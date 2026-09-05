@@ -1,0 +1,35 @@
+# Environments
+.env
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDEs / Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Large Model Checkpoints (Weights, LoRA adapters)
+01_retrieval/checkpoints/
+
+# Indices Files (BM25, FAISS)
+kb-indexing/indices/
+*.index
+*.pkl
+
+# Large Data & Checkpoints
+kb-indexing/data/
+01_retrieval/data/*_checkpoint.jsonl
+01_retrieval/data/*_rejected.jsonl
+
+# Python Virtual Environments (if any)
+venv/
+env/
+.venv/
+
+# OS specific files
+.DS_Store
+Thumbs.db

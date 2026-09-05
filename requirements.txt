@@ -1,0 +1,16 @@
+# --- Môi trường train chung cho 5 agent ---
+# GPU tối thiểu khuyến nghị: 1x24GB (RTX 3090/4090, A10) cho QLoRA 7-8B
+# Reader (LayoutLMv3) và Fact-Checker (SciBERT) nhẹ hơn nhiều, chạy được trên GPU nhỏ hơn
+
+torch>=2.2.0
+transformers>=4.41.0
+peft>=0.11.0            # LoRA/QLoRA
+trl>=0.9.0               # SFTTrainer, DPOTrainer
+bitsandbytes>=0.43.0     # quantization 4-bit cho QLoRA
+accelerate>=0.30.0
+datasets>=2.19.0
+evaluate>=0.4.2
+scikit-learn>=1.4.0      # eval metrics cho Fact-Checker (F1, confusion matrix)
+seqeval>=1.2.2           # eval metrics cho Reader (token classification)
+sentencepiece>=0.2.0
+protobuf>=4.25.0
