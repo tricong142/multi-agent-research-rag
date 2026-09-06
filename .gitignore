@@ -1,0 +1,88 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments & Virtual Envs
+.env
+.env.*
+!.env.example
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE & Editor Settings
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Jupyter & Notebooks
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Model Checkpoints & Large Model Weights
+layoutlmv3_doclaynet_model/
+checkpoints/
+models/
+saved_models/
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.onnx
+*.tflite
+
+# Datasets & Processed Data
+data/
+datasets/
+doclaynet_processed/
+raw_data/
+processed_data/
+*.parquet
+*.arrow
+*.tar.gz
+*.zip
+
+# Temporary inputs/outputs/test documents
+temp/
+tmp/
+outputs/
+test_outputs/
+*.pdf
+*.png
+*.jpg
+*.jpeg
+
+# Training, Experiment Tracking & Logs
+logs/
+*.log
+runs/
+wandb/
+mlruns/
+eval_results/
+
+# Package & Distribution
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+
+# Hugging Face & Caches
+.cache/
+hf_cache/
+transformers_cache/
