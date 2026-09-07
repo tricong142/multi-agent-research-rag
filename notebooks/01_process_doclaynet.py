@@ -105,14 +105,25 @@ def normalize_box(box, orig_width, orig_height):
     QUAN TRONG: dung orig_width/orig_height (kich thuoc trang GOC di kem
     tung sample), TUYET DOI KHONG dung image.size (1025x1025 la anh COCO
     da resize, khac he toa do voi bboxes).
+    BAT BUOC clamp ve [0, 1000] va dam bao x0 <= x1, y0 <= y1 de khong bao gio
+    gay loi CUDA device-side assert (ScatterGatherKernel out of bounds)
+    khi tra vao bang embedding 1024 cua LayoutLMv3.
     """
+    orig_width = max(orig_width, 1)
+    orig_height = max(orig_height, 1)
+
     x0, y0, x1, y1 = box
-    return [
-        int(LAYOUTLM_COORD_SCALE * (x0 / orig_width)),
-        int(LAYOUTLM_COORD_SCALE * (y0 / orig_height)),
-        int(LAYOUTLM_COORD_SCALE * (x1 / orig_width)),
-        int(LAYOUTLM_COORD_SCALE * (y1 / orig_height)),
-    ]
+    x0 = min(max(int(LAYOUTLM_COORD_SCALE * (x0 / orig_width)), 0), 1000)
+    y0 = min(max(int(LAYOUTLM_COORD_SCALE * (y0 / orig_height)), 0), 1000)
+    x1 = min(max(int(LAYOUTLM_COORD_SCALE * (x1 / orig_width)), 0), 1000)
+    y1 = min(max(int(LAYOUTLM_COORD_SCALE * (y1 / orig_height)), 0), 1000)
+
+    if x1 < x0:
+        x0, x1 = x1, x0
+    if y1 < y0:
+        y0, y1 = y1, y0
+
+    return [x0, y0, x1, y1]
 
 
 def process_example(example):

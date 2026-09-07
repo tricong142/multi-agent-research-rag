@@ -47,11 +47,15 @@ OUTPUT_MODEL_DIR = "/kaggle/working/layoutlmv3_doclaynet_model"
 BASE_MODEL = "microsoft/layoutlmv3-base"
 MAX_LENGTH = 512
 
-# Sieu tham so danh cho T4 16GB - da can nhac de tranh OOM.
-PER_DEVICE_BATCH_SIZE = 2
-GRAD_ACCUM_STEPS = 8          # batch hieu dung = 2 * 8 = 16
-NUM_EPOCHS = 15               # dataset nho (6910 mau train) nen can nhieu epoch hon
-LEARNING_RATE = 1e-5
+# Sieu tham so da toi uu thuc chien cho T4 16GB:
+# - TANG batch size tu 2 len 4: Tan dung tot Tensor Cores cua T4, giam thoi gian moi step
+# - GIAM grad accum tu 8 xuong 4: Giu nguyen effective batch size (4 * 4 = 16 tren 1 GPU, hoac 32 tren 2 GPU)
+# - GIAM epoch tu 15 xuong 5: Diem hoi tu toi uu cho Pretrained LayoutLMv3, chong overfit va giam ~3x thoi gian
+# - Tang nhe learning rate len 2e-5: Giup mo hinh hoi tu sac ben trong 5 epochs
+PER_DEVICE_BATCH_SIZE = 4
+GRAD_ACCUM_STEPS = 4          # batch hieu dung = 4 * 4 = 16 (1 GPU) hoac 4 * 4 * 2 = 32 (2 GPU)
+NUM_EPOCHS = 5                # 5 epochs la diem vang hoi tu cho transfer learning
+LEARNING_RATE = 2e-5
 
 
 def load_label_map() -> tuple:
@@ -71,6 +75,23 @@ def load_processed_dataset() -> DatasetDict:
     )
 
 
+def clamp_bbox(box):
+    """
+    Kep toa do box [x0, y0, x1, y1] ve thang chuan [0, 1000] cua LayoutLMv3.
+    Dam bao 0 <= x0 <= x1 <= 1000 va 0 <= y0 <= y1 <= 1000 de triet tieu loi
+    CUDA assertion trong embedding layer (kich thuoc bang lookup co dinh 1024).
+    """
+    x0 = min(max(int(box[0]), 0), 1000)
+    y0 = min(max(int(box[1]), 0), 1000)
+    x1 = min(max(int(box[2]), 0), 1000)
+    y1 = min(max(int(box[3]), 0), 1000)
+    if x1 < x0:
+        x0, x1 = x1, x0
+    if y1 < y0:
+        y0, y1 = y1, y0
+    return [x0, y0, x1, y1]
+
+
 def build_encode_fn(processor):
     def encode(examples):
         images = examples["image"]
@@ -78,15 +99,28 @@ def build_encode_fn(processor):
         boxes_batch = examples["bboxes_normalized"]
         labels_batch = examples["ner_tags"]
 
+        # 1. Clamp bounding boxes dau vao truoc khi dua vao processor
+        clamped_boxes_batch = [
+            [clamp_bbox(box) for box in doc_boxes]
+            for doc_boxes in boxes_batch
+        ]
+
         encoding = processor(
             images,
             words_batch,
-            boxes=boxes_batch,
+            boxes=clamped_boxes_batch,
             word_labels=labels_batch,
             truncation=True,
             padding="max_length",
             max_length=MAX_LENGTH,
         )
+
+        # 2. Phong thu kep (double defense): clamp lai encoding["bbox"]
+        # Dam bao 100% khong co index < 0 hoac >= 1024 lot vao GPU embedding lookup
+        encoding["bbox"] = [
+            [clamp_bbox(box) for box in doc_boxes]
+            for doc_boxes in encoding["bbox"]
+        ]
         return encoding
 
     return encode
@@ -132,6 +166,12 @@ def main():
     )
     encoded_dataset.set_format(type="torch")
 
+    # Tinh warmup_steps chuan thay cho warmup_ratio de tranh canh bao deprecation
+    effective_batch_size = PER_DEVICE_BATCH_SIZE * GRAD_ACCUM_STEPS
+    steps_per_epoch = len(encoded_dataset["train"]) // effective_batch_size
+    total_train_steps = max(steps_per_epoch * NUM_EPOCHS, 1)
+    warmup_steps = int(0.1 * total_train_steps)
+
     training_args = TrainingArguments(
         output_dir="/kaggle/working/checkpoints",
         per_device_train_batch_size=PER_DEVICE_BATCH_SIZE,
@@ -139,16 +179,15 @@ def main():
         gradient_accumulation_steps=GRAD_ACCUM_STEPS,
         num_train_epochs=NUM_EPOCHS,
         learning_rate=LEARNING_RATE,
-        warmup_ratio=0.1,
+        warmup_steps=warmup_steps,
         fp16=True,  # BAT BUOC tren T4 16GB, neu khong se OOM gan nhu chac chan
-        eval_strategy="steps",
-        eval_steps=200,
-        save_strategy="steps",
-        save_steps=200,
-        save_total_limit=2,  # gioi han so checkpoint luu de khong day disk Kaggle
-        logging_steps=50,
+        eval_strategy="epoch",  # Danh gia moi epoch 1 lan, giam thoi gian dung cho eval giua chung
+        save_strategy="epoch",  # Luu checkpoint moi epoch
+        save_total_limit=1,     # Chi giu 1 checkpoint tot nhat de tiet kiem disk Kaggle
+        logging_steps=25,
         load_best_model_at_end=True,
         metric_for_best_model="f1",
+        dataloader_num_workers=2,  # Prefetch batch da luong CPU de GPU khong bi doi data
         report_to="none",
     )
 

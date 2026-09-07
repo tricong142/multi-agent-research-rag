@@ -29,7 +29,7 @@ from typing import List, Literal
 from pydantic import BaseModel, Field
 from google import genai
 
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
 
 _client = None
 

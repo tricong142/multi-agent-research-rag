@@ -91,16 +91,19 @@ class LayoutLMv3Tool:
     def _normalize_boxes(
         self, boxes: List[List[float]], page_width: float, page_height: float
     ) -> List[List[int]]:
+        page_width = max(page_width, 1.0)
+        page_height = max(page_height, 1.0)
         norm = []
         for x0, y0, x1, y1 in boxes:
-            norm.append(
-                [
-                    int(_COORD_SCALE * (x0 / page_width)),
-                    int(_COORD_SCALE * (y0 / page_height)),
-                    int(_COORD_SCALE * (x1 / page_width)),
-                    int(_COORD_SCALE * (y1 / page_height)),
-                ]
-            )
+            nx0 = min(max(int(_COORD_SCALE * (x0 / page_width)), 0), 1000)
+            ny0 = min(max(int(_COORD_SCALE * (y0 / page_height)), 0), 1000)
+            nx1 = min(max(int(_COORD_SCALE * (x1 / page_width)), 0), 1000)
+            ny1 = min(max(int(_COORD_SCALE * (y1 / page_height)), 0), 1000)
+            if nx1 < nx0:
+                nx0, nx1 = nx1, nx0
+            if ny1 < ny0:
+                ny0, ny1 = ny1, ny0
+            norm.append([nx0, ny0, nx1, ny1])
         return norm
 
     def extract(
@@ -169,3 +172,8 @@ class LayoutLMv3Tool:
 
         doc.close()
         return results
+
+    def extract_page(self, pdf_path: str, page_no: int = 0) -> List[ExtractedBlock]:
+        """Tien ich rut gon de trich xuat 1 trang don le."""
+        return self.extract(pdf_path, page_numbers=[page_no])
+
