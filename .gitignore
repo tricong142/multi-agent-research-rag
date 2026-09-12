@@ -1,0 +1,78 @@
+# ==========================================
+# 1. Environment & Credentials (BẢO MẬT API KEY)
+# ==========================================
+.env
+.env.*
+*.pem
+*.key
+secrets/
+
+# ==========================================
+# 2. Checkpoints & Large Model Weights (RẤT NẶNG)
+# ==========================================
+checkpoints/
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.onnx
+adapter_model/
+
+# ==========================================
+# 3. Python Runtime & Caches
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ==========================================
+# 4. Virtual Environments
+# ==========================================
+venv/
+.venv/
+env/
+.env/
+ENV/
+
+# ==========================================
+# 5. IDE & Code Editors
+# ==========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# ==========================================
+# 6. Jupyter Notebook & Experiment Logs
+# ==========================================
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+runs/
+wandb/
+tensorboard/
+*.log
+
+# ==========================================
+# 7. Intermediate Data & Cash Files (Tùy chọn)
+# ==========================================
+# Bỏ comment nếu không muốn push các file log/raw nặng lên GitHub
+# data/summarizer_sft_raw.jsonl
+# data/summarizer_sft_rejected.jsonl.env
