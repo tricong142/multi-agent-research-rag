@@ -1,0 +1,31 @@
+{
+  "train_wall_seconds": 4909.275642644,
+  "timing_scope": "this train() invocation including periodic eval/checkpoints; excludes loading, preprocessing, final eval/save",
+  "resume_global_step": 0,
+  "final_global_step": 496,
+  "optimizer_steps_this_invocation": 496,
+  "train_metrics_scope": "this train() invocation only; never cumulative across resumes",
+  "examples_processed": 7936,
+  "non_padding_input_tokens_processed": 4236819,
+  "supervised_tokens_processed": 717918,
+  "examples_per_second": 1.6165317610330574,
+  "non_padding_input_tokens_per_second": 863.0232458730238,
+  "supervised_tokens_per_second": 146.23705252234507,
+  "peak_cuda_allocated_gib": 7.517181396484375,
+  "peak_cuda_reserved_gib": 8.224609375,
+  "train_metrics": {
+    "train_runtime": 4903.8964,
+    "train_samples_per_second": 1.619,
+    "train_steps_per_second": 0.101,
+    "total_flos": 3.4037743032631296e+16,
+    "train_loss": 0.019233073346713942,
+    "epoch": 0.999748047367095
+  },
+  "validation_metrics": {
+    "eval_loss": 0.0001464761735405773,
+    "eval_runtime": 125.4441,
+    "eval_samples_per_second": 4.081,
+    "eval_steps_per_second": 4.081,
+    "epoch": 0.999748047367095
+  }
+}

@@ -1,5 +1,7 @@
 # 🔬 Multi-Agent Research Assistant: Autonomous Scientific RAG System
 
+Agent 5 Writer v8: [bộ code, adapter, dữ liệu và kết quả đánh giá](writer_agent_v8_study/BAT_DAU_O_DAY.md). Ba file lớn của Writer được lưu bằng Git LFS; cài Git LFS trước khi clone để tải nội dung đầy đủ.
+
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch 2.x](https://img.shields.io/badge/PyTorch-2.x-EE4C2C.svg)](https://pytorch.org/)
 [![HuggingFace Transformers](https://img.shields.io/badge/🤗-Transformers-FFD21E.svg)](https://huggingface.co/)

@@ -1,0 +1,87 @@
+{
+  "reviewed_cases": 22,
+  "random_cases": 20,
+  "random_human_faithfulness": 1.0,
+  "random_reviewed_sentences": 39,
+  "random_answered_intent_rate": 0.8,
+  "random_claim_pool_sufficient_rate": 0.9,
+  "all_reviewed_faithfulness": 1.0,
+  "all_reviewed_sentences": 41,
+  "all_answered_intent_rate": 0.7727272727272727,
+  "all_claim_pool_sufficient_rate": 0.9090909090909091,
+  "schema_validity_rate": 1.0,
+  "exact_copy_support_proxy": 1.0,
+  "empty_report_rate": 0.045454545454545456,
+  "low_confidence_warning_rate": 0.18181818181818182,
+  "false_case_count": 5,
+  "false_cases": [
+    {
+      "example_id": "351bf13542cb5a3a5789:report",
+      "review_group": [
+        "random"
+      ],
+      "false_sentence_ids": [],
+      "human_answers_intent": false,
+      "human_claim_pool_sufficient": false,
+      "low_confidence_warning": false,
+      "warning_reasons": [],
+      "review_notes": "Neither the report nor the supplied claim states whether the methods are fully supervised."
+    },
+    {
+      "example_id": "fc9ee6f6aeee0b524f9b:report",
+      "review_group": [
+        "random",
+        "focus"
+      ],
+      "false_sentence_ids": [],
+      "human_answers_intent": false,
+      "human_claim_pool_sufficient": false,
+      "low_confidence_warning": true,
+      "warning_reasons": [
+        "action_selection_failed"
+      ],
+      "review_notes": "The question asks for the obtained F-score, but no numeric F-score exists in the report or claim pool."
+    },
+    {
+      "example_id": "8867329025f44ff213fd:report",
+      "review_group": [
+        "random"
+      ],
+      "false_sentence_ids": [],
+      "human_answers_intent": false,
+      "human_claim_pool_sufficient": true,
+      "low_confidence_warning": false,
+      "warning_reasons": [],
+      "review_notes": "Claim pool identifies TransferTransfo and the hybrid model, but the report only identifies TransferTransfo."
+    },
+    {
+      "example_id": "94021024e893671d4e1d:report",
+      "review_group": [
+        "random"
+      ],
+      "false_sentence_ids": [],
+      "human_answers_intent": false,
+      "human_claim_pool_sufficient": true,
+      "low_confidence_warning": false,
+      "warning_reasons": [],
+      "review_notes": "The report only describes a sentence-level baseline without context; it omits concat22 and s-hier from the available claim pool."
+    },
+    {
+      "example_id": "388495ab024678d2d743:report",
+      "review_group": [
+        "focus"
+      ],
+      "false_sentence_ids": [],
+      "human_answers_intent": false,
+      "human_claim_pool_sufficient": true,
+      "low_confidence_warning": true,
+      "warning_reasons": [
+        "generation_failed",
+        "empty_report",
+        "insufficient_claims_or_unassessed_coverage",
+        "internal_retry_budget_exhausted"
+      ],
+      "review_notes": "The report is empty although the claim pool clearly describes the hierarchical intent annotation scheme."
+    }
+  ]
+}

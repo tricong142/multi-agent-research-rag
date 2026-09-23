@@ -1,0 +1,37 @@
+{
+  "dataset": "allenai/qasper",
+  "counts": {
+    "papers_test": 416,
+    "papers_train": 888,
+    "papers_validation": 281,
+    "test_action": 925,
+    "test_critic": 2560,
+    "test_report": 1451,
+    "train_action": 737,
+    "train_critic": 4608,
+    "train_report": 2593,
+    "validation_action": 542,
+    "validation_critic": 1809,
+    "validation_report": 1005
+  },
+  "training_examples": 11294,
+  "manual_review_candidates": 100,
+  "human_reviewed_examples_generated": 0,
+  "claim_verification": "verbatim_source_match, not independent semantic verification",
+  "max_claims": 4,
+  "max_claim_chars": 900,
+  "sources": {
+    "train": {
+      "source_transport": "hf_parquet",
+      "source_revision": "06806e4608976fc2fac0a090ac425d5b2b29caf4"
+    },
+    "validation": {
+      "source_transport": "hf_parquet",
+      "source_revision": "06806e4608976fc2fac0a090ac425d5b2b29caf4"
+    },
+    "test": {
+      "source_transport": "hf_parquet",
+      "source_revision": "06806e4608976fc2fac0a090ac425d5b2b29caf4"
+    }
+  }
+}

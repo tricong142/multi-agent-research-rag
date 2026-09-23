@@ -1,0 +1,124 @@
+COMMAND: C:\Users\dellcuatri142\AppData\Local\Programs\Python\Python310\python.exe -m unittest discover -s 05_writer/tests -v
+EXIT: 0
+test_action_is_only_reselection_within_existing_pool (test_data_pipeline.DataPipelineTests) ... ok
+test_contradictory_polarity_produces_explicit_empty_pool (test_data_pipeline.DataPipelineTests) ... ok
+test_eval_candidates_are_not_pretended_human_labels (test_data_pipeline.DataPipelineTests) ... ok
+test_external_action_claim_is_rejected (test_data_pipeline.DataPipelineTests) ... ok
+test_hallucinated_report_label_is_rejected (test_data_pipeline.DataPipelineTests) ... ok
+test_incorrect_synthetic_critic_label_is_rejected (test_data_pipeline.DataPipelineTests) ... ok
+test_long_evidence_is_omitted_without_fragment_truncation (test_data_pipeline.DataPipelineTests) ... ok
+test_native_and_arrow_normalization_preserve_no_answer (test_data_pipeline.DataPipelineTests) ... ok
+test_only_verbatim_textual_evidence_becomes_claim (test_data_pipeline.DataPipelineTests) ... ok
+test_paper_leakage_rejected_before_generation_writes (test_data_pipeline.DataPipelineTests) ... ok
+test_unanswerable_is_not_converted_into_a_fact (test_data_pipeline.DataPipelineTests) ... ok
+test_unequal_arrow_columns_are_rejected (test_data_pipeline.DataPipelineTests) ... ok
+test_validator_rejects_all_rows_for_leaked_paper (test_data_pipeline.DataPipelineTests) ... ok
+test_yes_no_string_is_not_silently_coerced (test_data_pipeline.DataPipelineTests) ... ok
+test_all_supported_coverage_gap_has_no_blind_action (test_inference_actions.InferenceActionsTests) ... ok
+test_changed_number_remains_uncertain_until_repaired (test_inference_actions.InferenceActionsTests) ... ok
+test_context_overflow_raises_without_silent_token_truncation (test_inference_actions.InferenceActionsTests) ... ok
+test_critic_cannot_accept_nonverbatim_number_or_negation (test_inference_actions.InferenceActionsTests) ... ok
+test_critic_does_not_override_adverse_llm_review_for_exact_copy (test_inference_actions.InferenceActionsTests) ... ok
+test_critic_rejects_missing_and_duplicate_sentence_reviews (test_inference_actions.InferenceActionsTests) ... ok
+test_delete_preserves_other_sentences_and_original_report (test_inference_actions.InferenceActionsTests) ... ok
+test_empty_report_cannot_pass_llm_coverage_claim (test_inference_actions.InferenceActionsTests) ... ok
+test_generator_has_no_hidden_retry_for_malformed_json (test_inference_actions.InferenceActionsTests) ... ok
+test_hf_budget_validation_is_lazy_and_strict (test_inference_actions.InferenceActionsTests) ... ok
+test_json_rejects_ambiguous_and_nonfinite_payloads (test_inference_actions.InferenceActionsTests) ... ok
+test_missing_coverage_assessment_defaults_to_warning (test_inference_actions.InferenceActionsTests) ... ok
+test_offline_copy_support_does_not_claim_intent_coverage (test_inference_actions.InferenceActionsTests) ... ok
+test_reselect_ignores_proposed_invented_text (test_inference_actions.InferenceActionsTests) ... ok
+test_reselect_rejects_original_or_external_claims (test_inference_actions.InferenceActionsTests) ... ok
+test_rewrite_cannot_switch_citations (test_inference_actions.InferenceActionsTests) ... ok
+test_selector_refuses_edit_to_supported_sentence (test_inference_actions.InferenceActionsTests) ... ok
+test_independent_labels_bound_to_report (test_loop_and_schema.EvaluationTests) ... ok
+test_missing_human_labels_not_claimed_gold (test_loop_and_schema.EvaluationTests) ... ok
+test_missing_prediction_counts_invalid (test_loop_and_schema.EvaluationTests) ... ok
+test_prompt_does_not_contain_target_report (test_loop_and_schema.EvaluationTests) ... ok
+test_prompt_exposes_only_writer_relevant_claim_fields (test_loop_and_schema.EvaluationTests) ... ok
+test_prompt_uses_compact_output_contracts (test_loop_and_schema.EvaluationTests) ... ok
+test_prompts_require_full_pool_coverage (test_loop_and_schema.EvaluationTests) ... ok
+test_empty_claims_never_calls_model (test_loop_and_schema.LoopTests) ... ok
+test_empty_generated_report_not_success (test_loop_and_schema.LoopTests) ... ok
+test_internal_rewrite_is_rechecked (test_loop_and_schema.LoopTests) ... ok
+test_invalid_inputs_fail_soft (test_loop_and_schema.LoopTests) ... ok
+test_invalid_model_action_uses_exact_copy_rewrite_with_warning (test_loop_and_schema.LoopTests) ... ok
+test_node_returns_partial_state_no_routing (test_loop_and_schema.LoopTests) ... ok
+test_pass_without_repair (test_loop_and_schema.LoopTests) ... ok
+test_repair_cannot_add_claim (test_loop_and_schema.LoopTests) ... ok
+test_repeated_generation_failure_is_bounded (test_loop_and_schema.LoopTests) ... ok
+test_report_generator_removes_duplicate_claim_text (test_loop_and_schema.LoopTests) ... ok
+test_stale_failed_review_is_replaced (test_loop_and_schema.LoopTests) ... ok
+test_upstream_warning_preserved (test_loop_and_schema.LoopTests) ... ok
+test_zero_budget_returns_original_with_warning (test_loop_and_schema.LoopTests) ... ok
+test_claims_reject_duplicate_and_unverified (test_loop_and_schema.SchemaTests) ... ok
+test_critique_must_cover_all_sentences (test_loop_and_schema.SchemaTests) ... ok
+test_duplicate_json_keys_rejected (test_loop_and_schema.SchemaTests) ... ok
+test_duplicate_sentence_rejected (test_loop_and_schema.SchemaTests) ... ok
+test_no_external_or_same_claim_reselection (test_loop_and_schema.SchemaTests) ... ok
+test_string_false_not_boolean (test_loop_and_schema.SchemaTests) ... ok
+test_uncited_metadata_assertions_rejected (test_loop_and_schema.SchemaTests) ... ok
+test_unknown_citation_rejected (test_loop_and_schema.SchemaTests) ... ok
+test_completion_only_mask_uses_exact_template_prefix (test_training.TrainingTests) ... ok
+test_final_assistant_json_is_required (test_training.TrainingTests) ... ok
+test_overlong_example_is_dropped_whole (test_training.TrainingTests) ... ok
+test_speed_arguments_are_explicit_and_overridable (test_training.TrainingTests) ... ok
+test_template_prefix_mismatch_fails_closed (test_training.TrainingTests) ... ok
+test_training_split_loader_rejects_manual_file_by_name (test_training.TrainingTests) ... ok
+
+----------------------------------------------------------------------
+Ran 65 tests in 0.449s
+
+OK
+
+COMMAND: C:\Users\dellcuatri142\AppData\Local\Programs\Python\Python310\python.exe 05_writer/notebooks/00_quick_inference_check.py
+EXIT: 0
+{
+  "final_report": {
+    "title": "Research report",
+    "sentences": [
+      {
+        "sentence_id": "s1",
+        "text": "This synthetic experiment used 100 training examples.",
+        "claim_ids": [
+          "demo:c1"
+        ]
+      }
+    ],
+    "limitations": [
+      "The available claims may not fully answer the intent.",
+      "Some statements could not be verified within the internal retry budget."
+    ]
+  },
+  "low_confidence_warning": true,
+  "writer_diagnostics": {
+    "critique": {
+      "sentence_reviews": [
+        {
+          "sentence_id": "s1",
+          "verdict": "supported",
+          "reason": "The sentence exactly reproduces its cited verified claims."
+        }
+      ],
+      "needs_more_evidence": true,
+      "summary": "coverage_not_assessed: deterministic exact-copy review cannot establish intent coverage."
+    },
+    "internal_retries": 0,
+    "warning_reasons": [
+      "no_local_repair_available",
+      "insufficient_claims_or_unassessed_coverage"
+    ],
+    "trace": [
+      {
+        "attempt": 0,
+        "stage": "generate",
+        "ok": true
+      },
+      {
+        "attempt": 0,
+        "stage": "critic",
+        "ok": true
+      }
+    ]
+  }
+}

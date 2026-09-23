@@ -1,0 +1,4 @@
+writer_agent_v8_study/** -text
+writer_agent_v8_study/05_writer/checkpoints/writer_qlora/adapter_model.safetensors filter=lfs diff=lfs merge=lfs -text
+writer_agent_v8_study/05_writer/data/writer_sft_raw.jsonl filter=lfs diff=lfs merge=lfs -text
+writer_agent_v8_study/05_writer/data/writer_sft_validated.jsonl filter=lfs diff=lfs merge=lfs -text
