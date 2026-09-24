@@ -1,0 +1,26 @@
+﻿# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Large Model Weights and Checkpoints (Tuyệt đối không commit vào Git)
+**/checkpoints/
+**/weights/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.onnx
+*.gguf
+
+# Kaggle / Temporary Data
+.ipynb_checkpoints
+/kaggle/
+*.log
