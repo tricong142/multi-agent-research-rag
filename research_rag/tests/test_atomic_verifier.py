@@ -353,7 +353,7 @@ class QuoteDecompositionTests(unittest.TestCase):
 
     def test_prompt_examples_pass_code_contract_and_are_not_probe_claims(self):
         examples = re.findall(r'Example input: (.+)\nExample output:\n(.+)', a.DECOMPOSE_PROMPT)
-        self.assertEqual(len(examples), 5)
+        self.assertEqual(len(examples), 8)
         for input_text, output_text in examples:
             a.normalize_decomposition(json.loads(output_text), json.loads(input_text)['claim'])
 

@@ -1,0 +1,210 @@
+{
+  "scope": "offline diagnostics on unchanged v4 outputs; not v5 inference or pass rate",
+  "v4_invalid_attempts": 7,
+  "all_invalid_attempts_excluded_by_new_schema": true,
+  "rows": [
+    {
+      "example_id": "decompose:006",
+      "attempt": 1,
+      "v4_validation_issue": "dataset_condition_required",
+      "v5_prospective_schema_exclusions": [
+        "parts_count",
+        "parts[0].quote",
+        "parts[0].scope.condition",
+        "parts[1].quote",
+        "parts[1].scope.condition"
+      ],
+      "v5_repair_detail": {
+        "issues": [
+          {
+            "code": "dataset_condition_required"
+          },
+          {
+            "code": "dataset_condition_required",
+            "field": "parts[0].scope.condition",
+            "required_source": [
+              "on two datasets"
+            ]
+          },
+          {
+            "code": "dataset_condition_incomplete",
+            "field": "parts[1].scope.condition",
+            "required_source": [
+              "on two datasets"
+            ]
+          }
+        ],
+        "missing_source_spans": []
+      }
+    },
+    {
+      "example_id": "decompose:006",
+      "attempt": 2,
+      "v4_validation_issue": "dataset_condition_required",
+      "v5_prospective_schema_exclusions": [
+        "parts[0].quote",
+        "parts[0].scope.condition"
+      ],
+      "v5_repair_detail": {
+        "issues": [
+          {
+            "code": "dataset_condition_required"
+          },
+          {
+            "code": "uncovered_claim_content"
+          },
+          {
+            "code": "dataset_condition_required",
+            "field": "parts[0].scope.condition",
+            "required_source": [
+              "on two datasets"
+            ]
+          }
+        ],
+        "missing_source_spans": [
+          {
+            "start": 32,
+            "end": 49,
+            "text": " on two datasets."
+          }
+        ]
+      }
+    },
+    {
+      "example_id": "decompose:010",
+      "attempt": 1,
+      "v4_validation_issue": "uncovered_claim_content",
+      "v5_prospective_schema_exclusions": [
+        "parts[0].quote"
+      ],
+      "v5_repair_detail": {
+        "issues": [
+          {
+            "code": "uncovered_claim_content"
+          }
+        ],
+        "missing_source_spans": [
+          {
+            "start": 38,
+            "end": 58,
+            "text": " after the revision."
+          }
+        ]
+      }
+    },
+    {
+      "example_id": "decompose:011",
+      "attempt": 1,
+      "v4_validation_issue": "uncovered_claim_content",
+      "v5_prospective_schema_exclusions": [
+        "parts[0].quote"
+      ],
+      "v5_repair_detail": {
+        "issues": [
+          {
+            "code": "uncovered_claim_content"
+          },
+          {
+            "code": "population_modifier_missing",
+            "field": "parts[0].scope.entity",
+            "required_source": [
+              "audited"
+            ]
+          }
+        ],
+        "missing_source_spans": [
+          {
+            "start": 53,
+            "end": 70,
+            "text": " after the patch."
+          }
+        ]
+      }
+    },
+    {
+      "example_id": "decompose:013",
+      "attempt": 1,
+      "v4_validation_issue": "shared_time_required",
+      "v5_prospective_schema_exclusions": [
+        "parts[0].quote",
+        "parts[0].scope.time",
+        "parts[0].scope.condition"
+      ],
+      "v5_repair_detail": {
+        "issues": [
+          {
+            "code": "shared_time_required"
+          },
+          {
+            "code": "uncovered_claim_content"
+          },
+          {
+            "code": "shared_time_required",
+            "field": "parts[0].scope.time",
+            "required_source": [
+              "after calibration"
+            ]
+          }
+        ],
+        "missing_source_spans": [
+          {
+            "start": 40,
+            "end": 59,
+            "text": " after calibration."
+          }
+        ]
+      }
+    },
+    {
+      "example_id": "decompose:013",
+      "attempt": 2,
+      "v4_validation_issue": "uncovered_claim_content",
+      "v5_prospective_schema_exclusions": [
+        "parts[0].quote"
+      ],
+      "v5_repair_detail": {
+        "issues": [
+          {
+            "code": "uncovered_claim_content"
+          }
+        ],
+        "missing_source_spans": [
+          {
+            "start": 40,
+            "end": 59,
+            "text": " after calibration."
+          }
+        ]
+      }
+    },
+    {
+      "example_id": "decompose:018",
+      "attempt": 1,
+      "v4_validation_issue": "uncovered_claim_content",
+      "v5_prospective_schema_exclusions": [
+        "parts[0].quote"
+      ],
+      "v5_repair_detail": {
+        "issues": [
+          {
+            "code": "uncovered_claim_content"
+          }
+        ],
+        "missing_source_spans": [
+          {
+            "start": 53,
+            "end": 71,
+            "text": " after the update."
+          }
+        ]
+      }
+    }
+  ],
+  "previously_valid_plans_newly_rejected": [
+    {
+      "example_id": "decompose:011",
+      "v5_validation_issue": "population_modifier_missing"
+    }
+  ],
+  "model_calls": 0
+}
