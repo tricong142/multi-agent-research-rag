@@ -1,0 +1,16 @@
+{
+  "mode": "bm25",
+  "qrels_file": "kb_indexing\\data\\qasper_eval_20260926\\qrels_dev.jsonl",
+  "qrels_sha256": "b61631d9cf2a3f0729de1168d13896fe056ba87dea0d7157c0c541a383d3225e",
+  "corpus_sha256": "4ad78d602384e8c50a02e0ab5c2363b26ecf74b06296a3457a41ef05ee6631c6",
+  "index_dir": "kb_indexing\\indices\\qasper_bm25_20260927",
+  "n": 393,
+  "top_k": 5,
+  "hit_at_k": 0.27989821882951654,
+  "recall_at_k": 0.15966416252675794,
+  "latency_ms_mean": 478.4534101770052,
+  "latency_ms_p95": 844.2971000040416,
+  "dense_fallback_queries": 0,
+  "unsupported_policy_queries": 0,
+  "note": "Dense recall is not valid when dense_fallback_queries > 0. BM25 artifact loading is outside the timer; a first dense query can include encoder/index load."
+}

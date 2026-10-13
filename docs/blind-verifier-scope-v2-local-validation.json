@@ -1,0 +1,16 @@
+{
+  "candidate": "scope_v2",
+  "selected_backend": "base_instruct",
+  "baseline_prompt_matches_audited_v1": true,
+  "original_criteria_bytes_unchanged": true,
+  "weights_revision_generation_budget_and_quality_thresholds_preserved": true,
+  "focused_tests_passed": 11,
+  "model_inference_in_tests": "stubbed",
+  "new_real_model_inference_performed": false,
+  "scope_prompt_sha256": "97b3656134d35c56505b83e9e824735e7b353f8fb70b36249939761c63e2bb1b",
+  "candidate_notebook_sha256": "e8ac569d28a009953aea08e2e409bd0863546b12c8c434b9f79a37c632014531",
+  "remaining_validation": [
+    "Real model inference",
+    "Expanded regression and independent semantic review"
+  ]
+}

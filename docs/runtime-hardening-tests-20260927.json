@@ -1,0 +1,16 @@
+{
+  "tests_run": 62,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsed_seconds": 42.0,
+  "models_or_api_executed": false,
+  "note": "Local regression tests; injected model/API backends. Real PDF parser and small local FAISS fixtures are exercised. GPU inference, real Gemini and dense encoder quality are not measured.",
+  "thread_limits": {
+    "OMP_NUM_THREADS": 1,
+    "OPENBLAS_NUM_THREADS": 1,
+    "MKL_NUM_THREADS": 1
+  },
+  "notebook_sha256": "e695d02092e180e67cbe48f7a588b8c0729d921538998b7e9309ff6fea795f17",
+  "approved_upload_zip_sha256": "d36c94e92fd5ee9a7c41ccd597a9cb2cf4f8bbf93c29720c00ae58c184805477"
+}

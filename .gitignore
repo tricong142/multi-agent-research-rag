@@ -1,0 +1,30 @@
+# Local secrets and environments
+.env
+.env.*
+!.env.example
+_archive/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Generated model and search artifacts
+**/checkpoints/
+**/layoutlmv3_doclaynet_model/
+kb_indexing/data/
+kb_indexing/indices/
+*.safetensors
+*.pkl
+*.index
+
+# Local caches and logs
+.ipynb_checkpoints/
+*.log
+*.tmp
+sample.pdf
+kaggle_transfer/
+research-runs/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm

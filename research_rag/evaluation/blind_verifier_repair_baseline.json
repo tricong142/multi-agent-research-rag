@@ -1,0 +1,178 @@
+{
+  "source_run": "rag-validation-20261010T101538Z",
+  "source_artifact": "confidence-backends/finetuned__repair.jsonl",
+  "source_artifact_sha256": "80e5f688d07b92645f069ce05584dbcb4a7197cf0549620f25630ead2641cd76",
+  "source_zip_sha256": "7cb9d5d0045962b628efde2a5f1d1a3b9d11cc58c7d9e87892eb6cc58923519d",
+  "profile": "finetuned__repair",
+  "historical_not_rerun": true,
+  "predictions": [
+    {
+      "example_id": "contract:partial_accuracy:label_correct",
+      "gold_label": "not_enough_info",
+      "predicted_label": "not_enough_info",
+      "status": "ok",
+      "confidence_score": 0.0
+    },
+    {
+      "example_id": "contract:partial_accuracy:label_wrong",
+      "gold_label": "not_enough_info",
+      "predicted_label": "support",
+      "status": "ok",
+      "confidence_score": 0.0
+    },
+    {
+      "example_id": "contract:partial_memory:label_correct",
+      "gold_label": "not_enough_info",
+      "predicted_label": "not_enough_info",
+      "status": "ok",
+      "confidence_score": 0.0
+    },
+    {
+      "example_id": "contract:partial_memory:label_wrong",
+      "gold_label": "not_enough_info",
+      "predicted_label": "support",
+      "status": "ok",
+      "confidence_score": 0.0
+    },
+    {
+      "example_id": "contract:both_supported:label_correct",
+      "gold_label": "support",
+      "predicted_label": "support",
+      "status": "ok",
+      "confidence_score": 1.0
+    },
+    {
+      "example_id": "contract:both_supported:label_wrong",
+      "gold_label": "support",
+      "predicted_label": "contradict",
+      "status": "ok",
+      "confidence_score": 1.0
+    },
+    {
+      "example_id": "contract:accuracy_conflict:label_correct",
+      "gold_label": "contradict",
+      "predicted_label": "contradict",
+      "status": "ok",
+      "confidence_score": 0.0
+    },
+    {
+      "example_id": "contract:accuracy_conflict:label_wrong",
+      "gold_label": "contradict",
+      "predicted_label": "support",
+      "status": "ok",
+      "confidence_score": 0.0
+    },
+    {
+      "example_id": "contract:irrelevant:label_correct",
+      "gold_label": "not_enough_info",
+      "predicted_label": "not_enough_info",
+      "status": "ok",
+      "confidence_score": 0.0
+    },
+    {
+      "example_id": "contract:irrelevant:label_wrong",
+      "gold_label": "not_enough_info",
+      "predicted_label": "support",
+      "status": "ok",
+      "confidence_score": 0.0
+    },
+    {
+      "example_id": "contract:negation:label_correct",
+      "gold_label": "contradict",
+      "predicted_label": "contradict",
+      "status": "ok",
+      "confidence_score": 0.0
+    },
+    {
+      "example_id": "contract:negation:label_wrong",
+      "gold_label": "contradict",
+      "predicted_label": "support",
+      "status": "ok",
+      "confidence_score": 0.0
+    },
+    {
+      "example_id": "contract:causality_missing:label_correct",
+      "gold_label": "not_enough_info",
+      "predicted_label": "not_enough_info",
+      "status": "ok",
+      "confidence_score": 0.0
+    },
+    {
+      "example_id": "contract:causality_missing:label_wrong",
+      "gold_label": "not_enough_info",
+      "predicted_label": "support",
+      "status": "ok",
+      "confidence_score": 0.0
+    },
+    {
+      "example_id": "contract:scope:label_correct",
+      "gold_label": "contradict",
+      "predicted_label": "contradict",
+      "status": "ok",
+      "confidence_score": 0.0
+    },
+    {
+      "example_id": "contract:scope:label_wrong",
+      "gold_label": "contradict",
+      "predicted_label": "support",
+      "status": "ok",
+      "confidence_score": 0.0
+    },
+    {
+      "example_id": "contract:cross_sentence:label_correct",
+      "gold_label": "support",
+      "predicted_label": "support",
+      "status": "ok",
+      "confidence_score": 1.0
+    },
+    {
+      "example_id": "contract:cross_sentence:label_wrong",
+      "gold_label": "support",
+      "predicted_label": "contradict",
+      "status": "ok",
+      "confidence_score": 0.0
+    },
+    {
+      "example_id": "contract:wrong_units:label_correct",
+      "gold_label": "contradict",
+      "predicted_label": "contradict",
+      "status": "ok",
+      "confidence_score": 0.0
+    },
+    {
+      "example_id": "contract:wrong_units:label_wrong",
+      "gold_label": "contradict",
+      "predicted_label": "support",
+      "status": "ok",
+      "confidence_score": 0.0
+    },
+    {
+      "example_id": "contract:atomic_support:label_correct",
+      "gold_label": "support",
+      "predicted_label": "support",
+      "status": "ok",
+      "confidence_score": 1.0
+    },
+    {
+      "example_id": "contract:atomic_support:label_wrong",
+      "gold_label": "support",
+      "predicted_label": "contradict",
+      "status": "ok",
+      "confidence_score": 0.0
+    },
+    {
+      "example_id": "contract:bounded_scope:label_correct",
+      "gold_label": "support",
+      "predicted_label": "support",
+      "status": "ok",
+      "confidence_score": 1.0
+    },
+    {
+      "example_id": "contract:bounded_scope:label_wrong",
+      "gold_label": "support",
+      "predicted_label": "contradict",
+      "status": "ok",
+      "confidence_score": 1.0
+    }
+  ]
+}

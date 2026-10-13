@@ -1,0 +1,31 @@
+{
+  "version": "confidence-backends-20261010-v1",
+  "purpose": "Prospective backend comparison on development label interventions; not calibration or final evaluation",
+  "base_model": "Qwen/Qwen2.5-3B-Instruct",
+  "base_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "revision_source": "https://huggingface.co/api/models/Qwen/Qwen2.5-3B-Instruct",
+  "contracts_sha256": "918a1a95cfed421aa8748d7eac29af74a03f93825c30817e002b2b2e16feb7e3",
+  "backends": ["finetuned", "base_instruct"],
+  "prompt_profiles": ["repair", "explanation_repair"],
+  "required_profile": "base_instruct__explanation_repair",
+  "threshold": 0.7,
+  "max_attempts": 3,
+  "max_new_tokens": 192,
+  "seed": 42,
+  "expected_predictions": 96,
+  "label_challenges": {
+    "n": 24,
+    "wrong_label_map": {"support": "contradict", "contradict": "support", "not_enough_info": "support"},
+    "max_wrong_labels_at_or_above_threshold": 0,
+    "min_correct_labels_at_or_above_threshold": 12,
+    "max_runtime_failed_rows": 0
+  },
+  "human_review_required": true,
+  "promotion": "Never automatic; retain serving repair. Every qualifying profile still needs evidence review and broader regression.",
+  "limitations": [
+    "Same merged tokenizer and generation configuration are used for both backends; NF4 and float16 are held fixed.",
+    "No model Judge or ActionRecommender calls in this intervention; all measured backend calls estimate confidence.",
+    "Historical fine-tuning base revision is not established. This compares artifacts, not a causal proof that fine-tuning caused failure.",
+    "The 24 rows derive from 12 already-inspected synthetic contracts. They are not independent held-out samples."
+  ]
+}

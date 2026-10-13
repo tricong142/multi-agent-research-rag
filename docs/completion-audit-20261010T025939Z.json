@@ -1,0 +1,500 @@
+{
+  "run_id": "20261010T025939Z",
+  "zip_path": "C:\\Users\\dellcuatri142\\Downloads\\rag-validation-20261010T025939Z.zip",
+  "zip_size_bytes": 142555,
+  "zip_sha256": "f145b591d9db195cb96d1d910cbcf794e33ed19de5df11a63d7b8e9802fef202",
+  "zip_files": 64,
+  "manifest_entries_verified": 63,
+  "runtime_patch_matches": 42,
+  "criteria_and_provenance_verified": true,
+  "stage_status": {
+    "venv": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 164.84
+    },
+    "bootstrap": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 5379.77
+    },
+    "torch": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 130103.29
+    },
+    "serving": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 56098.75
+    },
+    "pip-check": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 466.37
+    },
+    "freeze": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 365.87
+    },
+    "contract-tests": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 4728.47
+    },
+    "preflight": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 8287.27
+    },
+    "confidence-explanation-v2": {
+      "state": "failed",
+      "exit_code": 1,
+      "elapsed_ms": 922848.42
+    },
+    "reader-page0": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 66387.24
+    },
+    "reader-smoke": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 315287.63
+    },
+    "reader-real": {
+      "state": "failed",
+      "exit_code": 1,
+      "elapsed_ms": 551595.09
+    }
+  },
+  "kaggle_contract_tests": {
+    "tests": 130,
+    "seconds": 3.095,
+    "passed": true
+  },
+  "local_inference_performed": false,
+  "confidence": {
+    "predictions": 142,
+    "backend_calls_verified": 312,
+    "all_metrics_recomputed_exactly": true,
+    "gates_recomputed_exactly": true,
+    "metrics": {
+      "repair": {
+        "dev30": {
+          "n": 30,
+          "accuracy": 0.6,
+          "macro_f1": 0.5933706816059757,
+          "runtime_failed_rows": 0,
+          "confidence_invalid_attempts": 0,
+          "backend_calls": 84,
+          "elapsed_ms": 246124.31,
+          "support_at_threshold": {
+            "threshold": 0.7,
+            "accepted": 5,
+            "false_support": 0,
+            "true_support": 5,
+            "coverage": 0.16666666666666666,
+            "precision": 1.0
+          }
+        },
+        "contracts": {
+          "n": 12,
+          "accuracy": 1.0,
+          "macro_f1": 1.0,
+          "runtime_failed_rows": 0,
+          "confidence_invalid_attempts": 3,
+          "backend_calls": 34,
+          "elapsed_ms": 74634.63,
+          "support_at_threshold": {
+            "threshold": 0.7,
+            "accepted": 4,
+            "false_support": 0,
+            "true_support": 4,
+            "coverage": 0.3333333333333333,
+            "precision": 1.0
+          }
+        },
+        "observed_failures": {
+          "n": 5,
+          "accuracy": 1.0,
+          "macro_f1": 0.3333333333333333,
+          "runtime_failed_rows": 0,
+          "confidence_invalid_attempts": 4,
+          "backend_calls": 14,
+          "elapsed_ms": 39913.64,
+          "support_at_threshold": {
+            "threshold": 0.7,
+            "accepted": 5,
+            "false_support": 0,
+            "true_support": 5,
+            "coverage": 1.0,
+            "precision": 1.0
+          }
+        },
+        "label_challenges": {
+          "n": 24,
+          "runtime_failed_rows": 0,
+          "correct_labels_accepted": 4,
+          "wrong_labels_accepted": 2,
+          "checks": {
+            "all_challenges_present": true,
+            "no_runtime_failures": true,
+            "wrong_proposed_labels_not_trusted": false,
+            "correct_proposed_labels_recognized": false
+          },
+          "automated_gate_pass": false,
+          "backend_calls": 43,
+          "elapsed_ms": 95339.3
+        }
+      },
+      "explanation_repair": {
+        "dev30": {
+          "n": 30,
+          "accuracy": 0.6,
+          "macro_f1": 0.5933706816059757,
+          "runtime_failed_rows": 0,
+          "confidence_invalid_attempts": 0,
+          "backend_calls": 72,
+          "elapsed_ms": 242289.03,
+          "support_at_threshold": {
+            "threshold": 0.7,
+            "accepted": 5,
+            "false_support": 0,
+            "true_support": 5,
+            "coverage": 0.16666666666666666,
+            "precision": 1.0
+          }
+        },
+        "contracts": {
+          "n": 12,
+          "accuracy": 1.0,
+          "macro_f1": 1.0,
+          "runtime_failed_rows": 0,
+          "confidence_invalid_attempts": 0,
+          "backend_calls": 26,
+          "elapsed_ms": 69063.82,
+          "support_at_threshold": {
+            "threshold": 0.7,
+            "accepted": 4,
+            "false_support": 0,
+            "true_support": 4,
+            "coverage": 0.3333333333333333,
+            "precision": 1.0
+          }
+        },
+        "observed_failures": {
+          "n": 5,
+          "accuracy": 1.0,
+          "macro_f1": 0.3333333333333333,
+          "runtime_failed_rows": 0,
+          "confidence_invalid_attempts": 0,
+          "backend_calls": 10,
+          "elapsed_ms": 37403.31,
+          "support_at_threshold": {
+            "threshold": 0.7,
+            "accepted": 5,
+            "false_support": 0,
+            "true_support": 5,
+            "coverage": 1.0,
+            "precision": 1.0
+          }
+        },
+        "label_challenges": {
+          "n": 24,
+          "runtime_failed_rows": 1,
+          "correct_labels_accepted": 11,
+          "wrong_labels_accepted": 10,
+          "checks": {
+            "all_challenges_present": true,
+            "no_runtime_failures": false,
+            "wrong_proposed_labels_not_trusted": false,
+            "correct_proposed_labels_recognized": false
+          },
+          "automated_gate_pass": false,
+          "backend_calls": 29,
+          "elapsed_ms": 83944.4
+        }
+      }
+    },
+    "gates": {
+      "criteria_version": "confidence-explanation-20261009-v2",
+      "candidates": {
+        "explanation_repair": {
+          "checks": {
+            "all_expected_rows_present": true,
+            "no_runtime_failures": true,
+            "judge_predictions_unchanged": true,
+            "label_metrics_not_lower": true,
+            "false_support_not_increased": true,
+            "no_accepted_false_support": true,
+            "accepted_true_support_not_lower": true,
+            "some_support_accepted": true,
+            "attempts_within_budget": true,
+            "controlled_labels_discriminated": false
+          },
+          "automated_gate_pass": false
+        }
+      },
+      "human_review": "pending",
+      "promoted_to_serving": false,
+      "overall_pass": false
+    },
+    "human_review_pending": 71
+  },
+  "reader": {
+    "reader-page0": {
+      "summary": {
+        "pdf_count": 1,
+        "evaluated_pdf_count": 1,
+        "expected_span_count": 1,
+        "span_coverage": 1.0,
+        "overall_exact_span_rate": 1.0,
+        "span_count": 1,
+        "exact_span_rate": 1.0,
+        "mean_token_recall": 1.0,
+        "by_layout": {
+          "controlled_e2e_page0": {
+            "spans": 1,
+            "exact_matches": 1
+          }
+        },
+        "failures": [],
+        "annotation_origins": [
+          "Original controlled E2E fixture; development regression"
+        ],
+        "note": "exact_span_rate is conditional on readable PDFs; overall_exact_span_rate includes failed PDFs as zero matches. Phrase/page presence only, not reading order, tables, or representative production quality.",
+        "api": {
+          "logical_call_count": 2,
+          "transport_attempt_count": 2,
+          "http_status_counts": {
+            "not_available": 2
+          },
+          "outcome_counts": {
+            "success": 2
+          },
+          "terminal_failure_events": 0,
+          "within_attempt_and_deadline_policy": true,
+          "total_transport_ms": 9208.12,
+          "total_wait_ms": 45127.848,
+          "model_ids": [
+            "gemini-3.6-flash"
+          ],
+          "cost_usd": null
+        },
+        "elapsed_ms": 63705.629,
+        "automated_gate_pass": true,
+        "human_review": "pending",
+        "overall_pass": false,
+        "status": "awaiting_human_review"
+      },
+      "retry_spacing_ms": [],
+      "page_results": [
+        {
+          "page_no": 0,
+          "success": true,
+          "tool": "layoutlmv3",
+          "block_count": 1
+        }
+      ],
+      "api_summary_recomputed": true,
+      "manifest_and_pdf_hashes_verified": true,
+      "phrase_metrics_independently_recomputed": false,
+      "limitation": "ZIP does not contain extracted blocks/chunks; phrase metrics are the recorded scorer results, not independently reproduced from text."
+    },
+    "reader-smoke": {
+      "summary": {
+        "pdf_count": 3,
+        "evaluated_pdf_count": 3,
+        "expected_span_count": 9,
+        "span_coverage": 1.0,
+        "overall_exact_span_rate": 1.0,
+        "span_count": 9,
+        "exact_span_rate": 1.0,
+        "mean_token_recall": 1.0,
+        "by_layout": {
+          "simple_text": {
+            "spans": 3,
+            "exact_matches": 3
+          },
+          "two_columns_table": {
+            "spans": 4,
+            "exact_matches": 4
+          },
+          "scan": {
+            "spans": 2,
+            "exact_matches": 2
+          }
+        },
+        "failures": [],
+        "annotation_origins": [
+          "Project-authored fixture; see manifest provenance"
+        ],
+        "note": "exact_span_rate is conditional on readable PDFs; overall_exact_span_rate includes failed PDFs as zero matches. Phrase/page presence only, not reading order, tables, or representative production quality.",
+        "api": {
+          "logical_call_count": 4,
+          "transport_attempt_count": 6,
+          "http_status_counts": {
+            "not_available": 4,
+            "503": 2
+          },
+          "outcome_counts": {
+            "success": 4,
+            "retry": 2
+          },
+          "terminal_failure_events": 0,
+          "within_attempt_and_deadline_policy": true,
+          "total_transport_ms": 26064.655,
+          "total_wait_ms": 286132.021,
+          "model_ids": [
+            "gemini-3.6-flash"
+          ],
+          "cost_usd": null
+        },
+        "elapsed_ms": 314177.201,
+        "automated_gate_pass": true,
+        "human_review": "pending",
+        "overall_pass": false,
+        "status": "awaiting_human_review"
+      },
+      "retry_spacing_ms": [
+        61000.09,
+        61000.097
+      ],
+      "page_results": [
+        {
+          "page_no": 0,
+          "success": true,
+          "tool": "alt_segmentation",
+          "block_count": 4
+        },
+        {
+          "page_no": 1,
+          "success": true,
+          "tool": "alt_segmentation",
+          "block_count": 3
+        },
+        {
+          "page_no": 0,
+          "success": true,
+          "tool": "alt_segmentation",
+          "block_count": 15
+        },
+        {
+          "page_no": 0,
+          "success": true,
+          "tool": "ocr_fallback",
+          "block_count": 18
+        }
+      ],
+      "api_summary_recomputed": true,
+      "manifest_and_pdf_hashes_verified": true,
+      "phrase_metrics_independently_recomputed": false,
+      "limitation": "ZIP does not contain extracted blocks/chunks; phrase metrics are the recorded scorer results, not independently reproduced from text."
+    },
+    "reader-real": {
+      "summary": {
+        "pdf_count": 1,
+        "evaluated_pdf_count": 0,
+        "expected_span_count": 9,
+        "span_coverage": 0.0,
+        "overall_exact_span_rate": 0.0,
+        "span_count": 0,
+        "exact_span_rate": null,
+        "mean_token_recall": null,
+        "by_layout": {},
+        "failures": [
+          {
+            "pdf_path": "pdfs/qasper_2021.pdf",
+            "error_type": "ReaderBatchError"
+          }
+        ],
+        "annotation_origins": [
+          "Assistant transcribed spans after visually reviewing Poppler renders of PDF pages 1, 4 and 9, before Reader inference. Not independently human-adjudicated."
+        ],
+        "note": "exact_span_rate is conditional on readable PDFs; overall_exact_span_rate includes failed PDFs as zero matches. Phrase/page presence only, not reading order, tables, or representative production quality.",
+        "api": {
+          "logical_call_count": 6,
+          "transport_attempt_count": 10,
+          "http_status_counts": {
+            "not_available": 5,
+            "503": 2,
+            "429": 3
+          },
+          "outcome_counts": {
+            "success": 5,
+            "retry": 4,
+            "exhausted": 1
+          },
+          "terminal_failure_events": 1,
+          "within_attempt_and_deadline_policy": true,
+          "total_transport_ms": 25221.26,
+          "total_wait_ms": 516268.469,
+          "model_ids": [
+            "gemini-3.6-flash"
+          ],
+          "cost_usd": null
+        },
+        "elapsed_ms": 549291.583,
+        "automated_gate_pass": false,
+        "human_review": "pending",
+        "overall_pass": false,
+        "status": "automated_gates_failed"
+      },
+      "retry_spacing_ms": [
+        61000.26,
+        61000.094,
+        61000.13,
+        61000.126
+      ],
+      "page_results": [
+        {
+          "page_no": 0,
+          "success": true,
+          "tool": "layoutlmv3",
+          "block_count": 135
+        },
+        {
+          "page_no": 1,
+          "success": true,
+          "tool": "alt_segmentation",
+          "block_count": 12
+        },
+        {
+          "page_no": 2,
+          "success": true,
+          "tool": "alt_segmentation",
+          "block_count": 15
+        },
+        {
+          "page_no": 3,
+          "success": false,
+          "tool": "layoutlmv3",
+          "block_count": 0
+        }
+      ],
+      "api_summary_recomputed": true,
+      "manifest_and_pdf_hashes_verified": true,
+      "phrase_metrics_independently_recomputed": false,
+      "limitation": "ZIP does not contain extracted blocks/chunks; phrase metrics are the recorded scorer results, not independently reproduced from text."
+    }
+  },
+  "reader_http_counts": {
+    "None": 11,
+    "503": 4,
+    "429": 3
+  },
+  "reader_transport_attempts": 18,
+  "limits": [
+    "No human sign-off performed",
+    "No model inference rerun",
+    "No full graph E2E in this archive",
+    "Exact cause of 429 not included in safe attempt metadata",
+    "Reader phrase metrics cannot be independently re-scored because extracted text was not exported"
+  ],
+  "external_references": [
+    "https://ai.google.dev/gemini-api/docs/rate-limits",
+    "https://ai.google.dev/gemini-api/docs/troubleshooting"
+  ]
+}

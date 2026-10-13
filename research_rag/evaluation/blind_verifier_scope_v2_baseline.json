@@ -1,0 +1,866 @@
+{
+  "source_run": "20261012T153832Z",
+  "source_zip_sha256": "0f6052667b04213bcc30eb7cdf114815ce3ab4e7413ba988881b3e2dfa3988e5",
+  "source_artifact_sha256": "94a0a71c1a2ee6eaf9d15af6b53dabef3e74183382c002b5d74c9cd999392382",
+  "historical_not_rerun": true,
+  "comparison_scope": "all_cases",
+  "prompt_profile": "scope_v2",
+  "prompt_sha256": "97b3656134d35c56505b83e9e824735e7b353f8fb70b36249939761c63e2bb1b",
+  "input_sha256": {
+    "original_contracts": "918a1a95cfed421aa8748d7eac29af74a03f93825c30817e002b2b2e16feb7e3",
+    "scope_regression": "f349b1d6a50ca417c28c43d5fced1f064fc43ebdf362d70acfc574d7d37ed45c"
+  },
+  "model_metadata": {
+    "backend": "base_instruct",
+    "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+    "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "model_files": {
+      "config.json": "eed00b17e22553979d090fa492e587e92885e328914c8e0b0b78f0a0d3576b3b",
+      "generation_config.json": "ea35dfb6fc5051b01114f9b995820d55dab01ed33ee490f6378b442af82c09f9",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "model-00001-of-00002.safetensors": "67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2",
+      "model-00002-of-00002.safetensors": "a40d941d0e7e0b966ad8b62bb6d6b7c88cce1299197b599d9d0a4ce59aabfc1d",
+      "model.safetensors.index.json": "bc8aaa0c87d4335177e01c765f1de0db81661c67c1a72fbfb0d521b09f5ddc56",
+      "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    "shared_tokenizer_files": {
+      "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+      "tokenizer_config.json": "d9bf1d78a80bad5eb65b83c2608910e3be00a9d3250c8153a5a393ad1257e1d6"
+    },
+    "shared_generation_config": {
+      "max_length": null,
+      "max_new_tokens": null,
+      "min_length": null,
+      "min_new_tokens": null,
+      "early_stopping": null,
+      "max_time": null,
+      "stop_strings": null,
+      "do_sample": true,
+      "num_beams": null,
+      "use_mtp": null,
+      "use_cache": null,
+      "cache_implementation": null,
+      "cache_config": null,
+      "max_cache_len": null,
+      "temperature": 0.7,
+      "top_k": 20,
+      "top_p": 0.8,
+      "min_p": null,
+      "top_h": null,
+      "typical_p": null,
+      "epsilon_cutoff": null,
+      "eta_cutoff": null,
+      "repetition_penalty": 1.05,
+      "encoder_repetition_penalty": null,
+      "length_penalty": null,
+      "no_repeat_ngram_size": null,
+      "bad_words_ids": null,
+      "renormalize_logits": null,
+      "forced_bos_token_id": null,
+      "forced_eos_token_id": null,
+      "remove_invalid_values": null,
+      "exponential_decay_length_penalty": null,
+      "suppress_tokens": null,
+      "begin_suppress_tokens": null,
+      "sequence_bias": null,
+      "token_healing": null,
+      "guidance_scale": null,
+      "watermarking_config": null,
+      "num_return_sequences": null,
+      "output_attentions": null,
+      "output_hidden_states": null,
+      "output_scores": null,
+      "output_logits": null,
+      "return_dict_in_generate": null,
+      "pad_token_id": 151643,
+      "bos_token_id": 151643,
+      "eos_token_id": [
+        151645,
+        151643
+      ],
+      "encoder_no_repeat_ngram_size": null,
+      "decoder_start_token_id": null,
+      "is_assistant": null,
+      "num_assistant_tokens": null,
+      "num_assistant_tokens_schedule": null,
+      "assistant_confidence_threshold": null,
+      "prompt_lookup_num_tokens": null,
+      "max_matching_ngram_size": null,
+      "assistant_early_exit": null,
+      "assistant_lookbehind": null,
+      "target_lookbehind": null,
+      "assistant_ensemble_weight": null,
+      "speculation_type": null,
+      "compile_config": null,
+      "disable_compile": null,
+      "continuous_batching_config": null,
+      "low_memory": null,
+      "penalty_alpha": null,
+      "dola_layers": null,
+      "diversity_penalty": null,
+      "num_beam_groups": null,
+      "constraints": null,
+      "force_words_ids": null,
+      "prefill_chunk_size": null,
+      "_from_model_config": null,
+      "transformers_version": "5.16.1"
+    },
+    "torch_version": "2.10.0+cu128",
+    "device": "Tesla T4",
+    "dtype": "float16",
+    "quantization": "NF4",
+    "seed": 42,
+    "do_sample": false,
+    "max_new_tokens": 384
+  },
+  "predictions": [
+    {
+      "example_id": "contract:partial_accuracy",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "The context does not provide information about the accuracy retention of Model Juniper."
+        ],
+        "explanation": "The context only mentions that Model Juniper uses 25% less memory, but it does not provide any information about its accuracy retention."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 5986.628
+    },
+    {
+      "example_id": "contract:partial_memory",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "The context only states that Model Juniper retains 94% accuracy, but it does not provide information about its memory usage."
+        ],
+        "explanation": "The context lacks information about Model Juniper's memory usage, which is necessary to determine if it uses 25% less memory."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 5795.21
+    },
+    {
+      "example_id": "contract:both_supported",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "support",
+        "evidence_quotes": [
+          "Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy."
+        ],
+        "missing_information": [],
+        "explanation": "The evidence directly supports the claim by stating that Model Juniper uses 25% less memory compared to the baseline and retains 94% accuracy."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 5633.235
+    },
+    {
+      "example_id": "contract:accuracy_conflict",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "The accuracy retention rate of Model Juniper"
+        ],
+        "explanation": "The context provides the memory usage and an accuracy rate of 81%, but not the 94% accuracy mentioned in the claim."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4802.392
+    },
+    {
+      "example_id": "contract:irrelevant",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "Explicit accuracy report for Model Juniper"
+        ],
+        "explanation": "The context lacks any information about the accuracy of Model Juniper, which is necessary to verify the claim."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4305.143
+    },
+    {
+      "example_id": "contract:negation",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "contradict",
+        "evidence_quotes": [
+          "The study did not use any human labels; all labels were generated automatically."
+        ],
+        "missing_information": [],
+        "explanation": "The context explicitly states that the study did not use human labels, contradicting the claim."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4334.224
+    },
+    {
+      "example_id": "contract:causality_missing",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "Specific evidence linking the new index to the improvement in latency."
+        ],
+        "explanation": "The context states that the new index and lower latency were observed together but does not provide evidence to establish a causal relationship between them."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4828.844
+    },
+    {
+      "example_id": "contract:scope",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "contradict",
+        "evidence_quotes": [
+          "but a fourth task became less accurate"
+        ],
+        "missing_information": [],
+        "explanation": "The context explicitly states that one of the tasks became less accurate, which directly contradicts the claim that all tasks improved."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4187.933
+    },
+    {
+      "example_id": "contract:cross_sentence",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "support",
+        "evidence_quotes": [
+          "Four models were evaluated in the report."
+        ],
+        "missing_information": [],
+        "explanation": "The context directly states that four models were evaluated in the report, which supports the claim."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 3751.904
+    },
+    {
+      "example_id": "contract:wrong_units",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "contradict",
+        "evidence_quotes": [
+          "Training took 12 hours, not 12 seconds."
+        ],
+        "missing_information": [],
+        "explanation": "The context explicitly states that training took 12 hours, which directly contradicts the claim that training took 12 seconds."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4756.275
+    },
+    {
+      "example_id": "contract:atomic_support",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "support",
+        "evidence_quotes": [
+          "The final sample contained exactly 240 documents."
+        ],
+        "missing_information": [],
+        "explanation": "The context directly states that the final sample contained exactly 240 documents, which supports the claim."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4162.652
+    },
+    {
+      "example_id": "contract:bounded_scope",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "support",
+        "evidence_quotes": [
+          "The method improved recall on the tested dataset."
+        ],
+        "missing_information": [],
+        "explanation": "The provided evidence directly supports the claim by stating that the method improved recall on the tested dataset."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 3839.505
+    },
+    {
+      "example_id": "scope:universal:support",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "support",
+        "evidence_quotes": [
+          "The validation set consisted of exactly three shards: Cedar, Maple and Pine. Recall improved on each of these three shards after the revision."
+        ],
+        "missing_information": [],
+        "explanation": "The context provides evidence that recall improved on each of the three validation shards (Cedar, Maple, and Pine) after the revision, thus supporting the claim."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 5786.959
+    },
+    {
+      "example_id": "scope:universal:contradict",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "contradict",
+        "evidence_quotes": [
+          "The validation set consisted of exactly three shards. After the revision, two improved recall, while the third became worse at recalling relevant records."
+        ],
+        "missing_information": [],
+        "explanation": "The context explicitly states that the third shard became worse at recalling relevant records, which directly contradicts the claim that 'Every validation shard improved recall after the revision.'"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 6004.71
+    },
+    {
+      "example_id": "scope:universal:not_enough_info",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "The complete set of validation shards or results for any others."
+        ],
+        "explanation": "The context mentions that two validation shards improved recall after the revision, but it does not provide information about the complete set of validation shards or the results for any others. Therefore, it is not possible to determine whether every validation shard improved recall based on the given information."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 6479.869
+    },
+    {
+      "example_id": "scope:existential:support",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "contradict",
+        "evidence_quotes": [
+          "The audited cache nodes were Birch, Elm and Fir. After the patch, Birch became faster, while Elm and Fir became slower."
+        ],
+        "missing_information": [],
+        "explanation": "The context explicitly states that Elm and Fir became slower after the patch, which directly contradicts the claim that at least one node (Birch) reduced response time."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 6073.764
+    },
+    {
+      "example_id": "scope:existential:contradict",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "contradict",
+        "evidence_quotes": [
+          "response time increased on Birch and Elm and stayed unchanged on Fir"
+        ],
+        "missing_information": [],
+        "explanation": "The context explicitly states that response time increased on Birch and Elm, contradicting the claim that at least one node reduced response time."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4660.557
+    },
+    {
+      "example_id": "scope:existential:not_enough_info",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "contradict",
+        "evidence_quotes": [
+          "Results for the other audited nodes were not reported."
+        ],
+        "missing_information": [],
+        "explanation": "The context explicitly states that results for the other audited nodes were not reported, contradicting the claim that at least one audited cache node reduced response time."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 5002.287
+    },
+    {
+      "example_id": "scope:none:support",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "support",
+        "evidence_quotes": [
+          "The report explicitly records no leaks for any of these three pumps during the test."
+        ],
+        "missing_information": [],
+        "explanation": "The context provides explicit evidence that no leaks occurred for each of the three monitored pumps (Blue, Green, and Silver) during the overnight test."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4984.016
+    },
+    {
+      "example_id": "scope:none:contradict",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "contradict",
+        "evidence_quotes": [
+          "Silver leaked during the overnight test"
+        ],
+        "missing_information": [],
+        "explanation": "The context explicitly states that Silver leaked during the overnight test, which directly contradicts the claim that none of the monitored pumps leaked."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4432.655
+    },
+    {
+      "example_id": "scope:none:not_enough_info",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "The status of Silver's pumps (leaked or not) during the overnight test."
+        ],
+        "explanation": "The context states that Silver's leak status was not reported, leaving the status of its pumps unknown."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4871.845
+    },
+    {
+      "example_id": "scope:entity:support",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "support",
+        "evidence_quotes": [
+          "After calibration, the North gateway's error rate decreased."
+        ],
+        "missing_information": [],
+        "explanation": "The evidence directly supports the claim by showing that the North gateway's error rate decreased after calibration."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4102.472
+    },
+    {
+      "example_id": "scope:entity:contradict",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "contradict",
+        "evidence_quotes": [
+          "After calibration, the North gateway's error rate increased."
+        ],
+        "missing_information": [],
+        "explanation": "The context explicitly states that the North gateway's error rate increased after calibration, which directly contradicts the claim that the North gateway's error rate reduced after calibration."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": false,
+          "error_type": "ValueError"
+        },
+        {
+          "attempt": 2,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 9830.233
+    },
+    {
+      "example_id": "scope:entity:not_enough_info",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "Calibration results for the North gateway"
+        ],
+        "explanation": "The context mentions that calibration results for the North gateway were not recorded, leaving the error rate change for the North gateway unspecified."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4586.204
+    },
+    {
+      "example_id": "scope:time:support",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "support",
+        "evidence_quotes": [
+          "Each of these four trials improved throughput."
+        ],
+        "missing_information": [],
+        "explanation": "The context provides evidence that each of the four weekly trials conducted in May improved throughput, which directly supports the claim."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4189.671
+    },
+    {
+      "example_id": "scope:time:contradict",
+      "status": "verification_failed",
+      "verification": null,
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": false,
+          "error_type": "ValueError"
+        },
+        {
+          "attempt": 2,
+          "ok": false,
+          "error_type": "ValueError"
+        }
+      ],
+      "elapsed_ms": 8788.457
+    },
+    {
+      "example_id": "scope:time:not_enough_info",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "Specific throughput results for the weekly trials conducted in May."
+        ],
+        "explanation": "The context provides information about April trials improving throughput but lacks any specific throughput results for the May trials, making it impossible to determine whether they improved throughput or not."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 5168.781
+    },
+    {
+      "example_id": "scope:direction:support",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "support",
+        "evidence_quotes": [
+          "For the same requests and conditions, median latency was 42 milliseconds before the patch and 31 milliseconds after it."
+        ],
+        "missing_information": [],
+        "explanation": "The context provides a direct comparison of median latency before and after the patch, showing a clear reduction from 42 milliseconds to 31 milliseconds. This evidence supports the claim that the patch reduced median request latency."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 6324.236
+    },
+    {
+      "example_id": "scope:direction:contradict",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "support",
+        "evidence_quotes": [
+          "For the same requests and conditions, median latency was 42 milliseconds before the patch and 55 milliseconds after it."
+        ],
+        "missing_information": [],
+        "explanation": "The context provides a direct comparison of median latency before and after the patch, showing a clear reduction in latency."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 5087.047
+    },
+    {
+      "example_id": "scope:direction:not_enough_info",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "A before-patch latency measurement and/or a comparative change in latency."
+        ],
+        "explanation": "The context provides the post-patch median request latency but lacks information on the pre-patch state or any comparative changes, making it impossible to determine if the patch reduced latency."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 5600.09
+    },
+    {
+      "example_id": "scope:metric:support",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "support",
+        "evidence_quotes": [
+          "precision rose from 0.81 before the configuration change to 0.86 afterward."
+        ],
+        "missing_information": [],
+        "explanation": "The context provides a clear comparison showing that precision increased after the configuration change, supporting the claim."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4544.878
+    },
+    {
+      "example_id": "scope:metric:contradict",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "contradict",
+        "evidence_quotes": [
+          "precision fell from 0.81 to 0.74 after the configuration change"
+        ],
+        "missing_information": [],
+        "explanation": "The context explicitly states that precision fell after the configuration change, which directly contradicts the claim that the configuration change increased precision."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 5032.834
+    },
+    {
+      "example_id": "scope:metric:not_enough_info",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "Specific details about the baseline precision before the configuration change."
+        ],
+        "explanation": "The context mentions that precision was not measured, so there is no direct evidence to confirm or deny the increase in precision after the configuration change."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4997.34
+    },
+    {
+      "example_id": "scope:conjunction:support",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "support",
+        "evidence_quotes": [
+          "For the same extraction workload, tuning reduced memory use from 5.4 to 4.6 gigabytes and raised token recall from 0.72 to 0.81."
+        ],
+        "missing_information": [],
+        "explanation": "The evidence directly supports the claim by showing that tuning reduced memory use and increased token recall."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 5790.048
+    },
+    {
+      "example_id": "scope:conjunction:contradict",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "The context does not provide information on the extent of the changes in memory use and token recall after tuning."
+        ],
+        "explanation": "The context shows changes in memory use and token recall, but it does not quantify the extent of these changes after tuning, which is necessary to determine if they met the claim's criteria."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 6113.494
+    },
+    {
+      "example_id": "scope:conjunction:not_enough_info",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "The effect on token recall after tuning"
+        ],
+        "explanation": "The context mentions that memory use decreased but does not provide any information about token recall after tuning."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4347.324
+    },
+    {
+      "example_id": "scope:condition:support",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "support",
+        "evidence_quotes": [
+          "The low-temperature group consisted of exactly three batches, and each gained yield after the update."
+        ],
+        "missing_information": [],
+        "explanation": "The evidence directly supports the claim by stating that each batch in the low-temperature group gained yield after the update."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4821.667
+    },
+    {
+      "example_id": "scope:condition:contradict",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "contradict",
+        "evidence_quotes": [
+          "After the update, two gained yield and one lost yield."
+        ],
+        "missing_information": [],
+        "explanation": "The context explicitly contradicts the claim by providing an example where one batch in the low-temperature group lost yield."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4535.937
+    },
+    {
+      "example_id": "scope:condition:not_enough_info",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "Specific yield measurements for the batches in the low-temperature group"
+        ],
+        "explanation": "The context states that no yield changes were measured for the low-temperature group, but it does not provide specific yield measurements for any of the batches."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 5233.787
+    }
+  ],
+  "note": "Audited historical scope_v2 result on 39 inspected synthetic development cases; includes one validation failure. Semantic and independent review pending."
+}

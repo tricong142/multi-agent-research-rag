@@ -1,0 +1,45 @@
+{
+  "candidate": "scope_v2",
+  "criteria_version": "blind-verifier-scope-regression-20261012-v1",
+  "selected_backend": "base_instruct",
+  "original_cases": 12,
+  "supplemental_cases": 27,
+  "unique_cases": 39,
+  "families": [
+    "condition",
+    "conjunction",
+    "direction",
+    "entity",
+    "existential",
+    "metric",
+    "none",
+    "time",
+    "universal"
+  ],
+  "label_counts": {
+    "support": 13,
+    "contradict": 13,
+    "not_enough_info": 13
+  },
+  "maximum_model_calls": 78,
+  "all_label_comparisons": 117,
+  "criteria_sha256": "afa7a363f6833972d673bdfc2100abcbeb5d79e82b7562b31b9712610a861561",
+  "input_sha256": {
+    "original_contracts": "918a1a95cfed421aa8748d7eac29af74a03f93825c30817e002b2b2e16feb7e3",
+    "scope_regression": "f349b1d6a50ca417c28c43d5fced1f064fc43ebdf362d70acfc574d7d37ed45c"
+  },
+  "prompt_sha256": "97b3656134d35c56505b83e9e824735e7b353f8fb70b36249939761c63e2bb1b",
+  "notebook_sha256": "bcb809d897b410f4016d0b86c1ee3cf811c3be413fcecadaff32704e897f79ca",
+  "baseline_v1_prompt_and_criteria_preserved": true,
+  "historical_verifier_metrics_recomputed": {
+    "correct_labels": 11,
+    "wrong_label_agreements_all_alternatives": 1,
+    "false_support": 0
+  },
+  "focused_tests_passed": 19,
+  "tests_use_model_stubs": true,
+  "new_real_model_inference_performed": false,
+  "independent_annotation_review": "pending",
+  "human_semantic_review": "pending",
+  "promoted_to_serving": false
+}

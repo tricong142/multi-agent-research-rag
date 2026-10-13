@@ -1,0 +1,29 @@
+{
+  "checked_on": "2026-10-13",
+  "reviewed_cases": 39,
+  "judgments_checked": 195,
+  "unique_ids": true,
+  "original_fields_unchanged": [
+    "backend",
+    "example_id",
+    "claim",
+    "context",
+    "label",
+    "source",
+    "status",
+    "verification",
+    "attempts",
+    "elapsed_ms"
+  ],
+  "source_and_completed_review_hashes_match": true,
+  "summary_counts_match": true,
+  "review_quotes_grounded": true,
+  "raw_output_hashes_match": 37,
+  "zip_hash_and_crc_match": true,
+  "form_sections": 39,
+  "report_links_exist": true,
+  "human_review": "pending",
+  "model_calls_in_this_review": 0,
+  "verification_scope": "Artifact integrity and review counts; does not independently establish semantic correctness.",
+  "validation_pass": true
+}

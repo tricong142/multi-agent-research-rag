@@ -1,0 +1,674 @@
+{
+  "purpose": "Post-run supplementary analysis; original criteria and gate remain unchanged",
+  "metrics": {
+    "finetuned": {
+      "correct_label_agreements": 10,
+      "wrong_label_agreements_all_alternatives": 2,
+      "wrong_alternatives_tested": 24,
+      "true_support_verified": 4,
+      "false_support_verified": 2
+    },
+    "base_instruct": {
+      "correct_label_agreements": 11,
+      "wrong_label_agreements_all_alternatives": 1,
+      "wrong_alternatives_tested": 24,
+      "true_support_verified": 4,
+      "false_support_verified": 0
+    }
+  },
+  "comparisons": [
+    {
+      "backend": "finetuned",
+      "example_id": "contract:partial_accuracy",
+      "gold_label": "not_enough_info",
+      "proposed_label": "support",
+      "label_agreement": true,
+      "claim_verified": true,
+      "status": "label_agreement"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:partial_accuracy",
+      "gold_label": "not_enough_info",
+      "proposed_label": "contradict",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:partial_accuracy",
+      "gold_label": "not_enough_info",
+      "proposed_label": "not_enough_info",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:partial_memory",
+      "gold_label": "not_enough_info",
+      "proposed_label": "support",
+      "label_agreement": true,
+      "claim_verified": true,
+      "status": "label_agreement"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:partial_memory",
+      "gold_label": "not_enough_info",
+      "proposed_label": "contradict",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:partial_memory",
+      "gold_label": "not_enough_info",
+      "proposed_label": "not_enough_info",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:both_supported",
+      "gold_label": "support",
+      "proposed_label": "support",
+      "label_agreement": true,
+      "claim_verified": true,
+      "status": "label_agreement"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:both_supported",
+      "gold_label": "support",
+      "proposed_label": "contradict",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:both_supported",
+      "gold_label": "support",
+      "proposed_label": "not_enough_info",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:accuracy_conflict",
+      "gold_label": "contradict",
+      "proposed_label": "support",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:accuracy_conflict",
+      "gold_label": "contradict",
+      "proposed_label": "contradict",
+      "label_agreement": true,
+      "claim_verified": false,
+      "status": "label_agreement"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:accuracy_conflict",
+      "gold_label": "contradict",
+      "proposed_label": "not_enough_info",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:irrelevant",
+      "gold_label": "not_enough_info",
+      "proposed_label": "support",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:irrelevant",
+      "gold_label": "not_enough_info",
+      "proposed_label": "contradict",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:irrelevant",
+      "gold_label": "not_enough_info",
+      "proposed_label": "not_enough_info",
+      "label_agreement": true,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:negation",
+      "gold_label": "contradict",
+      "proposed_label": "support",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:negation",
+      "gold_label": "contradict",
+      "proposed_label": "contradict",
+      "label_agreement": true,
+      "claim_verified": false,
+      "status": "label_agreement"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:negation",
+      "gold_label": "contradict",
+      "proposed_label": "not_enough_info",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:causality_missing",
+      "gold_label": "not_enough_info",
+      "proposed_label": "support",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:causality_missing",
+      "gold_label": "not_enough_info",
+      "proposed_label": "contradict",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:causality_missing",
+      "gold_label": "not_enough_info",
+      "proposed_label": "not_enough_info",
+      "label_agreement": true,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:scope",
+      "gold_label": "contradict",
+      "proposed_label": "support",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:scope",
+      "gold_label": "contradict",
+      "proposed_label": "contradict",
+      "label_agreement": true,
+      "claim_verified": false,
+      "status": "label_agreement"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:scope",
+      "gold_label": "contradict",
+      "proposed_label": "not_enough_info",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:cross_sentence",
+      "gold_label": "support",
+      "proposed_label": "support",
+      "label_agreement": true,
+      "claim_verified": true,
+      "status": "label_agreement"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:cross_sentence",
+      "gold_label": "support",
+      "proposed_label": "contradict",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:cross_sentence",
+      "gold_label": "support",
+      "proposed_label": "not_enough_info",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:wrong_units",
+      "gold_label": "contradict",
+      "proposed_label": "support",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:wrong_units",
+      "gold_label": "contradict",
+      "proposed_label": "contradict",
+      "label_agreement": true,
+      "claim_verified": false,
+      "status": "label_agreement"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:wrong_units",
+      "gold_label": "contradict",
+      "proposed_label": "not_enough_info",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:atomic_support",
+      "gold_label": "support",
+      "proposed_label": "support",
+      "label_agreement": true,
+      "claim_verified": true,
+      "status": "label_agreement"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:atomic_support",
+      "gold_label": "support",
+      "proposed_label": "contradict",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:atomic_support",
+      "gold_label": "support",
+      "proposed_label": "not_enough_info",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:bounded_scope",
+      "gold_label": "support",
+      "proposed_label": "support",
+      "label_agreement": true,
+      "claim_verified": true,
+      "status": "label_agreement"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:bounded_scope",
+      "gold_label": "support",
+      "proposed_label": "contradict",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:bounded_scope",
+      "gold_label": "support",
+      "proposed_label": "not_enough_info",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:partial_accuracy",
+      "gold_label": "not_enough_info",
+      "proposed_label": "support",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:partial_accuracy",
+      "gold_label": "not_enough_info",
+      "proposed_label": "contradict",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:partial_accuracy",
+      "gold_label": "not_enough_info",
+      "proposed_label": "not_enough_info",
+      "label_agreement": true,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:partial_memory",
+      "gold_label": "not_enough_info",
+      "proposed_label": "support",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:partial_memory",
+      "gold_label": "not_enough_info",
+      "proposed_label": "contradict",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:partial_memory",
+      "gold_label": "not_enough_info",
+      "proposed_label": "not_enough_info",
+      "label_agreement": true,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:both_supported",
+      "gold_label": "support",
+      "proposed_label": "support",
+      "label_agreement": true,
+      "claim_verified": true,
+      "status": "label_agreement"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:both_supported",
+      "gold_label": "support",
+      "proposed_label": "contradict",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:both_supported",
+      "gold_label": "support",
+      "proposed_label": "not_enough_info",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:accuracy_conflict",
+      "gold_label": "contradict",
+      "proposed_label": "support",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:accuracy_conflict",
+      "gold_label": "contradict",
+      "proposed_label": "contradict",
+      "label_agreement": true,
+      "claim_verified": false,
+      "status": "label_agreement"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:accuracy_conflict",
+      "gold_label": "contradict",
+      "proposed_label": "not_enough_info",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:irrelevant",
+      "gold_label": "not_enough_info",
+      "proposed_label": "support",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:irrelevant",
+      "gold_label": "not_enough_info",
+      "proposed_label": "contradict",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:irrelevant",
+      "gold_label": "not_enough_info",
+      "proposed_label": "not_enough_info",
+      "label_agreement": true,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:negation",
+      "gold_label": "contradict",
+      "proposed_label": "support",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:negation",
+      "gold_label": "contradict",
+      "proposed_label": "contradict",
+      "label_agreement": true,
+      "claim_verified": false,
+      "status": "label_agreement"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:negation",
+      "gold_label": "contradict",
+      "proposed_label": "not_enough_info",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:causality_missing",
+      "gold_label": "not_enough_info",
+      "proposed_label": "support",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:causality_missing",
+      "gold_label": "not_enough_info",
+      "proposed_label": "contradict",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:causality_missing",
+      "gold_label": "not_enough_info",
+      "proposed_label": "not_enough_info",
+      "label_agreement": true,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:scope",
+      "gold_label": "contradict",
+      "proposed_label": "support",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:scope",
+      "gold_label": "contradict",
+      "proposed_label": "contradict",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:scope",
+      "gold_label": "contradict",
+      "proposed_label": "not_enough_info",
+      "label_agreement": true,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:cross_sentence",
+      "gold_label": "support",
+      "proposed_label": "support",
+      "label_agreement": true,
+      "claim_verified": true,
+      "status": "label_agreement"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:cross_sentence",
+      "gold_label": "support",
+      "proposed_label": "contradict",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:cross_sentence",
+      "gold_label": "support",
+      "proposed_label": "not_enough_info",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:wrong_units",
+      "gold_label": "contradict",
+      "proposed_label": "support",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:wrong_units",
+      "gold_label": "contradict",
+      "proposed_label": "contradict",
+      "label_agreement": true,
+      "claim_verified": false,
+      "status": "label_agreement"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:wrong_units",
+      "gold_label": "contradict",
+      "proposed_label": "not_enough_info",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:atomic_support",
+      "gold_label": "support",
+      "proposed_label": "support",
+      "label_agreement": true,
+      "claim_verified": true,
+      "status": "label_agreement"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:atomic_support",
+      "gold_label": "support",
+      "proposed_label": "contradict",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:atomic_support",
+      "gold_label": "support",
+      "proposed_label": "not_enough_info",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:bounded_scope",
+      "gold_label": "support",
+      "proposed_label": "support",
+      "label_agreement": true,
+      "claim_verified": true,
+      "status": "label_agreement"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:bounded_scope",
+      "gold_label": "support",
+      "proposed_label": "contradict",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:bounded_scope",
+      "gold_label": "support",
+      "proposed_label": "not_enough_info",
+      "label_agreement": false,
+      "claim_verified": false,
+      "status": "needs_context"
+    }
+  ],
+  "limitations": [
+    "All alternatives reuse existing predictions; no new model calls.",
+    "The 36 label comparisons per backend come from only 12 unique cases.",
+    "Human semantic review is still pending."
+  ]
+}

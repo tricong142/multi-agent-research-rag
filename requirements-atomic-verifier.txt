@@ -1,0 +1,3 @@
+# Isolated atomic experiment only; existing orchestrator runtime is installed first.
+lm-format-enforcer==0.11.3
+interegular==0.3.3

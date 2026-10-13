@@ -1,0 +1,17 @@
+{
+  "run_id": "20261012T082718Z",
+  "zip_sha256": "b3a94107dd93ea14e6f6f3f43b2b7ac45e031d67e40386e44fa9c8c7ba44fb56",
+  "zip_size": 36448,
+  "artifact_files_verified": 44,
+  "runtime_file_count": 45,
+  "runtime_mismatches": [],
+  "offline_replays_match_kaggle": {
+    "reader-failed-page": true,
+    "reader-failed-page-retry-1": true
+  },
+  "failed_stage": "router",
+  "failed_page_index": 3,
+  "http_503_attempts": 6,
+  "accepted_blocks": 0,
+  "automated_gate_pass": false
+}

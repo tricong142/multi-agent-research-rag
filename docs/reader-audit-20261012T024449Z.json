@@ -1,0 +1,281 @@
+{
+  "run_id": "20261012T024449Z",
+  "zip_sha256": "40e5afa6842746bddeca11ebc1efd19f928ce9231acb88b6d166a63c4191ac98",
+  "archive_files_verified": 44,
+  "runtime_files_checked": 45,
+  "runtime_mismatches": [],
+  "stages": {
+    "reader-failed-page": {
+      "replay_verified": true,
+      "matches_kaggle_replay": true,
+      "automated_gate_pass": true,
+      "pages_returned": 1,
+      "pages_accepted": 1,
+      "blocks": 128
+    },
+    "reader-real": {
+      "replay_verified": true,
+      "matches_kaggle_replay": true,
+      "automated_gate_pass": false,
+      "pages_returned": 1,
+      "pages_accepted": 0,
+      "blocks": 0
+    }
+  },
+  "status": {
+    "venv": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 114.55
+    },
+    "bootstrap": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 3773.05
+    },
+    "torch": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 116551.8
+    },
+    "serving": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 47574.61
+    },
+    "pip-check": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 416.07
+    },
+    "freeze": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 365.89
+    },
+    "contract-tests": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 6486.37
+    },
+    "preflight": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 7584.4
+    },
+    "reader-failed-page": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 254617.11
+    },
+    "reader-failed-page-replay": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 967.68
+    },
+    "reader-real": {
+      "state": "failed",
+      "exit_code": 1,
+      "elapsed_ms": 1519.33
+    },
+    "reader-real-replay": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 967.44
+    }
+  },
+  "gemini_probe": {
+    "checked_at_utc": "2026-10-12T02:44:29.035449+00:00",
+    "model": "gemini-3.6-flash",
+    "endpoint_available": true,
+    "requests": [
+      {
+        "stage": "metadata",
+        "http_status": 200,
+        "elapsed_ms": 262.295,
+        "model_matches": true
+      },
+      {
+        "stage": "generation",
+        "http_status": 200,
+        "elapsed_ms": 1886.137,
+        "finish_reason": "STOP",
+        "structured_response_valid": true,
+        "usage": {
+          "promptTokenCount": 8,
+          "candidatesTokenCount": 5,
+          "thoughtsTokenCount": 218,
+          "totalTokenCount": 231
+        }
+      }
+    ]
+  },
+  "full_pdf_api_events": [
+    {
+      "pdf_path": "pdfs/qasper_2021.pdf",
+      "page_no": 0,
+      "event": "reader_api_attempt",
+      "call_id": "d896eb47e4aa4543a596c0f7156bf14f",
+      "stage": "router",
+      "model": "gemini-3.6-flash",
+      "attempt": 1,
+      "timeout_ms": 30000,
+      "wait_ms": 0.008,
+      "started_elapsed_ms": 77.54,
+      "http_status": 429,
+      "error_type": "ClientError",
+      "outcome": "deadline_exceeded",
+      "error_details": {
+        "status": "RESOURCE_EXHAUSTED",
+        "quota_violations": [
+          {
+            "quotaMetric": "generativelanguage.googleapis.com/generate_content_free_tier_requests",
+            "quotaId": "GenerateRequestsPerDayPerProjectPerModel-FreeTier",
+            "quotaValue": "20",
+            "quotaDimensions": {
+              "model": "gemini-3.6-flash",
+              "location": "global"
+            }
+          }
+        ],
+        "retry_delay_seconds": 75907.0
+      },
+      "elapsed_ms": 308.346,
+      "total_elapsed_ms": 385.886,
+      "retry_after_ms": 75907000.0,
+      "next_backoff_ms": 0.0
+    },
+    {
+      "pdf_path": "pdfs/qasper_2021.pdf",
+      "page_no": 0,
+      "event": "reader_api_stop",
+      "call_id": "d896eb47e4aa4543a596c0f7156bf14f",
+      "stage": "router",
+      "model": "gemini-3.6-flash",
+      "attempt_count": 1,
+      "http_status": 429,
+      "outcome": "deadline_exceeded",
+      "total_elapsed_ms": 386.404
+    }
+  ],
+  "pdf_pages": 12,
+  "minimum_reader_generation_calls": 17,
+  "minimum_notebook_generation_calls": 20,
+  "contract_tests": {
+    "passed": 139,
+    "unittest_seconds": 3.181
+  },
+  "human_review": "pending",
+  "step_A_complete": false,
+  "page_heuristics": [
+    {
+      "page_no": 0,
+      "has_text_layer": true,
+      "avg_block_count": 22,
+      "image_area_ratio": 0.172,
+      "page_width": 595.2760009765625,
+      "page_height": 841.8900146484375,
+      "needs_gemini_router": true
+    },
+    {
+      "page_no": 1,
+      "has_text_layer": true,
+      "avg_block_count": 12,
+      "image_area_ratio": 0.0,
+      "page_width": 595.2760009765625,
+      "page_height": 841.8900146484375,
+      "needs_gemini_router": false
+    },
+    {
+      "page_no": 2,
+      "has_text_layer": true,
+      "avg_block_count": 15,
+      "image_area_ratio": 0.0,
+      "page_width": 595.2760009765625,
+      "page_height": 841.8900146484375,
+      "needs_gemini_router": false
+    },
+    {
+      "page_no": 3,
+      "has_text_layer": true,
+      "avg_block_count": 27,
+      "image_area_ratio": 0.0,
+      "page_width": 595.2760009765625,
+      "page_height": 841.8900146484375,
+      "needs_gemini_router": true
+    },
+    {
+      "page_no": 4,
+      "has_text_layer": true,
+      "avg_block_count": 11,
+      "image_area_ratio": 0.0,
+      "page_width": 595.2760009765625,
+      "page_height": 841.8900146484375,
+      "needs_gemini_router": false
+    },
+    {
+      "page_no": 5,
+      "has_text_layer": true,
+      "avg_block_count": 12,
+      "image_area_ratio": 0.0,
+      "page_width": 595.2760009765625,
+      "page_height": 841.8900146484375,
+      "needs_gemini_router": false
+    },
+    {
+      "page_no": 6,
+      "has_text_layer": true,
+      "avg_block_count": 13,
+      "image_area_ratio": 0.048,
+      "page_width": 595.2760009765625,
+      "page_height": 841.8900146484375,
+      "needs_gemini_router": false
+    },
+    {
+      "page_no": 7,
+      "has_text_layer": true,
+      "avg_block_count": 13,
+      "image_area_ratio": 0.0,
+      "page_width": 595.2760009765625,
+      "page_height": 841.8900146484375,
+      "needs_gemini_router": false
+    },
+    {
+      "page_no": 8,
+      "has_text_layer": true,
+      "avg_block_count": 32,
+      "image_area_ratio": 0.0,
+      "page_width": 595.2760009765625,
+      "page_height": 841.8900146484375,
+      "needs_gemini_router": true
+    },
+    {
+      "page_no": 9,
+      "has_text_layer": true,
+      "avg_block_count": 20,
+      "image_area_ratio": 0.0,
+      "page_width": 595.2760009765625,
+      "page_height": 841.8900146484375,
+      "needs_gemini_router": true
+    },
+    {
+      "page_no": 10,
+      "has_text_layer": true,
+      "avg_block_count": 19,
+      "image_area_ratio": 0.0,
+      "page_width": 595.2760009765625,
+      "page_height": 841.8900146484375,
+      "needs_gemini_router": true
+    },
+    {
+      "page_no": 11,
+      "has_text_layer": true,
+      "avg_block_count": 6,
+      "image_area_ratio": 0.0,
+      "page_width": 595.2760009765625,
+      "page_height": 841.8900146484375,
+      "needs_gemini_router": false
+    }
+  ],
+  "call_estimate_note": "Exact source PDF features and current heuristic router rules; at least one successful Gemini critique per accepted page, excluding fallback, retries and unrelated project traffic."
+}

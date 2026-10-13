@@ -1,0 +1,42 @@
+# Local secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Python environments and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Model and training artifacts (too large/generated for regular Git)
+checkpoints/
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+
+# Generated evaluation/training outputs
+data/eval_predictions.jsonl
+data/rejected_rows.jsonl
+*.log
+runs/
+wandb/
+
+# Notebook, editor, and OS metadata
+.ipynb_checkpoints/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini

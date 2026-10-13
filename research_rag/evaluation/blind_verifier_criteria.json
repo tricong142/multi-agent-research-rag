@@ -1,0 +1,54 @@
+{
+  "version": "blind-verifier-development-20261012-v1",
+  "purpose": "Prospective blind label and evidence candidate on inspected development contracts; not independent evaluation or deployment approval",
+  "base_model": "Qwen/Qwen2.5-3B-Instruct",
+  "base_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "contracts_sha256": "918a1a95cfed421aa8748d7eac29af74a03f93825c30817e002b2b2e16feb7e3",
+  "baseline_sha256": "3657a43283c31f9b9e0f38f899ec1993896d89aa2643206e01117cf3d55129b4",
+  "backends": [
+    "finetuned",
+    "base_instruct"
+  ],
+  "cases_per_backend": 12,
+  "max_attempts": 2,
+  "max_new_tokens": 384,
+  "maximum_total_backend_calls": 48,
+  "seed": 42,
+  "min_correct_labels_recognized": 12,
+  "max_wrong_label_agreements": 0,
+  "wrong_label_map": {
+    "support": "contradict",
+    "contradict": "support",
+    "not_enough_info": "support"
+  },
+  "baseline_threshold": 0.7,
+  "baseline_label_challenges": {
+    "n": 24,
+    "wrong_label_map": {
+      "support": "contradict",
+      "contradict": "support",
+      "not_enough_info": "support"
+    },
+    "max_wrong_labels_at_or_above_threshold": 0,
+    "min_correct_labels_at_or_above_threshold": 12,
+    "max_runtime_failed_rows": 0
+  },
+  "human_review_rubric": [
+    "label_correct",
+    "quote_relevant",
+    "explanation_follows_evidence",
+    "all_claim_parts_checked",
+    "missing_information_specific"
+  ],
+  "human_review_required": true,
+  "promotion": "Never automatic. At least one backend must pass all automated gates; semantic evidence review and broader regression are still required before any integration.",
+  "limitations": [
+    "Twelve assistant-authored synthetic contracts have already been inspected. They are development regressions, not independent held-out data.",
+    "Each verifier sees only claim/context; proposed labels and gold labels are used by the scorer after inference. Blinding does not make model errors statistically independent.",
+    "One blind prediction is compared with two controlled labels offline; the 24 comparisons per backend are not 24 independent samples.",
+    "Exact quote membership is a necessary grounding check, not proof that the quote entails the label.",
+    "Historical repair scores at threshold 0.7 are compared with discrete label agreement. Agreement is not a calibrated confidence probability.",
+    "Verifier uses a 384-token output budget versus 192 in the historical confidence run; latency/cost differences are not a controlled causal comparison.",
+    "The serving repair pipeline, thresholds and Writer gate are not changed by this experiment."
+  ]
+}

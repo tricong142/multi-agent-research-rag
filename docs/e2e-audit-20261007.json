@@ -1,0 +1,179 @@
+{
+  "reviewed_on": "2026-10-07",
+  "reviewer": "assistant artifact review; independent human review still required",
+  "source_zip_sha256": "786497698554b008611eb2ea50cdaec467531ef60765b64e09a0dcbb44cfbed8",
+  "manifest_files_verified": 80,
+  "source_artifacts_unchanged": true,
+  "original_summary": {
+    "status": "awaiting_human_review",
+    "real_model_cases_run": 8,
+    "automated_passes": 2,
+    "retrieval_policy_gate_pass": true,
+    "mean_union_recall": {
+      "adaptive": 1.0,
+      "bm25": 1.0,
+      "dense": 1.0
+    },
+    "overall_pass": false,
+    "independent_test_proven": false
+  },
+  "original_case_results": {
+    "sufficient": {
+      "automated_gate_pass": false,
+      "safety_gate_pass": true,
+      "human_review": "pending",
+      "overall_pass": false,
+      "stop_reason": "search_budget_exhausted",
+      "status": "insufficient_evidence",
+      "steps": 8,
+      "search_calls": 4,
+      "factcheck_calls": 7,
+      "cost_usd": null,
+      "token_usage": null,
+      "total_ms": 89569.11
+    },
+    "missing": {
+      "automated_gate_pass": true,
+      "safety_gate_pass": true,
+      "human_review": "pending",
+      "overall_pass": false,
+      "stop_reason": "task_completed",
+      "status": "completed",
+      "steps": 6,
+      "search_calls": 2,
+      "factcheck_calls": 3,
+      "cost_usd": null,
+      "token_usage": null,
+      "total_ms": 96424.08
+    },
+    "conflict": {
+      "automated_gate_pass": false,
+      "safety_gate_pass": true,
+      "human_review": "pending",
+      "overall_pass": false,
+      "stop_reason": "search_budget_exhausted",
+      "status": "insufficient_evidence",
+      "steps": 6,
+      "search_calls": 4,
+      "factcheck_calls": 0,
+      "cost_usd": null,
+      "token_usage": null,
+      "total_ms": 57225.55
+    },
+    "pdf_pages": {
+      "automated_gate_pass": false,
+      "safety_gate_pass": true,
+      "human_review": "pending",
+      "overall_pass": false,
+      "stop_reason": "reader_failed",
+      "status": "insufficient_evidence",
+      "steps": 1,
+      "search_calls": 0,
+      "factcheck_calls": 0,
+      "cost_usd": null,
+      "token_usage": null,
+      "total_ms": 127367.4
+    },
+    "budget": {
+      "automated_gate_pass": true,
+      "safety_gate_pass": true,
+      "human_review": "pending",
+      "overall_pass": false,
+      "stop_reason": "step_budget_exhausted",
+      "status": "insufficient_evidence",
+      "steps": 1,
+      "search_calls": 1,
+      "factcheck_calls": 0,
+      "cost_usd": null,
+      "token_usage": null,
+      "total_ms": 5.32
+    },
+    "heldout_1": {
+      "automated_gate_pass": false,
+      "safety_gate_pass": true,
+      "human_review": "pending",
+      "overall_pass": false,
+      "stop_reason": "factchecker_failed",
+      "status": "insufficient_evidence",
+      "steps": 3,
+      "search_calls": 1,
+      "factcheck_calls": 6,
+      "cost_usd": null,
+      "token_usage": null,
+      "total_ms": 96373.32
+    },
+    "heldout_2": {
+      "automated_gate_pass": false,
+      "safety_gate_pass": true,
+      "human_review": "pending",
+      "overall_pass": false,
+      "stop_reason": "search_budget_exhausted",
+      "status": "insufficient_evidence",
+      "steps": 9,
+      "search_calls": 4,
+      "factcheck_calls": 6,
+      "cost_usd": null,
+      "token_usage": null,
+      "total_ms": 197036.72
+    },
+    "heldout_3": {
+      "automated_gate_pass": false,
+      "safety_gate_pass": true,
+      "human_review": "pending",
+      "overall_pass": false,
+      "stop_reason": "factchecker_failed",
+      "status": "insufficient_evidence",
+      "steps": 5,
+      "search_calls": 2,
+      "factcheck_calls": 16,
+      "cost_usd": null,
+      "token_usage": null,
+      "total_ms": 262246.06
+    }
+  },
+  "recorded_backend_calls": {
+    "summarizer_generator": 14,
+    "summarizer_critic": 14,
+    "factchecker": 113,
+    "writer": 2
+  },
+  "quality_review": {
+    "missing": "False completion: the answer locates the sample size in the appendix but does not provide it.",
+    "pdf_pages": "Root cause unresolved: page/tool/API rejection details were discarded.",
+    "confidence": "Root cause unresolved: confidence validation failed, but raw output and retry errors were not retained."
+  },
+  "local_validation": {
+    "command": "python -m unittest discover -s research_rag/tests -q",
+    "tests_run": 104,
+    "failures": 0,
+    "errors": 0,
+    "elapsed_seconds": 44.523,
+    "real_model_inference": false
+  },
+  "modified_code_sha256": {
+    "research_rag/planning.py": "680b25c3d049f7fa908ebaaed9b2a799a2430425eefd33ffb2b362e36a2d24f7",
+    "research_rag/graph.py": "b2883b3b7c2ca75cda20ab9223fb8012591dcd3284dc2eca9595af083fc275df",
+    "research_rag/controller.py": "b97466aece81f27bd89d62f1fd0c61857a8a604b2b9681faf1850cdfb55ff43f",
+    "research_rag/adapters.py": "22537d4284338c66a1262d03dd3ce55dea4a95a2fa859ae78c638b66c45f147c",
+    "research_rag/local.py": "b363825e64d07a5f8c12c5b456b1e58e4b2c4297e93f48d493c5dec3ba8bbf5a",
+    "research_rag/evaluation/autonomy.py": "4232b8a7e69ff0195b142918943fe9482867ddb7c474f8eedb257fbe31570fea",
+    "train_agent2_reader/reader_agent.py": "509ffc7069bfdf3584568fb8ccf01e2161636d7c749711269282ad2ab171c708",
+    "train_agent3_summarizer/node.py": "8f219e2740a4fe73449a849a893a50a980880d33a6748c31084d22fa22d91188",
+    "train_agent3_summarizer/critic/prompts.py": "5ec5559e8c6542375feb0d6ba619dc8b64036ae748972f9a01b8dfcb3ea54c11",
+    "04_factchecker/inference/judge.py": "ba0c895fc73f25cdfe86eadae9f1ac02241b6291d6b3ee4a1e7d41cb431465f7",
+    "research_rag/tests/test_e2e_regressions.py": "c20a9658b23bb41c5ca62b48d7a0dda41905fff6cf5db792740a71719466e25b",
+    "scripts/build_validation_notebook.py": "09e7887cca7bbcbfc01b7cc5193a5d878f8d6fe34c9e7a6fa14c4ac857b93f44",
+    "scripts/build_autonomy_notebook.py": "864dda62d44ffe271ec87f0c52d3bc9145688b469f9f2b8cd0b11a52a5cd78c8"
+  },
+  "notebooks": {
+    "scripts/kaggle_autonomy_validation.ipynb": {
+      "bytes": 160137,
+      "sha256": "160bce15f712cd581d6a4608fe85c099455b6ae7d1add9323d4bcd772eb8cdc6"
+    },
+    "scripts/kaggle_resume_validation.ipynb": {
+      "bytes": 114282,
+      "sha256": "3a94edd4e33514b9fdb7b1e455455946e728de39afe7f845b307bd5490b9ef62"
+    }
+  },
+  "new_gpu_run_completed": false
+}

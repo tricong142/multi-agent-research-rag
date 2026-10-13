@@ -1,0 +1,48 @@
+{
+  "files": {
+    "train": {
+      "sha256": "157b9f59c30dbb81e10ee504611b3844fa43fd1a7d8b843365893138a5473690",
+      "rows": 1312,
+      "labels": {
+        "not_enough_info": 355,
+        "contradict": 341,
+        "support": 616
+      }
+    },
+    "dev": {
+      "sha256": "33fed28b379d311f110a05843f7e2c8e86c68109250091fdef3ff0bca817600c",
+      "rows": 468,
+      "labels": {
+        "not_enough_info": 130,
+        "support": 216,
+        "contradict": 122
+      }
+    }
+  },
+  "example_id_overlap_count": 0,
+  "claim_id_overlap_count": 0,
+  "doc_id_overlap_count": 181,
+  "normalized_claim_overlap_count": 2,
+  "claim_context_overlap_count": 2,
+  "scope": "Exact and normalized duplicate audit of current files; dev is used for model selection, not a new final held-out test.",
+  "deduplicated_dev": {
+    "path": "research_rag/evaluation/scifact_dev_deduplicated.jsonl",
+    "sha256": "172059a91b3209f7d11830c7b4fe66e4b7fc6aa9cbba3d051689bdc60e2b80f1",
+    "rows": 466,
+    "labels": {
+      "not_enough_info": 128,
+      "support": 216,
+      "contradict": 122
+    },
+    "excluded_example_ids": [
+      "870:195689316:nei",
+      "1292:56893404:nei"
+    ],
+    "excluded_claim_ids": [
+      870,
+      1292
+    ],
+    "rule": "Exclude every dev row belonging to a claim whose normalized text occurs in train; group by claim_id.",
+    "independent_final_test": false
+  }
+}

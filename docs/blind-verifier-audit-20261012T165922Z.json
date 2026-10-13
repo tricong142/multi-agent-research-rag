@@ -1,0 +1,403 @@
+{
+  "zip_name": "rag-validation-20261012T165922Z.zip",
+  "zip_bytes": 61011,
+  "zip_sha256": "878bad4550f0364224325e5bdfec48a914a00e66e2f1c7a3725863dc7bca37ff",
+  "crc_pass": true,
+  "manifest_verified_files": 37,
+  "source_manifest_matches": {
+    "runtime-patch-manifest.json": 45,
+    "verifier-patch-manifest.json": 13
+  },
+  "source_checked_before_followup_changes": true,
+  "provenance_source_matches": 5,
+  "criteria_and_inputs_match": true,
+  "prediction_replay_matches": 39,
+  "backend_calls_replayed": 40,
+  "messages_and_blinding_match": true,
+  "metrics_comparisons_summary_recomputed": true,
+  "review_rows_verified": 39,
+  "human_review_status": "pending",
+  "historical_model_pairing": {
+    "model_files": true,
+    "shared_tokenizer_files": true,
+    "repo_id": true,
+    "revision": true,
+    "dtype": true,
+    "quantization": true,
+    "seed": true,
+    "do_sample": true,
+    "max_new_tokens": true
+  },
+  "metrics": {
+    "n": 39,
+    "correct_labels_recognized": 37,
+    "wrong_label_agreements": 2,
+    "false_support": 2,
+    "runtime_failed_rows": 0,
+    "backend_calls": 40,
+    "elapsed_ms": 242799.176,
+    "checks": {
+      "all_cases_present": true,
+      "no_runtime_failures": true,
+      "all_correct_labels_recognized": false,
+      "no_wrong_label_agreements": false,
+      "no_false_support": false,
+      "attempt_budget": true,
+      "each_dataset_group_complete_and_correct": false
+    },
+    "automated_gate_pass": false,
+    "dataset_groups": {
+      "original_contracts": {
+        "n": 12,
+        "correct_labels": 11,
+        "false_support": 1,
+        "runtime_failed_rows": 0
+      },
+      "scope_regression": {
+        "n": 27,
+        "correct_labels": 26,
+        "false_support": 1,
+        "runtime_failed_rows": 0
+      }
+    },
+    "families": {
+      "original_contracts": {
+        "n": 12,
+        "correct_labels": 11,
+        "false_support": 1,
+        "runtime_failed_rows": 0
+      },
+      "universal": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "existential": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "none": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "entity": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "time": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "direction": {
+        "n": 3,
+        "correct_labels": 2,
+        "false_support": 1,
+        "runtime_failed_rows": 0
+      },
+      "metric": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "conjunction": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "condition": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      }
+    },
+    "classification": {
+      "n": 39,
+      "accuracy": 0.9487179487179487,
+      "macro_f1": 0.9495238095238095,
+      "per_label": {
+        "support": {
+          "precision": 0.8666666666666667,
+          "recall": 1.0,
+          "f1": 0.9285714285714286,
+          "support": 13
+        },
+        "contradict": {
+          "precision": 1.0,
+          "recall": 0.9230769230769231,
+          "f1": 0.9600000000000001,
+          "support": 13
+        },
+        "not_enough_info": {
+          "precision": 1.0,
+          "recall": 0.9230769230769231,
+          "f1": 0.9600000000000001,
+          "support": 13
+        }
+      },
+      "confusion": {
+        "not_enough_info->support": 1,
+        "not_enough_info->not_enough_info": 12,
+        "support->support": 13,
+        "contradict->contradict": 12,
+        "contradict->support": 1
+      }
+    },
+    "comparison_policy": "all_labels",
+    "wrong_alternatives_tested": 78
+  },
+  "historical_v2_metrics": {
+    "n": 39,
+    "correct_labels_recognized": 33,
+    "wrong_label_agreements": 5,
+    "false_support": 1,
+    "runtime_failed_rows": 1,
+    "backend_calls": 41,
+    "elapsed_ms": 203775.107,
+    "checks": {
+      "all_cases_present": true,
+      "no_runtime_failures": false,
+      "all_correct_labels_recognized": false,
+      "no_wrong_label_agreements": false,
+      "no_false_support": false,
+      "attempt_budget": true,
+      "each_dataset_group_complete_and_correct": false
+    },
+    "automated_gate_pass": false,
+    "dataset_groups": {
+      "original_contracts": {
+        "n": 12,
+        "correct_labels": 11,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "scope_regression": {
+        "n": 27,
+        "correct_labels": 22,
+        "false_support": 1,
+        "runtime_failed_rows": 1
+      }
+    },
+    "families": {
+      "original_contracts": {
+        "n": 12,
+        "correct_labels": 11,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "universal": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "existential": {
+        "n": 3,
+        "correct_labels": 1,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "none": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "entity": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "time": {
+        "n": 3,
+        "correct_labels": 2,
+        "false_support": 0,
+        "runtime_failed_rows": 1
+      },
+      "direction": {
+        "n": 3,
+        "correct_labels": 2,
+        "false_support": 1,
+        "runtime_failed_rows": 0
+      },
+      "metric": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "conjunction": {
+        "n": 3,
+        "correct_labels": 2,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "condition": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      }
+    },
+    "classification": {
+      "n": 39,
+      "accuracy": 0.8461538461538461,
+      "macro_f1": 0.8539886039886041,
+      "per_label": {
+        "support": {
+          "precision": 0.9230769230769231,
+          "recall": 0.9230769230769231,
+          "f1": 0.9230769230769231,
+          "support": 13
+        },
+        "contradict": {
+          "precision": 0.8181818181818182,
+          "recall": 0.6923076923076923,
+          "f1": 0.7500000000000001,
+          "support": 13
+        },
+        "not_enough_info": {
+          "precision": 0.8571428571428571,
+          "recall": 0.9230769230769231,
+          "f1": 0.888888888888889,
+          "support": 13
+        }
+      },
+      "confusion": {
+        "not_enough_info->not_enough_info": 12,
+        "support->support": 12,
+        "contradict->not_enough_info": 2,
+        "contradict->contradict": 9,
+        "support->contradict": 1,
+        "not_enough_info->contradict": 1,
+        "contradict->__verification_failed__": 1,
+        "contradict->support": 1
+      }
+    },
+    "comparison_policy": "all_labels",
+    "wrong_alternatives_tested": 78
+  },
+  "summary": {
+    "experiment_completed": true,
+    "prediction_count": 39,
+    "backend_calls": 40,
+    "automated_gate_pass": false,
+    "qualifying_profiles": [],
+    "human_review": "pending",
+    "overall_pass": false,
+    "promoted_to_serving": false,
+    "cost_usd": null
+  },
+  "status": {
+    "venv": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 114.59
+    },
+    "bootstrap": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 8186.57
+    },
+    "torch": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 133759.3
+    },
+    "serving": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 56948.28
+    },
+    "pip-check": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 466.15
+    },
+    "freeze": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 365.77
+    },
+    "contract-tests": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 4728.25
+    },
+    "preflight": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 5929.7
+    },
+    "blind-verifier": {
+      "state": "failed",
+      "exit_code": 1,
+      "elapsed_ms": 311526.76
+    }
+  },
+  "label_changes_vs_v2": [
+    {
+      "example_id": "contract:partial_accuracy",
+      "gold_label": "not_enough_info",
+      "scope_v2": "not_enough_info",
+      "logic_v3": "support"
+    },
+    {
+      "example_id": "contract:accuracy_conflict",
+      "gold_label": "contradict",
+      "scope_v2": "not_enough_info",
+      "logic_v3": "contradict"
+    },
+    {
+      "example_id": "scope:existential:support",
+      "gold_label": "support",
+      "scope_v2": "contradict",
+      "logic_v3": "support"
+    },
+    {
+      "example_id": "scope:existential:not_enough_info",
+      "gold_label": "not_enough_info",
+      "scope_v2": "contradict",
+      "logic_v3": "not_enough_info"
+    },
+    {
+      "example_id": "scope:time:contradict",
+      "gold_label": "contradict",
+      "scope_v2": null,
+      "logic_v3": "contradict"
+    },
+    {
+      "example_id": "scope:conjunction:contradict",
+      "gold_label": "contradict",
+      "scope_v2": "not_enough_info",
+      "logic_v3": "contradict"
+    }
+  ],
+  "errors": [
+    {
+      "example_id": "contract:partial_accuracy",
+      "gold_label": "not_enough_info",
+      "assessed_label": "support"
+    },
+    {
+      "example_id": "scope:direction:contradict",
+      "gold_label": "contradict",
+      "assessed_label": "support"
+    }
+  ],
+  "kaggle_tests_passed": 161,
+  "kaggle_tests_seconds": 3.157,
+  "new_model_inference_during_audit": false
+}

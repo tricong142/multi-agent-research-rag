@@ -1,0 +1,345 @@
+{
+  "date": "2026-10-10",
+  "scope": "Confidence explanations prospective diagnostic and Reader HTTP retry reliability",
+  "real_model_run_performed": false,
+  "real_api_run_performed": false,
+  "model_quality_validated_for_new_candidate": false,
+  "reader_503_resolved_on_real_service": null,
+  "experimental_prompt_promoted": false,
+  "serving_profile": "repair",
+  "serving_prompt_hashes": {
+    "JUDGE_SYSTEM_PROMPT": "89559612b52febe67ead7630b4d38f5fb8142e802ef0c32e9a7329a8a3e030e5",
+    "CONFIDENCE_SYSTEM_PROMPT": "cc80fad9db9942a05bae03872c024495edb2952ffe755bf4e1ba7d4606929d1d"
+  },
+  "original_v1_criteria_unchanged_from_audited_run": true,
+  "original_v1_criteria_sha256": "99126a5f2bccfdcbcdb7a003f39c214de551bdc5b299a0970e91c2926ae2f6b0",
+  "new_criteria_version": "confidence-explanation-20261009-v2",
+  "packaged_runtime_file_count": 42,
+  "packaged_runtime_payload_matches_current_sources": true,
+  "notebook_code_cell_count": 6,
+  "python_version": "3.10.11",
+  "validation": [
+    {
+      "command": ".venv/Scripts/python.exe -m unittest discover -s research_rag/tests -q",
+      "environment": "Windows sandbox",
+      "tests": 137,
+      "passed": 136,
+      "errors": 1,
+      "seconds": 7.9,
+      "exit_code": 1,
+      "error": "WinError 5 Access denied renaming temporary ZIP in test_runner_preserves_success_failure_and_archive_hashes"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m unittest discover -s research_rag/tests -q",
+      "environment": "Windows outside sandbox, approved retry",
+      "tests": 137,
+      "passed": 137,
+      "seconds": 27.011,
+      "exit_code": 0,
+      "env_overrides": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1"
+      }
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m unittest research_rag.tests.test_validation_notebook.ValidationNotebookTests.test_completion_notebook_uses_current_patch_and_exact_failed_pdf research_rag.tests.test_validation_notebook.ValidationNotebookTests.test_cells_compile_and_patch_matches_current_sources -q",
+      "scope": "After final notebook title regeneration",
+      "tests": 2,
+      "passed": 2,
+      "seconds": 0.117,
+      "exit_code": 0
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m research_rag.evaluation.compare_factchecker --help",
+      "exit_code": 0
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m research_rag.evaluation.reader_reliability --help",
+      "exit_code": 0
+    }
+  ],
+  "test_limits": [
+    "Mock model backends and mock HTTP transport only",
+    "Linux process-group termination branch not executed on Windows",
+    "No new model/API inference or calibration"
+  ],
+  "warnings_observed": [
+    "RequestsDependencyWarning in local environment",
+    "Google SDK AFC recommendation"
+  ],
+  "pending": [
+    "Manual Kaggle six-cell diagnostic",
+    "Human explanation and PDF extraction review",
+    "Summarizer heldout_3 failure",
+    "Full eight-case E2E after component fixes",
+    "Independent evaluation/calibration and acceptance"
+  ],
+  "files": [
+    {
+      "path": "research_rag/graph.py",
+      "size": 32194,
+      "sha256": "b2883b3b7c2ca75cda20ab9223fb8012591dcd3284dc2eca9595af083fc275df"
+    },
+    {
+      "path": "research_rag/state.py",
+      "size": 1901,
+      "sha256": "0da55a10e4f5d1c33b4f06cad2e78553bfb190bc30c8b96b76a699e69a6fdc39"
+    },
+    {
+      "path": "research_rag/retrieval.py",
+      "size": 12717,
+      "sha256": "b2fa64a805591839f5583f189097ee787bf1741ccd78ea44835453941997497e"
+    },
+    {
+      "path": "research_rag/preflight.py",
+      "size": 5027,
+      "sha256": "bccd1755d5e23462f334703822d6fb185ca089bd62e2be9214bc0b9558fb5e39"
+    },
+    {
+      "path": "research_rag/indexing.py",
+      "size": 5245,
+      "sha256": "2e02675e5094a278b4eb9d0e2eb0245389fda47ad0d9236ba69fef68f457cd14"
+    },
+    {
+      "path": "research_rag/evaluate.py",
+      "size": 10760,
+      "sha256": "48f5936f8ef3e3454ab7d2049d803be18d67134279fe14359e4c2ec0451fcf66"
+    },
+    {
+      "path": "research_rag/evaluation/reader_smoke.py",
+      "size": 4629,
+      "sha256": "aa15952308de0e1df3643f1bd08f4162e17add7e392ea99ef4a55b5d8c44ae1b"
+    },
+    {
+      "path": "research_rag/tests/test_graph_safety.py",
+      "size": 4713,
+      "sha256": "3f5dc5ab0dcac0150c0e9163f2d19f51159ee18abc6540c936b9d7db0cd8520a"
+    },
+    {
+      "path": "research_rag/tests/test_evaluation_contracts.py",
+      "size": 2905,
+      "sha256": "07abcacd4317f11d1848ad99ddf8d307d716e3395d0be25545c0f4491a38b3cc"
+    },
+    {
+      "path": "research_rag/tests/test_indexing.py",
+      "size": 4298,
+      "sha256": "7de6774aff89673a16c3a32fe65a1660fd906020467178e9a4b77c2acf043c1f"
+    },
+    {
+      "path": "research_rag/controller.py",
+      "size": 7426,
+      "sha256": "b97466aece81f27bd89d62f1fd0c61857a8a604b2b9681faf1850cdfb55ff43f"
+    },
+    {
+      "path": "research_rag/adapters.py",
+      "size": 5305,
+      "sha256": "22537d4284338c66a1262d03dd3ce55dea4a95a2fa859ae78c638b66c45f147c"
+    },
+    {
+      "path": "research_rag/local.py",
+      "size": 17378,
+      "sha256": "b363825e64d07a5f8c12c5b456b1e58e4b2c4297e93f48d493c5dec3ba8bbf5a"
+    },
+    {
+      "path": "research_rag/observe.py",
+      "size": 2854,
+      "sha256": "46300c0d7f859228523efc2359d01092c48d7317b7509f5f4efb8fc6bbaae051"
+    },
+    {
+      "path": "requirements-orchestrator.txt",
+      "size": 467,
+      "sha256": "31b5dac851eaaf005a151e9c071226aeafeb4679ebe4019d0368e68fbd0dacd4"
+    },
+    {
+      "path": "train_agent3_summarizer/node.py",
+      "size": 12681,
+      "sha256": "8f219e2740a4fe73449a849a893a50a980880d33a6748c31084d22fa22d91188"
+    },
+    {
+      "path": "train_agent3_summarizer/critic/prompts.py",
+      "size": 3000,
+      "sha256": "5ec5559e8c6542375feb0d6ba619dc8b64036ae748972f9a01b8dfcb3ea54c11"
+    },
+    {
+      "path": "research_rag/tests/test_integration.py",
+      "size": 20733,
+      "sha256": "c0b351c3f8d76406bbf28d697188732bde11773cce684b681c000144ad051144"
+    },
+    {
+      "path": "research_rag/tests/test_autonomy.py",
+      "size": 15718,
+      "sha256": "c9a19650502784017bc30fb2a8e4a03517aa7cbee5d7ddaf0c27603970e8ba3e"
+    },
+    {
+      "path": "research_rag/planning.py",
+      "size": 9967,
+      "sha256": "680b25c3d049f7fa908ebaaed9b2a799a2430425eefd33ffb2b362e36a2d24f7"
+    },
+    {
+      "path": "research_rag/tests/test_planning.py",
+      "size": 6077,
+      "sha256": "11e8078fdafb08fa97480763cad1fa2f3ba6b1a4242001cdeae32c07edac4386"
+    },
+    {
+      "path": "research_rag/evaluation/autonomy.py",
+      "size": 17385,
+      "sha256": "4232b8a7e69ff0195b142918943fe9482867ddb7c474f8eedb257fbe31570fea"
+    },
+    {
+      "path": "research_rag/evaluation/autonomy_criteria.json",
+      "size": 2156,
+      "sha256": "1e2763ac2aecc9ef612a0fe19f3cb0dff96be0a8cee1e7810dec79cb3a769e6e"
+    },
+    {
+      "path": "research_rag/tests/test_autonomy_evaluation.py",
+      "size": 2466,
+      "sha256": "2293ae3332c79139d66d3f6f2debe61bc17e07a1eb141a6c0bd18f72646b6104"
+    },
+    {
+      "path": "04_factchecker/inference/judge.py",
+      "size": 5063,
+      "sha256": "e05d2d19384f4b8713fa6c18cbc9fa87defcafda164628467508cc7c98a50649"
+    },
+    {
+      "path": "train_agent2_reader/reader_agent.py",
+      "size": 11519,
+      "sha256": "8e19d00551a712759f6e55e2a9dea933f5d0b4a5cfc58123ad7b2f27c89b0825"
+    },
+    {
+      "path": "research_rag/tests/test_e2e_regressions.py",
+      "size": 10940,
+      "sha256": "c20a9658b23bb41c5ca62b48d7a0dda41905fff6cf5db792740a71719466e25b"
+    },
+    {
+      "path": "04_factchecker/inference/confidence.py",
+      "size": 3463,
+      "sha256": "307cdfb8bb9509a5189a31994d0aaa4c37f662e008f36dadaa54dcabeba0a09b"
+    },
+    {
+      "path": "04_factchecker/node.py",
+      "size": 7793,
+      "sha256": "577e62d2ce330d19bc4791641066d8d17b8dc4baebfc3dab455d593658afc48c"
+    },
+    {
+      "path": "04_factchecker/prompts.py",
+      "size": 7967,
+      "sha256": "fe7be89a4ac6f789f9629f90c9710aeafc074806c066fa2451cb889121b6017e"
+    },
+    {
+      "path": "04_factchecker/eval_factchecker.py",
+      "size": 7759,
+      "sha256": "579907c751d107f9b1634511501b9dfd433ac9d583d551d989e1b95f6f7cbc0e"
+    },
+    {
+      "path": "research_rag/evaluation/compare_factchecker.py",
+      "size": 18763,
+      "sha256": "ce7a74e56699a35d597493dd5152972a0cf40447aab6000774c7d76209574ae7"
+    },
+    {
+      "path": "research_rag/evaluation/confidence_criteria.json",
+      "size": 905,
+      "sha256": "99126a5f2bccfdcbcdb7a003f39c214de551bdc5b299a0970e91c2926ae2f6b0"
+    },
+    {
+      "path": "research_rag/evaluation/confidence_failures_20261009.jsonl",
+      "size": 5359,
+      "sha256": "10a5a2a6977f43186ee227733119301c7571ed0cd3f25a4326017b847014c024"
+    },
+    {
+      "path": "research_rag/tests/test_confidence_repair.py",
+      "size": 7022,
+      "sha256": "8499e4e7287025fc7603a4f6203e481f2db74fbcd9ef17d54dfe218405d246df"
+    },
+    {
+      "path": "research_rag/tests/test_confidence_diagnostic.py",
+      "size": 5374,
+      "sha256": "baa842183752075382aefccc422505220c3edc6caa846a975a49992726276d38"
+    },
+    {
+      "path": "research_rag/evaluation/confidence_explanation_criteria.json",
+      "size": 1663,
+      "sha256": "261dcbc75d0cd9d0c408f7c43a1965ae15c4bc98d743f072f04f24d11d143f2a"
+    },
+    {
+      "path": "research_rag/tests/test_confidence_explanations.py",
+      "size": 7350,
+      "sha256": "916bd374dca58ad4fd974745759ce2df4ca8b5bb263c94febfdf4e1fe269fccf"
+    },
+    {
+      "path": "train_agent2_reader/reader_policy.py",
+      "size": 13720,
+      "sha256": "c877a65daf01faa6a8564a5373ca1dad434decc150fad967b662413ce73de24f"
+    },
+    {
+      "path": "research_rag/tests/test_reader_api_retry.py",
+      "size": 10062,
+      "sha256": "a0a18d0ee745ceb69fb37e41672625ae508a7c00d8b0bef7e741e05892a591cc"
+    },
+    {
+      "path": "research_rag/evaluation/reader_reliability.py",
+      "size": 7494,
+      "sha256": "ba261e682f97d672f39a978be1d35bbb82ba1a168bc4514696e6c3a8d390c482"
+    },
+    {
+      "path": "research_rag/tests/test_reader_reliability.py",
+      "size": 6907,
+      "sha256": "5d5ef19eb96645668f29ed9b1867e22d1afb4960f7dfb383152c4fc32e2f9282"
+    },
+    {
+      "path": "research_rag/tests/test_validation_notebook.py",
+      "size": 11112,
+      "sha256": "ae347c59d5d60cb6f7b74a9a096c06d65173bf3fcca81447f30c3808007b4fa8"
+    },
+    {
+      "path": "scripts/build_validation_notebook.py",
+      "size": 15742,
+      "sha256": "a9caa58ff8f6bcbe0711dd2c9a69f789e74fb6993456708a5ccdfafe65df936e"
+    },
+    {
+      "path": "scripts/build_completion_notebook.py",
+      "size": 7100,
+      "sha256": "37b2d345456ddba7ed478f582c2df770dfdf4fe8a45e8d2b7860e0fc018b29d0"
+    },
+    {
+      "path": "scripts/kaggle_resume_validation.ipynb",
+      "size": 165216,
+      "sha256": "861405c4dc942daba17a59fa8cdb04f333ca78ad615cad73a2eae825c3e5ed3a"
+    },
+    {
+      "path": "scripts/kaggle_autonomy_validation.ipynb",
+      "size": 211075,
+      "sha256": "0843569ce8eebe8ee327b4a609dea59b62c2641802cca94abb217c1a2f7f03d6"
+    },
+    {
+      "path": "scripts/kaggle_confidence_validation.ipynb",
+      "size": 161712,
+      "sha256": "a4a69694f96108b1912777d142be1931466e707b027f5c5241f58c111194b51b"
+    },
+    {
+      "path": "scripts/kaggle_completion_validation.ipynb",
+      "size": 167505,
+      "sha256": "7836d6aa536df16391fd6c44331366673062bd6d3f142e4219bbb93096a2873b"
+    },
+    {
+      "path": "04_factchecker/README.md",
+      "size": 7967,
+      "sha256": "b8212bf1f51a23667595dff674a4503f003f01983623d970beb9cc4f14d73db7"
+    },
+    {
+      "path": "train_agent2_reader/README.md",
+      "size": 6135,
+      "sha256": "2de8be32e4dbeaa46b84c5b7dc249c8a86077e11efea97c14fdfdc696fa984d8"
+    },
+    {
+      "path": "docs/PROJECT_STATUS.md",
+      "size": 15256,
+      "sha256": "04fe4446c4b7ebeeae0fcf04e28d01ba81ef3fb09174d7acc639f453978e581a"
+    },
+    {
+      "path": "docs/COMPLETION_VALIDATION_20261010.md",
+      "size": 16415,
+      "sha256": "e8d4147fd2f667a9ce2067e863b6701ee88ebbc86a007de16d17a2dd46cdecea"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "version": "atomic-verifier-constrained-v4-20261013",
+  "policy": "atomic-verifier-constrained-v4",
+  "status": "local_core_and_final_packaging_passed_live_v4_probe_pending",
+  "criteria_sha256": "36e3dafb2b3d6de96090693987c5289fd291cb610f85775d7ba17b3c6f3d9fd7",
+  "notebook_sha256": "8439265ba4f34fd48ea49e251905719aa7fc5e93bd704db43b49f9917d484e1a",
+  "source_sha256": {
+    "04_factchecker/inference/atomic_verifier.py": "c05fddb53bef55dd0b49587d241bc557f219210b3a11f2e4a29ce76aab520153",
+    "04_factchecker/inference/numeric_verifier.py": "53375a676708b7118747d3fbf9b11cdf674055cfb78e5755b6f090391b831bc0",
+    "04_factchecker/inference/evidence_screen.py": "23574b7320ac576989b283a58d3e81d58be001f1b1c286523d4f0baa04dfcab5",
+    "04_factchecker/inference/verifier.py": "7eff9f8678cf1a4c270e59ada432bdf12a2fd6323c3d598fa34cc3513fd468f8",
+    "04_factchecker/inference/judge.py": "818aa5a4dc7f8065e101264e59d57828cc00f60d1c105156e49c03f374f6dbb7",
+    "research_rag/evaluation/evaluate_atomic_verifier.py": "a4f6c34eb55a80d3f478c14343e87bc7c953c4ec73d3ade97a2fc6c40db49360",
+    "research_rag/evaluation/compare_blind_verifier.py": "ea14524f1f43c806975e0adbe0c0f24eecf23fd970123be735b9e14b7e6644cb",
+    "research_rag/evaluation/compare_factchecker.py": "ce7a74e56699a35d597493dd5152972a0cf40447aab6000774c7d76209574ae7",
+    "research_rag/evaluation/compare_confidence_backends.py": "0d383a92d02cec05743c3585058cd1fd7a4dbd5daab3730beee08b499eb5e873",
+    "research_rag/local.py": "b363825e64d07a5f8c12c5b456b1e58e4b2c4297e93f48d493c5dec3ba8bbf5a",
+    "requirements-orchestrator.txt": "31b5dac851eaaf005a151e9c071226aeafeb4679ebe4019d0368e68fbd0dacd4",
+    "research_rag/tests/test_atomic_verifier.py": "1baddf4d68ad9ecf4c57da6f0d5dd84e87b898f4214da1277d2ea9d1180ede2d",
+    "research_rag/tests/test_atomic_experiment.py": "deaf5c9e6a8848c479c3523aee01c58b1408fad51683954bb159282392c286c8",
+    "04_factchecker/inference/atomic_decoding.py": "06f7e3e7b90dfea9eafc5d5a4dc70bc57eee1ff76d225cd8b93e83a013a0b769",
+    "research_rag/tests/test_atomic_decoding.py": "96b982868e0ad135fa494b16eadd84b2532f8b9f35e7973457918d836a64e95b",
+    "requirements-atomic-verifier.txt": "b95eaa539ed6046f9261b09cdaa82017360568703d8af8d2bc6d8eed3c9af370"
+  },
+  "frozen_sources_verified": 16,
+  "structured_decoder": {
+    "engine": "lm-format-enforcer",
+    "version": "0.11.3",
+    "interegular": "0.3.3",
+    "policy": "atomic-schema-decoding-v1",
+    "source_enum_max_words": 80,
+    "strict_field_order": true,
+    "max_consecutive_whitespaces": 4,
+    "num_beams": 1,
+    "repetition_penalty": 1.05
+  },
+  "local_validation": {
+    "runtime_unique_tests_passed": 83,
+    "final_packaging_tests_passed": 3,
+    "unique_test_cases_all_passed": 86,
+    "single_all_green_86_test_run": false,
+    "first_full_run": {
+      "tests": 86,
+      "failures": 1,
+      "runtime_failures": 0,
+      "elapsed_seconds": 92.712,
+      "exit_code": 1
+    },
+    "packaging_fix": "Added original runtime source hash for shared judge adapter; frozen core unchanged after this fix",
+    "final_packaging_run": {
+      "tests": 3,
+      "failures": 0,
+      "elapsed_seconds": 9.95,
+      "exit_code": 0
+    },
+    "log": "decomposition-v4-tests.log",
+    "backend": "Real LMFE token parser; tiny tokenizer/scripted model; no Qwen weights",
+    "local_torch_distribution": "2.6.0",
+    "kaggle_target_torch": "2.10.0+cu128",
+    "cuda_model_execution_tested": false
+  },
+  "convenience_adapter_incompatibility_observed": "LMFE 0.11.3 imports removed transformers.tokenization_utils.PreTrainedTokenizerBase; custom adapter uses public core instead",
+  "model_revision_data_prompts_budgets_label_gate_unchanged_from_v3": true,
+  "source_enum_word_limit": 80,
+  "old_zip_and_frozen_v3_artifacts_preserved": true,
+  "cli_blocks_39_without_probe": true,
+  "cli_model_called": false,
+  "prompt_examples_not_probe_claims": true,
+  "v3_semantic_ai_review_counts": {
+    "unreviewable": 5,
+    "pass": 9,
+    "needs_revision": 4
+  },
+  "v3_actual": {
+    "valid_decompositions": 13,
+    "incomplete": 5,
+    "calls": 27,
+    "kaggle_tests_passed": 206,
+    "automated_gate_pass": false
+  },
+  "new_live_model_calls": 0,
+  "v4_probe_executed": false,
+  "full39_executed": false,
+  "human_review_completed": false,
+  "serving_integration": false,
+  "shared_backend_hook_added": true,
+  "serving_default_constraint_kwargs": {},
+  "limitations": [
+    "GPU model quality and latency under v4 not yet measured.",
+    "Finite source enums can reject text spans outside the supported word boundaries; 80 words maximum.",
+    "Schema cannot prove atomicity, full population/metric binding, entailment or coverage of all numeric requirements.",
+    "Max token/deadline interruption can still leave JSON incomplete.",
+    "All 18/39 cases are seen development data; independent evaluation remains required."
+  ]
+}

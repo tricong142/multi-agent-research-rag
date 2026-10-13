@@ -1,0 +1,493 @@
+{
+  "date": "2026-10-10",
+  "recorded_at_utc": "2026-10-10T08:47:04.969602+00:00",
+  "scope": "Reader quota/export/offline replay and controlled confidence backend comparison; manual Kaggle runners",
+  "tests": {
+    "command": ".venv/Scripts/python.exe -m unittest discover -s research_rag/tests -q",
+    "passed": 147,
+    "failed": 0,
+    "unittest_seconds": 20.65,
+    "process_elapsed_seconds": 35.601,
+    "exit_code": 0,
+    "sandbox": "approved outside sandbox after Windows temporary rename denial",
+    "initial_run": "147 tests: one incomplete Torch test stub fixed, two sandbox rename errors; retained original logs",
+    "logs": [
+      {
+        "path": "research-runs/local-component-validation-20261010/tests-approved-status.json",
+        "sha256": "4abcb47feeb56de9d03be1c1c5d924bfe927b5ac59c0b1698de8613dc6fa32a8"
+      },
+      {
+        "path": "research-runs/local-component-validation-20261010/tests-approved.stderr.log",
+        "sha256": "b8fd7b925594ea3f65a5087c883e82b9fd37b2bfdc820a309744bfa4422382ab"
+      },
+      {
+        "path": "research-runs/local-component-validation-20261010/tests-approved.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "research-runs/local-component-validation-20261010/tests-status.json",
+        "sha256": "356a906c838a72e0a0eec4f68aa139a60491a928070eaf528fd2315fb3cb3dd4"
+      },
+      {
+        "path": "research-runs/local-component-validation-20261010/tests.stderr.log",
+        "sha256": "2b3753e422c72fc7142c670c198087c5d80fad0543edbdf7868aa2d630c3a308"
+      },
+      {
+        "path": "research-runs/local-component-validation-20261010/tests.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "limitations": [
+      "Model/API inference is mocked in unit tests",
+      "Local requests dependency and Google AFC warnings remain; Kaggle pip-check is a separate gate"
+    ]
+  },
+  "real_model_inference_performed": false,
+  "gemini_api_calls_performed": false,
+  "serving_prompt_sha256_unchanged": {
+    "JUDGE_SYSTEM_PROMPT": "89559612b52febe67ead7630b4d38f5fb8142e802ef0c32e9a7329a8a3e030e5",
+    "CONFIDENCE_SYSTEM_PROMPT": "cc80fad9db9942a05bae03872c024495edb2952ffe755bf4e1ba7d4606929d1d"
+  },
+  "frozen_prior_criteria_sha256_unchanged": {
+    "research_rag/evaluation/confidence_criteria.json": "99126a5f2bccfdcbcdb7a003f39c214de551bdc5b299a0970e91c2926ae2f6b0",
+    "research_rag/evaluation/confidence_explanation_criteria.json": "261dcbc75d0cd9d0c408f7c43a1965ae15c4bc98d743f072f04f24d11d143f2a"
+  },
+  "runtime_patch_file_count": 45,
+  "runtime_patch_manifest": [
+    {
+      "base_sha256": "51ed5fbe86bc67aee92827ca6f2a4f7c6596035e14499ef8cfc85ffb1d50f681",
+      "path": "research_rag/graph.py",
+      "sha256": "b2883b3b7c2ca75cda20ab9223fb8012591dcd3284dc2eca9595af083fc275df",
+      "size": 32194
+    },
+    {
+      "base_sha256": "b5baee104b4d0b6a1dc45fe1beb613bbc0af1d9bc7ba2a094b5dc7cf603ee5df",
+      "path": "research_rag/state.py",
+      "sha256": "0da55a10e4f5d1c33b4f06cad2e78553bfb190bc30c8b96b76a699e69a6fdc39",
+      "size": 1901
+    },
+    {
+      "base_sha256": "abda894ece2cde6089e3c81acb52d73d01a88233c8a9b146d9ae3fc764a81867",
+      "path": "research_rag/retrieval.py",
+      "sha256": "b2fa64a805591839f5583f189097ee787bf1741ccd78ea44835453941997497e",
+      "size": 12717
+    },
+    {
+      "base_sha256": "1e01c2b433aab1e755b37307ccb2c5905be10f78c9e38884df2a9f4de1cd12af",
+      "path": "research_rag/preflight.py",
+      "sha256": "bccd1755d5e23462f334703822d6fb185ca089bd62e2be9214bc0b9558fb5e39",
+      "size": 5027
+    },
+    {
+      "base_sha256": "c16c4bb651140d117450cba508de1835404f7742343a71bb638761d9edd42384",
+      "path": "research_rag/indexing.py",
+      "sha256": "2e02675e5094a278b4eb9d0e2eb0245389fda47ad0d9236ba69fef68f457cd14",
+      "size": 5245
+    },
+    {
+      "base_sha256": "2fe103fddd2bcc47b3da402be933e54096216e432b30f0b2882433073a4e9d22",
+      "path": "research_rag/evaluate.py",
+      "sha256": "48f5936f8ef3e3454ab7d2049d803be18d67134279fe14359e4c2ec0451fcf66",
+      "size": 10760
+    },
+    {
+      "base_sha256": "1f1618d2a2f156a4f9f9779562a296bd8b866d3c1d3c6a21ddde89ace89053fe",
+      "path": "research_rag/evaluation/reader_smoke.py",
+      "sha256": "ef52d40c18b1561a7cf7f7a01bb8381b3f37618c6bef7b80ed2259f7103d214f",
+      "size": 5721
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/tests/test_graph_safety.py",
+      "sha256": "3f5dc5ab0dcac0150c0e9163f2d19f51159ee18abc6540c936b9d7db0cd8520a",
+      "size": 4713
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/tests/test_evaluation_contracts.py",
+      "sha256": "07abcacd4317f11d1848ad99ddf8d307d716e3395d0be25545c0f4491a38b3cc",
+      "size": 2905
+    },
+    {
+      "base_sha256": "806b5b7808fc35a6d4278e94eb5ff51fae1ba1d000b486fe3b05e39dee949a1f",
+      "path": "research_rag/tests/test_indexing.py",
+      "sha256": "7de6774aff89673a16c3a32fe65a1660fd906020467178e9a4b77c2acf043c1f",
+      "size": 4298
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/controller.py",
+      "sha256": "b97466aece81f27bd89d62f1fd0c61857a8a604b2b9681faf1850cdfb55ff43f",
+      "size": 7426
+    },
+    {
+      "base_sha256": "d5e10af41a344c0a640ff9eba3ce5de43883ab3636507727001263e31278bb42",
+      "path": "research_rag/adapters.py",
+      "sha256": "22537d4284338c66a1262d03dd3ce55dea4a95a2fa859ae78c638b66c45f147c",
+      "size": 5305
+    },
+    {
+      "base_sha256": "83a9d942170cdde78fbdee08a178242f647d29424556134acedde375b0107fbb",
+      "path": "research_rag/local.py",
+      "sha256": "b363825e64d07a5f8c12c5b456b1e58e4b2c4297e93f48d493c5dec3ba8bbf5a",
+      "size": 17378
+    },
+    {
+      "base_sha256": "498dfa3d8825183e74f40ff6d23faa6b93a6d29ba08b9edbf5f1539b1647ffcb",
+      "path": "research_rag/observe.py",
+      "sha256": "46300c0d7f859228523efc2359d01092c48d7317b7509f5f4efb8fc6bbaae051",
+      "size": 2854
+    },
+    {
+      "base_sha256": "4f89a6da4451247a141d7367727f9b00716480ea49295147ee6dcc508f6ecbab",
+      "path": "requirements-orchestrator.txt",
+      "sha256": "31b5dac851eaaf005a151e9c071226aeafeb4679ebe4019d0368e68fbd0dacd4",
+      "size": 467
+    },
+    {
+      "base_sha256": "f5ddfb142a2458bbeb18d84e8c89b50ccc9b5750a7f43e1c97a1888894ec0719",
+      "path": "train_agent3_summarizer/node.py",
+      "sha256": "8f219e2740a4fe73449a849a893a50a980880d33a6748c31084d22fa22d91188",
+      "size": 12681
+    },
+    {
+      "base_sha256": "dc56b658500abc729e35649c5449018a6fb6c9e45edc0154ff28e07cff4ab84d",
+      "path": "train_agent3_summarizer/critic/prompts.py",
+      "sha256": "5ec5559e8c6542375feb0d6ba619dc8b64036ae748972f9a01b8dfcb3ea54c11",
+      "size": 3000
+    },
+    {
+      "base_sha256": "9f42572898f0f52a8f9838ae0f3f1ba5431cdf342b3cc5adbd11f6c85f68d2eb",
+      "path": "research_rag/tests/test_integration.py",
+      "sha256": "c0b351c3f8d76406bbf28d697188732bde11773cce684b681c000144ad051144",
+      "size": 20733
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/tests/test_autonomy.py",
+      "sha256": "c9a19650502784017bc30fb2a8e4a03517aa7cbee5d7ddaf0c27603970e8ba3e",
+      "size": 15718
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/planning.py",
+      "sha256": "680b25c3d049f7fa908ebaaed9b2a799a2430425eefd33ffb2b362e36a2d24f7",
+      "size": 9967
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/tests/test_planning.py",
+      "sha256": "11e8078fdafb08fa97480763cad1fa2f3ba6b1a4242001cdeae32c07edac4386",
+      "size": 6077
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/evaluation/autonomy.py",
+      "sha256": "4232b8a7e69ff0195b142918943fe9482867ddb7c474f8eedb257fbe31570fea",
+      "size": 17385
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/evaluation/autonomy_criteria.json",
+      "sha256": "1e2763ac2aecc9ef612a0fe19f3cb0dff96be0a8cee1e7810dec79cb3a769e6e",
+      "size": 2156
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/tests/test_autonomy_evaluation.py",
+      "sha256": "2293ae3332c79139d66d3f6f2debe61bc17e07a1eb141a6c0bd18f72646b6104",
+      "size": 2466
+    },
+    {
+      "base_sha256": "3c4612e567fc629941a2912342efbac641adacabbd038ae3a316d762693159e1",
+      "path": "04_factchecker/inference/judge.py",
+      "sha256": "e05d2d19384f4b8713fa6c18cbc9fa87defcafda164628467508cc7c98a50649",
+      "size": 5063
+    },
+    {
+      "base_sha256": "8f121cc1fe187920d313c44ffbacb681ab853aefaf7308ec080bb6f5f5c73d40",
+      "path": "train_agent2_reader/reader_agent.py",
+      "sha256": "8e19d00551a712759f6e55e2a9dea933f5d0b4a5cfc58123ad7b2f27c89b0825",
+      "size": 11519
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/tests/test_e2e_regressions.py",
+      "sha256": "c20a9658b23bb41c5ca62b48d7a0dda41905fff6cf5db792740a71719466e25b",
+      "size": 10940
+    },
+    {
+      "base_sha256": "f2c4bdffbe3844732c0dc1f7f62813a5eb2fb68720496c8e39c06c9423b962b0",
+      "path": "04_factchecker/inference/confidence.py",
+      "sha256": "307cdfb8bb9509a5189a31994d0aaa4c37f662e008f36dadaa54dcabeba0a09b",
+      "size": 3463
+    },
+    {
+      "base_sha256": "e58db08b91c5f2c26a062df53371d3925a690280db56cf32c38b4176e8a9e773",
+      "path": "04_factchecker/node.py",
+      "sha256": "577e62d2ce330d19bc4791641066d8d17b8dc4baebfc3dab455d593658afc48c",
+      "size": 7793
+    },
+    {
+      "base_sha256": "0239eb137636a75f4944ede0c6e8ec1edd3f03a3b9f96415d1d8b153311b2be1",
+      "path": "04_factchecker/prompts.py",
+      "sha256": "fe7be89a4ac6f789f9629f90c9710aeafc074806c066fa2451cb889121b6017e",
+      "size": 7967
+    },
+    {
+      "base_sha256": "34f26f0596a00754cf0891d8da91b8f79732d7d6cb7e7f83655ec91a9364aa39",
+      "path": "04_factchecker/eval_factchecker.py",
+      "sha256": "579907c751d107f9b1634511501b9dfd433ac9d583d551d989e1b95f6f7cbc0e",
+      "size": 7759
+    },
+    {
+      "base_sha256": "7b2458465290ca27bde4cde87ac258daf51cc5957538bbcd0bafe631ba17c812",
+      "path": "research_rag/evaluation/compare_factchecker.py",
+      "sha256": "ce7a74e56699a35d597493dd5152972a0cf40447aab6000774c7d76209574ae7",
+      "size": 18763
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/evaluation/confidence_criteria.json",
+      "sha256": "99126a5f2bccfdcbcdb7a003f39c214de551bdc5b299a0970e91c2926ae2f6b0",
+      "size": 905
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/evaluation/confidence_failures_20261009.jsonl",
+      "sha256": "10a5a2a6977f43186ee227733119301c7571ed0cd3f25a4326017b847014c024",
+      "size": 5359
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/tests/test_confidence_repair.py",
+      "sha256": "8499e4e7287025fc7603a4f6203e481f2db74fbcd9ef17d54dfe218405d246df",
+      "size": 7022
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/tests/test_confidence_diagnostic.py",
+      "sha256": "baa842183752075382aefccc422505220c3edc6caa846a975a49992726276d38",
+      "size": 5374
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/evaluation/confidence_explanation_criteria.json",
+      "sha256": "261dcbc75d0cd9d0c408f7c43a1965ae15c4bc98d743f072f04f24d11d143f2a",
+      "size": 1663
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/tests/test_confidence_explanations.py",
+      "sha256": "916bd374dca58ad4fd974745759ce2df4ca8b5bb263c94febfdf4e1fe269fccf",
+      "size": 7350
+    },
+    {
+      "base_sha256": "919caa7ef01a02543db9ef5de67de95206dc3b50c2e24895f7e91e37bb834ed0",
+      "path": "train_agent2_reader/reader_policy.py",
+      "sha256": "1b0d51a272b6183d2244b08ac2b809602a6ee1eae4f2e135f394e27d8c1571ab",
+      "size": 16760
+    },
+    {
+      "base_sha256": "f5ef130ca5065478991d4e49ffe13b879235836a49460d67f75ab76e0ef9530f",
+      "path": "research_rag/tests/test_reader_api_retry.py",
+      "sha256": "2e7670eb66a619b04aa44289c7fb82d9abbf8e822ab5bc3e0cd8c05892cffbd8",
+      "size": 13341
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/evaluation/reader_reliability.py",
+      "sha256": "0586a853f0b103816ed740ca4ed0dbf39572887ba01ab6abbedc006e3553e5b0",
+      "size": 12837
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/tests/test_reader_reliability.py",
+      "sha256": "6639a09a6a1bc2d324c49f7a13f34e0f316fe67f845136728c3900fa12c1b3c6",
+      "size": 10603
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/evaluation/confidence_backend_criteria.json",
+      "sha256": "d51dc212d8a6af358b76003e70185b943dad34f9ab3d147ccf2a33147fbfe5d6",
+      "size": 1686
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/evaluation/compare_confidence_backends.py",
+      "sha256": "0d383a92d02cec05743c3585058cd1fd7a4dbd5daab3730beee08b499eb5e873",
+      "size": 10701
+    },
+    {
+      "base_sha256": null,
+      "path": "research_rag/tests/test_confidence_backends.py",
+      "sha256": "4fa63997b64746a848d13702c02becdf653d24f99d00ecef2a4c7db0cfd69286",
+      "size": 7433
+    }
+  ],
+  "notebooks": {
+    "kaggle_autonomy_validation.ipynb": {
+      "size": 225706,
+      "sha256": "82307a86a236935d0846882b10e75ea8466a3f89a774ce9f45f74b9ca233377e",
+      "code_cells": 4
+    },
+    "kaggle_completion_validation.ipynb": {
+      "size": 182136,
+      "sha256": "b754fcbbe76f5b2b22685a545e2912964e6506afe2dec31eb585332b31a629b0",
+      "code_cells": 6
+    },
+    "kaggle_confidence_backends.ipynb": {
+      "size": 175965,
+      "sha256": "8ff762a50974e594cb77fd8816b49e82e652c25358ac628ee768ea9d954186d8",
+      "code_cells": 3
+    },
+    "kaggle_confidence_validation.ipynb": {
+      "size": 176343,
+      "sha256": "6b5db2f1862792d863bc944607083cfdc80eca968b4655cc9060e28340236a87",
+      "code_cells": 3
+    },
+    "kaggle_reader_diagnostics.ipynb": {
+      "size": 177762,
+      "sha256": "53edbd4607755febfa0520e3d96c91609550ed04059588cb1e8eafd75b867ba1",
+      "code_cells": 4
+    },
+    "kaggle_resume_validation.ipynb": {
+      "size": 179847,
+      "sha256": "7d13c8bb55af04c3558871d75259975132a67e7d0544e548435df73676666481",
+      "code_cells": 4
+    }
+  },
+  "new_component_inference_cells_executed": false,
+  "confidence_experiment": {
+    "predictions_expected": 96,
+    "criteria_sha256": "d51dc212d8a6af358b76003e70185b943dad34f9ab3d147ccf2a33147fbfe5d6",
+    "required_profile": "base_instruct__explanation_repair",
+    "promoted_to_serving": false,
+    "human_review": "pending"
+  },
+  "reader": {
+    "artifacts_exported": [
+      "page_blocks.jsonl",
+      "extractions.jsonl",
+      "input-manifest.jsonl"
+    ],
+    "safe_quota_metadata": true,
+    "offline_replay_supported": true,
+    "live_api_result": "pending manual Kaggle run"
+  },
+  "remaining": [
+    "Manual Kaggle component runs and ZIP review",
+    "Reader and confidence human review",
+    "Summarizer heldout_3 correction",
+    "Full eight-case E2E regression",
+    "Independent evaluation/calibration and final sign-off"
+  ],
+  "git_diff_available": false,
+  "files": [
+    {
+      "path": "train_agent2_reader/reader_policy.py",
+      "size": 16760,
+      "sha256": "1b0d51a272b6183d2244b08ac2b809602a6ee1eae4f2e135f394e27d8c1571ab"
+    },
+    {
+      "path": "research_rag/evaluation/reader_smoke.py",
+      "size": 5721,
+      "sha256": "ef52d40c18b1561a7cf7f7a01bb8381b3f37618c6bef7b80ed2259f7103d214f"
+    },
+    {
+      "path": "research_rag/evaluation/reader_reliability.py",
+      "size": 12837,
+      "sha256": "0586a853f0b103816ed740ca4ed0dbf39572887ba01ab6abbedc006e3553e5b0"
+    },
+    {
+      "path": "research_rag/evaluation/compare_confidence_backends.py",
+      "size": 10701,
+      "sha256": "0d383a92d02cec05743c3585058cd1fd7a4dbd5daab3730beee08b499eb5e873"
+    },
+    {
+      "path": "research_rag/evaluation/confidence_backend_criteria.json",
+      "size": 1686,
+      "sha256": "d51dc212d8a6af358b76003e70185b943dad34f9ab3d147ccf2a33147fbfe5d6"
+    },
+    {
+      "path": "research_rag/tests/test_reader_api_retry.py",
+      "size": 13341,
+      "sha256": "2e7670eb66a619b04aa44289c7fb82d9abbf8e822ab5bc3e0cd8c05892cffbd8"
+    },
+    {
+      "path": "research_rag/tests/test_reader_reliability.py",
+      "size": 10603,
+      "sha256": "6639a09a6a1bc2d324c49f7a13f34e0f316fe67f845136728c3900fa12c1b3c6"
+    },
+    {
+      "path": "research_rag/tests/test_confidence_backends.py",
+      "size": 7433,
+      "sha256": "4fa63997b64746a848d13702c02becdf653d24f99d00ecef2a4c7db0cfd69286"
+    },
+    {
+      "path": "research_rag/tests/test_validation_notebook.py",
+      "size": 12459,
+      "sha256": "62592ac9ba00d24ee832974ebbe0ad811642a1eda488011a128f7f8ebf266546"
+    },
+    {
+      "path": "scripts/build_validation_notebook.py",
+      "size": 15949,
+      "sha256": "23792f8ebdd1d1d99645c3d50462c1c209e65819e20a8f7b6ff85101806e112b"
+    },
+    {
+      "path": "scripts/build_component_notebooks.py",
+      "size": 5705,
+      "sha256": "df04f16d63ff2928e01b4bef6fc33db590f4ac90eacf1d0eb5dadc7cae7dbb4b"
+    },
+    {
+      "path": "04_factchecker/README.md",
+      "size": 8453,
+      "sha256": "70a2f8629436c755fa28dcac5575d027d3f2b47951b0e8245e9264f795943faf"
+    },
+    {
+      "path": "train_agent2_reader/README.md",
+      "size": 6703,
+      "sha256": "730095982d3b2fa8ec550dc64e97bdee4b38e7570c41d1c551396f3bdac90f1d"
+    },
+    {
+      "path": "docs/PROJECT_STATUS.md",
+      "size": 17735,
+      "sha256": "0fd84233cc2bfc467624b20cadc35ddf9423a93c1c32f5c0448c62873645e264"
+    },
+    {
+      "path": "docs/COMPONENT_DIAGNOSTICS_20261010.md",
+      "size": 15115,
+      "sha256": "8ee8d7d1e51b9deb4e1e77834cba7cf4e0364eec947da5cbaf67782b581a411f"
+    },
+    {
+      "path": "scripts/kaggle_autonomy_validation.ipynb",
+      "size": 225706,
+      "sha256": "82307a86a236935d0846882b10e75ea8466a3f89a774ce9f45f74b9ca233377e"
+    },
+    {
+      "path": "scripts/kaggle_completion_validation.ipynb",
+      "size": 182136,
+      "sha256": "b754fcbbe76f5b2b22685a545e2912964e6506afe2dec31eb585332b31a629b0"
+    },
+    {
+      "path": "scripts/kaggle_confidence_backends.ipynb",
+      "size": 175965,
+      "sha256": "8ff762a50974e594cb77fd8816b49e82e652c25358ac628ee768ea9d954186d8"
+    },
+    {
+      "path": "scripts/kaggle_confidence_validation.ipynb",
+      "size": 176343,
+      "sha256": "6b5db2f1862792d863bc944607083cfdc80eca968b4655cc9060e28340236a87"
+    },
+    {
+      "path": "scripts/kaggle_reader_diagnostics.ipynb",
+      "size": 177762,
+      "sha256": "53edbd4607755febfa0520e3d96c91609550ed04059588cb1e8eafd75b867ba1"
+    },
+    {
+      "path": "scripts/kaggle_resume_validation.ipynb",
+      "size": 179847,
+      "sha256": "7d13c8bb55af04c3558871d75259975132a67e7d0544e548435df73676666481"
+    }
+  ]
+}

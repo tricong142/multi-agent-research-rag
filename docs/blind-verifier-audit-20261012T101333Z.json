@@ -1,0 +1,183 @@
+{
+  "zip_name": "rag-validation-20261012T101333Z.zip",
+  "zip_bytes": 38292,
+  "zip_sha256": "4c8e6c8868714f28e78d5372ab5be845497ec5c995bcefb9adf4436c7bcfba6c",
+  "crc_pass": true,
+  "manifest_verified_files": 36,
+  "source_manifest_matches": {
+    "runtime-patch-manifest.json": 45,
+    "verifier-patch-manifest.json": 5
+  },
+  "provenance_source_matches": 5,
+  "criteria_baseline_cases_match": true,
+  "prediction_replay_matches": 24,
+  "backend_calls_replayed": 27,
+  "messages_and_blinding_match": true,
+  "metrics_comparisons_summary_recomputed": true,
+  "review_rows_verified": 24,
+  "human_review_status": "pending",
+  "historical_model_hash_matches": {
+    "finetuned": {
+      "model_files": true,
+      "shared_tokenizer_files": true
+    },
+    "base_instruct": {
+      "model_files": true,
+      "shared_tokenizer_files": true
+    }
+  },
+  "metrics": {
+    "finetuned": {
+      "n": 12,
+      "correct_labels_recognized": 10,
+      "wrong_label_agreements": 2,
+      "false_support": 2,
+      "runtime_failed_rows": 0,
+      "backend_calls": 15,
+      "elapsed_ms": 61884.453,
+      "checks": {
+        "all_cases_present": true,
+        "no_runtime_failures": true,
+        "all_correct_labels_recognized": false,
+        "no_wrong_label_agreements": false,
+        "no_false_support": false,
+        "attempt_budget": true
+      },
+      "automated_gate_pass": false
+    },
+    "base_instruct": {
+      "n": 12,
+      "correct_labels_recognized": 11,
+      "wrong_label_agreements": 0,
+      "false_support": 0,
+      "runtime_failed_rows": 0,
+      "backend_calls": 12,
+      "elapsed_ms": 52320.247,
+      "checks": {
+        "all_cases_present": true,
+        "no_runtime_failures": true,
+        "all_correct_labels_recognized": false,
+        "no_wrong_label_agreements": true,
+        "no_false_support": true,
+        "attempt_budget": true
+      },
+      "automated_gate_pass": false
+    }
+  },
+  "confusion": {
+    "finetuned": {
+      "not_enough_info -> support": 2,
+      "support -> support": 4,
+      "contradict -> contradict": 4,
+      "not_enough_info -> not_enough_info": 2
+    },
+    "base_instruct": {
+      "not_enough_info -> not_enough_info": 4,
+      "support -> support": 4,
+      "contradict -> contradict": 3,
+      "contradict -> not_enough_info": 1
+    }
+  },
+  "incorrect_predictions": [
+    {
+      "backend": "finetuned",
+      "example_id": "contract:partial_accuracy",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "context": "Model Juniper uses 25% less memory than its baseline.",
+      "label": "not_enough_info",
+      "source": "original synthetic regression; assistant-authored; not independent held-out data",
+      "verification": {
+        "assessed_label": "support",
+        "evidence_quotes": [
+          "Model Juniper uses 25% less memory than its baseline."
+        ],
+        "missing_information": [],
+        "explanation": "The annotated evidence states: \"Model Juniper uses 25% less memory than its baseline.\""
+      }
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:partial_memory",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "context": "Model Juniper retains 94% accuracy on the benchmark.",
+      "label": "not_enough_info",
+      "source": "original synthetic regression; assistant-authored; not independent held-out data",
+      "verification": {
+        "assessed_label": "support",
+        "evidence_quotes": [
+          "Model Juniper retains 94% accuracy on the benchmark."
+        ],
+        "missing_information": [],
+        "explanation": "The annotated evidence states: \"Model Juniper retains 94% accuracy on the benchmark.\""
+      }
+    },
+    {
+      "backend": "base_instruct",
+      "example_id": "contract:scope",
+      "claim": "All tasks improved after compression.",
+      "context": "Three tasks improved after compression, but a fourth task became less accurate.",
+      "label": "contradict",
+      "source": "original synthetic regression; assistant-authored; not independent held-out data",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "Information about the fourth task's performance before compression."
+        ],
+        "explanation": "The context only mentions that one task became less accurate after compression, but does not provide information about its performance before compression, which is necessary to assess whether all tasks improved."
+      }
+    }
+  ],
+  "invalid_attempts": [
+    {
+      "backend": "finetuned",
+      "example_id": "contract:partial_memory",
+      "call_index": 2,
+      "validation_error": "Return exactly the four required verifier fields",
+      "raw_output": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "The cited context has no annotated evidence that supports or contradicts the claim."
+        ]
+      }
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:irrelevant",
+      "call_index": 6,
+      "validation_error": "Return exactly the four required verifier fields",
+      "raw_output": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "No annotated evidence found."
+        ]
+      }
+    },
+    {
+      "backend": "finetuned",
+      "example_id": "contract:causality_missing",
+      "call_index": 9,
+      "validation_error": "Return exactly the four required verifier fields",
+      "raw_output": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "The annotated evidence has no annotated evidence that supports or contradicts the claim."
+        ]
+      }
+    }
+  ],
+  "kaggle_contract_tests": 145,
+  "kaggle_contract_test_seconds": 3.041,
+  "stage_elapsed_ms": 217900.38,
+  "cost_usd": null,
+  "limitations": [
+    "Local replay reuses recorded responses, not new inference.",
+    "Hashes establish internal consistency, not independent provider attestation.",
+    "Model files are compared by recorded hashes; no weights were downloaded during audit.",
+    "Synthetic development cases have been inspected; not an independent final test.",
+    "wrong_label_agreements checks only one preselected wrong label; it does not count every possible classification error."
+  ]
+}

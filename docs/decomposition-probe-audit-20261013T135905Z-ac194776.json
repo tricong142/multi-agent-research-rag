@@ -1,0 +1,62 @@
+{
+  "run": "20261013T135905Z-ac194776",
+  "zip_sha256": "a92ca909fec97dec644c20268fefc5591995bea2daf647853fff504253530714",
+  "crc_pass": true,
+  "output_manifest_files_verified": 37,
+  "runtime_files_verified": 45,
+  "verifier_patch_files_verified": 28,
+  "frozen_sources_verified": 13,
+  "predictions_replayed": 18,
+  "calls_reconciled": 27,
+  "kaggle_tests_passed": 206,
+  "metrics": {
+    "n": 18,
+    "valid_decompositions": 13,
+    "incomplete": 5,
+    "backend_calls": 27,
+    "checks": {
+      "all_claims_present": true,
+      "all_decompositions_valid": false,
+      "within_call_budget": true,
+      "within_measured_token_budget": true
+    },
+    "automated_gate_pass": false,
+    "semantic_review": "pending",
+    "label_accuracy": null,
+    "generated_tokens": 1385,
+    "prompt_tokens": 26247
+  },
+  "validation_issues": {
+    "invalid_json": 9,
+    "quantifier_not_preserved": 2,
+    "uncovered_claim_content": 3
+  },
+  "successful_first_attempt": 9,
+  "repair_attempts": 9,
+  "successful_repairs": 4,
+  "max_generated_tokens_per_call": 78,
+  "summary": {
+    "experiment_completed": true,
+    "prediction_count": 18,
+    "backend_calls": 27,
+    "automated_gate_pass": false,
+    "human_review": "pending",
+    "overall_pass": false,
+    "promoted_to_serving": false,
+    "cost_usd": null,
+    "status": "automated_gates_failed",
+    "evaluation_mode": "decomposition",
+    "last_case_id": "decompose:018",
+    "elapsed_ms": 163196.547
+  },
+  "stage_status": {
+    "state": "failed",
+    "exit_code": 1,
+    "elapsed_ms": 165580.85
+  },
+  "model_pairing_matches_recorded_baseline": true,
+  "original_output_modified": false,
+  "human_review": "pending",
+  "full39_authorized_by_gate": false,
+  "new_inference_calls_by_assistant": 0
+}

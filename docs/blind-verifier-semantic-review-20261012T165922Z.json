@@ -1,0 +1,105 @@
+{
+  "review_date": "2026-10-13",
+  "scope": "Step 1 only: complete semantic review of the 39 recorded logic_v3 cases",
+  "reviewer": "Codex (AI semantic reviewer)",
+  "reviewer_type": "ai_assistant",
+  "review_completion": "completed",
+  "independent_review": false,
+  "human_review": "pending",
+  "source_run": "20261012T165922Z",
+  "source_review_sha256": "3c77a034e85f8753d2f7f4635a0580c0e43aff59e09f001017f1da3cb34916ad",
+  "reviewed_cases": 39,
+  "judgment_count": 195,
+  "label_correct": 37,
+  "rubric_pass_count": 29,
+  "needs_output_correction": 10,
+  "failed_case_ids": [
+    "contract:partial_accuracy",
+    "contract:both_supported",
+    "contract:irrelevant",
+    "contract:cross_sentence",
+    "scope:existential:contradict",
+    "scope:direction:contradict",
+    "scope:metric:not_enough_info",
+    "scope:conjunction:support",
+    "scope:conjunction:contradict",
+    "scope:condition:not_enough_info"
+  ],
+  "criteria": {
+    "label_correct": {
+      "passed_applicable": 37,
+      "applicable": 39,
+      "not_applicable": 0,
+      "failed_ids": [
+        "contract:partial_accuracy",
+        "scope:direction:contradict"
+      ]
+    },
+    "quote_relevant": {
+      "passed_applicable": 31,
+      "applicable": 33,
+      "not_applicable": 6,
+      "failed_ids": [
+        "scope:conjunction:contradict",
+        "scope:condition:not_enough_info"
+      ]
+    },
+    "explanation_follows_evidence": {
+      "passed_applicable": 32,
+      "applicable": 39,
+      "not_applicable": 0,
+      "failed_ids": [
+        "contract:partial_accuracy",
+        "contract:both_supported",
+        "contract:cross_sentence",
+        "scope:existential:contradict",
+        "scope:direction:contradict",
+        "scope:metric:not_enough_info",
+        "scope:conjunction:support"
+      ]
+    },
+    "all_claim_parts_checked": {
+      "passed_applicable": 33,
+      "applicable": 39,
+      "not_applicable": 0,
+      "failed_ids": [
+        "contract:partial_accuracy",
+        "contract:both_supported",
+        "contract:cross_sentence",
+        "scope:existential:contradict",
+        "scope:metric:not_enough_info",
+        "scope:conjunction:support"
+      ]
+    },
+    "missing_information_specific": {
+      "passed_applicable": 11,
+      "applicable": 13,
+      "not_applicable": 26,
+      "failed_ids": [
+        "contract:partial_accuracy",
+        "contract:irrelevant"
+      ]
+    }
+  },
+  "annotation_clarification_ids": [
+    "scope:existential:support",
+    "scope:condition:not_enough_info"
+  ],
+  "gold_labels_changed": false,
+  "original_predictions_changed": false,
+  "serving_modified": false,
+  "steps_2_to_4_performed_in_this_turn": false,
+  "automated_gate_pass": false,
+  "promoted_to_serving": false,
+  "rubric_policy": {
+    "label_correct": "Label follows the full context under the existing fixture interpretation. Conditional annotation readings are disclosed separately.",
+    "quote_relevant": "Quoted text is exact and pertinent to the decisive assessment or known fact/gap. Mere support for another conjunct does not evidence a contradiction. Joint coverage is evaluated separately.",
+    "explanation_follows_evidence": "The explanation is consistent with full context, uses the correct metric/scope, and justifies the verdict; repeating a compound claim does not prove it.",
+    "all_claim_parts_checked": "Support covers every material part. Contradict has a logically sufficient in-scope refutation under the correct quantifier. NEI identifies known versus unresolved material parts.",
+    "missing_information_specific": "For an unresolved claim the missing facts are identified without unnecessary restrictions or requests for already supplied information.",
+    "not_applicable": "Empty quotes on NEI and no missing information on fully decidable claims are stored true for compatibility but excluded from applicable denominators.",
+    "anaphora": "Unambiguous these/third/one references can resolve through adjacent context; a quote need not repeat every antecedent. This does not excuse omitting a separate factual part.",
+    "review_design": "Descriptive AI semantic review after seeing output, not a new prospective benchmark or independent human acceptance."
+  },
+  "completed_review_sha256": "5ab4879f30d20b7254529cb5e267b478b5e10d661635fb13dfe30b99cb115ce3"
+}

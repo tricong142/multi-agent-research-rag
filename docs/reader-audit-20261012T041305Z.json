@@ -1,0 +1,14 @@
+{
+  "run_id": "20261012T041305Z",
+  "zip_sha256": "2ccd042989a8e82716d08267b16b391655f2654023307b59cf7fcb519c2d2fa5",
+  "zip_crc_valid": true,
+  "artifact_files_verified": 32,
+  "runtime_file_count": 45,
+  "runtime_mismatches": [],
+  "offline_replay_matches_kaggle": true,
+  "automated_gate_pass": false,
+  "failed_stage": "critique",
+  "failed_page_index": 3,
+  "http_503_attempts": 3,
+  "review_scope": "ZIP integrity, runtime hashes and offline replay; no live API calls or human extraction review"
+}

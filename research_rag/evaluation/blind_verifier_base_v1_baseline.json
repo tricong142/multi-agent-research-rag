@@ -1,0 +1,344 @@
+{
+  "source_run": "rag-validation-20261012T101333Z",
+  "source_zip_sha256": "4c8e6c8868714f28e78d5372ab5be845497ec5c995bcefb9adf4436c7bcfba6c",
+  "source_artifact": "blind-verifier/base_instruct.jsonl",
+  "source_artifact_sha256": "6f16e8117c1b26a6b83d87a025eb0d3a470af67e55335d639a65f34c04ac0d5a",
+  "historical_not_rerun": true,
+  "prompt_profile": "baseline_v1",
+  "model_metadata": {
+    "backend": "base_instruct",
+    "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+    "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "model_files": {
+      "config.json": "eed00b17e22553979d090fa492e587e92885e328914c8e0b0b78f0a0d3576b3b",
+      "generation_config.json": "ea35dfb6fc5051b01114f9b995820d55dab01ed33ee490f6378b442af82c09f9",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "model-00001-of-00002.safetensors": "67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2",
+      "model-00002-of-00002.safetensors": "a40d941d0e7e0b966ad8b62bb6d6b7c88cce1299197b599d9d0a4ce59aabfc1d",
+      "model.safetensors.index.json": "bc8aaa0c87d4335177e01c765f1de0db81661c67c1a72fbfb0d521b09f5ddc56",
+      "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    "shared_tokenizer_files": {
+      "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+      "tokenizer_config.json": "d9bf1d78a80bad5eb65b83c2608910e3be00a9d3250c8153a5a393ad1257e1d6"
+    },
+    "shared_generation_config": {
+      "max_length": null,
+      "max_new_tokens": null,
+      "min_length": null,
+      "min_new_tokens": null,
+      "early_stopping": null,
+      "max_time": null,
+      "stop_strings": null,
+      "do_sample": true,
+      "num_beams": null,
+      "use_mtp": null,
+      "use_cache": null,
+      "cache_implementation": null,
+      "cache_config": null,
+      "max_cache_len": null,
+      "temperature": 0.7,
+      "top_k": 20,
+      "top_p": 0.8,
+      "min_p": null,
+      "top_h": null,
+      "typical_p": null,
+      "epsilon_cutoff": null,
+      "eta_cutoff": null,
+      "repetition_penalty": 1.05,
+      "encoder_repetition_penalty": null,
+      "length_penalty": null,
+      "no_repeat_ngram_size": null,
+      "bad_words_ids": null,
+      "renormalize_logits": null,
+      "forced_bos_token_id": null,
+      "forced_eos_token_id": null,
+      "remove_invalid_values": null,
+      "exponential_decay_length_penalty": null,
+      "suppress_tokens": null,
+      "begin_suppress_tokens": null,
+      "sequence_bias": null,
+      "token_healing": null,
+      "guidance_scale": null,
+      "watermarking_config": null,
+      "num_return_sequences": null,
+      "output_attentions": null,
+      "output_hidden_states": null,
+      "output_scores": null,
+      "output_logits": null,
+      "return_dict_in_generate": null,
+      "pad_token_id": 151643,
+      "bos_token_id": 151643,
+      "eos_token_id": [
+        151645,
+        151643
+      ],
+      "encoder_no_repeat_ngram_size": null,
+      "decoder_start_token_id": null,
+      "is_assistant": null,
+      "num_assistant_tokens": null,
+      "num_assistant_tokens_schedule": null,
+      "assistant_confidence_threshold": null,
+      "prompt_lookup_num_tokens": null,
+      "max_matching_ngram_size": null,
+      "assistant_early_exit": null,
+      "assistant_lookbehind": null,
+      "target_lookbehind": null,
+      "assistant_ensemble_weight": null,
+      "speculation_type": null,
+      "compile_config": null,
+      "disable_compile": null,
+      "continuous_batching_config": null,
+      "low_memory": null,
+      "penalty_alpha": null,
+      "dola_layers": null,
+      "diversity_penalty": null,
+      "num_beam_groups": null,
+      "constraints": null,
+      "force_words_ids": null,
+      "prefill_chunk_size": null,
+      "_from_model_config": null,
+      "transformers_version": "5.16.1"
+    },
+    "torch_version": "2.10.0+cu128",
+    "device": "Tesla T4",
+    "dtype": "float16",
+    "quantization": "NF4",
+    "seed": 42,
+    "do_sample": false,
+    "max_new_tokens": 384
+  },
+  "predictions": [
+    {
+      "example_id": "contract:partial_accuracy",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "The claim specifies that Model Juniper retains 94% accuracy, but the context does not provide this information."
+        ],
+        "explanation": "The context provides information about memory usage but not about accuracy."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4647.416
+    },
+    {
+      "example_id": "contract:partial_memory",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "The amount of memory used by Model Juniper and its specific memory usage compared to other models."
+        ],
+        "explanation": "The context only mentions that Model Juniper retains 94% accuracy, but does not provide information about its memory usage or compare it to other models."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 5425.513
+    },
+    {
+      "example_id": "contract:both_supported",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "support",
+        "evidence_quotes": [
+          "Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy."
+        ],
+        "missing_information": [],
+        "explanation": "The context directly supports the claim with specific figures and comparison to the baseline."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4439.836
+    },
+    {
+      "example_id": "contract:accuracy_conflict",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "contradict",
+        "evidence_quotes": [
+          "not 94%"
+        ],
+        "missing_information": [],
+        "explanation": "The context states that Model Juniper retains 81% accuracy, not 94%. This directly contradicts the claim."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4055.194
+    },
+    {
+      "example_id": "contract:irrelevant",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "No model accuracy is reported."
+        ],
+        "explanation": "The context does not provide any information about the accuracy of the Model Juniper, thus making it impossible to assess the claim."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4294.26
+    },
+    {
+      "example_id": "contract:negation",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "contradict",
+        "evidence_quotes": [
+          "The study did not use any human labels; all labels were generated automatically."
+        ],
+        "missing_information": [],
+        "explanation": "The context explicitly states that human labels were not used in the study."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 3940.986
+    },
+    {
+      "example_id": "contract:causality_missing",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "Information about whether a causal relationship was established between the new index and latency improvement."
+        ],
+        "explanation": "The context states that a causal relationship was not established, but does not provide information on whether one was or could be."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4875.052
+    },
+    {
+      "example_id": "contract:scope",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "not_enough_info",
+        "evidence_quotes": [],
+        "missing_information": [
+          "Information about the fourth task's performance before compression."
+        ],
+        "explanation": "The context only mentions that one task became less accurate after compression, but does not provide information about its performance before compression, which is necessary to assess whether all tasks improved."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 5201.606
+    },
+    {
+      "example_id": "contract:cross_sentence",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "support",
+        "evidence_quotes": [
+          "Four models were evaluated in the report.",
+          "Evaluation used two datasets."
+        ],
+        "missing_information": [],
+        "explanation": "Both factual parts of the claim are directly supported by the context."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 3675.56
+    },
+    {
+      "example_id": "contract:wrong_units",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "contradict",
+        "evidence_quotes": [
+          "Training took 12 hours, not 12 seconds."
+        ],
+        "missing_information": [],
+        "explanation": "The context explicitly states that training took 12 hours, contradicting the claim that it took 12 seconds."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 4456.535
+    },
+    {
+      "example_id": "contract:atomic_support",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "support",
+        "evidence_quotes": [
+          "The final sample contained exactly 240 documents."
+        ],
+        "missing_information": [],
+        "explanation": "The context directly states the number of documents in the sample."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 3430.064
+    },
+    {
+      "example_id": "contract:bounded_scope",
+      "status": "ok",
+      "verification": {
+        "assessed_label": "support",
+        "evidence_quotes": [
+          "The method improved recall on the tested dataset."
+        ],
+        "missing_information": [],
+        "explanation": "The provided context directly supports the claim with an explicit statement about the improvement in recall on the tested dataset."
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true
+        }
+      ],
+      "elapsed_ms": 3878.225
+    }
+  ]
+}

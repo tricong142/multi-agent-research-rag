@@ -1,0 +1,537 @@
+{
+  "reviewed_on": "2026-10-09",
+  "scope": "artifact comparison and completion plan; no runtime changes or new model inference",
+  "zip_sha256": "7edebdadde2dba6076de407214abada845821047a8bf5de64c634811114f6016",
+  "manifest_files_verified": 80,
+  "runtime_matches_20261007": {
+    "research_rag/planning.py": true,
+    "research_rag/graph.py": true,
+    "research_rag/controller.py": true,
+    "research_rag/adapters.py": true,
+    "research_rag/local.py": true,
+    "research_rag/evaluation/autonomy.py": true,
+    "train_agent2_reader/reader_agent.py": true,
+    "train_agent3_summarizer/node.py": true,
+    "train_agent3_summarizer/critic/prompts.py": true,
+    "04_factchecker/inference/judge.py": true,
+    "research_rag/tests/test_e2e_regressions.py": true
+  },
+  "original_summaries": {
+    "20261002": {
+      "status": "awaiting_human_review",
+      "real_model_cases_run": 8,
+      "automated_passes": 2,
+      "retrieval_policy_gate_pass": true,
+      "mean_union_recall": {
+        "adaptive": 1.0,
+        "bm25": 1.0,
+        "dense": 1.0
+      },
+      "overall_pass": false,
+      "independent_test_proven": false
+    },
+    "20261009": {
+      "status": "automated_gates_failed",
+      "real_model_cases_run": 8,
+      "scorer_version": 2,
+      "automated_passes": 3,
+      "retrieval_policy_gate_pass": true,
+      "mean_union_recall": {
+        "adaptive": 1.0,
+        "bm25": 1.0,
+        "dense": 1.0
+      },
+      "overall_pass": false,
+      "independent_test_proven": false
+    }
+  },
+  "comparison": {
+    "sufficient": {
+      "old": {
+        "automated_gate_pass": false,
+        "safety_gate_pass": true,
+        "human_review": "pending",
+        "overall_pass": false,
+        "stop_reason": "search_budget_exhausted",
+        "status": "insufficient_evidence",
+        "steps": 8,
+        "search_calls": 4,
+        "factcheck_calls": 7,
+        "cost_usd": null,
+        "token_usage": null,
+        "total_ms": 89569.11
+      },
+      "new": {
+        "automated_gate_pass": false,
+        "safety_gate_pass": true,
+        "budget_checks": {
+          "steps": true,
+          "searches": true,
+          "factchecks": true,
+          "time": true,
+          "cost_reservation": null
+        },
+        "human_review": "pending",
+        "overall_pass": false,
+        "stop_reason": "factchecker_failed",
+        "status": "insufficient_evidence",
+        "steps": 3,
+        "search_calls": 1,
+        "factcheck_calls": 3,
+        "cost_usd": null,
+        "token_usage": null,
+        "total_ms": 48086.14
+      }
+    },
+    "missing": {
+      "old": {
+        "automated_gate_pass": true,
+        "safety_gate_pass": true,
+        "human_review": "pending",
+        "overall_pass": false,
+        "stop_reason": "task_completed",
+        "status": "completed",
+        "steps": 6,
+        "search_calls": 2,
+        "factcheck_calls": 3,
+        "cost_usd": null,
+        "token_usage": null,
+        "total_ms": 96424.08
+      },
+      "new": {
+        "automated_gate_pass": true,
+        "safety_gate_pass": true,
+        "budget_checks": {
+          "steps": true,
+          "searches": true,
+          "factchecks": true,
+          "time": true,
+          "cost_reservation": null
+        },
+        "human_review": "pending",
+        "overall_pass": false,
+        "stop_reason": "task_completed",
+        "status": "completed",
+        "steps": 8,
+        "search_calls": 3,
+        "factcheck_calls": 5,
+        "cost_usd": null,
+        "token_usage": null,
+        "total_ms": 139790.23
+      }
+    },
+    "conflict": {
+      "old": {
+        "automated_gate_pass": false,
+        "safety_gate_pass": true,
+        "human_review": "pending",
+        "overall_pass": false,
+        "stop_reason": "search_budget_exhausted",
+        "status": "insufficient_evidence",
+        "steps": 6,
+        "search_calls": 4,
+        "factcheck_calls": 0,
+        "cost_usd": null,
+        "token_usage": null,
+        "total_ms": 57225.55
+      },
+      "new": {
+        "automated_gate_pass": true,
+        "safety_gate_pass": true,
+        "budget_checks": {
+          "steps": true,
+          "searches": true,
+          "factchecks": true,
+          "time": true,
+          "cost_reservation": null
+        },
+        "human_review": "pending",
+        "overall_pass": false,
+        "stop_reason": "factchecker_failed",
+        "status": "insufficient_evidence",
+        "steps": 5,
+        "search_calls": 2,
+        "factcheck_calls": 5,
+        "cost_usd": null,
+        "token_usage": null,
+        "total_ms": 130647.6
+      }
+    },
+    "pdf_pages": {
+      "old": {
+        "automated_gate_pass": false,
+        "safety_gate_pass": true,
+        "human_review": "pending",
+        "overall_pass": false,
+        "stop_reason": "reader_failed",
+        "status": "insufficient_evidence",
+        "steps": 1,
+        "search_calls": 0,
+        "factcheck_calls": 0,
+        "cost_usd": null,
+        "token_usage": null,
+        "total_ms": 127367.4
+      },
+      "new": {
+        "automated_gate_pass": false,
+        "safety_gate_pass": true,
+        "budget_checks": {
+          "steps": true,
+          "searches": true,
+          "factchecks": true,
+          "time": true,
+          "cost_reservation": null
+        },
+        "human_review": "pending",
+        "overall_pass": false,
+        "stop_reason": "reader_failed",
+        "status": "insufficient_evidence",
+        "steps": 1,
+        "search_calls": 0,
+        "factcheck_calls": 0,
+        "cost_usd": null,
+        "token_usage": null,
+        "total_ms": 13906.9
+      }
+    },
+    "budget": {
+      "old": {
+        "automated_gate_pass": true,
+        "safety_gate_pass": true,
+        "human_review": "pending",
+        "overall_pass": false,
+        "stop_reason": "step_budget_exhausted",
+        "status": "insufficient_evidence",
+        "steps": 1,
+        "search_calls": 1,
+        "factcheck_calls": 0,
+        "cost_usd": null,
+        "token_usage": null,
+        "total_ms": 5.32
+      },
+      "new": {
+        "automated_gate_pass": true,
+        "safety_gate_pass": true,
+        "budget_checks": {
+          "steps": true,
+          "searches": true,
+          "factchecks": true,
+          "time": true,
+          "cost_reservation": null
+        },
+        "human_review": "pending",
+        "overall_pass": false,
+        "stop_reason": "step_budget_exhausted",
+        "status": "insufficient_evidence",
+        "steps": 1,
+        "search_calls": 1,
+        "factcheck_calls": 0,
+        "cost_usd": null,
+        "token_usage": null,
+        "total_ms": 6.37
+      }
+    },
+    "heldout_1": {
+      "old": {
+        "automated_gate_pass": false,
+        "safety_gate_pass": true,
+        "human_review": "pending",
+        "overall_pass": false,
+        "stop_reason": "factchecker_failed",
+        "status": "insufficient_evidence",
+        "steps": 3,
+        "search_calls": 1,
+        "factcheck_calls": 6,
+        "cost_usd": null,
+        "token_usage": null,
+        "total_ms": 96373.32
+      },
+      "new": {
+        "automated_gate_pass": false,
+        "safety_gate_pass": true,
+        "budget_checks": {
+          "steps": true,
+          "searches": true,
+          "factchecks": true,
+          "time": true,
+          "cost_reservation": null
+        },
+        "human_review": "pending",
+        "overall_pass": false,
+        "stop_reason": "factchecker_failed",
+        "status": "insufficient_evidence",
+        "steps": 3,
+        "search_calls": 1,
+        "factcheck_calls": 6,
+        "cost_usd": null,
+        "token_usage": null,
+        "total_ms": 110316.47
+      }
+    },
+    "heldout_2": {
+      "old": {
+        "automated_gate_pass": false,
+        "safety_gate_pass": true,
+        "human_review": "pending",
+        "overall_pass": false,
+        "stop_reason": "search_budget_exhausted",
+        "status": "insufficient_evidence",
+        "steps": 9,
+        "search_calls": 4,
+        "factcheck_calls": 6,
+        "cost_usd": null,
+        "token_usage": null,
+        "total_ms": 197036.72
+      },
+      "new": {
+        "automated_gate_pass": false,
+        "safety_gate_pass": true,
+        "budget_checks": {
+          "steps": true,
+          "searches": true,
+          "factchecks": true,
+          "time": true,
+          "cost_reservation": null
+        },
+        "human_review": "pending",
+        "overall_pass": false,
+        "stop_reason": "factchecker_failed",
+        "status": "insufficient_evidence",
+        "steps": 3,
+        "search_calls": 1,
+        "factcheck_calls": 6,
+        "cost_usd": null,
+        "token_usage": null,
+        "total_ms": 130073.14
+      }
+    },
+    "heldout_3": {
+      "old": {
+        "automated_gate_pass": false,
+        "safety_gate_pass": true,
+        "human_review": "pending",
+        "overall_pass": false,
+        "stop_reason": "factchecker_failed",
+        "status": "insufficient_evidence",
+        "steps": 5,
+        "search_calls": 2,
+        "factcheck_calls": 16,
+        "cost_usd": null,
+        "token_usage": null,
+        "total_ms": 262246.06
+      },
+      "new": {
+        "automated_gate_pass": false,
+        "safety_gate_pass": true,
+        "budget_checks": {
+          "steps": true,
+          "searches": true,
+          "factchecks": true,
+          "time": true,
+          "cost_reservation": null
+        },
+        "human_review": "pending",
+        "overall_pass": false,
+        "stop_reason": "search_budget_exhausted",
+        "status": "insufficient_evidence",
+        "steps": 8,
+        "search_calls": 4,
+        "factcheck_calls": 0,
+        "cost_usd": null,
+        "token_usage": null,
+        "total_ms": 255059.82
+      }
+    }
+  },
+  "original_gate_flags_reproduced_for_both_runs": true,
+  "recorded_backend_calls": {
+    "summarizer_generator": 16,
+    "summarizer_critic": 16,
+    "factchecker": 82,
+    "writer": 2
+  },
+  "empty_confidence_reasoning_outputs": [
+    {
+      "line": 7,
+      "case": "sufficient",
+      "raw": {
+        "confidence_score": 1.0,
+        "reasoning": ""
+      },
+      "generated_tokens": 14,
+      "max_new_tokens": 192
+    },
+    {
+      "line": 9,
+      "case": "sufficient",
+      "raw": {
+        "confidence_score": 1.0,
+        "reasoning": ""
+      },
+      "generated_tokens": 14,
+      "max_new_tokens": 192
+    },
+    {
+      "line": 11,
+      "case": "sufficient",
+      "raw": {
+        "confidence_score": 1.0,
+        "reasoning": ""
+      },
+      "generated_tokens": 14,
+      "max_new_tokens": 192
+    },
+    {
+      "line": 87,
+      "case": "conflict",
+      "raw": {
+        "confidence_score": 1.0,
+        "reasoning": ""
+      },
+      "generated_tokens": 14,
+      "max_new_tokens": 192
+    },
+    {
+      "line": 89,
+      "case": "conflict",
+      "raw": {
+        "confidence_score": 1.0,
+        "reasoning": ""
+      },
+      "generated_tokens": 14,
+      "max_new_tokens": 192
+    },
+    {
+      "line": 91,
+      "case": "conflict",
+      "raw": {
+        "confidence_score": 1.0,
+        "reasoning": ""
+      },
+      "generated_tokens": 14,
+      "max_new_tokens": 192
+    },
+    {
+      "line": 153,
+      "case": "heldout_1",
+      "raw": {
+        "confidence_score": 1.0,
+        "reasoning": ""
+      },
+      "generated_tokens": 14,
+      "max_new_tokens": 192
+    },
+    {
+      "line": 155,
+      "case": "heldout_1",
+      "raw": {
+        "confidence_score": 1.0,
+        "reasoning": ""
+      },
+      "generated_tokens": 14,
+      "max_new_tokens": 192
+    },
+    {
+      "line": 157,
+      "case": "heldout_1",
+      "raw": {
+        "confidence_score": 1.0,
+        "reasoning": ""
+      },
+      "generated_tokens": 14,
+      "max_new_tokens": 192
+    },
+    {
+      "line": 173,
+      "case": "heldout_2",
+      "raw": {
+        "confidence_score": 1.0,
+        "reasoning": ""
+      },
+      "generated_tokens": 14,
+      "max_new_tokens": 192
+    },
+    {
+      "line": 175,
+      "case": "heldout_2",
+      "raw": {
+        "confidence_score": 1.0,
+        "reasoning": ""
+      },
+      "generated_tokens": 14,
+      "max_new_tokens": 192
+    },
+    {
+      "line": 177,
+      "case": "heldout_2",
+      "raw": {
+        "confidence_score": 1.0,
+        "reasoning": ""
+      },
+      "generated_tokens": 14,
+      "max_new_tokens": 192
+    },
+    {
+      "line": 195,
+      "case": "heldout_2",
+      "raw": {
+        "confidence_score": 1.0,
+        "reasoning": ""
+      },
+      "generated_tokens": 14,
+      "max_new_tokens": 192
+    },
+    {
+      "line": 197,
+      "case": "heldout_2",
+      "raw": {
+        "confidence_score": 1.0,
+        "reasoning": ""
+      },
+      "generated_tokens": 14,
+      "max_new_tokens": 192
+    },
+    {
+      "line": 199,
+      "case": "heldout_2",
+      "raw": {
+        "confidence_score": 1.0,
+        "reasoning": ""
+      },
+      "generated_tokens": 14,
+      "max_new_tokens": 192
+    }
+  ],
+  "offline_parser_replay_error": "Confidence reasoning must not be empty",
+  "reader_diagnostics": {
+    "page_count": 4,
+    "selected_pages": [
+      0,
+      1,
+      2
+    ],
+    "page_trials": [
+      {
+        "page_no": 0,
+        "attempts": [
+          {
+            "stage": "critique",
+            "tool": "alt_segmentation",
+            "accepted": false,
+            "error_type": "ServerError",
+            "http_status": 503
+          }
+        ],
+        "final_tool": "alt_segmentation",
+        "accepted": false
+      }
+    ],
+    "selection_method": "lexical_preview"
+  },
+  "quality_findings": {
+    "missing": "Now answers forty-two and cites missing:1; independently unreviewed.",
+    "conflict": "Contradiction recorded; publication blocked; run still has a confidence failure.",
+    "heldout_3": "Final proposed answer describes MTL-LSTM baseline; altered evidence rejected by verbatim gate."
+  },
+  "independent_human_review_completed": false
+}

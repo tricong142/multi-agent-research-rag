@@ -1,0 +1,10 @@
+{"query":"How much smaller is DistilBERT than BERT while retaining language understanding performance?","relevant_doc_ids":["1910.01108::chunk_0"],"reference_answer":"40% smaller while retaining 97% of language understanding performance"}
+{"query":"What accuracy did the multi-hop reading comprehension model achieve versus human performance on its annotated test set?","relevant_doc_ids":["1710.06481::chunk_1"],"reference_answer":"54.5% versus 85.0% human performance"}
+{"query":"What training update pattern does Proximal Policy Optimization's surrogate objective permit?","relevant_doc_ids":["1707.06347::chunk_0"],"reference_answer":"multiple epochs of minibatch updates"}
+{"query":"What fraction of a noisy contrastive learning dataset did the backdoor attack poison in the Carlini and Terzis study?","relevant_doc_ids":["2106.09667::chunk_0"],"reference_answer":"0.01% of the dataset"}
+{"query":"What curvature property of an LLM's log probability function does DetectGPT associate with generated text?","relevant_doc_ids":["2301.11305::chunk_0"],"reference_answer":"negative curvature regions"}
+{"query":"What reasoning steps does Rethinking with Retrieval use to retrieve external knowledge?","relevant_doc_ids":["2301.00303::chunk_0"],"reference_answer":"decomposed chain-of-thought reasoning steps"}
+{"query":"How are the yes/no questions in BoolQ collected?","relevant_doc_ids":["1905.10044::chunk_0"],"reference_answer":"naturally occurring, unprompted and unconstrained settings"}
+{"query":"How does self-consistency select an answer from multiple chain-of-thought paths?","relevant_doc_ids":["2203.11171::chunk_0"],"reference_answer":"sample diverse reasoning paths and marginalize over them"}
+{"query":"In PAL, what does the language model generate and what executes the solution step?","relevant_doc_ids":["2211.10435::chunk_1"],"reference_answer":"generates programs as intermediate steps; a Python interpreter executes the solution"}
+{"query":"What happens to invalid or similar self-generated instructions in Self-Instruct before fine-tuning?","relevant_doc_ids":["2212.10560::chunk_1"],"reference_answer":"they are filtered out"}

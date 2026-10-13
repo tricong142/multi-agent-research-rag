@@ -1,0 +1,70 @@
+{
+  "version": "atomic-verifier-quotes-v3-20261013",
+  "policy": "atomic-verifier-quotes-v3",
+  "status": "local_checks_passed_live_v3_probe_pending",
+  "criteria_sha256": "2de4ce34a925fad3267aa4bf52f0a52cd5b95f82e3115254348a85554f6da9ac",
+  "notebook_sha256": "05fcd2daa599031a3e9331851ead3d26b7d04a201a1be679650427c0cf5ca928",
+  "source_sha256": {
+    "04_factchecker/inference/atomic_verifier.py": "83bf9cda9b639a2a640bba92ddc0c3124ce07a66fca48891d9826971d07ee304",
+    "04_factchecker/inference/numeric_verifier.py": "53375a676708b7118747d3fbf9b11cdf674055cfb78e5755b6f090391b831bc0",
+    "04_factchecker/inference/evidence_screen.py": "23574b7320ac576989b283a58d3e81d58be001f1b1c286523d4f0baa04dfcab5",
+    "04_factchecker/inference/verifier.py": "7eff9f8678cf1a4c270e59ada432bdf12a2fd6323c3d598fa34cc3513fd468f8",
+    "04_factchecker/inference/judge.py": "e05d2d19384f4b8713fa6c18cbc9fa87defcafda164628467508cc7c98a50649",
+    "research_rag/evaluation/evaluate_atomic_verifier.py": "21104982f055b0bb0eb243ac7baa0e3d7ac95e646ba779d2e471e5925c292f46",
+    "research_rag/evaluation/compare_blind_verifier.py": "ea14524f1f43c806975e0adbe0c0f24eecf23fd970123be735b9e14b7e6644cb",
+    "research_rag/evaluation/compare_factchecker.py": "ce7a74e56699a35d597493dd5152972a0cf40447aab6000774c7d76209574ae7",
+    "research_rag/evaluation/compare_confidence_backends.py": "0d383a92d02cec05743c3585058cd1fd7a4dbd5daab3730beee08b499eb5e873",
+    "research_rag/local.py": "b363825e64d07a5f8c12c5b456b1e58e4b2c4297e93f48d493c5dec3ba8bbf5a",
+    "requirements-orchestrator.txt": "31b5dac851eaaf005a151e9c071226aeafeb4679ebe4019d0368e68fbd0dacd4",
+    "research_rag/tests/test_atomic_verifier.py": "1baddf4d68ad9ecf4c57da6f0d5dd84e87b898f4214da1277d2ea9d1180ede2d",
+    "research_rag/tests/test_atomic_experiment.py": "041a429549f45be8fb1baf6b0f3f023b9da31a91d5f8a27a3a2e73d1e553af11"
+  },
+  "local_tests": {
+    "count": 78,
+    "passed": 78,
+    "exit_code": 0,
+    "elapsed_seconds": 28.941,
+    "backend": "fixtures/stubs",
+    "log": "decomposition-v3-tests.log"
+  },
+  "packaging_tests_passed": 3,
+  "prompt_examples_not_probe_claims": true,
+  "frozen_sources_verified": 13,
+  "model_data_budgets_gate_unchanged_from_v2": true,
+  "v2_zip_notebook_criteria_contract_source_preserved": true,
+  "cli_blocks_full39_without_probe": true,
+  "cli_probe_freeze_valid": true,
+  "cli_model_calls": 0,
+  "cli_output_created": false,
+  "offline_revalidation_of_v2_raw_outputs": {
+    "leading_and_examples_001_017_accepted": true,
+    "wrong_dataset_time_009_rejected": true,
+    "new_model_inference": false
+  },
+  "v2_measured_outcome": {
+    "valid_decompositions": 12,
+    "incomplete": 6,
+    "calls": 29,
+    "kaggle_runtime_tests_passed": 203,
+    "automated_gate_pass": false
+  },
+  "v2_semantic_review": {
+    "reviewer_kind": "assistant",
+    "rows": 18,
+    "pass": 9,
+    "needs_revision": 2,
+    "fail": 1,
+    "unreviewable": 6,
+    "human_adjudicated": false
+  },
+  "new_live_model_calls": 0,
+  "v3_probe_executed": false,
+  "full39_executed": false,
+  "serving_integration": false,
+  "limitations": [
+    "V3 model quality not measured yet.",
+    "Dataset restriction guard covers explicit English on/using/under ... dataset only; broader scope needs semantic review.",
+    "Named metric is prompted and reviewed, not inferred automatically by code.",
+    "18 claims are seen development diagnostics, not independent held-out data."
+  ]
+}

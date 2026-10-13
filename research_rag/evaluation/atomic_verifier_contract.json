@@ -1,0 +1,38 @@
+{
+  "version": "atomic-contract-v1",
+  "format": "Contract manifest; executable validators are frozen by source hash, not an external JSON Schema validator",
+  "decomposition": {
+    "required_fields": ["parts", "unresolved"],
+    "part_fields": ["start", "end", "quote", "quantifier", "scope"],
+    "scope_fields": ["entity", "metric", "time", "condition"],
+    "quantifiers": ["atomic", "all", "some", "none"],
+    "max_parts": 12,
+    "span_convention": "Zero-based character offsets; end exclusive; exact nonoverlapping claim spans",
+    "coverage": "All content words, quantities, units and conditions; no split token or unseparated AND",
+    "unresolved_policy": "Stop incomplete; no aggregate label"
+  },
+  "assessment": {
+    "required_fields": ["scope_match", "coverage", "observations", "missing_information", "explanation"],
+    "scope_match": ["matched", "mismatched", "unknown"],
+    "coverage_fields": ["complete", "members", "quotes"],
+    "observation_fields": ["member", "truth", "quotes", "explanation", "numeric"],
+    "truth": ["true", "false", "unknown"],
+    "truth_semantics": "Positive predicate before applying the quantifier",
+    "max_observations": 16,
+    "complete_coverage": "Quoted nonempty population with unique members and one observation per declared member"
+  },
+  "numeric": {
+    "required_fields": ["kind", "source_quote", "left", "right"],
+    "kinds": ["value", "change"],
+    "operand_fields": ["value", "unit", "quote"],
+    "arithmetic": "Source-grounded Decimal; value comparison or ordered before/after change",
+    "unknown_policy": "No implicit unit conversion, unsupported comparisons or ambiguous association"
+  },
+  "result": {
+    "completed_labels": ["support", "contradict", "not_enough_info"],
+    "incomplete_label": null,
+    "aggregation": "Per-quantifier part decisions, then AND across parts",
+    "experiment_only": {"claim_verified": false, "promoted_to_serving": false},
+    "semantic_review_required": true
+  }
+}

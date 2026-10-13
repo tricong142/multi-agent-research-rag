@@ -1,0 +1,108 @@
+{
+  "version": "atomic-contract-quotes-v3",
+  "format": "Contract manifest; executable validators are frozen by source hash, not an external JSON Schema validator",
+  "decomposition": {
+    "required_fields": [
+      "parts",
+      "unresolved"
+    ],
+    "part_fields": [
+      "start",
+      "end",
+      "quote",
+      "quantifier",
+      "scope"
+    ],
+    "scope_fields": [
+      "entity",
+      "metric",
+      "time",
+      "condition"
+    ],
+    "quantifiers": [
+      "atomic",
+      "all",
+      "some",
+      "none"
+    ],
+    "max_parts": 12,
+    "span_convention": "Code derives zero-based exclusive offsets from unique exact quotes; absent/ambiguous/out-of-order/overlapping quotes are rejected",
+    "coverage": "All content words, quantities, units and conditions; no split token or inner AND predicate. A leading AND connector is allowed in a later part.",
+    "unresolved_policy": "Stop incomplete; no aggregate label",
+    "model_part_fields": [
+      "quote",
+      "quantifier",
+      "scope"
+    ],
+    "repair": "At most 2 attempts; source scope errors name the rejected field; syntax repair regenerates without replaying malformed JSON. Other errors include prior output, capped at 6000 characters.",
+    "semantic_gate": "18 unique development claims; all structural checks AND human predicate/coverage/quantifier/entity-metric/time-condition review before full 39-case inference",
+    "scope_rules": "Copy capitalization exactly. Prefer named measurement property in metric; predicate fallback only when no property is named. Explicit on/using/under ... dataset restriction requires condition and cannot be stored in time. Other semantic assignments require review."
+  },
+  "assessment": {
+    "required_fields": [
+      "scope_match",
+      "coverage",
+      "observations",
+      "missing_information",
+      "explanation"
+    ],
+    "scope_match": [
+      "matched",
+      "mismatched",
+      "unknown"
+    ],
+    "coverage_fields": [
+      "complete",
+      "members",
+      "quotes"
+    ],
+    "observation_fields": [
+      "member",
+      "truth",
+      "quotes",
+      "explanation",
+      "numeric"
+    ],
+    "truth": [
+      "true",
+      "false",
+      "unknown"
+    ],
+    "truth_semantics": "Positive predicate before applying the quantifier",
+    "max_observations": 16,
+    "complete_coverage": "Quoted nonempty population with unique members and one observation per declared member"
+  },
+  "numeric": {
+    "required_fields": [
+      "kind",
+      "source_quote",
+      "left",
+      "right"
+    ],
+    "kinds": [
+      "value",
+      "change"
+    ],
+    "operand_fields": [
+      "value",
+      "unit",
+      "quote"
+    ],
+    "arithmetic": "Source-grounded Decimal; value comparison or ordered before/after change",
+    "unknown_policy": "No implicit unit conversion, unsupported comparisons or ambiguous association"
+  },
+  "result": {
+    "completed_labels": [
+      "support",
+      "contradict",
+      "not_enough_info"
+    ],
+    "incomplete_label": null,
+    "aggregation": "Per-quantifier part decisions, then AND across parts",
+    "experiment_only": {
+      "claim_verified": false,
+      "promoted_to_serving": false
+    },
+    "semantic_review_required": true
+  }
+}

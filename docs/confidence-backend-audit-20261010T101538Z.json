@@ -1,0 +1,791 @@
+{
+  "run_id": "20261010T101538Z",
+  "review_date": "2026-10-10",
+  "zip_path": "C:\\Users\\dellcuatri142\\Downloads\\rag-validation-20261010T101538Z.zip",
+  "zip_sha256": "7cb9d5d0045962b628efde2a5f1d1a3b9d11cc58c7d9e87892eb6cc58923519d",
+  "zip_bytes": 52084,
+  "archive_integrity": {
+    "crc_ok": true,
+    "entries": 36,
+    "manifest_files_verified": 35,
+    "no_extra_or_duplicate_entries": true
+  },
+  "runtime_files_matching_local": 45,
+  "provenance_source_files_matching_local": 5,
+  "criteria_exact_match": true,
+  "cases_exact_match": true,
+  "prompts_exact_match": true,
+  "first_attempt_inputs_identical_across_backends": true,
+  "model_configuration_shared": {
+    "shared_tokenizer_files": true,
+    "shared_generation_config": true,
+    "quantization": true,
+    "dtype": true,
+    "seed": true,
+    "do_sample": true,
+    "max_new_tokens": true
+  },
+  "model_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "model_weights_independently_downloaded_for_audit": false,
+  "validation": {
+    "predictions_replayed": 96,
+    "recorded_calls_replayed": 99,
+    "method": "Production ConfidenceEstimator validators and repair prompts fed stored call responses; no model/API inference",
+    "all_replayed_outputs_match": true,
+    "metrics_recomputed_match": true,
+    "summary_recomputed_match": true,
+    "explanation_review_rows_match": 96
+  },
+  "kaggle_contract_tests": {
+    "count": 139,
+    "seconds": 3.174,
+    "passed": true
+  },
+  "pip_check_pass": true,
+  "status": {
+    "venv": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 114.65
+    },
+    "bootstrap": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 4879.01
+    },
+    "torch": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 122731.68
+    },
+    "serving": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 48127.5
+    },
+    "pip-check": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 466.79
+    },
+    "freeze": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 365.98
+    },
+    "contract-tests": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 4729.12
+    },
+    "preflight": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 7885.15
+    },
+    "confidence-backends": {
+      "state": "failed",
+      "exit_code": 1,
+      "elapsed_ms": 434089.18
+    }
+  },
+  "summary": {
+    "experiment_completed": true,
+    "prediction_count": 96,
+    "backend_calls": 99,
+    "required_profile": "base_instruct__explanation_repair",
+    "automated_gate_pass": false,
+    "qualifying_profiles": [],
+    "human_review": "pending",
+    "overall_pass": false,
+    "promoted_to_serving": false,
+    "cost_usd": null
+  },
+  "metrics": {
+    "finetuned__repair": {
+      "n": 24,
+      "runtime_failed_rows": 0,
+      "correct_labels_accepted": 4,
+      "wrong_labels_accepted": 2,
+      "checks": {
+        "all_challenges_present": true,
+        "no_runtime_failures": true,
+        "wrong_proposed_labels_not_trusted": false,
+        "correct_proposed_labels_recognized": false
+      },
+      "automated_gate_pass": false,
+      "note": "Proposed labels are controlled inputs, not Judge model predictions; this is not calibration on independent data.",
+      "backend_calls": 25,
+      "elapsed_ms": 53408.36,
+      "max_attempts": 2
+    },
+    "finetuned__explanation_repair": {
+      "n": 24,
+      "runtime_failed_rows": 1,
+      "correct_labels_accepted": 11,
+      "wrong_labels_accepted": 10,
+      "checks": {
+        "all_challenges_present": true,
+        "no_runtime_failures": false,
+        "wrong_proposed_labels_not_trusted": false,
+        "correct_proposed_labels_recognized": false
+      },
+      "automated_gate_pass": false,
+      "note": "Proposed labels are controlled inputs, not Judge model predictions; this is not calibration on independent data.",
+      "backend_calls": 26,
+      "elapsed_ms": 76068.01,
+      "max_attempts": 3
+    },
+    "base_instruct__repair": {
+      "n": 24,
+      "runtime_failed_rows": 0,
+      "correct_labels_accepted": 2,
+      "wrong_labels_accepted": 1,
+      "checks": {
+        "all_challenges_present": true,
+        "no_runtime_failures": true,
+        "wrong_proposed_labels_not_trusted": false,
+        "correct_proposed_labels_recognized": false
+      },
+      "automated_gate_pass": false,
+      "note": "Proposed labels are controlled inputs, not Judge model predictions; this is not calibration on independent data.",
+      "backend_calls": 24,
+      "elapsed_ms": 77318.61,
+      "max_attempts": 1
+    },
+    "base_instruct__explanation_repair": {
+      "n": 24,
+      "runtime_failed_rows": 0,
+      "correct_labels_accepted": 12,
+      "wrong_labels_accepted": 9,
+      "checks": {
+        "all_challenges_present": true,
+        "no_runtime_failures": true,
+        "wrong_proposed_labels_not_trusted": false,
+        "correct_proposed_labels_recognized": true
+      },
+      "automated_gate_pass": false,
+      "note": "Proposed labels are controlled inputs, not Judge model predictions; this is not calibration on independent data.",
+      "backend_calls": 24,
+      "elapsed_ms": 125546.44,
+      "max_attempts": 1
+    }
+  },
+  "diagnostics": {
+    "finetuned__repair": {
+      "accepted_correct_ids": [
+        "contract:both_supported:label_correct",
+        "contract:cross_sentence:label_correct",
+        "contract:atomic_support:label_correct",
+        "contract:bounded_scope:label_correct"
+      ],
+      "accepted_wrong_ids": [
+        "contract:both_supported:label_wrong",
+        "contract:bounded_scope:label_wrong"
+      ],
+      "failures": [],
+      "invalid_attempts": 1,
+      "paired_scores": [
+        {
+          "case": "contract:partial_accuracy",
+          "correct": 0.0,
+          "wrong": 0.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:partial_memory",
+          "correct": 0.0,
+          "wrong": 0.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:both_supported",
+          "correct": 1.0,
+          "wrong": 1.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:accuracy_conflict",
+          "correct": 0.0,
+          "wrong": 0.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:irrelevant",
+          "correct": 0.0,
+          "wrong": 0.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:negation",
+          "correct": 0.0,
+          "wrong": 0.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:causality_missing",
+          "correct": 0.0,
+          "wrong": 0.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:scope",
+          "correct": 0.0,
+          "wrong": 0.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:cross_sentence",
+          "correct": 1.0,
+          "wrong": 0.0,
+          "relation": "higher"
+        },
+        {
+          "case": "contract:wrong_units",
+          "correct": 0.0,
+          "wrong": 0.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:atomic_support",
+          "correct": 1.0,
+          "wrong": 0.0,
+          "relation": "higher"
+        },
+        {
+          "case": "contract:bounded_scope",
+          "correct": 1.0,
+          "wrong": 1.0,
+          "relation": "equal"
+        }
+      ],
+      "pair_relations": {
+        "equal": 10,
+        "higher": 2
+      },
+      "posthoc_threshold_feasibility": [
+        {
+          "threshold": 0.0,
+          "correct_accepted": 12,
+          "wrong_accepted": 12
+        },
+        {
+          "threshold": 1.0,
+          "correct_accepted": 4,
+          "wrong_accepted": 2
+        }
+      ],
+      "any_threshold_can_meet_original_counts": false,
+      "note": "Threshold analysis describes observed failure; no new threshold selected or gate changed."
+    },
+    "finetuned__explanation_repair": {
+      "accepted_correct_ids": [
+        "contract:partial_memory:label_correct",
+        "contract:both_supported:label_correct",
+        "contract:accuracy_conflict:label_correct",
+        "contract:irrelevant:label_correct",
+        "contract:negation:label_correct",
+        "contract:causality_missing:label_correct",
+        "contract:scope:label_correct",
+        "contract:cross_sentence:label_correct",
+        "contract:wrong_units:label_correct",
+        "contract:atomic_support:label_correct",
+        "contract:bounded_scope:label_correct"
+      ],
+      "accepted_wrong_ids": [
+        "contract:partial_accuracy:label_wrong",
+        "contract:partial_memory:label_wrong",
+        "contract:both_supported:label_wrong",
+        "contract:accuracy_conflict:label_wrong",
+        "contract:negation:label_wrong",
+        "contract:causality_missing:label_wrong",
+        "contract:scope:label_wrong",
+        "contract:cross_sentence:label_wrong",
+        "contract:atomic_support:label_wrong",
+        "contract:bounded_scope:label_wrong"
+      ],
+      "failures": [
+        "contract:wrong_units:label_wrong"
+      ],
+      "invalid_attempts": 3,
+      "paired_scores": [
+        {
+          "case": "contract:partial_accuracy",
+          "correct": 0.0,
+          "wrong": 0.98,
+          "relation": "lower"
+        },
+        {
+          "case": "contract:partial_memory",
+          "correct": 0.85,
+          "wrong": 0.98,
+          "relation": "lower"
+        },
+        {
+          "case": "contract:both_supported",
+          "correct": 1.0,
+          "wrong": 1.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:accuracy_conflict",
+          "correct": 1.0,
+          "wrong": 0.9375,
+          "relation": "higher"
+        },
+        {
+          "case": "contract:irrelevant",
+          "correct": 0.85,
+          "wrong": 0.0,
+          "relation": "higher"
+        },
+        {
+          "case": "contract:negation",
+          "correct": 1.0,
+          "wrong": 1.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:causality_missing",
+          "correct": 0.95,
+          "wrong": 0.95,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:scope",
+          "correct": 1.0,
+          "wrong": 0.95,
+          "relation": "higher"
+        },
+        {
+          "case": "contract:cross_sentence",
+          "correct": 1.0,
+          "wrong": 1.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:wrong_units",
+          "correct": 1.0,
+          "wrong": null,
+          "relation": "invalid"
+        },
+        {
+          "case": "contract:atomic_support",
+          "correct": 1.0,
+          "wrong": 1.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:bounded_scope",
+          "correct": 1.0,
+          "wrong": 1.0,
+          "relation": "equal"
+        }
+      ],
+      "pair_relations": {
+        "lower": 2,
+        "equal": 6,
+        "higher": 3,
+        "invalid": 1
+      },
+      "posthoc_threshold_feasibility": [
+        {
+          "threshold": 0.0,
+          "correct_accepted": 12,
+          "wrong_accepted": 11
+        },
+        {
+          "threshold": 0.85,
+          "correct_accepted": 11,
+          "wrong_accepted": 10
+        },
+        {
+          "threshold": 0.9375,
+          "correct_accepted": 9,
+          "wrong_accepted": 10
+        },
+        {
+          "threshold": 0.95,
+          "correct_accepted": 9,
+          "wrong_accepted": 9
+        },
+        {
+          "threshold": 0.98,
+          "correct_accepted": 8,
+          "wrong_accepted": 7
+        },
+        {
+          "threshold": 1.0,
+          "correct_accepted": 8,
+          "wrong_accepted": 5
+        }
+      ],
+      "any_threshold_can_meet_original_counts": false,
+      "note": "Threshold analysis describes observed failure; no new threshold selected or gate changed."
+    },
+    "base_instruct__repair": {
+      "accepted_correct_ids": [
+        "contract:both_supported:label_correct",
+        "contract:atomic_support:label_correct"
+      ],
+      "accepted_wrong_ids": [
+        "contract:both_supported:label_wrong"
+      ],
+      "failures": [],
+      "invalid_attempts": 0,
+      "paired_scores": [
+        {
+          "case": "contract:partial_accuracy",
+          "correct": 0.0,
+          "wrong": 0.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:partial_memory",
+          "correct": 0.0,
+          "wrong": 0.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:both_supported",
+          "correct": 0.8,
+          "wrong": 0.8,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:accuracy_conflict",
+          "correct": 0.0,
+          "wrong": 0.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:irrelevant",
+          "correct": 0.0,
+          "wrong": 0.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:negation",
+          "correct": 0.0,
+          "wrong": 0.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:causality_missing",
+          "correct": 0.0,
+          "wrong": 0.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:scope",
+          "correct": 0.0,
+          "wrong": 0.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:cross_sentence",
+          "correct": 0.0,
+          "wrong": 0.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:wrong_units",
+          "correct": 0.0,
+          "wrong": 0.0,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:atomic_support",
+          "correct": 0.8,
+          "wrong": 0.0,
+          "relation": "higher"
+        },
+        {
+          "case": "contract:bounded_scope",
+          "correct": 0.5,
+          "wrong": 0.5,
+          "relation": "equal"
+        }
+      ],
+      "pair_relations": {
+        "equal": 11,
+        "higher": 1
+      },
+      "posthoc_threshold_feasibility": [
+        {
+          "threshold": 0.0,
+          "correct_accepted": 12,
+          "wrong_accepted": 12
+        },
+        {
+          "threshold": 0.5,
+          "correct_accepted": 3,
+          "wrong_accepted": 2
+        },
+        {
+          "threshold": 0.8,
+          "correct_accepted": 2,
+          "wrong_accepted": 1
+        },
+        {
+          "threshold": 1.0,
+          "correct_accepted": 0,
+          "wrong_accepted": 0
+        }
+      ],
+      "any_threshold_can_meet_original_counts": false,
+      "note": "Threshold analysis describes observed failure; no new threshold selected or gate changed."
+    },
+    "base_instruct__explanation_repair": {
+      "accepted_correct_ids": [
+        "contract:partial_accuracy:label_correct",
+        "contract:partial_memory:label_correct",
+        "contract:both_supported:label_correct",
+        "contract:accuracy_conflict:label_correct",
+        "contract:irrelevant:label_correct",
+        "contract:negation:label_correct",
+        "contract:causality_missing:label_correct",
+        "contract:scope:label_correct",
+        "contract:cross_sentence:label_correct",
+        "contract:wrong_units:label_correct",
+        "contract:atomic_support:label_correct",
+        "contract:bounded_scope:label_correct"
+      ],
+      "accepted_wrong_ids": [
+        "contract:partial_accuracy:label_wrong",
+        "contract:partial_memory:label_wrong",
+        "contract:both_supported:label_wrong",
+        "contract:accuracy_conflict:label_wrong",
+        "contract:negation:label_wrong",
+        "contract:cross_sentence:label_wrong",
+        "contract:wrong_units:label_wrong",
+        "contract:atomic_support:label_wrong",
+        "contract:bounded_scope:label_wrong"
+      ],
+      "failures": [],
+      "invalid_attempts": 0,
+      "paired_scores": [
+        {
+          "case": "contract:partial_accuracy",
+          "correct": 0.85,
+          "wrong": 0.7,
+          "relation": "higher"
+        },
+        {
+          "case": "contract:partial_memory",
+          "correct": 0.85,
+          "wrong": 0.8,
+          "relation": "higher"
+        },
+        {
+          "case": "contract:both_supported",
+          "correct": 1.0,
+          "wrong": 0.95,
+          "relation": "higher"
+        },
+        {
+          "case": "contract:accuracy_conflict",
+          "correct": 0.95,
+          "wrong": 0.7,
+          "relation": "higher"
+        },
+        {
+          "case": "contract:irrelevant",
+          "correct": 0.95,
+          "wrong": 0.1,
+          "relation": "higher"
+        },
+        {
+          "case": "contract:negation",
+          "correct": 0.95,
+          "wrong": 0.95,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:causality_missing",
+          "correct": 0.95,
+          "wrong": 0.2,
+          "relation": "higher"
+        },
+        {
+          "case": "contract:scope",
+          "correct": 0.95,
+          "wrong": 0.2,
+          "relation": "higher"
+        },
+        {
+          "case": "contract:cross_sentence",
+          "correct": 0.95,
+          "wrong": 0.95,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:wrong_units",
+          "correct": 0.95,
+          "wrong": 0.95,
+          "relation": "equal"
+        },
+        {
+          "case": "contract:atomic_support",
+          "correct": 1.0,
+          "wrong": 0.95,
+          "relation": "higher"
+        },
+        {
+          "case": "contract:bounded_scope",
+          "correct": 0.95,
+          "wrong": 0.95,
+          "relation": "equal"
+        }
+      ],
+      "pair_relations": {
+        "higher": 8,
+        "equal": 4
+      },
+      "posthoc_threshold_feasibility": [
+        {
+          "threshold": 0.0,
+          "correct_accepted": 12,
+          "wrong_accepted": 12
+        },
+        {
+          "threshold": 0.1,
+          "correct_accepted": 12,
+          "wrong_accepted": 12
+        },
+        {
+          "threshold": 0.2,
+          "correct_accepted": 12,
+          "wrong_accepted": 11
+        },
+        {
+          "threshold": 0.7,
+          "correct_accepted": 12,
+          "wrong_accepted": 9
+        },
+        {
+          "threshold": 0.8,
+          "correct_accepted": 12,
+          "wrong_accepted": 7
+        },
+        {
+          "threshold": 0.85,
+          "correct_accepted": 12,
+          "wrong_accepted": 6
+        },
+        {
+          "threshold": 0.95,
+          "correct_accepted": 10,
+          "wrong_accepted": 6
+        },
+        {
+          "threshold": 1.0,
+          "correct_accepted": 2,
+          "wrong_accepted": 0
+        }
+      ],
+      "any_threshold_can_meet_original_counts": false,
+      "note": "Threshold analysis describes observed failure; no new threshold selected or gate changed."
+    }
+  },
+  "prior_run_comparison": {
+    "repair": {
+      "rows": 24,
+      "labels_scores_status_match_prior_run": true,
+      "prior_file": "research-runs\\kaggle-20261010T025939Z\\confidence-explanation-v2\\repair-label_challenges.jsonl"
+    },
+    "explanation_repair": {
+      "rows": 24,
+      "labels_scores_status_match_prior_run": true,
+      "prior_file": "research-runs\\kaggle-20261010T025939Z\\confidence-explanation-v2\\explanation_repair-label_challenges.jsonl"
+    }
+  },
+  "preflight": {
+    "host": {
+      "ram_total_bytes": 33658318848,
+      "ram_available_bytes": 31392600064,
+      "torch_version": "2.10.0+cu128",
+      "cuda_available": true,
+      "gpu": [
+        {
+          "name": "Tesla T4",
+          "vram_total_bytes": 15636037632,
+          "vram_free_bytes": 15526068224
+        },
+        {
+          "name": "Tesla T4",
+          "vram_total_bytes": 15636037632,
+          "vram_free_bytes": 15526068224
+        }
+      ]
+    },
+    "models": {
+      "summarizer_generator": {
+        "adapter_present": true,
+        "adapter_bytes": 161533192,
+        "base_model": "Qwen/Qwen2.5-7B-Instruct",
+        "base_cache": {
+          "weights_complete": false,
+          "shards_found": 0,
+          "shards_expected": 1,
+          "weight_bytes_found": 0
+        }
+      },
+      "summarizer_critic": {
+        "adapter_present": true,
+        "adapter_bytes": 40400200,
+        "base_model": "Qwen/Qwen2.5-7B-Instruct",
+        "base_cache": {
+          "weights_complete": false,
+          "shards_found": 0,
+          "shards_expected": 1,
+          "weight_bytes_found": 0
+        }
+      },
+      "factchecker": {
+        "checkpoint": {
+          "weights_complete": true,
+          "shards_found": 2,
+          "shards_expected": 2,
+          "weight_bytes_found": 6171926544
+        },
+        "training_base_model": "Qwen/Qwen2.5-3B-Instruct",
+        "configured_base_model": "Qwen/Qwen2.5-3B-Instruct",
+        "base_matches_adapter": true,
+        "loaded_from": "merged_local"
+      },
+      "writer": {
+        "adapter_present": true,
+        "adapter_bytes": 73911112,
+        "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+        "base_cache": {
+          "weights_complete": false,
+          "shards_found": 0,
+          "shards_expected": 1,
+          "weight_bytes_found": 0
+        }
+      },
+      "retrieval_encoder": {
+        "model": "BAAI/bge-large-en-v1.5",
+        "revision": "d4aa6901d3a41ba39fb536a557fa166f842b0e09",
+        "base_cache": {
+          "weights_complete": false,
+          "shards_found": 0,
+          "shards_expected": 1,
+          "weight_bytes_found": 0
+        }
+      }
+    },
+    "faiss": {
+      "readable": true,
+      "vectors": 41549,
+      "dimensions": 1024,
+      "id_count": 41549,
+      "ids_aligned": true,
+      "load_ms": 831.66
+    }
+  },
+  "human_review": "pending; assistant findings in accompanying report are not human sign-off",
+  "runtime_changed_by_audit": false,
+  "cost_usd": null
+}

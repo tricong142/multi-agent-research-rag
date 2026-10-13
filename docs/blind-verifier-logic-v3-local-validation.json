@@ -1,0 +1,34 @@
+{
+  "candidate": "logic_v3",
+  "criteria_version": "blind-verifier-logic-v3-20261012-v1",
+  "criteria_sha256": "de76b7e018f013be50f2e8e9aa48bf884a06e893003d28a51aeaf7b3fa3596a7",
+  "prompt_sha256": "163983997e21446f6dbcf1c2034eb27cea6ef35015db11d0b093c35023c5aaad",
+  "repair_feedback_policy": "quote_membership_v1",
+  "input_sha256": {
+    "original_contracts": "918a1a95cfed421aa8748d7eac29af74a03f93825c30817e002b2b2e16feb7e3",
+    "scope_regression": "f349b1d6a50ca417c28c43d5fced1f064fc43ebdf362d70acfc574d7d37ed45c"
+  },
+  "historical_baseline_sha256": "3b7a5bb876deb85035e0efba4a1adf6f6dcd94e247ebd1d8a384c32bb9469141",
+  "historical_recorded_predictions_match": true,
+  "historical_verifier_metrics_recomputed": {
+    "n": 39,
+    "correct_labels": 33,
+    "false_support": 1,
+    "failed_rows": 1
+  },
+  "baseline_v1_and_scope_v2_prompts_preserved": true,
+  "scope_v2_frozen_criteria_preserved": true,
+  "notebook_sha256": "3cbe22877e83f0290b0def5dd9f70c676a4d517f9e4ead358f886f26416ecaf0",
+  "focused_tests_passed": 26,
+  "tests_use_model_stubs": true,
+  "new_real_model_inference_performed": false,
+  "independent_annotation_review": "pending",
+  "human_semantic_review": "pending",
+  "promoted_to_serving": false,
+  "source_sha256": {
+    "04_factchecker/inference/verifier.py": "7eff9f8678cf1a4c270e59ada432bdf12a2fd6323c3d598fa34cc3513fd468f8",
+    "research_rag/evaluation/compare_blind_verifier.py": "ea14524f1f43c806975e0adbe0c0f24eecf23fd970123be735b9e14b7e6644cb",
+    "research_rag/tests/test_blind_verifier_logic.py": "1b3866659f61da3e031f6971dde82089e9678dee27168c348c9bc2b3d7d5cf18",
+    "scripts/build_blind_verifier_notebook.py": "6bd697b83ffabb731c356e6d5dc4fa3c2fa7851de2cab8b68cff2c147c0c2cd1"
+  }
+}

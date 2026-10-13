@@ -1,0 +1,90 @@
+{
+  "version": "atomic-verifier-quotes-v3-20261013",
+  "policy": "atomic-verifier-quotes-v3",
+  "purpose": "Frozen isolated candidate on 39 inspected development regressions; not independent held-out evaluation",
+  "base_model": "Qwen/Qwen2.5-3B-Instruct",
+  "base_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "backends": [
+    "base_instruct"
+  ],
+  "seed": 42,
+  "cases_per_backend": 39,
+  "dataset_groups": {
+    "original_contracts": 12,
+    "scope_regression": 27
+  },
+  "contracts_sha256": "918a1a95cfed421aa8748d7eac29af74a03f93825c30817e002b2b2e16feb7e3",
+  "supplemental_cases_file": "blind_verifier_scope_regression_cases.jsonl",
+  "supplemental_cases_sha256": "f349b1d6a50ca417c28c43d5fced1f064fc43ebdf362d70acfc574d7d37ed45c",
+  "contract_file": "atomic_verifier_contract_v3.json",
+  "contract_sha256": "ebe8a1b9e69fc32fc58d76577b3fe94c463896180525c94a5d54ab4e6e4c1bf5",
+  "baseline_file": "atomic_verifier_logic_v3_baseline.json",
+  "baseline_sha256": "42f8fab1e7b5a9056538481113d6590d4e84d0b089989472afe09f9ccd16be85",
+  "source_sha256": {
+    "04_factchecker/inference/atomic_verifier.py": "83bf9cda9b639a2a640bba92ddc0c3124ce07a66fca48891d9826971d07ee304",
+    "04_factchecker/inference/numeric_verifier.py": "53375a676708b7118747d3fbf9b11cdf674055cfb78e5755b6f090391b831bc0",
+    "04_factchecker/inference/evidence_screen.py": "23574b7320ac576989b283a58d3e81d58be001f1b1c286523d4f0baa04dfcab5",
+    "04_factchecker/inference/verifier.py": "7eff9f8678cf1a4c270e59ada432bdf12a2fd6323c3d598fa34cc3513fd468f8",
+    "04_factchecker/inference/judge.py": "e05d2d19384f4b8713fa6c18cbc9fa87defcafda164628467508cc7c98a50649",
+    "research_rag/evaluation/evaluate_atomic_verifier.py": "21104982f055b0bb0eb243ac7baa0e3d7ac95e646ba779d2e471e5925c292f46",
+    "research_rag/evaluation/compare_blind_verifier.py": "ea14524f1f43c806975e0adbe0c0f24eecf23fd970123be735b9e14b7e6644cb",
+    "research_rag/evaluation/compare_factchecker.py": "ce7a74e56699a35d597493dd5152972a0cf40447aab6000774c7d76209574ae7",
+    "research_rag/evaluation/compare_confidence_backends.py": "0d383a92d02cec05743c3585058cd1fd7a4dbd5daab3730beee08b499eb5e873",
+    "research_rag/local.py": "b363825e64d07a5f8c12c5b456b1e58e4b2c4297e93f48d493c5dec3ba8bbf5a",
+    "requirements-orchestrator.txt": "31b5dac851eaaf005a151e9c071226aeafeb4679ebe4019d0368e68fbd0dacd4",
+    "research_rag/tests/test_atomic_verifier.py": "1baddf4d68ad9ecf4c57da6f0d5dd84e87b898f4214da1277d2ea9d1180ede2d",
+    "research_rag/tests/test_atomic_experiment.py": "041a429549f45be8fb1baf6b0f3f023b9da31a91d5f8a27a3a2e73d1e553af11"
+  },
+  "prompt_sha256": {
+    "decompose": "df91e9a6793610c284415bc498db8f4a3f309b3f24cb666abda2b42cd5cf651a",
+    "assess": "ed5d051a7f4de6be4d9fea0d4eecd453f4557fd38b6a41200b3a217ea6120186"
+  },
+  "decomposition_probe": {
+    "cases_file": "decomposition_probe_claims_v2.jsonl",
+    "cases_sha256": "440030681bca80724ab4ee0e85e79ac70db7f1703f77587991000cb07b6bea13",
+    "max_calls_per_case": 2,
+    "maximum_total_backend_calls": 36,
+    "maximum_generated_tokens": 55296,
+    "process_timeout_seconds": 2400,
+    "minimum_valid_decompositions": 18,
+    "human_review_rubric": [
+      "factual_predicates_not_fragments",
+      "all_requirements_preserved",
+      "quantifier_preserved",
+      "entity_metric_binding_correct",
+      "time_condition_scope_correct"
+    ],
+    "human_review_acceptance": "18/18 structural pass AND all five judgments true for each claim, with human reviewer and per-claim notes before 39 cases",
+    "dataset_status": "18 unique claims from the inspected 39 development cases; not independent held-out data"
+  },
+  "max_calls_per_case": 8,
+  "max_attempts": 2,
+  "max_new_tokens": 1536,
+  "case_deadline_seconds": 180,
+  "process_timeout_seconds": 5400,
+  "maximum_total_backend_calls": 312,
+  "maximum_generated_tokens": 479232,
+  "min_correct_labels_recognized": 39,
+  "max_false_support": 0,
+  "max_runtime_failed_rows": 0,
+  "human_review_rubric": [
+    "label_correct",
+    "quote_relevant",
+    "explanation_follows_evidence",
+    "all_claim_parts_checked",
+    "missing_information_specific"
+  ],
+  "human_review_required": true,
+  "human_review_acceptance": "All applicable rubric items true for every one of the 39 cases; independent reviewer required before integration",
+  "promotion": "Never automatic; semantic evidence and independent evaluation required before integration",
+  "limitations": [
+    "All 39 synthetic cases have been inspected and used for development. Independent annotation is pending.",
+    "Code validates structure/quotes/arithmetic; semantic decomposition, association and population completeness still depend on the model.",
+    "Candidate changes prompting, call count, output contract and token budget together; improvements cannot be attributed to one change.",
+    "Per-case deadline rejects late output; outer process deadline interrupts blocking calls and includes model loading/downloads.",
+    "More than seven parts or repeated repairs may exhaust the eight-call case budget; incomplete results fail the gate.",
+    "English AND/simple numerical grammar can reject valid evidence. Gold-support rejection is reported.",
+    "Cost USD is unavailable; actual calls/latency and available generation token counts are recorded.",
+    "No serving integration, Reader requests or automatic promotion in this experiment."
+  ]
+}

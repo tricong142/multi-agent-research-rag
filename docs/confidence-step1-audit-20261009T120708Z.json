@@ -1,0 +1,243 @@
+{
+  "archive": "C:\\Users\\dellcuatri142\\Downloads\\rag-validation-20261009T120708Z.zip",
+  "archive_sha256": "99139b8e0492a344240103d8bb76f8626271e23a441438e79b6872cfc8d8bb34",
+  "verified_files": 44,
+  "runtime_patch_matches": {
+    "research_rag/graph.py": true,
+    "research_rag/state.py": true,
+    "research_rag/retrieval.py": true,
+    "research_rag/preflight.py": true,
+    "research_rag/indexing.py": true,
+    "research_rag/evaluate.py": true,
+    "research_rag/evaluation/reader_smoke.py": true,
+    "research_rag/tests/test_graph_safety.py": true,
+    "research_rag/tests/test_evaluation_contracts.py": true,
+    "research_rag/tests/test_indexing.py": true,
+    "research_rag/controller.py": true,
+    "research_rag/adapters.py": true,
+    "research_rag/local.py": true,
+    "research_rag/observe.py": true,
+    "requirements-orchestrator.txt": true,
+    "train_agent3_summarizer/node.py": true,
+    "train_agent3_summarizer/critic/prompts.py": true,
+    "research_rag/tests/test_integration.py": true,
+    "research_rag/tests/test_autonomy.py": true,
+    "research_rag/planning.py": true,
+    "research_rag/tests/test_planning.py": true,
+    "research_rag/evaluation/autonomy.py": true,
+    "research_rag/evaluation/autonomy_criteria.json": true,
+    "research_rag/tests/test_autonomy_evaluation.py": true,
+    "04_factchecker/inference/judge.py": true,
+    "train_agent2_reader/reader_agent.py": true,
+    "research_rag/tests/test_e2e_regressions.py": true,
+    "04_factchecker/inference/confidence.py": true,
+    "04_factchecker/node.py": true,
+    "04_factchecker/prompts.py": true,
+    "04_factchecker/eval_factchecker.py": true,
+    "research_rag/evaluation/compare_factchecker.py": true,
+    "research_rag/evaluation/confidence_criteria.json": true,
+    "research_rag/evaluation/confidence_failures_20261009.jsonl": true,
+    "research_rag/tests/test_confidence_repair.py": true,
+    "research_rag/tests/test_confidence_diagnostic.py": true
+  },
+  "criteria_inputs_sources_profiles_match": true,
+  "recomputed_metrics_and_gates_match": true,
+  "predictions": 141,
+  "actual_backend_calls": 372,
+  "profiles": {
+    "legacy_retry": {
+      "predictions": 47,
+      "runtime_failures": 7,
+      "invalid_confidence_attempts": 21,
+      "backend_calls": 146,
+      "elapsed_ms": 399368.69,
+      "accepted_support": 7,
+      "accepted_false_support": 0
+    },
+    "repair": {
+      "predictions": 47,
+      "runtime_failures": 0,
+      "invalid_confidence_attempts": 7,
+      "backend_calls": 132,
+      "elapsed_ms": 367715.6,
+      "accepted_support": 14,
+      "accepted_false_support": 0
+    },
+    "label_confidence_repair": {
+      "predictions": 47,
+      "runtime_failures": 0,
+      "invalid_confidence_attempts": 0,
+      "backend_calls": 94,
+      "elapsed_ms": 301872.47,
+      "accepted_support": 14,
+      "accepted_false_support": 0
+    }
+  },
+  "model_inference_performed_during_audit": false,
+  "semantic_review_example": {
+    "example_id": "contract:wrong_units",
+    "confidence_output": {
+      "confidence_score": 0.0,
+      "reasoning": "The cited context has a supporting annotation."
+    },
+    "input": "CLAIM:\nTraining took 12 seconds.\n\nCONTEXT:\nTraining took 12 hours, not 12 seconds.\n\nPROPOSED LABEL: contradict\nJUDGE EXPLANATION: The annotated evidence states: \"Training took 12 hours, not 12 seconds.\""
+  },
+  "repair_trace_review": {
+    "seven_failures_repaired_on_second_attempt": true,
+    "empty_string_first_outputs": 5,
+    "null_first_outputs": 2,
+    "records": [
+      {
+        "dataset": "contracts",
+        "example_id": "contract:both_supported",
+        "trace_file": "repair-contracts-calls.jsonl",
+        "trace_lines": [
+          8,
+          9
+        ],
+        "original_output": {
+          "confidence_score": 1.0,
+          "reasoning": ""
+        },
+        "repaired_output": {
+          "confidence_score": 1.0,
+          "reasoning": "The annotated evidence states: \"Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy.\""
+        },
+        "original_user_prompt": "CLAIM:\nModel Juniper uses 25% less memory and retains 94% accuracy.\n\nCONTEXT:\nCompared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy.\n\nPROPOSED LABEL: support\nJUDGE EXPLANATION: The annotated evidence states: \"Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy.\"",
+        "has_validation_feedback": true,
+        "attempts": 2
+      },
+      {
+        "dataset": "contracts",
+        "example_id": "contract:atomic_support",
+        "trace_file": "repair-contracts-calls.jsonl",
+        "trace_lines": [
+          30,
+          31
+        ],
+        "original_output": {
+          "confidence_score": 1.0,
+          "reasoning": ""
+        },
+        "repaired_output": {
+          "confidence_score": 1.0,
+          "reasoning": "The annotated evidence states: \"The final sample contained exactly 240 documents.\""
+        },
+        "original_user_prompt": "CLAIM:\nThe sample contained 240 documents.\n\nCONTEXT:\nThe final sample contained exactly 240 documents.\n\nPROPOSED LABEL: support\nJUDGE EXPLANATION: The annotated evidence states: \"The final sample contained exactly 240 documents.\"",
+        "has_validation_feedback": true,
+        "attempts": 2
+      },
+      {
+        "dataset": "contracts",
+        "example_id": "contract:bounded_scope",
+        "trace_file": "repair-contracts-calls.jsonl",
+        "trace_lines": [
+          33,
+          34
+        ],
+        "original_output": {
+          "confidence_score": 1.0,
+          "reasoning": ""
+        },
+        "repaired_output": {
+          "confidence_score": 1.0,
+          "reasoning": "The annotated evidence states: \"The method improved recall on the tested dataset.\""
+        },
+        "original_user_prompt": "CLAIM:\nOn the tested dataset, the method improved recall.\n\nCONTEXT:\nThe method improved recall on the tested dataset. Results on other datasets are unknown.\n\nPROPOSED LABEL: support\nJUDGE EXPLANATION: The annotated evidence states: \"The method improved recall on the tested dataset.\"",
+        "has_validation_feedback": true,
+        "attempts": 2
+      },
+      {
+        "dataset": "observed_failures",
+        "example_id": "regression:sufficient:0",
+        "trace_file": "repair-observed_failures-calls.jsonl",
+        "trace_lines": [
+          2,
+          3
+        ],
+        "original_output": {
+          "confidence_score": 1.0,
+          "reasoning": ""
+        },
+        "repaired_output": {
+          "confidence_score": 1.0,
+          "reasoning": "The annotated evidence states: \"The Orion trial enrolled 42 participants.\""
+        },
+        "original_user_prompt": "CLAIM:\nThe Orion trial enrolled 42 participants.\n\nCONTEXT:\nThe Orion trial enrolled 42 participants.\n\nPROPOSED LABEL: support\nJUDGE EXPLANATION: The annotated evidence states: \"The Orion trial enrolled 42 participants.\"",
+        "has_validation_feedback": true,
+        "attempts": 2
+      },
+      {
+        "dataset": "observed_failures",
+        "example_id": "regression:conflict:0",
+        "trace_file": "repair-observed_failures-calls.jsonl",
+        "trace_lines": [
+          5,
+          6
+        ],
+        "original_output": {
+          "confidence_score": 1.0,
+          "reasoning": ""
+        },
+        "repaired_output": {
+          "confidence_score": 1.0,
+          "reasoning": "The annotated evidence states: \"The Orion trial enrolled 42 participants.\""
+        },
+        "original_user_prompt": "CLAIM:\nThe Orion trial enrolled 42 participants.\n\nCONTEXT:\nThe Orion trial enrolled 42 participants.\n\nPROPOSED LABEL: support\nJUDGE EXPLANATION: The annotated evidence states: \"The Orion trial enrolled 42 participants.\"",
+        "has_validation_feedback": true,
+        "attempts": 2
+      },
+      {
+        "dataset": "observed_failures",
+        "example_id": "regression:heldout_2:1",
+        "trace_file": "repair-observed_failures-calls.jsonl",
+        "trace_lines": [
+          10,
+          11
+        ],
+        "original_output": {
+          "confidence_score": 1.0,
+          "reasoning": null
+        },
+        "repaired_output": {
+          "confidence_score": 1.0,
+          "reasoning": "The annotated evidence states: \"In this section, we investigate whether it is possible to transfer the attribute encodings, learned from the sentiment classification model, to other tasks: product category classification and review headline generation. The experimental setup is as follows. First, we train a sentiment classification model using an attribute representation and injection method of choice to learn the attribute encodings. Then, we use these fixed encodings as input to the task-specific model.\""
+        },
+        "original_user_prompt": "CLAIM:\nThe paper evaluates attribute representations on two downstream tasks: product category classification and review headline generation.\n\nCONTEXT:\nIn this section, we investigate whether it is possible to transfer the attribute encodings, learned from the sentiment classification model, to other tasks: product category classification and review headline generation. The experimental setup is as follows. First, we train a sentiment classification model using an attribute representation and injection method of choice to learn the attribute encodings. Then, we use these fixed encodings as input to the task-specific model.\n\nPROPOSED LABEL: support\nJUDGE EXPLANATION: The annotated evidence states: \"In this section, we investigate whether it is possible to transfer the attribute encodings, learned from the sentiment classification model, to other tasks: product category classification and review headline generation. The experimental setup is as follows. First, we train a sentiment classification model using an attribute representation and injection method of choice to learn the attribute encodings. Then, we use these fixed encodings as input to the task-specific model.\"",
+        "has_validation_feedback": true,
+        "attempts": 2
+      },
+      {
+        "dataset": "observed_failures",
+        "example_id": "regression:heldout_2:4",
+        "trace_file": "repair-observed_failures-calls.jsonl",
+        "trace_lines": [
+          13,
+          14
+        ],
+        "original_output": {
+          "confidence_score": 1.0,
+          "reasoning": null
+        },
+        "repaired_output": {
+          "confidence_score": 1.0,
+          "reasoning": "The annotated evidence states: \"Finally, we show promising results on transferring the attribute representations from sentiment classification, and use them to two different tasks such as product category classification and review headline generation.\""
+        },
+        "original_user_prompt": "CLAIM:\nThe paper evaluates attribute representations on two downstream tasks: product category classification and review headline generation.\n\nCONTEXT:\nWe showed that the current accepted standard for attribute representation and injection, i.e. bias-attention, which incorporates attributes as additional biases in the attention mechanism, is the least effective method. We proposed to represent attributes as chunk-wise importance weight matrices (CHIM) and showed that this representation method significantly outperforms the bias-attention method. Despite using a simple BiLSTM classifier as base model, CHIM significantly outperforms the current state-of-the-art models, even when those models use a more complex base model architecture. Furthermore, we conducted several experiments that conclude that injection to the attention mechanism, no matter which representation method is used, garners the worst performance. This result contradicts previously reported conclusions regarding attribute injection to the attention mechanism. Finally, we show promising results on transferring the attribute representations from sentiment classification, and use them to two different tasks such as product category classification and review headline generation.\n\nPROPOSED LABEL: support\nJUDGE EXPLANATION: The annotated evidence states: \"Finally, we show promising results on transferring the attribute representations from sentiment classification, and use them to two different tasks such as product category classification and review headline generation.\"",
+        "has_validation_feedback": true,
+        "attempts": 2
+      }
+    ],
+    "first_confidence_input_differences_vs_baseline": []
+  },
+  "candidate_all_scores_one": {
+    "count": 47,
+    "incorrect_labels": 12,
+    "dev30_correct": 18,
+    "dev30_n": 30
+  },
+  "review_type": "Assistant technical audit; not independent human sign-off",
+  "step1_contract_automated_pass": true,
+  "human_acceptance_recorded": false,
+  "full_e2e_rerun_in_this_zip": false
+}

@@ -1,0 +1,24 @@
+{
+  "policy": "evidence-screen-v1",
+  "new_tests_passed": 8,
+  "real_model_inference_performed": false,
+  "recorded_cases_screened": 39,
+  "false_supports_flagged": 2,
+  "gold_supports_flagged": 2,
+  "original_labels_unchanged_correct": 37,
+  "assistant_flagged_review_rows": 10,
+  "human_review": "pending",
+  "serving_modified": false,
+  "original_39_of_39_gate_pass": false,
+  "screen_result_sha256": "4128f3a6ba22079d74e6a1d6ec448765042fde967f811d83e4df1ea4bce43427",
+  "source_sha256": {
+    "04_factchecker/inference/evidence_screen.py": "23574b7320ac576989b283a58d3e81d58be001f1b1c286523d4f0baa04dfcab5",
+    "research_rag/evaluation/screen_blind_verifier.py": "c4d56c96ff983c4ab719bb3bd54b8240b5701740ecb7f444eb5493a002ba04c7",
+    "research_rag/tests/test_verifier_evidence_screen.py": "4e37b618d9a7566571b70e68e5b484e832f669276e1f6aa9ad985581df1f2632"
+  },
+  "limitations": [
+    "Post-hoc diagnostic written after inspecting recorded development predictions.",
+    "Screen flags do not assign or repair labels; clear screen does not verify entailment.",
+    "No prospective GPU evaluation, semantic reviewer approval or independent final evaluation."
+  ]
+}

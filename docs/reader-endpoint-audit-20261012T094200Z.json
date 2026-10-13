@@ -1,0 +1,39 @@
+{
+  "zip_name": "reader-endpoint-20261012T094200Z-8bf24d19.zip",
+  "zip_bytes": 48409,
+  "zip_sha256": "339e5bcd1d1abd04091c6f011f0ecb7cb34fce8311b1bfc8f06b83aa42f4a27e",
+  "crc_pass": true,
+  "manifest_verified_files": 23,
+  "source_manifest_verified_files": 5,
+  "current_source_matches": {
+    "scripts/kaggle_reader_endpoint_probe.py": true,
+    "scripts/kaggle_gemini_probe.py": true,
+    "train_agent2_reader/reader_policy.py": true
+  },
+  "requests_match_summary": true,
+  "payload_hashes_verified": true,
+  "request_intervals_seconds": [
+    61.00016,
+    61.000143,
+    61.000155
+  ],
+  "backend_contract_pass": {
+    "sdk": false,
+    "rest": false
+  },
+  "successful_contracts": 1,
+  "status": {
+    "state": "failed",
+    "model": "gemini-3.6-flash",
+    "exit_code": 1,
+    "elapsed_ms": 184846.828
+  },
+  "wrapt_fix_artifacts_present": false,
+  "quality_gate_pass": null,
+  "cost_usd": null,
+  "limitations": [
+    "Hash consistency is not an independent provider signature.",
+    "Frozen development inputs do not measure extraction quality.",
+    "503 provider message reports high demand; no permanent outage or future availability inferred."
+  ]
+}

@@ -1,0 +1,4 @@
+Qwen is licensed under the Qwen RESEARCH LICENSE AGREEMENT, Copyright (c) Alibaba Cloud. All Rights Reserved.
+
+The Fact-Checker checkpoint was fine-tuned from Qwen/Qwen2.5-3B-Instruct for this research workspace.
+Built with Qwen.

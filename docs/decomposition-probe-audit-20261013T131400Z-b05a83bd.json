@@ -1,0 +1,65 @@
+{
+  "run": "20261013T131400Z-b05a83bd",
+  "zip_sha256": "abb5e69ef781bf9850f1b1ca1d4b877c65316d664832070f3785caa41e1c6144",
+  "crc_pass": true,
+  "output_manifest_files_verified": 37,
+  "runtime_files_verified": 45,
+  "verifier_patch_files_verified": 28,
+  "frozen_sources_verified": 13,
+  "predictions_replayed": 18,
+  "calls_reconciled": 29,
+  "kaggle_tests_passed": 203,
+  "metrics": {
+    "n": 18,
+    "valid_decompositions": 12,
+    "incomplete": 6,
+    "backend_calls": 29,
+    "checks": {
+      "all_claims_present": true,
+      "all_decompositions_valid": false,
+      "within_call_budget": true,
+      "within_measured_token_budget": true
+    },
+    "automated_gate_pass": false,
+    "semantic_review": "pending",
+    "label_accuracy": null,
+    "generated_tokens": 1816,
+    "prompt_tokens": 20092
+  },
+  "validation_issues": {
+    "unsplit_conjunction": 2,
+    "scope_not_grounded": 3,
+    "invalid_json": 6,
+    "entity_and_metric_required": 1,
+    "uncovered_claim_content": 4,
+    "quote_not_in_claim": 1
+  },
+  "successful_first_attempt": 7,
+  "repair_attempts": 11,
+  "successful_repairs": 5,
+  "max_generated_tokens_per_call": 141,
+  "summary": {
+    "experiment_completed": true,
+    "prediction_count": 18,
+    "backend_calls": 29,
+    "automated_gate_pass": false,
+    "human_review": "pending",
+    "overall_pass": false,
+    "promoted_to_serving": false,
+    "cost_usd": null,
+    "status": "automated_gates_failed",
+    "evaluation_mode": "decomposition",
+    "last_case_id": "decompose:018",
+    "elapsed_ms": 186431.409
+  },
+  "stage_status": {
+    "state": "failed",
+    "exit_code": 1,
+    "elapsed_ms": 188849.36
+  },
+  "model_pairing_matches_recorded_baseline": true,
+  "original_output_modified": false,
+  "human_review": "pending",
+  "full39_authorized_by_gate": false,
+  "new_inference_calls_by_assistant": 0
+}

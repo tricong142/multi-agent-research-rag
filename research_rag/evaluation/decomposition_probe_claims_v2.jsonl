@@ -1,0 +1,18 @@
+{"example_id": "decompose:001", "claim": "Model Juniper uses 25% less memory and retains 94% accuracy."}
+{"example_id": "decompose:002", "claim": "Model Juniper retains 94% accuracy."}
+{"example_id": "decompose:003", "claim": "The study used human labels."}
+{"example_id": "decompose:004", "claim": "The new index caused the latency improvement."}
+{"example_id": "decompose:005", "claim": "All tasks improved after compression."}
+{"example_id": "decompose:006", "claim": "The report evaluated four models on two datasets."}
+{"example_id": "decompose:007", "claim": "Training took 12 seconds."}
+{"example_id": "decompose:008", "claim": "The sample contained 240 documents."}
+{"example_id": "decompose:009", "claim": "On the tested dataset, the method improved recall."}
+{"example_id": "decompose:010", "claim": "Every validation shard improved recall after the revision."}
+{"example_id": "decompose:011", "claim": "At least one audited cache node reduced response time after the patch."}
+{"example_id": "decompose:012", "claim": "None of the monitored pumps leaked during the overnight test."}
+{"example_id": "decompose:013", "claim": "The North gateway reduced its error rate after calibration."}
+{"example_id": "decompose:014", "claim": "Every weekly trial conducted in May improved throughput."}
+{"example_id": "decompose:015", "claim": "The patch reduced median request latency."}
+{"example_id": "decompose:016", "claim": "The configuration change increased precision."}
+{"example_id": "decompose:017", "claim": "After tuning, the extractor decreased memory use and increased token recall."}
+{"example_id": "decompose:018", "claim": "Every batch in the low-temperature group gained yield after the update."}

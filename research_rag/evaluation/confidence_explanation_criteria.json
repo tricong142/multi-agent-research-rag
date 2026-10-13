@@ -1,0 +1,30 @@
+{
+  "version": "confidence-explanation-20261009-v2",
+  "purpose": "New prospective development diagnostic; does not rescore or replace v1 acceptance",
+  "threshold": 0.7,
+  "max_attempts_per_stage": 3,
+  "datasets": {"dev30": 30, "contracts": 12, "observed_failures": 5},
+  "baseline": "repair",
+  "candidates": ["explanation_repair"],
+  "gates": [
+    "all_expected_rows_present", "no_runtime_failures", "judge_predictions_unchanged",
+    "label_metrics_not_lower", "false_support_not_increased", "no_accepted_false_support",
+    "accepted_true_support_not_lower", "some_support_accepted", "attempts_within_budget"
+  ],
+  "label_challenges": {
+    "n": 24,
+    "selection": "For each of the 12 synthetic contracts, assess its gold label and one wrong label; no Judge inference in this controlled intervention",
+    "wrong_label_map": {"support": "contradict", "contradict": "support", "not_enough_info": "support"},
+    "max_wrong_labels_at_or_above_threshold": 0,
+    "min_correct_labels_at_or_above_threshold": 12,
+    "max_runtime_failed_rows": 0
+  },
+  "human_review_required": true,
+  "human_review_rubric": [
+    "grounded_in_context", "explains_proposed_label", "identifies_conflict_or_missing_fact_when_applicable",
+    "score_explanation_consistent"
+  ],
+  "human_review_policy": "Every explanation_repair row requires a named reviewer, four boolean judgments and a note; all four must pass. The reviewer must actually inspect claim/context and rationale. Script output is not human review.",
+  "promotion": "Never automatic; retain audited repair in serving until model and human evaluation support a separate promotion decision",
+  "cost_usd": null
+}

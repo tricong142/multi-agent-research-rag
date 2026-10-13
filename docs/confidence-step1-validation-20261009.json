@@ -1,0 +1,146 @@
+{
+  "scope": "Step 1: confidence output contract and bounded repair; no Reader/Summarizer edits",
+  "real_model_run_performed": false,
+  "model_quality_validated": false,
+  "experimental_prompt_promoted": false,
+  "validation": [
+    {
+      "command": ".venv/Scripts/python.exe -m unittest research_rag.tests.test_confidence_repair research_rag.tests.test_confidence_diagnostic research_rag.tests.test_calibration_collection research_rag.tests.test_factchecker_prompt_profiles -q",
+      "tests": 17,
+      "seconds": 0.225,
+      "exit_code": 0
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m unittest discover -s research_rag/tests -q",
+      "environment": "Windows sandbox",
+      "tests": 118,
+      "seconds": 16.939,
+      "exit_code": 1,
+      "errors": 1,
+      "error": "WinError 5 Access denied renaming temporary ZIP in notebook helper test"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m unittest discover -s research_rag/tests -q",
+      "environment": "Windows outside sandbox, approved retry",
+      "tests": 118,
+      "seconds": 15.519,
+      "exit_code": 0,
+      "env_overrides": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1"
+      }
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m research_rag.evaluation.compare_factchecker --help",
+      "exit_code": 0
+    }
+  ],
+  "files": [
+    {
+      "path": "04_factchecker/inference/judge.py",
+      "size": 5063,
+      "sha256": "e05d2d19384f4b8713fa6c18cbc9fa87defcafda164628467508cc7c98a50649"
+    },
+    {
+      "path": "04_factchecker/inference/confidence.py",
+      "size": 3463,
+      "sha256": "307cdfb8bb9509a5189a31994d0aaa4c37f662e008f36dadaa54dcabeba0a09b"
+    },
+    {
+      "path": "04_factchecker/node.py",
+      "size": 7793,
+      "sha256": "577e62d2ce330d19bc4791641066d8d17b8dc4baebfc3dab455d593658afc48c"
+    },
+    {
+      "path": "04_factchecker/prompts.py",
+      "size": 6139,
+      "sha256": "14947971166d25cd9ee99dd0118cca3d3e07f54398d3daa90baffe4664eea20b"
+    },
+    {
+      "path": "04_factchecker/eval_factchecker.py",
+      "size": 7759,
+      "sha256": "579907c751d107f9b1634511501b9dfd433ac9d583d551d989e1b95f6f7cbc0e"
+    },
+    {
+      "path": "04_factchecker/README.md",
+      "size": 7535,
+      "sha256": "40cfd3925138e7bbc5589f6d4bb88e1530a0e11069afa86c4b47f5a4fb657dc7"
+    },
+    {
+      "path": "research_rag/evaluation/compare_factchecker.py",
+      "size": 13253,
+      "sha256": "626373c92d244a095518b07bab153e8f01fa28c6a8e2cce0b1d85300c4206ae4"
+    },
+    {
+      "path": "research_rag/evaluation/confidence_criteria.json",
+      "size": 905,
+      "sha256": "99126a5f2bccfdcbcdb7a003f39c214de551bdc5b299a0970e91c2926ae2f6b0"
+    },
+    {
+      "path": "research_rag/evaluation/confidence_failures_20261009.jsonl",
+      "size": 5359,
+      "sha256": "10a5a2a6977f43186ee227733119301c7571ed0cd3f25a4326017b847014c024"
+    },
+    {
+      "path": "research_rag/tests/test_confidence_repair.py",
+      "size": 7022,
+      "sha256": "8499e4e7287025fc7603a4f6203e481f2db74fbcd9ef17d54dfe218405d246df"
+    },
+    {
+      "path": "research_rag/tests/test_confidence_diagnostic.py",
+      "size": 5374,
+      "sha256": "baa842183752075382aefccc422505220c3edc6caa846a975a49992726276d38"
+    },
+    {
+      "path": "research_rag/tests/test_validation_notebook.py",
+      "size": 8904,
+      "sha256": "ccb5dfd6939e0b5de765ee3136e48bb1cd627ae91075a8e9c7c098cc300cf71e"
+    },
+    {
+      "path": "scripts/build_validation_notebook.py",
+      "size": 15361,
+      "sha256": "4d2633f0d75029b6eab3a56e431a111e1101c0481187524c70a246f210132ee2"
+    },
+    {
+      "path": "scripts/build_autonomy_notebook.py",
+      "size": 4447,
+      "sha256": "e9d531aa88acc17dbf4c01223d640f743c061a7b9ba5c6080e6aaef844ca0f97"
+    },
+    {
+      "path": "scripts/build_confidence_notebook.py",
+      "size": 2791,
+      "sha256": "dd6d69e5c22116caa2a7cdc8e2faaf157f557575991fdfd0aa64de2b9d10a08d"
+    },
+    {
+      "path": "scripts/kaggle_resume_validation.ipynb",
+      "size": 140971,
+      "sha256": "7313c2a5040a8e4e329d5b5db0489bfe7262f583f034960bae15f337ae1c097f"
+    },
+    {
+      "path": "scripts/kaggle_autonomy_validation.ipynb",
+      "size": 186830,
+      "sha256": "6befa839bbde398784ac1a174f47b5dae667b89de6cb578854ef84c05a8561ba"
+    },
+    {
+      "path": "scripts/kaggle_confidence_validation.ipynb",
+      "size": 137467,
+      "sha256": "8124ff02db50ac6d889fc98f53d12b859987fa61e2bfb650c8032e06d25c5ef8"
+    },
+    {
+      "path": "docs/CONFIDENCE_STEP1_20261009.md",
+      "size": 11232,
+      "sha256": "ee8289a521a3c6ca89ee9f37f187e701d885f3d0c4f8e4cff3bcd05201cc1164"
+    },
+    {
+      "path": "docs/PROJECT_STATUS.md",
+      "size": 12878,
+      "sha256": "0f2aa8405d7b41ded04ba008f3e75f84584a612bd7f0e56124ee6ccd6eca285c"
+    }
+  ],
+  "remaining": [
+    "Run confidence-only notebook manually on Kaggle GPU",
+    "Review confidence explanations and predeclared quality gates",
+    "Separate independent calibration/final E2E remain outstanding"
+  ]
+}

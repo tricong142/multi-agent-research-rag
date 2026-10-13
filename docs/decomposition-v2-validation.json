@@ -1,0 +1,66 @@
+{
+  "version": "atomic-verifier-quotes-v2-20261013",
+  "policy": "atomic-verifier-quotes-v2",
+  "status": "local_checks_passed_live_probe_pending",
+  "criteria_sha256": "ad1094afe37d2620c10d6336dc2da4e36b2b1e820b0cd7af579c97da717a632c",
+  "notebook_sha256": "0ff6d9b7ec29e3870a4655ede92e132ab09e539a441602bce833cd8605e89a37",
+  "frozen_sources_verified": 13,
+  "changed_frozen_sources": [
+    "04_factchecker/inference/atomic_verifier.py",
+    "research_rag/evaluation/evaluate_atomic_verifier.py",
+    "research_rag/tests/test_atomic_verifier.py",
+    "research_rag/tests/test_atomic_experiment.py"
+  ],
+  "source_sha256": {
+    "04_factchecker/inference/atomic_verifier.py": "e0b0ea2c5055a6f33d258092d5c789314e12627fc17113f42f2144adc3e623cd",
+    "04_factchecker/inference/numeric_verifier.py": "53375a676708b7118747d3fbf9b11cdf674055cfb78e5755b6f090391b831bc0",
+    "04_factchecker/inference/evidence_screen.py": "23574b7320ac576989b283a58d3e81d58be001f1b1c286523d4f0baa04dfcab5",
+    "04_factchecker/inference/verifier.py": "7eff9f8678cf1a4c270e59ada432bdf12a2fd6323c3d598fa34cc3513fd468f8",
+    "04_factchecker/inference/judge.py": "e05d2d19384f4b8713fa6c18cbc9fa87defcafda164628467508cc7c98a50649",
+    "research_rag/evaluation/evaluate_atomic_verifier.py": "e3c4c2a9b4e12cad68beca686fd82e3abc8a8e530d5a9c5b9bbd63e0113ad929",
+    "research_rag/evaluation/compare_blind_verifier.py": "ea14524f1f43c806975e0adbe0c0f24eecf23fd970123be735b9e14b7e6644cb",
+    "research_rag/evaluation/compare_factchecker.py": "ce7a74e56699a35d597493dd5152972a0cf40447aab6000774c7d76209574ae7",
+    "research_rag/evaluation/compare_confidence_backends.py": "0d383a92d02cec05743c3585058cd1fd7a4dbd5daab3730beee08b499eb5e873",
+    "research_rag/local.py": "b363825e64d07a5f8c12c5b456b1e58e4b2c4297e93f48d493c5dec3ba8bbf5a",
+    "requirements-orchestrator.txt": "31b5dac851eaaf005a151e9c071226aeafeb4679ebe4019d0368e68fbd0dacd4",
+    "research_rag/tests/test_atomic_verifier.py": "bd0a895350a6a5227b5ad38e6d0d78815b618a22bfb057df331bbd47073f4a82",
+    "research_rag/tests/test_atomic_experiment.py": "e373478bd7345493cc92882a87663e6b93c08171af6363274b2c5a18f7df49cd"
+  },
+  "local_tests": {
+    "count": 75,
+    "passed": 75,
+    "exit_code": 0,
+    "elapsed_seconds": 33.723,
+    "backend": "fixtures/stubs",
+    "log": "decomposition-v2-tests.log"
+  },
+  "notebook_packaging_tests_passed": 3,
+  "runtime_experiment_tests_discovered_in_reconstructed_workspace": 15,
+  "cli_probe_freeze_check": {
+    "freeze_valid": true,
+    "cases": 18,
+    "maximum_calls": 36
+  },
+  "full_cli_without_reviewed_probe": {
+    "exit_code": 2,
+    "model_called": false,
+    "output_created": false
+  },
+  "new_live_model_calls": 0,
+  "probe_executed": false,
+  "probe_semantic_review": "pending",
+  "full_39_executed": false,
+  "serving_integration": false,
+  "reader_summarizer_e2e_executed": false,
+  "original_zip_preserved": true,
+  "setup2_notebook_criteria_contract_preserved": true,
+  "old_frozen_source_snapshot": "research-runs/atomic-verifier-setup2-source-snapshot",
+  "git_status_available": false,
+  "limitations": [
+    "No real-model v2 quality result yet.",
+    "18 unique claims come from inspected development cases, not independent held-out data.",
+    "Code checks source/structure; factual atomicity and semantic scope require review.",
+    "Windows temporary checkpoint denial is retried at most four attempts; persistent failures remain errors.",
+    "Proceed to 39 cases only after successful bound probe and human semantic review; integration remains gated."
+  ]
+}

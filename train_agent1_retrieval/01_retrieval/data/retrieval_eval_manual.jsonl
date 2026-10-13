@@ -1,0 +1,30 @@
+{"sub_query": "What is the capital of France?", "history_trials": [], "expected_tool": "bm25", "expected_is_relevant": true}
+{"sub_query": "List all countries in the European Union", "history_trials": [], "expected_tool": "bm25", "expected_is_relevant": true}
+{"sub_query": "Who invented the telephone?", "history_trials": [], "expected_tool": "bm25", "expected_is_relevant": true}
+{"sub_query": "What year was the Eiffel Tower built?", "history_trials": [], "expected_tool": "bm25", "expected_is_relevant": true}
+{"sub_query": "Define the term machine learning", "history_trials": [], "expected_tool": "bm25", "expected_is_relevant": true}
+{"sub_query": "How does photosynthesis relate to climate change mitigation?", "history_trials": [], "expected_tool": "dense", "expected_is_relevant": true}
+{"sub_query": "What are the philosophical implications of artificial intelligence?", "history_trials": [], "expected_tool": "dense", "expected_is_relevant": true}
+{"sub_query": "Explain the relationship between economic inequality and social mobility", "history_trials": [], "expected_tool": "dense", "expected_is_relevant": true}
+{"sub_query": "How do neural networks learn abstract representations?", "history_trials": [], "expected_tool": "dense", "expected_is_relevant": true}
+{"sub_query": "What is the connection between gut microbiome and mental health?", "history_trials": [], "expected_tool": "dense", "expected_is_relevant": true}
+{"sub_query": "Compare the economic policies of Japan and South Korea in the 1990s and their long-term effects on GDP growth", "history_trials": [], "expected_tool": "decompose", "expected_is_relevant": true}
+{"sub_query": "What are the environmental, economic, and social impacts of transitioning from fossil fuels to renewable energy?", "history_trials": [], "expected_tool": "decompose", "expected_is_relevant": true}
+{"sub_query": "How did the invention of the printing press influence the Protestant Reformation and subsequent political changes in Europe?", "history_trials": [], "expected_tool": "decompose", "expected_is_relevant": true}
+{"sub_query": "Analyze the causes, key events, and lasting consequences of the French Revolution", "history_trials": [], "expected_tool": "decompose", "expected_is_relevant": true}
+{"sub_query": "stuff about AI things and how it works maybe", "history_trials": [], "expected_tool": "rewrite", "expected_is_relevant": true}
+{"sub_query": "that paper by Vaswani about the attention thing", "history_trials": [], "expected_tool": "rewrite", "expected_is_relevant": true}
+{"sub_query": "how to make computer see pictures good", "history_trials": [], "expected_tool": "rewrite", "expected_is_relevant": true}
+{"sub_query": "the thing where robots learn by trying", "history_trials": [], "expected_tool": "rewrite", "expected_is_relevant": true}
+{"sub_query": "Why do transformers outperform RNNs on long-range dependency tasks?", "history_trials": [], "expected_tool": "hyde", "expected_is_relevant": true}
+{"sub_query": "Why is dropout effective at preventing overfitting in deep neural networks?", "history_trials": [], "expected_tool": "hyde", "expected_is_relevant": true}
+{"sub_query": "How does batch normalization accelerate training convergence?", "history_trials": [], "expected_tool": "hyde", "expected_is_relevant": true}
+{"sub_query": "What is the capital of France?", "history_trials": [{"tool": "bm25", "is_relevant": false, "reason": "Retrieved documents about French cuisine, not geography"}], "expected_tool": "dense", "expected_is_relevant": true}
+{"sub_query": "How does BERT handle word sense disambiguation?", "history_trials": [{"tool": "dense", "is_relevant": false, "reason": "Results were about BERT the Sesame Street character"}], "expected_tool": "rewrite", "expected_is_relevant": true}
+{"sub_query": "Explain quantum computing applications in drug discovery", "history_trials": [{"tool": "bm25", "is_relevant": false, "reason": "Only found generic quantum physics articles"}, {"tool": "dense", "is_relevant": false, "reason": "Found drug discovery papers but none mentioning quantum computing"}], "expected_tool": "hyde", "expected_is_relevant": true}
+{"sub_query": "What are the side effects of aspirin?", "history_trials": [{"tool": "bm25", "is_relevant": false, "reason": "Retrieved marketing materials for aspirin brand"}], "expected_tool": "dense", "expected_is_relevant": true}
+{"sub_query": "How does gradient descent work?", "history_trials": [], "expected_tool": "bm25", "expected_is_relevant": false}
+{"sub_query": "What is transfer learning in NLP?", "history_trials": [{"tool": "bm25", "is_relevant": false, "reason": "Found results about language transfer in bilingual education, not NLP"}], "expected_tool": "dense", "expected_is_relevant": false}
+{"sub_query": "Explain the attention mechanism in transformers", "history_trials": [], "expected_tool": "dense", "expected_is_relevant": false}
+{"sub_query": "What are the benefits of containerization with Docker?", "history_trials": [{"tool": "dense", "is_relevant": false, "reason": "Found results about shipping containers, not software containers"}], "expected_tool": "rewrite", "expected_is_relevant": false}
+{"sub_query": "How to implement a REST API in Python?", "history_trials": [{"tool": "bm25", "is_relevant": false, "reason": "Found results about Python the snake species"}, {"tool": "rewrite", "is_relevant": false, "reason": "Still retrieving biology content"}], "expected_tool": "hyde", "expected_is_relevant": false}

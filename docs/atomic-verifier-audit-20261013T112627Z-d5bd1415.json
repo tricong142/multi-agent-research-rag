@@ -1,0 +1,276 @@
+{
+  "checked_on": "2026-10-13",
+  "run_id": "20261013T112627Z-d5bd1415",
+  "zip_sha256": "d9c6416a270893bb0d52bbbbaf38dc63474cec9d43db8799a6b45bd9c064a1a0",
+  "zip_crc_valid": true,
+  "zip_files": 39,
+  "output_manifest_files_verified": 38,
+  "criteria_version": "atomic-verifier-v1-setup2-20261013",
+  "criteria_source_inputs_contract_baseline_hashes_match": true,
+  "verifier_patch_files_match_repo": 27,
+  "runtime_patch_files_match_repo": 45,
+  "runtime_patch_files_total": 45,
+  "runtime_patch_mismatches": [],
+  "historical_model_pairing_match": {
+    "model_files": true,
+    "shared_tokenizer_files": true,
+    "repo_id": true,
+    "revision": true,
+    "dtype": true,
+    "quantization": true,
+    "seed": true,
+    "do_sample": true
+  },
+  "kaggle_contract_tests_passed": 193,
+  "setup_preflight_and_freeze_passed": true,
+  "case_trace_metrics_reviews_and_comparisons_replay_match": true,
+  "blinded_model_inputs_match": true,
+  "metrics": {
+    "n": 39,
+    "correct_labels": 0,
+    "false_support": 0,
+    "runtime_failed_rows": 39,
+    "gold_support_rejected": 13,
+    "gold_support_count": 13,
+    "backend_calls": 78,
+    "checks": {
+      "all_cases_present": true,
+      "all_labels_correct": false,
+      "no_false_support": true,
+      "no_runtime_failures": false,
+      "within_call_budget": true,
+      "each_group_complete_and_correct": false,
+      "within_measured_token_budget": true
+    },
+    "automated_gate_pass": false,
+    "dataset_groups": {
+      "original_contracts": {
+        "n": 12,
+        "correct": 0,
+        "false_support": 0,
+        "failed": 12
+      },
+      "scope_regression": {
+        "n": 27,
+        "correct": 0,
+        "false_support": 0,
+        "failed": 27
+      }
+    },
+    "stop_reasons": {
+      "invalid_output_exhausted": 39
+    },
+    "confusion": [
+      {
+        "gold": "contradict",
+        "prediction": "__incomplete__",
+        "n": 13
+      },
+      {
+        "gold": "not_enough_info",
+        "prediction": "__incomplete__",
+        "n": 13
+      },
+      {
+        "gold": "support",
+        "prediction": "__incomplete__",
+        "n": 13
+      }
+    ],
+    "generated_tokens": 9764,
+    "prompt_tokens": 23245
+  },
+  "baseline_metrics": {
+    "n": 39,
+    "correct_labels_recognized": 37,
+    "wrong_label_agreements": 2,
+    "false_support": 2,
+    "runtime_failed_rows": 0,
+    "backend_calls": 40,
+    "elapsed_ms": 242799.176,
+    "checks": {
+      "all_cases_present": true,
+      "no_runtime_failures": true,
+      "all_correct_labels_recognized": false,
+      "no_wrong_label_agreements": false,
+      "no_false_support": false,
+      "attempt_budget": true,
+      "each_dataset_group_complete_and_correct": false
+    },
+    "automated_gate_pass": false,
+    "dataset_groups": {
+      "original_contracts": {
+        "n": 12,
+        "correct_labels": 11,
+        "false_support": 1,
+        "runtime_failed_rows": 0
+      },
+      "scope_regression": {
+        "n": 27,
+        "correct_labels": 26,
+        "false_support": 1,
+        "runtime_failed_rows": 0
+      }
+    },
+    "families": {
+      "original_contracts": {
+        "n": 12,
+        "correct_labels": 11,
+        "false_support": 1,
+        "runtime_failed_rows": 0
+      },
+      "universal": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "existential": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "none": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "entity": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "time": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "direction": {
+        "n": 3,
+        "correct_labels": 2,
+        "false_support": 1,
+        "runtime_failed_rows": 0
+      },
+      "metric": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "conjunction": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      },
+      "condition": {
+        "n": 3,
+        "correct_labels": 3,
+        "false_support": 0,
+        "runtime_failed_rows": 0
+      }
+    },
+    "classification": {
+      "n": 39,
+      "accuracy": 0.9487179487179487,
+      "macro_f1": 0.9495238095238095,
+      "per_label": {
+        "support": {
+          "precision": 0.8666666666666667,
+          "recall": 1.0,
+          "f1": 0.9285714285714286,
+          "support": 13
+        },
+        "contradict": {
+          "precision": 1.0,
+          "recall": 0.9230769230769231,
+          "f1": 0.9600000000000001,
+          "support": 13
+        },
+        "not_enough_info": {
+          "precision": 1.0,
+          "recall": 0.9230769230769231,
+          "f1": 0.9600000000000001,
+          "support": 13
+        }
+      },
+      "confusion": {
+        "not_enough_info->support": 1,
+        "not_enough_info->not_enough_info": 12,
+        "support->support": 13,
+        "contradict->contradict": 12,
+        "contradict->support": 1
+      }
+    },
+    "comparison_policy": "all_labels",
+    "wrong_alternatives_tested": 78
+  },
+  "successful_aggregate_predictions": 0,
+  "conditional_label_accuracy": null,
+  "support_precision": null,
+  "measured_per_part_or_numeric_quality_available": false,
+  "primary_validation_issues_per_call": {
+    "part_span_membership": 27,
+    "invalid_json": 42,
+    "part_count": 9
+  },
+  "primary_validation_issues_by_attempt": {
+    "1": {
+      "part_span_membership": 27,
+      "part_count": 9,
+      "invalid_json": 3
+    },
+    "2": {
+      "invalid_json": 39
+    }
+  },
+  "json_generation_validity": {
+    "valid": 36,
+    "invalid": 42
+  },
+  "parsed_outputs_with_wrong_scope_object_type": 27,
+  "events": {
+    "call_started": 78,
+    "generation": 78,
+    "call_finished": 78
+  },
+  "maximum_generated_tokens_per_call_observed": 232,
+  "token_cap_reached_calls": 0,
+  "case_deadline_exceeded_rows": 0,
+  "case_call_budget_exceeded_rows": 0,
+  "case_elapsed_ms": {
+    "min": 6811.934,
+    "median": 16261.673,
+    "mean": 15477.760410256411,
+    "max": 22640.216
+  },
+  "stage_elapsed_ms": 670290.97,
+  "experiment_elapsed_ms": 668005.864,
+  "cost_usd": null,
+  "unique_decomposition_claims": 18,
+  "decomposition_probe_is_development_data": true,
+  "decomposition_probe_executed": false,
+  "diagnostic_files_sha256": {
+    "research-runs\\atomic-verifier-diagnostic-20261013T112627Z-d5bd1415\\decomposition-probe-claims.jsonl": "440030681bca80724ab4ee0e85e79ac70db7f1703f77587991000cb07b6bea13",
+    "research-runs\\atomic-verifier-diagnostic-20261013T112627Z-d5bd1415\\failure-triage.jsonl": "68789ca3839cd15b6891cffd8eaebbe3d9f0a331d51e3d06137b0e59ab067b72"
+  },
+  "original_run_output_modified": false,
+  "serving_modified": false,
+  "promoted_to_serving": false,
+  "automated_gate_pass": false,
+  "human_review": "pending",
+  "step3_quality_acceptance_complete": false,
+  "step4_started": false,
+  "next_priority": "Revise decomposition interface and explicit JSON examples; derive offsets in code; freeze a separate probe on 18 unique claims before another full candidate evaluation.",
+  "interpretation": [
+    "Experiment completed means all cases attempted; every case remained incomplete at decomposition.",
+    "Zero false support occurs with zero emitted labels and is not evidence of useful verifier quality.",
+    "No per-part evidence or numerical decision was exercised; classifier accuracy among valid predictions is unavailable.",
+    "Repair failed syntactically on all 39 cases; attempts did not reach the token cap or deadline.",
+    "Thirty-nine cases are inspected development regressions; independent evaluation and human review remain pending."
+  ]
+}

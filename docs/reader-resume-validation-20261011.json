@@ -1,0 +1,46 @@
+{
+  "date_local": "2026-10-11",
+  "timezone": "Asia/Saigon",
+  "scope": "Reader notebook availability probe, failure evidence and full-PDF gate",
+  "build": {
+    "command": ".venv/Scripts/python.exe scripts/build_component_notebooks.py",
+    "exit_code": 0,
+    "reader_code_cells": 4,
+    "reader_notebook_sha256": "06b33b2633108664d076aa8a940ddd49443108dd75927d873745ca90a0f964aa",
+    "confidence_notebook_sha256": "8ff762a50974e594cb77fd8816b49e82e652c25358ac628ee768ea9d954186d8",
+    "log": "research-runs/gemini-availability-20261010/notebook-build-20261011.log"
+  },
+  "tests": {
+    "command": ".venv/Scripts/python.exe -m unittest research_rag.tests.test_validation_notebook -v",
+    "passed": 10,
+    "exit_code": 0,
+    "unittest_seconds": 26.381,
+    "environment": "local Windows, outside sandbox for ZIP Path.replace",
+    "api_calls": "mocked; no live model inference",
+    "initial_sandbox_run": "9 passed, 1 PermissionError during ZIP Path.replace; same tests rerun outside sandbox without changing the test",
+    "log": "research-runs/gemini-availability-20261010/notebook-tests-20261011-unsandboxed.log",
+    "verified": [
+      "Notebook cells compile and embedded payload matches repository sources",
+      "Frozen evaluation suite and prior result preservation",
+      "Success and failure stage logs plus ZIP hashes",
+      "Gemini HTTP 429, 503, 403, timeout, wrong model, HTML error, empty candidates, numeric boolean rejection, successful structured response",
+      "No fake credential in probe results or URL; credential only sent in request header",
+      "Full PDF only starts with completed, exit code 0 and boolean true quality gate"
+    ]
+  },
+  "source_sha256": {
+    "scripts/kaggle_gemini_probe.py": "6d5de8821296189a892e70a78a81ab9fbb3acf551c20ce937a6b3e8b9ca0096e",
+    "scripts/build_component_notebooks.py": "446850235f9825ac2099896580650a6208c0a671ba86a80eab81f55c6da0f94e",
+    "research_rag/tests/test_validation_notebook.py": "5125d16069473b96ac188cc0af79402dcc1713ef7d5c64c41ee237c29d28a138"
+  },
+  "live_run": {
+    "notebook_opened": "https://www.kaggle.com/code/trcng23/notebook0d8713a99a/edit",
+    "latest_notebook_uploaded": false,
+    "new_probe_executed": false,
+    "new_reader_executed": false,
+    "blocker": "Browser tab opened, but UI input timed out via both element-index and Playwright click",
+    "account_endpoint_available": null,
+    "latest_reader_evidence": "rag-validation-20261010T105802Z: HTTP 503 on router, reader-failed-page failed; full PDF not run"
+  },
+  "release_gate_passed": false
+}
