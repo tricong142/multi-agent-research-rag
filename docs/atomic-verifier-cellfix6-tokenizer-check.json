@@ -1,0 +1,79 @@
+{
+  "kind": "handcrafted_output_tokenizer_feasibility",
+  "candidate": "atomic-verifier-constrained-v8-cellfix6",
+  "criteria_sha256": "b9d77823b5c8d6d2a56d4053667b8b53f6e059a1f5edb9e7e3a7578a50f34071",
+  "tokenizer_hashes": {
+    "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+    "tokenizer_config.json": "d9bf1d78a80bad5eb65b83c2608910e3be00a9d3250c8153a5a393ad1257e1d6"
+  },
+  "checks": [
+    {
+      "case": "dimensionless_afterward",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens_including_eos": 146,
+      "split_pieces": [
+        ".\",\""
+      ]
+    },
+    {
+      "case": "reversed_pair",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens_including_eos": null,
+      "split_pieces": [
+        ".\",\"",
+        "8"
+      ]
+    },
+    {
+      "case": "required_numeric_missing",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens_including_eos": null,
+      "split_pieces": [
+        ".\",\"",
+        "null"
+      ]
+    },
+    {
+      "case": "source_modifier_binding",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens_including_eos": 156,
+      "split_pieces": [
+        ".\",\""
+      ]
+    },
+    {
+      "case": "missing_unknown",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens_including_eos": 73,
+      "split_pieces": [
+        ".\",\""
+      ]
+    },
+    {
+      "case": "missing_false",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens_including_eos": null,
+      "split_pieces": [
+        "false"
+      ]
+    },
+    {
+      "case": "closed_population",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens_including_eos": 148,
+      "split_pieces": [
+        ".\",\"",
+        ".\",\""
+      ]
+    }
+  ],
+  "weights_loaded": false,
+  "model_inference_completed": false
+}

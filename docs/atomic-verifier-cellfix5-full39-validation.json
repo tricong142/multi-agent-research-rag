@@ -1,0 +1,31 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix5",
+  "criteria_sha256": "642d66612c25514e3764840f750a97cc85c93d4a32a3e4f23bcabff6b993e84c",
+  "payload_sha256": "922bb57ed569982785d026e365c208ef19d4fc5c104e622aa7e9e70395fcb869",
+  "human_admission_verified": true,
+  "human_review": {
+    "reviewer": "Trí Công",
+    "probe_predictions_sha256": "b555551b7812fd9aa9fcf372715f1551ccd72d1568176de50266c1210c90b014",
+    "semantic_review_sha256": "b1caf56e66a869d7e9c9a3d3b8443449ee3915e1a1a1991304031704364104dc"
+  },
+  "notebook_tests_passed": 9,
+  "notebook_test_elapsed_seconds": 129.12,
+  "test_command": ".venv/Scripts/python.exe -m unittest scripts.test_colab_cellfix5_full39 -v",
+  "exact_embedded_probe_and_review_admitted_by_real_runner": true,
+  "tampered_criterion_rejected_before_model_loading": true,
+  "frozen_payload_unchanged_from_audited_smoke_probe": true,
+  "previous_t4_regression_passed": 181,
+  "new_t4_notebook_will_rerun_regression": true,
+  "original_zip_and_unsigned_review_preserved": true,
+  "new_probe_inference_required": false,
+  "full39_inference_completed": false,
+  "new_gpu_model_inference_during_local_validation": false,
+  "serving_promoted": false,
+  "files": {
+    "scripts/colab_atomic_verifier39_cellfix5.ipynb": "fc6e8d26495920ef9b316dce183ab05850cf64c9be10e89a40b64fc7bbc4b443",
+    "scripts/build_colab_cellfix5_full39.py": "bb9afff42a6fc75e938d691e13403ac5a8676c26d1fe3ca75fc1a743d8991497",
+    "scripts/test_colab_cellfix5_full39.py": "82568b75cb01f342b38798974a5bc7e6d4a0b55a3b517af0ea42813f87d1ead2",
+    "docs/atomic-verifier-cellfix5-full39-colab-release.json": "89e5de6296818093cf9494fce21ee5cd512eb25fa63b6adf77b1f5dc857fc0c1",
+    "docs/ATOMIC_VERIFIER_CELLFIX5_FULL39_RUN_GUIDE.md": "f0d8358915abcac153e2450ef7f511ba6c1a5900e0fe9bf6e30520cd7c42d441"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "version": "verifier-validation-protocol-v1",
+  "scope": "supplied-context verifier pilot",
+  "gate": {
+    "cases": 30,
+    "correct_labels": 30,
+    "false_support": 0,
+    "runtime_failed_rows": 0,
+    "every_paper_complete_and_correct": true,
+    "measured_token_budget_required": true,
+    "decode_and_deadline_trace_required": true
+  },
+  "model": "Qwen/Qwen2.5-3B-Instruct",
+  "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "seed": 42,
+  "quantization": "NF4",
+  "dtype": "float16",
+  "do_sample": false,
+  "budget": {
+    "calls_per_case": 8,
+    "attempts_per_stage": 2,
+    "new_tokens_per_call": 1536,
+    "seconds_per_case": 180,
+    "maximum_calls": 240,
+    "maximum_generated_tokens": 368640
+  },
+  "report": [
+    "confusion",
+    "per_label_precision_recall",
+    "support_recall",
+    "false_support_count_and_denominator",
+    "runtime_failures",
+    "per_paper_results",
+    "latency",
+    "calls",
+    "prompt_tokens",
+    "generated_tokens"
+  ],
+  "prerequisites": [
+    "human annotation admission and immutable lock",
+    "same candidate smoke12 gate",
+    "same candidate probe18 and human review",
+    "same candidate full39 gate under strict-identity-v1"
+  ],
+  "outcome_policy": "One preregistered quality run. Preserve all failures. Technical reruns must retain failed traces and declare why. If outcomes inform a fix or selection, retire this set to development; never continue calling it independent.",
+  "claims": "New assistant-authored claims; labels proposed from exact QASPER paragraphs, not QASPER entailment labels.",
+  "interpretation": "Zero observed false support on this small correlated pilot is not a population guarantee or E2E acceptance."
+}

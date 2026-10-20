@@ -1,0 +1,81 @@
+{
+  "date": "2026-10-20",
+  "candidate": "atomic-verifier-constrained-v8-cellfix8",
+  "criteria_sha256": "fbf969ebea81aba03961767b9ee53960f89cc3e3cb2d370da3a4adba4007def8",
+  "payload_sha256": "9c783b696e69abfc84f0e0c36273fb11cbb4173e90843642b071a6387bf69bc4",
+  "status": "frozen_pending_new_t4_inference",
+  "regression_tests": 252,
+  "new_regression_tests": 15,
+  "packaging_workflow_tests": 20,
+  "failures": 0,
+  "errors": 0,
+  "real_tokenizer_paths": 14,
+  "malformed_prefix_replay": {
+    "old_parser_allows_eos_on_malformed_prefix": true,
+    "new_parser_rejects_prefix": true,
+    "rejected_at_bpe_token": 105,
+    "prefix_bpe_tokens": 107,
+    "original_model_generated_tokens": 111,
+    "no_character_fallback_used": true
+  },
+  "candidate_input_files": 97,
+  "notebook_payload_files": 111,
+  "extracted_payload_validate_only": {
+    "smoke": {
+      "freeze_valid": true,
+      "cases": 12,
+      "maximum_calls": 96
+    },
+    "probe": {
+      "freeze_valid": true,
+      "cases": 18,
+      "maximum_calls": 36
+    },
+    "full39": {
+      "freeze_valid": true,
+      "cases": 39,
+      "maximum_calls": 312
+    },
+    "validation30": {
+      "freeze_valid": true,
+      "cases": 30,
+      "maximum_calls": 240,
+      "prerequisites_required_for_inference": true
+    }
+  },
+  "cellfix7_original_bytes_preserved": true,
+  "cellfix7_smoke_correct": 10,
+  "cellfix7_smoke_n": 12,
+  "cellfix7_smoke_false_support": 0,
+  "cellfix7_smoke_runtime_failures": 1,
+  "validation30_original_files_unchanged": true,
+  "validation_binding_version": "atomic-cellfix8-validation-binding-v1",
+  "new_human_signature_created": false,
+  "validation30_used_for_tuning": false,
+  "model_revision_budget_gate_unchanged": true,
+  "serving_modified": false,
+  "local_cuda_available": false,
+  "new_model_inference_completed": false,
+  "cellfix8_smoke_quality_measured": false,
+  "cellfix8_full39_quality_measured": false,
+  "cellfix8_independent_validation_completed": false,
+  "reader_summarizer_e2e_completed": false,
+  "delivery_sha256": {
+    "docs/atomic-verifier-cellfix8-release.json": "2f002f880252018ebd51c3ed792c2a5a92905eeaa3f41678806112d2c4d0687a",
+    "docs/atomic-verifier-cellfix8-validation.json": "277aca265da655bcb87a9ef429cad8f1f9f9206ffca9fd4f1bb9064f77ad19a9",
+    "docs/atomic-verifier-cellfix8-tokenizer-check.json": "19aeeeed7899b1c51ee4ea1c0c9c884af7f11a53e14c0b7b0b0710f146a08fb1",
+    "docs/atomic-verifier-cellfix8-validation-overlap.json": "d601f0dbf214dd63ad10a0b28caeb3b0e640a04d382ec309480d62d1ad021e68",
+    "docs/atomic-verifier-cellfix7-preserved-before-cellfix8.json": "cd55357790c582eaafa7f922a931df5919052e0d9def6978f15c87cd593d2b53",
+    "scripts/test_atomic_cellfix8_workflow.py": "7645242ca676e8ed5ba651442a90c6b09ae126fee7c180593fcae776183e10f3",
+    "scripts/test_colab_cellfix8.py": "54d57bf598e72ef975ef923a5a6f81ebee78152eba7331b005c442c479507c01",
+    "research-runs/cellfix8-regression.log": "46492f9f7592431c315d228686993b484032a4855d462197230f9fd28a9b3b4c",
+    "research-runs/cellfix8-packaging-tests.log": "757d17ce78dcf69b1ad2039328678c1aa6e0cbf8b7de5d34323ce66d334d5295",
+    "research-runs/cellfix8-payload-validate-only.json": "a1c301a322c16ac9c691aa59b70fc4fd30abf32b47d5e995ff4d86b9e6e25e47"
+  },
+  "limitations": [
+    "Local checks do not measure Qwen prediction accuracy or T4 end-to-end latency.",
+    "The malformed prefix was replayed using canonical BPE; original token IDs and finish reason were not stored.",
+    "Finite source grammar is not a general entailment/coreference proof.",
+    "Lexical overlap checks do not establish semantic independence or rule out pretraining exposure."
+  ]
+}

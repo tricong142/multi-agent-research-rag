@@ -1,0 +1,69 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix7",
+  "criteria_sha256": "ac4d37689f99f252c4996a906262850c9f81fa1247cdfdc61e66cae5ee7e1ca9",
+  "kind": "real_pinned_tokenizer_handcrafted_path_check",
+  "checks": [
+    {
+      "case": "keyed_two_sentence_counts",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 199
+    },
+    {
+      "case": "duplicated_requirement",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null
+    },
+    {
+      "case": "missing_requirement",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null
+    },
+    {
+      "case": "explicit_denial",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 75
+    },
+    {
+      "case": "counterevidence_as_scope_mismatch",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null
+    },
+    {
+      "case": "counterevidence_as_unknown",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null
+    },
+    {
+      "case": "genuine_missing_evidence",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 73
+    },
+    {
+      "case": "single_counterexample",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 81
+    },
+    {
+      "case": "old_ordered_change_preserved",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 146
+    },
+    {
+      "case": "reversed_change_rejected",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null
+    }
+  ],
+  "weights_loaded": false,
+  "model_inference_completed": false
+}

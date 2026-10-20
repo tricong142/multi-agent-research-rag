@@ -1,0 +1,15 @@
+{
+  "snapshot": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\atomic-verifier-v7-source-snapshot-20261016",
+  "archive": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\atomic-verifier-v7-source-snapshot-20261016.zip",
+  "files": 211,
+  "manifest_sha256": "650ddd4f9302f947b1cf370d2ad94fbf0f04f3ed994d3da17e9b27e0ff280b2b",
+  "archive_sha256": "528746088f5313f38a3e148b49ffe1b56061218bbc50777760921bbc1c305039",
+  "criteria_sha256": "3e9a61616903e99f3c767e45c2ba361b44f6ea6c65732598ac3166b6cf23af7f",
+  "validation": {
+    "isolated_source": true,
+    "probe_replayed": 18,
+    "partial_verifier_replayed": 22,
+    "frozen_sources_verified": 26
+  },
+  "model_weights_included": false
+}

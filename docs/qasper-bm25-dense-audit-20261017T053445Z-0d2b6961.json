@@ -1,0 +1,209 @@
+{
+  "run_id": "20261017T053445Z-0d2b6961",
+  "source_zip": "C:\\Users\\dellcuatri142\\Downloads\\output (4).zip",
+  "preserved_zip": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\colab-qasper-benchmark\\20261017T053445Z-0d2b6961\\original-output.zip",
+  "zip_sha256": "21c6c3a53ac3be3a3f694dafc8d4248ad5ca7ed89affa09f0f86c03482946669",
+  "zip_size": 76357569,
+  "output_files_verified": 34,
+  "input_files_verified": 13,
+  "zip_crc_valid": true,
+  "local_notebook_sha256": "089dbb1834766e867b4bce31a6e01b3725cead15075726cded7dbcc525276e28",
+  "input_manifest_matches_release": true,
+  "all_stages_completed": true,
+  "stages": {
+    "gpu-host": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 236.09
+    },
+    "venv": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 117.46
+    },
+    "bootstrap": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 3742.87
+    },
+    "torch": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 139643.85
+    },
+    "runtime": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 30922.73
+    },
+    "pip-check": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 416.58
+    },
+    "pip-freeze": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 315.13
+    },
+    "regression": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 616.63
+    },
+    "cuda-check": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 5982.15
+    },
+    "download-pinned-bge": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 8888.69
+    },
+    "build-qasper-faiss": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 792076.39
+    },
+    "paired-dev-benchmark": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 70113.9
+    }
+  },
+  "colab_regression_tests": 4,
+  "cuda_device": "Tesla T4",
+  "packages": {
+    "rank-bm25": "0.2.2",
+    "sentence-transformers": "6.0.0",
+    "faiss-cpu": "1.15.0",
+    "torch": "2.10.0+cu128",
+    "transformers": "5.16.1"
+  },
+  "python": "3.13.15",
+  "provenance": {
+    "corpus_sha256": "4ad78d602384e8c50a02e0ab5c2363b26ecf74b06296a3457a41ef05ee6631c6",
+    "qrels_dev_sha256": "b61631d9cf2a3f0729de1168d13896fe056ba87dea0d7157c0c541a383d3225e",
+    "corpus_chunks": 18587,
+    "dev_queries": 393,
+    "embedding_model": "BAAI/bge-large-en-v1.5",
+    "embedding_revision": "d4aa6901d3a41ba39fb536a557fa166f842b0e09",
+    "query_prefix": "Represent this sentence for searching relevant passages: ",
+    "packages": {
+      "rank-bm25": "0.2.2",
+      "sentence-transformers": "6.0.0",
+      "faiss-cpu": "1.15.0",
+      "torch": "2.10.0+cu128",
+      "transformers": "5.16.1"
+    },
+    "python": "3.13.15",
+    "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+    "index_sha256": {
+      "bm25_index.pkl": "6ccb46be579a76f6aca111580a0dba4543b832a999684d523df6440fa2bde134",
+      "faiss_arxiv.index": "b34d7e06b1f7e7a725f804a0f69df1b438113570878707548dae3691947e1004",
+      "faiss_doc_ids.json": "c15a5010617c9d3769342276df8ae8e12bd81a66b25c4c9826cef25a7973a6af",
+      "index_manifest.json": "d49291596a1de3c06820de6f3e994760db65f88a4d598fa4dc0dc9fa787bc651"
+    },
+    "source_sha256": {
+      "research_rag/evaluation/qasper_benchmark.py": "283fc0c2b50f76bb72d95bab4076ba305542ae4cb6c97f1326ee8f6307136e6e",
+      "research_rag/retrieval.py": "f8fc0c3118c0feb7dcb845f6be2a3dc026f253679524cbdcb5c4ec9bc1f6c75b",
+      "research_rag/indexing.py": "2e02675e5094a278b4eb9d0e2eb0245389fda47ad0d9236ba69fef68f457cd14"
+    }
+  },
+  "faiss": {
+    "class": "IndexFlatIP",
+    "vectors": 18587,
+    "dimension": 1024,
+    "metric": "inner_product",
+    "all_vectors_finite": true,
+    "all_vectors_normalized": true,
+    "norm_min": 0.9999998807907104,
+    "norm_max": 1.0000001192092896
+  },
+  "replayed_queries": 786,
+  "replayed": {
+    "bm25": {
+      "requested_method": "bm25",
+      "n": 393,
+      "top_k": 5,
+      "valid_backend_run": true,
+      "actual_backends": {
+        "bm25": 393
+      },
+      "fallback_queries": 0,
+      "failed_queries": 0,
+      "metrics": {
+        "hit_at_k": 0.27989821882951654,
+        "paragraph_recall_at_k": 0.15966416252675794,
+        "mrr_at_k": 0.15894826123833758
+      },
+      "latency_ms_mean": 112.63057072010119,
+      "latency_ms_p95": 183.15381100001105,
+      "first_query_ms": 130.15675800011195,
+      "excluding_first_query": {
+        "n": 392,
+        "latency_ms_mean": 112.58586105867259,
+        "latency_ms_p95": 183.15381100001105
+      }
+    },
+    "dense": {
+      "requested_method": "dense",
+      "n": 393,
+      "top_k": 5,
+      "valid_backend_run": true,
+      "actual_backends": {
+        "dense": 393
+      },
+      "fallback_queries": 0,
+      "failed_queries": 0,
+      "metrics": {
+        "hit_at_k": 0.40966921119592875,
+        "paragraph_recall_at_k": 0.2707086312048144,
+        "mrr_at_k": 0.23087362171331638
+      },
+      "latency_ms_mean": 58.08760206615497,
+      "latency_ms_p95": 50.36025799995514,
+      "first_query_ms": 6586.894546999929,
+      "excluding_first_query": {
+        "n": 392,
+        "latency_ms_mean": 41.432482308670856,
+        "latency_ms_p95": 50.36017800011905
+      }
+    }
+  },
+  "hit_counts": {
+    "bm25": 110,
+    "dense": 161
+  },
+  "paired_outcomes": {
+    "both_hit": 89,
+    "bm25_only": 21,
+    "dense_only": 72,
+    "neither_hit": 211
+  },
+  "papers_in_dev": 168,
+  "paired_comparison_valid": true,
+  "bm25_cross_host_replay": {
+    "queries": 393,
+    "ordered_top5_doc_ids_match": true,
+    "bm25_scores_match": true,
+    "reference_run": "qasper-dev-20261016-bm25-preflight",
+    "tolerance": 1e-10
+  },
+  "dense_fallback_queries": 0,
+  "test_candidate_evaluated": false,
+  "bm25_pickle_unpickled": false,
+  "dense_inference_rerun_locally": false,
+  "verifier_false_support_measured_this_run": false,
+  "project_ready": false,
+  "limitations": [
+    "Development only; not official QASPER answer score or held-out evaluation.",
+    "Metrics replayed from exact traces; encoder inference not rerun on local CPU host.",
+    "No query vectors were exported, so Dense ranking/score cannot be reconstructed without the pinned encoder.",
+    "CUDA preflight/build command are recorded; per-query encoder device and token truncation length were not exported.",
+    "The executed notebook file itself is not exported in this ZIP; its input manifest matches the released local notebook payload.",
+    "Timing from one run in fixed BM25-then-Dense order; no hardware-independent latency or SLA claim.",
+    "No new verifier labels, false-support measurement, OCR quality test or five-component E2E in this ZIP."
+  ]
+}

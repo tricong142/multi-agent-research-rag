@@ -1,0 +1,217 @@
+{
+  "run_id": "20261020T061934Z-c87bce57",
+  "recovery_id": "20261020T095348Z-7974a5cc",
+  "candidate": "atomic-verifier-constrained-v8-cellfix8",
+  "zip_sha256": "07b5fdf87e57e89bf6b19f14c54df29806bb72c08d3210e7a9f9c93fa5d35190",
+  "output_files": 128,
+  "input_files": 111,
+  "all_output_hashes_valid": true,
+  "all_input_bytes_match_release": true,
+  "parent_original_files_preserved": 69,
+  "parent_lineage_valid": true,
+  "probe_human_admission": {
+    "probe_predictions_sha256": "16da0c50c5c62e22caba50749e50c3cb4f3f1dde83cdba18356c54e85dc01260",
+    "semantic_review_sha256": "06ce2e455f3c5da3273197ecd0dedf34b6f043f6df14bcdd76a8ee7dc88fee79",
+    "reviewer": "Trí Công"
+  },
+  "smoke_replayed_without_new_inference": true,
+  "model_revision_source_prompt_contract_budget_gate_unchanged": true,
+  "all_predictions_and_calls_replayed": true,
+  "metrics_recomputed_exactly": true,
+  "criteria_sha256": "fbf969ebea81aba03961767b9ee53960f89cc3e3cb2d370da3a4adba4007def8",
+  "payload_sha256": "9c783b696e69abfc84f0e0c36273fb11cbb4173e90843642b071a6387bf69bc4",
+  "predictions_sha256": "40f2a7ad428139638cbf6f656c700dd571b83b11d2aa3a06da1c9ca68610c8f1",
+  "metrics": {
+    "n": 39,
+    "correct_labels": 29,
+    "false_support": 0,
+    "runtime_failed_rows": 3,
+    "gold_support_rejected": 4,
+    "gold_support_count": 12,
+    "backend_calls": 95,
+    "checks": {
+      "all_cases_present": true,
+      "all_labels_correct": false,
+      "no_false_support": true,
+      "no_runtime_failures": false,
+      "within_call_budget": true,
+      "each_group_complete_and_correct": false,
+      "within_measured_token_budget": true,
+      "structured_decoding_trace_complete": true,
+      "cooperative_deadline_trace_complete": true
+    },
+    "automated_gate_pass": false,
+    "dataset_groups": {
+      "original_contracts": {
+        "n": 12,
+        "correct": 12,
+        "false_support": 0,
+        "failed": 0
+      },
+      "scope_regression": {
+        "n": 27,
+        "correct": 17,
+        "false_support": 0,
+        "failed": 3
+      }
+    },
+    "stop_reasons": {
+      "completed": 36,
+      "invalid_output_exhausted": 3
+    },
+    "confusion": [
+      {
+        "gold": "contradict",
+        "prediction": "__incomplete__",
+        "n": 2
+      },
+      {
+        "gold": "contradict",
+        "prediction": "contradict",
+        "n": 6
+      },
+      {
+        "gold": "contradict",
+        "prediction": "not_enough_info",
+        "n": 4
+      },
+      {
+        "gold": "not_enough_info",
+        "prediction": "not_enough_info",
+        "n": 15
+      },
+      {
+        "gold": "support",
+        "prediction": "__incomplete__",
+        "n": 1
+      },
+      {
+        "gold": "support",
+        "prediction": "contradict",
+        "n": 1
+      },
+      {
+        "gold": "support",
+        "prediction": "not_enough_info",
+        "n": 2
+      },
+      {
+        "gold": "support",
+        "prediction": "support",
+        "n": 8
+      }
+    ],
+    "generated_tokens": 11410,
+    "prompt_tokens": 105889
+  },
+  "validation_issues": {
+    "valid": 82,
+    "incomplete_coverage_ledger": 3,
+    "observation_polarity_mismatch": 5,
+    "duplicate_coverage_member": 1,
+    "positive_predicate_before_quantifier": 2,
+    "observation_scope_mismatch": 2
+  },
+  "exact_citations_checked_in_accepted_assessment_attempts": 24,
+  "numeric_records_checked_in_accepted_assessment_attempts": 13,
+  "derived_citation_additions": 1,
+  "failed_cases": [
+    {
+      "example_id": "scope:universal:support",
+      "gold": "support",
+      "prediction": "not_enough_info",
+      "stop": "completed",
+      "validation_issues": [
+        "incomplete_coverage_ledger"
+      ]
+    },
+    {
+      "example_id": "scope:universal:contradict",
+      "gold": "contradict",
+      "prediction": null,
+      "stop": "invalid_output_exhausted",
+      "validation_issues": [
+        "observation_polarity_mismatch",
+        "observation_polarity_mismatch"
+      ]
+    },
+    {
+      "example_id": "scope:existential:contradict",
+      "gold": "contradict",
+      "prediction": "not_enough_info",
+      "stop": "completed",
+      "validation_issues": [
+        "duplicate_coverage_member"
+      ]
+    },
+    {
+      "example_id": "scope:none:support",
+      "gold": "support",
+      "prediction": "contradict",
+      "stop": "completed",
+      "validation_issues": [
+        "incomplete_coverage_ledger"
+      ]
+    },
+    {
+      "example_id": "scope:none:contradict",
+      "gold": "contradict",
+      "prediction": null,
+      "stop": "invalid_output_exhausted",
+      "validation_issues": [
+        "positive_predicate_before_quantifier",
+        "positive_predicate_before_quantifier"
+      ]
+    },
+    {
+      "example_id": "scope:time:support",
+      "gold": "support",
+      "prediction": null,
+      "stop": "invalid_output_exhausted",
+      "validation_issues": [
+        "observation_polarity_mismatch",
+        "observation_scope_mismatch"
+      ]
+    },
+    {
+      "example_id": "scope:time:contradict",
+      "gold": "contradict",
+      "prediction": "not_enough_info",
+      "stop": "completed",
+      "validation_issues": []
+    },
+    {
+      "example_id": "scope:metric:contradict",
+      "gold": "contradict",
+      "prediction": "not_enough_info",
+      "stop": "completed",
+      "validation_issues": []
+    },
+    {
+      "example_id": "scope:condition:support",
+      "gold": "support",
+      "prediction": "not_enough_info",
+      "stop": "completed",
+      "validation_issues": [
+        "observation_polarity_mismatch"
+      ]
+    },
+    {
+      "example_id": "scope:condition:contradict",
+      "gold": "contradict",
+      "prediction": "not_enough_info",
+      "stop": "completed",
+      "validation_issues": []
+    }
+  ],
+  "validation30_admission_block": "Successful full39 is required before validation30",
+  "validation30_inference_present": false,
+  "full39_human_review_completed": false,
+  "new_model_inference_during_audit": false,
+  "limitations": [
+    "Stored provenance establishes artifact consistency, not remote-host attestation.",
+    "Exact quotes and deterministic replay do not prove semantic entailment.",
+    "39 development cases do not establish zero false support on unseen data.",
+    "Full39 label-correct rows can still have unsupported citations or incorrect explanations."
+  ]
+}

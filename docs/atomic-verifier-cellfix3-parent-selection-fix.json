@@ -1,0 +1,20 @@
+{
+  "fix": "Verify and recover the audited cellfix2 parent before caching it.",
+  "previous_cell_sha256": "d512d7dd50abcd540223d05e570829298cd8d62db0345abce91384bedaf9e9d5",
+  "updated_cell_sha256": "623c3bc8c2a6ff0d2d7dd39c5fd559b06622dae74d216e54086211da4643b963",
+  "only_parent_selection_prelude_changed": true,
+  "verifier_patch_unchanged": true,
+  "parent_selection_tests_passed": 8,
+  "expected_parent_criteria_sha256": "a31549bda8776f6a566689c59378e5c47092faf6000d4597ef7ab82fdafa197b",
+  "expected_parent_manifest_fingerprint": "01d110cddae3bbdb4a41569429c255359c14a87c2f30f8c633817900bf269533",
+  "previously_validated_candidate_criteria_sha256": "c38cf4cad12ce7ddcf257c1b80dff5467dc1d499a22f295d2824b0ca5c5a558f",
+  "prior_runtime_regression_tests": 153,
+  "prior_validate_only_modes": [
+    "probe18",
+    "smoke12",
+    "full39"
+  ],
+  "new_gpu_inference_completed": false,
+  "actual_colab_parent_hash": "not supplied in the error message",
+  "limits": "The resolver recovers an existing exact audited source. If it no longer exists or integrity fails, the cell stops with root/hash diagnostics; it does not accept arbitrary hashes."
+}

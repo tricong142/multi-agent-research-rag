@@ -47,6 +47,18 @@ class TinyTokenizer:
         return {'input_ids': Tensor([self.encode(text)])}
 
 
+def token_backend():
+    # Exercise LMFE's real list-token path without importing its optional torch
+    # bitmask implementation; model execution is separately scripted below.
+    original = __import__
+    def import_without_torch(name, *args, **kwargs):
+        if name == 'torch':
+            raise ImportError('Torch bitmasks are outside these token-filter tests')
+        return original(name, *args, **kwargs)
+    with patch('builtins.__import__', side_effect=import_without_torch):
+        return d.ConstrainedAtomicBackend(None, TinyTokenizer())
+
+
 def messages(claim='The lamp brightness increased.'):
     return [{'role': 'system', 'content': a.DECOMPOSE_PROMPT},
             {'role': 'user', 'content': json.dumps({'claim': claim})}]
@@ -59,7 +71,7 @@ def plan(claim='The lamp brightness increased.'):
 
 class ConstrainedDecodingTests(unittest.TestCase):
     def setUp(self):
-        self.backend = d.ConstrainedAtomicBackend(None, TinyTokenizer())
+        self.backend = token_backend()
 
     def accepts(self, output, request=None):
         callback = self.backend.generation_options(request or messages())['prefix_allowed_tokens_fn']
@@ -127,6 +139,10 @@ class ConstrainedDecodingTests(unittest.TestCase):
         self.assertFalse(self.accepts(json.dumps(bad), request))
         value['observations'][0]['numeric'] = {'kind': 'value', 'source_quote': 'Brightness was 8.',
             'left': {'value': '8', 'unit': '', 'quote': '8'}, 'right': {'value': '8', 'unit': '', 'quote': '8'}}
+        self.assertFalse(self.accepts(json.dumps(value), request))
+        payload = json.loads(request[1]['content'])
+        payload['context'] += ' Brightness was 8.'
+        request[1]['content'] = json.dumps(payload)
         self.assertTrue(self.accepts(json.dumps(value), request))
 
     def test_actual_adapter_passes_filter_and_records_schema_hash(self):

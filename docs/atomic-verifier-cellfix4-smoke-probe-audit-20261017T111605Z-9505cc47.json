@@ -1,0 +1,224 @@
+{
+  "run_id": "20261017T111605Z-9505cc47",
+  "zip_sha256": "e8f12af4d25948f158ab2acd4fd48989d756b40721c0081943be345f09a08cac",
+  "output_files": 62,
+  "all_output_hashes_valid": true,
+  "all_input_bytes_match_released_payload": true,
+  "input_files": 81,
+  "source_fixture_files": 34,
+  "criteria_sha256": "2e49e7c2b09d6b4379d43c09e267e228c7ae1ed4f74236aae444dc0f918e07fb",
+  "payload_sha256": "40f108ebd2ed15250469d1fb4ab9e76cc29a7128b5265697ca4b812ff2024188",
+  "load_frozen_passed": true,
+  "remote_regression_tests_passed": 166,
+  "remote_validate_only": {
+    "probe": {
+      "freeze_valid": true,
+      "cases": 18,
+      "maximum_calls": 36
+    },
+    "smoke": {
+      "freeze_valid": true,
+      "cases": 12,
+      "maximum_calls": 96
+    },
+    "verifier": {
+      "freeze_valid": true,
+      "cases": 39,
+      "maximum_calls": 312
+    }
+  },
+  "remote_cuda_preflight": {
+    "torch": "2.10.0+cu128",
+    "cuda": "12.8",
+    "gpu": "Tesla T4"
+  },
+  "results": {
+    "assessment-smoke": {
+      "all_predictions_replayed": true,
+      "metrics_recomputed_exactly": true,
+      "model_pairing": {
+        "model_files": true,
+        "shared_tokenizer_files": true,
+        "repo_id": true,
+        "revision": true,
+        "dtype": true,
+        "quantization": true,
+        "seed": true,
+        "do_sample": true
+      },
+      "call_triplets_reconciled": 28,
+      "validation_issues": {
+        "valid": 28
+      },
+      "exact_raw_citations_checked": 16,
+      "exact_numeric_sources_checked": 10,
+      "derived_numeric_citations_checked": 1,
+      "metrics": {
+        "n": 12,
+        "correct_labels": 12,
+        "false_support": 0,
+        "runtime_failed_rows": 0,
+        "gold_support_rejected": 0,
+        "gold_support_count": 4,
+        "backend_calls": 28,
+        "checks": {
+          "all_cases_present": true,
+          "all_labels_correct": true,
+          "no_false_support": true,
+          "no_runtime_failures": true,
+          "within_call_budget": true,
+          "each_group_complete_and_correct": true,
+          "within_measured_token_budget": true,
+          "structured_decoding_trace_complete": true,
+          "cooperative_deadline_trace_complete": true
+        },
+        "automated_gate_pass": true,
+        "dataset_groups": {
+          "original_contracts": {
+            "n": 12,
+            "correct": 12,
+            "false_support": 0,
+            "failed": 0
+          }
+        },
+        "stop_reasons": {
+          "completed": 12
+        },
+        "confusion": [
+          {
+            "gold": "contradict",
+            "prediction": "contradict",
+            "n": 4
+          },
+          {
+            "gold": "not_enough_info",
+            "prediction": "not_enough_info",
+            "n": 4
+          },
+          {
+            "gold": "support",
+            "prediction": "support",
+            "n": 4
+          }
+        ],
+        "generated_tokens": 3577,
+        "prompt_tokens": 40305
+      },
+      "summary": {
+        "experiment_completed": true,
+        "prediction_count": 12,
+        "backend_calls": 28,
+        "automated_gate_pass": true,
+        "human_review": "pending",
+        "overall_pass": false,
+        "promoted_to_serving": false,
+        "cost_usd": null,
+        "status": "automated_pass_human_pending",
+        "evaluation_mode": "assessment_smoke",
+        "last_case_id": "contract:bounded_scope",
+        "elapsed_ms": 336513.334
+      },
+      "predictions_sha256": "6756557b899401fc45ae93f9d7ca26e9a1bafbd65b4a14b5f64210e731e7d615"
+    },
+    "decomposition-probe": {
+      "all_predictions_replayed": true,
+      "metrics_recomputed_exactly": true,
+      "model_pairing": {
+        "model_files": true,
+        "shared_tokenizer_files": true,
+        "repo_id": true,
+        "revision": true,
+        "dtype": true,
+        "quantization": true,
+        "seed": true,
+        "do_sample": true
+      },
+      "call_triplets_reconciled": 18,
+      "validation_issues": {
+        "valid": 18
+      },
+      "exact_raw_citations_checked": 0,
+      "exact_numeric_sources_checked": 0,
+      "derived_numeric_citations_checked": 0,
+      "metrics": {
+        "n": 18,
+        "valid_decompositions": 18,
+        "incomplete": 0,
+        "backend_calls": 18,
+        "checks": {
+          "all_claims_present": true,
+          "all_decompositions_valid": true,
+          "within_call_budget": true,
+          "within_measured_token_budget": true,
+          "structured_decoding_trace_complete": true,
+          "cooperative_deadline_trace_complete": true
+        },
+        "automated_gate_pass": true,
+        "semantic_review": "pending",
+        "label_accuracy": null,
+        "generated_tokens": 976,
+        "prompt_tokens": 22892
+      },
+      "summary": {
+        "experiment_completed": true,
+        "prediction_count": 18,
+        "backend_calls": 18,
+        "automated_gate_pass": true,
+        "human_review": "pending",
+        "overall_pass": false,
+        "promoted_to_serving": false,
+        "cost_usd": null,
+        "status": "automated_pass_human_pending",
+        "evaluation_mode": "decomposition",
+        "last_case_id": "decompose:018",
+        "elapsed_ms": 133648.835
+      },
+      "predictions_sha256": "ae6fcb5d6b7a129afa00896a6a8a684a1dc9cd64570d53f134a796dca65f137f"
+    }
+  },
+  "human_review": "pending",
+  "full39_admission_error": "Completed human review bound to this probe is required",
+  "full39_blocked_before_model_loader": true,
+  "original_human_review_preserved": true,
+  "new_gpu_inference_during_audit": false,
+  "full39_current_candidate": null,
+  "promoted_to_serving": false,
+  "limitations": [
+    "Hashes show consistency with the frozen local release, not a signature of remote execution.",
+    "Smoke12 measures labels only on development data; probe18 measures decomposition structure, not label accuracy.",
+    "Human review must be newly bound to current criteria and predictions. Historical v7 approval is not copied."
+  ],
+  "assistant_review": {
+    "probe_claims_inspected": 18,
+    "parts_inspected": 20,
+    "canonical_plans_equal_previous_v7": 18,
+    "all_five_semantic_rubrics_rechecked": true,
+    "prompt_literal_compliance": false,
+    "metric_format_caveats": [
+      "decompose:010",
+      "decompose:014",
+      "decompose:018"
+    ],
+    "may_scope_note": "Population filter for trials conducted in May; not proof of improvement occurring in May.",
+    "smoke_labels_and_evidence_inspected": 12,
+    "explanation_alignment_caveat": "contract:accuracy_conflict memory part",
+    "human_review_completed": false,
+    "human_approval_transferred": false,
+    "files": {
+      "docs/decomposition-semantic-review-cellfix4-20261017T111605Z-9505cc47.jsonl": "c6ce2d7759be2516ba52f77fa5cdd241c574bf841b13d66518d4803b687d7d24",
+      "docs/atomic-verifier-cellfix4-evidence-review-20261017T111605Z-9505cc47.jsonl": "fa32b1b6b49ae5d63b5b3791a5c566879e9248103343b1e03580c184d156f13c",
+      "docs/HUMAN_REVIEW_CELLFIX4_20261017T111605Z-9505cc47.html": "ec7e7774fb1b9f291efcfb70b1ab62d86d16912e01abc1429462b452eb71b6fa"
+    },
+    "human_form_validation": {
+      "tested_with": "Node vm using a simulated DOM; no human signature written",
+      "checkboxes_initially_unsigned": 90,
+      "claims": 18,
+      "blank_form_blocked": true,
+      "incomplete_form_blocked": true,
+      "exported_json_parses": true,
+      "original_template_remains_unsigned": true,
+      "command_exit_code": 0
+    },
+    "human_readable_report": "docs/ATOMIC_VERIFIER_CELLFIX4_REVIEW_20261017T111605Z-9505cc47.md"
+  }
+}

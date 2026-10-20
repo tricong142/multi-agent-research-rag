@@ -65,7 +65,7 @@ class ReaderApiRetryTests(unittest.TestCase):
                     patch.object(reader_policy.genai, "Client", side_effect=client_factory):
                 try:
                     if use_reader:
-                        agent = ReaderAgent()
+                        agent = ReaderAgent(allow_remote=True)
                         features = {"has_text_layer": True, "avg_block_count": 1, "image_area_ratio": 0,
                                     "page_width": 600, "page_height": 800}
                         with patch.object(agent, "_extract_heuristic_features", return_value=features), \

@@ -1,0 +1,117 @@
+{
+  "run": "20261015T103401Z-723b3e4a",
+  "zip_sha256": "26c02fffb4cd1c4ae718534a0db1386065241f24a4c7d065055763575d7c9fa7",
+  "crc_pass": true,
+  "output_manifest_files_verified": 39,
+  "input_manifest_files_verified_against_release_and_local_bytes": 67,
+  "frozen_source_files_verified": 24,
+  "criteria_sha256": "b110c02c404f7b91e52551d90e7605d850b12ac7ebb5a332fd292895ad27fa77",
+  "model_pairing_matches_recorded_baseline": {
+    "model_files": true,
+    "shared_tokenizer_files": true,
+    "repo_id": true,
+    "revision": true,
+    "dtype": true,
+    "quantization": true,
+    "seed": true,
+    "do_sample": true
+  },
+  "provenance_limit": "Recorded hashes verified against frozen baseline; remote GPU weight files are not included in ZIP and were not independently rehashed locally.",
+  "gpu": {
+    "cuda": "12.8",
+    "torch": "2.10.0+cu128",
+    "device": "Tesla T4"
+  },
+  "remote_regression_tests_passed": 80,
+  "probe_validate_only": {
+    "freeze_valid": true,
+    "cases": 18,
+    "maximum_calls": 36
+  },
+  "verifier_validate_only": {
+    "freeze_valid": true,
+    "cases": 39,
+    "maximum_calls": 312
+  },
+  "predictions_replayed": 18,
+  "trace_event_counts": {
+    "call_started": 18,
+    "generation": 18,
+    "call_finished": 18
+  },
+  "calls_reconciled": 18,
+  "successful_first_attempt": 18,
+  "repair_attempts": 0,
+  "max_generated_tokens_per_call": 117,
+  "parts_reviewed": 20,
+  "metrics": {
+    "n": 18,
+    "valid_decompositions": 18,
+    "incomplete": 0,
+    "backend_calls": 18,
+    "checks": {
+      "all_claims_present": true,
+      "all_decompositions_valid": true,
+      "within_call_budget": true,
+      "within_measured_token_budget": true,
+      "structured_decoding_trace_complete": true
+    },
+    "automated_gate_pass": true,
+    "semantic_review": "pending",
+    "label_accuracy": null,
+    "generated_tokens": 967,
+    "prompt_tokens": 22892
+  },
+  "summary": {
+    "experiment_completed": true,
+    "prediction_count": 18,
+    "backend_calls": 18,
+    "automated_gate_pass": true,
+    "human_review": "pending",
+    "overall_pass": false,
+    "promoted_to_serving": false,
+    "cost_usd": null,
+    "status": "automated_pass_human_pending",
+    "evaluation_mode": "decomposition",
+    "last_case_id": "decompose:018",
+    "elapsed_ms": 315765.416
+  },
+  "stage_status": {
+    "state": "completed",
+    "exit_code": 0,
+    "elapsed_ms": 321562.3
+  },
+  "human_admission_error": "Completed human review bound to this probe is required",
+  "original_review_sha256": "022e467cfaab6df9b54dc582cc3c0a8fac98a55f34a104c12af11822271f45e0",
+  "original_output_modified": false,
+  "new_inference_calls_by_assistant": 0,
+  "full39_authorized_by_gate": false,
+  "verifier_39_completed": false,
+  "false_support": null,
+  "assistant_review": {
+    "reviewer_kind": "assistant",
+    "cases_reviewed": 18,
+    "parts_reviewed": 20,
+    "cases_pass": 16,
+    "cases_needing_revision": 2,
+    "parts_pass": 18,
+    "parts_needing_revision": 2,
+    "blocked_case_ids": [
+      "decompose:007",
+      "decompose:008"
+    ],
+    "review_file": "docs/decomposition-semantic-review-20261015T103401Z-723b3e4a.jsonl",
+    "review_sha256": "a8fa61b6776b939d35576a68adc2c07ece4a638ba074c57a66833e59365d74ca",
+    "predictions_sha256": "883154294887bc51e22fefdf59c6bc931daea4a1f6da3411fcf6e711920187db",
+    "human_review_completed": false,
+    "semantic_gate_pass": false
+  },
+  "audit_selfchecks": {
+    "review_rows_verified": 18,
+    "parts_verified": 20,
+    "full39_blocked_before_model_loader": true,
+    "original_output_unchanged": true,
+    "frozen_sources_unchanged": true,
+    "counterfactuals_not_saved_as_predictions": true
+  }
+}

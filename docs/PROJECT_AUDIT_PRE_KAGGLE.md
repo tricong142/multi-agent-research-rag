@@ -1,5 +1,10 @@
 # Full system audit trước khi chuyển lên Kaggle
 
+> Báo cáo lịch sử 2026-09-24. Các mức READY/PARTIALLY READY bên dưới chỉ phản ánh
+> phạm vi kiểm tra lúc đó, không phải trạng thái nghiệm thu hiện tại. Agent 3 và
+> Agent 5 chưa tích hợp/đạt E2E với atomic verifier mới. Xem
+> [gate hiện hành 2026-10-16](PRODUCTION_GATES_20261016.md).
+
 Ngày kiểm tra: 2026-09-24. Phạm vi: workspace `AI ENGINEER`, source code, artifact, test và các lệnh kiểm tra cục bộ. Đây là báo cáo hiện trạng, **không xóa hoặc sửa code**. `NOT VERIFIED` nghĩa là chưa có lần chạy/nhãn đánh giá đủ để kết luận.
 
 ## 1. Executive Summary

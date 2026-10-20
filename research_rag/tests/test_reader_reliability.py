@@ -26,7 +26,8 @@ class ReaderReliabilityTests(unittest.TestCase):
         return manifest
 
     def fake_agent(self, output, calls, *, failed=False, record_api=True, failed_page=None):
-        def factory(model_dir, *, on_api_attempt):
+        def factory(model_dir, *, on_api_attempt, allow_remote):
+            self.assertTrue(allow_remote)
             self.assertTrue((output / "criteria.json").is_file())
             def process(pdf_path, page_no):
                 calls.append(page_no)

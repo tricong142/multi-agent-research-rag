@@ -4,7 +4,32 @@ from __future__ import annotations
 from decimal import Decimal, localcontext
 import re
 
-from .evidence_screen import DIRECTION_WORDS, WORDS, quantities
+from .evidence_screen import DIGITS, DIRECTION_WORDS, WORDS, quantities
+
+
+def numeric_requirements(claim_part: str) -> list[dict]:
+    """Keep quantity occurrences and their immediate unit/object, including repeats."""
+    excluded = [m.span() for m in re.finditer(r'\b(?:at least one|one or more)\b', claim_part, re.I)]
+    matches = list(DIGITS.finditer(claim_part))
+    matches += list(re.finditer(r'\b(?:' + '|'.join(WORDS) + r')\b', claim_part, re.I))
+    requirements = []
+    for match in sorted(matches, key=lambda m: m.start()):
+        if any(start <= match.start() < end for start, end in excluded):
+            continue
+        end = match.end()
+        unit = '%' if '%' in match[0] else 'percent' if re.search(r'\bpercent\b', match[0], re.I) else ''
+        # shortcut: immediate English unit/count noun only; compound associations
+        # remain unknown until a separately evaluated binding grammar is added.
+        if not re.search(r'%|\bpercent\b', match[0], re.I):
+            tail = re.match(r'\s+([A-Za-z]+)\b', claim_part[end:])
+            if tail and tail[1].casefold() not in {'before', 'after', 'to', 'and', 'on', 'in', 'at', 'for', 'with', 'than', 'or'}:
+                end += tail.end()
+                unit = tail[1]
+        quote = claim_part[match.start():end]
+        value, kind = next(iter(quantities(match[0])))
+        requirements.append({'start': match.start(), 'end': end, 'quote': quote,
+                             'value': str(value), 'unit': unit, 'kind': kind})
+    return requirements
 
 
 def direction(text: str) -> str | None:
@@ -72,22 +97,36 @@ def check_numeric(raw: dict, claim_part: str, context: str) -> dict:
     right, right_unit, right_quote = _operand(raw['right'], proof)
     result = {'kind': kind, 'input': raw, 'truth': 'unknown', 'reason': '',
               'left': str(left), 'right': str(right), 'unit': left_unit}
+    if kind == 'value':
+        requirements = numeric_requirements(claim_part)
+        bound = [r for r in requirements if r['quote'] == left_quote]
+        if len(requirements) > 1 and len(bound) != 1:
+            return {**result, 'reason': 'numeric_requirement_binding_unresolved'}
+        if len(requirements) <= 1 and quantities(claim_part, claim=True) != quantities(left_quote):
+            return {**result, 'reason': 'unbound_claim_quantity'}
+        if bound:
+            result['requirement'] = bound[0]
     if re.search(r'\b(?:not|never|without)\b', claim_part, re.I):
         return {**result, 'reason': 'unsupported_numeric_negation'}
     if re.search(r'[<>\u2260\u2264\u2265\u2248]', claim_part):
         return {**result, 'reason': 'unsupported_comparison_operator'}
-    if re.search(r'\b(?:not|never|hypothetical|would|could|if|expected|predicted|approximately|about)\b', proof, re.I):
+    if kind == 'value' and re.search(r'\b(?:about|approximately|between|up to|less than|more than|at least|at most|over|under)\b', claim_part, re.I):
+        return {**result, 'reason': 'unsupported_threshold_or_approximation'}
+    # shortcut: explicit "observed X, not claimed Y" only; no inferred unit conversion.
+    if kind == 'value' and direction(claim_part) is None and (left, left_unit) != (right, right_unit):
+        denial = re.search(r'(?<!\w)' + re.escape(right_quote) + r'\s*,?\s+(?:but\s+)?not\s+'
+                           + re.escape(left_quote) + r'(?!\w)', proof, re.I)
+        remainder = proof[:denial.start()] + proof[denial.end():] if denial else proof
+        if denial and not re.search(r'\b(?:not|never|without|hypothetical|would|could|may|might|should|if|expected|predicted|approximately|about)\b', remainder, re.I):
+            return {**result, 'truth': 'false', 'reason': 'explicit_quantity_denial'}
+    if re.search(r'\b(?:not|never|hypothetical|would|could|may|might|should|if|expected|predicted|approximately|about)\b', proof, re.I):
         return {**result, 'reason': 'qualified_numeric_evidence'}
     if left_unit != right_unit:
         return {**result, 'reason': 'unit_mismatch_no_conversion'}
     if kind == 'value':
-        if quantities(claim_part, claim=True) != quantities(left_quote):
-            return {**result, 'reason': 'multiple_or_unbound_claim_quantities'}
         requested = direction(claim_part)
         if requested and direction(proof) != requested:
             return {**result, 'reason': 'reported_change_direction_not_matched'}
-        if re.search(r'\b(?:about|approximately|between|up to|less than|more than|at least|at most|over|under)\b', claim_part, re.I):
-            return {**result, 'reason': 'unsupported_threshold_or_approximation'}
         truth = left == right
         return {**result, 'truth': 'true' if truth else 'false', 'reason': 'exact_value_comparison'}
 

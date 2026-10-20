@@ -1,0 +1,1494 @@
+[
+  {
+    "example_id": "contract:partial_accuracy",
+    "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+    "context": "Model Juniper uses 25% less memory than its baseline.",
+    "gold": "not_enough_info",
+    "prediction": "not_enough_info",
+    "reviewer_kind": "assistant",
+    "label_matches_evidence_on_this_case": true,
+    "quality_issue_codes": [],
+    "notes": "Memory giảm 25% được chứng minh; chưa có accuracy 94%, nên NEI đúng.",
+    "parts": [
+      {
+        "part": {
+          "quote": "Model Juniper uses 25% less memory",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "Model Juniper",
+            "metric": "memory",
+            "time": "",
+            "condition": ""
+          },
+          "start": 0,
+          "end": 34,
+          "numeric_requirements": [
+            {
+              "start": 19,
+              "end": 22,
+              "quote": "25%",
+              "value": "25",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ]
+        },
+        "numeric_requirements": [
+          {
+            "start": 19,
+            "end": 22,
+            "quote": "25%",
+            "value": "25",
+            "unit": "%",
+            "kind": "percent"
+          }
+        ],
+        "assessed_label": "support",
+        "observations": [
+          {
+            "member": "Model Juniper",
+            "truth": "true",
+            "quotes": [
+              "Model Juniper uses 25% less memory than its baseline."
+            ],
+            "explanation": "Context directly states the memory usage reduction for Model Jun",
+            "numeric": {
+              "kind": "value",
+              "source_quote": "Model Juniper uses 25% less memory than its baseline.",
+              "left": {
+                "value": "25",
+                "unit": "%",
+                "quote": "25%"
+              },
+              "right": {
+                "value": "25",
+                "unit": "%",
+                "quote": "25%"
+              }
+            },
+            "citation_additions": [],
+            "model_truth": "true",
+            "numeric_result": {
+              "kind": "value",
+              "input": {
+                "kind": "value",
+                "source_quote": "Model Juniper uses 25% less memory than its baseline.",
+                "left": {
+                  "value": "25",
+                  "unit": "%",
+                  "quote": "25%"
+                },
+                "right": {
+                  "value": "25",
+                  "unit": "%",
+                  "quote": "25%"
+                }
+              },
+              "truth": "true",
+              "reason": "exact_value_comparison",
+              "left": "25",
+              "right": "25",
+              "unit": "%",
+              "requirement": {
+                "start": 19,
+                "end": 22,
+                "quote": "25%",
+                "value": "25",
+                "unit": "%",
+                "kind": "percent"
+              }
+            }
+          }
+        ],
+        "explanation": "atomic: support; observed predicate values: true; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "matched",
+        "missing_information": [],
+        "model_explanation": "Context confirms the memory usage reduction percentage for Model",
+        "validation_issues": []
+      },
+      {
+        "part": {
+          "quote": "and retains 94% accuracy.",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "Model Juniper",
+            "metric": "accuracy",
+            "time": "",
+            "condition": ""
+          },
+          "start": 35,
+          "end": 60,
+          "numeric_requirements": [
+            {
+              "start": 12,
+              "end": 15,
+              "quote": "94%",
+              "value": "94",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ]
+        },
+        "numeric_requirements": [
+          {
+            "start": 12,
+            "end": 15,
+            "quote": "94%",
+            "value": "94",
+            "unit": "%",
+            "kind": "percent"
+          }
+        ],
+        "assessed_label": "not_enough_info",
+        "observations": [
+          {
+            "member": "Model Juniper",
+            "truth": "unknown",
+            "quotes": [],
+            "explanation": "Context only provides memory usage improvement, not accuracy",
+            "numeric": null,
+            "citation_additions": [],
+            "model_truth": "unknown",
+            "numeric_result": null
+          }
+        ],
+        "explanation": "atomic: not_enough_info; observed predicate values: unknown; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "matched",
+        "missing_information": [
+          "The accuracy retention percentage is not provided in the context"
+        ],
+        "model_explanation": "The context only mentions memory usage improvement, not accuracy",
+        "validation_issues": []
+      }
+    ]
+  },
+  {
+    "example_id": "contract:partial_memory",
+    "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+    "context": "Model Juniper retains 94% accuracy on the benchmark.",
+    "gold": "not_enough_info",
+    "prediction": "not_enough_info",
+    "reviewer_kind": "assistant",
+    "label_matches_evidence_on_this_case": true,
+    "quality_issue_codes": [
+      "missing_information_wrong_metric"
+    ],
+    "notes": "Accuracy 94% đã được chứng minh; phần memory thiếu chứng cứ. NEI đúng, nhưng missing_information của part memory lại nói thiếu retention accuracy: sai đối tượng còn thiếu.",
+    "parts": [
+      {
+        "part": {
+          "quote": "Model Juniper uses 25% less memory",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "Model Juniper",
+            "metric": "memory",
+            "time": "",
+            "condition": ""
+          },
+          "start": 0,
+          "end": 34,
+          "numeric_requirements": [
+            {
+              "start": 19,
+              "end": 22,
+              "quote": "25%",
+              "value": "25",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ]
+        },
+        "numeric_requirements": [
+          {
+            "start": 19,
+            "end": 22,
+            "quote": "25%",
+            "value": "25",
+            "unit": "%",
+            "kind": "percent"
+          }
+        ],
+        "assessed_label": "not_enough_info",
+        "observations": [
+          {
+            "member": "Model Juniper",
+            "truth": "unknown",
+            "quotes": [],
+            "explanation": "Context does not provide retention accuracy details for Model Jn",
+            "numeric": null,
+            "citation_additions": [],
+            "model_truth": "unknown",
+            "numeric_result": null
+          }
+        ],
+        "explanation": "atomic: not_enough_info; observed predicate values: unknown; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "matched",
+        "missing_information": [
+          "The retention accuracy of Model Juniper is not provided in the context"
+        ],
+        "model_explanation": "The context only mentions retention accuracy, not memory usage",
+        "validation_issues": []
+      },
+      {
+        "part": {
+          "quote": "and retains 94% accuracy.",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "Model Juniper",
+            "metric": "accuracy",
+            "time": "",
+            "condition": ""
+          },
+          "start": 35,
+          "end": 60,
+          "numeric_requirements": [
+            {
+              "start": 12,
+              "end": 15,
+              "quote": "94%",
+              "value": "94",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ]
+        },
+        "numeric_requirements": [
+          {
+            "start": 12,
+            "end": 15,
+            "quote": "94%",
+            "value": "94",
+            "unit": "%",
+            "kind": "percent"
+          }
+        ],
+        "assessed_label": "support",
+        "observations": [
+          {
+            "member": "Model Juniper",
+            "truth": "true",
+            "quotes": [
+              "Model Juniper retains 94% accuracy on the benchmark."
+            ],
+            "explanation": "Context confirms the accuracy claim for Model Juniper",
+            "numeric": {
+              "kind": "value",
+              "source_quote": "Model Juniper retains 94% accuracy on the benchmark.",
+              "left": {
+                "value": "94",
+                "unit": "%",
+                "quote": "94%"
+              },
+              "right": {
+                "value": "94",
+                "unit": "%",
+                "quote": "94%"
+              }
+            },
+            "citation_additions": [],
+            "model_truth": "true",
+            "numeric_result": {
+              "kind": "value",
+              "input": {
+                "kind": "value",
+                "source_quote": "Model Juniper retains 94% accuracy on the benchmark.",
+                "left": {
+                  "value": "94",
+                  "unit": "%",
+                  "quote": "94%"
+                },
+                "right": {
+                  "value": "94",
+                  "unit": "%",
+                  "quote": "94%"
+                }
+              },
+              "truth": "true",
+              "reason": "exact_value_comparison",
+              "left": "94",
+              "right": "94",
+              "unit": "%",
+              "requirement": {
+                "start": 12,
+                "end": 15,
+                "quote": "94%",
+                "value": "94",
+                "unit": "%",
+                "kind": "percent"
+              }
+            }
+          }
+        ],
+        "explanation": "atomic: support; observed predicate values: true; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "matched",
+        "missing_information": [],
+        "model_explanation": "Context confirms the accuracy claim for Model Juniper",
+        "validation_issues": []
+      }
+    ]
+  },
+  {
+    "example_id": "contract:both_supported",
+    "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+    "context": "Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy.",
+    "gold": "support",
+    "prediction": "support",
+    "reviewer_kind": "assistant",
+    "label_matches_evidence_on_this_case": true,
+    "quality_issue_codes": [
+      "incomplete_explanation"
+    ],
+    "notes": "Hai requirement 25% memory và 94% accuracy được trích/kiểm riêng, cùng true; support đúng. Diễn giải memory vẫn có câu bị cụt.",
+    "parts": [
+      {
+        "part": {
+          "quote": "Model Juniper uses 25% less memory",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "Model Juniper",
+            "metric": "memory",
+            "time": "",
+            "condition": ""
+          },
+          "start": 0,
+          "end": 34,
+          "numeric_requirements": [
+            {
+              "start": 19,
+              "end": 22,
+              "quote": "25%",
+              "value": "25",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ]
+        },
+        "numeric_requirements": [
+          {
+            "start": 19,
+            "end": 22,
+            "quote": "25%",
+            "value": "25",
+            "unit": "%",
+            "kind": "percent"
+          }
+        ],
+        "assessed_label": "support",
+        "observations": [
+          {
+            "member": "Model Juniper",
+            "truth": "true",
+            "quotes": [
+              "Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy."
+            ],
+            "explanation": "Context confirms the claim about Model Juniper using less memory",
+            "numeric": {
+              "kind": "value",
+              "source_quote": "Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy.",
+              "left": {
+                "value": "25",
+                "unit": "%",
+                "quote": "25%"
+              },
+              "right": {
+                "value": "25",
+                "unit": "%",
+                "quote": "25%"
+              }
+            },
+            "citation_additions": [],
+            "model_truth": "true",
+            "numeric_result": {
+              "kind": "value",
+              "input": {
+                "kind": "value",
+                "source_quote": "Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy.",
+                "left": {
+                  "value": "25",
+                  "unit": "%",
+                  "quote": "25%"
+                },
+                "right": {
+                  "value": "25",
+                  "unit": "%",
+                  "quote": "25%"
+                }
+              },
+              "truth": "true",
+              "reason": "exact_value_comparison",
+              "left": "25",
+              "right": "25",
+              "unit": "%",
+              "requirement": {
+                "start": 19,
+                "end": 22,
+                "quote": "25%",
+                "value": "25",
+                "unit": "%",
+                "kind": "percent"
+              }
+            }
+          }
+        ],
+        "explanation": "atomic: support; observed predicate values: true; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "matched",
+        "missing_information": [],
+        "model_explanation": "The context confirms the claim about Model Juniper using less (2",
+        "validation_issues": []
+      },
+      {
+        "part": {
+          "quote": "and retains 94% accuracy.",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "Model Juniper",
+            "metric": "accuracy",
+            "time": "",
+            "condition": ""
+          },
+          "start": 35,
+          "end": 60,
+          "numeric_requirements": [
+            {
+              "start": 12,
+              "end": 15,
+              "quote": "94%",
+              "value": "94",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ]
+        },
+        "numeric_requirements": [
+          {
+            "start": 12,
+            "end": 15,
+            "quote": "94%",
+            "value": "94",
+            "unit": "%",
+            "kind": "percent"
+          }
+        ],
+        "assessed_label": "support",
+        "observations": [
+          {
+            "member": "Model Juniper",
+            "truth": "true",
+            "quotes": [
+              "Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy."
+            ],
+            "explanation": "Context directly states the accuracy retention rate for Model Jn",
+            "numeric": {
+              "kind": "value",
+              "source_quote": "Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy.",
+              "left": {
+                "value": "94",
+                "unit": "%",
+                "quote": "94%"
+              },
+              "right": {
+                "value": "94",
+                "unit": "%",
+                "quote": "94%"
+              }
+            },
+            "citation_additions": [],
+            "model_truth": "true",
+            "numeric_result": {
+              "kind": "value",
+              "input": {
+                "kind": "value",
+                "source_quote": "Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy.",
+                "left": {
+                  "value": "94",
+                  "unit": "%",
+                  "quote": "94%"
+                },
+                "right": {
+                  "value": "94",
+                  "unit": "%",
+                  "quote": "94%"
+                }
+              },
+              "truth": "true",
+              "reason": "exact_value_comparison",
+              "left": "94",
+              "right": "94",
+              "unit": "%",
+              "requirement": {
+                "start": 12,
+                "end": 15,
+                "quote": "94%",
+                "value": "94",
+                "unit": "%",
+                "kind": "percent"
+              }
+            }
+          }
+        ],
+        "explanation": "atomic: support; observed predicate values: true; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "matched",
+        "missing_information": [],
+        "model_explanation": "Context confirms the accuracy retention rate for Model Juniper",
+        "validation_issues": []
+      }
+    ]
+  },
+  {
+    "example_id": "contract:accuracy_conflict",
+    "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+    "context": "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%.",
+    "gold": "contradict",
+    "prediction": "contradict",
+    "reviewer_kind": "assistant",
+    "label_matches_evidence_on_this_case": true,
+    "quality_issue_codes": [
+      "explanation_cross_part_contamination"
+    ],
+    "notes": "Memory 25% true; accuracy 81% bác 94%, aggregate contradict đúng. Root model_explanation của part memory lại bàn accuracy 81%: diễn giải lạc sang conjunct khác.",
+    "parts": [
+      {
+        "part": {
+          "quote": "Model Juniper uses 25% less memory",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "Model Juniper",
+            "metric": "memory",
+            "time": "",
+            "condition": ""
+          },
+          "start": 0,
+          "end": 34,
+          "numeric_requirements": [
+            {
+              "start": 19,
+              "end": 22,
+              "quote": "25%",
+              "value": "25",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ]
+        },
+        "numeric_requirements": [
+          {
+            "start": 19,
+            "end": 22,
+            "quote": "25%",
+            "value": "25",
+            "unit": "%",
+            "kind": "percent"
+          }
+        ],
+        "assessed_label": "support",
+        "observations": [
+          {
+            "member": "Model Juniper",
+            "truth": "true",
+            "quotes": [
+              "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%."
+            ],
+            "explanation": "Context explicitly states a different accuracy rate than claimed",
+            "numeric": {
+              "kind": "value",
+              "source_quote": "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%.",
+              "left": {
+                "value": "25",
+                "unit": "%",
+                "quote": "25%"
+              },
+              "right": {
+                "value": "25",
+                "unit": "%",
+                "quote": "25%"
+              }
+            },
+            "citation_additions": [],
+            "model_truth": "true",
+            "numeric_result": {
+              "kind": "value",
+              "input": {
+                "kind": "value",
+                "source_quote": "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%.",
+                "left": {
+                  "value": "25",
+                  "unit": "%",
+                  "quote": "25%"
+                },
+                "right": {
+                  "value": "25",
+                  "unit": "%",
+                  "quote": "25%"
+                }
+              },
+              "truth": "true",
+              "reason": "exact_value_comparison",
+              "left": "25",
+              "right": "25",
+              "unit": "%",
+              "requirement": {
+                "start": 19,
+                "end": 22,
+                "quote": "25%",
+                "value": "25",
+                "unit": "%",
+                "kind": "percent"
+              }
+            }
+          }
+        ],
+        "explanation": "atomic: support; observed predicate values: true; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "matched",
+        "missing_information": [],
+        "model_explanation": "The context provides a different accuracy rate (81%) than the cl",
+        "validation_issues": []
+      },
+      {
+        "part": {
+          "quote": "and retains 94% accuracy.",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "Model Juniper",
+            "metric": "accuracy",
+            "time": "",
+            "condition": ""
+          },
+          "start": 35,
+          "end": 60,
+          "numeric_requirements": [
+            {
+              "start": 12,
+              "end": 15,
+              "quote": "94%",
+              "value": "94",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ]
+        },
+        "numeric_requirements": [
+          {
+            "start": 12,
+            "end": 15,
+            "quote": "94%",
+            "value": "94",
+            "unit": "%",
+            "kind": "percent"
+          }
+        ],
+        "assessed_label": "contradict",
+        "observations": [
+          {
+            "member": "Model Juniper",
+            "truth": "false",
+            "quotes": [
+              "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%."
+            ],
+            "explanation": "Context states a different accuracy rate (81%)",
+            "numeric": {
+              "kind": "value",
+              "source_quote": "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%.",
+              "left": {
+                "value": "94",
+                "unit": "%",
+                "quote": "94%"
+              },
+              "right": {
+                "value": "81",
+                "unit": "%",
+                "quote": "81%"
+              }
+            },
+            "citation_additions": [],
+            "model_truth": "false",
+            "numeric_result": {
+              "kind": "value",
+              "input": {
+                "kind": "value",
+                "source_quote": "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%.",
+                "left": {
+                  "value": "94",
+                  "unit": "%",
+                  "quote": "94%"
+                },
+                "right": {
+                  "value": "81",
+                  "unit": "%",
+                  "quote": "81%"
+                }
+              },
+              "truth": "false",
+              "reason": "explicit_quantity_denial",
+              "left": "94",
+              "right": "81",
+              "unit": "%",
+              "requirement": {
+                "start": 12,
+                "end": 15,
+                "quote": "94%",
+                "value": "94",
+                "unit": "%",
+                "kind": "percent"
+              }
+            }
+          }
+        ],
+        "explanation": "atomic: contradict; observed predicate values: false; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "matched",
+        "missing_information": [],
+        "model_explanation": "The context provides a different accuracy rate (81%)",
+        "validation_issues": []
+      }
+    ]
+  },
+  {
+    "example_id": "contract:irrelevant",
+    "claim": "Model Juniper retains 94% accuracy.",
+    "context": "The benchmark was conducted on a Tuesday. No model accuracy is reported.",
+    "gold": "not_enough_info",
+    "prediction": "not_enough_info",
+    "reviewer_kind": "assistant",
+    "label_matches_evidence_on_this_case": true,
+    "quality_issue_codes": [
+      "unknown_target_diagnostic_quality",
+      "fragmented_missing_information"
+    ],
+    "notes": "Không có identity/accuracy của Model Juniper nên NEI đúng. Member dạng No model accuracy is reported và missing-information dài, có fragment, không phải trình bày target rõ ràng.",
+    "parts": [
+      {
+        "part": {
+          "quote": "Model Juniper retains 94% accuracy.",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "Model Juniper",
+            "metric": "accuracy",
+            "time": "",
+            "condition": ""
+          },
+          "start": 0,
+          "end": 35,
+          "numeric_requirements": [
+            {
+              "start": 22,
+              "end": 25,
+              "quote": "94%",
+              "value": "94",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ]
+        },
+        "numeric_requirements": [
+          {
+            "start": 22,
+            "end": 25,
+            "quote": "94%",
+            "value": "94",
+            "unit": "%",
+            "kind": "percent"
+          }
+        ],
+        "assessed_label": "not_enough_info",
+        "observations": [
+          {
+            "member": "No model accuracy is reported",
+            "truth": "unknown",
+            "quotes": [],
+            "explanation": "Context does not provide any accuracy reports for models, making",
+            "numeric": null,
+            "citation_additions": [],
+            "model_truth": "unknown",
+            "numeric_result": null
+          }
+        ],
+        "explanation": "atomic: not_enough_info; observed predicate values: unknown; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "unknown",
+        "missing_information": [
+          "The absence of accuracy reports for models makes it impossible to verify the claim about Model Juniper's accuracy retention. The context simply states that no '",
+          "no model accuracy is reported",
+          "'."
+        ],
+        "model_explanation": "There is no evidence provided in the context to confirm or deny",
+        "validation_issues": [
+          "scope_unknown"
+        ]
+      }
+    ]
+  },
+  {
+    "example_id": "contract:negation",
+    "claim": "The study used human labels.",
+    "context": "The study did not use any human labels; all labels were generated automatically.",
+    "gold": "contradict",
+    "prediction": "contradict",
+    "reviewer_kind": "assistant",
+    "label_matches_evidence_on_this_case": true,
+    "quality_issue_codes": [],
+    "notes": "did not use any human labels là phủ định trực tiếp cùng study/predicate; contradict đúng.",
+    "parts": [
+      {
+        "part": {
+          "quote": "The study used human labels.",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "study",
+            "metric": "used human labels",
+            "time": "",
+            "condition": ""
+          },
+          "start": 0,
+          "end": 28,
+          "numeric_requirements": []
+        },
+        "numeric_requirements": [],
+        "assessed_label": "contradict",
+        "observations": [
+          {
+            "member": "study",
+            "truth": "false",
+            "quotes": [
+              "The study did not use any human labels; all labels were generated automatically."
+            ],
+            "explanation": "Context explicitly states the study did not use human labels",
+            "numeric": null,
+            "citation_additions": [],
+            "model_truth": "false",
+            "numeric_result": null
+          }
+        ],
+        "explanation": "atomic: contradict; observed predicate values: false; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "matched",
+        "missing_information": [],
+        "model_explanation": "Context directly contradicts the claim",
+        "validation_issues": []
+      }
+    ]
+  },
+  {
+    "example_id": "contract:causality_missing",
+    "claim": "The new index caused the latency improvement.",
+    "context": "The new index and lower latency were observed in the same deployment. The study did not establish a causal relationship.",
+    "gold": "not_enough_info",
+    "prediction": "not_enough_info",
+    "reviewer_kind": "assistant",
+    "label_matches_evidence_on_this_case": true,
+    "quality_issue_codes": [
+      "causal_absence_worded_as_denial"
+    ],
+    "notes": "Đồng xuất hiện không chứng minh quan hệ nhân quả; not establish causal relationship dẫn tới NEI. Cụm denies a causal link trong model_explanation mạnh hơn điều source đã nói.",
+    "parts": [
+      {
+        "part": {
+          "quote": "The new index caused the latency improvement.",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "new index",
+            "metric": "latency",
+            "time": "",
+            "condition": ""
+          },
+          "start": 0,
+          "end": 45,
+          "numeric_requirements": []
+        },
+        "numeric_requirements": [],
+        "assessed_label": "not_enough_info",
+        "observations": [
+          {
+            "member": "new index",
+            "truth": "unknown",
+            "quotes": [],
+            "explanation": "Context explicitly states no causal relationship was established",
+            "numeric": null,
+            "citation_additions": [],
+            "model_truth": "unknown",
+            "numeric_result": null
+          }
+        ],
+        "explanation": "atomic: not_enough_info; observed predicate values: unknown; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "matched",
+        "missing_information": [
+          "At least one causal relationship between the new index and latency improvement"
+        ],
+        "model_explanation": "The context denies a causal link, making it impossible to verify",
+        "validation_issues": []
+      }
+    ]
+  },
+  {
+    "example_id": "contract:scope",
+    "claim": "All tasks improved after compression.",
+    "context": "Three tasks improved after compression, but a fourth task became less accurate.",
+    "gold": "contradict",
+    "prediction": "contradict",
+    "reviewer_kind": "assistant",
+    "label_matches_evidence_on_this_case": true,
+    "quality_issue_codes": [],
+    "notes": "Một fourth task became less accurate là counterexample bác ALL; không cần roster đầy đủ để refute.",
+    "parts": [
+      {
+        "part": {
+          "quote": "All tasks improved after compression.",
+          "quantifier": "all",
+          "scope": {
+            "entity": "tasks",
+            "metric": "improved",
+            "time": "after compression",
+            "condition": ""
+          },
+          "start": 0,
+          "end": 37,
+          "numeric_requirements": []
+        },
+        "numeric_requirements": [],
+        "assessed_label": "contradict",
+        "observations": [
+          {
+            "member": "a fourth task",
+            "truth": "false",
+            "quotes": [
+              "Three tasks improved after compression, but a fourth task became less accurate."
+            ],
+            "explanation": "Contradiction with context",
+            "numeric": null,
+            "citation_additions": [],
+            "model_truth": "false",
+            "numeric_result": null
+          }
+        ],
+        "explanation": "all: contradict; observed predicate values: false; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "matched",
+        "missing_information": [],
+        "model_explanation": "Context explicitly states that one task became less accurate, so",
+        "validation_issues": []
+      }
+    ]
+  },
+  {
+    "example_id": "contract:cross_sentence",
+    "claim": "The report evaluated four models on two datasets.",
+    "context": "Four models were evaluated in the report. Evaluation used two datasets.",
+    "gold": "support",
+    "prediction": "support",
+    "reviewer_kind": "assistant",
+    "label_matches_evidence_on_this_case": true,
+    "quality_issue_codes": [
+      "explanation_subject_object_wording"
+    ],
+    "notes": "q0=4 models và q1=2 datasets kiểm riêng bằng hai câu cùng event. Quote thứ hai được thêm từ source_quote của q1, có ledger rõ. Diễn giải report being evaluated sai cách diễn đạt đối tượng, dù ledger và nhãn đúng.",
+    "parts": [
+      {
+        "part": {
+          "quote": "The report evaluated four models on two datasets.",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "report",
+            "metric": "evaluated four models",
+            "time": "",
+            "condition": "on two datasets"
+          },
+          "start": 0,
+          "end": 49,
+          "numeric_requirements": [
+            {
+              "start": 21,
+              "end": 32,
+              "quote": "four models",
+              "value": "4",
+              "unit": "models",
+              "kind": "number"
+            },
+            {
+              "start": 36,
+              "end": 48,
+              "quote": "two datasets",
+              "value": "2",
+              "unit": "datasets",
+              "kind": "number"
+            }
+          ]
+        },
+        "numeric_requirements": [
+          {
+            "start": 21,
+            "end": 32,
+            "quote": "four models",
+            "value": "4",
+            "unit": "models",
+            "kind": "number"
+          },
+          {
+            "start": 36,
+            "end": 48,
+            "quote": "two datasets",
+            "value": "2",
+            "unit": "datasets",
+            "kind": "number"
+          }
+        ],
+        "assessed_label": "support",
+        "observations": [
+          {
+            "member": "report",
+            "truth": "true",
+            "quotes": [
+              "Four models were evaluated in the report.",
+              "Evaluation used two datasets."
+            ],
+            "explanation": "Context directly states the evaluation was done on the report,",
+            "numeric": {
+              "q0": {
+                "kind": "value",
+                "source_quote": "Four models were evaluated in the report.",
+                "left": {
+                  "value": "4",
+                  "unit": "models",
+                  "quote": "four models"
+                },
+                "right": {
+                  "value": "4",
+                  "unit": "models",
+                  "quote": "Four models"
+                }
+              },
+              "q1": {
+                "kind": "value",
+                "source_quote": "Evaluation used two datasets.",
+                "left": {
+                  "value": "2",
+                  "unit": "datasets",
+                  "quote": "two datasets"
+                },
+                "right": {
+                  "value": "2",
+                  "unit": "datasets",
+                  "quote": "two datasets"
+                }
+              }
+            },
+            "citation_additions": [
+              "Evaluation used two datasets."
+            ],
+            "model_truth": "true",
+            "numeric_result": [
+              {
+                "kind": "value",
+                "input": {
+                  "kind": "value",
+                  "source_quote": "Four models were evaluated in the report.",
+                  "left": {
+                    "value": "4",
+                    "unit": "models",
+                    "quote": "four models"
+                  },
+                  "right": {
+                    "value": "4",
+                    "unit": "models",
+                    "quote": "Four models"
+                  }
+                },
+                "truth": "true",
+                "reason": "exact_value_comparison",
+                "left": "4",
+                "right": "4",
+                "unit": "models",
+                "requirement": {
+                  "start": 21,
+                  "end": 32,
+                  "quote": "four models",
+                  "value": "4",
+                  "unit": "models",
+                  "kind": "number"
+                }
+              },
+              {
+                "kind": "value",
+                "input": {
+                  "kind": "value",
+                  "source_quote": "Evaluation used two datasets.",
+                  "left": {
+                    "value": "2",
+                    "unit": "datasets",
+                    "quote": "two datasets"
+                  },
+                  "right": {
+                    "value": "2",
+                    "unit": "datasets",
+                    "quote": "two datasets"
+                  }
+                },
+                "truth": "true",
+                "reason": "exact_value_comparison",
+                "left": "2",
+                "right": "2",
+                "unit": "datasets",
+                "requirement": {
+                  "start": 36,
+                  "end": 48,
+                  "quote": "two datasets",
+                  "value": "2",
+                  "unit": "datasets",
+                  "kind": "number"
+                }
+              }
+            ]
+          }
+        ],
+        "explanation": "atomic: support; observed predicate values: true; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "matched",
+        "missing_information": [],
+        "model_explanation": "Context confirms the claim about the report being evaluated, but",
+        "validation_issues": []
+      }
+    ]
+  },
+  {
+    "example_id": "contract:wrong_units",
+    "claim": "Training took 12 seconds.",
+    "context": "Training took 12 hours, not 12 seconds.",
+    "gold": "contradict",
+    "prediction": "contradict",
+    "reviewer_kind": "assistant",
+    "label_matches_evidence_on_this_case": true,
+    "quality_issue_codes": [],
+    "notes": "Source nói 12 hours, not 12 seconds; numeric record giữ đúng hai unit, không tự đổi đơn vị; contradict đúng.",
+    "parts": [
+      {
+        "part": {
+          "quote": "Training took 12 seconds.",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "Training",
+            "metric": "took 12 seconds",
+            "time": "",
+            "condition": ""
+          },
+          "start": 0,
+          "end": 25,
+          "numeric_requirements": [
+            {
+              "start": 14,
+              "end": 24,
+              "quote": "12 seconds",
+              "value": "12",
+              "unit": "seconds",
+              "kind": "number"
+            }
+          ]
+        },
+        "numeric_requirements": [
+          {
+            "start": 14,
+            "end": 24,
+            "quote": "12 seconds",
+            "value": "12",
+            "unit": "seconds",
+            "kind": "number"
+          }
+        ],
+        "assessed_label": "contradict",
+        "observations": [
+          {
+            "member": "Training",
+            "truth": "false",
+            "quotes": [
+              "Training took 12 hours, not 12 seconds."
+            ],
+            "explanation": "Context explicitly states a different duration",
+            "numeric": {
+              "kind": "value",
+              "source_quote": "Training took 12 hours, not 12 seconds.",
+              "left": {
+                "value": "12",
+                "unit": "seconds",
+                "quote": "12 seconds"
+              },
+              "right": {
+                "value": "12",
+                "unit": "hours",
+                "quote": "12 hours"
+              }
+            },
+            "citation_additions": [],
+            "model_truth": "false",
+            "numeric_result": {
+              "kind": "value",
+              "input": {
+                "kind": "value",
+                "source_quote": "Training took 12 hours, not 12 seconds.",
+                "left": {
+                  "value": "12",
+                  "unit": "seconds",
+                  "quote": "12 seconds"
+                },
+                "right": {
+                  "value": "12",
+                  "unit": "hours",
+                  "quote": "12 hours"
+                }
+              },
+              "truth": "false",
+              "reason": "explicit_quantity_denial",
+              "left": "12",
+              "right": "12",
+              "unit": "seconds",
+              "requirement": {
+                "start": 14,
+                "end": 24,
+                "quote": "12 seconds",
+                "value": "12",
+                "unit": "seconds",
+                "kind": "number"
+              }
+            }
+          }
+        ],
+        "explanation": "atomic: contradict; observed predicate values: false; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "matched",
+        "missing_information": [],
+        "model_explanation": "Context provides explicit counter-evidence to the claim",
+        "validation_issues": []
+      }
+    ]
+  },
+  {
+    "example_id": "contract:atomic_support",
+    "claim": "The sample contained 240 documents.",
+    "context": "The final sample contained exactly 240 documents.",
+    "gold": "support",
+    "prediction": "support",
+    "reviewer_kind": "assistant",
+    "label_matches_evidence_on_this_case": true,
+    "quality_issue_codes": [],
+    "notes": "240 documents xuất hiện nguyên văn cho sample; numeric value/object khớp, support đúng.",
+    "parts": [
+      {
+        "part": {
+          "quote": "The sample contained 240 documents.",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "sample",
+            "metric": "contained 240 documents",
+            "time": "",
+            "condition": ""
+          },
+          "start": 0,
+          "end": 35,
+          "numeric_requirements": [
+            {
+              "start": 21,
+              "end": 34,
+              "quote": "240 documents",
+              "value": "240",
+              "unit": "documents",
+              "kind": "number"
+            }
+          ]
+        },
+        "numeric_requirements": [
+          {
+            "start": 21,
+            "end": 34,
+            "quote": "240 documents",
+            "value": "240",
+            "unit": "documents",
+            "kind": "number"
+          }
+        ],
+        "assessed_label": "support",
+        "observations": [
+          {
+            "member": "sample",
+            "truth": "true",
+            "quotes": [
+              "The final sample contained exactly 240 documents."
+            ],
+            "explanation": "Context confirms the exact number of documents in the sample",
+            "numeric": {
+              "kind": "value",
+              "source_quote": "The final sample contained exactly 240 documents.",
+              "left": {
+                "value": "240",
+                "unit": "documents",
+                "quote": "240 documents"
+              },
+              "right": {
+                "value": "240",
+                "unit": "documents",
+                "quote": "240 documents"
+              }
+            },
+            "citation_additions": [],
+            "model_truth": "true",
+            "numeric_result": {
+              "kind": "value",
+              "input": {
+                "kind": "value",
+                "source_quote": "The final sample contained exactly 240 documents.",
+                "left": {
+                  "value": "240",
+                  "unit": "documents",
+                  "quote": "240 documents"
+                },
+                "right": {
+                  "value": "240",
+                  "unit": "documents",
+                  "quote": "240 documents"
+                }
+              },
+              "truth": "true",
+              "reason": "exact_value_comparison",
+              "left": "240",
+              "right": "240",
+              "unit": "documents",
+              "requirement": {
+                "start": 21,
+                "end": 34,
+                "quote": "240 documents",
+                "value": "240",
+                "unit": "documents",
+                "kind": "number"
+              }
+            }
+          }
+        ],
+        "explanation": "atomic: support; observed predicate values: true; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "matched",
+        "missing_information": [],
+        "model_explanation": "Context confirms the exact number of documents in the sample",
+        "validation_issues": []
+      }
+    ]
+  },
+  {
+    "example_id": "contract:bounded_scope",
+    "claim": "On the tested dataset, the method improved recall.",
+    "context": "The method improved recall on the tested dataset. Results on other datasets are unknown.",
+    "gold": "support",
+    "prediction": "support",
+    "reviewer_kind": "assistant",
+    "label_matches_evidence_on_this_case": true,
+    "quality_issue_codes": [
+      "incomplete_explanation"
+    ],
+    "notes": "Chỉ đánh giá tested dataset; evidence trực tiếp xác nhận improved recall, missing_information rỗng. Không đòi dataset khác; support đúng. Model explanation còn kết thúc ở một cụm chưa đầy đủ.",
+    "parts": [
+      {
+        "part": {
+          "quote": "On the tested dataset, the method improved recall.",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "method",
+            "metric": "recall",
+            "time": "",
+            "condition": "On the tested dataset"
+          },
+          "start": 0,
+          "end": 50,
+          "numeric_requirements": []
+        },
+        "numeric_requirements": [],
+        "assessed_label": "support",
+        "observations": [
+          {
+            "member": "method",
+            "truth": "true",
+            "quotes": [
+              "The method improved recall on the tested dataset."
+            ],
+            "explanation": "Context directly confirms the claim about the method improving '",
+            "numeric": null,
+            "citation_additions": [],
+            "model_truth": "true",
+            "numeric_result": null
+          }
+        ],
+        "explanation": "atomic: support; observed predicate values: true; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "matched",
+        "missing_information": [],
+        "model_explanation": "Contextually confirmed the method's improvement in recall on the",
+        "validation_issues": []
+      }
+    ]
+  }
+]

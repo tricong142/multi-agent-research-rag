@@ -1,0 +1,86 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix5",
+  "recorded_at": "2026-10-17T12:33:14.687043+00:00",
+  "parent_zip": "output-cellfix4-fresh-20261017T111605Z-9505cc47.zip",
+  "parent_zip_sha256": "e8f12af4d25948f158ab2acd4fd48989d756b40721c0081943be345f09a08cac",
+  "criteria_sha256": "642d66612c25514e3764840f750a97cc85c93d4a32a3e4f23bcabff6b993e84c",
+  "payload_sha256": "922bb57ed569982785d026e365c208ef19d4fc5c104e622aa7e9e70395fcb869",
+  "notebook_sha256": "db68828cbc1a6bd05d9e6d250811459e6334ee35c89b7f0631fc22c612e09962",
+  "input_files": 84,
+  "source_fixture_files": 36,
+  "model_revision_prompts_data_budgets_and_gates_unchanged": true,
+  "local_validation": {
+    "criteria_sha256": "642d66612c25514e3764840f750a97cc85c93d4a32a3e4f23bcabff6b993e84c",
+    "payload_sha256": "922bb57ed569982785d026e365c208ef19d4fc5c104e622aa7e9e70395fcb869",
+    "frozen_regression_tests_passed": 181,
+    "validate_only": {
+      "probe": {
+        "freeze_valid": true,
+        "cases": 18,
+        "maximum_calls": 36
+      },
+      "smoke": {
+        "freeze_valid": true,
+        "cases": 12,
+        "maximum_calls": 96
+      },
+      "verifier": {
+        "freeze_valid": true,
+        "cases": 39,
+        "maximum_calls": 312
+      }
+    },
+    "model_inference_completed": false,
+    "new_regression_tests": 15,
+    "notebook_tests_passed": 8,
+    "notebook_test_exit_code": 0,
+    "notebook_test_elapsed_seconds": 445.468,
+    "notebook_test_command": ".venv/Scripts/python.exe -m unittest scripts.test_colab_cellfix5_fresh -v",
+    "refreshed_release_catalog_test_passed": true,
+    "patch_template_reproduces_frozen_source": true,
+    "checks": [
+      "Exact embedded payload regression and three validate-only modes",
+      "Fresh startup without previous session state or ZIP",
+      "Payload hashes, safe paths and release catalog",
+      "Prerequisite failures archive diagnostics and block inference",
+      "Failed smoke or stale success flags cannot admit probe",
+      "Confirmed smoke can admit probe; no full39 inference step"
+    ]
+  },
+  "offline_diagnostic_report": "docs/atomic-verifier-cellfix5-offline-check.json",
+  "old_probe_traces_unchanged_valid": 15,
+  "old_probe_traces_rejected": 3,
+  "old_smoke_case_labels_unchanged": 12,
+  "real_qwen_tokenizer_checks": {
+    "accepted_legal_paths": 28,
+    "rejected_invalid_paths": 11,
+    "not_model_inference": true
+  },
+  "parent_released_files_and_zip_preserved": true,
+  "new_model_smoke": null,
+  "new_model_probe18": null,
+  "new_model_full39": null,
+  "full39_inference_started": false,
+  "human_review": "pending_new_run",
+  "promoted_to_serving": false,
+  "cuda_available": false,
+  "limitations": [
+    "Finite active verb plus known measurement head grammar; unsupported syntax still needs semantic review.",
+    "Novel regression fixtures are development evidence, not an independent model evaluation.",
+    "Stored cellfix4 traces and handcrafted canonical alternatives are not new predictions.",
+    "Local runtime has no CUDA; new NF4 T4 smoke/probe must run in the supplied notebook.",
+    "Zero false support on candidate full39 has not been measured."
+  ],
+  "files": {
+    "scripts/atomic_cellfix5_patch.py": "e577440aa26c358adc38d2d849aa0e4858a543a529eb29c3315fb8ef7534bcd0",
+    "scripts/build_colab_cellfix5_fresh.py": "50ed70864f643755c8275f2f946f9e7c1f30365d66e3e6ccd2602b61ed60a3e0",
+    "scripts/test_colab_cellfix5_fresh.py": "117266eacdef14e84bdbc44fdfd73505d0d6f2943ba04a7ad41307660d4a3f5d",
+    "scripts/check_atomic_cellfix5.py": "6334a334d3e4dfe53a6da87c408bd1d6b517971401ad9f4bc1aab06390eb103c",
+    "docs/ATOMIC_VERIFIER_CELLFIX5_FRESH_RUN_GUIDE.md": "c744811bc4f39eac593336a9222ce6a2efb9d2d0da2e24eac9feff91e688ff32",
+    "docs/atomic-verifier-cellfix5-freeze.json": "bd78b5998f6e82b21e80905a18a3142c16fce4af4fccf4f2b0f020483437a248",
+    "docs/atomic-verifier-cellfix5-fresh-colab-release.json": "6330db330b16a7d27ed268617ffb88278412822ec554421cbffa211b33f1b87e",
+    "docs/atomic-verifier-cellfix5-offline-check.json": "3fcd5b864dc73dfc1e670f86a2e88830308c8b64291bf0675d430292983d24bf",
+    "research-runs/cellfix5-fresh-payload-regression.log": "3af2d63bf93cfb6c478893d16470d77c74b03532575c7de8c049a6af0db81fdb",
+    "research-runs/cellfix5-fresh-payload-validation.json": "f5e5d33318972ee21c9d8d53c21eade8e402d709754a818495cff5faab9bd821"
+  }
+}

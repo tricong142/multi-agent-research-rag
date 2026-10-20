@@ -1,0 +1,7 @@
+{
+  "north_support_accepted_with_only_south_quote": true,
+  "other_named_target_returned_false_on_south_quote": true,
+  "third_counterexample_rejected_with_mixed_quote": true,
+  "third_counterexample_not_rejected_with_member_clause_only": true,
+  "localized_clause_used_for_diagnostic_only_no_predictions_rewritten": true
+}

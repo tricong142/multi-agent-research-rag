@@ -6,15 +6,19 @@ from importlib.metadata import version
 import hashlib
 import json
 import re
+import time
 
-from .atomic_verifier import DECOMPOSE_PROMPT, ASSESS_PROMPT, _quantifier, scope_restrictions
+from .atomic_verifier import (DECOMPOSE_PROMPT, ASSESS_PROMPT, ASSESSMENT_LIMITS,
+                              CaseDeadlineExceeded, _quantifier, scope_clauses)
+from .numeric_verifier import numeric_requirements, _operand
 from .judge import TransformersJSONBackend
 
 DECODER = {'engine': 'lm-format-enforcer', 'version': '0.11.3',
-           'interegular': '0.3.3', 'policy': 'atomic-schema-decoding-v2',
+           'interegular': '0.3.3', 'policy': 'atomic-schema-decoding-v5',
            'source_enum_max_words': 80, 'strict_field_order': True,
            'max_consecutive_whitespaces': 4, 'num_beams': 1,
-           'repetition_penalty': 1.05}
+           'repetition_penalty': 1.05, 'assessment_limits': ASSESSMENT_LIMITS,
+           'deadline_policy': 'absolute_monotonic_per_decode_step'}
 
 
 def obj(properties):
@@ -52,33 +56,101 @@ def decomposition_schema(claim):
     unique = [v for v in spans if claim.find(v, claim.find(v) + 1) == -1] if conjunction else [claim]
     quantifier = _quantifier(claim)
     quantifiers = [quantifier] if quantifier is not None else ['atomic', 'all', 'some', 'none']
-    restrictions = scope_restrictions(claim)
-    scope_values = {key: spans + ([''] if key in ('time', 'condition') else [])
-                    for key in ('entity', 'metric', 'time', 'condition')}
-    if restrictions['time']:
-        scope_values['time'] = (restrictions['time'] if len(restrictions['time']) == 1 else
-                               [s for s in spans if all(v in s for v in restrictions['time'])])
-    if restrictions['condition']:
-        scope_values['condition'] = [s for s in spans if all(v in s for v in restrictions['condition'])]
-    else:
-        scope_values['condition'] = [s for s in scope_values['condition']
-                                     if not re.search(r'\b(?:after|before|during)\b', s, re.I)]
-    part = obj({'quote': {'type': 'string', 'enum': unique},
-                'quantifier': {'type': 'string', 'enum': quantifiers},
-                'scope': obj({key: {'type': 'string', 'enum': values} for key, values in scope_values.items()})})
+    alternatives = []
+    for clause in scope_clauses(claim):
+        quotes = [v for v in unique if clause['start'] <= claim.find(v)
+                  and claim.find(v) + len(v) <= clause['end']]
+        scope_values = {'entity': spans, 'metric': [clause['required_metric']] if clause['required_metric'] else spans,
+                        'time': clause['time'] or [''],
+                        'condition': ([s for s in spans if all(v in s for v in clause['condition'])]
+                                      if clause['condition'] else [''] + [s for s in spans
+                                          if s in clause['source'] and not re.search(r'\b(?:after|before|during)\b', s, re.I)])}
+        if not quotes or any(not values for values in scope_values.values()):
+            raise ValueError('unsupported_scope_structure')
+        alternatives.append(obj({'quote': {'type': 'string', 'enum': quotes},
+            'quantifier': {'type': 'string', 'enum': quantifiers},
+            'scope': obj({key: {'type': 'string', 'enum': values} for key, values in scope_values.items()})}))
+    part = alternatives[0] if len(alternatives) == 1 else {'anyOf': alternatives}
     return obj({'parts': array(part, minimum=1, maximum=12 if conjunction else 1), 'unresolved': array(TEXT)})
 
 
-def assessment_schema():
-    operand = obj({'value': TEXT, 'unit': TEXT, 'quote': TEXT})
+def bounded_text(maximum):
+    return {'type': 'string', 'minLength': 1, 'maxLength': maximum}
+
+
+def source_members(context):
+    words = list(re.finditer(r'\S+', context))
+    return sorted({context[first.start():last.end()].rstrip(',.;:')
+                   for i, first in enumerate(words) for last in words[i:i + 8]
+                   if last.end() - first.start() <= ASSESSMENT_LIMITS['member_chars']
+                   and context[first.start():last.end()].rstrip(',.;:')})
+
+
+def evidence_passages(context):
+    """Exact whole/adjacent sentences; bounded windows for long sentences."""
+    maximum = ASSESSMENT_LIMITS['quote_chars']
+    bounds = [0] + [m.end() for m in re.finditer(r'[.!?](?=\s|$)|\n', context)] + [len(context)]
+    passages = set()
+    for i, start in enumerate(bounds[:-1]):
+        sentence = context[start:bounds[i + 1]].strip()
+        if len(sentence) > maximum:
+            words = list(re.finditer(r'\S+', sentence))
+            for j, first in enumerate(words):
+                ends = [last.end() for last in words[j:] if last.end() - first.start() <= maximum]
+                if ends:
+                    passages.add(sentence[first.start():max(ends)])
+        for end in bounds[i + 1:]:
+            value = context[start:end].strip()
+            if len(value) > maximum:
+                break
+            if value:
+                passages.add(value)
+    return sorted(passages)
+
+
+def operand_schema(source):
+    alternatives = []
+    seen = set()
+    for requirement in numeric_requirements(source):
+        value = {key: requirement[key] for key in ('value', 'unit', 'quote')}
+        identity = tuple(value.values())
+        if identity in seen:
+            continue
+        try:
+            _operand(value, source)
+        except ValueError:
+            continue
+        seen.add(identity)
+        alternatives.append(obj({key: {'type': 'string', 'enum': [text]} for key, text in value.items()}))
+    return alternatives
+
+
+def assessment_schema(claim, part, context):
+    if len(context.split()) > ASSESSMENT_LIMITS['context_words']:
+        raise ValueError('unsupported_assessment_context')
+    limits = ASSESSMENT_LIMITS
+    passages, members = evidence_passages(context), source_members(context)
+    quote = {'type': 'string', 'enum': passages} if passages else bounded_text(limits['quote_chars'])
+    member = {'type': 'string', 'enum': members} if members else bounded_text(limits['member_chars'])
+    evidence = array(quote, maximum=limits['quotes_per_record'] if passages else 0)
+    left = operand_schema(part['quote']) + operand_schema(context)
+    right = operand_schema(context)
+    # No finite source operands means no executable numerical proof, never invented values.
+    empty_operand = obj({'value': {'type': 'string', 'enum': ['0']},
+                         'unit': {'type': 'string', 'enum': ['']}, 'quote': quote})
+    left_schema = {'anyOf': left} if left else empty_operand
+    right_schema = {'anyOf': right} if right else empty_operand
     numeric = obj({'kind': {'type': 'string', 'enum': ['value', 'change']},
-                   'source_quote': TEXT, 'left': operand, 'right': operand})
-    observation = obj({'member': TEXT, 'truth': {'type': 'string', 'enum': ['true', 'false', 'unknown']},
-                       'quotes': array(TEXT), 'explanation': TEXT,
-                       'numeric': {'anyOf': [{'type': 'null'}, numeric]}})
+                   'source_quote': quote, 'left': left_schema, 'right': right_schema})
+    numeric_schema = {'anyOf': [{'type': 'null'}, numeric, array(numeric, minimum=1)]} if left and right else {'type': 'null'}
+    observation = obj({'member': member, 'truth': {'type': 'string', 'enum': ['true', 'false', 'unknown']},
+                       'quotes': evidence, 'explanation': bounded_text(limits['explanation_chars']),
+                       'numeric': numeric_schema})
     return obj({'scope_match': {'type': 'string', 'enum': ['matched', 'mismatched', 'unknown']},
-                'coverage': obj({'complete': {'type': 'boolean'}, 'members': array(TEXT), 'quotes': array(TEXT)}),
-                'observations': array(observation), 'missing_information': array(TEXT), 'explanation': TEXT})
+                'coverage': obj({'complete': {'type': 'boolean'}, 'members': array(member, maximum=16 if members else 0), 'quotes': evidence}),
+                'observations': array(observation, maximum=16 if members else 0),
+                'missing_information': array(bounded_text(limits['missing_chars']), maximum=limits['missing_items']),
+                'explanation': bounded_text(limits['explanation_chars'])})
 
 
 def schema_for(messages):
@@ -86,12 +158,20 @@ def schema_for(messages):
     if messages[0]['content'] == DECOMPOSE_PROMPT and set(payload) == {'claim'}:
         return decomposition_schema(payload['claim']), payload['claim']
     if messages[0]['content'] == ASSESS_PROMPT and set(payload) == {'claim', 'part', 'context'}:
-        return assessment_schema(), payload['claim'] + payload['context']
+        return assessment_schema(payload['claim'], payload['part'], payload['context']), payload['claim'] + payload['context']
     raise ValueError('Unsupported constrained atomic request')
 
 
 def schema_sha256(schema):
     return hashlib.sha256(json.dumps(schema, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+
+
+class DeadlineStop:
+    def __init__(self, deadline):
+        self.deadline = deadline
+
+    def __call__(self, input_ids, scores, **kwargs):
+        return time.monotonic() >= self.deadline
 
 
 class ConstrainedAtomicBackend(TransformersJSONBackend):
@@ -100,6 +180,7 @@ class ConstrainedAtomicBackend(TransformersJSONBackend):
         if version('lm-format-enforcer') != DECODER['version'] or version('interegular') != DECODER['interegular']:
             raise ValueError('Structured decoder dependency version differs from frozen policy')
         super().__init__(model, tokenizer)
+        self._case_deadline = None
         # Build the 150k-token prefix tree once per loaded tokenizer, not per call.
         # LMFE 0.11.3's convenience adapter imports tokenization_utils, removed
         # in Transformers 5. Use its public core and the documented HF callback.
@@ -114,8 +195,18 @@ class ConstrainedAtomicBackend(TransformersJSONBackend):
         self.tokenizer_data = TokenEnforcerTokenizerData(vocabulary,
             lambda ids: tokenizer.decode(ids).rstrip('\ufffd'), tokenizer.eos_token_id, False, len(tokenizer))
 
+    @contextmanager
+    def generation_deadline(self, deadline):
+        previous, self._case_deadline = self._case_deadline, deadline
+        try:
+            yield True
+        finally:
+            self._case_deadline = previous
+
     def generation_options(self, messages):
         from lmformatenforcer import JsonSchemaParser, CharacterLevelParserConfig, TokenEnforcer
+        if self._case_deadline is not None and time.monotonic() >= self._case_deadline:
+            raise CaseDeadlineExceeded()
         schema, source = schema_for(messages)
         config = CharacterLevelParserConfig()
         config.force_json_field_order = DECODER['strict_field_order']
@@ -128,8 +219,15 @@ class ConstrainedAtomicBackend(TransformersJSONBackend):
         def callback(batch_id, input_ids):
             return enforcer.get_allowed_tokens(input_ids.tolist()).allowed_tokens
         self.decoding_metadata = {'structured_decoder': DECODER, 'schema_sha256': schema_sha256(schema)}
-        return {'prefix_allowed_tokens_fn': callback, 'num_beams': DECODER['num_beams'],
-                'repetition_penalty': DECODER['repetition_penalty']}
+        options = {'prefix_allowed_tokens_fn': callback, 'num_beams': DECODER['num_beams'],
+                   'repetition_penalty': DECODER['repetition_penalty']}
+        if self._case_deadline is not None:
+            if time.monotonic() >= self._case_deadline:
+                raise CaseDeadlineExceeded()
+            from transformers import StoppingCriteriaList
+            options['stopping_criteria'] = StoppingCriteriaList([DeadlineStop(self._case_deadline)])
+            self.decoding_metadata['deadline_stop_enabled'] = True
+        return options
 
 
 def constrained_loader(loader):

@@ -1,0 +1,436 @@
+{
+  "kind": "offline_diagnostic_replay_and_real_tokenizer_feasibility",
+  "model_inference_completed": false,
+  "full39_inference_started": false,
+  "criteria_sha256": "642d66612c25514e3764840f750a97cc85c93d4a32a3e4f23bcabff6b993e84c",
+  "script_sha256": "6334a334d3e4dfe53a6da87c408bd1d6b517971401ad9f4bc1aab06390eb103c",
+  "original_cellfix4_release_preserved": true,
+  "old_probe_trace_checks": [
+    {
+      "example_id": "decompose:001",
+      "new_validation_of_old_trace": "unchanged_valid"
+    },
+    {
+      "example_id": "decompose:002",
+      "new_validation_of_old_trace": "unchanged_valid"
+    },
+    {
+      "example_id": "decompose:003",
+      "new_validation_of_old_trace": "unchanged_valid"
+    },
+    {
+      "example_id": "decompose:004",
+      "new_validation_of_old_trace": "unchanged_valid"
+    },
+    {
+      "example_id": "decompose:005",
+      "new_validation_of_old_trace": "unchanged_valid"
+    },
+    {
+      "example_id": "decompose:006",
+      "new_validation_of_old_trace": "unchanged_valid"
+    },
+    {
+      "example_id": "decompose:007",
+      "new_validation_of_old_trace": "unchanged_valid"
+    },
+    {
+      "example_id": "decompose:008",
+      "new_validation_of_old_trace": "unchanged_valid"
+    },
+    {
+      "example_id": "decompose:009",
+      "new_validation_of_old_trace": "unchanged_valid"
+    },
+    {
+      "example_id": "decompose:010",
+      "new_validation_of_old_trace": "metric_property_not_canonical"
+    },
+    {
+      "example_id": "decompose:011",
+      "new_validation_of_old_trace": "unchanged_valid"
+    },
+    {
+      "example_id": "decompose:012",
+      "new_validation_of_old_trace": "unchanged_valid"
+    },
+    {
+      "example_id": "decompose:013",
+      "new_validation_of_old_trace": "unchanged_valid"
+    },
+    {
+      "example_id": "decompose:014",
+      "new_validation_of_old_trace": "metric_property_not_canonical"
+    },
+    {
+      "example_id": "decompose:015",
+      "new_validation_of_old_trace": "unchanged_valid"
+    },
+    {
+      "example_id": "decompose:016",
+      "new_validation_of_old_trace": "unchanged_valid"
+    },
+    {
+      "example_id": "decompose:017",
+      "new_validation_of_old_trace": "unchanged_valid"
+    },
+    {
+      "example_id": "decompose:018",
+      "new_validation_of_old_trace": "metric_property_not_canonical"
+    }
+  ],
+  "old_smoke_trace_checks": [
+    {
+      "example_id": "contract:partial_accuracy",
+      "original_label_unchanged": true
+    },
+    {
+      "example_id": "contract:partial_memory",
+      "original_label_unchanged": true
+    },
+    {
+      "example_id": "contract:both_supported",
+      "original_label_unchanged": true
+    },
+    {
+      "example_id": "contract:accuracy_conflict",
+      "original_label_unchanged": true
+    },
+    {
+      "example_id": "contract:irrelevant",
+      "original_label_unchanged": true
+    },
+    {
+      "example_id": "contract:negation",
+      "original_label_unchanged": true
+    },
+    {
+      "example_id": "contract:causality_missing",
+      "original_label_unchanged": true
+    },
+    {
+      "example_id": "contract:scope",
+      "original_label_unchanged": true
+    },
+    {
+      "example_id": "contract:cross_sentence",
+      "original_label_unchanged": true
+    },
+    {
+      "example_id": "contract:wrong_units",
+      "original_label_unchanged": true
+    },
+    {
+      "example_id": "contract:atomic_support",
+      "original_label_unchanged": true
+    },
+    {
+      "example_id": "contract:bounded_scope",
+      "original_label_unchanged": true
+    }
+  ],
+  "real_qwen_tokenizer_checks": [
+    {
+      "case": "decompose:001/original",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 77,
+      "split_pieces": []
+    },
+    {
+      "case": "decompose:002/original",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 43,
+      "split_pieces": []
+    },
+    {
+      "case": "decompose:003/original",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 39,
+      "split_pieces": []
+    },
+    {
+      "case": "decompose:004/original",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 41,
+      "split_pieces": []
+    },
+    {
+      "case": "decompose:005/original",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 41,
+      "split_pieces": []
+    },
+    {
+      "case": "decompose:006/original",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 46,
+      "split_pieces": []
+    },
+    {
+      "case": "decompose:007/original",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 42,
+      "split_pieces": []
+    },
+    {
+      "case": "decompose:008/original",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 45,
+      "split_pieces": []
+    },
+    {
+      "case": "decompose:009/original",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 45,
+      "split_pieces": []
+    },
+    {
+      "case": "decompose:010/original",
+      "accepted": false,
+      "expected_accepted": false,
+      "legal_path_tokens_including_eos": null,
+      "split_pieces": [
+        "im"
+      ]
+    },
+    {
+      "case": "decompose:011/original",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 53,
+      "split_pieces": []
+    },
+    {
+      "case": "decompose:012/original",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 50,
+      "split_pieces": []
+    },
+    {
+      "case": "decompose:013/original",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 46,
+      "split_pieces": []
+    },
+    {
+      "case": "decompose:014/original",
+      "accepted": false,
+      "expected_accepted": false,
+      "legal_path_tokens_including_eos": null,
+      "split_pieces": [
+        "im"
+      ]
+    },
+    {
+      "case": "decompose:015/original",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 40,
+      "split_pieces": []
+    },
+    {
+      "case": "decompose:016/original",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 38,
+      "split_pieces": []
+    },
+    {
+      "case": "decompose:017/original",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 78,
+      "split_pieces": []
+    },
+    {
+      "case": "decompose:018/original",
+      "accepted": false,
+      "expected_accepted": false,
+      "legal_path_tokens_including_eos": null,
+      "split_pieces": [
+        "g"
+      ]
+    },
+    {
+      "case": "decompose:010/synthetic_canonical_alternative",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 45,
+      "split_pieces": []
+    },
+    {
+      "case": "decompose:014/synthetic_canonical_alternative",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 44,
+      "split_pieces": []
+    },
+    {
+      "case": "decompose:018/synthetic_canonical_alternative",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 55,
+      "split_pieces": []
+    },
+    {
+      "case": "novel:0/canonical",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 46,
+      "split_pieces": []
+    },
+    {
+      "case": "novel:0/dropped_modifier",
+      "accepted": false,
+      "expected_accepted": false,
+      "legal_path_tokens_including_eos": null,
+      "split_pieces": [
+        "f"
+      ]
+    },
+    {
+      "case": "novel:1/canonical",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 48,
+      "split_pieces": []
+    },
+    {
+      "case": "novel:1/dropped_modifier",
+      "accepted": false,
+      "expected_accepted": false,
+      "legal_path_tokens_including_eos": null,
+      "split_pieces": [
+        "skill"
+      ]
+    },
+    {
+      "case": "novel:2/canonical",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 45,
+      "split_pieces": []
+    },
+    {
+      "case": "novel:2/dropped_modifier",
+      "accepted": false,
+      "expected_accepted": false,
+      "legal_path_tokens_including_eos": null,
+      "split_pieces": [
+        "var"
+      ]
+    },
+    {
+      "case": "novel:3/canonical",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 40,
+      "split_pieces": []
+    },
+    {
+      "case": "novel:3/dropped_modifier",
+      "accepted": false,
+      "expected_accepted": false,
+      "legal_path_tokens_including_eos": null,
+      "split_pieces": [
+        "lat"
+      ]
+    },
+    {
+      "case": "novel:4/canonical",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 46,
+      "split_pieces": []
+    },
+    {
+      "case": "novel:4/dropped_modifier",
+      "accepted": false,
+      "expected_accepted": false,
+      "legal_path_tokens_including_eos": null,
+      "split_pieces": [
+        "pressure"
+      ]
+    },
+    {
+      "case": "novel:5/canonical",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 39,
+      "split_pieces": []
+    },
+    {
+      "case": "novel:5/dropped_modifier",
+      "accepted": false,
+      "expected_accepted": false,
+      "legal_path_tokens_including_eos": null,
+      "split_pieces": [
+        "quality"
+      ]
+    },
+    {
+      "case": "novel:6/canonical",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 39,
+      "split_pieces": []
+    },
+    {
+      "case": "novel:6/dropped_modifier",
+      "accepted": false,
+      "expected_accepted": false,
+      "legal_path_tokens_including_eos": null,
+      "split_pieces": [
+        "resolution"
+      ]
+    },
+    {
+      "case": "novel:7/canonical",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 47,
+      "split_pieces": []
+    },
+    {
+      "case": "novel:7/dropped_modifier",
+      "accepted": false,
+      "expected_accepted": false,
+      "legal_path_tokens_including_eos": null,
+      "split_pieces": [
+        "precision"
+      ]
+    },
+    {
+      "case": "took seven minutes",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 38,
+      "split_pieces": []
+    },
+    {
+      "case": "evaluated six systems",
+      "accepted": true,
+      "expected_accepted": true,
+      "legal_path_tokens_including_eos": 46,
+      "split_pieces": []
+    }
+  ],
+  "shared_tokenizer_files": {
+    "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+    "tokenizer_config.json": "d9bf1d78a80bad5eb65b83c2608910e3be00a9d3250c8153a5a393ad1257e1d6"
+  },
+  "torch_version": "2.6.0+cpu",
+  "cuda_available": false,
+  "note": "Old traces retain their original policy and results. Canonical alternatives and novel fixtures are handcrafted. These checks do not measure new model accuracy, false support or human review."
+}

@@ -1,0 +1,515 @@
+{
+  "kind": "read_only_legacy_assessment_replay_not_new_model_predictions",
+  "candidate": "atomic-verifier-constrained-v8-cellfix10",
+  "criteria_sha256": "2edd14d0e7fb728b3ba6eb99923ade128573ed2938f55bfeb2d1a0e4a06f8cda",
+  "cases": [
+    {
+      "example_id": "contract:partial_accuracy",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "support",
+          "explanation": "The checked in-scope evidence establishes this predicate."
+        },
+        {
+          "stage": "part_2",
+          "accepted": true,
+          "checked_label": "not_enough_info",
+          "explanation": "The checked ledger does not decide this claim part. Evidence resolving this predicate for the claimed target and scope: target=Model Juniper; predicate/metric=accuracy."
+        }
+      ]
+    },
+    {
+      "example_id": "contract:partial_memory",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "not_enough_info",
+          "explanation": "The checked ledger does not decide this claim part. Evidence resolving this predicate for the claimed target and scope: target=Model Juniper; predicate/metric=memory."
+        },
+        {
+          "stage": "part_2",
+          "accepted": true,
+          "checked_label": "support",
+          "explanation": "The checked in-scope evidence establishes this predicate."
+        }
+      ]
+    },
+    {
+      "example_id": "contract:both_supported",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "support",
+          "explanation": "The checked in-scope evidence establishes this predicate."
+        },
+        {
+          "stage": "part_2",
+          "accepted": true,
+          "checked_label": "support",
+          "explanation": "The checked in-scope evidence establishes this predicate."
+        }
+      ]
+    },
+    {
+      "example_id": "contract:accuracy_conflict",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "support",
+          "explanation": "The checked in-scope evidence establishes this predicate."
+        },
+        {
+          "stage": "part_2",
+          "accepted": true,
+          "checked_label": "contradict",
+          "explanation": "The checked in-scope evidence refutes this predicate."
+        }
+      ]
+    },
+    {
+      "example_id": "contract:irrelevant",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "not_enough_info",
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=Model Juniper; predicate/metric=accuracy."
+        }
+      ]
+    },
+    {
+      "example_id": "contract:negation",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "contradict",
+          "explanation": "The checked in-scope evidence refutes this predicate."
+        }
+      ]
+    },
+    {
+      "example_id": "contract:causality_missing",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "not_enough_info",
+          "explanation": "The checked ledger does not decide this claim part. Evidence resolving this predicate for the claimed target and scope: target=new index; predicate/metric=latency."
+        }
+      ]
+    },
+    {
+      "example_id": "contract:scope",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "contradict",
+          "explanation": "A checked member fails the predicate, refuting ALL."
+        }
+      ]
+    },
+    {
+      "example_id": "contract:cross_sentence",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "support",
+          "explanation": "The checked in-scope evidence establishes this predicate."
+        }
+      ]
+    },
+    {
+      "example_id": "contract:wrong_units",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "contradict",
+          "explanation": "The checked in-scope evidence refutes this predicate."
+        }
+      ]
+    },
+    {
+      "example_id": "contract:atomic_support",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "support",
+          "explanation": "The checked in-scope evidence establishes this predicate."
+        }
+      ]
+    },
+    {
+      "example_id": "contract:bounded_scope",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "support",
+          "explanation": "The checked in-scope evidence establishes this predicate."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:universal:support",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "support",
+          "explanation": "The complete checked population satisfies the predicate for every member."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:universal:contradict",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "contradict",
+          "explanation": "A checked member fails the predicate, refuting ALL."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:universal:not_enough_info",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "not_enough_info",
+          "explanation": "The checked ledger does not decide this claim part. A closed target population and the remaining member results: target=validation shard; predicate/metric=recall; time=after the revision."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:existential:support",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "support",
+          "explanation": "A checked member satisfies the predicate, establishing SOME."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:existential:contradict",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": false,
+          "issue": "population_witness_missing"
+        }
+      ]
+    },
+    {
+      "example_id": "scope:existential:not_enough_info",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "not_enough_info",
+          "explanation": "The checked ledger does not decide this claim part. A closed target population and the remaining member results: target=audited cache node; predicate/metric=response time; time=after the patch."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:none:support",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "support",
+          "explanation": "The complete checked population has no true member, establishing NONE."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:none:contradict",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "contradict",
+          "explanation": "A checked member satisfies the predicate, refuting NONE."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:none:not_enough_info",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "not_enough_info",
+          "explanation": "The checked ledger does not decide this claim part. The unreported in-scope measurement/result: target=monitored pumps; predicate/metric=leaked; time=during the overnight test."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:entity:support",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "support",
+          "explanation": "The checked in-scope evidence establishes this predicate."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:entity:contradict",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "contradict",
+          "explanation": "The checked in-scope evidence refutes this predicate."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:entity:not_enough_info",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "not_enough_info",
+          "explanation": "The checked ledger does not decide this claim part. Evidence resolving this predicate for the claimed target and scope: target=North gateway; predicate/metric=error rate; time=after calibration."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:time:support",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "support",
+          "explanation": "The complete checked population satisfies the predicate for every member."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:time:contradict",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "contradict",
+          "explanation": "A checked member fails the predicate, refuting ALL."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:time:not_enough_info",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "not_enough_info",
+          "explanation": "The checked ledger does not decide this claim part. A closed target population and the remaining member results: target=weekly trial; predicate/metric=throughput; condition=in May."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:direction:support",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "support",
+          "explanation": "The checked in-scope evidence establishes this predicate."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:direction:contradict",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "contradict",
+          "explanation": "The checked in-scope evidence refutes this predicate."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:direction:not_enough_info",
+      "stored_cellfix9_stop": "invalid_output_exhausted",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": false,
+          "issue": "unattributed_prose_citation"
+        }
+      ]
+    },
+    {
+      "example_id": "scope:metric:support",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "support",
+          "explanation": "The checked in-scope evidence establishes this predicate."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:metric:contradict",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "contradict",
+          "explanation": "The checked in-scope evidence refutes this predicate."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:metric:not_enough_info",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "not_enough_info",
+          "explanation": "The checked ledger does not decide this claim part. The unreported in-scope measurement/result: target=configuration change; predicate/metric=precision."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:conjunction:support",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "not_enough_info",
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=extractor; predicate/metric=memory use; time=After tuning."
+        },
+        {
+          "stage": "part_2",
+          "accepted": true,
+          "checked_label": "not_enough_info",
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=extractor; predicate/metric=token recall; time=After tuning."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:conjunction:contradict",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "not_enough_info",
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=extractor; predicate/metric=memory use; time=After tuning."
+        },
+        {
+          "stage": "part_2",
+          "accepted": true,
+          "checked_label": "not_enough_info",
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=extractor; predicate/metric=token recall; time=After tuning."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:conjunction:not_enough_info",
+      "stored_cellfix9_stop": "invalid_output_exhausted",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": false,
+          "issue": "missing_information_wrong_metric"
+        }
+      ]
+    },
+    {
+      "example_id": "scope:condition:support",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "support",
+          "explanation": "The complete checked population satisfies the predicate for every member."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:condition:contradict",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "contradict",
+          "explanation": "A checked member fails the predicate, refuting ALL."
+        }
+      ]
+    },
+    {
+      "example_id": "scope:condition:not_enough_info",
+      "stored_cellfix9_stop": "completed",
+      "replayed_last_assessment_attempts": [
+        {
+          "stage": "part_1",
+          "accepted": true,
+          "checked_label": "not_enough_info",
+          "explanation": "The checked ledger does not decide this claim part. A closed target population and the remaining member results: target=batch; predicate/metric=yield; time=after the update; condition=in the low-temperature group."
+        }
+      ]
+    }
+  ],
+  "new_model_inference_completed": false,
+  "full39_quality_measured": false,
+  "rejected_legacy_cases": [
+    "scope:conjunction:not_enough_info",
+    "scope:direction:not_enough_info",
+    "scope:existential:contradict"
+  ]
+}

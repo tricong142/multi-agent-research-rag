@@ -91,7 +91,7 @@ def run_diagnostic(manifest: Path, output_dir: Path, *, page_no: int | None = No
             api_stream.flush()
 
         model_dir = Path(__file__).resolve().parents[2] / "train_agent2_reader/layoutlmv3_doclaynet_model"
-        agent = ReaderAgent(str(model_dir), on_api_attempt=record_api)
+        agent = ReaderAgent(str(model_dir), on_api_attempt=record_api, allow_remote=True)
 
         def process_page(pdf_path, selected_page):
             context.update(pdf_path=Path(pdf_path).relative_to(manifest.parent).as_posix(), page_no=selected_page)

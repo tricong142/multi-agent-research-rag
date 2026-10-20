@@ -1,0 +1,57 @@
+{
+  "kind": "offline_real_tokenizer_feasibility",
+  "model_inference": false,
+  "fixture_count": 18,
+  "fixtures_accepted": [
+    "decompose:001",
+    "decompose:002",
+    "decompose:003",
+    "decompose:004",
+    "decompose:005",
+    "decompose:006",
+    "decompose:007",
+    "decompose:008",
+    "decompose:009",
+    "decompose:010",
+    "decompose:011",
+    "decompose:012",
+    "decompose:013",
+    "decompose:014",
+    "decompose:015",
+    "decompose:016",
+    "decompose:017",
+    "decompose:018"
+  ],
+  "old_bad_drafts_rejected": [
+    {
+      "example_id": "decompose:007",
+      "metric": "took"
+    },
+    {
+      "example_id": "decompose:007",
+      "metric": "took"
+    },
+    {
+      "example_id": "decompose:008",
+      "metric": "contained"
+    },
+    {
+      "example_id": "decompose:008",
+      "metric": "240 documents"
+    }
+  ],
+  "original_v6_predictions_unchanged": true,
+  "tokenizer_source": "frozen shared local Qwen tokenizer",
+  "decoder": {
+    "engine": "lm-format-enforcer",
+    "version": "0.11.3",
+    "interegular": "0.3.3",
+    "policy": "atomic-schema-decoding-v4",
+    "source_enum_max_words": 80,
+    "strict_field_order": true,
+    "max_consecutive_whitespaces": 4,
+    "num_beams": 1,
+    "repetition_penalty": 1.05
+  },
+  "note": "Counterfactual fixtures are not v7 predictions or proof of 18/18 inference."
+}

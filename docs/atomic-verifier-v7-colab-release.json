@@ -1,0 +1,293 @@
+{
+  "version": "atomic-verifier-constrained-v7-20261016",
+  "platform": "Google Colab CUDA",
+  "criteria_sha256": "3e9a61616903e99f3c767e45c2ba361b44f6ea6c65732598ac3166b6cf23af7f",
+  "payload_sha256": "69f6f3dce452e6d63c8c2308928afcc6fc9030323fde3f01493749c71ad96aaa",
+  "payload_files": {
+    "04_factchecker/checkpoints/factchecker_merged/chat_template.jinja": {
+      "size": 2507,
+      "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f"
+    },
+    "04_factchecker/checkpoints/factchecker_merged/config.json": {
+      "size": 1548,
+      "sha256": "2e13d6edf2413d55422a2fe541d4fc851e17b01cc7a16601a107547687e7951d"
+    },
+    "04_factchecker/checkpoints/factchecker_merged/generation_config.json": {
+      "size": 242,
+      "sha256": "dd1a52c6b9e837741be9dfa5c7fb8f0d8d9ed57e06d399a0fe52ec23d10ca066"
+    },
+    "04_factchecker/checkpoints/factchecker_merged/tokenizer.json": {
+      "size": 11421892,
+      "sha256": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8"
+    },
+    "04_factchecker/checkpoints/factchecker_merged/tokenizer_config.json": {
+      "size": 664,
+      "sha256": "d9bf1d78a80bad5eb65b83c2608910e3be00a9d3250c8153a5a393ad1257e1d6"
+    },
+    "04_factchecker/config.py": {
+      "size": 2026,
+      "sha256": "2d9f99a6dee5a7a4b40278a552002d7d9737e060730bc9d5e48de4923693a584"
+    },
+    "04_factchecker/eval_factchecker.py": {
+      "size": 7759,
+      "sha256": "579907c751d107f9b1634511501b9dfd433ac9d583d551d989e1b95f6f7cbc0e"
+    },
+    "04_factchecker/generate_training_data.py": {
+      "size": 6255,
+      "sha256": "e42e8abde6571f2257b2a05500b73395ec51c41407e4b35b872ef38684533e38"
+    },
+    "04_factchecker/inference/__init__.py": {
+      "size": 474,
+      "sha256": "11edee781c7d9592646acc9ebbca280c818fe561abb487995b079cbbe3ac6495"
+    },
+    "04_factchecker/inference/action_recommender.py": {
+      "size": 1846,
+      "sha256": "9e8d9350142122e573ed4ab758581b0076dc39d339566dd598c9f757fba9c37d"
+    },
+    "04_factchecker/inference/atomic_decoding.py": {
+      "size": 7568,
+      "sha256": "0dde12339b8733d6dfb9f36685de38a4e09214517551c0994cb785ec89a48219"
+    },
+    "04_factchecker/inference/atomic_verifier.py": {
+      "size": 43403,
+      "sha256": "f03ba564848781f75314e533146970915de1ada84ce81e192879bf60f2d29a5b"
+    },
+    "04_factchecker/inference/confidence.py": {
+      "size": 3463,
+      "sha256": "307cdfb8bb9509a5189a31994d0aaa4c37f662e008f36dadaa54dcabeba0a09b"
+    },
+    "04_factchecker/inference/evidence_screen.py": {
+      "size": 5405,
+      "sha256": "23574b7320ac576989b283a58d3e81d58be001f1b1c286523d4f0baa04dfcab5"
+    },
+    "04_factchecker/inference/judge.py": {
+      "size": 5412,
+      "sha256": "818aa5a4dc7f8065e101264e59d57828cc00f60d1c105156e49c03f374f6dbb7"
+    },
+    "04_factchecker/inference/numeric_verifier.py": {
+      "size": 8567,
+      "sha256": "dcdc6e844f3b1afcb5b2fab71591b6044011a3b2762a6dad6b89d0ded02816d4"
+    },
+    "04_factchecker/inference/verifier.py": {
+      "size": 11971,
+      "sha256": "7eff9f8678cf1a4c270e59ada432bdf12a2fd6323c3d598fa34cc3513fd468f8"
+    },
+    "04_factchecker/merge_lora_weights.py": {
+      "size": 6730,
+      "sha256": "bb237ec90020328f9cb2a849f75f4688e913bc41f35b661781ad113a4af78420"
+    },
+    "04_factchecker/node.py": {
+      "size": 7793,
+      "sha256": "577e62d2ce330d19bc4791641066d8d17b8dc4baebfc3dab455d593658afc48c"
+    },
+    "04_factchecker/prompts.py": {
+      "size": 7967,
+      "sha256": "fe7be89a4ac6f789f9629f90c9710aeafc074806c066fa2451cb889121b6017e"
+    },
+    "04_factchecker/train_factchecker_qlora.py": {
+      "size": 21854,
+      "sha256": "99cee60ec35a3b60f9da41719891c3130ec5c64bf38e7e5bd4872382b13cc379"
+    },
+    "04_factchecker/validate_labels.py": {
+      "size": 3825,
+      "sha256": "1c70278ad4ab59659dade53b8f8eb6f4a1cf135d7ab957d685b248a5b1cd9877"
+    },
+    "requirements-atomic-verifier.txt": {
+      "size": 131,
+      "sha256": "b95eaa539ed6046f9261b09cdaa82017360568703d8af8d2bc6d8eed3c9af370"
+    },
+    "requirements-orchestrator.txt": {
+      "size": 467,
+      "sha256": "31b5dac851eaaf005a151e9c071226aeafeb4679ebe4019d0368e68fbd0dacd4"
+    },
+    "research_rag/__init__.py": {
+      "size": 134,
+      "sha256": "cc7fea0e7e9fe57abaea1ca3e78e70ecaad9feb9819b088c50cdf26ba0d249e5"
+    },
+    "research_rag/adapters.py": {
+      "size": 5305,
+      "sha256": "22537d4284338c66a1262d03dd3ce55dea4a95a2fa859ae78c638b66c45f147c"
+    },
+    "research_rag/controller.py": {
+      "size": 7426,
+      "sha256": "b97466aece81f27bd89d62f1fd0c61857a8a604b2b9681faf1850cdfb55ff43f"
+    },
+    "research_rag/evaluate.py": {
+      "size": 10760,
+      "sha256": "48f5936f8ef3e3454ab7d2049d803be18d67134279fe14359e4c2ec0451fcf66"
+    },
+    "research_rag/evaluation/__init__.py": {
+      "size": 66,
+      "sha256": "edf15e92c3397d31441733113a0ea6bc45d805a6084ef354526ffce327d7dd5d"
+    },
+    "research_rag/evaluation/atomic_verifier_contract_v7.json": {
+      "size": 6951,
+      "sha256": "206227cc94c5711d9b68af08a540b68a580f72b74751c7053cf8a239eea781ed"
+    },
+    "research_rag/evaluation/atomic_verifier_criteria_v7.json": {
+      "size": 8458,
+      "sha256": "3e9a61616903e99f3c767e45c2ba361b44f6ea6c65732598ac3166b6cf23af7f"
+    },
+    "research_rag/evaluation/atomic_verifier_logic_v3_baseline.json": {
+      "size": 31343,
+      "sha256": "42f8fab1e7b5a9056538481113d6590d4e84d0b089989472afe09f9ccd16be85"
+    },
+    "research_rag/evaluation/blind_verifier_scope_regression_cases.jsonl": {
+      "size": 16356,
+      "sha256": "f349b1d6a50ca417c28c43d5fced1f064fc43ebdf362d70acfc574d7d37ed45c"
+    },
+    "research_rag/evaluation/compare_blind_verifier.py": {
+      "size": 16716,
+      "sha256": "ea14524f1f43c806975e0adbe0c0f24eecf23fd970123be735b9e14b7e6644cb"
+    },
+    "research_rag/evaluation/compare_confidence_backends.py": {
+      "size": 10701,
+      "sha256": "0d383a92d02cec05743c3585058cd1fd7a4dbd5daab3730beee08b499eb5e873"
+    },
+    "research_rag/evaluation/compare_factchecker.py": {
+      "size": 18763,
+      "sha256": "ce7a74e56699a35d597493dd5152972a0cf40447aab6000774c7d76209574ae7"
+    },
+    "research_rag/evaluation/decomposition_probe_claims_v2.jsonl": {
+      "size": 1711,
+      "sha256": "440030681bca80724ab4ee0e85e79ac70db7f1703f77587991000cb07b6bea13"
+    },
+    "research_rag/evaluation/evaluate_atomic_verifier.py": {
+      "size": 30220,
+      "sha256": "52b0a402e307e52ee71dda275ce776b92109bc4d31a237cf555e3b8bd64f1a41"
+    },
+    "research_rag/evaluation/factchecker_contract_cases.jsonl": {
+      "size": 3533,
+      "sha256": "918a1a95cfed421aa8748d7eac29af74a03f93825c30817e002b2b2e16feb7e3"
+    },
+    "research_rag/graph.py": {
+      "size": 32194,
+      "sha256": "b2883b3b7c2ca75cda20ab9223fb8012591dcd3284dc2eca9595af083fc275df"
+    },
+    "research_rag/indexing.py": {
+      "size": 5245,
+      "sha256": "2e02675e5094a278b4eb9d0e2eb0245389fda47ad0d9236ba69fef68f457cd14"
+    },
+    "research_rag/local.py": {
+      "size": 17378,
+      "sha256": "b363825e64d07a5f8c12c5b456b1e58e4b2c4297e93f48d493c5dec3ba8bbf5a"
+    },
+    "research_rag/observe.py": {
+      "size": 2854,
+      "sha256": "46300c0d7f859228523efc2359d01092c48d7317b7509f5f4efb8fc6bbaae051"
+    },
+    "research_rag/planning.py": {
+      "size": 9967,
+      "sha256": "680b25c3d049f7fa908ebaaed9b2a799a2430425eefd33ffb2b362e36a2d24f7"
+    },
+    "research_rag/preflight.py": {
+      "size": 5027,
+      "sha256": "bccd1755d5e23462f334703822d6fb185ca089bd62e2be9214bc0b9558fb5e39"
+    },
+    "research_rag/retrieval.py": {
+      "size": 12717,
+      "sha256": "b2fa64a805591839f5583f189097ee787bf1741ccd78ea44835453941997497e"
+    },
+    "research_rag/state.py": {
+      "size": 1901,
+      "sha256": "0da55a10e4f5d1c33b4f06cad2e78553bfb190bc30c8b96b76a699e69a6fdc39"
+    },
+    "research_rag/tests/test_atomic_contract_v5.py": {
+      "size": 10557,
+      "sha256": "7ef3ce8602be5eaf0007d102d9171475d3623b5063c6e08e85b8bd9eaebdc3fe"
+    },
+    "research_rag/tests/test_atomic_decoding.py": {
+      "size": 8044,
+      "sha256": "7f756e5d8cafb6b6c022789a1c0f38cb8af0bafd5d77e3ab3224c83c41d68e5b"
+    },
+    "research_rag/tests/test_atomic_decomposition_v5.py": {
+      "size": 8424,
+      "sha256": "f5f2e053f0dbe3de38e0751aded20f22bdfa7c3822e4e7b669dd3eea2baf82d9"
+    },
+    "research_rag/tests/test_atomic_experiment.py": {
+      "size": 18376,
+      "sha256": "058552907af0223e330dabec4e8ee5ea1fedb436037b492407521e6751a2668d"
+    },
+    "research_rag/tests/test_atomic_metric_v6.py": {
+      "size": 7270,
+      "sha256": "63433a23b9b07a309c2f88afd8bbe6eb6c552a344d69a9e97a25dedbee095477"
+    },
+    "research_rag/tests/test_atomic_metric_v7.py": {
+      "size": 15427,
+      "sha256": "bc6a1f58e22d90e00884550c664f79b8614e3af27610644d9836339af0045bd0"
+    },
+    "research_rag/tests/test_atomic_verifier.py": {
+      "size": 25697,
+      "sha256": "9145dde144eee2018e6cedcffe3106a425fd94be3f17ff64e1c3a268be58efae"
+    },
+    "research_rag/tests/test_summary_schema.py": {
+      "size": 2852,
+      "sha256": "95f04375510bca135ab56a31c40b1e6b418e126d0b5f9059db8da60dd71b521c"
+    },
+    "research_rag/tests/test_summary_trace.py": {
+      "size": 4974,
+      "sha256": "5285b7109213573ef157e3b8d67e44d6eb78bc9e8b7e3d18290e7cbad5c47538"
+    },
+    "train_agent3_summarizer/config.py": {
+      "size": 5213,
+      "sha256": "cf69370bc520b960cf144386793f44fac316c1c1ea20fd9bb3e566519c6863ea"
+    },
+    "train_agent3_summarizer/critic/__init__.py": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "train_agent3_summarizer/critic/prompts.py": {
+      "size": 3000,
+      "sha256": "5ec5559e8c6542375feb0d6ba619dc8b64036ae748972f9a01b8dfcb3ea54c11"
+    },
+    "train_agent3_summarizer/critic/train_critic_qlora.py": {
+      "size": 19528,
+      "sha256": "abf7cdf00ad5c1c76814e2a9425cb19088690a35ccfad0593b31d2d0f5e123d2"
+    },
+    "train_agent3_summarizer/eval_generator_critic.py": {
+      "size": 27382,
+      "sha256": "9f0867034b0ac472a89afd0d8a6aa41b3a00e13ba89c2defbb7376c985f59e2b"
+    },
+    "train_agent3_summarizer/generate_training_data.py": {
+      "size": 18476,
+      "sha256": "ac2ec01492e5a73bf99700b8f189d247b451d42203c1447397ac8075f9f024ae"
+    },
+    "train_agent3_summarizer/generator/__init__.py": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "train_agent3_summarizer/generator/prompts.py": {
+      "size": 1944,
+      "sha256": "64bf3da00181c210452f86f24cf67b9c8acd9ea12c66e5d33eb2f026327e46fd"
+    },
+    "train_agent3_summarizer/generator/train_generator_qlora.py": {
+      "size": 19436,
+      "sha256": "1262f59c2a3a6be7815f9c3dee434bdde047a5e8a6da9ade82c84a06c9c34d11"
+    },
+    "train_agent3_summarizer/llm_judge_eval.py": {
+      "size": 6421,
+      "sha256": "cc1cfc18b9f1135e54fe35dd3702ad1724d1e7ca5ebc4b4e98b8273edd37f413"
+    },
+    "train_agent3_summarizer/merge_lora_weights.py": {
+      "size": 2558,
+      "sha256": "65dcb7ed6f2711c01fe9a98b2bf83225d22aacaf11219d7fc8bd92f8ca33af8b"
+    },
+    "train_agent3_summarizer/node.py": {
+      "size": 15263,
+      "sha256": "43dff6e0ecccd9b9f7c6eb24d1ee73c0239c45a0c3553faf499a5e9fcfad5096"
+    },
+    "train_agent3_summarizer/validate_evidence_span.py": {
+      "size": 5874,
+      "sha256": "54795f2bf992d07a32a70c8f19852d022f1a4706dbb0b180cf87840bb43f17bf"
+    }
+  },
+  "files": {
+    "scripts/colab_decomposition_probe_v7.ipynb": "5e1fcf1774f208f11d5021ee5429402ccd7cc817f876876a6c8976bd764fda3e",
+    "scripts/build_colab_atomic_probe.py": "90c1e16aff6674d1f55594511361a57c7037a4e55224eb09765bd55232dc5c84",
+    "scripts/freeze_atomic_verifier_v7.py": "23e7541ea32d099d2af075bcea0847d84c91114e2f8b392123ee9fe83a0517b3",
+    "research_rag/evaluation/atomic_verifier_criteria_v7.json": "3e9a61616903e99f3c767e45c2ba361b44f6ea6c65732598ac3166b6cf23af7f",
+    "research_rag/evaluation/atomic_verifier_contract_v7.json": "206227cc94c5711d9b68af08a540b68a580f72b74751c7053cf8a239eea781ed"
+  },
+  "validation_scope": "Isolated verifier only; full five-agent/FAISS preflight not included.",
+  "model_inference_completed": false
+}

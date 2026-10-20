@@ -1,0 +1,145 @@
+{
+  "version": "atomic-contract-constrained-v8",
+  "format": "Contract manifest; executable validators are frozen by source hash, not an external JSON Schema validator",
+  "decomposition": {
+    "required_fields": [
+      "parts",
+      "unresolved"
+    ],
+    "part_fields": [
+      "start",
+      "end",
+      "quote",
+      "quantifier",
+      "scope",
+      "numeric_requirements"
+    ],
+    "scope_fields": [
+      "entity",
+      "metric",
+      "time",
+      "condition"
+    ],
+    "quantifiers": [
+      "atomic",
+      "all",
+      "some",
+      "none"
+    ],
+    "max_parts": 12,
+    "span_convention": "Code derives zero-based exclusive offsets from unique exact quotes; absent/ambiguous/out-of-order/overlapping quotes are rejected",
+    "coverage": "All content words, quantities, units and conditions; no split token or inner AND predicate. A leading AND connector is allowed in a later part. A claim without English AND is represented by exactly one quote containing the complete claim.",
+    "unresolved_policy": "Stop incomplete; no aggregate label",
+    "model_part_fields": [
+      "quote",
+      "quantifier",
+      "scope"
+    ],
+    "repair": "At most 2 attempts; structural repair reports the related scope/coverage failures together. Syntax repair regenerates without replaying malformed JSON. Other errors include prior output, capped at 6000 characters.",
+    "semantic_gate": "18 unique development claims; all structural checks AND human predicate/coverage/quantifier/entity-metric/time-condition review before full 39-case inference",
+    "scope_rules": "Copy capitalization exactly. Preserve population modifiers in entity or condition. Simple time/dataset restrictions bind to their own AND clause. Only explicit leading comma-delimited temporal/dataset prefixes are shared. Each clause has at most one time and one dataset restriction; conflicting or unrepresentable restrictions stop incomplete with unsupported_scope_structure before generation. Other semantic scope assignments require review. A source-derived clause-local rule requires the complete metric predicate for supported positive take-duration and contain/use/evaluate immediate count-plus-object forms. Validator and decoder use the same helper: neither a bare verb nor a quantity/object fragment satisfies that requirement. Named properties remain accepted. Structural failures enter bounded repair with the required source span. This finite grammar is not a complete semantic parser; other predicate meanings still require individual human review."
+  },
+  "assessment": {
+    "required_fields": [
+      "scope_match",
+      "coverage",
+      "observations",
+      "missing_information",
+      "explanation"
+    ],
+    "scope_match": [
+      "matched",
+      "mismatched",
+      "unknown"
+    ],
+    "coverage_fields": [
+      "complete",
+      "members",
+      "quotes"
+    ],
+    "observation_fields": [
+      "member",
+      "truth",
+      "quotes",
+      "explanation",
+      "numeric"
+    ],
+    "truth": [
+      "true",
+      "false",
+      "unknown"
+    ],
+    "truth_semantics": "Positive predicate before applying the quantifier",
+    "max_observations": 16,
+    "complete_coverage": "Quoted nonempty population with unique members and one observation per declared member",
+    "numeric_records": "numeric is null, a legacy single check object, or a nonempty list of at most 16 check objects. Every independent quantity requirement must have its own cited check. Missing or unknown requirements cannot support; any established false requirement refutes the conjunction. Model-declared unknown association remains unknown. Definitive observations missing required numeric records enter bounded repair instead of valid NEI. A proved false requirement may refute without checking the remaining conjuncts. Unknown associations remain unknown. Population counts alone do not force measurement arithmetic.",
+    "limits": {
+      "explanation_chars": 128,
+      "missing_chars": 160,
+      "missing_items": 4,
+      "quote_chars": 384,
+      "quotes_per_record": 4,
+      "member_chars": 160,
+      "context_words": 600
+    }
+  },
+  "numeric": {
+    "required_fields": [
+      "kind",
+      "source_quote",
+      "left",
+      "right"
+    ],
+    "kinds": [
+      "value",
+      "change"
+    ],
+    "operand_fields": [
+      "value",
+      "unit",
+      "quote"
+    ],
+    "requirement_fields": [
+      "start",
+      "end",
+      "quote",
+      "value",
+      "unit",
+      "kind"
+    ],
+    "requirements": "Code derives an occurrence-based numeric_requirements list per normalized part. Offsets are relative to part.quote. Each quote binds a number to its immediate English unit/count noun; repeated values on different objects remain separate. A multi-quantity value check must use exactly one requirement quote as left.quote. Duplicate checks are rejected; each source_quote must be cited in that observation. Compound or ambiguous associations are not established by arithmetic.",
+    "arithmetic": "Source-grounded Decimal; value comparison for each independent requirement, or ordered before/after change",
+    "unknown_policy": "No implicit unit conversion, unsupported comparisons or ambiguous association",
+    "binding": "Named properties keep literal metric binding. Supported complete take/contain/use/evaluate predicates bind the same verb family to the observed quantity, permitting exactly. No relation is established merely by matching a number or unit.",
+    "explicit_denial": "A grounded positive observed X followed by not claimed Y refutes an exact, unqualified claim. Other negation, thresholds, hypothetical context and implicit unit conversion remain unsupported."
+  },
+  "result": {
+    "completed_labels": [
+      "support",
+      "contradict",
+      "not_enough_info"
+    ],
+    "incomplete_label": null,
+    "aggregation": "Per-quantifier part decisions, then AND across parts",
+    "experiment_only": {
+      "claim_verified": false,
+      "promoted_to_serving": false
+    },
+    "semantic_review_required": true
+  },
+  "decoding": {
+    "library": "lm-format-enforcer==0.11.3",
+    "adapter": "Public TokenEnforcer core plus Transformers prefix_allowed_tokens_fn; default serving backend has no constraint kwargs",
+    "decomposition": "Schema required keys/types/arrays; quote/scope enums from exact source spans. AND clauses use separate object alternatives binding each quote to its local time/dataset restrictions plus explicit shared prefixes. No-AND claims require one complete quote. Unsupported scope structures fail preflight rather than generating against an impossible schema.",
+    "assessment": "Exact source sentence/adjacent-sentence enums and bounded windows for long sentences (384 chars), exact member spans (up to eight words/160 chars), source-derived decimal/unit/quote operand alternatives, bounded prose/arrays. Validator still checks citation, requirement coverage and arithmetic; schema does not establish semantic entailment.",
+    "trace": "Every generation records decoder policy and schema SHA256; missing/mismatched trace fails gate",
+    "scope_limit": "At most 80 whitespace-separated claim words for finite source enums",
+    "limitations": "Schema validity does not prove atomicity, correct scope or entailment; truncated output still fails validation; human review required; supported scope grammar is English AND and simple temporal/dataset phrases; whole no-AND quote does not prove semantic atomicity"
+  },
+  "summarizer": {
+    "generator": "Object with exactly answer (nonempty string) and evidence_spans (list of nonempty strings, possibly empty). Invalid output skips Critic and requests repair.",
+    "critic": "Object with boolean is_supported, nonempty reason, and action empty for support or rewrite/request_more_context/lower_confidence otherwise. Optional suggested_query is a nonempty string of at most 4000 characters.",
+    "repair": "Uses existing MAX_INTERNAL_RETRY=3; exhaustion returns unsupported, low confidence. Valid JSON and valid role schema are recorded separately in opt-in traces."
+  },
+  "deadline": "Absolute monotonic case deadline forwarded through RecordingBackend to a per-decode-step Transformers stopping criterion. Late parsed or invalid JSON is rejected with deadline_exceeded; partial generation and call logs are retained. Preparation checks the same deadline. This is cooperative and cannot interrupt a hung CUDA kernel; the hard process watchdog remains."
+}

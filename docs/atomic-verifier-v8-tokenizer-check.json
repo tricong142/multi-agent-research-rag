@@ -1,0 +1,42 @@
+{
+  "kind": "offline_real_tokenizer_feasibility",
+  "model_inference": false,
+  "criteria_sha256": "20b94ccfb2451fce3ebd0fba1e321a344615641b5fa9e6b6ef7d3cef4d08fce1",
+  "script_sha256": "5c374b5a1b86bd1be5d8c290bf3aa12bd8a555c31ca52e28450ee8188e3f6034",
+  "shared_tokenizer_files": {
+    "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+    "tokenizer_config.json": "d9bf1d78a80bad5eb65b83c2608910e3be00a9d3250c8153a5a393ad1257e1d6"
+  },
+  "decomposition_fixtures_accepted": [],
+  "synthetic_multi_quantity_assessment_accepted": true,
+  "assessment_canonical_reencoding_accepted": false,
+  "assessment_legal_token_path": {
+    "generated_tokens_including_eos": 226,
+    "split_tokens": [
+      ".\","
+    ]
+  },
+  "fabricated_quote_ungrounded_number_and_long_prose_rejected": true,
+  "decoder": {
+    "engine": "lm-format-enforcer",
+    "version": "0.11.3",
+    "interegular": "0.3.3",
+    "policy": "atomic-schema-decoding-v5",
+    "source_enum_max_words": 80,
+    "strict_field_order": true,
+    "max_consecutive_whitespaces": 4,
+    "num_beams": 1,
+    "repetition_penalty": 1.05,
+    "assessment_limits": {
+      "explanation_chars": 128,
+      "missing_chars": 160,
+      "missing_items": 4,
+      "quote_chars": 384,
+      "quotes_per_record": 4,
+      "member_chars": 160,
+      "context_words": 600
+    },
+    "deadline_policy": "absolute_monotonic_per_decode_step"
+  },
+  "note": "LMFE may forbid a merged free-text punctuation token while admitting the same text with split tokens. This verifies a legal path, not model inference, label accuracy or human review."
+}

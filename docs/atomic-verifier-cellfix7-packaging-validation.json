@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-20",
+  "candidate": "atomic-verifier-constrained-v8-cellfix7",
+  "status": "frozen_notebook_for_evaluation_pending_gpu_inference",
+  "criteria_sha256": "ac4d37689f99f252c4996a906262850c9f81fa1247cdfdc61e66cae5ee7e1ca9",
+  "payload_sha256": "68ee71b31d8f1bd8ec1ea55203a7c19c59c7601b841f33b27c18ad5e10151c23",
+  "candidate_input_files": 93,
+  "notebook_payload_files": 107,
+  "regression_tests": 237,
+  "new_regression_tests": 26,
+  "packaging_workflow_tests": 20,
+  "failures": 0,
+  "errors": 0,
+  "real_tokenizer_paths": 10,
+  "tokenizer_weights_loaded": false,
+  "extracted_payload_validate_only": {
+    "smoke": {
+      "freeze_valid": true,
+      "cases": 12,
+      "maximum_calls": 96
+    },
+    "probe": {
+      "freeze_valid": true,
+      "cases": 18,
+      "maximum_calls": 36
+    },
+    "full39": {
+      "freeze_valid": true,
+      "cases": 39,
+      "maximum_calls": 312
+    },
+    "validation30": {
+      "freeze_valid": true,
+      "cases": 30,
+      "maximum_calls": 240,
+      "prerequisites_required_for_inference": true
+    }
+  },
+  "model_revision_budget_gate_and_dev_data_unchanged": true,
+  "decomposition_prompt_unchanged": true,
+  "cellfix6_preserved": {
+    "zip_sha256": "d28195992d0d2bd20d6dbbc3b6d7553ab3dd5c0aaf9677dd6504b5057c4518e7",
+    "predictions_sha256": "6ef433c87dc47254134ec0720a5075eeacb742d00c68fae9e4c4d56b8235b97a",
+    "correct_labels": 7,
+    "n": 12,
+    "false_support": 0
+  },
+  "validation30_original_files_unchanged": true,
+  "validation_binding_version": "atomic-cellfix7-validation-binding-v5",
+  "new_human_signature_created": false,
+  "validation_used_for_tuning": false,
+  "new_development_overlap_flags": 0,
+  "new_development_files_screened": 53,
+  "model_inference_completed": false,
+  "smoke_quality_measured": false,
+  "full39_quality_measured": false,
+  "independent_validation_completed": false,
+  "serving_modified": false,
+  "reader_summarizer_e2e_completed": false,
+  "limitations": [
+    "Regression and scripted workflow tests do not measure model accuracy.",
+    "Token checks use handcrafted JSON paths without weights.",
+    "Finite grammar does not establish general entailment, population closure or coreference.",
+    "Validation independence is limited to the recorded provenance and overlap checks; pretraining exposure is unknown."
+  ],
+  "delivery_sha256": {
+    "docs/atomic-verifier-cellfix7-release.json": "4e7f06639d5f1820c755546352d94660662ac35d8db102941506a9f48d7d789c",
+    "docs/atomic-verifier-cellfix7-candidate.json": "1e56b16e759ad1cd199908976d9cd5a160414ad167cd6becd1f3f74bbe476411",
+    "docs/atomic-verifier-cellfix7-validation.json": "b525773f49da335b8ee7180ff56ce3c0c215424f74d025bd551a5c124ebf8845",
+    "docs/atomic-verifier-cellfix7-tokenizer-check.json": "fa40bba7f535160dc3afd45da766ef8263f4a51abb8e8ffdfd8a3592008911b5",
+    "docs/atomic-verifier-cellfix7-validation-overlap.json": "e771377f23b4b70fdaab16c04c2e736fb7f8185747f961443ef6169346847f95",
+    "docs/atomic-verifier-cellfix6-preserved-before-cellfix7.json": "cd063bee1324c65ebbe80082d35e8ed3f43a27c7c18434b955d49af6f5b5d74c",
+    "docs/ATOMIC_VERIFIER_CELLFIX7_RUN_GUIDE.md": "2380fae0e305ee23837eace127724b0ce9f4dabcdf968394bf4e6a6106b5fb6e",
+    "scripts/test_atomic_cellfix7_workflow.py": "67eb9fa9d53cbb28923552b60afe15da91b4475f0f7baf4ef1092dfddf617af3",
+    "scripts/test_colab_cellfix7.py": "9612e74704fbacaa1af15cab10e3f5beb6ecc3079c4eae01e598edaf21d7c8c0",
+    "research-runs/cellfix7-regression.log": "8a263d296414da6b68b793e8a4acc0a3923ed24c618c3680276d103485ca1a8a",
+    "research-runs/cellfix7-packaging-tests.log": "b08c64f8d62243683e1808901a73482dbb1d11245a92ac2c5d0543306c2baa37",
+    "research-runs/cellfix7-payload-validate-only.json": "a1c301a322c16ac9c691aa59b70fc4fd30abf32b47d5e995ff4d86b9e6e25e47"
+  }
+}

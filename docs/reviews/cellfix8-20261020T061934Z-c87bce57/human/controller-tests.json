@@ -1,0 +1,8 @@
+{
+  "test_kind": "scripted_controller_only_no_model",
+  "checks": {
+    "wrong_review": "blocked_before_copy_and_model",
+    "admitted_review": "scripted_control_flow_reaches_admission_then_model_stage_and_preserves_failed_gate"
+  },
+  "new_model_inference_completed": false
+}

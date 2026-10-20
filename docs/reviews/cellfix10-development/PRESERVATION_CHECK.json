@@ -1,0 +1,29 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix10",
+  "criteria_sha256": "2edd14d0e7fb728b3ba6eb99923ade128573ed2938f55bfeb2d1a0e4a06f8cda",
+  "parent_release_files_unchanged": true,
+  "validation30_all_original_files_unchanged": true,
+  "model_revision_budget_gate_unchanged": true,
+  "full39_fixture_unchanged": true,
+  "changed_parent_inputs": [
+    "04_factchecker/inference/assessment_evidence.py",
+    "04_factchecker/inference/atomic_decoding.py",
+    "04_factchecker/inference/atomic_verifier.py",
+    "research_rag/evaluation/atomic_verifier_criteria_v8.json",
+    "research_rag/tests/test_atomic_assessment_cellfix8.py",
+    "research_rag/tests/test_atomic_assessment_v8.py",
+    "research_rag/tests/test_atomic_decoding.py",
+    "research_rag/tests/test_atomic_smoke_cellfix2.py",
+    "research_rag/tests/test_atomic_verifier.py"
+  ],
+  "new_inputs": [
+    "04_factchecker/inference/assessment_reporting.py",
+    "research_rag/evaluation/atomic_cellfix10_closure_adjudication.json",
+    "research_rag/evaluation/atomic_verifier_contract_v8_cellfix10.json",
+    "research_rag/tests/fixtures/atomic_cellfix9_full39_traces.json",
+    "research_rag/tests/test_atomic_assessment_cellfix10.py"
+  ],
+  "gpu_inference_completed": false,
+  "full39_quality_measured": false,
+  "independent_validation_completed": false
+}

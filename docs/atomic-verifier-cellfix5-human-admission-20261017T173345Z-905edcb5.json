@@ -1,0 +1,20 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix5",
+  "probe_run": "20261017T173345Z-905edcb5",
+  "criteria_sha256": "642d66612c25514e3764840f750a97cc85c93d4a32a3e4f23bcabff6b993e84c",
+  "human_review_completed": true,
+  "admission_verified": true,
+  "probe_predictions_sha256": "b555551b7812fd9aa9fcf372715f1551ccd72d1568176de50266c1210c90b014",
+  "semantic_review_sha256": "b1caf56e66a869d7e9c9a3d3b8443449ee3915e1a1a1991304031704364104dc",
+  "reviewer": "Trí Công",
+  "review_file": "docs/semantic-review-cellfix5-20261017T173345Z-905edcb5-human.json",
+  "reviewed_probe_directory": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\cellfix5-reviewed-probe\\20261017T173345Z-905edcb5",
+  "received_review_file": "C:\\Users\\dellcuatri142\\Downloads\\semantic-review.json",
+  "received_review_sha256": "b1caf56e66a869d7e9c9a3d3b8443449ee3915e1a1a1991304031704364104dc",
+  "original_probe_zip_sha256": "e854d7d7276a806941b876ef1a23bc04365677caa2301cda3c9f14356dc4f1bb",
+  "all_claim_texts_match_probe": true,
+  "original_zip_and_unsigned_review_preserved": true,
+  "model_inference_completed": false,
+  "full39_inference_completed": false,
+  "promoted_to_serving": false
+}

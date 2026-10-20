@@ -5,12 +5,16 @@ import hashlib
 import json
 from pathlib import Path
 from pprint import pformat
+import sys
 import zlib
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 def build():
+    sys.path.insert(0, str(ROOT))
+    from research_rag.evaluation.evaluate_atomic_verifier import CRITERIA, load_frozen
+    load_frozen(CRITERIA)
     template = json.loads((ROOT / 'scripts/kaggle_blind_verifier_logic_v3.ipynb').read_text(encoding='utf-8'))
     code = [c['source'] if isinstance(c['source'], str) else ''.join(c['source']) for c in template['cells'] if c['cell_type'] == 'code']
     tree = ast.parse(code[1])
@@ -19,17 +23,20 @@ def build():
     names = [item['path'] for item in old_patch] + [
         '04_factchecker/inference/atomic_verifier.py', '04_factchecker/inference/numeric_verifier.py',
         '04_factchecker/inference/evidence_screen.py', 'research_rag/evaluation/evaluate_atomic_verifier.py',
-        'research_rag/evaluation/atomic_verifier_contract_v5.json', 'research_rag/evaluation/atomic_verifier_criteria_v5.json',
+        'research_rag/evaluation/atomic_verifier_contract_v7.json', 'research_rag/evaluation/atomic_verifier_criteria_v7.json',
         'research_rag/evaluation/atomic_verifier_logic_v3_baseline.json',
         'research_rag/evaluation/decomposition_probe_claims_v2.jsonl',
         'research_rag/tests/test_atomic_verifier.py', 'research_rag/tests/test_atomic_experiment.py']
-    frozen = json.loads((ROOT / 'research_rag/evaluation/atomic_verifier_criteria_v5.json').read_text())
+    frozen = json.loads((ROOT / 'research_rag/evaluation/atomic_verifier_criteria_v7.json').read_text())
     names += [name for name in frozen['source_sha256'] if name not in names]
     assert len(names) == len(set(names))
     payload = []
     old_runtime = next(ast.literal_eval(node.value) for node in tree.body if isinstance(node, ast.Assign)
                        and any(isinstance(t, ast.Name) and t.id == 'runtime_patch' for t in node.targets))
     original_hashes = {item['path']: item['sha256'] for item in old_runtime + old_patch}
+    # This file is installed by the pinned 49-file diagnostics manifest, before
+    # either template patch. Preserve its verified pre-v6 hash as an allowed base.
+    original_hashes['research_rag/tests/test_summary_trace.py'] = '20ff80f2cfce9dad4190e1e52fe21507a9932bc91b0cf3f6318d897dbd5a40a0'
     for name in names:
         data = (ROOT / name).read_bytes()
         item = {'path': name, 'size': len(data), 'sha256': hashlib.sha256(data).hexdigest(),
@@ -51,7 +58,7 @@ def build():
     # Both must pass before cell 3; validate-only never loads a model.
     setup = setup.replace("run('pip-check',", "run('structured-decoder', [python, '-m', 'pip', 'install', '--disable-pip-version-check', '-r', 'requirements-atomic-verifier.txt'])\nrun('pip-check',")
     setup += "run('atomic-freeze-check', [python, '-m', 'research_rag.evaluation.evaluate_atomic_verifier', '--output-dir', str(out/'decomposition-probe'), '--decomposition-probe', '--validate-only'])\n"
-    setup += "print('SETUP COMPLETE: atomic-verifier-constrained-v5-20261013; runtime tests, preflight and freeze check passed')\n"
+    setup += "print('SETUP COMPLETE: atomic-verifier-constrained-v7-20261016; runtime tests, preflight and freeze check passed')\n"
     run = '''assert statuses.get('preflight', {}).get('exit_code') == 0 and statuses.get('atomic-freeze-check', {}).get('exit_code') == 0, 'Complete cell 2 first'
 diagnostic_env = env.copy()
 diagnostic_env.pop('HF_HUB_OFFLINE', None)
@@ -67,15 +74,27 @@ print('ZIP:', out.with_suffix('.zip'))
 print('Exit 1 means a quality gate may have failed; 124 means process timeout. Preserve all output.')
 print('Save Version WITH Output, download ZIP, then stop GPU. Review all 18 decompositions before 39 cases.')
 '''
-    intro = '# Decomposition probe v5 — 18 development claims only\n\nNEW private Kaggle notebook, GPU T4 and Internet ON; three CODE cells.\n1. Mount the existing Five Agents Workspace / Runtime Diagnostics datasets.\n2. Create isolated runtime with venv --without-pip; apply verified patches;\n   run contract tests, preflight and frozen source/data/prompt checks.\n3. Run ONLY decomposition for 18 unique inspected development claims using\n   pinned Qwen2.5-3B-Instruct. No evidence assessment, label generation or Gemini.\n\nThe model returns exact quotes, quantifier and a four-field scope OBJECT.\nCode derives start/end and checks uniqueness, order, coverage and shared scope.\nLeading AND at a later predicate boundary is allowed; inner AND still requires\nseparation. Scope errors identify the rejected field, and dataset restrictions\nbelong in condition. Syntax repairs regenerate without echoing malformed JSON.\nV5 enforces the JSON schema during token generation with lm-format-enforcer\n0.11.3, using a core adapter compatible with Transformers 5.16.1.\nQuotes/scope values come from exact claim spans; unambiguous quantifiers are\nrestricted from claim wording. No gold labels are used. At most 80 claim words.\nClaims without AND keep one complete quote. Simple temporal/dataset scope is\nrestricted in the schema and checked after generation; repair reports the\nrelated failures together. Population modifiers must remain attached to entity.\nSupported grammar is English AND and simple temporal/dataset phrases.\nNamed properties are preferred over generic verbs in scope.metric.\nFrozen version: atomic-verifier-constrained-v5-20261013.\nMaximum 2 calls/claim, 2 attempts, 1536 generated tokens/call, 180 seconds/claim;\n36 calls and 55296 generated tokens total. Hard process deadline 2400 seconds\nincludes model loading/downloads; notebook watchdog 2520 seconds. These are caps.\nDo not rerun cell 3 in an existing run. Preserve failed output as evidence.\n\nAutomated gate: all 18 valid, complete decompositions. This DOES NOT establish\ncorrect predicate meaning. Inspect predictions.jsonl and evidence-review.jsonl.\nsemantic-review.json starts pending; a human must review every claim for factual\npredicates, coverage, quantifiers, entity/metric and time/condition scope.\nDo not fill all true without reviewing. A structurally valid noun fragment can\nstill be semantically wrong. These seen cases are not independent held-out data.\nThe 39-case runner requires a matching passed probe and completed semantic review.\nNo serving promotion. Download ZIP with Output and send it for review; stop GPU.\n'
+    intro = '# Decomposition probe v7 — 18 development claims only\n\nNEW private Kaggle notebook, GPU T4 and Internet ON; three CODE cells.\n1. Mount the existing Five Agents Workspace / Runtime Diagnostics datasets.\n2. Create isolated runtime with venv --without-pip; apply verified patches;\n   run contract tests, preflight and frozen source/data/prompt checks.\n3. Run ONLY decomposition for 18 unique inspected development claims using\n   pinned Qwen2.5-3B-Instruct. No evidence assessment, label generation or Gemini.\n\nThe model returns exact quotes, quantifier and a four-field scope OBJECT.\nCode derives start/end and checks uniqueness, order, coverage and shared scope.\nLeading AND at a later predicate boundary is allowed; inner AND still requires\nseparation. Scope errors identify the rejected field, and dataset restrictions\nbelong in condition. Syntax repairs regenerate without echoing malformed JSON.\nV7 enforces the JSON schema during token generation with lm-format-enforcer\n0.11.3, using a core adapter compatible with Transformers 5.16.1.\nQuotes/scope values come from exact claim spans; unambiguous quantifiers are\nrestricted from claim wording. No gold labels are used. At most 80 claim words.\nClaims without AND keep one complete quote. Simple temporal/dataset scope is\nrestricted in the schema and checked after generation; repair reports the\nrelated failures together. Population modifiers must remain in entity or condition.\nSupported grammar is English AND and simple temporal/dataset phrases.\nNamed properties are preferred over generic verbs in scope.metric.\nV7 shares clause-local complete-predicate requirements between validator and\ndecoder for supported positive duration/count forms; noun fragments are excluded.\nFrozen version: atomic-verifier-constrained-v7-20261016.\nMaximum 2 calls/claim, 2 attempts, 1536 generated tokens/call, 180 seconds/claim;\n36 calls and 55296 generated tokens total. Hard process deadline 2400 seconds\nincludes model loading/downloads; notebook watchdog 2520 seconds. These are caps.\nDo not rerun cell 3 in an existing run. Preserve failed output as evidence.\n\nAutomated gate: all 18 valid, complete decompositions. This DOES NOT establish\ncorrect predicate meaning. Inspect predictions.jsonl and evidence-review.jsonl.\nsemantic-review.json starts pending; a human must review every claim for factual\npredicates, coverage, quantifiers, entity/metric and time/condition scope.\nDo not fill all true without reviewing. A structurally valid noun fragment can\nstill be semantically wrong. These seen cases are not independent held-out data.\nThe 39-case runner requires a matching passed probe and completed semantic review.\nNo serving promotion. Download ZIP with Output and send it for review; stop GPU.\n'
+    intro = intro.replace('Code derives start/end and checks uniqueness, order, coverage and shared scope.',
+        'Code derives offsets and numeric requirements, and checks order, coverage and clause-local scope. Only explicit leading scope prefixes are shared.')
+    intro = intro.replace('Simple temporal/dataset scope is\nrestricted in the schema',
+        'Clause-local temporal/dataset scope is\nrestricted in separate schema alternatives')
     cells = [{'cell_type': 'markdown', 'metadata': {}, 'source': intro}]
     for index, body in enumerate((code[0], setup, run), 1):
         compile(body, 'atomic-cell-' + str(index), 'exec')
         cells.append({'cell_type': 'code', 'metadata': {}, 'source': body, 'execution_count': None, 'outputs': []})
-    target = ROOT / 'scripts/kaggle_decomposition_probe_v5.ipynb'
+    target = ROOT / 'scripts/kaggle_decomposition_probe_v7.ipynb'
     target.write_text(json.dumps({'cells': cells, 'metadata': template['metadata'], 'nbformat': 4, 'nbformat_minor': 4},
                                 ensure_ascii=False, indent=2), encoding='utf-8')
     print(target.name, 'SHA256:', hashlib.sha256(target.read_bytes()).hexdigest())
+    manifest = {'version': frozen['version'], 'files': {
+        name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in (
+            target.relative_to(ROOT).as_posix(), 'research_rag/evaluation/atomic_verifier_criteria_v7.json',
+            'research_rag/evaluation/atomic_verifier_contract_v7.json',
+            'scripts/build_atomic_verifier_notebook.py', 'scripts/freeze_atomic_verifier_v7.py')},
+        'validation': 'Offline source/prompt/data/contract freeze checked before packaging; model quality and human semantic review remain pending.'}
+    (ROOT / 'docs/atomic-verifier-v7-release.json').write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     return target
 
 

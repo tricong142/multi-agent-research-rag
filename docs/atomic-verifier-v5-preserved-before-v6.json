@@ -1,0 +1,11 @@
+{
+  "snapshot": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\atomic-verifier-v5-source-snapshot-20261015T103401Z-723b3e4a",
+  "archive": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\atomic-verifier-v5-source-snapshot-20261015T103401Z-723b3e4a.zip",
+  "files": 127,
+  "manifest_sha256": "d16ccb1fe463bf728da948fc79cb273ea21ff990539475bd742888fee13e6318",
+  "archive_sha256": "337583ca37fc017e164023dab462540c758906539349d10cdc64de39e00196af",
+  "validation": {
+    "v5_freeze_valid": true,
+    "v5_predictions_replayed": 18
+  }
+}

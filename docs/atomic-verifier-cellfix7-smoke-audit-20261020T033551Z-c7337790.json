@@ -1,0 +1,120 @@
+{
+  "run_id": "20261020T033551Z-c7337790",
+  "zip_sha256": "1846677f19204d47e9dae6691c83005e8411d13bb2fd4ee1a06f5c3776ce962f",
+  "output_files": 53,
+  "input_files": 107,
+  "criteria_sha256": "ac4d37689f99f252c4996a906262850c9f81fa1247cdfdc61e66cae5ee7e1ca9",
+  "all_output_hashes_valid": true,
+  "all_inputs_match_release": true,
+  "all_predictions_replayed": true,
+  "metrics_recomputed_exactly": true,
+  "call_events_reconciled": 29,
+  "remote_regression_tests_passed": 237,
+  "remote_validate_only": {
+    "smoke": {
+      "freeze_valid": true,
+      "cases": 12,
+      "maximum_calls": 96
+    },
+    "probe": {
+      "freeze_valid": true,
+      "cases": 18,
+      "maximum_calls": 36
+    },
+    "verifier": {
+      "freeze_valid": true,
+      "cases": 39,
+      "maximum_calls": 312
+    },
+    "validation30": {
+      "freeze_valid": true,
+      "cases": 30,
+      "maximum_calls": 240,
+      "prerequisites_required_for_inference": true
+    }
+  },
+  "model_revision_budget_unchanged": true,
+  "validation_binding_replayed": true,
+  "exact_citations_checked": 11,
+  "validation_issues": {
+    "valid": 26,
+    "invalid_json": 2,
+    "incomplete_coverage_ledger": 1
+  },
+  "metrics": {
+    "n": 12,
+    "correct_labels": 10,
+    "false_support": 0,
+    "runtime_failed_rows": 1,
+    "gold_support_rejected": 2,
+    "gold_support_count": 4,
+    "backend_calls": 29,
+    "checks": {
+      "all_cases_present": true,
+      "all_labels_correct": false,
+      "no_false_support": true,
+      "no_runtime_failures": false,
+      "within_call_budget": true,
+      "each_group_complete_and_correct": false,
+      "within_measured_token_budget": true,
+      "structured_decoding_trace_complete": true,
+      "cooperative_deadline_trace_complete": true
+    },
+    "automated_gate_pass": false,
+    "dataset_groups": {
+      "original_contracts": {
+        "n": 12,
+        "correct": 10,
+        "false_support": 0,
+        "failed": 1
+      }
+    },
+    "stop_reasons": {
+      "completed": 11,
+      "invalid_output_exhausted": 1
+    },
+    "confusion": [
+      {
+        "gold": "contradict",
+        "prediction": "contradict",
+        "n": 4
+      },
+      {
+        "gold": "not_enough_info",
+        "prediction": "not_enough_info",
+        "n": 4
+      },
+      {
+        "gold": "support",
+        "prediction": "__incomplete__",
+        "n": 1
+      },
+      {
+        "gold": "support",
+        "prediction": "not_enough_info",
+        "n": 1
+      },
+      {
+        "gold": "support",
+        "prediction": "support",
+        "n": 2
+      }
+    ],
+    "generated_tokens": 3739,
+    "prompt_tokens": 31511
+  },
+  "incorrect_cases": [
+    "contract:both_supported",
+    "contract:bounded_scope"
+  ],
+  "invalid_json_generations": 2,
+  "probe18_present": false,
+  "full39_present": false,
+  "validation30_inference_present": false,
+  "new_model_inference_completed": false,
+  "predictions_sha256": "c200f5e4aba3f4756f940d20ffc69aea266e077ac79cff89f6f3e208e3ea3c88",
+  "limitations": [
+    "Stored provenance consistency is not a cryptographic signature of remote execution.",
+    "Historical baseline 37/39 is not a cellfix7 result. No model quality is measured by this audit."
+  ]
+}

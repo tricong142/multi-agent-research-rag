@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-19",
+  "candidate": "atomic-verifier-constrained-v8-cellfix6",
+  "criteria_sha256": "b9d77823b5c8d6d2a56d4053667b8b53f6e059a1f5edb9e7e3a7578a50f34071",
+  "status": "offline_packaging_checks_passed_pending_human_annotation",
+  "packet_notebook_tests": {
+    "passed": 23,
+    "failures": 0,
+    "errors": 0
+  },
+  "extracted_payload": {
+    "regression_tests": 211,
+    "regression_passed": true,
+    "validate_only": {
+      "smoke": {
+        "freeze_valid": true,
+        "cases": 12,
+        "maximum_calls": 96
+      },
+      "probe": {
+        "freeze_valid": true,
+        "cases": 18,
+        "maximum_calls": 36
+      },
+      "verifier": {
+        "freeze_valid": true,
+        "cases": 39,
+        "maximum_calls": 312
+      }
+    },
+    "model_inference_completed": false
+  },
+  "validation_packet": {
+    "cases": 30,
+    "papers": 10,
+    "human_review": "pending",
+    "locked": false,
+    "overlap_flags": 0,
+    "document_overlap": [],
+    "scanned_files": 46,
+    "scanned_strings": 25530
+  },
+  "candidate_inputs_unchanged": 89,
+  "notebook_payload_files": 99,
+  "cellfix5_baseline": {
+    "zip_preserved": true,
+    "source_files_preserved": 84,
+    "predictions_preserved": true,
+    "correct_labels": 21,
+    "false_support": 0,
+    "annotation": "original"
+  },
+  "html": {
+    "javascript_compiles": true,
+    "blank_export_remains_pending": true,
+    "real_browser_render_tested": false
+  },
+  "model_inference_completed": false,
+  "independent_validation_completed": false,
+  "full39_quality_measured": false,
+  "promoted_to_serving": false,
+  "delivery_sha256": {
+    "docs/atomic-verifier-cellfix6-notebook-draft.json": "0ed9a85a8b018f0f062d37ae85306a8c8668f6cd51395bbfdc7cffd00c432617",
+    "scripts/test_atomic_validation_packet.py": "c7584ab04e1705b9d2c13b314004e3841c6272fb2746d550b2a07b362a09b2b4",
+    "scripts/test_colab_cellfix6_fresh.py": "ffc9f5af2c691b8a763bb9370bfeb032e0c304d3e2cc332efa509391cfe330fa",
+    "research-runs/cellfix6-packet-notebook-tests.log": "7770324a89e31e02126572fba621bdc4f8f77d93dda05d001580bf254d0d7696",
+    "research-runs/cellfix6-notebook-payload-regression.log": "0aa1233d4e638b7a5b655d1fd010f2aabe2a2d7a836efc8733fc60cf359adbef",
+    "docs/validation/atomic-cellfix6-v1/manifest.json": "2220c18b708c967b7a33ee1bcd6a8771ce7aefe7e2b3753d8a60adcc3c080069",
+    "docs/validation/atomic-cellfix6-v1/REVIEW.html": "4b1349854c2eaef4acfc9a494f5550fc60aa8d8d6d962d1220af0374679ac9f1",
+    "docs/ATOMIC_VERIFIER_CELLFIX6_VALIDATION_RUN_GUIDE.md": "b83b9e776bb506a5969461ea432f522b5c9b3ae260a6e01d605e053f80eefc23"
+  }
+}

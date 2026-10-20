@@ -1,0 +1,395 @@
+[
+  [
+    "1804.05306",
+    26,
+    [
+      [
+        "support",
+        "Model E-4 achieved 88.26% WER with the LibriSpeech language model.",
+        "with the same LibriSpeech LM, Model E-4 reduced WER to 88.26%",
+        "",
+        [
+          "metric",
+          "condition",
+          "quantity"
+        ],
+        "The WER and language model are explicitly bound to Model E-4."
+      ],
+      [
+        "contradict",
+        "Model E-4 achieved 80.40% WER with the LibriSpeech language model.",
+        "with the same LibriSpeech LM, Model E-4 reduced WER to 88.26%",
+        "",
+        [
+          "condition",
+          "quantity_binding"
+        ],
+        "The reported WER with LibriSpeech LM is 88.26%; 80.40% belongs to the replacement Lyrics LM."
+      ],
+      [
+        "not_enough_info",
+        "Model E-4 used 25% less memory with the LibriSpeech language model than Model A.",
+        "with the same LibriSpeech LM, Model E-4 reduced WER to 88.26%",
+        "Memory measurements and the memory baseline for these two models are absent.",
+        [
+          "missing_metric",
+          "baseline"
+        ],
+        "WER improvement does not establish a memory reduction."
+      ]
+    ]
+  ],
+  [
+    "1908.05731",
+    11,
+    [
+      [
+        "support",
+        "For WMT En-De, the reported BLEU is detokenized BLEU.",
+        "For WMT De-En, En-De and Zh-En we measure detokenized BLEU BIBREF14.",
+        "",
+        [
+          "metric",
+          "population"
+        ],
+        "The WMT En-De setup explicitly uses detokenized BLEU."
+      ],
+      [
+        "contradict",
+        "For WMT En-De, the reported BLEU is tokenized BLEU.",
+        "For WMT De-En, En-De and Zh-En we measure detokenized BLEU BIBREF14.",
+        "",
+        [
+          "metric",
+          "condition"
+        ],
+        "Tokenized BLEU is associated with IWSLT, while WMT En-De is explicitly detokenized."
+      ],
+      [
+        "not_enough_info",
+        "The WMT En-De system achieved a BLEU score of 30.",
+        "For WMT De-En, En-De and Zh-En we measure detokenized BLEU BIBREF14.",
+        "No numerical BLEU score is reported in this context.",
+        [
+          "missing_quantity"
+        ],
+        "Naming the metric supplies no achieved value."
+      ]
+    ]
+  ],
+  [
+    "1910.02677",
+    2,
+    [
+      [
+        "support",
+        "The controllable parametrization achieved 41.87 SARI on WikiLarge.",
+        "our controllable parametrization improves the performance of out-of-the-box Seq2Seq models leading to a new state-of-the-art score of 41.87 SARI BIBREF9 on the WikiLarge benchmark BIBREF10",
+        "",
+        [
+          "target",
+          "metric",
+          "quantity"
+        ],
+        "The score, metric and benchmark appear in the same predicate."
+      ],
+      [
+        "contradict",
+        "The controllable parametrization required a modified training objective to achieve its WikiLarge score.",
+        "without requiring any external resource or modified training objective.",
+        "",
+        [
+          "negation",
+          "requirement"
+        ],
+        "The source explicitly says a modified training objective was not required."
+      ],
+      [
+        "not_enough_info",
+        "The controllable parametrization simplified each sentence in 20 milliseconds.",
+        "our controllable parametrization improves the performance of out-of-the-box Seq2Seq models",
+        "No per-sentence runtime or hardware condition is provided.",
+        [
+          "duration",
+          "missing_metric"
+        ],
+        "Quality improvement does not establish latency."
+      ]
+    ]
+  ],
+  [
+    "1906.04236",
+    4,
+    [
+      [
+        "support",
+        "The dataset contains 1,268 video clips and 14,769 actions, of which 4,340 are visible.",
+        "First, we introduce a novel dataset consisting of 1,268 short video clips paired with sets of actions mentioned in the video transcripts, as well as manual annotations of whether the actions are visible or not. The dataset includes a total of 14,769 actions, 4,340 of which are visible.",
+        "",
+        [
+          "multiple_quantities",
+          "subset"
+        ],
+        "Each count has a distinct object; the visible count is a subset of all actions."
+      ],
+      [
+        "contradict",
+        "All 14,769 actions in the dataset are visible.",
+        "The dataset includes a total of 14,769 actions, 4,340 of which are visible.",
+        "",
+        [
+          "all",
+          "population"
+        ],
+        "The explicitly reported visible subset contains 4,340 of the 14,769 actions."
+      ],
+      [
+        "not_enough_info",
+        "Every video clip in the dataset lasts exactly 10 seconds.",
+        "a novel dataset consisting of 1,268 short video clips",
+        "Neither clip durations nor coverage of every clip are supplied.",
+        [
+          "all",
+          "duration",
+          "missing_quantity"
+        ],
+        "Calling clips short does not imply a fixed duration."
+      ]
+    ]
+  ],
+  [
+    "1611.00440",
+    22,
+    [
+      [
+        "support",
+        "The model achieved 0.548 prediction accuracy.",
+        "We achieve 0.548 prediction accuracy",
+        "",
+        [
+          "metric",
+          "quantity"
+        ],
+        "The achieved accuracy is stated directly."
+      ],
+      [
+        "contradict",
+        "The model achieved 0.748 prediction accuracy.",
+        "We achieve 0.548 prediction accuracy",
+        "",
+        [
+          "quantity"
+        ],
+        "The stated achieved value is 0.548, not 0.748."
+      ],
+      [
+        "not_enough_info",
+        "The model achieved 0.548 prediction accuracy and produced each prediction in 20 milliseconds.",
+        "We achieve 0.548 prediction accuracy",
+        "Per-prediction runtime is not provided.",
+        [
+          "conjunction",
+          "partial_support"
+        ],
+        "The accuracy part is supported; the runtime part is missing."
+      ]
+    ]
+  ],
+  [
+    "2004.03090",
+    10,
+    [
+      [
+        "support",
+        "CALLHOME contains transcriptions from 120 half-hour casual telephone conversations.",
+        "CALLHOME BIBREF11, transcriptions from 120 half-hour casual telephone conversations.",
+        "",
+        [
+          "count",
+          "duration",
+          "target"
+        ],
+        "The count and duration both modify CALLHOME conversations."
+      ],
+      [
+        "contradict",
+        "CALLHOME contains transcriptions from 120 two-hour casual telephone conversations.",
+        "CALLHOME BIBREF11, transcriptions from 120 half-hour casual telephone conversations.",
+        "",
+        [
+          "duration",
+          "quantity_binding"
+        ],
+        "The source specifies half-hour, not two-hour, conversations."
+      ],
+      [
+        "not_enough_info",
+        "CALLHOME transcriptions have a word error rate of 5%.",
+        "CALLHOME BIBREF11, transcriptions from 120 half-hour casual telephone conversations.",
+        "No transcription word error rate is given.",
+        [
+          "missing_metric"
+        ],
+        "Conversation counts and language-model perplexity evaluation do not provide transcription WER."
+      ]
+    ]
+  ],
+  [
+    "1610.09722",
+    38,
+    [
+      [
+        "support",
+        "Every plane crash event in the Stanford Plane Crash Dataset is paired with related news articles.",
+        "The Stanford Plane Crash Dataset BIBREF15 is a small data set consisting of 80 plane crash events, each paired with a set of related news articles.",
+        "",
+        [
+          "all",
+          "coverage"
+        ],
+        "The word each explicitly covers all events in the named dataset."
+      ],
+      [
+        "contradict",
+        "The Stanford Plane Crash Dataset reserves all 80 events for training.",
+        "Of these events, 40 are reserved for training, and 40 for testing",
+        "",
+        [
+          "all",
+          "split",
+          "quantity"
+        ],
+        "The source explicitly reserves only 40 of the 80 events for training."
+      ],
+      [
+        "not_enough_info",
+        "The news articles paired with the Stanford Plane Crash Dataset events are all written in French.",
+        "each paired with a set of related news articles",
+        "The language of the articles and universal language coverage are not specified.",
+        [
+          "all",
+          "missing_property"
+        ],
+        "Related news articles establishes existence, not their language."
+      ]
+    ]
+  ],
+  [
+    "1912.07940",
+    3,
+    [
+      [
+        "support",
+        "The study targets 980 name annotations in 670 Turkish tweets.",
+        "However, in this study, we target only at the first three categories which amounts to a total of 980 annotations in 670 tweets in Turkish.",
+        "",
+        [
+          "multiple_quantities",
+          "target"
+        ],
+        "The annotation count and tweet count are separately explicit."
+      ],
+      [
+        "contradict",
+        "The study targets all eight named-entity categories from the original dataset.",
+        "However, in this study, we target only at the first three categories",
+        "",
+        [
+          "only",
+          "population",
+          "scope"
+        ],
+        "The study explicitly restricts its target to the first three categories."
+      ],
+      [
+        "not_enough_info",
+        "Three human annotators produced the study's name-variant annotations.",
+        "We further annotate these 980 names with respect to a name variant categorization that we propose",
+        "The number and identity of human annotators are not specified.",
+        [
+          "identity",
+          "count"
+        ],
+        "Three categories must not be rebound to three annotators."
+      ]
+    ]
+  ],
+  [
+    "1912.03010",
+    23,
+    [
+      [
+        "support",
+        "The proposed model performs better than the wav2letter Transformer on the test-other dataset.",
+        "which achieves a comparable result with wav2letter Transformer on test-clean dataset and a better result on test-other dataset",
+        "",
+        [
+          "comparator",
+          "condition"
+        ],
+        "The better-result relation is tied to wav2letter and test-other."
+      ],
+      [
+        "contradict",
+        "The proposed model performs better than the best hybrid model on the test-other dataset.",
+        "is still worse than the best hybrid model on the test-other dataset.",
+        "",
+        [
+          "comparator",
+          "relation"
+        ],
+        "The same comparator and test set are explicitly associated with worse performance."
+      ],
+      [
+        "not_enough_info",
+        "The study experimentally established that semantic masking is more suitable on noisy input because the input features are unreliable.",
+        "The reason might be that our semantic masking is more suitable on a noisy setting, because the input features are not reliable",
+        "Experimental confirmation of this proposed explanation is not stated.",
+        [
+          "modality",
+          "causality"
+        ],
+        "Might be offers an explanation, not evidence that this explanation was experimentally established."
+      ]
+    ]
+  ],
+  [
+    "1603.03876",
+    54,
+    [
+      [
+        "support",
+        "PDTB sections 0-1 were used for development and hyperparameter optimization.",
+        "Sections 0-1 were used as the development set for hyperparameter optimization.",
+        "",
+        [
+          "scope",
+          "split"
+        ],
+        "The development use and purpose are explicit."
+      ],
+      [
+        "contradict",
+        "PDTB sections 0-1 were the test set used in the study.",
+        "we used sections 2-20 as our training set, sections 21-22 as the test set. Sections 0-1 were used as the development set for hyperparameter optimization.",
+        "",
+        [
+          "scope",
+          "split"
+        ],
+        "Test sections are 21-22, while 0-1 are explicitly development."
+      ],
+      [
+        "not_enough_info",
+        "The study trained its model for 10 epochs on PDTB.",
+        "we used sections 2-20 as our training set",
+        "The number of training epochs is not provided.",
+        [
+          "count",
+          "missing_quantity"
+        ],
+        "Section identifiers do not encode training epochs."
+      ]
+    ]
+  ]
+]

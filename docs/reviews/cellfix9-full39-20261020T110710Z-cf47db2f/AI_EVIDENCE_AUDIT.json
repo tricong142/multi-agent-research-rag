@@ -1,0 +1,400 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix9",
+  "run_id": "20261020T110710Z-cf47db2f",
+  "predictions_sha256": "209faca70827236faaa63528dbb853fdd5593e66ce9157298b1d1688e0f77f28",
+  "reviewer_kind": "assistant",
+  "human_review_completed": false,
+  "purpose": "AI evidence audit, not human admission",
+  "cases": [
+    {
+      "example_id": "contract:partial_accuracy",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "context": "Model Juniper uses 25% less memory than its baseline.",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "label_matches_gold": true,
+      "evidence_audit_status": "consistent",
+      "notes": "Memory 25% có check đúng; thiếu accuracy nên aggregate NEI đúng. Missing accuracy còn dùng từ structural khá chung."
+    },
+    {
+      "example_id": "contract:partial_memory",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "context": "Model Juniper retains 94% accuracy on the benchmark.",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "label_matches_gold": true,
+      "evidence_audit_status": "prose_issue",
+      "notes": "NEI đúng và missing đã trỏ memory thay vì accuracy. Accuracy 94% có check đúng; model_explanation accuracy kết thúc dở ở ký tự 9."
+    },
+    {
+      "example_id": "contract:both_supported",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "context": "Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "gold": "support",
+      "prediction": "support",
+      "label_matches_gold": true,
+      "evidence_audit_status": "consistent",
+      "notes": "Memory 25% và accuracy 94% có checks riêng, cùng đúng Model Juniper; hai part support, aggregate support đúng."
+    },
+    {
+      "example_id": "contract:accuracy_conflict",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "context": "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%.",
+      "gold": "contradict",
+      "prediction": "contradict",
+      "label_matches_gold": true,
+      "evidence_audit_status": "prose_issue",
+      "notes": "Memory 25% đúng, accuracy 81% refute 94% đúng. Explanation memory có cụm but not the exact rồi bị cụt, dù source đã nêu chính xác 25%."
+    },
+    {
+      "example_id": "contract:irrelevant",
+      "claim": "Model Juniper retains 94% accuracy.",
+      "context": "The benchmark was conducted on a Tuesday. No model accuracy is reported.",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "label_matches_gold": true,
+      "evidence_audit_status": "prose_issue",
+      "notes": "NEI đúng, nhưng missing_information lại nói absence of reports directly contradicts claim. Thiếu báo cáo không phải phủ định accuracy 94%."
+    },
+    {
+      "example_id": "contract:negation",
+      "claim": "The study used human labels.",
+      "context": "The study did not use any human labels; all labels were generated automatically.",
+      "gold": "contradict",
+      "prediction": "contradict",
+      "label_matches_gold": true,
+      "evidence_audit_status": "consistent",
+      "notes": "Source phủ định trực tiếp study dùng human labels; quote, truth=false và contradict đúng."
+    },
+    {
+      "example_id": "contract:causality_missing",
+      "claim": "The new index caused the latency improvement.",
+      "context": "The new index and lower latency were observed in the same deployment. The study did not establish a causal relationship.",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "label_matches_gold": true,
+      "evidence_audit_status": "prose_issue",
+      "notes": "NEI đúng vì không establish causal link. Model_explanation dùng denies a causal relationship là mạnh hơn source, và bị cắt kèm ký tự rác."
+    },
+    {
+      "example_id": "contract:scope",
+      "claim": "All tasks improved after compression.",
+      "context": "Three tasks improved after compression, but a fourth task became less accurate.",
+      "gold": "contradict",
+      "prediction": "contradict",
+      "label_matches_gold": true,
+      "evidence_audit_status": "prose_issue",
+      "notes": "Fourth task kém chính xác là counterexample, truth=false và contradict đúng. Prose lại gọi One true witness refutes ALL, sai tên truth theo contract."
+    },
+    {
+      "example_id": "contract:cross_sentence",
+      "claim": "The report evaluated four models on two datasets.",
+      "context": "Four models were evaluated in the report. Evaluation used two datasets.",
+      "gold": "support",
+      "prediction": "support",
+      "label_matches_gold": true,
+      "evidence_audit_status": "prose_issue",
+      "notes": "q0=4 models và q1=2 datasets đều có source đúng; thêm citation từ ledger đúng. Explanation có từ datast bị cụt."
+    },
+    {
+      "example_id": "contract:wrong_units",
+      "claim": "Training took 12 seconds.",
+      "context": "Training took 12 hours, not 12 seconds.",
+      "gold": "contradict",
+      "prediction": "contradict",
+      "label_matches_gold": true,
+      "evidence_audit_status": "consistent",
+      "notes": "Source 12 hours, not 12 seconds refute đúng; giữ đơn vị, không tự chuyển đổi. Model_explanation dài bị cụt nhưng không đổi kết luận arithmetic."
+    },
+    {
+      "example_id": "contract:atomic_support",
+      "claim": "The sample contained 240 documents.",
+      "context": "The final sample contained exactly 240 documents.",
+      "gold": "support",
+      "prediction": "support",
+      "label_matches_gold": true,
+      "evidence_audit_status": "prose_issue",
+      "notes": "Sample 240 documents có exact quote/check đúng; model_explanation bị cắt dở dù observation explanation đầy đủ."
+    },
+    {
+      "example_id": "contract:bounded_scope",
+      "claim": "On the tested dataset, the method improved recall.",
+      "context": "The method improved recall on the tested dataset. Results on other datasets are unknown.",
+      "gold": "support",
+      "prediction": "support",
+      "label_matches_gold": true,
+      "evidence_audit_status": "prose_issue",
+      "notes": "Chỉ support trên tested dataset, không đòi dataset khác; scope và quote đúng. Hai explanation kết thúc dở ở in the."
+    },
+    {
+      "example_id": "scope:universal:support",
+      "claim": "Every validation shard improved recall after the revision.",
+      "context": "The validation set consisted of exactly three shards: Cedar, Maple and Pine. Recall improved on each of these three shards after the revision.",
+      "gold": "support",
+      "prediction": "support",
+      "label_matches_gold": true,
+      "evidence_audit_status": "prose_issue",
+      "notes": "Closed population ba shard có each outcome after revision; collective span three shards với full source hợp lệ. Model_explanation bị cắt dở."
+    },
+    {
+      "example_id": "scope:universal:contradict",
+      "claim": "Every validation shard improved recall after the revision.",
+      "context": "The validation set consisted of exactly three shards. After the revision, two improved recall, while the third became worse at recalling relevant records.",
+      "gold": "contradict",
+      "prediction": "contradict",
+      "label_matches_gold": true,
+      "evidence_audit_status": "consistent",
+      "notes": "the third became worse at recalling relevant records được giữ là false trong đúng population; không mượn polarity của two improved; contradict đúng."
+    },
+    {
+      "example_id": "scope:universal:not_enough_info",
+      "claim": "Every validation shard improved recall after the revision.",
+      "context": "Two validation shards improved recall after the revision. The report does not identify the complete set of validation shards or results for any others.",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "label_matches_gold": true,
+      "evidence_audit_status": "prose_issue",
+      "notes": "NEI đúng vì chưa có complete population. Observation gán unknown cho câu hai shard đã improved và missing All validation shards quá chung; cần phân biệt kết quả đã biết với phần chưa biết."
+    },
+    {
+      "example_id": "scope:existential:support",
+      "claim": "At least one audited cache node reduced response time after the patch.",
+      "context": "The audited cache nodes were Birch, Elm and Fir. After the patch, Birch became faster, while Elm and Fir became slower.",
+      "gold": "support",
+      "prediction": "support",
+      "label_matches_gold": true,
+      "evidence_audit_status": "consistent",
+      "notes": "Birch became faster sau patch là true witness cho SOME; không yêu cầu toàn bộ population đều giảm response time. Explanation cuối bị cụt."
+    },
+    {
+      "example_id": "scope:existential:contradict",
+      "claim": "At least one audited cache node reduced response time after the patch.",
+      "context": "The complete audited set was Birch, Elm and Fir. After the patch, response time increased on Birch and Elm and stayed unchanged on Fir.",
+      "gold": "contradict",
+      "prediction": "not_enough_info",
+      "label_matches_gold": false,
+      "evidence_audit_status": "label_failure",
+      "notes": "Gold contradict nhưng prediction NEI: attempt đầu lặp một coverage member 16 lần; repair chỉ giữ Fir=false và coverage=false. Không đủ để refute SOME. Cần adjudicate binding complete audited set với audited cache nodes trước khi mở rộng quy tắc."
+    },
+    {
+      "example_id": "scope:existential:not_enough_info",
+      "claim": "At least one audited cache node reduced response time after the patch.",
+      "context": "Elm was one of the audited cache nodes and its response time increased after the patch. Results for the other audited nodes were not reported.",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "label_matches_gold": true,
+      "evidence_audit_status": "prose_issue",
+      "notes": "NEI đúng: Elm không giảm và các node khác chưa báo cáo. Missing lặp lại cả claim thay vì nêu kết quả còn thiếu của các node khác."
+    },
+    {
+      "example_id": "scope:none:support",
+      "claim": "None of the monitored pumps leaked during the overnight test.",
+      "context": "The overnight test monitored exactly three pumps: Blue, Green and Silver. The report explicitly records no leaks for any of these three pumps during the test.",
+      "gold": "support",
+      "prediction": "support",
+      "label_matches_gold": true,
+      "evidence_audit_status": "opposite_explanation",
+      "notes": "Quote no leaks cho cả ba pump; truth=false trước NONE và aggregate support đúng. Nhưng observation explanation nói có leak ít nhất một pump, model_explanation nói claim bị contradicted: prose ngược source và ledger, không đạt semantic review."
+    },
+    {
+      "example_id": "scope:none:contradict",
+      "claim": "None of the monitored pumps leaked during the overnight test.",
+      "context": "The monitored pumps were Blue, Green and Silver. Silver leaked during the overnight test; Blue and Green did not.",
+      "gold": "contradict",
+      "prediction": "contradict",
+      "label_matches_gold": true,
+      "evidence_audit_status": "consistent",
+      "notes": "Silver leaked được truth=true trước NONE, quote gồm population và leak result; aggregate contradict đúng."
+    },
+    {
+      "example_id": "scope:none:not_enough_info",
+      "claim": "None of the monitored pumps leaked during the overnight test.",
+      "context": "Blue, Green and Silver were monitored during the overnight test. Blue and Green had no leaks, but Silver's leak status was not reported.",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "label_matches_gold": true,
+      "evidence_audit_status": "prose_issue",
+      "notes": "NEI đúng do leak status Silver chưa báo cáo. Missing gọi no leaks và status chưa báo cáo là structural contradiction; đây là khác biệt giữa member đã biết và member chưa biết, không phải contradiction."
+    },
+    {
+      "example_id": "scope:entity:support",
+      "claim": "The North gateway reduced its error rate after calibration.",
+      "context": "After calibration, the North gateway's error rate decreased. The South gateway's error rate increased.",
+      "gold": "support",
+      "prediction": "support",
+      "label_matches_gold": true,
+      "evidence_audit_status": "consistent",
+      "notes": "Đã cite đúng North gateway error rate decreased after calibration, không còn chỉ cite South như cellfix8. Support khớp nguồn."
+    },
+    {
+      "example_id": "scope:entity:contradict",
+      "claim": "The North gateway reduced its error rate after calibration.",
+      "context": "After calibration, the North gateway's error rate increased. The South gateway's error rate decreased.",
+      "gold": "contradict",
+      "prediction": "contradict",
+      "label_matches_gold": true,
+      "evidence_audit_status": "consistent",
+      "notes": "Quote chỉ North error rate increased sau calibration; truth=false và contradict đúng."
+    },
+    {
+      "example_id": "scope:entity:not_enough_info",
+      "claim": "The North gateway reduced its error rate after calibration.",
+      "context": "After calibration, the South gateway's error rate decreased. No calibration results for the North gateway were recorded.",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "label_matches_gold": true,
+      "evidence_audit_status": "consistent",
+      "notes": "Không có calibration result của North; không mượn kết quả South. NEI và missing đúng target, observation explanation bị cụt."
+    },
+    {
+      "example_id": "scope:time:support",
+      "claim": "Every weekly trial conducted in May improved throughput.",
+      "context": "Exactly four weekly trials were conducted in May. Each of these four trials improved throughput. Some April trials reduced throughput.",
+      "gold": "support",
+      "prediction": "support",
+      "label_matches_gold": true,
+      "evidence_audit_status": "consistent",
+      "notes": "Full quote May closed population và each improved, không gồm phản ví dụ April; support đúng. May giới hạn population trials, không tự gán thời gian improvement."
+    },
+    {
+      "example_id": "scope:time:contradict",
+      "claim": "Every weekly trial conducted in May improved throughput.",
+      "context": "Exactly four weekly trials were conducted in May. Three improved throughput and one reduced throughput.",
+      "gold": "contradict",
+      "prediction": "contradict",
+      "label_matches_gold": true,
+      "evidence_audit_status": "consistent",
+      "notes": "one reduced throughput là false witness thuộc bốn trial May, refute ALL đúng; explanation bị cắt dở."
+    },
+    {
+      "example_id": "scope:time:not_enough_info",
+      "claim": "Every weekly trial conducted in May improved throughput.",
+      "context": "Every April trial improved throughput. The report contains no throughput results for the weekly trials conducted in May.",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "label_matches_gold": true,
+      "evidence_audit_status": "consistent",
+      "notes": "Không có throughput results May; giữ NEI và missing đúng group, không mượn April."
+    },
+    {
+      "example_id": "scope:direction:support",
+      "claim": "The patch reduced median request latency.",
+      "context": "For the same requests and conditions, median latency was 42 milliseconds before the patch and 31 milliseconds after it.",
+      "gold": "support",
+      "prediction": "support",
+      "label_matches_gold": true,
+      "evidence_audit_status": "prose_issue",
+      "notes": "42 -> 31 ms có numeric change đúng, support đúng. Explanation có newline/tab rác và câu dở, không coi là prose hoàn chỉnh."
+    },
+    {
+      "example_id": "scope:direction:contradict",
+      "claim": "The patch reduced median request latency.",
+      "context": "For the same requests and conditions, median latency was 42 milliseconds before the patch and 55 milliseconds after it.",
+      "gold": "contradict",
+      "prediction": "contradict",
+      "label_matches_gold": true,
+      "evidence_audit_status": "prose_issue",
+      "notes": "42 -> 55 ms được check tăng, refute reduced đúng. Observation/model explanation dở; không có lỗi đảo direction trong ledger."
+    },
+    {
+      "example_id": "scope:direction:not_enough_info",
+      "claim": "The patch reduced median request latency.",
+      "context": "Median request latency was 31 milliseconds after the patch. No before-patch latency or comparative change was reported.",
+      "gold": "not_enough_info",
+      "prediction": null,
+      "label_matches_gold": false,
+      "evidence_audit_status": "incomplete",
+      "notes": "Hai attempt đều tự thêm Shepherd et al. (2023), không có trong input. Guard unattributed_prose_citation chặn đúng; repair thất bại, không có aggregate label. Gold NEI không cho phép bỏ qua lỗi contract để tính đúng."
+    },
+    {
+      "example_id": "scope:metric:support",
+      "claim": "The configuration change increased precision.",
+      "context": "Under the same evaluation conditions, precision rose from 0.81 before the configuration change to 0.86 afterward.",
+      "gold": "support",
+      "prediction": "support",
+      "label_matches_gold": true,
+      "evidence_audit_status": "prose_issue",
+      "notes": "Precision 0.81 -> 0.86 có check đúng, support đúng; prose bị cụt ở and it."
+    },
+    {
+      "example_id": "scope:metric:contradict",
+      "claim": "The configuration change increased precision.",
+      "context": "Under the same conditions, precision fell from 0.81 to 0.74 after the configuration change, while recall rose from 0.64 to 0.79.",
+      "gold": "contradict",
+      "prediction": "contradict",
+      "label_matches_gold": true,
+      "evidence_audit_status": "consistent",
+      "notes": "Chọn đúng precision 0.81 -> 0.74, không mượn recall 0.64 -> 0.79; check và contradict đúng."
+    },
+    {
+      "example_id": "scope:metric:not_enough_info",
+      "claim": "The configuration change increased precision.",
+      "context": "Recall rose from 0.64 to 0.79 after the configuration change. Precision was not measured.",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "label_matches_gold": true,
+      "evidence_audit_status": "prose_issue",
+      "notes": "NEI đúng vì precision not measured. Observation chỉ quote câu recall rose; nên cite câu precision chưa được đo để thể hiện lý do thay vì quote metric khác."
+    },
+    {
+      "example_id": "scope:conjunction:support",
+      "claim": "After tuning, the extractor decreased memory use and increased token recall.",
+      "context": "For the same extraction workload, tuning reduced memory use from 5.4 to 4.6 gigabytes and raised token recall from 0.72 to 0.81.",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "label_matches_gold": true,
+      "evidence_audit_status": "prose_issue",
+      "notes": "Gold hiện tại NEI theo strict-identity-v1: context thiếu định danh extractor. Part memory nói đúng thiếu target; part token recall nói không có thông tin dù source có 0.72 -> 0.81. Nhãn đúng nhưng lý do chưa đủ chính xác."
+    },
+    {
+      "example_id": "scope:conjunction:contradict",
+      "claim": "After tuning, the extractor decreased memory use and increased token recall.",
+      "context": "For the same workload, tuning reduced memory use from 5.4 to 4.6 gigabytes but lowered token recall from 0.72 to 0.68.",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "label_matches_gold": true,
+      "evidence_audit_status": "prose_issue",
+      "notes": "Gold hiện tại NEI theo strict-identity-v1. Source có memory 5.4 -> 4.6 và recall 0.72 -> 0.68 nhưng không bind extractor. Prose lại nói thiếu số liệu đã có và trộn memory với token recall."
+    },
+    {
+      "example_id": "scope:conjunction:not_enough_info",
+      "claim": "After tuning, the extractor decreased memory use and increased token recall.",
+      "context": "Tuning reduced memory use from 5.4 to 4.6 gigabytes on the extraction workload. Token recall after tuning was not evaluated.",
+      "gold": "not_enough_info",
+      "prediction": null,
+      "label_matches_gold": false,
+      "evidence_audit_status": "incomplete",
+      "notes": "Hai attempt của part memory đều nêu missing token recall; guard missing_information_wrong_metric chặn đúng. Chưa assess xong các part, không có aggregate. Missing cần là identity/binding extractor và evidence cho đúng part."
+    },
+    {
+      "example_id": "scope:condition:support",
+      "claim": "Every batch in the low-temperature group gained yield after the update.",
+      "context": "The low-temperature group consisted of exactly three batches, and each gained yield after the update. A separate high-temperature batch lost yield.",
+      "gold": "support",
+      "prediction": "support",
+      "label_matches_gold": true,
+      "evidence_audit_status": "consistent",
+      "notes": "Collective three batches có each gained yield after update trong low-temperature group; không mượn high-temperature. Support đúng, model_explanation bị cụt."
+    },
+    {
+      "example_id": "scope:condition:contradict",
+      "claim": "Every batch in the low-temperature group gained yield after the update.",
+      "context": "The low-temperature group consisted of exactly three batches. After the update, two gained yield and one lost yield.",
+      "gold": "contradict",
+      "prediction": "contradict",
+      "label_matches_gold": true,
+      "evidence_audit_status": "consistent",
+      "notes": "one lost yield thuộc chính low-temperature population sau update; false witness refute ALL đúng."
+    },
+    {
+      "example_id": "scope:condition:not_enough_info",
+      "claim": "Every batch in the low-temperature group gained yield after the update.",
+      "context": "The low-temperature group contained three batches, but no yield changes were measured for that group. All measured high-temperature batches gained yield after the update.",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "label_matches_gold": true,
+      "evidence_audit_status": "prose_issue",
+      "notes": "NEI đúng vì low-temperature chưa đo yield. Missing_information lại lặp một fact đã biết về high-temperature; không phải thông tin thiếu của claim."
+    }
+  ]
+}

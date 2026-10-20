@@ -56,8 +56,19 @@ class SummaryTraceTests(unittest.TestCase):
     def test_default_generation_does_not_print_raw_text(self):
         stdout = io.StringIO()
         with contextlib.redirect_stdout(stdout):
-            self.assertEqual(self.generate('{"answer": "private answer"}'), {"answer": "private answer"})
+            value = {"answer": "private answer", "evidence_spans": []}
+            self.assertEqual(self.generate(json.dumps(value)), value)
         self.assertEqual(stdout.getvalue(), "")
+
+    def test_valid_json_with_wrong_role_schema_has_separate_trace_and_is_rejected(self):
+        for value in ([], {}, {"answer": "private answer"}, {"answer": 1, "evidence_spans": []}):
+            with self.subTest(value=value):
+                events = []
+                self.assertIsNone(self.generate(json.dumps(value), events.append))
+                self.assertTrue(events[0]["json_valid"])
+                self.assertIsNone(events[0]["parse_error"])
+                self.assertFalse(events[0]["schema_valid"])
+                self.assertTrue(events[0]["schema_issue"].startswith("generator_"))
 
     def test_cli_trace_is_opt_in_and_preserves_existing_files(self):
         def builder(**kwargs):

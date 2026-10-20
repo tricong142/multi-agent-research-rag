@@ -1,0 +1,75 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix4",
+  "parent_zip": "output-cellfix3-fresh-20261017T101839Z-a9590fe1.zip",
+  "parent_zip_sha256": "37fa91b236c15078ebaf2fb571a3fdf91dd76f96ad88dae6ee1fd6adf759eec2",
+  "parent_smoke_measured": {
+    "n": 12,
+    "correct_labels": 11,
+    "false_support": 0,
+    "runtime_failed_rows": 1
+  },
+  "criteria_sha256": "2e49e7c2b09d6b4379d43c09e267e228c7ae1ed4f74236aae444dc0f918e07fb",
+  "payload_sha256": "40f108ebd2ed15250469d1fb4ab9e76cc29a7128b5265697ca4b812ff2024188",
+  "notebook_sha256": "1a5f22187d0a4bc9013dbb35af7e713e1c72ca1558587bd92220b45f9b81c722",
+  "input_files": 81,
+  "source_fixture_files": 34,
+  "model_revision_data_budgets_and_gates_unchanged": true,
+  "local_validation": {
+    "criteria_sha256": "2e49e7c2b09d6b4379d43c09e267e228c7ae1ed4f74236aae444dc0f918e07fb",
+    "payload_sha256": "40f108ebd2ed15250469d1fb4ab9e76cc29a7128b5265697ca4b812ff2024188",
+    "frozen_regression_tests_passed": 166,
+    "validate_only": {
+      "probe": {
+        "freeze_valid": true,
+        "cases": 18,
+        "maximum_calls": 36
+      },
+      "smoke": {
+        "freeze_valid": true,
+        "cases": 12,
+        "maximum_calls": 96
+      },
+      "verifier": {
+        "freeze_valid": true,
+        "cases": 39,
+        "maximum_calls": 312
+      }
+    },
+    "model_inference_completed": false,
+    "new_regression_tests": 13,
+    "notebook_tests_passed": 8,
+    "notebook_test_exit_code": 0,
+    "notebook_test_elapsed_seconds": 127.524,
+    "notebook_test_command": ".venv/Scripts/python.exe -m unittest scripts.test_colab_cellfix4_fresh -v",
+    "checks": [
+      "Exact embedded payload regression and all three validate-only modes",
+      "Fresh startup without prior session globals or ZIPs",
+      "Payload hashes, safe paths and release catalog",
+      "Smoke prerequisites and infrastructure failure archives",
+      "Failed smoke and stale success flags cannot admit probe",
+      "Confirmed smoke can admit probe; full39 never runs automatically"
+    ],
+    "gpu_model_inference_completed": false
+  },
+  "previous_completed_stored_part_labels_unchanged": true,
+  "parent_released_files_preserved": true,
+  "intentional_contract_change": "Treat a validated numeric source_quote as an explicit model citation; merge into a copied evidence ledger and record citation_additions. This removes duplicate citation serialization, never adds missing numeric checks or infers measurements.",
+  "intentional_fixture_change": "The existing second-report negative remains rejected; expected error now identifies observation_target_mismatch rather than missing duplicated citation.",
+  "new_model_smoke": null,
+  "new_probe18": null,
+  "new_full39": null,
+  "human_review": "pending",
+  "promoted_to_serving": false,
+  "limitations": [
+    "Local regression, stored-output diagnostics and lifecycle simulations are not fresh Qwen inference.",
+    "Finite target, quantity and negation rules do not establish semantic entailment or generalization.",
+    "Smoke12 and probe18 are development sets; full39 and independent evaluation remain required."
+  ],
+  "files": {
+    "scripts/audit_atomic_cellfix3.py": "90fef653df4b0de96d6cb227a61f90a9f2ce17d795b92524872bd8e80be86969",
+    "scripts/atomic_cellfix4_patch.py": "f8da3795e6fc6d6f383fdc1d21ad215c8a21621b944696a2b6544efadfdab6bf",
+    "scripts/build_colab_cellfix4_fresh.py": "7c1de37b5f34cb8910b35ebaf726eee8981cef1e7f104554f1309d3275f88fc3",
+    "scripts/test_colab_cellfix4_fresh.py": "cf3cc9dfc79351a1526ab79cbe55004f74665b8bf00eaeab24892a7373d43bf6",
+    "docs/ATOMIC_VERIFIER_CELLFIX4_FRESH_RUN_GUIDE.md": "3df852ee7bac0a0e5ea549ebf58062ad7165426138f6b8df9a9b4468db348061"
+  }
+}

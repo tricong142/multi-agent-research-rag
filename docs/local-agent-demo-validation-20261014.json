@@ -1,0 +1,34 @@
+{
+  "checked_at_utc": "2026-10-14T03:56:29.320690+00:00",
+  "run_dir": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\local-agent-demo\\20261014T035034Z-c6098a53",
+  "output_files_verified": 45,
+  "contract_tests_passed": 94,
+  "runner_regression_tests_passed": 4,
+  "runner_regression_command": ".venv/Scripts/python.exe -m unittest research_rag.tests.test_local_demo -q",
+  "live_demo_command": ".venv/Scripts/python.exe -m research_rag.evaluation.local_demo --agent all",
+  "stages_all_completed": true,
+  "all_trained_models_evaluated_locally": false,
+  "new_llm_model_inference_calls": 0,
+  "external_api_calls": 0,
+  "full_project_tests_run": false,
+  "source_sha256": {
+    "research_rag/evaluation/local_demo.py": "4657980aac86addf32e40e1a9d07d0f58986f5c64c55205045274e9c673a513a",
+    "research_rag/tests/test_local_demo.py": "c026b9e79264d29d95753fa7effc8e3ad649fa9fa1c65e503631d7ecdd3f93f2",
+    "run_agent_tests.bat": "0226003092445fd5e92a4f765fcfa9633485636b17e04849d19eb77f6926ced2",
+    "web_demo/index.html": "ae664906443cf153bd7aca3fcd7acd9dbcfe327fbd518cc5db8008ff1fae4ab1",
+    "web_demo/server.py": "8ea60d029e62f66503878d0e06680222b27e22d7d6ff0206e7a088527976af2d"
+  },
+  "metric_modes": {
+    "retrieval": "live_local_bm25_agent",
+    "reader": "live_reader_tool_only",
+    "summarizer": "stored_prediction_scoring",
+    "factchecker": "stored_prediction_scoring",
+    "writer": "live_writer_offline_baseline"
+  },
+  "limitations": [
+    "Summarizer and Fact-checker metrics are scores over stored development predictions, not new local model inference.",
+    "Reader is actual PyMuPDF tool extraction; scan/router/critic/LayoutLMv3/OCR are not passed.",
+    "Writer is a conservative offline baseline; human faithfulness pending and warnings100%.",
+    "Atomic V5 frozen experiment and whole-system E2E remain unfinished."
+  ]
+}

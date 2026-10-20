@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-20",
+  "original_run_id": "20261020T061934Z-c87bce57",
+  "recovery_tests_passed": 7,
+  "failures": 0,
+  "errors": 0,
+  "recovery_cell_sha256": "2b1074364c53b20177ce1d8cffc7d2a399c0d1d62c8cd3231c317fd5773f150f",
+  "builder_sha256": "5f61d4d24f12e2060f4f2bf815bc1b22f3b8b217c6f068cbcc1eb1f34dc94dca",
+  "tests_sha256": "56eda5d763e6ff4a9f63626664069ce95822d3e8852b486040944d51a27ccac3",
+  "test_log_sha256": "70b329913f83156b5c71587a6a57e98b5e1ce0d93853d9590b2be13a131d6c36",
+  "actual_archived_smoke_and_human_admission_replayed": true,
+  "replay_result": {
+    "original_run_id": "20261020T061934Z-c87bce57",
+    "smoke_replayed": true,
+    "probe_human_admission": {
+      "probe_predictions_sha256": "16da0c50c5c62e22caba50749e50c3cb4f3f1dde83cdba18356c54e85dc01260",
+      "semantic_review_sha256": "06ce2e455f3c5da3273197ecd0dedf34b6f043f6df14bcdd76a8ee7dc88fee79",
+      "reviewer": "Trí Công"
+    },
+    "smoke_generated_again": false,
+    "probe_generated_again": false,
+    "new_model_calls_during_replay": 0
+  },
+  "wrong_uploads_block_before_workspace": true,
+  "mismatched_globals_recovered_from_verified_artifacts": true,
+  "environment_or_admission_failure_blocks_model": true,
+  "historical_artifacts_preserved": true,
+  "dependency_commands_match_original_notebook": true,
+  "frozen_release_unchanged": true,
+  "source_model_budget_gate_changed": false,
+  "colab_installation_executed_locally": false,
+  "new_model_inference_completed": false,
+  "full39_quality_measured": false,
+  "validation30_executed": false
+}

@@ -1,0 +1,232 @@
+{
+  "predictions_sha256": "ae6fcb5d6b7a129afa00896a6a8a684a1dc9cd64570d53f134a796dca65f137f",
+  "criteria_sha256": "2e49e7c2b09d6b4379d43c09e267e228c7ae1ed4f74236aae444dc0f918e07fb",
+  "reviewer": "tricong",
+  "reviewer_kind": "human",
+  "review_completed": true,
+  "cases": [
+    {
+      "example_id": "decompose:001",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Ghi nhận kết luận người dùng trong chat: đạt đủ năm tiêu chí."
+    },
+    {
+      "example_id": "decompose:002",
+      "claim": "Model Juniper retains 94% accuracy.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Ghi nhận kết luận người dùng trong chat: đạt đủ năm tiêu chí."
+    },
+    {
+      "example_id": "decompose:003",
+      "claim": "The study used human labels.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Ghi nhận kết luận người dùng trong chat: đạt đủ năm tiêu chí."
+    },
+    {
+      "example_id": "decompose:004",
+      "claim": "The new index caused the latency improvement.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Ghi nhận kết luận người dùng trong chat: đạt đủ năm tiêu chí."
+    },
+    {
+      "example_id": "decompose:005",
+      "claim": "All tasks improved after compression.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Ghi nhận kết luận người dùng trong chat: đạt đủ năm tiêu chí."
+    },
+    {
+      "example_id": "decompose:006",
+      "claim": "The report evaluated four models on two datasets.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Ghi nhận kết luận người dùng trong chat: đạt đủ năm tiêu chí."
+    },
+    {
+      "example_id": "decompose:007",
+      "claim": "Training took 12 seconds.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Ghi nhận kết luận người dùng trong chat: đạt đủ năm tiêu chí."
+    },
+    {
+      "example_id": "decompose:008",
+      "claim": "The sample contained 240 documents.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Ghi nhận kết luận người dùng trong chat: đạt đủ năm tiêu chí."
+    },
+    {
+      "example_id": "decompose:009",
+      "claim": "On the tested dataset, the method improved recall.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Ghi nhận kết luận người dùng trong chat: đạt đủ năm tiêu chí."
+    },
+    {
+      "example_id": "decompose:010",
+      "claim": "Every validation shard improved recall after the revision.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": false,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Ghi nhận kết luận người dùng: TC1/TC2/TC3/TC5 đạt, TC4 chưa đạt. Entity/property đúng nghĩa nhưng scope.metric='improved recall' còn change verb; prompt yêu cầu named property 'recall'. Không sửa predictions trong lượt ghi nhận review."
+    },
+    {
+      "example_id": "decompose:011",
+      "claim": "At least one audited cache node reduced response time after the patch.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Ghi nhận kết luận người dùng trong chat: đạt đủ năm tiêu chí."
+    },
+    {
+      "example_id": "decompose:012",
+      "claim": "None of the monitored pumps leaked during the overnight test.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Ghi nhận kết luận người dùng trong chat: đạt đủ năm tiêu chí."
+    },
+    {
+      "example_id": "decompose:013",
+      "claim": "The North gateway reduced its error rate after calibration.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Ghi nhận kết luận người dùng trong chat: đạt đủ năm tiêu chí."
+    },
+    {
+      "example_id": "decompose:014",
+      "claim": "Every weekly trial conducted in May improved throughput.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": false,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Ghi nhận kết luận người dùng: TC1/TC2/TC3/TC5 đạt, TC4 chưa đạt. Entity/property đúng nghĩa nhưng scope.metric='improved throughput' còn change verb; prompt yêu cầu named property 'throughput'. Không sửa predictions trong lượt ghi nhận review. TC5 được xét cùng quote: in May giới hạn tập trial conducted in May; không suy ra thời điểm improvement. Không tự chuyển restriction sang time của improvement."
+    },
+    {
+      "example_id": "decompose:015",
+      "claim": "The patch reduced median request latency.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Ghi nhận kết luận người dùng trong chat: đạt đủ năm tiêu chí."
+    },
+    {
+      "example_id": "decompose:016",
+      "claim": "The configuration change increased precision.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Ghi nhận kết luận người dùng trong chat: đạt đủ năm tiêu chí."
+    },
+    {
+      "example_id": "decompose:017",
+      "claim": "After tuning, the extractor decreased memory use and increased token recall.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Ghi nhận kết luận người dùng trong chat: đạt đủ năm tiêu chí."
+    },
+    {
+      "example_id": "decompose:018",
+      "claim": "Every batch in the low-temperature group gained yield after the update.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": false,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Ghi nhận kết luận người dùng: TC1/TC2/TC3/TC5 đạt, TC4 chưa đạt. Entity/property đúng nghĩa nhưng scope.metric='gained yield' còn change verb; prompt yêu cầu named property 'yield'. Không sửa predictions trong lượt ghi nhận review."
+    }
+  ],
+  "recorded_by": "Codex",
+  "review_basis": "User explicitly supplied the per-criterion verdict in the current conversation; recorded verbatim in scope, without changing predictions.",
+  "reviewer_name_source": "User supplied the name tricong earlier in this conversation; this does not transfer the old v7 approval.",
+  "user_verdict": "Mọi decompose đều đạt tiêu chí trên trừ decompose 10,14,18 đều k đạt tiêu chí đúng chủ thể và metric",
+  "all_criteria_pass": false,
+  "full39_admitted": false,
+  "criterion_4_interpretation": "Correct entity/property binding together with the mandatory named-property metric format in the frozen prompt."
+}

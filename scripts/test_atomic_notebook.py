@@ -10,6 +10,7 @@ import sys
 import tempfile
 import unittest
 import zlib
+from scripts.atomic_release_test_support import v7_file
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,7 +18,7 @@ EVAL = ROOT / 'research_rag/evaluation'
 
 
 def notebook():
-    nb = json.loads((ROOT / 'scripts/kaggle_decomposition_probe_v5.ipynb').read_text(encoding='utf-8'))
+    nb = json.loads((ROOT / 'scripts/kaggle_decomposition_probe_v7.ipynb').read_text(encoding='utf-8'))
     cells = [c['source'] if isinstance(c['source'], str) else ''.join(c['source'])
              for c in nb['cells'] if c['cell_type'] == 'code']
     patches = {target.id: ast.literal_eval(node.value) for node in ast.parse(cells[1]).body
@@ -36,31 +37,40 @@ class AtomicNotebookTests(unittest.TestCase):
         self.assertIn("'--without-pip'", cells[1])
         self.assertIn("'--validate-only'", cells[1])
         self.assertIn('timeout=2520', cells[2])
-        self.assertIn('atomic-verifier-constrained-v5-20261013', cells[1])
+        self.assertIn('atomic-verifier-constrained-v7-20261016', cells[1])
         self.assertLess(cells[1].index("run('structured-decoder'"), cells[1].index("run('pip-check'"))
         self.assertLess(cells[1].index("run('atomic-freeze-check'"),
                         cells[1].index("print('SETUP COMPLETE:"))
         by_path = {item['path']: item for item in patches['verifier_patch']}
-        criteria = json.loads((EVAL / 'atomic_verifier_criteria_v5.json').read_text())
+        trace_fixture = (ROOT / 'scripts/fixtures/summary_trace_pre_v5.py.txt').read_bytes()
+        self.assertEqual(by_path['research_rag/tests/test_summary_trace.py']['base_sha256'],
+                         hashlib.sha256(trace_fixture).hexdigest())
+        criteria = json.loads((EVAL / 'atomic_verifier_criteria_v7.json').read_text())
         self.assertTrue(set(criteria['source_sha256']) <= set(by_path))
-        self.assertIn('research_rag/tests/test_atomic_decomposition_v5.py', criteria['source_sha256'])
-        self.assertEqual(criteria['policy'], 'atomic-verifier-constrained-v5')
-        self.assertEqual(criteria['structured_decoder']['policy'], 'atomic-schema-decoding-v2')
-        previous = json.loads((EVAL / 'atomic_verifier_criteria_v4.json').read_text())
+        self.assertIn('research_rag/tests/test_atomic_metric_v7.py', criteria['source_sha256'])
+        self.assertEqual(criteria['policy'], 'atomic-verifier-constrained-v7')
+        self.assertEqual(criteria['structured_decoder']['policy'], 'atomic-schema-decoding-v4')
+        previous = json.loads((EVAL / 'atomic_verifier_criteria_v6.json').read_text())
         versioned = {'version', 'policy', 'structured_decoder', 'contract_file', 'contract_sha256',
                      'source_sha256', 'prompt_sha256', 'limitations'}
         self.assertEqual(previous.keys(), criteria.keys())
         for key in criteria.keys() - versioned:
             self.assertEqual(previous[key], criteria[key], key)
-        self.assertEqual(previous['prompt_sha256']['assess'], criteria['prompt_sha256']['assess'])
+        self.assertEqual(previous['prompt_sha256'], criteria['prompt_sha256'])
+        self.assertEqual({k: v for k, v in previous['structured_decoder'].items() if k != 'policy'},
+                         {k: v for k, v in criteria['structured_decoder'].items() if k != 'policy'})
         for name, item in by_path.items():
             data = zlib.decompress(base64.b64decode(item['payload'], validate=True))
             self.assertEqual(len(data), item['size'])
             self.assertEqual(hashlib.sha256(data).hexdigest(), item['sha256'])
-            self.assertEqual(data, (ROOT / name).read_bytes())
+            self.assertEqual(data, v7_file(name).read_bytes())
         for item in patches['runtime_patch']:
             if item['path'] in by_path:
                 self.assertIn(item['sha256'], (by_path[item['path']]['sha256'], by_path[item['path']].get('base_sha256')))
+        release = json.loads((ROOT / 'docs/atomic-verifier-v7-release.json').read_text(encoding='utf-8'))
+        self.assertEqual(release['version'], criteria['version'])
+        for name, digest in release['files'].items():
+            self.assertEqual(hashlib.sha256(v7_file(name).read_bytes()).hexdigest(), digest, name)
 
     def test_patched_runtime_discovers_tests_and_validates_freeze_without_notebook(self):
         _, patches = notebook()
@@ -76,18 +86,28 @@ class AtomicNotebookTests(unittest.TestCase):
                 if source.exists():
                     target = runtime / source.relative_to(ROOT)
                     target.parent.mkdir(parents=True, exist_ok=True)
-                    target.write_bytes(source.read_bytes())
+                    target.write_bytes(v7_file(source.relative_to(ROOT)).read_bytes())
+            # Reproduce the existing diagnostics file that v7 must replace.
+            trace_target = runtime / 'research_rag/tests/test_summary_trace.py'
+            trace_target.parent.mkdir(parents=True, exist_ok=True)
+            trace_target.write_bytes((ROOT / 'scripts/fixtures/summary_trace_pre_v5.py.txt').read_bytes())
             for items in patches.values():
                 for item in items:
                     target = (runtime / item['path']).resolve()
                     self.assertTrue(target.is_relative_to(runtime.resolve()))
+                    if items is patches['verifier_patch'] and target.exists():
+                        self.assertIn(hashlib.sha256(target.read_bytes()).hexdigest(),
+                                      (item['sha256'], item.get('base_sha256', item['sha256'])), item['path'])
                     target.parent.mkdir(parents=True, exist_ok=True)
                     target.write_bytes(zlib.decompress(base64.b64decode(item['payload'], validate=True)))
             self.assertFalse((runtime / 'scripts').exists())
             env = {**os.environ, 'PYTHONPATH': str(runtime), 'HF_HUB_OFFLINE': '1'}
+            expected_tests = unittest.defaultTestLoader.discover(
+                str(ROOT / 'research_rag/tests'), pattern='test_atomic_experiment.py').countTestCases()
+            self.assertGreater(expected_tests, 0)
             probe = '''import sys, unittest
 suite = unittest.defaultTestLoader.discover('research_rag/tests', pattern='test_atomic_experiment.py')
-assert suite.countTestCases() == 15, 'Runtime discovery must contain all fifteen experiment tests'
+assert suite.countTestCases() == int(sys.argv[1]), 'Runtime discovery differs from the source tests'
 for group in suite:
     for cases in group:
         for case in cases:
@@ -97,11 +117,17 @@ freeze = unittest.defaultTestLoader.loadTestsFromName(
 result = unittest.TextTestRunner(verbosity=2).run(freeze)
 raise SystemExit(0 if result.wasSuccessful() else 1)
 '''
-            result = subprocess.run([sys.executable, '-c', probe],
+            result = subprocess.run([sys.executable, '-c', probe, str(expected_tests)],
                 cwd=runtime, env=env, capture_output=True, text=True, timeout=120)
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
             self.assertIn('Ran 1 test', result.stderr)
             self.assertIn('\nOK', result.stderr)
+            validated = subprocess.run([sys.executable, '-m', 'research_rag.evaluation.evaluate_atomic_verifier',
+                '--output-dir', str(runtime / 'probe'), '--decomposition-probe', '--validate-only'],
+                cwd=runtime, env=env, capture_output=True, text=True, timeout=120)
+            self.assertEqual(validated.returncode, 0, validated.stdout + validated.stderr)
+            self.assertEqual(json.loads(validated.stdout)['cases'], 18)
+            self.assertFalse((runtime / 'probe').exists())
 
     def test_setup_fix_preserves_model_prompts_data_and_budgets(self):
         old = json.loads((EVAL / 'atomic_verifier_criteria.json').read_text())

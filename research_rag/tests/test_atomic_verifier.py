@@ -233,7 +233,8 @@ class AtomicContractTests(unittest.TestCase):
         claim, proof = 'The service reduced latency.', 'The service latency fell from 42 ms to 31 ms.'
         p = part(claim)
         raw = assessment([observation(quote=proof)])
-        self.assertIn('numeric_tool_required', a.assess_part(raw, p, proof)['validation_issues'])
+        with self.assertRaisesRegex(ValueError, 'numeric_tool_required'):
+            a.assess_part(raw, p, proof)
         raw['observations'][0]['numeric'] = numeric('change', proof, operand('42', 'ms'), operand('31', 'ms'))
         raw['observations'][0]['truth'] = 'unknown'
         self.assertEqual(a.assess_part(raw, p, proof)['assessed_label'], 'not_enough_info')

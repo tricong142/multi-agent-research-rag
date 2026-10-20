@@ -1,0 +1,373 @@
+{
+  "review_type": "human",
+  "reviewer": "",
+  "reviewed_on": "",
+  "human_attestation": false,
+  "provenance_limits_acknowledged": false,
+  "no_candidate_outcomes_seen": false,
+  "protocol_accepted": false,
+  "manifest_sha256": "2220c18b708c967b7a33ee1bcd6a8771ce7aefe7e2b3753d8a60adcc3c080069",
+  "candidate_criteria_sha256": "b9d77823b5c8d6d2a56d4053667b8b53f6e059a1f5edb9e7e3a7578a50f34071",
+  "decisions": [
+    {
+      "id": "validation-v1:001",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:002",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:003",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:004",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:005",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:006",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:007",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:008",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:009",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:010",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:011",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:012",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:013",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:014",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:015",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:016",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:017",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:018",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:019",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:020",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:021",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:022",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:023",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:024",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:025",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:026",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:027",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:028",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:029",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "validation-v1:030",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    }
+  ]
+}

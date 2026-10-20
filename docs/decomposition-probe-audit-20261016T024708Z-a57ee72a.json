@@ -1,0 +1,149 @@
+{
+  "run": "20261016T024708Z-a57ee72a",
+  "zip_sha256": "9501567f9efe425c9d8ed61a416f58a92ccac75bc44afef7c04e71b1eead590f",
+  "crc_pass": true,
+  "output_manifest_files_verified": 39,
+  "input_manifest_files_verified_against_release_and_local_bytes": 69,
+  "frozen_source_files_verified": 26,
+  "criteria_sha256": "3e9a61616903e99f3c767e45c2ba361b44f6ea6c65732598ac3166b6cf23af7f",
+  "model_pairing_matches_recorded_baseline": {
+    "model_files": true,
+    "shared_tokenizer_files": true,
+    "repo_id": true,
+    "revision": true,
+    "dtype": true,
+    "quantization": true,
+    "seed": true,
+    "do_sample": true
+  },
+  "provenance_limit": "Recorded hashes match frozen baseline; remote GPU weights were not included or independently rehashed locally.",
+  "gpu": {
+    "cuda": "12.8",
+    "torch": "2.10.0+cu128",
+    "device": "Tesla T4"
+  },
+  "remote_regression_tests_passed": 101,
+  "remote_regression_elapsed_seconds": 2.393,
+  "probe_validate_only": {
+    "freeze_valid": true,
+    "cases": 18,
+    "maximum_calls": 36
+  },
+  "verifier_validate_only": {
+    "freeze_valid": true,
+    "cases": 39,
+    "maximum_calls": 312
+  },
+  "predictions_replayed": 18,
+  "trace_event_counts": {
+    "call_started": 18,
+    "generation": 18,
+    "call_finished": 18
+  },
+  "calls_reconciled": 18,
+  "successful_first_attempt": 18,
+  "repair_attempts": 0,
+  "structurally_successful_repairs": 0,
+  "validation_issues": {},
+  "max_generated_tokens_per_call": 117,
+  "canonical_parts_available": 20,
+  "metrics": {
+    "n": 18,
+    "valid_decompositions": 18,
+    "incomplete": 0,
+    "backend_calls": 18,
+    "checks": {
+      "all_claims_present": true,
+      "all_decompositions_valid": true,
+      "within_call_budget": true,
+      "within_measured_token_budget": true,
+      "structured_decoding_trace_complete": true
+    },
+    "automated_gate_pass": true,
+    "semantic_review": "pending",
+    "label_accuracy": null,
+    "generated_tokens": 976,
+    "prompt_tokens": 22892
+  },
+  "summary": {
+    "experiment_completed": true,
+    "prediction_count": 18,
+    "backend_calls": 18,
+    "automated_gate_pass": true,
+    "human_review": "pending",
+    "overall_pass": false,
+    "promoted_to_serving": false,
+    "cost_usd": null,
+    "status": "automated_pass_human_pending",
+    "evaluation_mode": "decomposition",
+    "last_case_id": "decompose:018",
+    "elapsed_ms": 220913.489
+  },
+  "stage_status": {
+    "state": "completed",
+    "exit_code": 0,
+    "elapsed_ms": 226865.36
+  },
+  "admission_error": null,
+  "full39_blocked_before_model_loader": false,
+  "predictions_sha256": "55d449e24056ed440ec9e6e660aea164f20a345c045dc70c5411cf2d84b747d4",
+  "original_review_sha256": "e44c3bb66326824370971ae1bd11494ff6ceb69a1af3ffec26740b5c1eecf4df",
+  "original_output_modified": false,
+  "new_inference_calls_by_assistant": 0,
+  "full39_authorized_by_gate": true,
+  "verifier_39_completed": false,
+  "false_support": null,
+  "assistant_review": {
+    "reviewer_kind": "assistant",
+    "claims_reviewed": 18,
+    "canonical_parts_reviewed": 20,
+    "claims_pass_five_semantic_rubric_fields": 18,
+    "prompt_format_deviations": [
+      10,
+      14,
+      18
+    ],
+    "prompt_format_compliance_100_percent": false,
+    "review_file": "docs/decomposition-semantic-review-20261016T024708Z-a57ee72a.jsonl",
+    "review_sha256": "01f6480a4fec786a0206d3dff05fb98e8c11af4538d95bef9e108a154be98b17",
+    "human_review_completed": true,
+    "semantic_gate_pass": true
+  },
+  "human_review": {
+    "run": "20261016T024708Z-a57ee72a",
+    "reviewer": "tricong",
+    "reviewer_kind": "human",
+    "human_review_completed": true,
+    "confirmation_source": "Two direct human replies in this chat: reviewer name then explicit all18/fivecriteria confirmation.",
+    "user_provided_reviewer_name": "tricong",
+    "user_confirmation_verbatim": "Cả 18 ca đạt cả năm tiêu chí; tôi đã đọc các lưu ý",
+    "format_caveats_shown_before_confirmation": [
+      "decompose:010",
+      "decompose:014",
+      "decompose:018"
+    ],
+    "per_case_notes_origin": "AI-proposed case notes shown in the review form and explicitly confirmed by the human.",
+    "human_review_file": "docs/semantic-review-v7-20261016T024708Z-a57ee72a.json",
+    "reviewed_probe_directory": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\colab-atomic-v7\\20261016T024708Z-a57ee72a\\reviewed-probe",
+    "criteria_sha256": "3e9a61616903e99f3c767e45c2ba361b44f6ea6c65732598ac3166b6cf23af7f",
+    "original_probe_zip_sha256": "9501567f9efe425c9d8ed61a416f58a92ccac75bc44afef7c04e71b1eead590f",
+    "admission": {
+      "probe_predictions_sha256": "55d449e24056ed440ec9e6e660aea164f20a345c045dc70c5411cf2d84b747d4",
+      "semantic_review_sha256": "c01870b7f777607508055b0ee12ce44b47141960345ce8ae15babed0d4f9719f",
+      "reviewer": "tricong"
+    },
+    "admission_verified": true,
+    "original_human_template_sha256": "e44c3bb66326824370971ae1bd11494ff6ceb69a1af3ffec26740b5c1eecf4df",
+    "original_output_modified": false,
+    "verifier39_inference_completed": false,
+    "false_support": null,
+    "step2_completed": false,
+    "promoted_to_serving": false
+  },
+  "initial_pending_review_guard_verified": {
+    "blocked_before_model_loader": true,
+    "error": "Completed human review bound to this probe is required",
+    "tested_before_human_confirmation": true
+  },
+  "current_admission_verified": true
+}

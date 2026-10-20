@@ -1,0 +1,21 @@
+{
+  "run": "20261016T024708Z-a57ee72a",
+  "archive": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\atomic-verifier-v7-full39-handoff-20261016T024708Z-a57ee72a.zip",
+  "archive_sha256": "bd159998f696f178b9e1244725df7d5defa83f0b22e236f0f51aab25e93077eb",
+  "archive_bytes": 2506039,
+  "files_verified": 12,
+  "criteria_sha256": "3e9a61616903e99f3c767e45c2ba361b44f6ea6c65732598ac3166b6cf23af7f",
+  "human_review": {
+    "probe_predictions_sha256": "55d449e24056ed440ec9e6e660aea164f20a345c045dc70c5411cf2d84b747d4",
+    "semantic_review_sha256": "c01870b7f777607508055b0ee12ce44b47141960345ce8ae15babed0d4f9719f",
+    "reviewer": "tricong"
+  },
+  "probe18_completed": true,
+  "human_admission_verified": true,
+  "full39_notebook_ready_for_user": true,
+  "full39_model_inference_completed": false,
+  "original_probe_outputs_verified_unchanged": 39,
+  "full39_packaging_tests_passed": 4,
+  "false_support": null,
+  "step2_completed": false
+}

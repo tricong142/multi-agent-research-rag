@@ -1,0 +1,225 @@
+{
+  "predictions_sha256": "55d449e24056ed440ec9e6e660aea164f20a345c045dc70c5411cf2d84b747d4",
+  "criteria_sha256": "3e9a61616903e99f3c767e45c2ba361b44f6ea6c65732598ac3166b6cf23af7f",
+  "reviewer": "tricong",
+  "reviewer_kind": "human",
+  "review_completed": true,
+  "cases": [
+    {
+      "example_id": "decompose:001",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Giữ chủ thể Model Juniper, property memory và hướng giảm 25%; numeric requirement 25% còn nguyên. Chưa có evidence để xác nhận baseline hay phép tính phần trăm. Tách riêng retains 94% accuracy; kế thừa đúng Model Juniper trong entity. AND đầu quote là connector được contract cho phép; không ghép accuracy với memory."
+    },
+    {
+      "example_id": "decompose:002",
+      "claim": "Model Juniper retains 94% accuracy.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Một factual predicate đầy đủ: Model Juniper giữ accuracy 94%; metric accuracy, quantifier atomic và requirement 94% đúng."
+    },
+    {
+      "example_id": "decompose:003",
+      "claim": "The study used human labels.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Quote giữ nguyên quan hệ study used human labels; metric dùng full predicate used human labels, không còn chỉ động từ used. Không thêm phủ định hoặc lượng từ."
+    },
+    {
+      "example_id": "decompose:004",
+      "claim": "The new index caused the latency improvement.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Giữ chủ thể new index, property latency và quan hệ caused trong quote. Decomposition không biến nhân quả thành tương quan; assessment sau này vẫn phải có bằng chứng nhân quả."
+    },
+    {
+      "example_id": "decompose:005",
+      "claim": "All tasks improved after compression.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Giữ toàn bộ population tasks, lượng từ all và after compression. Claim không chỉ rõ một property khác ngoài improved; review không tự thêm metric vào claim."
+    },
+    {
+      "example_id": "decompose:006",
+      "claim": "The report evaluated four models on two datasets.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Giữ một predicate evaluated, entity report, metric evaluated four models và condition on two datasets. Numeric requirements tách đúng 4/models và 2/datasets; không cắt dataset/count thành factual fragment. Chưa kiểm evidence của hai requirement."
+    },
+    {
+      "example_id": "decompose:007",
+      "claim": "Training took 12 seconds.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Training là chủ thể; quote giữ toàn bộ Training took 12 seconds. Metric took 12 seconds giữ đủ quan hệ và thời lượng, không còn took hoặc 12 seconds đứng riêng. Requirement 12/seconds đúng; time rỗng vì đây là thời lượng đo, không phải restriction thời điểm."
+    },
+    {
+      "example_id": "decompose:008",
+      "claim": "The sample contained 240 documents.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Sample là chủ thể; metric contained 240 documents giữ đủ quan hệ chứa, số lượng và đối tượng. Quote đầy đủ; requirement 240/documents đúng; không thêm restriction hoặc tách quantity thành part riêng."
+    },
+    {
+      "example_id": "decompose:009",
+      "claim": "On the tested dataset, the method improved recall.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Entity method và property recall đúng; On the tested dataset giữ nguyên trong quote và condition. Không gán dataset thành thời gian hoặc bỏ tested."
+    },
+    {
+      "example_id": "decompose:010",
+      "claim": "Every validation shard improved recall after the revision.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Giữ validation shard, all, recall và after the revision. Metric improved recall vẫn chỉ đúng property recall nên binding có nghĩa đúng; riêng prompt ưu tiên recall không kèm động từ là điểm chưa đồng nhất về hình thức, không phải mất/sai metric. Metric 'improved recall' vẫn chứa đúng property 'recall' và không làm mất hướng trong quote; binding đúng theo năm rubric semantic. Tuy nhiên base prompt yêu cầu named property không kèm change verb: canonical metric nên là 'recall'. Không tuyên bố prompt-format compliance 100%; human cần đọc lưu ý này."
+    },
+    {
+      "example_id": "decompose:011",
+      "claim": "At least one audited cache node reduced response time after the patch.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "At least one chuyển đúng thành some; entity audited cache node giữ audited, metric response time, time after the patch. Không nâng existential thành all hoặc bỏ population modifier."
+    },
+    {
+      "example_id": "decompose:012",
+      "claim": "None of the monitored pumps leaked during the overnight test.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "None chuyển đúng thành none; entity monitored pumps giữ monitored, metric leaked là positive predicate trước khi áp lượng từ none, time during the overnight test. Không diễn giải unknown/silence thành không rò rỉ."
+    },
+    {
+      "example_id": "decompose:013",
+      "claim": "The North gateway reduced its error rate after calibration.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Entity North gateway, metric error rate, hướng giảm trong quote và time after calibration đúng. Không đổi North thành một gateway khác."
+    },
+    {
+      "example_id": "decompose:014",
+      "claim": "Every weekly trial conducted in May improved throughput.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Giữ all weekly trial, property throughput và condition in May để chọn tập trial conducted in May. Metric improved throughput vẫn chỉ đúng property, dù prompt ưu tiên throughput không kèm động từ. Không suy ra improvement xảy ra trong May; time rỗng theo schema hiện tại. Metric 'improved throughput' vẫn chứa đúng property 'throughput' và không làm mất hướng trong quote; binding đúng theo năm rubric semantic. Tuy nhiên base prompt yêu cầu named property không kèm change verb: canonical metric nên là 'throughput'. Không tuyên bố prompt-format compliance 100%; human cần đọc lưu ý này."
+    },
+    {
+      "example_id": "decompose:015",
+      "claim": "The patch reduced median request latency.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Giữ patch, hướng reduced và metric median request latency; không đổi median thành mean hoặc bỏ request. Không thêm thời gian chưa có trong claim."
+    },
+    {
+      "example_id": "decompose:016",
+      "claim": "The configuration change increased precision.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Giữ configuration change, property precision và hướng increased trong quote; không nhầm precision với recall."
+    },
+    {
+      "example_id": "decompose:017",
+      "claim": "After tuning, the extractor decreased memory use and increased token recall.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Predicate 1 giữ extractor, decreased memory use và time After tuning. Đây là prefix đứng đầu có dấu phẩy nên được dùng chung cho hai part. Predicate 2 giữ increased token recall; kế thừa đúng extractor và After tuning. Hướng tăng recall tách khỏi hướng giảm memory use; leading AND hợp lệ."
+    },
+    {
+      "example_id": "decompose:018",
+      "claim": "Every batch in the low-temperature group gained yield after the update.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "Giữ all batch, condition in the low-temperature group, property yield và time after the update. Population không bị mở rộng sang batch thuộc group khác. Metric 'gained yield' vẫn chứa đúng property 'yield' và không làm mất hướng trong quote; binding đúng theo năm rubric semantic. Tuy nhiên base prompt yêu cầu named property không kèm change verb: canonical metric nên là 'yield'. Không tuyên bố prompt-format compliance 100%; human cần đọc lưu ý này."
+    }
+  ]
+}

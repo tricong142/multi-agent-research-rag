@@ -1,0 +1,269 @@
+{
+  "run_id": "20261019T171503Z-bfe32d16",
+  "zip_sha256": "d28195992d0d2bd20d6dbbc3b6d7553ab3dd5c0aaf9677dd6504b5057c4518e7",
+  "output_files": 50,
+  "all_output_hashes_valid": true,
+  "all_inputs_match_packaged_payload": true,
+  "input_files": 99,
+  "criteria_sha256": "b9d77823b5c8d6d2a56d4053667b8b53f6e059a1f5edb9e7e3a7578a50f34071",
+  "payload_sha256": "3d9d570f6bc7468f176c19952bbafe6212b609adf672fd3285a79f875ef9582a",
+  "candidate": "atomic-verifier-constrained-v8-cellfix6",
+  "load_frozen_passed": true,
+  "model_pairing": {
+    "model_files": true,
+    "shared_tokenizer_files": true,
+    "repo_id": true,
+    "revision": true,
+    "dtype": true,
+    "quantization": true,
+    "seed": true,
+    "do_sample": true
+  },
+  "validation_admission_replayed": {
+    "version": "atomic-cellfix6-validation-v1",
+    "status": "locked_after_human_annotation",
+    "manifest_sha256": "2220c18b708c967b7a33ee1bcd6a8771ce7aefe7e2b3753d8a60adcc3c080069",
+    "candidate_criteria_sha256": "b9d77823b5c8d6d2a56d4053667b8b53f6e059a1f5edb9e7e3a7578a50f34071",
+    "reviewer": "Trí Công",
+    "reviewed_on": "2026-10-19",
+    "cases": 30,
+    "papers": 10,
+    "inference_completed": false,
+    "scope": "Verifier pilot on supplied paragraphs; not unseen pretraining data or pipeline E2E",
+    "signature_kind": "self-attested human review; not cryptographic identity verification",
+    "review_sha256": "8ff233fff0c01eb7bbbbb14746a82a7295b2ad294dc9c1eba55cd52303cd946a"
+  },
+  "review_diff_from_local": [
+    {
+      "id": "validation-v1:004",
+      "different_fields": [
+        "note"
+      ]
+    },
+    {
+      "id": "validation-v1:008",
+      "different_fields": [
+        "note"
+      ]
+    },
+    {
+      "id": "validation-v1:010",
+      "different_fields": [
+        "note"
+      ]
+    },
+    {
+      "id": "validation-v1:025",
+      "different_fields": [
+        "note"
+      ]
+    }
+  ],
+  "local_human_review_preserved": true,
+  "remote_regression_tests_passed": 211,
+  "remote_validate_only": {
+    "probe": {
+      "freeze_valid": true,
+      "cases": 18,
+      "maximum_calls": 36
+    },
+    "smoke": {
+      "freeze_valid": true,
+      "cases": 12,
+      "maximum_calls": 96
+    },
+    "verifier": {
+      "freeze_valid": true,
+      "cases": 39,
+      "maximum_calls": 312
+    }
+  },
+  "remote_cuda_preflight": {
+    "torch": "2.10.0+cu128",
+    "cuda": "12.8",
+    "gpu": "Tesla T4"
+  },
+  "stages": {
+    "gpu-host": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 214.72
+    },
+    "venv": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 114.98
+    },
+    "bootstrap": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 3532.5
+    },
+    "torch": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 147778.4
+    },
+    "runtime": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 49182.51
+    },
+    "pip-check": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 467.92
+    },
+    "pip-freeze": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 367.38
+    },
+    "regression": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 14734.98
+    },
+    "cuda-preflight": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 2175.86
+    },
+    "probe-validate-only": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 2177.18
+    },
+    "smoke-validate-only": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 2273.83
+    },
+    "verifier-validate-only": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 2071.38
+    },
+    "pinned-model-cache": {
+      "state": "completed",
+      "exit_code": 0,
+      "elapsed_ms": 34394.79
+    },
+    "assessment-smoke": {
+      "state": "failed",
+      "exit_code": 1,
+      "elapsed_ms": 358191.09
+    }
+  },
+  "all_12_predictions_replayed": true,
+  "metrics_recomputed_exactly": true,
+  "call_triplets_reconciled": 29,
+  "validation_issues": {
+    "valid": 28,
+    "duplicate_numeric_requirement": 1
+  },
+  "exact_raw_citations_checked": 15,
+  "exact_numeric_sources_checked": 7,
+  "derived_citation_additions": 0,
+  "metrics": {
+    "n": 12,
+    "correct_labels": 7,
+    "false_support": 0,
+    "runtime_failed_rows": 0,
+    "gold_support_rejected": 1,
+    "gold_support_count": 4,
+    "backend_calls": 29,
+    "checks": {
+      "all_cases_present": true,
+      "all_labels_correct": false,
+      "no_false_support": true,
+      "no_runtime_failures": true,
+      "within_call_budget": true,
+      "each_group_complete_and_correct": false,
+      "within_measured_token_budget": true,
+      "structured_decoding_trace_complete": true,
+      "cooperative_deadline_trace_complete": true
+    },
+    "automated_gate_pass": false,
+    "dataset_groups": {
+      "original_contracts": {
+        "n": 12,
+        "correct": 7,
+        "false_support": 0,
+        "failed": 0
+      }
+    },
+    "stop_reasons": {
+      "completed": 12
+    },
+    "confusion": [
+      {
+        "gold": "contradict",
+        "prediction": "not_enough_info",
+        "n": 4
+      },
+      {
+        "gold": "not_enough_info",
+        "prediction": "not_enough_info",
+        "n": 4
+      },
+      {
+        "gold": "support",
+        "prediction": "not_enough_info",
+        "n": 1
+      },
+      {
+        "gold": "support",
+        "prediction": "support",
+        "n": 3
+      }
+    ],
+    "generated_tokens": 3708,
+    "prompt_tokens": 32956
+  },
+  "summary": {
+    "experiment_completed": true,
+    "prediction_count": 12,
+    "backend_calls": 29,
+    "automated_gate_pass": false,
+    "human_review": "pending",
+    "overall_pass": false,
+    "promoted_to_serving": false,
+    "cost_usd": null,
+    "status": "automated_gates_failed",
+    "evaluation_mode": "assessment_smoke",
+    "last_case_id": "contract:bounded_scope",
+    "elapsed_ms": 349955.629
+  },
+  "support_predictions": 3,
+  "support_precision": 1.0,
+  "support_recall": 0.75,
+  "contradict_recall": 0.0,
+  "paired_development_comparison": {
+    "source": "stored cellfix5 full39 original-contract subset",
+    "same_claim_context_gold": true,
+    "n": 12,
+    "cellfix5_correct": 12,
+    "cellfix6_correct": 7,
+    "single_runtime_per_candidate": true,
+    "causal_attribution_established": false
+  },
+  "incorrect_cases": [
+    "contract:accuracy_conflict",
+    "contract:negation",
+    "contract:scope",
+    "contract:cross_sentence",
+    "contract:wrong_units"
+  ],
+  "probe18_present": false,
+  "full39_present": false,
+  "validation30_inference_present": false,
+  "new_gpu_inference_during_audit": false,
+  "promoted_to_serving": false,
+  "limitations": [
+    "Hash and log consistency is not a cryptographic signature of remote execution.",
+    "The 12 cases are development diagnostics; no generalization guarantee.",
+    "Validation gold review is not approval of new decomposition predictions.",
+    "Historical baseline 37/39 is not cellfix6 full39 inference."
+  ]
+}

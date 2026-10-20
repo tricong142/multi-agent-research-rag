@@ -51,7 +51,11 @@ def main():
                'requirements-orchestrator.txt', 'research_rag/tests/test_atomic_verifier.py',
                'research_rag/tests/test_atomic_experiment.py',
                '04_factchecker/inference/atomic_decoding.py', 'research_rag/tests/test_atomic_decoding.py',
-               'requirements-atomic-verifier.txt', 'research_rag/tests/test_atomic_decomposition_v5.py')
+               'requirements-atomic-verifier.txt', 'research_rag/tests/test_atomic_decomposition_v5.py',
+               'research_rag/tests/test_atomic_contract_v5.py',
+               'train_agent3_summarizer/node.py', 'train_agent3_summarizer/config.py',
+               'train_agent3_summarizer/generator/prompts.py', 'train_agent3_summarizer/critic/prompts.py',
+               'research_rag/tests/test_summary_schema.py', 'research_rag/tests/test_summary_trace.py')
     legacy = json.loads((EVAL / 'blind_verifier_logic_v3_criteria.json').read_text())
     criteria = {
         'version': 'atomic-verifier-constrained-v5-20261013', 'policy': atomic.POLICY,
@@ -92,7 +96,8 @@ def main():
             'Per-case deadline rejects late output; outer process deadline interrupts blocking calls and includes model loading/downloads.',
             'More than seven parts or repeated repairs may exhaust the eight-call case budget; incomplete results fail the gate.',
             'English AND/simple numerical grammar can reject valid evidence. Gold-support rejection is reported.',
-            'Decomposition is limited to English AND and simple temporal/dataset phrases. A claim without AND is kept as one complete quote, which does not prove semantic atomicity.',
+            'Decomposition is limited to English AND and simple temporal/dataset phrases. Only explicit leading scope prefixes are shared; unrepresentable multiple restrictions stop before generation. A full no-AND quote does not prove semantic atomicity.',
+            'Independent quantities use occurrence-based requirements with immediate English unit/count nouns. Every requirement needs a separate cited check; compound or ambiguous binding still requires review.',
             'Cost USD is unavailable; actual calls/latency and available generation token counts are recorded.',
             'Shared backend adds a default-empty generation hook; constrained decoding is enabled only by the isolated atomic loader, not serving.',
             'Schema decoding prevents many formatting/source/quantifier errors; semantic entailment, binding and coverage still require validation/review. Token limits can truncate JSON.',

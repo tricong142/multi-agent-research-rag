@@ -1,0 +1,16 @@
+{
+  "kind": "synthetic_review_form_control_test",
+  "tests_passed": 7,
+  "checks": [
+    "18 populated drafts match reviewed cases with assistant attribution",
+    "original review unsigned and 90 controls unchecked",
+    "name required",
+    "all per-case judgments required",
+    "cleared per-case notes rejected",
+    "last-case rejection retained",
+    "synthetic positive export preserves every draft and both hashes"
+  ],
+  "form_sha256": "d3b74830edd1919497c769f448e033608b7b3d450f3ba40df66783491ef9078b",
+  "actual_human_review_completed": false,
+  "synthetic_review_json_written": false
+}

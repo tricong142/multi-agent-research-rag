@@ -1,0 +1,373 @@
+{
+  "review_type": "human",
+  "reviewer": "Trí Công",
+  "reviewed_on": "2026-10-19",
+  "human_attestation": true,
+  "provenance_limits_acknowledged": true,
+  "no_candidate_outcomes_seen": true,
+  "protocol_accepted": true,
+  "manifest_sha256": "2220c18b708c967b7a33ee1bcd6a8771ce7aefe7e2b3753d8a60adcc3c080069",
+  "candidate_criteria_sha256": "b9d77823b5c8d6d2a56d4053667b8b53f6e059a1f5edb9e7e3a7578a50f34071",
+  "decisions": [
+    {
+      "id": "validation-v1:001",
+      "accepted_label": "support",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Đúng chủ thể Model E-4, metric WER và giá trị 88.26% được gắn chính xác với điều kiện LibriSpeech LM theo nguyên văn context."
+    },
+    {
+      "id": "validation-v1:002",
+      "accepted_label": "contradict",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Mâu thuẫn trực tiếp về điều kiện: 80.40% WER thuộc về Lyrics LM sau khi thay thế, trong khi với LibriSpeech LM kết quả là 88.26%."
+    },
+    {
+      "id": "validation-v1:003",
+      "accepted_label": "not_enough_info",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Context chỉ đo lường và so sánh WER, hoàn toàn không có số liệu hay baseline về mức sử dụng bộ nhớ (memory); không suy diễn từ giảm WER sang giảm memory."
+    },
+    {
+      "id": "validation-v1:004",
+      "accepted_label": "support",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Nguyên văn context khẳng định WMT En-De cùng với De-En và Zh-En sử dụng phép đo detokenized BLEU."
+    },
+    {
+      "id": "validation-v1:005",
+      "accepted_label": "contradict",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Mâu thuẫn trực tiếp: tokenized BLEU chỉ áp dụng cho IWSLT'14 De-En, còn WMT En-De được quy định rõ là detokenized BLEU."
+    },
+    {
+      "id": "validation-v1:006",
+      "accepted_label": "not_enough_info",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Context chỉ nêu tên metric detokenized BLEU, hoàn toàn không công bố điểm số BLEU đạt được; không biến việc thiếu số liệu thành contradict."
+    },
+    {
+      "id": "validation-v1:007",
+      "accepted_label": "support",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Đúng chủ thể controllable parametrization, đạt điểm 41.87 SARI trên benchmark WikiLarge xuất hiện đầy đủ trong cùng vị ngữ."
+    },
+    {
+      "id": "validation-v1:008",
+      "accepted_label": "contradict",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Phản bác trực tiếp: context nêu rõ 'without requiring any external resource or modified training objective', trái với khẳng định required."
+    },
+    {
+      "id": "validation-v1:009",
+      "accepted_label": "not_enough_info",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Context chỉ báo cáo cải thiện điểm SARI, hoàn toàn không đề cập thời gian xử lý từng câu (latency 20ms) hay điều kiện phần cứng."
+    },
+    {
+      "id": "validation-v1:010",
+      "accepted_label": "support",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Các số lượng 1,268 clips, 14,769 actions và tập con 4,340 visible actions đều khớp chính xác nguyên văn từng đối tượng."
+    },
+    {
+      "id": "validation-v1:011",
+      "accepted_label": "contradict",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Mâu thuẫn với lượng từ toàn thể 'All': context chỉ rõ chỉ có 4,340 trong tổng số 14,769 actions là visible."
+    },
+    {
+      "id": "validation-v1:012",
+      "accepted_label": "not_enough_info",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Context chỉ dùng từ định tính 'short video clips', không cung cấp thời lượng của từng clip hay bất kỳ con số 10 giây nào."
+    },
+    {
+      "id": "validation-v1:013",
+      "accepted_label": "support",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Đúng chủ thể mô hình đạt 0.548 prediction accuracy được phát biểu trực tiếp và nguyên văn."
+    },
+    {
+      "id": "validation-v1:014",
+      "accepted_label": "contradict",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Mâu thuẫn trực tiếp về giá trị số: accuracy đạt được là 0.548 chứ không phải 0.748."
+    },
+    {
+      "id": "validation-v1:015",
+      "accepted_label": "not_enough_info",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Mệnh đề liên từ: phần accuracy 0.548 có căn cứ nhưng phần độ trễ 20ms/prediction vắng mặt trong context, do đó toàn bộ claim là not_enough_info."
+    },
+    {
+      "id": "validation-v1:016",
+      "accepted_label": "support",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Đúng tên tập dữ liệu CALLHOME, số lượng 120 cuộc hội thoại, thời lượng half-hour và tính chất casual telephone conversations."
+    },
+    {
+      "id": "validation-v1:017",
+      "accepted_label": "contradict",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Mâu thuẫn trực tiếp về định lượng thời gian: context xác định rõ cuộc hội thoại dài 'half-hour', trực tiếp bác bỏ 'two-hour'."
+    },
+    {
+      "id": "validation-v1:018",
+      "accepted_label": "not_enough_info",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Context chỉ mô tả quy mô hội thoại và đo perplexity của GPT2, hoàn toàn không đo lường tỷ lệ lỗi từ (WER) của bản gỡ băng."
+    },
+    {
+      "id": "validation-v1:019",
+      "accepted_label": "support",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Từ 'each' trong context xác nhận toàn bộ 80 sự kiện tai nạn máy bay đều được ghép cặp với các bài báo liên quan, thỏa mãn lượng từ 'Every'."
+    },
+    {
+      "id": "validation-v1:020",
+      "accepted_label": "contradict",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Mâu thuẫn với lượng từ 'all 80': context phân chia rõ 40 sự kiện cho training và 40 cho testing, không dành toàn bộ 80 cho training."
+    },
+    {
+      "id": "validation-v1:021",
+      "accepted_label": "not_enough_info",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Context chỉ nêu có các bài báo liên quan, hoàn toàn không đề cập ngôn ngữ bài báo có phải tiếng Pháp hay không."
+    },
+    {
+      "id": "validation-v1:022",
+      "accepted_label": "support",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Đúng mục tiêu nghiên cứu với 980 annotations trong 670 tweets tiếng Thổ Nhĩ Kỳ, hai con số được tách bạch rõ ràng."
+    },
+    {
+      "id": "validation-v1:023",
+      "accepted_label": "contradict",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Mâu thuẫn trực tiếp: nghiên cứu chỉ tập trung vào 3 danh mục đầu tiên ('only at the first three categories'), bác bỏ việc nhắm vào cả 8 danh mục."
+    },
+    {
+      "id": "validation-v1:024",
+      "accepted_label": "not_enough_info",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Số lượng 'three' trong context là 3 loại danh mục thực thể, không cung cấp danh tính hay số lượng người gán nhãn là 3 người."
+    },
+    {
+      "id": "validation-v1:025",
+      "accepted_label": "support",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Quan hệ so sánh 'better result' được gắn đúng với đối tượng so sánh wav2letter Transformer trên tập dữ liệu test-other."
+    },
+    {
+      "id": "validation-v1:026",
+      "accepted_label": "contradict",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Mâu thuẫn trực tiếp về chiều so sánh: mô hình đề xuất trên test-other vẫn kém hơn ('is still worse than') mô hình hybrid tốt nhất."
+    },
+    {
+      "id": "validation-v1:027",
+      "accepted_label": "not_enough_info",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Cụm 'The reason might be' chỉ là giả thuyết phỏng đoán, context không khẳng định điều này đã được chứng minh bằng thực nghiệm."
+    },
+    {
+      "id": "validation-v1:028",
+      "accepted_label": "support",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Khớp chính xác tên sections 0-1, phân loại development set và mục đích tối ưu hóa siêu tham số (hyperparameter optimization)."
+    },
+    {
+      "id": "validation-v1:029",
+      "accepted_label": "contradict",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Mâu thuẫn trực tiếp: context quy định sections 21-22 là test set, còn sections 0-1 là development set."
+    },
+    {
+      "id": "validation-v1:030",
+      "accepted_label": "not_enough_info",
+      "checks": {
+        "gold_label": true,
+        "exact_evidence": true,
+        "missing_information": true,
+        "identity_metric_quantity": true,
+        "scope_population_relation": true
+      },
+      "note": "Context chỉ mô tả việc phân chia các sections dữ liệu, hoàn toàn không cung cấp số lượng epoch huấn luyện (10 epochs)."
+    }
+  ]
+}

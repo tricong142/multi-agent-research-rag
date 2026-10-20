@@ -1,0 +1,199 @@
+{
+  "date": "2026-10-16",
+  "project_ready": false,
+  "component_readiness": {
+    "summarizer_new_atomic_verifier_integrated": false,
+    "writer_new_atomic_verifier_integrated": false,
+    "e2e_new_atomic_verifier_passed": false
+  },
+  "checks": {
+    "cpu_regression": {
+      "passed": true,
+      "tests": 310,
+      "log": "research-runs/production-gates-regression-final-20261016.log",
+      "sha256": "6db0682fadc57297b8f22c4c72741d6256b5d259bb6bbc96035e75038b612331"
+    },
+    "qasper_notebook_packaging": {
+      "passed": true,
+      "tests": 2,
+      "isolated_payload_regression": true
+    },
+    "v7_probe_validate_only": {
+      "freeze_valid": true,
+      "cases": 18,
+      "maximum_calls": 36
+    },
+    "v7_verifier_validate_only": {
+      "freeze_valid": true,
+      "cases": 39,
+      "maximum_calls": 312
+    },
+    "bm25_trace_replay": {
+      "replayed_queries": 393,
+      "metrics_match": true,
+      "input_hashes_verified": true
+    }
+  },
+  "qasper": {
+    "report": {
+      "benchmark": "QASPER-derived global paragraph retrieval, development only",
+      "official_qasper_score": false,
+      "test_candidate_evaluated": false,
+      "static_load_ms": 4736.253499984741,
+      "results": {
+        "bm25": {
+          "requested_method": "bm25",
+          "n": 393,
+          "top_k": 5,
+          "valid_backend_run": true,
+          "actual_backends": {
+            "bm25": 393
+          },
+          "fallback_queries": 0,
+          "failed_queries": 0,
+          "metrics": {
+            "hit_at_k": 0.27989821882951654,
+            "paragraph_recall_at_k": 0.15966416252675794,
+            "mrr_at_k": 0.15894826123833758
+          },
+          "latency_ms_mean": 860.5321312965126,
+          "latency_ms_p95": 2354.765900003258,
+          "first_query_ms": 837.6407999894582,
+          "preflight": {
+            "passed": true
+          }
+        },
+        "dense": {
+          "valid_backend_run": false,
+          "metrics": null,
+          "n": 0,
+          "preflight": {
+            "passed": false,
+            "error_type": "ValueError",
+            "reason": "Dense index provenance/model/revision does not match this benchmark"
+          },
+          "status": "blocked_before_encoder_load"
+        }
+      },
+      "paired_comparison_valid": false,
+      "delta_dense_minus_bm25": null,
+      "timing_note": "Static alignment load excluded; first Dense query includes encoder load. Query order fixed; no retrieval history.",
+      "quality_note": "Paragraph retrieval scores do not measure answer accuracy, verifier false support or E2E quality."
+    },
+    "provenance": {
+      "corpus_sha256": "4ad78d602384e8c50a02e0ab5c2363b26ecf74b06296a3457a41ef05ee6631c6",
+      "qrels_dev_sha256": "b61631d9cf2a3f0729de1168d13896fe056ba87dea0d7157c0c541a383d3225e",
+      "corpus_chunks": 18587,
+      "dev_queries": 393,
+      "embedding_model": "BAAI/bge-large-en-v1.5",
+      "embedding_revision": "d4aa6901d3a41ba39fb536a557fa166f842b0e09",
+      "query_prefix": "Represent this sentence for searching relevant passages: ",
+      "packages": {
+        "rank-bm25": "0.2.2",
+        "sentence-transformers": "6.0.0",
+        "faiss-cpu": "1.15.0",
+        "torch": "2.6.0",
+        "transformers": "5.16.1"
+      },
+      "python": "3.10.11",
+      "platform": "Windows-10-10.0.26200-SP0",
+      "index_sha256": {
+        "bm25_index.pkl": "34b73027ba7b6e7d8bf7812e844c286f2044508d26e901bb67ec845dc7ead372",
+        "faiss_doc_ids.json": "c15a5010617c9d3769342276df8ae8e12bd81a66b25c4c9826cef25a7973a6af",
+        "index_manifest.json": "bccd2fa76dee7ca720208f9c996d840d8ba9b8a4f7f7b08c3ee3db73f8e81142"
+      },
+      "source_sha256": {
+        "research_rag/evaluation/qasper_benchmark.py": "283fc0c2b50f76bb72d95bab4076ba305542ae4cb6c97f1326ee8f6307136e6e",
+        "research_rag/retrieval.py": "f8fc0c3118c0feb7dcb845f6be2a3dc026f253679524cbdcb5c4ec9bc1f6c75b",
+        "research_rag/indexing.py": "2e02675e5094a278b4eb9d0e2eb0245389fda47ad0d9236ba69fef68f457cd14"
+      }
+    },
+    "actual_dense_request_audit": {
+      "requested_method": "dense",
+      "actual_method": "bm25",
+      "warning": "dense_unavailable:RuntimeError;used_bm25",
+      "encoder_loaded": false,
+      "doc_ids": [
+        "qasper:1909.12079:paragraph:7",
+        "qasper:1909.12079:paragraph:40",
+        "qasper:1909.12079:paragraph:2",
+        "qasper:1908.11053:paragraph:52",
+        "qasper:1603.00957:paragraph:43"
+      ],
+      "dense_metrics_valid": false
+    },
+    "notebook_release": "docs/qasper-benchmark-colab-release.json",
+    "gpu_run_pending": true,
+    "test_candidate_evaluated": false
+  },
+  "reader": {
+    "default_policy": "local_pymupdf_then_tesseract",
+    "remote_policy": "explicit allow_remote=True",
+    "real_fixture_smoke": {
+      "pdf_count": 3,
+      "evaluated_pdf_count": 2,
+      "expected_span_count": 9,
+      "span_coverage": 0.7777777777777778,
+      "overall_exact_span_rate": 0.7777777777777778,
+      "span_count": 7,
+      "exact_span_rate": 1.0,
+      "mean_token_recall": 1.0,
+      "by_layout": {
+        "simple_text": {
+          "spans": 3,
+          "exact_matches": 3
+        },
+        "two_columns_table": {
+          "spans": 4,
+          "exact_matches": 4
+        }
+      },
+      "failures": [
+        {
+          "pdf_path": "pdfs/scanned_page.pdf",
+          "error_type": "ReaderBatchError"
+        }
+      ],
+      "annotation_origins": [
+        "Project-authored fixture; see manifest provenance"
+      ],
+      "note": "exact_span_rate is conditional on readable PDFs; overall_exact_span_rate includes failed PDFs as zero matches. Phrase/page presence only, not reading order, tables, or representative production quality.",
+      "passed": false
+    },
+    "tesseract_binary_found": false,
+    "ocr_quality_certified": false
+  },
+  "verifier": {
+    "current_frozen_version": "v7",
+    "new_candidate_implemented_this_run": false,
+    "probe_structurally_valid": 18,
+    "probe_human_review_complete": true,
+    "full39_saved_predictions": 22,
+    "full39_completed_predictions": 1,
+    "full39_correct_saved_labels": 0,
+    "full39_runtime_incomplete_saved": 21,
+    "full39_false_support": null,
+    "full39_passed": false,
+    "independent_validation_set_status": "not_created_or_human_annotated",
+    "v7_snapshot_record": "docs/atomic-verifier-v7-preserved-before-next-candidate.json"
+  },
+  "next_order": [
+    "Execute real paired QASPER dev benchmark on CUDA; audit returned ZIP",
+    "Fix assessment/grounding/numeric/deadline in new verifier candidate with general regression",
+    "Freeze separate human-annotated validation before evaluation; rerun probe and human review",
+    "Complete all 39 development cases plus separate validation and review evidence; no false support",
+    "Integrate Reader/Summarizer/Writer with passed verifier and run real model E2E"
+  ],
+  "this_run_source_sha256": {
+    "research_rag/retrieval.py": "f8fc0c3118c0feb7dcb845f6be2a3dc026f253679524cbdcb5c4ec9bc1f6c75b",
+    "research_rag/evaluation/qasper_benchmark.py": "283fc0c2b50f76bb72d95bab4076ba305542ae4cb6c97f1326ee8f6307136e6e",
+    "research_rag/tests/test_qasper_benchmark.py": "f1e615cc0227deecbd39c9778b20c48d839099d9c6fc74ffbfc9adeac7c50462",
+    "train_agent2_reader/reader_agent.py": "b7f8a2138a7fb18ab3258fb5a4268edad9d944cb485d45a3a7afedf5afc9823c",
+    "train_agent2_reader/tools/tool_ocr_fallback.py": "85febc1f3275c7f3f6f58334bd8b4d2da31c9f6c76bde06cf1877771e3f98e20",
+    "research_rag/tests/test_reader_local.py": "48310f45e39c62d13359a5807ae73a25d939ccd0d344fa96120e2ef39ee0f19e",
+    "research_rag/evaluation/reader_reliability.py": "7d34f8af1fdaf27b738fce2ccca8ce4171e969d21aeb608fcf8d8e37d6f7356f",
+    "scripts/build_colab_qasper_benchmark.py": "51891331e2a73d3866b3a681b463c79a07ce3db6fe1b333529f050fc5f88e7b3",
+    "scripts/test_colab_qasper_benchmark.py": "9d88c8795fcfa1f0b1cd38966069c3bbe00ee23c55eea406a7d462191655bc87",
+    "scripts/build_validation_notebook.py": "b2fa2fda300b04bb19ab98d52c7773a50430a1abde9b8aa9ce6ffb31af136c5b"
+  }
+}

@@ -1,0 +1,1622 @@
+--- cellfix9/04_factchecker/inference/assessment_evidence.py
++++ cellfix10/04_factchecker/inference/assessment_evidence.py
+@@ -1,318 +1,327 @@
+-"""Finite clause ownership and closed-population witnesses; no general entailment."""
+-import re
+-
+-from .assessment_rules import clauses, contains, scope_conflict, _MISSING
+-from .numeric_verifier import direction, numeric_requirements, _NUMERIC_MODAL
+-from .evidence_screen import WORDS
+-
+-_MODAL = re.compile(_NUMERIC_MODAL + r'|\b(?:planned|proposed|alleged|claimed|disputed|false|incorrect|denied|retracted|not true|which|who)\b', re.I)
+-_UP = r'improv(?:ed|es?)|increas(?:ed|es?)|rose|raised|gained|higher|better'
+-_DOWN = r'decreas(?:ed|es?)|reduc(?:ed|es?)|fell|lowered|lost|worsened|worse|slower|less accurate'
+-_COUNT = r'(?:\d+|' + '|'.join(WORDS) + r')'
+-
+-
+-def _modal(text):
+-    # May inside an explicit month phrase is not the modal verb "may".
+-    return _MODAL.search(re.sub(r'\b(?:in|during)\s+May\b', '', text, flags=re.I))
+-
+-
+-def local_clauses(text):
+-    # Split coordinated results, not lists of names or a verb's object.
+-    return [v.strip(' ,') for c in clauses(text) for v in re.split(
+-        r'\band\s+(?=(?:one|two|three|four|five|each|every|all|the third)\b[^.;]*\b(?:improved|reduced|gained|lost|increased|decreased)\b)', c, flags=re.I)]
+-
+-
+-def metric_present(part, text):
+-    metric = part['scope']['metric']
+-    if contains(metric, text):
+-        return True
+-    # shortcut: recall/recalling and leak/leaked/leaks are the only inflections
+-    # beyond exact metrics here; unsupported paraphrases remain model judgments.
+-    if metric.casefold() == 'recall' and re.search(r'\brecalling\b', text, re.I):
+-        return True
+-    if metric.casefold() in ('leaked', 'leak', 'leaks') and re.search(r'\bleak(?:ed|s)?\b', text, re.I):
+-        return True
+-    return False
+-
+-
+-def predicate_truth(part, text):
+-    """Truth of the positive predicate, independent of ALL/SOME/NONE."""
+-    if _MISSING.search(text) or _modal(text) or scope_conflict(part, text):
+-        return None
+-    metric = part['scope']['metric'].casefold()
+-    if metric in ('leak', 'leaked', 'leaks'):
+-        if re.search(r'\b(?:no leaks?|did not leak|never leaked|had no leaks?)\b', text, re.I):
+-            return 'false'
+-        if re.search(r'\bleaked\b', text, re.I):
+-            return 'true'
+-        return None
+-    requested = direction(part['quote'])
+-    if requested is None and re.search(r'\b(?:improv\w*|gain\w*)\b', part['quote'], re.I):
+-        requested = 'increase'
+-    if metric == 'improved':
+-        has_metric = True
+-    else:
+-        has_metric = metric_present(part, text)
+-    if not has_metric or not requested:
+-        return None
+-    up = bool(re.search(r'\b(?:' + _UP + r')\b', text, re.I))
+-    down = bool(re.search(r'\b(?:' + _DOWN + r')\b', text, re.I))
+-    unchanged = bool(re.search(r'\b(?:unchanged|stayed the same|did not improve)\b', text, re.I))
+-    if re.search(r'\bdid not improve\b', text, re.I):
+-        up = False
+-    if re.search(r'\b(?:not|never|no)\b', text, re.I) and not unchanged:
+-        return None
+-    states = (['increase'] if up else []) + (['decrease'] if down else []) + (['unchanged'] if unchanged else [])
+-    return ('true' if states[0] == requested else 'false') if len(states) == 1 else None
+-
+-
+-def owned_clauses(member, quotes):
+-    return [c for q in quotes for c in local_clauses(q) if contains(member, c)]
+-
+-
+-def citation_issue(part, member, quotes, truth):
+-    if truth == 'unknown':
+-        return None
+-    own = owned_clauses(member, quotes)
+-    if part['quantifier']!='atomic' and re.search(r'\b'+_noun(_head(part))+r'\b',member,re.I):
+-        pieces = [c for q in quotes for c in local_clauses(q)]
+-        if any(scope_conflict(part,c) for c in pieces) and any(not scope_conflict(part,c) for c in pieces):
+-            return 'observation_scope_binding_unresolved'
+-    if not own:
+-        return 'observation_evidence_unbound'
+-    if all(scope_conflict(part, c) for c in own):
+-        return 'observation_scope_mismatch'
+-    values = {v for c in own if (v := predicate_truth(part, c)) is not None}
+-    if len(values) == 1 and truth not in values:
+-        return 'observation_polarity_mismatch'
+-    # Exact member presence in a roster is not a predicate witness. Apply this
+-    # only to known property/verb heads; arbitrary semantic relations stay open.
+-    from .atomic_verifier import _PROPERTY_HEADS
+-    known = (contains(part['scope']['metric'],part['quote'])
+-             and part['scope']['metric'].split()[-1].casefold() in _PROPERTY_HEADS | {'improved', 'leaked'})
+-    numeric_head = part['scope']['metric'].split()[-1]
+-    numeric_bound = any(numeric_requirements(c) and contains(numeric_head,c) for c in own)
+-    if known and not numeric_bound and not any(metric_present(part, c) or part['scope']['metric']=='improved' and predicate_truth(part, c) for c in own):
+-        return 'observation_predicate_not_grounded'
+-    return None
+-
+-
+-def _head(part):
+-    word = part['scope']['entity'].split()[-1].casefold()
+-    if word.endswith(('ches','shes','xes','zes','sses')):
+-        return word[:-2]
+-    if word.endswith('ies'):
+-        return word[:-3]+'y'
+-    return word[:-1] if word.endswith('s') else word
+-
+-
+-def _noun(head):
+-    plural = head[:-1]+'ies' if head.endswith('y') else head+'es' if head.endswith(('ch','sh','x','z','s')) else head+'s'
+-    return '(?:'+re.escape(head)+'|'+re.escape(plural)+')'
+-
+-
+-def _restricted(part, text):
+-    if scope_conflict(part, text):
+-        return False
+-    for value in (part['scope']['time'], part['scope']['condition']):
+-        if value and not numeric_requirements(value):
+-            key = re.sub(r'^(?:on|in|during|under)\s+', '', value, flags=re.I)
+-            if not contains(key, text):
+-                return False
+-    return True
+-
+-
+-def _population(part, context):
+-    """One explicit population only; never join different source populations."""
+-    head = _head(part)
+-    if not re.fullmatch('[a-z-]+', head):
+-        return None
+-    sentences = [m[0].strip() for m in re.finditer(r'[^.!?]+(?:[.!?](?=\s|$)|$)', context) if m[0].strip()]
+-    populations = []
+-    for i, sentence in enumerate(sentences):
+-        if scope_conflict(part, sentence):
+-            continue
+-        count = re.search(r'\bexactly\s+(' + _COUNT + r')\s+(?:[a-z-]+\s+){0,3}' + _noun(head) + r'\b', sentence, re.I)
+-        roster = re.search(r'(?:\b(?:were|was)\s+|:\s*)([A-Z][\w-]*(?:,\s*[A-Z][\w-]*)*(?:,?\s+and\s+[A-Z][\w-]*))\s*[.!]?$', sentence)
+-        declared = bool(re.search(r'\b'+_noun(head)+r'\b',sentence,re.I))
+-        # A previously named audited set is explicit, but unrelated generic
+-        # "set" sentences are never assigned to a qualified population.
+-        named_set = re.search(r'\bcomplete\s+([a-z-]+)\s+set\b', sentence, re.I)
+-        declared = declared or bool(named_set and contains(named_set[1], part['scope']['entity']))
+-        if any(not contains(w,sentence) for w in part['scope']['entity'].split()[:-1]):
+-            continue
+-        if not declared or not (count or roster):
+-            continue
+-        names = re.split(r',\s*|\s+and\s+', roster[1]) if roster else []
+-        names = [n.strip() for n in names if n.strip()]
+-        n = int(count[1]) if count and count[1].isdigit() else WORDS.get(count[1].lower()) if count else len(names)
+-        if not n or n > 16 or names and len(names) != n:
+-            continue
+-        # Restrict to this declaration and its immediately following sentences;
+-        # a different explicit scope terminates the inheritance window.
+-        local = [sentence]
+-        for next_sentence in sentences[i+1:i+3]:
+-            if scope_conflict(part, next_sentence):
+-                break
+-            time = part['scope']['time']
+-            if time and re.match(r'^(?:after|before)\b',time,re.I) and re.search(r'\b(?:after|before)\b',next_sentence,re.I) and not contains(time,next_sentence):
+-                break
+-            local.append(next_sentence)
+-        text = ' '.join(local)
+-        if not _restricted(part, text):
+-            continue
+-        anchor = re.sub(r'^exactly\s+', '', count[0], flags=re.I) if count else roster[1]
+-        if len(anchor) > 160 or len(text) > 384 or text not in context:
+-            continue
+-        populations.append({'anchor': anchor, 'names': names, 'count': n, 'text': text})
+-    return populations[0] if len(populations) == 1 else None
+-
+-
+-def population_witness(part, context):
+-    if part['quantifier'] == 'atomic' or re.search(r'\b(?:not|never|without)\b', part['quote'], re.I):
+-        return None
+-    for modifier in part['scope']['entity'].split()[:-1]:
+-        if re.search(r'\b(?:non-|un)'+re.escape(modifier)+r'\b',context,re.I):
+-            return None
+-    pop = _population(part, context)
+-    if not pop:
+-        return None
+-    text, names = pop['text'], pop['names']
+-    if _MISSING.search(text) or _modal(text):
+-        return None
+-    if re.search(r'\b(?:some|several|most|few|subset|selected|remaining|except|only)\b',text,re.I):
+-        return None
+-    from .atomic_verifier import numeric_proof_required
+-    if numeric_proof_required(part,[text]):
+-        return None  # Do not force numeric=null where a measurement ledger is required.
+-    values = []
+-    # Explicit collective result must refer to this entire declared population.
+-    collective = []
+-    for clause in local_clauses(text):
+-        if re.search(r'\b(?:each|all|every|any of these)\b', clause, re.I):
+-            if re.search(r'\b(?:these|those|each of|and each)\b|^each\b', clause, re.I) or contains(_head(part), clause) or contains(_head(part)+'s', clause):
+-                counts = [q for q in numeric_requirements(clause)
+-                          if re.fullmatch(_noun(_head(part)),q['unit'],re.I)]
+-                if any(q['value']!=str(pop['count']) for q in counts):
+-                    continue
+-                value = predicate_truth(part, clause)
+-                if value:
+-                    collective.append(value)
+-    if collective and len(set(collective)) == 1:
+-        # A second opposed outcome inside this same population invalidates a
+-        # collective shortcut. Out-of-scope sentences were removed above.
+-        opposed = [predicate_truth(part, c) for c in local_clauses(text)]
+-        if any(v is not None and v != collective[0] for v in opposed):
+-            return None
+-        return {'truth': collective[0], 'members': [pop['anchor']], 'quotes': [text],
+-                'complete': True, 'numeric': False, 'population': True}
+-    if names:
+-        for name in names:
+-            states = set()
+-            for clause in owned_clauses(name, [text]):
+-                pieces = re.split(r'\band\s+(?=(?:stayed|remained|became)\s+(?:unchanged|slower|faster)|(?:increased|decreased|reduced)\s+on\b)', clause, flags=re.I)
+-                for piece in pieces:
+-                    if not contains(name, piece):
+-                        continue
+-                    if len(pieces)>1 and metric_present(part, clause) and not metric_present(part, piece):
+-                        piece = part['scope']['metric'] + ' ' + piece
+-                    value = predicate_truth(part, piece)
+-                    if value:
+-                        states.add(value)
+-            values.append(next(iter(states)) if len(states)==1 else None)
+-        decisive = 'false' if part['quantifier']=='all' else 'true'
+-        if decisive in values:
+-            return {'truth': decisive, 'members': [names[values.index(decisive)]], 'quotes': [text],
+-                    'complete': False, 'numeric': False, 'population': True}
+-        if None not in values and len(set(values)) == 1:
+-            return {'truth': values[0], 'members': [pop['anchor']], 'quotes': [text],
+-                    'complete': True, 'numeric': False, 'population': True}
+-    else:
+-        decisive = 'false' if part['quantifier']=='all' else 'true'
+-        found = []
+-        for clause in local_clauses(text):
+-            if predicate_truth(part, clause) != decisive:
+-                continue
+-            member = re.search(r'\b(?:(?:a|the)\s+)?(?:first|second|third|fourth|fifth|one)(?:\s+'+re.escape(_head(part))+r')?\b', clause, re.I)
+-            if member:
+-                found.append(member[0])
+-        if found:
+-            return {'truth': decisive, 'members': [found[0]], 'quotes': [text],
+-                    'complete': False, 'numeric': False, 'population': True}
+-    return None
+-
+-
+-def change_witness(part, context):
+-    if (part['quantifier']!='atomic' or numeric_requirements(part['quote']) or not direction(part['quote'])
+-            or re.search(r'\b(?:not|never|without)\b',part['quote'],re.I)):
+-        return None
+-    from .assessment_decisions import scope_supported
+-    from .atomic_decoding import evidence_passages
+-    from .atomic_verifier import numeric_metric_matches, target_members
+-    from .numeric_verifier import check_numeric
+-    results = []
+-    for passage in evidence_passages(context):
+-        if not scope_supported(part, passage) or _modal(passage):
+-            continue
+-        operands = numeric_requirements(passage)
+-        if len(operands)>16:
+-            continue
+-        for left in operands:
+-            for right in operands:
+-                record = {'kind':'change','source_quote':passage,
+-                          'left':{k:left[k] for k in ('value','unit','quote')},
+-                          'right':{k:right[k] for k in ('value','unit','quote')}}
+-                try:
+-                    checked = check_numeric(record,part['quote'],context,metric=part['scope']['metric'])
+-                except ValueError:
+-                    continue
+-                if checked['truth']!='unknown' and numeric_metric_matches(part,record,[]):
+-                    results.append((checked['truth'], passage))
+-    if results and len({truth for truth,_ in results})==1:
+-        return {'truth':results[0][0], 'members':target_members(part,context),
+-                'quotes':sorted({text for _,text in results}), 'numeric':True}
+-    return None
+-
+-
+-def population_issue(raw, part, context):
+-    witness = population_witness(part, context)
+-    if witness:
+-        expected = witness['truth']
+-        q = part['quantifier']
+-        closure_needed = q == 'all' and expected == 'true' or q in ('some','none') and expected == 'false'
+-        if raw['scope_match'] != 'matched':
+-            return 'scope_is_not_agreement'
+-        supported = any(o['truth'] == expected and o['member'] in witness['members']
+-                        and (not closure_needed or all(any(q in cited for cited in o['quotes']) for q in witness['quotes']))
+-                        for o in raw['observations'])
+-        # Complete individual ledgers remain replayable; the decoder's single
+-        # collective witness is a compact serialization, not a new truth rule.
+-        pop = _population(part, context)
+-        individuals = bool(pop and pop['names'] and raw['coverage']['complete']
+-            and set(raw['coverage']['members']) == set(pop['names'])
+-            and {o['member'] for o in raw['observations']} == set(pop['names'])
+-            and all(o['truth']==expected and citation_issue(part,o['member'],o['quotes'],expected) is None
+-                    for o in raw['observations']))
+-        if not supported and not individuals:
+-            return 'population_witness_missing'
+-        if closure_needed and not individuals and (not raw['coverage']['complete'] or set(raw['coverage']['members']) != set(witness['members'])):
+-            return 'population_closure_required'
+-        if raw['missing_information']:
+-            return 'irrelevant_missing_information'
+-    return None
+-
+-
+-def missing_issue(raw, part, context):
+-    text = ' '.join(raw['missing_information'] + [raw['explanation']] + [o['explanation'] for o in raw['observations']])
+-    # Reject invented author/year citations rather than treating free text as
+-    # source evidence. Other prose semantics still require independent review.
+-    for match in re.finditer(r'\b[A-Z][a-z]+(?:\s+et al\.)?\s*\(\d{4}\)', text):
+-        if match[0] not in context and match[0] not in part['quote']:
+-            return 'unattributed_prose_citation'
+-    from .atomic_verifier import _PROPERTY_HEADS
+-    wanted = set(re.findall(r'[a-z]+', part['scope']['metric'].lower())) & _PROPERTY_HEADS
+-    for missing in raw['missing_information']:
+-        mentioned = set(re.findall(r'[a-z]+', missing.lower())) & _PROPERTY_HEADS
+-        if wanted and mentioned and not wanted & mentioned:
+-            return 'missing_information_wrong_metric'
+-    return None
++"""Finite clause ownership and closed-population witnesses; no general entailment."""
++import re
++
++from .assessment_rules import clauses, contains, scope_conflict, _MISSING
++from .numeric_verifier import direction, numeric_requirements, _NUMERIC_MODAL
++from .evidence_screen import WORDS
++
++_MODAL = re.compile(_NUMERIC_MODAL + r'|\b(?:planned|proposed|alleged|claimed|disputed|false|incorrect|denied|retracted|not true|which|who)\b', re.I)
++_UP = r'improv(?:ed|es?)|increas(?:ed|es?)|rose|raised|gained|higher|better'
++_DOWN = r'decreas(?:ed|es?)|reduc(?:ed|es?)|fell|lowered|lost|worsened|worse|slower|less accurate'
++_COUNT = r'(?:\d+|' + '|'.join(WORDS) + r')'
++
++
++def _modal(text):
++    # May inside an explicit month phrase is not the modal verb "may".
++    return _MODAL.search(re.sub(r'\b(?:in|during)\s+May\b', '', text, flags=re.I))
++
++
++def local_clauses(text):
++    # Split coordinated results, not lists of names or a verb's object.
++    return [v.strip(' ,') for c in clauses(text) for v in re.split(
++        r'\band\s+(?=(?:one|two|three|four|five|each|every|all|the third)\b[^.;]*\b(?:improved|reduced|gained|lost|increased|decreased)\b)', c, flags=re.I)]
++
++
++def metric_present(part, text):
++    metric = part['scope']['metric']
++    if contains(metric, text):
++        return True
++    # shortcut: recall/recalling and leak/leaked/leaks are the only inflections
++    # beyond exact metrics here; unsupported paraphrases remain model judgments.
++    if metric.casefold() == 'recall' and re.search(r'\brecalling\b', text, re.I):
++        return True
++    if metric.casefold() in ('leaked', 'leak', 'leaks') and re.search(r'\bleak(?:ed|s)?\b', text, re.I):
++        return True
++    return False
++
++
++def predicate_truth(part, text):
++    """Truth of the positive predicate, independent of ALL/SOME/NONE."""
++    if _MISSING.search(text) or _modal(text) or scope_conflict(part, text):
++        return None
++    metric = part['scope']['metric'].casefold()
++    if metric in ('leak', 'leaked', 'leaks'):
++        if re.search(r'\b(?:no leaks?|did not leak|never leaked|had no leaks?)\b', text, re.I):
++            return 'false'
++        if re.search(r'\bleaked\b', text, re.I):
++            return 'true'
++        return None
++    requested = direction(part['quote'])
++    if requested is None and re.search(r'\b(?:improv\w*|gain\w*)\b', part['quote'], re.I):
++        requested = 'increase'
++    if metric == 'improved':
++        has_metric = True
++    else:
++        has_metric = metric_present(part, text)
++    if not has_metric or not requested:
++        return None
++    up = bool(re.search(r'\b(?:' + _UP + r')\b', text, re.I))
++    down = bool(re.search(r'\b(?:' + _DOWN + r')\b', text, re.I))
++    unchanged = bool(re.search(r'\b(?:unchanged|stayed the same|did not improve)\b', text, re.I))
++    if re.search(r'\bdid not improve\b', text, re.I):
++        up = False
++    if re.search(r'\b(?:not|never|no)\b', text, re.I) and not unchanged:
++        return None
++    states = (['increase'] if up else []) + (['decrease'] if down else []) + (['unchanged'] if unchanged else [])
++    return ('true' if states[0] == requested else 'false') if len(states) == 1 else None
++
++
++def owned_clauses(member, quotes):
++    return [c for q in quotes for c in local_clauses(q) if contains(member, c)]
++
++
++def citation_issue(part, member, quotes, truth):
++    if truth == 'unknown':
++        return None
++    own = owned_clauses(member, quotes)
++    if part['quantifier']!='atomic' and re.search(r'\b'+_noun(_head(part))+r'\b',member,re.I):
++        pieces = [c for q in quotes for c in local_clauses(q)]
++        if any(scope_conflict(part,c) for c in pieces) and any(not scope_conflict(part,c) for c in pieces):
++            return 'observation_scope_binding_unresolved'
++    if not own:
++        return 'observation_evidence_unbound'
++    if all(scope_conflict(part, c) for c in own):
++        return 'observation_scope_mismatch'
++    values = {v for c in own if (v := predicate_truth(part, c)) is not None}
++    if len(values) == 1 and truth not in values:
++        return 'observation_polarity_mismatch'
++    # Exact member presence in a roster is not a predicate witness. Apply this
++    # only to known property/verb heads; arbitrary semantic relations stay open.
++    from .atomic_verifier import _PROPERTY_HEADS
++    known = (contains(part['scope']['metric'],part['quote'])
++             and part['scope']['metric'].split()[-1].casefold() in _PROPERTY_HEADS | {'improved', 'leaked'})
++    numeric_head = part['scope']['metric'].split()[-1]
++    numeric_bound = any(numeric_requirements(c) and contains(numeric_head,c) for c in own)
++    if known and not numeric_bound and not any(metric_present(part, c) or part['scope']['metric']=='improved' and predicate_truth(part, c) for c in own):
++        return 'observation_predicate_not_grounded'
++    return None
++
++
++def _head(part):
++    word = part['scope']['entity'].split()[-1].casefold()
++    if word.endswith(('ches','shes','xes','zes','sses')):
++        return word[:-2]
++    if word.endswith('ies'):
++        return word[:-3]+'y'
++    return word[:-1] if word.endswith('s') else word
++
++
++def _noun(head):
++    plural = head[:-1]+'ies' if head.endswith('y') and len(head)>1 and head[-2] not in 'aeiou' else head+'es' if head.endswith(('ch','sh','x','z','s')) else head+'s'
++    return '(?:'+re.escape(head)+'|'+re.escape(plural)+')'
++
++
++def _restricted(part, text):
++    if scope_conflict(part, text):
++        return False
++    for value in (part['scope']['time'], part['scope']['condition']):
++        if value and not numeric_requirements(value):
++            key = re.sub(r'^(?:on|in|during|under)\s+', '', value, flags=re.I)
++            if not contains(key, text):
++                return False
++    return True
++
++
++def _population(part, context):
++    """One explicit population only; never join different source populations."""
++    head = _head(part)
++    if not re.fullmatch('[a-z-]+', head):
++        return None
++    sentences = [m[0].strip() for m in re.finditer(r'[^.!?]+(?:[.!?](?=\s|$)|$)', context) if m[0].strip()]
++    populations = []
++    for i, sentence in enumerate(sentences):
++        if scope_conflict(part, sentence):
++            continue
++        count = re.search(r'\bexactly\s+(' + _COUNT + r')\s+(?:[a-z-]+\s+){0,3}' + _noun(head) + r'\b', sentence, re.I)
++        roster = re.search(r'(?:\b(?:were|was)\s+|:\s*)([A-Z][\w-]*(?:,\s*[A-Z][\w-]*)*(?:,?\s+and\s+[A-Z][\w-]*))\s*[.!]?$', sentence)
++        declared = bool(re.search(r'\b'+_noun(head)+r'\b',sentence,re.I))
++        # A previously named audited set is explicit, but unrelated generic
++        # "set" sentences are never assigned to a qualified population.
++        named_set = re.search(r'\bcomplete\s+([a-z-]+)\s+set\b', sentence, re.I)
++        declared = declared or bool(named_set and contains(named_set[1], part['scope']['entity']))
++        # Reviewed convention: a unique 'complete <selection> set' roster
++        # refers to the queried selected population. This is scoped discourse
++        # binding, not a general set/entity alias. Keep it visible for review.
++        selection = re.fullmatch(r'The complete (audited|inspected|monitored|tested|evaluated|surveyed) set (?:was|were) '
++            r'[A-Z][\w-]*(?:,\s*[A-Z][\w-]*)*(?:,?\s+and\s+[A-Z][\w-]*)[.!]?', sentence)
++        elliptical = bool(selection and part['scope']['entity'].casefold().startswith(selection[1]+' ')
++            and len(re.findall(r'\b(?:set|population|group)\b',context,re.I))==1
++            and not re.search(r'\b(?:other|another|different|non-|not|except|subset|selected|remaining)\b',context,re.I)
++            and not re.search(r'\b(?:these|those|they)\s+(?:are|were)\b',context,re.I))
++        if not elliptical and any(not contains(w,sentence) for w in part['scope']['entity'].split()[:-1]):
++            continue
++        if not declared or not (count or roster):
++            continue
++        names = re.split(r',\s*|\s+and\s+', roster[1]) if roster else []
++        names = [n.strip() for n in names if n.strip()]
++        n = int(count[1]) if count and count[1].isdigit() else WORDS.get(count[1].lower()) if count else len(names)
++        if not n or n > 16 or names and len(names) != n:
++            continue
++        # Restrict to this declaration and its immediately following sentences;
++        # a different explicit scope terminates the inheritance window.
++        local = [sentence]
++        for next_sentence in sentences[i+1:]:
++            if scope_conflict(part, next_sentence):
++                break
++            time = part['scope']['time']
++            if time and re.match(r'^(?:after|before)\b',time,re.I) and re.search(r'\b(?:after|before)\b',next_sentence,re.I) and not contains(time,next_sentence):
++                break
++            local.append(next_sentence)
++        text = ' '.join(local)
++        if not _restricted(part, text):
++            continue
++        anchor = re.sub(r'^exactly\s+', '', count[0], flags=re.I) if count else roster[1]
++        if len(anchor) > 160 or len(text) > 384 or text not in context:
++            continue
++        populations.append({'anchor': anchor, 'names': names, 'count': n, 'text': text, 'binding_basis': 'unique_complete_selection_set' if elliptical else 'explicit_population'})
++    return populations[0] if len(populations) == 1 else None
++
++
++def population_witness(part, context):
++    if part['quantifier'] == 'atomic' or re.search(r'\b(?:not|never|without)\b', part['quote'], re.I):
++        return None
++    for modifier in part['scope']['entity'].split()[:-1]:
++        if re.search(r'\b(?:non-|un)'+re.escape(modifier)+r'\b',context,re.I):
++            return None
++    pop = _population(part, context)
++    if not pop:
++        return None
++    text, names = pop['text'], pop['names']
++    if _MISSING.search(text) or _modal(text):
++        return None
++    if re.search(r'\b(?:some|several|most|few|subset|selected|remaining|except|only)\b',text,re.I):
++        return None
++    from .atomic_verifier import numeric_proof_required
++    if numeric_proof_required(part,[text]):
++        return None  # Do not force numeric=null where a measurement ledger is required.
++    values = []
++    # Explicit collective result must refer to this entire declared population.
++    collective = []
++    for clause in local_clauses(text):
++        if re.search(r'\b(?:each|all|every|any of these)\b', clause, re.I):
++            if re.search(r'\b(?:these|those|each of|and each)\b|^each\b', clause, re.I) or contains(_head(part), clause) or contains(_head(part)+'s', clause):
++                counts = [q for q in numeric_requirements(clause)
++                          if re.fullmatch(_noun(_head(part)),q['unit'],re.I)]
++                if any(q['value']!=str(pop['count']) for q in counts):
++                    continue
++                value = predicate_truth(part, clause)
++                if value:
++                    collective.append(value)
++    if collective and len(set(collective)) == 1:
++        # A second opposed outcome inside this same population invalidates a
++        # collective shortcut. Out-of-scope sentences were removed above.
++        opposed = [predicate_truth(part, c) for c in local_clauses(text)]
++        if any(v is not None and v != collective[0] for v in opposed):
++            return None
++        return {'truth': collective[0], 'members': [pop['anchor']], 'quotes': [text],
++                'complete': True, 'numeric': False, 'population': True}
++    if names:
++        for name in names:
++            states = set()
++            for clause in owned_clauses(name, [text]):
++                pieces = re.split(r'\band\s+(?=(?:stayed|remained|became)\s+(?:unchanged|slower|faster)|(?:increased|decreased|reduced)\s+on\b)', clause, flags=re.I)
++                for piece in pieces:
++                    if not contains(name, piece):
++                        continue
++                    if len(pieces)>1 and metric_present(part, clause) and not metric_present(part, piece):
++                        piece = part['scope']['metric'] + ' ' + piece
++                    value = predicate_truth(part, piece)
++                    if value:
++                        states.add(value)
++            values.append(next(iter(states)) if len(states)==1 else None)
++        decisive = 'false' if part['quantifier']=='all' else 'true'
++        if decisive in values:
++            return {'truth': decisive, 'members': [names[values.index(decisive)]], 'quotes': [text],
++                    'complete': False, 'numeric': False, 'population': True}
++        if None not in values and len(set(values)) == 1:
++            return {'truth': values[0], 'members': [pop['anchor']], 'quotes': [text],
++                    'complete': True, 'numeric': False, 'population': True}
++    else:
++        decisive = 'false' if part['quantifier']=='all' else 'true'
++        found = []
++        for clause in local_clauses(text):
++            if predicate_truth(part, clause) != decisive:
++                continue
++            member = re.search(r'\b(?:(?:a|the)\s+)?(?:first|second|third|fourth|fifth|one)(?:\s+'+re.escape(_head(part))+r')?\b', clause, re.I)
++            if member:
++                found.append(member[0])
++        if found:
++            return {'truth': decisive, 'members': [found[0]], 'quotes': [text],
++                    'complete': False, 'numeric': False, 'population': True}
++    return None
++
++
++def change_witness(part, context):
++    if (part['quantifier']!='atomic' or numeric_requirements(part['quote']) or not direction(part['quote'])
++            or re.search(r'\b(?:not|never|without)\b',part['quote'],re.I)):
++        return None
++    from .assessment_decisions import scope_supported
++    from .atomic_decoding import evidence_passages
++    from .atomic_verifier import numeric_metric_matches, target_members
++    from .numeric_verifier import check_numeric
++    results = []
++    for passage in evidence_passages(context):
++        if not scope_supported(part, passage) or _modal(passage):
++            continue
++        operands = numeric_requirements(passage)
++        if len(operands)>16:
++            continue
++        for left in operands:
++            for right in operands:
++                record = {'kind':'change','source_quote':passage,
++                          'left':{k:left[k] for k in ('value','unit','quote')},
++                          'right':{k:right[k] for k in ('value','unit','quote')}}
++                try:
++                    checked = check_numeric(record,part['quote'],context,metric=part['scope']['metric'])
++                except ValueError:
++                    continue
++                if checked['truth']!='unknown' and numeric_metric_matches(part,record,[]):
++                    results.append((checked['truth'], passage))
++    if results and len({truth for truth,_ in results})==1:
++        return {'truth':results[0][0], 'members':target_members(part,context),
++                'quotes':sorted({text for _,text in results}), 'numeric':True}
++    return None
++
++
++def population_issue(raw, part, context):
++    witness = population_witness(part, context)
++    if witness:
++        expected = witness['truth']
++        q = part['quantifier']
++        closure_needed = q == 'all' and expected == 'true' or q in ('some','none') and expected == 'false'
++        if raw['scope_match'] != 'matched':
++            return 'scope_is_not_agreement'
++        supported = any(o['truth'] == expected and o['member'] in witness['members']
++                        and (not closure_needed or all(any(q in cited for cited in o['quotes']) for q in witness['quotes']))
++                        for o in raw['observations'])
++        # Complete individual ledgers remain replayable; the decoder's single
++        # collective witness is a compact serialization, not a new truth rule.
++        pop = _population(part, context)
++        individuals = bool(pop and pop['names'] and raw['coverage']['complete']
++            and set(raw['coverage']['members']) == set(pop['names'])
++            and {o['member'] for o in raw['observations']} == set(pop['names'])
++            and all(o['truth']==expected and citation_issue(part,o['member'],o['quotes'],expected) is None
++                    for o in raw['observations']))
++        if not supported and not individuals:
++            return 'population_witness_missing'
++        if closure_needed and not individuals and (not raw['coverage']['complete'] or set(raw['coverage']['members']) != set(witness['members'])):
++            return 'population_closure_required'
++        if raw['missing_information']:
++            return 'irrelevant_missing_information'
++    return None
++
++
++def missing_issue(raw, part, context):
++    text = ' '.join(raw['missing_information'] + [raw['explanation']] + [o['explanation'] for o in raw['observations']])
++    # Reject invented author/year citations rather than treating free text as
++    # source evidence. Other prose semantics still require independent review.
++    for match in re.finditer(r'\b[A-Z][a-z]+(?:\s+et al\.)?\s*\(\d{4}\)', text):
++        if match[0] not in context and match[0] not in part['quote']:
++            return 'unattributed_prose_citation'
++    from .atomic_verifier import _PROPERTY_HEADS
++    wanted = set(re.findall(r'[a-z]+', part['scope']['metric'].lower())) & _PROPERTY_HEADS
++    for missing in raw['missing_information']:
++        mentioned = set(re.findall(r'[a-z]+', missing.lower())) & _PROPERTY_HEADS
++        if wanted and mentioned and not wanted & mentioned:
++            return 'missing_information_wrong_metric'
++    return None
+--- cellfix9/04_factchecker/inference/atomic_decoding.py
++++ cellfix10/04_factchecker/inference/atomic_decoding.py
+@@ -593,3 +593,12 @@
+         raise ValueError('unrepresentable_assessment_evidence')
+     props['observations']['items']['anyOf'] = kept
+     return schema
++
++
++
++from .assessment_reporting import constrain_schema
++DECODER.update(policy='atomic-schema-decoding-v5-cellfix10',
++    prose='validated_ledger_renderer_v1',missing_information_scope='part_bound_reason_code')
++_cellfix9_final_schema = assessment_schema
++def assessment_schema(claim, part, context):
++    return constrain_schema(_cellfix9_final_schema(claim,part,context),part,context)
+--- cellfix9/04_factchecker/inference/atomic_verifier.py
++++ cellfix10/04_factchecker/inference/atomic_verifier.py
+@@ -1142,3 +1142,30 @@
+     'For NONE, no leak means leaked=false; an actual leak means leaked=true. '
+     'Never add an author/year reference absent from the input. Missing facts must '
+     'refer to the current part, not another metric or a known source measurement.\n')
++
++
++
++POLICY = 'atomic-verifier-constrained-v8-cellfix10'
++from .assessment_reporting import reporting_issue, render as render_assessment
++_cellfix9_assess = assess_part
++def assess_part(raw, part, context):
++    result = _cellfix9_assess(raw,part,context)
++    issue = reporting_issue(raw,part,context)
++    if issue:
++        raise ValueError(issue)
++    return render_assessment(result,raw,part,context)
++REPAIR_HINTS.update(
++    duplicate_coverage_member='List each member once. For a closed population use the exact roster and its full outcomes; one false member alone cannot refute SOME.',
++    population_closure_required='Retain the exact closed-population roster and all its results. Do not drop coverage on retry to evade a duplicate-member error.',
++    missing_reason_binding='Choose the current part missing-reason code from the schema. Binding absence is not a missing measurement; another conjunct cannot supply this reason.',
++    missing_information_wrong_metric='Use the current part missing-reason code. Do not describe another conjunct. If the target is absent use target_binding_unresolved.',
++    unattributed_prose_citation='Use the schema evidence-note constants and missing-reason code. Do not generate author names or narrative.')
++ASSESS_PROMPT += (
++    '\nREPORTING CONTRACT: Do not generate narrative prose. Observation explanation '
++    'is exactly "Predicate evidence recorded."; assessment explanation is exactly '
++    '"Assess the recorded evidence ledger.". missing_information is [] when the '
++    'part is decided, otherwise choose the current part reason code allowed by '
++    'the schema. Code renders the user explanation only after checking scope, '
++    'truth, coverage and quantities. Do not change an unknown truth to obtain '
++    'an answer. A complete false population refutes SOME, but one false member '
++    'without closure does not. Keep evidence and closure during repair.\n')
+--- cellfix9/research_rag/tests/test_atomic_assessment_cellfix8.py
++++ cellfix10/research_rag/tests/test_atomic_assessment_cellfix8.py
+@@ -1,179 +1,179 @@
+-"""Real cf7 failures and new development sentences; no validation outcomes."""
+-from copy import deepcopy
+-import importlib
+-import json
+-from pathlib import Path
+-import unittest
+-
+-from lmformatenforcer import JsonSchemaParser, CharacterLevelParserConfig, TokenEnforcer, TokenEnforcerTokenizerData
+-from research_rag.tests.test_atomic_smoke_cellfix3 import scoped, request
+-from research_rag.tests.test_atomic_verifier import assessment, observation, run
+-from research_rag.tests import test_atomic_assessment_v8 as h
+-
+-a = importlib.import_module('04_factchecker.inference.atomic_verifier')
+-d = importlib.import_module('04_factchecker.inference.atomic_decoding')
+-rules = importlib.import_module('04_factchecker.inference.assessment_decisions')
+-CheckedParser = importlib.import_module('04_factchecker.inference.decoder_parser').CheckedParser
+-alphabet_tree = importlib.import_module('04_factchecker.inference.decoder_parser').alphabet_tree
+-
+-
+-class ParserTests(unittest.TestCase):
+-    def setup_enforcer(self, strict=True, extra=''):
+-        alphabet = ''.join(chr(i) for i in range(32,127)) + extra
+-        self.mapping = {v:i for i,v in enumerate(alphabet)}
+-        vocabulary = [(i,v,False) for v,i in self.mapping.items()]
+-        vocabulary.append((len(vocabulary),'内存',False))
+-        self.bad = len(vocabulary)-1
+-        self.eos = len(vocabulary)
+-        config = CharacterLevelParserConfig(alphabet=alphabet, max_consecutive_whitespaces=4)
+-        parser = JsonSchemaParser(d.obj({'explanation':d.bounded_text(64)}),config=config)
+-        if strict: parser = CheckedParser(parser, filtered_cache=True)
+-        data = TokenEnforcerTokenizerData(vocabulary,lambda ids:''.join(vocabulary[i][1] for i in ids if i<self.eos),self.eos,False,self.eos+1)
+-        enforcer = TokenEnforcer(data,parser)
+-        if strict: enforcer.tokenizer_tree = alphabet_tree(enforcer.tokenizer_tree,config)
+-        enforcer.root_parser.config = config
+-        return enforcer
+-
+-    def feed(self,enforcer,text):
+-        ids=[self.eos]
+-        for char in text:
+-            token=self.mapping[char]
+-            self.assertIn(token,enforcer.get_allowed_tokens(ids).allowed_tokens)
+-            ids.append(token)
+-        return ids
+-
+-    def test_old_freetext_cache_accepts_out_of_alphabet_and_early_eos(self):
+-        old=self.setup_enforcer(False)
+-        ids=self.feed(old,'{"explanation":"Context confirms the claim about Model Juniper using 25% less')
+-        self.assertIn(self.bad,old.get_allowed_tokens(ids).allowed_tokens)
+-        ids.append(self.bad)
+-        self.assertIn(self.eos,old.get_allowed_tokens(ids).allowed_tokens)
+-
+-    def test_checked_parser_rejects_the_same_token_and_early_eos(self):
+-        enforcer=self.setup_enforcer()
+-        ids=self.feed(enforcer,'{"explanation":"Context confirms the claim about Model Juniper using 25% less')
+-        allowed=enforcer.get_allowed_tokens(ids).allowed_tokens
+-        self.assertNotIn(self.bad,allowed)
+-        self.assertNotIn(self.eos,allowed)
+-
+-    def test_64_character_boundary_closes_json_instead_of_stopping(self):
+-        enforcer=self.setup_enforcer()
+-        text='{"explanation":"'+'x'*64
+-        ids=self.feed(enforcer,text)
+-        allowed=enforcer.get_allowed_tokens(ids).allowed_tokens
+-        self.assertNotIn(self.mapping['x'],allowed)
+-        self.assertNotIn(self.eos,allowed)
+-        for char in '"}':
+-            self.assertIn(self.mapping[char],enforcer.get_allowed_tokens(ids).allowed_tokens)
+-            ids.append(self.mapping[char])
+-        self.assertIn(self.eos,enforcer.get_allowed_tokens(ids).allowed_tokens)
+-
+-    def test_unicode_in_config_is_preserved_and_no_premature_eos(self):
+-        enforcer=self.setup_enforcer(extra='é')
+-        ids=self.feed(enforcer,'{"explanation":"Résumé confirmed."}')
+-        self.assertIn(self.eos,enforcer.get_allowed_tokens(ids).allowed_tokens)
+-
+-    def test_whitespace_boundary_cannot_escape_the_current_string(self):
+-        enforcer=self.setup_enforcer()
+-        ids=self.feed(enforcer,'{"explanation":"Word    ')
+-        allowed=enforcer.get_allowed_tokens(ids).allowed_tokens
+-        self.assertNotIn(self.mapping[' '],allowed)
+-        self.assertNotIn(self.eos,allowed)
+-        self.assertIn(self.mapping['"'],allowed)
+-
+-    def test_json_escapes_remain_available_without_backslash_in_alphabet(self):
+-        enforcer=self.setup_enforcer()
+-        config=enforcer.root_parser.config
+-        config.alphabet=config.alphabet.replace('\\','')
+-        enforcer.tokenizer_tree=alphabet_tree(enforcer.tokenizer_tree,config)
+-        ids=self.feed(enforcer,json.dumps({'explanation':'A "quoted" result.'},separators=(',',':')))
+-        self.assertIn(self.eos,enforcer.get_allowed_tokens(ids).allowed_tokens)
+-
+-
+-class ScopedMissingTests(unittest.TestCase):
+-    def sample(self):
+-        claim='On the Falcon corpus, the parser reduced latency.'
+-        context='The parser reduced latency on the Falcon corpus. Results on other corpora are unknown.'
+-        part=scoped(claim,'parser','latency',condition='On the Falcon corpus')
+-        good=assessment([observation('parser','true','The parser reduced latency on the Falcon corpus.')])
+-        return claim,part,context,good
+-
+-    def test_real_bounded_scope_trace_is_rejected_not_silently_promoted(self):
+-        rows=json.loads((Path(__file__).parent/'fixtures/atomic_cellfix7_smoke_traces.json').read_text())
+-        row=next(r for r in rows if r['case']['example_id']=='contract:bounded_scope')
+-        t=row['result']['trace'][-1];p=json.loads(t['messages'][1]['content'])
+-        with self.assertRaisesRegex(ValueError,'irrelevant_missing_information'):
+-            a.assess_part(t['output'],p['part'],p['context'])
+-        self.assertEqual(t['output']['missing_information'],['structural information about other datasets'])
+-
+-    def test_new_scoped_claim_does_not_require_other_corpora(self):
+-        _,p,ctx,good=self.sample()
+-        self.assertEqual(a.assess_part(good,p,ctx)['assessed_label'],'support')
+-        bad=deepcopy(good);bad['missing_information']=['Results on other corpora.']
+-        with self.assertRaisesRegex(ValueError,'irrelevant_missing_information'):a.assess_part(bad,p,ctx)
+-
+-    def test_missing_and_wrong_conditions_remain_unknown(self):
+-        _,p,_,_=self.sample()
+-        for ctx in ('The parser reduced latency on the Heron corpus.',
+-                    'The parser latency on the Falcon corpus was not reported.',
+-                    'The parser might reduce latency on the Falcon corpus.'):
+-            self.assertIsNone(rules.decision_evidence(p,ctx))
+-            raw=assessment([observation('parser','unknown',ctx)],missing=['In-scope latency result.'])
+-            self.assertEqual(a.assess_part(raw,p,ctx)['assessed_label'],'not_enough_info')
+-
+-    def test_conditional_extra_arguments_and_quantities_are_not_forced(self):
+-        p=scoped('The parser reduced latency.','parser','latency')
+-        for ctx in ('The parser reduced latency on a tiny corpus.',
+-                    'The parser reduced latency only if caching was enabled.',
+-                    'The parser reduced latency by 12%.',
+-                    'Another parser reduced latency.',
+-                    'The parser planned to reduce latency.'):
+-            self.assertIsNone(rules.decision_evidence(p,ctx),ctx)
+-
+-    def test_conflicting_in_scope_reports_keep_unknown(self):
+-        _,p,ctx,_=self.sample()
+-        ctx += ' The parser did not reduce latency on the Falcon corpus.'
+-        self.assertIsNone(rules.decision_evidence(p,ctx))
+-
+-    def test_explicit_scoped_denial_is_counterevidence_not_missing(self):
+-        _,p,_,_=self.sample()
+-        ctx='The parser did not reduce latency on the Falcon corpus.'
+-        raw=assessment([observation('parser','false',ctx)])
+-        self.assertEqual(a.assess_part(raw,p,ctx)['assessed_label'],'contradict')
+-
+-    def test_truncated_json_repairs_without_increasing_budget(self):
+-        from research_rag.tests.test_atomic_verifier import ModelOutputError
+-        claim,p,ctx,good=self.sample()
+-        decomposition={'parts':[{k:p[k] for k in ('quote','quantifier','scope')}],'unresolved':[]}
+-        broken='{"scope_match":"matched","coverage":'
+-        result,_=run([decomposition,ModelOutputError('Invalid JSON',broken),good],claim,ctx,
+-            max_calls=8,max_attempts=2,max_new_tokens=1536,timeout_seconds=180)
+-        self.assertEqual(result['assessed_label'],'support')
+-        self.assertEqual(result['backend_calls'],3)
+-        self.assertEqual(result['trace'][1]['raw_output'],broken)
+-
+-    def test_new_trace_repair_succeeds_and_exhaustion_is_bounded(self):
+-        claim,p,ctx,good=self.sample()
+-        decomposition={'parts':[{k:p[k] for k in ('quote','quantifier','scope')}],'unresolved':[]}
+-        bad=deepcopy(good);bad['missing_information']=['Unrelated corpus results.']
+-        result,_=run([decomposition,bad,good],claim,ctx)
+-        self.assertEqual(result['assessed_label'],'support')
+-        self.assertEqual(result['backend_calls'],3)
+-        self.assertEqual(result['trace'][1]['validation_issue'],'irrelevant_missing_information')
+-        result,_=run([decomposition,bad,bad],claim,ctx)
+-        self.assertIsNone(result['assessed_label'])
+-        self.assertEqual(result['stop_reason'],'invalid_output_exhausted')
+-        self.assertEqual(result['backend_calls'],3)
+-
+-    def test_decoder_rejects_out_of_scope_missing_and_keeps_genuine_missing(self):
+-        claim,p,ctx,good=self.sample()
+-        tester=h.AssessmentTokenFilterTests();tester.setUp()
+-        self.assertTrue(tester.accepts(tester.ordered(good),request(claim,p,ctx)))
+-        bad=deepcopy(good);bad['missing_information']=['Other corpora.']
+-        self.assertFalse(tester.accepts(tester.ordered(bad),request(claim,p,ctx)))
+-        ctx='The parser latency on the Falcon corpus was not measured.'
+-        raw=assessment([observation('parser','unknown',ctx)],missing=['In-scope latency result.'])
+-        self.assertTrue(tester.accepts(tester.ordered(raw),request(claim,p,ctx)))
+-
+-
+-if __name__=='__main__':unittest.main()
++"""Real cf7 failures and new development sentences; no validation outcomes."""
++from copy import deepcopy
++import importlib
++import json
++from pathlib import Path
++import unittest
++
++from lmformatenforcer import JsonSchemaParser, CharacterLevelParserConfig, TokenEnforcer, TokenEnforcerTokenizerData
++from research_rag.tests.test_atomic_smoke_cellfix3 import scoped, request
++from research_rag.tests.test_atomic_verifier import assessment, observation, run
++from research_rag.tests import test_atomic_assessment_v8 as h
++
++a = importlib.import_module('04_factchecker.inference.atomic_verifier')
++d = importlib.import_module('04_factchecker.inference.atomic_decoding')
++rules = importlib.import_module('04_factchecker.inference.assessment_decisions')
++CheckedParser = importlib.import_module('04_factchecker.inference.decoder_parser').CheckedParser
++alphabet_tree = importlib.import_module('04_factchecker.inference.decoder_parser').alphabet_tree
++
++
++class ParserTests(unittest.TestCase):
++    def setup_enforcer(self, strict=True, extra=''):
++        alphabet = ''.join(chr(i) for i in range(32,127)) + extra
++        self.mapping = {v:i for i,v in enumerate(alphabet)}
++        vocabulary = [(i,v,False) for v,i in self.mapping.items()]
++        vocabulary.append((len(vocabulary),'内存',False))
++        self.bad = len(vocabulary)-1
++        self.eos = len(vocabulary)
++        config = CharacterLevelParserConfig(alphabet=alphabet, max_consecutive_whitespaces=4)
++        parser = JsonSchemaParser(d.obj({'explanation':d.bounded_text(64)}),config=config)
++        if strict: parser = CheckedParser(parser, filtered_cache=True)
++        data = TokenEnforcerTokenizerData(vocabulary,lambda ids:''.join(vocabulary[i][1] for i in ids if i<self.eos),self.eos,False,self.eos+1)
++        enforcer = TokenEnforcer(data,parser)
++        if strict: enforcer.tokenizer_tree = alphabet_tree(enforcer.tokenizer_tree,config)
++        enforcer.root_parser.config = config
++        return enforcer
++
++    def feed(self,enforcer,text):
++        ids=[self.eos]
++        for char in text:
++            token=self.mapping[char]
++            self.assertIn(token,enforcer.get_allowed_tokens(ids).allowed_tokens)
++            ids.append(token)
++        return ids
++
++    def test_old_freetext_cache_accepts_out_of_alphabet_and_early_eos(self):
++        old=self.setup_enforcer(False)
++        ids=self.feed(old,'{"explanation":"Context confirms the claim about Model Juniper using 25% less')
++        self.assertIn(self.bad,old.get_allowed_tokens(ids).allowed_tokens)
++        ids.append(self.bad)
++        self.assertIn(self.eos,old.get_allowed_tokens(ids).allowed_tokens)
++
++    def test_checked_parser_rejects_the_same_token_and_early_eos(self):
++        enforcer=self.setup_enforcer()
++        ids=self.feed(enforcer,'{"explanation":"Context confirms the claim about Model Juniper using 25% less')
++        allowed=enforcer.get_allowed_tokens(ids).allowed_tokens
++        self.assertNotIn(self.bad,allowed)
++        self.assertNotIn(self.eos,allowed)
++
++    def test_64_character_boundary_closes_json_instead_of_stopping(self):
++        enforcer=self.setup_enforcer()
++        text='{"explanation":"'+'x'*64
++        ids=self.feed(enforcer,text)
++        allowed=enforcer.get_allowed_tokens(ids).allowed_tokens
++        self.assertNotIn(self.mapping['x'],allowed)
++        self.assertNotIn(self.eos,allowed)
++        for char in '"}':
++            self.assertIn(self.mapping[char],enforcer.get_allowed_tokens(ids).allowed_tokens)
++            ids.append(self.mapping[char])
++        self.assertIn(self.eos,enforcer.get_allowed_tokens(ids).allowed_tokens)
++
++    def test_unicode_in_config_is_preserved_and_no_premature_eos(self):
++        enforcer=self.setup_enforcer(extra='é')
++        ids=self.feed(enforcer,'{"explanation":"Résumé confirmed."}')
++        self.assertIn(self.eos,enforcer.get_allowed_tokens(ids).allowed_tokens)
++
++    def test_whitespace_boundary_cannot_escape_the_current_string(self):
++        enforcer=self.setup_enforcer()
++        ids=self.feed(enforcer,'{"explanation":"Word    ')
++        allowed=enforcer.get_allowed_tokens(ids).allowed_tokens
++        self.assertNotIn(self.mapping[' '],allowed)
++        self.assertNotIn(self.eos,allowed)
++        self.assertIn(self.mapping['"'],allowed)
++
++    def test_json_escapes_remain_available_without_backslash_in_alphabet(self):
++        enforcer=self.setup_enforcer()
++        config=enforcer.root_parser.config
++        config.alphabet=config.alphabet.replace('\\','')
++        enforcer.tokenizer_tree=alphabet_tree(enforcer.tokenizer_tree,config)
++        ids=self.feed(enforcer,json.dumps({'explanation':'A "quoted" result.'},separators=(',',':')))
++        self.assertIn(self.eos,enforcer.get_allowed_tokens(ids).allowed_tokens)
++
++
++class ScopedMissingTests(unittest.TestCase):
++    def sample(self):
++        claim='On the Falcon corpus, the parser reduced latency.'
++        context='The parser reduced latency on the Falcon corpus. Results on other corpora are unknown.'
++        part=scoped(claim,'parser','latency',condition='On the Falcon corpus')
++        good=assessment([observation('parser','true','The parser reduced latency on the Falcon corpus.')])
++        return claim,part,context,good
++
++    def test_real_bounded_scope_trace_is_rejected_not_silently_promoted(self):
++        rows=json.loads((Path(__file__).parent/'fixtures/atomic_cellfix7_smoke_traces.json').read_text())
++        row=next(r for r in rows if r['case']['example_id']=='contract:bounded_scope')
++        t=row['result']['trace'][-1];p=json.loads(t['messages'][1]['content'])
++        with self.assertRaisesRegex(ValueError,'irrelevant_missing_information'):
++            a.assess_part(t['output'],p['part'],p['context'])
++        self.assertEqual(t['output']['missing_information'],['structural information about other datasets'])
++
++    def test_new_scoped_claim_does_not_require_other_corpora(self):
++        _,p,ctx,good=self.sample()
++        self.assertEqual(a.assess_part(good,p,ctx)['assessed_label'],'support')
++        bad=deepcopy(good);bad['missing_information']=['Results on other corpora.']
++        with self.assertRaisesRegex(ValueError,'irrelevant_missing_information'):a.assess_part(bad,p,ctx)
++
++    def test_missing_and_wrong_conditions_remain_unknown(self):
++        _,p,_,_=self.sample()
++        for ctx in ('The parser reduced latency on the Heron corpus.',
++                    'The parser latency on the Falcon corpus was not reported.',
++                    'The parser might reduce latency on the Falcon corpus.'):
++            self.assertIsNone(rules.decision_evidence(p,ctx))
++            raw=assessment([observation('parser','unknown',ctx)],missing=['In-scope latency result.'])
++            self.assertEqual(a.assess_part(raw,p,ctx)['assessed_label'],'not_enough_info')
++
++    def test_conditional_extra_arguments_and_quantities_are_not_forced(self):
++        p=scoped('The parser reduced latency.','parser','latency')
++        for ctx in ('The parser reduced latency on a tiny corpus.',
++                    'The parser reduced latency only if caching was enabled.',
++                    'The parser reduced latency by 12%.',
++                    'Another parser reduced latency.',
++                    'The parser planned to reduce latency.'):
++            self.assertIsNone(rules.decision_evidence(p,ctx),ctx)
++
++    def test_conflicting_in_scope_reports_keep_unknown(self):
++        _,p,ctx,_=self.sample()
++        ctx += ' The parser did not reduce latency on the Falcon corpus.'
++        self.assertIsNone(rules.decision_evidence(p,ctx))
++
++    def test_explicit_scoped_denial_is_counterevidence_not_missing(self):
++        _,p,_,_=self.sample()
++        ctx='The parser did not reduce latency on the Falcon corpus.'
++        raw=assessment([observation('parser','false',ctx)])
++        self.assertEqual(a.assess_part(raw,p,ctx)['assessed_label'],'contradict')
++
++    def test_truncated_json_repairs_without_increasing_budget(self):
++        from research_rag.tests.test_atomic_verifier import ModelOutputError
++        claim,p,ctx,good=self.sample()
++        decomposition={'parts':[{k:p[k] for k in ('quote','quantifier','scope')}],'unresolved':[]}
++        broken='{"scope_match":"matched","coverage":'
++        result,_=run([decomposition,ModelOutputError('Invalid JSON',broken),good],claim,ctx,
++            max_calls=8,max_attempts=2,max_new_tokens=1536,timeout_seconds=180)
++        self.assertEqual(result['assessed_label'],'support')
++        self.assertEqual(result['backend_calls'],3)
++        self.assertEqual(result['trace'][1]['raw_output'],broken)
++
++    def test_new_trace_repair_succeeds_and_exhaustion_is_bounded(self):
++        claim,p,ctx,good=self.sample()
++        decomposition={'parts':[{k:p[k] for k in ('quote','quantifier','scope')}],'unresolved':[]}
++        bad=deepcopy(good);bad['missing_information']=['Unrelated corpus results.']
++        result,_=run([decomposition,bad,good],claim,ctx)
++        self.assertEqual(result['assessed_label'],'support')
++        self.assertEqual(result['backend_calls'],3)
++        self.assertEqual(result['trace'][1]['validation_issue'],'irrelevant_missing_information')
++        result,_=run([decomposition,bad,bad],claim,ctx)
++        self.assertIsNone(result['assessed_label'])
++        self.assertEqual(result['stop_reason'],'invalid_output_exhausted')
++        self.assertEqual(result['backend_calls'],3)
++
++    def test_decoder_rejects_out_of_scope_missing_and_keeps_genuine_missing(self):
++        claim,p,ctx,good=self.sample()
++        tester=h.AssessmentTokenFilterTests();tester.setUp()
++        self.assertTrue(tester.accepts(tester.ordered(good),request(claim,p,ctx)))
++        bad=deepcopy(good);bad['missing_information']=['Other corpora.']
++        self.assertFalse(tester.accepts(tester.ordered(bad),request(claim,p,ctx)))
++        ctx='The parser latency on the Falcon corpus was not measured.'
++        raw=assessment([observation('parser','unknown',ctx)],missing=['measurement_unreported'])
++        self.assertTrue(tester.accepts(tester.ordered(raw),request(claim,p,ctx)))
++
++
++if __name__=='__main__':unittest.main()
+--- cellfix9/research_rag/tests/test_atomic_assessment_v8.py
++++ cellfix10/research_rag/tests/test_atomic_assessment_v8.py
+@@ -271,7 +271,7 @@
+         payload = json.loads(request[1]['content'])
+         payload['context'] = ''
+         request[1]['content'] = json.dumps(payload)
+-        raw = assessment([], missing=['Source evidence is absent.'], scope='unknown')
++        raw = assessment([], missing=['source_evidence_absent'], scope='unknown')
+         self.assertTrue(self.accepts(self.ordered(raw), request))
+ 
+ 
+--- cellfix9/research_rag/tests/test_atomic_decoding.py
++++ cellfix10/research_rag/tests/test_atomic_decoding.py
+@@ -1,183 +1,183 @@
+-"""Real token-filter tests with a tiny tokenizer; no weights or live inference."""
+-from contextlib import nullcontext
+-from copy import deepcopy
+-import importlib
+-import json
+-import sys
+-from types import SimpleNamespace
+-import unittest
+-from unittest.mock import patch
+-
+-a = importlib.import_module('04_factchecker.inference.atomic_verifier')
+-d = importlib.import_module('04_factchecker.inference.atomic_decoding')
+-j = importlib.import_module('04_factchecker.inference.judge')
+-
+-
+-class Sequence(list):
+-    def tolist(self):
+-        return list(self)
+-
+-
+-class Tensor:
+-    def __init__(self, rows):
+-        self.rows = rows
+-        self.shape = (len(rows), len(rows[0]))
+-
+-    def __getitem__(self, index):
+-        return self.rows[index]
+-
+-
+-class TinyTokenizer:
+-    eos_token_id = 0
+-    all_special_ids = [0]
+-
+-    def __len__(self):
+-        return 128
+-
+-    def encode(self, text):
+-        return [ord(c) for c in text]
+-
+-    def decode(self, ids, **options):
+-        return ''.join(chr(i) for i in ids if i)
+-
+-    def apply_chat_template(self, messages, **options):
+-        return 'P'
+-
+-    def __call__(self, text, **options):
+-        return {'input_ids': Tensor([self.encode(text)])}
+-
+-
+-def token_backend():
+-    # Exercise LMFE's real list-token path without importing its optional torch
+-    # bitmask implementation; model execution is separately scripted below.
+-    original = __import__
+-    def import_without_torch(name, *args, **kwargs):
+-        if name == 'torch':
+-            raise ImportError('Torch bitmasks are outside these token-filter tests')
+-        return original(name, *args, **kwargs)
+-    with patch('builtins.__import__', side_effect=import_without_torch):
+-        return d.ConstrainedAtomicBackend(None, TinyTokenizer())
+-
+-
+-def messages(claim='The lamp brightness increased.'):
+-    return [{'role': 'system', 'content': a.DECOMPOSE_PROMPT},
+-            {'role': 'user', 'content': json.dumps({'claim': claim})}]
+-
+-
+-def plan(claim='The lamp brightness increased.'):
+-    return {'parts': [{'quote': claim, 'quantifier': 'atomic',
+-                      'scope': {'entity': 'lamp', 'metric': 'brightness', 'time': '', 'condition': ''}}], 'unresolved': []}
+-
+-
+-class ConstrainedDecodingTests(unittest.TestCase):
+-    def setUp(self):
+-        self.backend = token_backend()
+-
+-    def accepts(self, output, request=None):
+-        callback = self.backend.generation_options(request or messages())['prefix_allowed_tokens_fn']
+-        ids = Sequence([ord('P')])
+-        for char in output:
+-            if ord(char) not in callback(0, ids):
+-                return False
+-            ids.append(ord(char))
+-        return 0 in callback(0, ids)
+-
+-    def test_valid_json_can_end_but_missing_quote_or_extra_brace_cannot(self):
+-        text = json.dumps(plan(), separators=(',', ':'))
+-        self.assertTrue(self.accepts(text))
+-        self.assertFalse(self.accepts(text.replace('"unresolved":', '"unresolved:')))
+-        self.assertFalse(self.accepts(text + '}'))
+-        self.assertFalse(self.accepts(text[:-1]))
+-
+-    def test_source_and_quantifier_enum_prevent_unseen_values_without_gold(self):
+-        for field, value in [('quote', 'The lamp got brighter.'), ('quantifier', 'all')]:
+-            bad = plan()
+-            bad['parts'][0][field] = value
+-            self.assertFalse(self.accepts(json.dumps(bad)))
+-        bad = plan()
+-        bad['parts'][0]['scope']['entity'] = 'Lamp'
+-        self.assertFalse(self.accepts(json.dumps(bad)))
+-
+-    def test_required_keys_types_and_empty_parts_are_rejected(self):
+-        for bad in [dict(parts=[], unresolved=[]), {'parts': plan()['parts']},
+-                    {**plan(), 'label': 'support'}]:
+-            self.assertFalse(self.accepts(json.dumps(bad)))
+-        bad = plan()
+-        bad['parts'][0]['scope'] = 'entity'
+-        self.assertFalse(self.accepts(json.dumps(bad)))
+-
+-    def test_single_clause_coverage_enforced_but_semantic_binding_still_needs_review(self):
+-        bad = plan()
+-        bad['parts'][0]['quote'] = 'The lamp'
+-        self.assertFalse(self.accepts(json.dumps(bad)))
+-        with self.assertRaisesRegex(ValueError, 'uncovered_claim_content'):
+-            a.normalize_decomposition(bad, 'The lamp brightness increased.')
+-        bad = plan()
+-        bad['parts'][0]['scope']['metric'] = 'increased'
+-        # Valid structure/source still cannot prove entity/property semantics.
+-        self.assertTrue(self.accepts(json.dumps(bad)))
+-
+-    def test_explicit_word_limit_and_supported_quantifiers_are_frozen(self):
+-        with self.assertRaises(ValueError):
+-            d.decomposition_schema(' '.join(['word'] * 81))
+-        for claim, quantifier in [('Every lamp shone.', 'all'), ('Some lamps shone.', 'some'),
+-                                  ('None of the lamps shone.', 'none'), ('The lamp shone.', 'atomic')]:
+-            schema = d.decomposition_schema(claim)
+-            self.assertEqual(schema['properties']['parts']['items']['properties']['quantifier']['enum'], [quantifier])
+-
+-    def test_assessment_numeric_union_and_type_constraints(self):
+-        request = [{'role': 'system', 'content': a.ASSESS_PROMPT},
+-                   {'role': 'user', 'content': json.dumps({'claim': 'The lamp brightness increased.',
+-                       'part': plan()['parts'][0], 'context': 'The lamp brightness increased.'})}]
+-        value = {'scope_match': 'matched', 'coverage': {'complete': False, 'members': [], 'quotes': []},
+-                 'observations': [{'member': 'lamp', 'truth': 'unknown', 'quotes': [],
+-                    'explanation': 'Missing measurement.', 'numeric': None}],
+-                 'missing_information': ['Measurement.'], 'explanation': 'Missing evidence.'}
+-        self.assertTrue(self.accepts(json.dumps(value), request))
+-        bad = deepcopy(value)
+-        bad['observations'][0]['truth'] = True
+-        self.assertFalse(self.accepts(json.dumps(bad), request))
+-        value['observations'][0]['numeric'] = {'kind': 'value', 'source_quote': 'Brightness was 8.',
+-            'left': {'value': '8', 'unit': '', 'quote': '8'}, 'right': {'value': '8', 'unit': '', 'quote': '8'}}
+-        self.assertFalse(self.accepts(json.dumps(value), request))
+-        payload = json.loads(request[1]['content'])
+-        payload['context'] += ' Brightness was 8.'
+-        request[1]['content'] = json.dumps(payload)
+-        self.assertFalse(self.accepts(json.dumps(value), request))
+-
+-    def test_actual_adapter_passes_filter_and_records_schema_hash(self):
+-        tokenizer = TinyTokenizer()
+-        target = json.dumps(plan(), separators=(',', ':'))
+-        class ScriptedModel:
+-            def generate(self, *, input_ids, prefix_allowed_tokens_fn, max_new_tokens, do_sample, pad_token_id,
+-                         num_beams, repetition_penalty):
+-                assert num_beams == 1 and repetition_penalty == 1.05
+-                self.options = (max_new_tokens, do_sample)
+-                ids = Sequence(input_ids[0])
+-                for token in tokenizer.encode(target):
+-                    assert token in prefix_allowed_tokens_fn(0, ids)
+-                    ids.append(token)
+-                assert tokenizer.eos_token_id in prefix_allowed_tokens_fn(0, ids)
+-                ids.append(tokenizer.eos_token_id)
+-                return Tensor([ids])
+-        model = ScriptedModel()
+-        backend = d.ConstrainedAtomicBackend(model, tokenizer)
+-        events = []
+-        backend.on_generation = events.append
+-        with patch.dict(sys.modules, {'torch': SimpleNamespace(inference_mode=nullcontext)}):
+-            result = backend.generate_json(messages(), max_new_tokens=1536)
+-        self.assertEqual(result, plan())
+-        self.assertEqual(model.options, (1536, False))
+-        self.assertEqual(events[0]['structured_decoder'], d.DECODER)
+-        self.assertEqual(events[0]['schema_sha256'], d.schema_sha256(d.schema_for(messages())[0]))
+-
+-    def test_serving_backend_uses_no_constraint_options_and_unknown_request_stops(self):
+-        self.assertEqual(j.TransformersJSONBackend(None, None).generation_options(messages()), {})
+-        request = messages()
+-        request[1]['content'] = '{"claim":"The lamp shone.","label":"support"}'
+-        with self.assertRaises(ValueError):
+-            self.backend.generation_options(request)
+-
+-
+-if __name__ == '__main__':
+-    unittest.main()
++"""Real token-filter tests with a tiny tokenizer; no weights or live inference."""
++from contextlib import nullcontext
++from copy import deepcopy
++import importlib
++import json
++import sys
++from types import SimpleNamespace
++import unittest
++from unittest.mock import patch
++
++a = importlib.import_module('04_factchecker.inference.atomic_verifier')
++d = importlib.import_module('04_factchecker.inference.atomic_decoding')
++j = importlib.import_module('04_factchecker.inference.judge')
++
++
++class Sequence(list):
++    def tolist(self):
++        return list(self)
++
++
++class Tensor:
++    def __init__(self, rows):
++        self.rows = rows
++        self.shape = (len(rows), len(rows[0]))
++
++    def __getitem__(self, index):
++        return self.rows[index]
++
++
++class TinyTokenizer:
++    eos_token_id = 0
++    all_special_ids = [0]
++
++    def __len__(self):
++        return 128
++
++    def encode(self, text):
++        return [ord(c) for c in text]
++
++    def decode(self, ids, **options):
++        return ''.join(chr(i) for i in ids if i)
++
++    def apply_chat_template(self, messages, **options):
++        return 'P'
++
++    def __call__(self, text, **options):
++        return {'input_ids': Tensor([self.encode(text)])}
++
++
++def token_backend():
++    # Exercise LMFE's real list-token path without importing its optional torch
++    # bitmask implementation; model execution is separately scripted below.
++    original = __import__
++    def import_without_torch(name, *args, **kwargs):
++        if name == 'torch':
++            raise ImportError('Torch bitmasks are outside these token-filter tests')
++        return original(name, *args, **kwargs)
++    with patch('builtins.__import__', side_effect=import_without_torch):
++        return d.ConstrainedAtomicBackend(None, TinyTokenizer())
++
++
++def messages(claim='The lamp brightness increased.'):
++    return [{'role': 'system', 'content': a.DECOMPOSE_PROMPT},
++            {'role': 'user', 'content': json.dumps({'claim': claim})}]
++
++
++def plan(claim='The lamp brightness increased.'):
++    return {'parts': [{'quote': claim, 'quantifier': 'atomic',
++                      'scope': {'entity': 'lamp', 'metric': 'brightness', 'time': '', 'condition': ''}}], 'unresolved': []}
++
++
++class ConstrainedDecodingTests(unittest.TestCase):
++    def setUp(self):
++        self.backend = token_backend()
++
++    def accepts(self, output, request=None):
++        callback = self.backend.generation_options(request or messages())['prefix_allowed_tokens_fn']
++        ids = Sequence([ord('P')])
++        for char in output:
++            if ord(char) not in callback(0, ids):
++                return False
++            ids.append(ord(char))
++        return 0 in callback(0, ids)
++
++    def test_valid_json_can_end_but_missing_quote_or_extra_brace_cannot(self):
++        text = json.dumps(plan(), separators=(',', ':'))
++        self.assertTrue(self.accepts(text))
++        self.assertFalse(self.accepts(text.replace('"unresolved":', '"unresolved:')))
++        self.assertFalse(self.accepts(text + '}'))
++        self.assertFalse(self.accepts(text[:-1]))
++
++    def test_source_and_quantifier_enum_prevent_unseen_values_without_gold(self):
++        for field, value in [('quote', 'The lamp got brighter.'), ('quantifier', 'all')]:
++            bad = plan()
++            bad['parts'][0][field] = value
++            self.assertFalse(self.accepts(json.dumps(bad)))
++        bad = plan()
++        bad['parts'][0]['scope']['entity'] = 'Lamp'
++        self.assertFalse(self.accepts(json.dumps(bad)))
++
++    def test_required_keys_types_and_empty_parts_are_rejected(self):
++        for bad in [dict(parts=[], unresolved=[]), {'parts': plan()['parts']},
++                    {**plan(), 'label': 'support'}]:
++            self.assertFalse(self.accepts(json.dumps(bad)))
++        bad = plan()
++        bad['parts'][0]['scope'] = 'entity'
++        self.assertFalse(self.accepts(json.dumps(bad)))
++
++    def test_single_clause_coverage_enforced_but_semantic_binding_still_needs_review(self):
++        bad = plan()
++        bad['parts'][0]['quote'] = 'The lamp'
++        self.assertFalse(self.accepts(json.dumps(bad)))
++        with self.assertRaisesRegex(ValueError, 'uncovered_claim_content'):
++            a.normalize_decomposition(bad, 'The lamp brightness increased.')
++        bad = plan()
++        bad['parts'][0]['scope']['metric'] = 'increased'
++        # Valid structure/source still cannot prove entity/property semantics.
++        self.assertTrue(self.accepts(json.dumps(bad)))
++
++    def test_explicit_word_limit_and_supported_quantifiers_are_frozen(self):
++        with self.assertRaises(ValueError):
++            d.decomposition_schema(' '.join(['word'] * 81))
++        for claim, quantifier in [('Every lamp shone.', 'all'), ('Some lamps shone.', 'some'),
++                                  ('None of the lamps shone.', 'none'), ('The lamp shone.', 'atomic')]:
++            schema = d.decomposition_schema(claim)
++            self.assertEqual(schema['properties']['parts']['items']['properties']['quantifier']['enum'], [quantifier])
++
++    def test_assessment_numeric_union_and_type_constraints(self):
++        request = [{'role': 'system', 'content': a.ASSESS_PROMPT},
++                   {'role': 'user', 'content': json.dumps({'claim': 'The lamp brightness increased.',
++                       'part': plan()['parts'][0], 'context': 'The lamp brightness increased.'})}]
++        value = {'scope_match': 'matched', 'coverage': {'complete': False, 'members': [], 'quotes': []},
++                 'observations': [{'member': 'lamp', 'truth': 'unknown', 'quotes': [],
++                    'explanation': 'Predicate evidence recorded.', 'numeric': None}],
++                 'missing_information': ['scoped_evidence_unresolved'], 'explanation': 'Assess the recorded evidence ledger.'}
++        self.assertTrue(self.accepts(json.dumps(value), request))
++        bad = deepcopy(value)
++        bad['observations'][0]['truth'] = True
++        self.assertFalse(self.accepts(json.dumps(bad), request))
++        value['observations'][0]['numeric'] = {'kind': 'value', 'source_quote': 'Brightness was 8.',
++            'left': {'value': '8', 'unit': '', 'quote': '8'}, 'right': {'value': '8', 'unit': '', 'quote': '8'}}
++        self.assertFalse(self.accepts(json.dumps(value), request))
++        payload = json.loads(request[1]['content'])
++        payload['context'] += ' Brightness was 8.'
++        request[1]['content'] = json.dumps(payload)
++        self.assertFalse(self.accepts(json.dumps(value), request))
++
++    def test_actual_adapter_passes_filter_and_records_schema_hash(self):
++        tokenizer = TinyTokenizer()
++        target = json.dumps(plan(), separators=(',', ':'))
++        class ScriptedModel:
++            def generate(self, *, input_ids, prefix_allowed_tokens_fn, max_new_tokens, do_sample, pad_token_id,
++                         num_beams, repetition_penalty):
++                assert num_beams == 1 and repetition_penalty == 1.05
++                self.options = (max_new_tokens, do_sample)
++                ids = Sequence(input_ids[0])
++                for token in tokenizer.encode(target):
++                    assert token in prefix_allowed_tokens_fn(0, ids)
++                    ids.append(token)
++                assert tokenizer.eos_token_id in prefix_allowed_tokens_fn(0, ids)
++                ids.append(tokenizer.eos_token_id)
++                return Tensor([ids])
++        model = ScriptedModel()
++        backend = d.ConstrainedAtomicBackend(model, tokenizer)
++        events = []
++        backend.on_generation = events.append
++        with patch.dict(sys.modules, {'torch': SimpleNamespace(inference_mode=nullcontext)}):
++            result = backend.generate_json(messages(), max_new_tokens=1536)
++        self.assertEqual(result, plan())
++        self.assertEqual(model.options, (1536, False))
++        self.assertEqual(events[0]['structured_decoder'], d.DECODER)
++        self.assertEqual(events[0]['schema_sha256'], d.schema_sha256(d.schema_for(messages())[0]))
++
++    def test_serving_backend_uses_no_constraint_options_and_unknown_request_stops(self):
++        self.assertEqual(j.TransformersJSONBackend(None, None).generation_options(messages()), {})
++        request = messages()
++        request[1]['content'] = '{"claim":"The lamp shone.","label":"support"}'
++        with self.assertRaises(ValueError):
++            self.backend.generation_options(request)
++
++
++if __name__ == '__main__':
++    unittest.main()
+--- cellfix9/research_rag/tests/test_atomic_smoke_cellfix2.py
++++ cellfix10/research_rag/tests/test_atomic_smoke_cellfix2.py
+@@ -1,81 +1,81 @@
+-
+-from copy import deepcopy
+-import json, unittest
+-from research_rag.tests import test_atomic_assessment_v8 as h
+-from research_rag.tests.test_atomic_verifier import (
+-    a, part, assessment, observation, numeric, operand
+-)
+-
+-class Cellfix2Tests(unittest.TestCase):
+-    setUp = h.AssessmentTokenFilterTests.setUp
+-    accepts = h.AssessmentTokenFilterTests.accepts
+-    ordered = h.AssessmentTokenFilterTests.ordered
+-
+-    def request(self, claim, p, proof):
+-        return [
+-            {'role':'system', 'content':a.ASSESS_PROMPT},
+-            {'role':'user', 'content':json.dumps({
+-                'claim':claim, 'part':p, 'context':proof
+-            })},
+-        ]
+-
+-    def fixture(self):
+-        claim, proof = 'Capacity was 9 liters.', 'Capacity was 9 liters.'
+-        p = part(claim, metric='Capacity')
+-        raw = assessment([observation(
+-            'Capacity', 'true', proof,
+-            numeric('value', proof, operand('9','liters'), operand('9','liters'))
+-        )])
+-        return raw, self.request(claim, p, proof)
+-
+-    def test_true_numeric_requires_quote_and_check(self):
+-        raw, request = self.fixture()
+-        self.assertTrue(self.accepts(self.ordered(raw), request))
+-        raw['observations'][0]['quotes'] = []
+-        self.assertFalse(self.accepts(self.ordered(raw), request))
+-        raw, request = self.fixture()
+-        raw['observations'][0]['numeric'] = None
+-        self.assertFalse(self.accepts(self.ordered(raw), request))
+-
+-    def test_atomic_population_flag_is_false_not_empty_true(self):
+-        raw, request = self.fixture()
+-        raw['coverage']['complete'] = True
+-        self.assertFalse(self.accepts(self.ordered(raw), request))
+-        raw['coverage']['complete'] = False
+-        self.assertTrue(self.accepts(self.ordered(raw), request))
+-
+-    def test_missing_numeric_source_allows_unknown_not_false(self):
+-        claim, proof = 'Capacity was 9 liters.', 'Capacity was not reported.'
+-        p = part(claim, metric='Capacity')
+-        raw = assessment(
+-            [observation('Capacity', 'unknown', proof)],
+-            missing=['Capacity measurement.']
+-        )
+-        request = self.request(claim, p, proof)
+-        self.assertTrue(self.accepts(self.ordered(raw), request))
+-        raw['observations'][0]['truth'] = 'false'
+-        self.assertFalse(self.accepts(self.ordered(raw), request))
+-
+-    def test_qualitative_false_requires_evidence(self):
+-        claim = 'The survey used paper forms.'
+-        proof = 'The survey did not use paper forms.'
+-        p = part(claim, metric='used paper forms')
+-        raw = assessment([observation('survey', 'false', proof)])
+-        request = self.request(claim, p, proof)
+-        self.assertTrue(self.accepts(self.ordered(raw), request))
+-        self.assertEqual(
+-            a.assess_part(raw, p, proof)['assessed_label'], 'contradict'
+-        )
+-        raw['observations'][0]['quotes'] = []
+-        self.assertFalse(self.accepts(self.ordered(raw), request))
+-
+-    def test_quantified_complete_needs_nonempty_population(self):
+-        claim, proof = 'All pumps remained operable.', 'One pump failed.'
+-        p = part(claim, quantifier='all', metric='operable')
+-        raw = assessment([observation('pump', 'false', proof)])
+-        request = self.request(claim, p, proof)
+-        self.assertTrue(self.accepts(self.ordered(raw), request))
+-        raw['coverage']['complete'] = True
+-        self.assertFalse(self.accepts(self.ordered(raw), request))
+-        raw['coverage'].update(members=['pump'], quotes=[proof])
+-        self.assertTrue(self.accepts(self.ordered(raw), request))
++
++from copy import deepcopy
++import json, unittest
++from research_rag.tests import test_atomic_assessment_v8 as h
++from research_rag.tests.test_atomic_verifier import (
++    a, part, assessment, observation, numeric, operand
++)
++
++class Cellfix2Tests(unittest.TestCase):
++    setUp = h.AssessmentTokenFilterTests.setUp
++    accepts = h.AssessmentTokenFilterTests.accepts
++    ordered = h.AssessmentTokenFilterTests.ordered
++
++    def request(self, claim, p, proof):
++        return [
++            {'role':'system', 'content':a.ASSESS_PROMPT},
++            {'role':'user', 'content':json.dumps({
++                'claim':claim, 'part':p, 'context':proof
++            })},
++        ]
++
++    def fixture(self):
++        claim, proof = 'Capacity was 9 liters.', 'Capacity was 9 liters.'
++        p = part(claim, metric='Capacity')
++        raw = assessment([observation(
++            'Capacity', 'true', proof,
++            numeric('value', proof, operand('9','liters'), operand('9','liters'))
++        )])
++        return raw, self.request(claim, p, proof)
++
++    def test_true_numeric_requires_quote_and_check(self):
++        raw, request = self.fixture()
++        self.assertTrue(self.accepts(self.ordered(raw), request))
++        raw['observations'][0]['quotes'] = []
++        self.assertFalse(self.accepts(self.ordered(raw), request))
++        raw, request = self.fixture()
++        raw['observations'][0]['numeric'] = None
++        self.assertFalse(self.accepts(self.ordered(raw), request))
++
++    def test_atomic_population_flag_is_false_not_empty_true(self):
++        raw, request = self.fixture()
++        raw['coverage']['complete'] = True
++        self.assertFalse(self.accepts(self.ordered(raw), request))
++        raw['coverage']['complete'] = False
++        self.assertTrue(self.accepts(self.ordered(raw), request))
++
++    def test_missing_numeric_source_allows_unknown_not_false(self):
++        claim, proof = 'Capacity was 9 liters.', 'Capacity was not reported.'
++        p = part(claim, metric='Capacity')
++        raw = assessment(
++            [observation('Capacity', 'unknown', proof)],
++            missing=['measurement_unreported']
++        )
++        request = self.request(claim, p, proof)
++        self.assertTrue(self.accepts(self.ordered(raw), request))
++        raw['observations'][0]['truth'] = 'false'
++        self.assertFalse(self.accepts(self.ordered(raw), request))
++
++    def test_qualitative_false_requires_evidence(self):
++        claim = 'The survey used paper forms.'
++        proof = 'The survey did not use paper forms.'
++        p = part(claim, metric='used paper forms')
++        raw = assessment([observation('survey', 'false', proof)])
++        request = self.request(claim, p, proof)
++        self.assertTrue(self.accepts(self.ordered(raw), request))
++        self.assertEqual(
++            a.assess_part(raw, p, proof)['assessed_label'], 'contradict'
++        )
++        raw['observations'][0]['quotes'] = []
++        self.assertFalse(self.accepts(self.ordered(raw), request))
++
++    def test_quantified_complete_needs_nonempty_population(self):
++        claim, proof = 'All pumps remained operable.', 'One pump failed.'
++        p = part(claim, quantifier='all', metric='operable')
++        raw = assessment([observation('pump', 'false', proof)])
++        request = self.request(claim, p, proof)
++        self.assertTrue(self.accepts(self.ordered(raw), request))
++        raw['coverage']['complete'] = True
++        self.assertFalse(self.accepts(self.ordered(raw), request))
++        raw['coverage'].update(members=['pump'], quotes=[proof])
++        self.assertTrue(self.accepts(self.ordered(raw), request))
+--- cellfix9/research_rag/tests/test_atomic_verifier.py
++++ cellfix10/research_rag/tests/test_atomic_verifier.py
+@@ -34,7 +34,7 @@
+ 
+ def observation(member='service', truth='true', quote='The service reduced latency.', numeric=None):
+     return {'member': member, 'truth': truth, 'quotes': [quote], 'numeric': numeric,
+-            'explanation': 'Synthetic fixture evidence.'}
++            'explanation': 'Predicate evidence recorded.'}
+ 
+ 
+ def assessment(observations=None, *, complete=False, missing=None, scope='matched'):
+@@ -43,7 +43,7 @@
+             'coverage': {'complete': complete, 'members': [o['member'] for o in observations] if complete else [],
+                          'quotes': [observations[0]['quotes'][0]] if complete and observations else []},
+             'observations': observations, 'missing_information': missing or [],
+-            'explanation': 'Synthetic fixture, not a model prediction.'}
++            'explanation': 'Assess the recorded evidence ledger.'}
+ 
+ 
+ def operand(value, unit='', quote=None):

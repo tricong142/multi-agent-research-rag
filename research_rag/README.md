@@ -1,5 +1,21 @@
 # LangGraph orchestration
 
+**Chưa nghiệm thu với atomic verifier mới.** Loader vẫn dùng FactChecker cũ;
+Summarizer và Writer chưa đạt E2E với verifier mới. [Gate hiện hành và notebook
+benchmark QASPER](../docs/PRODUCTION_GATES_20261016.md) phân biệt probe tách mệnh
+đề, nhãn/false support39 và E2E. Reader mặc định chạy PyMuPDF/Tesseract local;
+Gemini router/critique chỉ dùng khi khởi tạo `ReaderAgent(allow_remote=True)`.
+
+[Audit QASPER 2026-10-17](../docs/QASPER_BM25_DENSE_REVIEW_20261017.md) xác nhận
+Dense chạy393 dev với FAISS QASPER mới, zero fallback: Hit@5=40,97%, paragraph
+Recall@5=27,07%, cao hơn BM25 trên lượt này. Đây là benchmark retrieval riêng;
+chưa đánh giá adaptive policy, verifier hoặc model E2E.
+
+Candidate atomic verifier v8 dùng default criteria v8 trong runner thí nghiệm;
+serving vẫn dùng FactChecker cũ. [Notebook và thứ tự chạy T4](../docs/ATOMIC_VERIFIER_V8_RUN_GUIDE.md):
+smoke12 → probe18 → review người mới → full39. Regression local/freeze không
+thay số đo nhãn, false support hoặc E2E. [Validation v8](../docs/ATOMIC_VERIFIER_V8_VALIDATION.md).
+
 Runtime hiện dùng **controller theo luật để điều phối tự chủ một nhiệm vụ**.
 Hướng dẫn cấu trúc, ngân sách, checkpoint/resume và cách chạy:
 [AUTONOMOUS_RESEARCH.md](../docs/AUTONOMOUS_RESEARCH.md).

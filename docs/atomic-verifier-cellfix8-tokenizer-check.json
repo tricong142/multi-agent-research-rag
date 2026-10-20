@@ -1,0 +1,116 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix8",
+  "criteria_sha256": "fbf969ebea81aba03961767b9ee53960f89cc3e3cb2d370da3a4adba4007def8",
+  "kind": "real_pinned_tokenizer_handcrafted_path_check",
+  "checks": [
+    {
+      "case": "keyed_two_sentence_counts",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 199,
+      "elapsed_seconds": 1.288
+    },
+    {
+      "case": "duplicated_requirement",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.846
+    },
+    {
+      "case": "missing_requirement",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.9
+    },
+    {
+      "case": "explicit_denial",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 75,
+      "elapsed_seconds": 0.986
+    },
+    {
+      "case": "counterevidence_as_scope_mismatch",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.551
+    },
+    {
+      "case": "counterevidence_as_unknown",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.525
+    },
+    {
+      "case": "genuine_missing_evidence",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 73,
+      "elapsed_seconds": 0.716
+    },
+    {
+      "case": "single_counterexample",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 81,
+      "elapsed_seconds": 0.866
+    },
+    {
+      "case": "old_ordered_change_preserved",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 146,
+      "elapsed_seconds": 1.568
+    },
+    {
+      "case": "reversed_change_rejected",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.922
+    },
+    {
+      "case": "scoped_support_without_other_corpora",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 75,
+      "elapsed_seconds": 0.598
+    },
+    {
+      "case": "irrelevant_missing_information_rejected",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.571
+    },
+    {
+      "case": "both_explanation_boundaries_close_at_64",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 75,
+      "elapsed_seconds": 0.721
+    },
+    {
+      "case": "explanation_65_rejected",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.695
+    }
+  ],
+  "exact_malformed_prefix_replay": {
+    "old_parser_allows_eos_on_malformed_prefix": true,
+    "new_parser_rejects_prefix": true,
+    "rejected_at_bpe_token": 105,
+    "prefix_bpe_tokens": 107,
+    "original_model_generated_tokens": 111,
+    "no_character_fallback_used": true
+  },
+  "elapsed_seconds": 87.529,
+  "weights_loaded": false,
+  "model_inference_completed": false
+}

@@ -47,6 +47,38 @@ else:  # direct execution from this directory
     from critic.prompts import CRITIC_SYSTEM_PROMPT, build_critic_user_prompt
 
 
+def output_schema_issue(value, role: str) -> str | None:
+    """Validate each role's wire contract before the node reads any fields."""
+    if not isinstance(value, dict):
+        return role + "_object_required"
+    if role == "generator":
+        if set(value) != {"answer", "evidence_spans"}:
+            return "generator_fields_required"
+        if not isinstance(value["answer"], str) or not value["answer"].strip():
+            return "generator_answer_required"
+        spans = value["evidence_spans"]
+        if not isinstance(spans, list) or any(not isinstance(s, str) or not s.strip() for s in spans):
+            return "generator_evidence_spans_schema"
+    elif role == "critic":
+        required = {"is_supported", "reason", "action"}
+        if not required <= set(value) or set(value) - required - {"suggested_query"}:
+            return "critic_fields_required"
+        if type(value["is_supported"]) is not bool:
+            return "critic_support_boolean_required"
+        if not isinstance(value["reason"], str) or not value["reason"].strip():
+            return "critic_reason_required"
+        actions = ("",) if value["is_supported"] else config.CRITIC_ACTIONS
+        if value["action"] not in actions:
+            return "critic_action_schema"
+        if "suggested_query" in value and (not isinstance(value["suggested_query"], str)
+                                          or not value["suggested_query"].strip()
+                                          or len(value["suggested_query"]) > 4000):
+            return "critic_query_schema"
+    else:
+        raise ValueError("Unknown summarizer role: " + role)
+    return None
+
+
 @dataclass
 class SummarizerTrial:
     """1 lần thử trong lịch sử nội bộ - dùng để model đọc lại ở lượt sau,
@@ -106,7 +138,11 @@ class SummarizerNode:
             evidence_spans = gen_output["evidence_spans"]
 
             # --- Bước 2: Critic độc lập phê bình ---
-            critic_output = self._call_critic(current_context, question, answer, evidence_spans)
+            if gen_output.get("validation_issue"):
+                critic_output = {"is_supported": False, "reason": gen_output["validation_issue"],
+                                 "action": "rewrite"}
+            else:
+                critic_output = self._call_critic(current_context, question, answer, evidence_spans)
             is_supported = critic_output["is_supported"] is True
             reason = critic_output["reason"]
             action = critic_output.get("action", "")
@@ -192,10 +228,13 @@ class SummarizerNode:
             GENERATOR_SYSTEM_PROMPT, user_prompt,
             role="generator",
         )
-        if result is None:
+        issue = output_schema_issue(result, "generator")
+        if issue:
             # Model trả JSON hỏng - coi như answer rỗng, để Critic (hoặc vòng lặp)
             # tự nhận diện và retry, KHÔNG để lỗi lan ra ngoài node.
-            return {"answer": "", "evidence_spans": []}
+            return {"answer": "", "evidence_spans": [], "validation_issue":
+                    "Generator JSON/schema invalid (" + issue +
+                    "). Return answer as a nonempty string and evidence_spans as a list of strings."}
         return result
 
     def _call_critic(self, context: str, question: str, answer: str, evidence_spans: list[str]) -> dict:
@@ -205,17 +244,19 @@ class SummarizerNode:
             CRITIC_SYSTEM_PROMPT, user_prompt,
             role="critic",
         )
-        if result is None:
+        issue = output_schema_issue(result, "critic")
+        if issue:
             # Critic hỏng JSON - mặc định coi là "chưa đạt" (an toàn hơn là mặc
             # định "đạt", vì thà retry thừa còn hơn để lọt answer chưa được kiểm).
-            return {"is_supported": False, "reason": "Critic trả JSON không hợp lệ.", "action": "rewrite"}
+            return {"is_supported": False, "reason": "Critic JSON/schema invalid (" + issue +
+                    "). Return boolean is_supported, nonempty reason and a valid action.", "action": "rewrite"}
         return result
 
     def _generate_json(self, model, tokenizer, system_prompt: str, user_prompt: str,
                        *, role: str) -> dict | None:
         """Hàm dùng chung để gọi model + parse JSON, tách riêng để dễ đổi
         sang backend serving khác (vLLM/TGI) sau này mà không sửa logic
-        điều phối ở run(). Trả về None nếu parse lỗi - KHÔNG raise exception,
+        điều phối ở run(). Trả về None nếu parse/schema lỗi - KHÔNG raise exception,
         để hàm gọi (_call_generator/_call_critic) tự quyết định fallback phù
         hợp với vai trò của từng bên, đúng nguyên tắc "lối thoát an toàn,
         không crash, không treo vô hạn" đã thống nhất từ Bước 1."""
@@ -242,10 +283,13 @@ class SummarizerNode:
         except json.JSONDecodeError as exc:
             result = None
             parse_error = {"message": exc.msg, "position": exc.pos}
+        schema_issue = output_schema_issue(result, role) if parse_error is None else None
         if self.on_generation is not None:
             self.on_generation({"event": "summarizer_generation", "role": role,
                                 "raw_output": generated, "json_valid": parse_error is None,
                                 "parsed_type": type(result).__name__, "parse_error": parse_error,
+                                "schema_valid": parse_error is None and schema_issue is None,
+                                "schema_issue": schema_issue,
                                 "generated_tokens": len(output_ids[0]) - inputs["input_ids"].shape[1],
                                 "max_new_tokens": 512})
-        return result
+        return result if schema_issue is None else None

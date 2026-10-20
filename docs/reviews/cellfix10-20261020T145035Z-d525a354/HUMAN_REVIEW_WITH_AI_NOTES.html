@@ -1,0 +1,406 @@
+<!doctype html><html lang="vi"><meta charset="utf-8"><title>Cellfix10 — human confirmation after AI review</title><style>body{max-width:1050px;margin:30px auto;font:16px/1.6 system-ui;padding:12px}article{border:1px solid #bbb;padding:20px;margin:20px 0}pre{white-space:pre-wrap}textarea{width:95%;min-height:130px}small{display:inline-block;margin-left:25px;color:#333}</style><h1>Cellfix10 — xác nhận human sau AI review</h1><p>Run 20261020T145035Z-d525a354. Đây là review đề xuất của AI, chưa có chữ ký human. Đọc từng claim/part và năm nhận xét, chỉ tích khi chính bạn thấy đạt. Không chuyển chữ ký candidate cũ.</p><p>014: May lọc thời điểm trial được tiến hành, không phải thời điểm improvement. 018: population được giới hạn bởi low-temperature group.</p><pre>criteria_sha256: 2edd14d0e7fb728b3ba6eb99923ade128573ed2938f55bfeb2d1a0e4a06f8cda
+predictions_sha256: 67859c961c674260fe66bca7ef46caecf6dfb743d973d5f0612b59919f52052f</pre><label>Tên người trực tiếp review <input id="name"></label><br><label><input id="done" type="checkbox"> Tôi đã trực tiếp đọc đủ 18 claim/20 part, xác nhận từng tiêu chí và ghi chú.</label><article data-id="decompose:001"><h2>decompose:001</h2><p>Model Juniper uses 25% less memory and retains 94% accuracy.</p><pre>{
+  &quot;parts&quot;: [
+    {
+      &quot;quote&quot;: &quot;Model Juniper uses 25% less memory&quot;,
+      &quot;quantifier&quot;: &quot;atomic&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;Model Juniper&quot;,
+        &quot;metric&quot;: &quot;memory&quot;,
+        &quot;time&quot;: &quot;&quot;,
+        &quot;condition&quot;: &quot;&quot;
+      },
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 34,
+      &quot;numeric_requirements&quot;: [
+        {
+          &quot;start&quot;: 19,
+          &quot;end&quot;: 22,
+          &quot;quote&quot;: &quot;25%&quot;,
+          &quot;value&quot;: &quot;25&quot;,
+          &quot;unit&quot;: &quot;%&quot;,
+          &quot;kind&quot;: &quot;percent&quot;
+        }
+      ]
+    },
+    {
+      &quot;quote&quot;: &quot;and retains 94% accuracy.&quot;,
+      &quot;quantifier&quot;: &quot;atomic&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;Model Juniper&quot;,
+        &quot;metric&quot;: &quot;accuracy&quot;,
+        &quot;time&quot;: &quot;&quot;,
+        &quot;condition&quot;: &quot;&quot;
+      },
+      &quot;start&quot;: 35,
+      &quot;end&quot;: 60,
+      &quot;numeric_requirements&quot;: [
+        {
+          &quot;start&quot;: 12,
+          &quot;end&quot;: 15,
+          &quot;quote&quot;: &quot;94%&quot;,
+          &quot;value&quot;: &quot;94&quot;,
+          &quot;unit&quot;: &quot;%&quot;,
+          &quot;kind&quot;: &quot;percent&quot;
+        }
+      ]
+    }
+  ],
+  &quot;unresolved&quot;: []
+}</pre><label><input type="checkbox" data-key="factual_predicates_not_fragments"> Part là factual predicate đầy đủ<br><small>AI: đạt — Tách đúng hai predicate uses less memory và retains accuracy; vế sau kế thừa chủ thể.</small></label><br><label><input type="checkbox" data-key="all_requirements_preserved"> Giữ đủ yêu cầu, số liệu, đơn vị và quan hệ<br><small>AI: đạt — Giữ 25%, 94%, quan hệ less và retains trong hai quote tương ứng.</small></label><br><label><input type="checkbox" data-key="quantifier_preserved"> Đúng lượng từ và population<br><small>AI: đạt — Cả hai part atomic; không thêm lượng từ ALL/SOME.</small></label><br><label><input type="checkbox" data-key="entity_metric_binding_correct"> Đúng chủ thể và metric<br><small>AI: đạt — Cùng Model Juniper; memory và accuracy tách riêng, không hoán đổi số liệu.</small></label><br><label><input type="checkbox" data-key="time_condition_scope_correct"> Đúng scope thời gian và điều kiện<br><small>AI: đạt — Claim không nêu time/condition; các trường này rỗng, không tự bổ sung.</small></label><br><label>Ghi chú người review (có gợi ý AI)<textarea>[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Tách đúng hai predicate uses less memory và retains accuracy; vế sau kế thừa chủ thể. C2: Giữ 25%, 94%, quan hệ less và retains trong hai quote tương ứng. C3: Cả hai part atomic; không thêm lượng từ ALL/SOME. C4: Cùng Model Juniper; memory và accuracy tách riêng, không hoán đổi số liệu. C5: Claim không nêu time/condition; các trường này rỗng, không tự bổ sung.</textarea></label></article><article data-id="decompose:002"><h2>decompose:002</h2><p>Model Juniper retains 94% accuracy.</p><pre>{
+  &quot;parts&quot;: [
+    {
+      &quot;quote&quot;: &quot;Model Juniper retains 94% accuracy.&quot;,
+      &quot;quantifier&quot;: &quot;atomic&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;Model Juniper&quot;,
+        &quot;metric&quot;: &quot;accuracy&quot;,
+        &quot;time&quot;: &quot;&quot;,
+        &quot;condition&quot;: &quot;&quot;
+      },
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 35,
+      &quot;numeric_requirements&quot;: [
+        {
+          &quot;start&quot;: 22,
+          &quot;end&quot;: 25,
+          &quot;quote&quot;: &quot;94%&quot;,
+          &quot;value&quot;: &quot;94&quot;,
+          &quot;unit&quot;: &quot;%&quot;,
+          &quot;kind&quot;: &quot;percent&quot;
+        }
+      ]
+    }
+  ],
+  &quot;unresolved&quot;: []
+}</pre><label><input type="checkbox" data-key="factual_predicates_not_fragments"> Part là factual predicate đầy đủ<br><small>AI: đạt — Một part retains 94% accuracy đầy đủ.</small></label><br><label><input type="checkbox" data-key="all_requirements_preserved"> Giữ đủ yêu cầu, số liệu, đơn vị và quan hệ<br><small>AI: đạt — Giữ nguyên retains và requirement 94%.</small></label><br><label><input type="checkbox" data-key="quantifier_preserved"> Đúng lượng từ và population<br><small>AI: đạt — Atomic, không có population lượng hóa.</small></label><br><label><input type="checkbox" data-key="entity_metric_binding_correct"> Đúng chủ thể và metric<br><small>AI: đạt — Entity Model Juniper; metric accuracy.</small></label><br><label><input type="checkbox" data-key="time_condition_scope_correct"> Đúng scope thời gian và điều kiện<br><small>AI: đạt — Không có restriction thời gian/điều kiện được thêm.</small></label><br><label>Ghi chú người review (có gợi ý AI)<textarea>[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Một part retains 94% accuracy đầy đủ. C2: Giữ nguyên retains và requirement 94%. C3: Atomic, không có population lượng hóa. C4: Entity Model Juniper; metric accuracy. C5: Không có restriction thời gian/điều kiện được thêm.</textarea></label></article><article data-id="decompose:003"><h2>decompose:003</h2><p>The study used human labels.</p><pre>{
+  &quot;parts&quot;: [
+    {
+      &quot;quote&quot;: &quot;The study used human labels.&quot;,
+      &quot;quantifier&quot;: &quot;atomic&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;study&quot;,
+        &quot;metric&quot;: &quot;used human labels&quot;,
+        &quot;time&quot;: &quot;&quot;,
+        &quot;condition&quot;: &quot;&quot;
+      },
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 28,
+      &quot;numeric_requirements&quot;: []
+    }
+  ],
+  &quot;unresolved&quot;: []
+}</pre><label><input type="checkbox" data-key="factual_predicates_not_fragments"> Part là factual predicate đầy đủ<br><small>AI: đạt — Một part used human labels giữ cả động từ và đối tượng.</small></label><br><label><input type="checkbox" data-key="all_requirements_preserved"> Giữ đủ yêu cầu, số liệu, đơn vị và quan hệ<br><small>AI: đạt — Không bỏ used hoặc human labels; không thêm số liệu.</small></label><br><label><input type="checkbox" data-key="quantifier_preserved"> Đúng lượng từ và population<br><small>AI: đạt — Atomic đúng với một study.</small></label><br><label><input type="checkbox" data-key="entity_metric_binding_correct"> Đúng chủ thể và metric<br><small>AI: đạt — study là chủ thể; used human labels là metric dạng predicate đầy đủ vì không có named property.</small></label><br><label><input type="checkbox" data-key="time_condition_scope_correct"> Đúng scope thời gian và điều kiện<br><small>AI: đạt — Không gán thêm time/condition.</small></label><br><label>Ghi chú người review (có gợi ý AI)<textarea>[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Một part used human labels giữ cả động từ và đối tượng. C2: Không bỏ used hoặc human labels; không thêm số liệu. C3: Atomic đúng với một study. C4: study là chủ thể; used human labels là metric dạng predicate đầy đủ vì không có named property. C5: Không gán thêm time/condition.</textarea></label></article><article data-id="decompose:004"><h2>decompose:004</h2><p>The new index caused the latency improvement.</p><pre>{
+  &quot;parts&quot;: [
+    {
+      &quot;quote&quot;: &quot;The new index caused the latency improvement.&quot;,
+      &quot;quantifier&quot;: &quot;atomic&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;new index&quot;,
+        &quot;metric&quot;: &quot;latency&quot;,
+        &quot;time&quot;: &quot;&quot;,
+        &quot;condition&quot;: &quot;&quot;
+      },
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 45,
+      &quot;numeric_requirements&quot;: []
+    }
+  ],
+  &quot;unresolved&quot;: []
+}</pre><label><input type="checkbox" data-key="factual_predicates_not_fragments"> Part là factual predicate đầy đủ<br><small>AI: đạt — Giữ nguyên causal predicate caused the latency improvement.</small></label><br><label><input type="checkbox" data-key="all_requirements_preserved"> Giữ đủ yêu cầu, số liệu, đơn vị và quan hệ<br><small>AI: đạt — Quan hệ caused nằm trong quote, không bị đổi thành đồng xuất hiện/correlation.</small></label><br><label><input type="checkbox" data-key="quantifier_preserved"> Đúng lượng từ và population<br><small>AI: đạt — Atomic đúng; không tạo population.</small></label><br><label><input type="checkbox" data-key="entity_metric_binding_correct"> Đúng chủ thể và metric<br><small>AI: đạt — new index và metric latency đúng, modifier new được giữ.</small></label><br><label><input type="checkbox" data-key="time_condition_scope_correct"> Đúng scope thời gian và điều kiện<br><small>AI: đạt — Không có restriction được tự thêm. Decomposition không chứng minh quan hệ causal là thật.</small></label><br><label>Ghi chú người review (có gợi ý AI)<textarea>[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Giữ nguyên causal predicate caused the latency improvement. C2: Quan hệ caused nằm trong quote, không bị đổi thành đồng xuất hiện/correlation. C3: Atomic đúng; không tạo population. C4: new index và metric latency đúng, modifier new được giữ. C5: Không có restriction được tự thêm. Decomposition không chứng minh quan hệ causal là thật.</textarea></label></article><article data-id="decompose:005"><h2>decompose:005</h2><p>All tasks improved after compression.</p><pre>{
+  &quot;parts&quot;: [
+    {
+      &quot;quote&quot;: &quot;All tasks improved after compression.&quot;,
+      &quot;quantifier&quot;: &quot;all&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;tasks&quot;,
+        &quot;metric&quot;: &quot;improved&quot;,
+        &quot;time&quot;: &quot;after compression&quot;,
+        &quot;condition&quot;: &quot;&quot;
+      },
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 37,
+      &quot;numeric_requirements&quot;: []
+    }
+  ],
+  &quot;unresolved&quot;: []
+}</pre><label><input type="checkbox" data-key="factual_predicates_not_fragments"> Part là factual predicate đầy đủ<br><small>AI: đạt — Predicate improved đầy đủ với population tasks.</small></label><br><label><input type="checkbox" data-key="all_requirements_preserved"> Giữ đủ yêu cầu, số liệu, đơn vị và quan hệ<br><small>AI: đạt — Không bịa improved accuracy khi claim chỉ nói improved.</small></label><br><label><input type="checkbox" data-key="quantifier_preserved"> Đúng lượng từ và population<br><small>AI: đạt — All ánh xạ all trên tasks.</small></label><br><label><input type="checkbox" data-key="entity_metric_binding_correct"> Đúng chủ thể và metric<br><small>AI: đạt — Entity tasks; improved là predicate source cung cấp, không suy đoán property.</small></label><br><label><input type="checkbox" data-key="time_condition_scope_correct"> Đúng scope thời gian và điều kiện<br><small>AI: đạt — after compression nằm đúng time và vẫn trong quote.</small></label><br><label>Ghi chú người review (có gợi ý AI)<textarea>[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Predicate improved đầy đủ với population tasks. C2: Không bịa improved accuracy khi claim chỉ nói improved. C3: All ánh xạ all trên tasks. C4: Entity tasks; improved là predicate source cung cấp, không suy đoán property. C5: after compression nằm đúng time và vẫn trong quote.</textarea></label></article><article data-id="decompose:006"><h2>decompose:006</h2><p>The report evaluated four models on two datasets.</p><pre>{
+  &quot;parts&quot;: [
+    {
+      &quot;quote&quot;: &quot;The report evaluated four models on two datasets.&quot;,
+      &quot;quantifier&quot;: &quot;atomic&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;report&quot;,
+        &quot;metric&quot;: &quot;evaluated four models&quot;,
+        &quot;time&quot;: &quot;&quot;,
+        &quot;condition&quot;: &quot;on two datasets&quot;
+      },
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 49,
+      &quot;numeric_requirements&quot;: [
+        {
+          &quot;start&quot;: 21,
+          &quot;end&quot;: 32,
+          &quot;quote&quot;: &quot;four models&quot;,
+          &quot;value&quot;: &quot;4&quot;,
+          &quot;unit&quot;: &quot;models&quot;,
+          &quot;kind&quot;: &quot;number&quot;
+        },
+        {
+          &quot;start&quot;: 36,
+          &quot;end&quot;: 48,
+          &quot;quote&quot;: &quot;two datasets&quot;,
+          &quot;value&quot;: &quot;2&quot;,
+          &quot;unit&quot;: &quot;datasets&quot;,
+          &quot;kind&quot;: &quot;number&quot;
+        }
+      ]
+    }
+  ],
+  &quot;unresolved&quot;: []
+}</pre><label><input type="checkbox" data-key="factual_predicates_not_fragments"> Part là factual predicate đầy đủ<br><small>AI: đạt — Một event evaluated four models on two datasets, không tách count thành fragment.</small></label><br><label><input type="checkbox" data-key="all_requirements_preserved"> Giữ đủ yêu cầu, số liệu, đơn vị và quan hệ<br><small>AI: đạt — Có đủ hai requirement: 4 models và 2 datasets, giữ object/unit riêng.</small></label><br><label><input type="checkbox" data-key="quantifier_preserved"> Đúng lượng từ và population<br><small>AI: đạt — Atomic; four/two là số lượng đối tượng, không phải ALL/SOME.</small></label><br><label><input type="checkbox" data-key="entity_metric_binding_correct"> Đúng chủ thể và metric<br><small>AI: đạt — report là entity; evaluated four models giữ quan hệ đánh giá; on two datasets là condition.</small></label><br><label><input type="checkbox" data-key="time_condition_scope_correct"> Đúng scope thời gian và điều kiện<br><small>AI: đạt — Không biến dataset condition thành time hoặc bỏ dataset requirement.</small></label><br><label>Ghi chú người review (có gợi ý AI)<textarea>[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Một event evaluated four models on two datasets, không tách count thành fragment. C2: Có đủ hai requirement: 4 models và 2 datasets, giữ object/unit riêng. C3: Atomic; four/two là số lượng đối tượng, không phải ALL/SOME. C4: report là entity; evaluated four models giữ quan hệ đánh giá; on two datasets là condition. C5: Không biến dataset condition thành time hoặc bỏ dataset requirement.</textarea></label></article><article data-id="decompose:007"><h2>decompose:007</h2><p>Training took 12 seconds.</p><pre>{
+  &quot;parts&quot;: [
+    {
+      &quot;quote&quot;: &quot;Training took 12 seconds.&quot;,
+      &quot;quantifier&quot;: &quot;atomic&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;Training&quot;,
+        &quot;metric&quot;: &quot;took 12 seconds&quot;,
+        &quot;time&quot;: &quot;&quot;,
+        &quot;condition&quot;: &quot;&quot;
+      },
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 25,
+      &quot;numeric_requirements&quot;: [
+        {
+          &quot;start&quot;: 14,
+          &quot;end&quot;: 24,
+          &quot;quote&quot;: &quot;12 seconds&quot;,
+          &quot;value&quot;: &quot;12&quot;,
+          &quot;unit&quot;: &quot;seconds&quot;,
+          &quot;kind&quot;: &quot;number&quot;
+        }
+      ]
+    }
+  ],
+  &quot;unresolved&quot;: []
+}</pre><label><input type="checkbox" data-key="factual_predicates_not_fragments"> Part là factual predicate đầy đủ<br><small>AI: đạt — Training took 12 seconds là một factual predicate đầy đủ.</small></label><br><label><input type="checkbox" data-key="all_requirements_preserved"> Giữ đủ yêu cầu, số liệu, đơn vị và quan hệ<br><small>AI: đạt — Giữ số 12 và unit seconds cùng quan hệ took.</small></label><br><label><input type="checkbox" data-key="quantifier_preserved"> Đúng lượng từ và population<br><small>AI: đạt — Atomic, không có lượng từ population.</small></label><br><label><input type="checkbox" data-key="entity_metric_binding_correct"> Đúng chủ thể và metric<br><small>AI: đạt — Training là entity; metric took 12 seconds đầy đủ, không phải took hoặc 12 seconds riêng.</small></label><br><label><input type="checkbox" data-key="time_condition_scope_correct"> Đúng scope thời gian và điều kiện<br><small>AI: đạt — 12 seconds là thời lượng được đo, không phải mốc time; time rỗng hợp lý.</small></label><br><label>Ghi chú người review (có gợi ý AI)<textarea>[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Training took 12 seconds là một factual predicate đầy đủ. C2: Giữ số 12 và unit seconds cùng quan hệ took. C3: Atomic, không có lượng từ population. C4: Training là entity; metric took 12 seconds đầy đủ, không phải took hoặc 12 seconds riêng. C5: 12 seconds là thời lượng được đo, không phải mốc time; time rỗng hợp lý.</textarea></label></article><article data-id="decompose:008"><h2>decompose:008</h2><p>The sample contained 240 documents.</p><pre>{
+  &quot;parts&quot;: [
+    {
+      &quot;quote&quot;: &quot;The sample contained 240 documents.&quot;,
+      &quot;quantifier&quot;: &quot;atomic&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;sample&quot;,
+        &quot;metric&quot;: &quot;contained 240 documents&quot;,
+        &quot;time&quot;: &quot;&quot;,
+        &quot;condition&quot;: &quot;&quot;
+      },
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 35,
+      &quot;numeric_requirements&quot;: [
+        {
+          &quot;start&quot;: 21,
+          &quot;end&quot;: 34,
+          &quot;quote&quot;: &quot;240 documents&quot;,
+          &quot;value&quot;: &quot;240&quot;,
+          &quot;unit&quot;: &quot;documents&quot;,
+          &quot;kind&quot;: &quot;number&quot;
+        }
+      ]
+    }
+  ],
+  &quot;unresolved&quot;: []
+}</pre><label><input type="checkbox" data-key="factual_predicates_not_fragments"> Part là factual predicate đầy đủ<br><small>AI: đạt — contained 240 documents giữ hành động và đối tượng trong một part.</small></label><br><label><input type="checkbox" data-key="all_requirements_preserved"> Giữ đủ yêu cầu, số liệu, đơn vị và quan hệ<br><small>AI: đạt — Giữ requirement 240 documents, không bỏ count hoặc object.</small></label><br><label><input type="checkbox" data-key="quantifier_preserved"> Đúng lượng từ và population<br><small>AI: đạt — Atomic; 240 không bị hiểu thành population quantifier.</small></label><br><label><input type="checkbox" data-key="entity_metric_binding_correct"> Đúng chủ thể và metric<br><small>AI: đạt — Entity sample; metric contained 240 documents đầy đủ.</small></label><br><label><input type="checkbox" data-key="time_condition_scope_correct"> Đúng scope thời gian và điều kiện<br><small>AI: đạt — Không tự thêm điều kiện hay thời gian.</small></label><br><label>Ghi chú người review (có gợi ý AI)<textarea>[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: contained 240 documents giữ hành động và đối tượng trong một part. C2: Giữ requirement 240 documents, không bỏ count hoặc object. C3: Atomic; 240 không bị hiểu thành population quantifier. C4: Entity sample; metric contained 240 documents đầy đủ. C5: Không tự thêm điều kiện hay thời gian.</textarea></label></article><article data-id="decompose:009"><h2>decompose:009</h2><p>On the tested dataset, the method improved recall.</p><pre>{
+  &quot;parts&quot;: [
+    {
+      &quot;quote&quot;: &quot;On the tested dataset, the method improved recall.&quot;,
+      &quot;quantifier&quot;: &quot;atomic&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;method&quot;,
+        &quot;metric&quot;: &quot;recall&quot;,
+        &quot;time&quot;: &quot;&quot;,
+        &quot;condition&quot;: &quot;On the tested dataset&quot;
+      },
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 50,
+      &quot;numeric_requirements&quot;: []
+    }
+  ],
+  &quot;unresolved&quot;: []
+}</pre><label><input type="checkbox" data-key="factual_predicates_not_fragments"> Part là factual predicate đầy đủ<br><small>AI: đạt — improved recall là predicate của method, giữ nguyên leading restriction.</small></label><br><label><input type="checkbox" data-key="all_requirements_preserved"> Giữ đủ yêu cầu, số liệu, đơn vị và quan hệ<br><small>AI: đạt — Giữ hướng improved và property recall.</small></label><br><label><input type="checkbox" data-key="quantifier_preserved"> Đúng lượng từ và population<br><small>AI: đạt — Atomic, không suy rộng sang mọi dataset.</small></label><br><label><input type="checkbox" data-key="entity_metric_binding_correct"> Đúng chủ thể và metric<br><small>AI: đạt — Entity method, metric recall đúng.</small></label><br><label><input type="checkbox" data-key="time_condition_scope_correct"> Đúng scope thời gian và điều kiện<br><small>AI: đạt — On the tested dataset là condition; không đòi kết quả của dataset khác.</small></label><br><label>Ghi chú người review (có gợi ý AI)<textarea>[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: improved recall là predicate của method, giữ nguyên leading restriction. C2: Giữ hướng improved và property recall. C3: Atomic, không suy rộng sang mọi dataset. C4: Entity method, metric recall đúng. C5: On the tested dataset là condition; không đòi kết quả của dataset khác.</textarea></label></article><article data-id="decompose:010"><h2>decompose:010</h2><p>Every validation shard improved recall after the revision.</p><pre>{
+  &quot;parts&quot;: [
+    {
+      &quot;quote&quot;: &quot;Every validation shard improved recall after the revision.&quot;,
+      &quot;quantifier&quot;: &quot;all&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;validation shard&quot;,
+        &quot;metric&quot;: &quot;recall&quot;,
+        &quot;time&quot;: &quot;after the revision&quot;,
+        &quot;condition&quot;: &quot;&quot;
+      },
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 58,
+      &quot;numeric_requirements&quot;: []
+    }
+  ],
+  &quot;unresolved&quot;: []
+}</pre><label><input type="checkbox" data-key="factual_predicates_not_fragments"> Part là factual predicate đầy đủ<br><small>AI: đạt — Mỗi validation shard improved recall là một predicate đầy đủ.</small></label><br><label><input type="checkbox" data-key="all_requirements_preserved"> Giữ đủ yêu cầu, số liệu, đơn vị và quan hệ<br><small>AI: đạt — Giữ hướng improved và restriction after the revision.</small></label><br><label><input type="checkbox" data-key="quantifier_preserved"> Đúng lượng từ và population<br><small>AI: đạt — Every ánh xạ all; population validation shard giữ modifier validation.</small></label><br><label><input type="checkbox" data-key="entity_metric_binding_correct"> Đúng chủ thể và metric<br><small>AI: đạt — Entity validation shard; metric recall không kèm improved.</small></label><br><label><input type="checkbox" data-key="time_condition_scope_correct"> Đúng scope thời gian và điều kiện<br><small>AI: đạt — after the revision nằm trong time của đúng predicate.</small></label><br><label>Ghi chú người review (có gợi ý AI)<textarea>[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Mỗi validation shard improved recall là một predicate đầy đủ. C2: Giữ hướng improved và restriction after the revision. C3: Every ánh xạ all; population validation shard giữ modifier validation. C4: Entity validation shard; metric recall không kèm improved. C5: after the revision nằm trong time của đúng predicate.</textarea></label></article><article data-id="decompose:011"><h2>decompose:011</h2><p>At least one audited cache node reduced response time after the patch.</p><pre>{
+  &quot;parts&quot;: [
+    {
+      &quot;quote&quot;: &quot;At least one audited cache node reduced response time after the patch.&quot;,
+      &quot;quantifier&quot;: &quot;some&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;audited cache node&quot;,
+        &quot;metric&quot;: &quot;response time&quot;,
+        &quot;time&quot;: &quot;after the patch&quot;,
+        &quot;condition&quot;: &quot;&quot;
+      },
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 70,
+      &quot;numeric_requirements&quot;: []
+    }
+  ],
+  &quot;unresolved&quot;: []
+}</pre><label><input type="checkbox" data-key="factual_predicates_not_fragments"> Part là factual predicate đầy đủ<br><small>AI: đạt — reduced response time đầy đủ trên audited cache node.</small></label><br><label><input type="checkbox" data-key="all_requirements_preserved"> Giữ đủ yêu cầu, số liệu, đơn vị và quan hệ<br><small>AI: đạt — Giữ at least one, reduced, response time và after the patch.</small></label><br><label><input type="checkbox" data-key="quantifier_preserved"> Đúng lượng từ và population<br><small>AI: đạt — At least one ánh xạ some; giữ đủ audited cache node.</small></label><br><label><input type="checkbox" data-key="entity_metric_binding_correct"> Đúng chủ thể và metric<br><small>AI: đạt — Entity audited cache node; metric response time giữ cả cụm.</small></label><br><label><input type="checkbox" data-key="time_condition_scope_correct"> Đúng scope thời gian và điều kiện<br><small>AI: đạt — after the patch là time; không thêm điều kiện khác.</small></label><br><label>Ghi chú người review (có gợi ý AI)<textarea>[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: reduced response time đầy đủ trên audited cache node. C2: Giữ at least one, reduced, response time và after the patch. C3: At least one ánh xạ some; giữ đủ audited cache node. C4: Entity audited cache node; metric response time giữ cả cụm. C5: after the patch là time; không thêm điều kiện khác.</textarea></label></article><article data-id="decompose:012"><h2>decompose:012</h2><p>None of the monitored pumps leaked during the overnight test.</p><pre>{
+  &quot;parts&quot;: [
+    {
+      &quot;quote&quot;: &quot;None of the monitored pumps leaked during the overnight test.&quot;,
+      &quot;quantifier&quot;: &quot;none&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;monitored pumps&quot;,
+        &quot;metric&quot;: &quot;leaked&quot;,
+        &quot;time&quot;: &quot;during the overnight test&quot;,
+        &quot;condition&quot;: &quot;&quot;
+      },
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 61,
+      &quot;numeric_requirements&quot;: []
+    }
+  ],
+  &quot;unresolved&quot;: []
+}</pre><label><input type="checkbox" data-key="factual_predicates_not_fragments"> Part là factual predicate đầy đủ<br><small>AI: đạt — Predicate leaked được giữ, quantifier none mang phủ định.</small></label><br><label><input type="checkbox" data-key="all_requirements_preserved"> Giữ đủ yêu cầu, số liệu, đơn vị và quan hệ<br><small>AI: đạt — Giữ monitored và during the overnight test; không tạo số liệu.</small></label><br><label><input type="checkbox" data-key="quantifier_preserved"> Đúng lượng từ và population<br><small>AI: đạt — None of ánh xạ none trên monitored pumps.</small></label><br><label><input type="checkbox" data-key="entity_metric_binding_correct"> Đúng chủ thể và metric<br><small>AI: đạt — Entity monitored pumps; metric leaked là predicate dương trước áp lượng từ none.</small></label><br><label><input type="checkbox" data-key="time_condition_scope_correct"> Đúng scope thời gian và điều kiện<br><small>AI: đạt — during the overnight test là restriction thời gian.</small></label><br><label>Ghi chú người review (có gợi ý AI)<textarea>[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Predicate leaked được giữ, quantifier none mang phủ định. C2: Giữ monitored và during the overnight test; không tạo số liệu. C3: None of ánh xạ none trên monitored pumps. C4: Entity monitored pumps; metric leaked là predicate dương trước áp lượng từ none. C5: during the overnight test là restriction thời gian.</textarea></label></article><article data-id="decompose:013"><h2>decompose:013</h2><p>The North gateway reduced its error rate after calibration.</p><pre>{
+  &quot;parts&quot;: [
+    {
+      &quot;quote&quot;: &quot;The North gateway reduced its error rate after calibration.&quot;,
+      &quot;quantifier&quot;: &quot;atomic&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;North gateway&quot;,
+        &quot;metric&quot;: &quot;error rate&quot;,
+        &quot;time&quot;: &quot;after calibration&quot;,
+        &quot;condition&quot;: &quot;&quot;
+      },
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 59,
+      &quot;numeric_requirements&quot;: []
+    }
+  ],
+  &quot;unresolved&quot;: []
+}</pre><label><input type="checkbox" data-key="factual_predicates_not_fragments"> Part là factual predicate đầy đủ<br><small>AI: đạt — North gateway reduced its error rate là factual predicate đầy đủ.</small></label><br><label><input type="checkbox" data-key="all_requirements_preserved"> Giữ đủ yêu cầu, số liệu, đơn vị và quan hệ<br><small>AI: đạt — Giữ quan hệ reduced, định danh North và after calibration.</small></label><br><label><input type="checkbox" data-key="quantifier_preserved"> Đúng lượng từ và population<br><small>AI: đạt — Atomic, không mở rộng sang gateway khác.</small></label><br><label><input type="checkbox" data-key="entity_metric_binding_correct"> Đúng chủ thể và metric<br><small>AI: đạt — Entity North gateway; metric error rate không lẫn its/reduced.</small></label><br><label><input type="checkbox" data-key="time_condition_scope_correct"> Đúng scope thời gian và điều kiện<br><small>AI: đạt — after calibration là time của predicate reduced.</small></label><br><label>Ghi chú người review (có gợi ý AI)<textarea>[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: North gateway reduced its error rate là factual predicate đầy đủ. C2: Giữ quan hệ reduced, định danh North và after calibration. C3: Atomic, không mở rộng sang gateway khác. C4: Entity North gateway; metric error rate không lẫn its/reduced. C5: after calibration là time của predicate reduced.</textarea></label></article><article data-id="decompose:014"><h2>decompose:014</h2><p>Every weekly trial conducted in May improved throughput.</p><pre>{
+  &quot;parts&quot;: [
+    {
+      &quot;quote&quot;: &quot;Every weekly trial conducted in May improved throughput.&quot;,
+      &quot;quantifier&quot;: &quot;all&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;weekly trial&quot;,
+        &quot;metric&quot;: &quot;throughput&quot;,
+        &quot;time&quot;: &quot;&quot;,
+        &quot;condition&quot;: &quot;in May&quot;
+      },
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 56,
+      &quot;numeric_requirements&quot;: []
+    }
+  ],
+  &quot;unresolved&quot;: []
+}</pre><label><input type="checkbox" data-key="factual_predicates_not_fragments"> Part là factual predicate đầy đủ<br><small>AI: đạt — weekly trial conducted in May improved throughput là một predicate, không tách modifier thành part riêng.</small></label><br><label><input type="checkbox" data-key="all_requirements_preserved"> Giữ đủ yêu cầu, số liệu, đơn vị và quan hệ<br><small>AI: đạt — Giữ nguyên conducted in May trong quote, cùng hướng improved và property throughput.</small></label><br><label><input type="checkbox" data-key="quantifier_preserved"> Đúng lượng từ và population<br><small>AI: đạt — Every ánh xạ all; population là weekly trial được lọc bởi conducted in May.</small></label><br><label><input type="checkbox" data-key="entity_metric_binding_correct"> Đúng chủ thể và metric<br><small>AI: đạt — Entity weekly trial; metric throughput đúng, không còn improved throughput.</small></label><br><label><input type="checkbox" data-key="time_condition_scope_correct"> Đúng scope thời gian và điều kiện<br><small>AI: đạt — condition=in May lọc trial được tiến hành trong May; time rỗng không khẳng định improvement xảy ra trong May. Phải đọc cùng quote; schema chưa có restriction-owner riêng.</small></label><br><label>Ghi chú người review (có gợi ý AI)<textarea>[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: weekly trial conducted in May improved throughput là một predicate, không tách modifier thành part riêng. C2: Giữ nguyên conducted in May trong quote, cùng hướng improved và property throughput. C3: Every ánh xạ all; population là weekly trial được lọc bởi conducted in May. C4: Entity weekly trial; metric throughput đúng, không còn improved throughput. C5: condition=in May lọc trial được tiến hành trong May; time rỗng không khẳng định improvement xảy ra trong May. Phải đọc cùng quote; schema chưa có restriction-owner riêng.</textarea></label></article><article data-id="decompose:015"><h2>decompose:015</h2><p>The patch reduced median request latency.</p><pre>{
+  &quot;parts&quot;: [
+    {
+      &quot;quote&quot;: &quot;The patch reduced median request latency.&quot;,
+      &quot;quantifier&quot;: &quot;atomic&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;patch&quot;,
+        &quot;metric&quot;: &quot;median request latency&quot;,
+        &quot;time&quot;: &quot;&quot;,
+        &quot;condition&quot;: &quot;&quot;
+      },
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 41,
+      &quot;numeric_requirements&quot;: []
+    }
+  ],
+  &quot;unresolved&quot;: []
+}</pre><label><input type="checkbox" data-key="factual_predicates_not_fragments"> Part là factual predicate đầy đủ<br><small>AI: đạt — patch reduced median request latency là predicate đầy đủ.</small></label><br><label><input type="checkbox" data-key="all_requirements_preserved"> Giữ đủ yêu cầu, số liệu, đơn vị và quan hệ<br><small>AI: đạt — Giữ cả median, request và hướng reduced.</small></label><br><label><input type="checkbox" data-key="quantifier_preserved"> Đúng lượng từ và population<br><small>AI: đạt — Atomic, không tạo population.</small></label><br><label><input type="checkbox" data-key="entity_metric_binding_correct"> Đúng chủ thể và metric<br><small>AI: đạt — Entity patch; metric median request latency không bị rút thành latency.</small></label><br><label><input type="checkbox" data-key="time_condition_scope_correct"> Đúng scope thời gian và điều kiện<br><small>AI: đạt — Không tự thêm time/condition.</small></label><br><label>Ghi chú người review (có gợi ý AI)<textarea>[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: patch reduced median request latency là predicate đầy đủ. C2: Giữ cả median, request và hướng reduced. C3: Atomic, không tạo population. C4: Entity patch; metric median request latency không bị rút thành latency. C5: Không tự thêm time/condition.</textarea></label></article><article data-id="decompose:016"><h2>decompose:016</h2><p>The configuration change increased precision.</p><pre>{
+  &quot;parts&quot;: [
+    {
+      &quot;quote&quot;: &quot;The configuration change increased precision.&quot;,
+      &quot;quantifier&quot;: &quot;atomic&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;configuration change&quot;,
+        &quot;metric&quot;: &quot;precision&quot;,
+        &quot;time&quot;: &quot;&quot;,
+        &quot;condition&quot;: &quot;&quot;
+      },
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 45,
+      &quot;numeric_requirements&quot;: []
+    }
+  ],
+  &quot;unresolved&quot;: []
+}</pre><label><input type="checkbox" data-key="factual_predicates_not_fragments"> Part là factual predicate đầy đủ<br><small>AI: đạt — configuration change increased precision là predicate đầy đủ.</small></label><br><label><input type="checkbox" data-key="all_requirements_preserved"> Giữ đủ yêu cầu, số liệu, đơn vị và quan hệ<br><small>AI: đạt — Giữ quan hệ increased trong quote.</small></label><br><label><input type="checkbox" data-key="quantifier_preserved"> Đúng lượng từ và population<br><small>AI: đạt — Atomic, không thêm lượng từ.</small></label><br><label><input type="checkbox" data-key="entity_metric_binding_correct"> Đúng chủ thể và metric<br><small>AI: đạt — Entity configuration change giữ đủ định danh; metric precision không lẫn change trong subject.</small></label><br><label><input type="checkbox" data-key="time_condition_scope_correct"> Đúng scope thời gian và điều kiện<br><small>AI: đạt — Không tự thêm time/condition.</small></label><br><label>Ghi chú người review (có gợi ý AI)<textarea>[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: configuration change increased precision là predicate đầy đủ. C2: Giữ quan hệ increased trong quote. C3: Atomic, không thêm lượng từ. C4: Entity configuration change giữ đủ định danh; metric precision không lẫn change trong subject. C5: Không tự thêm time/condition.</textarea></label></article><article data-id="decompose:017"><h2>decompose:017</h2><p>After tuning, the extractor decreased memory use and increased token recall.</p><pre>{
+  &quot;parts&quot;: [
+    {
+      &quot;quote&quot;: &quot;After tuning, the extractor decreased memory use&quot;,
+      &quot;quantifier&quot;: &quot;atomic&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;extractor&quot;,
+        &quot;metric&quot;: &quot;memory use&quot;,
+        &quot;time&quot;: &quot;After tuning&quot;,
+        &quot;condition&quot;: &quot;&quot;
+      },
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 48,
+      &quot;numeric_requirements&quot;: []
+    },
+    {
+      &quot;quote&quot;: &quot;and increased token recall.&quot;,
+      &quot;quantifier&quot;: &quot;atomic&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;extractor&quot;,
+        &quot;metric&quot;: &quot;token recall&quot;,
+        &quot;time&quot;: &quot;After tuning&quot;,
+        &quot;condition&quot;: &quot;&quot;
+      },
+      &quot;start&quot;: 49,
+      &quot;end&quot;: 76,
+      &quot;numeric_requirements&quot;: []
+    }
+  ],
+  &quot;unresolved&quot;: []
+}</pre><label><input type="checkbox" data-key="factual_predicates_not_fragments"> Part là factual predicate đầy đủ<br><small>AI: đạt — Tách decreased memory use và increased token recall; part sau kế thừa extractor.</small></label><br><label><input type="checkbox" data-key="all_requirements_preserved"> Giữ đủ yêu cầu, số liệu, đơn vị và quan hệ<br><small>AI: đạt — Giữ hai hướng đối nhau và đầy đủ memory use/token recall.</small></label><br><label><input type="checkbox" data-key="quantifier_preserved"> Đúng lượng từ và population<br><small>AI: đạt — Hai part atomic; không thêm lượng từ population.</small></label><br><label><input type="checkbox" data-key="entity_metric_binding_correct"> Đúng chủ thể và metric<br><small>AI: đạt — Cả hai entity extractor, hai metric riêng đúng vế.</small></label><br><label><input type="checkbox" data-key="time_condition_scope_correct"> Đúng scope thời gian và điều kiện<br><small>AI: đạt — After tuning là prefix chung trước dấu phẩy, nên kế thừa time cho cả hai part là đúng.</small></label><br><label>Ghi chú người review (có gợi ý AI)<textarea>[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Tách decreased memory use và increased token recall; part sau kế thừa extractor. C2: Giữ hai hướng đối nhau và đầy đủ memory use/token recall. C3: Hai part atomic; không thêm lượng từ population. C4: Cả hai entity extractor, hai metric riêng đúng vế. C5: After tuning là prefix chung trước dấu phẩy, nên kế thừa time cho cả hai part là đúng.</textarea></label></article><article data-id="decompose:018"><h2>decompose:018</h2><p>Every batch in the low-temperature group gained yield after the update.</p><pre>{
+  &quot;parts&quot;: [
+    {
+      &quot;quote&quot;: &quot;Every batch in the low-temperature group gained yield after the update.&quot;,
+      &quot;quantifier&quot;: &quot;all&quot;,
+      &quot;scope&quot;: {
+        &quot;entity&quot;: &quot;batch&quot;,
+        &quot;metric&quot;: &quot;yield&quot;,
+        &quot;time&quot;: &quot;after the update&quot;,
+        &quot;condition&quot;: &quot;in the low-temperature group&quot;
+      },
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 71,
+      &quot;numeric_requirements&quot;: []
+    }
+  ],
+  &quot;unresolved&quot;: []
+}</pre><label><input type="checkbox" data-key="factual_predicates_not_fragments"> Part là factual predicate đầy đủ<br><small>AI: đạt — batch gained yield là predicate đầy đủ kèm restriction population và time.</small></label><br><label><input type="checkbox" data-key="all_requirements_preserved"> Giữ đủ yêu cầu, số liệu, đơn vị và quan hệ<br><small>AI: đạt — Giữ gained, yield, low-temperature group và after the update.</small></label><br><label><input type="checkbox" data-key="quantifier_preserved"> Đúng lượng từ và population<br><small>AI: đạt — Every ánh xạ all; entity batch kết hợp condition in the low-temperature group giới hạn đúng population.</small></label><br><label><input type="checkbox" data-key="entity_metric_binding_correct"> Đúng chủ thể và metric<br><small>AI: đạt — Entity batch; metric yield không kèm gained.</small></label><br><label><input type="checkbox" data-key="time_condition_scope_correct"> Đúng scope thời gian và điều kiện<br><small>AI: đạt — after the update là time; low-temperature group là condition, không tráo hai loại restriction.</small></label><br><label>Ghi chú người review (có gợi ý AI)<textarea>[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: batch gained yield là predicate đầy đủ kèm restriction population và time. C2: Giữ gained, yield, low-temperature group và after the update. C3: Every ánh xạ all; entity batch kết hợp condition in the low-temperature group giới hạn đúng population. C4: Entity batch; metric yield không kèm gained. C5: after the update là time; low-temperature group là condition, không tráo hai loại restriction.</textarea></label></article><button id="save">Xuất semantic-review.json sau xác nhận human</button><script>const seed={"run_id": "20261020T145035Z-d525a354", "candidate": "atomic-verifier-constrained-v8-cellfix10", "criteria_sha256": "2edd14d0e7fb728b3ba6eb99923ade128573ed2938f55bfeb2d1a0e4a06f8cda", "predictions_sha256": "67859c961c674260fe66bca7ef46caecf6dfb743d973d5f0612b59919f52052f", "reviewer": "", "reviewer_kind": "human", "review_completed": false, "human_review_completed": false, "review_scope": "decomposition rubric only; not claim truth or model label accuracy", "reviewed_on": "2026-10-20", "cases": [{"example_id": "decompose:001", "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.", "decomposition": {"parts": [{"quote": "Model Juniper uses 25% less memory", "quantifier": "atomic", "scope": {"entity": "Model Juniper", "metric": "memory", "time": "", "condition": ""}, "start": 0, "end": 34, "numeric_requirements": [{"start": 19, "end": 22, "quote": "25%", "value": "25", "unit": "%", "kind": "percent"}]}, {"quote": "and retains 94% accuracy.", "quantifier": "atomic", "scope": {"entity": "Model Juniper", "metric": "accuracy", "time": "", "condition": ""}, "start": 35, "end": 60, "numeric_requirements": [{"start": 12, "end": 15, "quote": "94%", "value": "94", "unit": "%", "kind": "percent"}]}], "unresolved": []}, "judgments": {"factual_predicates_not_fragments": null, "all_requirements_preserved": null, "quantifier_preserved": null, "entity_metric_binding_correct": null, "time_condition_scope_correct": null}, "criterion_notes": {"factual_predicates_not_fragments": "Tách đúng hai predicate uses less memory và retains accuracy; vế sau kế thừa chủ thể.", "all_requirements_preserved": "Giữ 25%, 94%, quan hệ less và retains trong hai quote tương ứng.", "quantifier_preserved": "Cả hai part atomic; không thêm lượng từ ALL/SOME.", "entity_metric_binding_correct": "Cùng Model Juniper; memory và accuracy tách riêng, không hoán đổi số liệu.", "time_condition_scope_correct": "Claim không nêu time/condition; các trường này rỗng, không tự bổ sung."}, "notes": "[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Tách đúng hai predicate uses less memory và retains accuracy; vế sau kế thừa chủ thể. C2: Giữ 25%, 94%, quan hệ less và retains trong hai quote tương ứng. C3: Cả hai part atomic; không thêm lượng từ ALL/SOME. C4: Cùng Model Juniper; memory và accuracy tách riêng, không hoán đổi số liệu. C5: Claim không nêu time/condition; các trường này rỗng, không tự bổ sung."}, {"example_id": "decompose:002", "claim": "Model Juniper retains 94% accuracy.", "decomposition": {"parts": [{"quote": "Model Juniper retains 94% accuracy.", "quantifier": "atomic", "scope": {"entity": "Model Juniper", "metric": "accuracy", "time": "", "condition": ""}, "start": 0, "end": 35, "numeric_requirements": [{"start": 22, "end": 25, "quote": "94%", "value": "94", "unit": "%", "kind": "percent"}]}], "unresolved": []}, "judgments": {"factual_predicates_not_fragments": null, "all_requirements_preserved": null, "quantifier_preserved": null, "entity_metric_binding_correct": null, "time_condition_scope_correct": null}, "criterion_notes": {"factual_predicates_not_fragments": "Một part retains 94% accuracy đầy đủ.", "all_requirements_preserved": "Giữ nguyên retains và requirement 94%.", "quantifier_preserved": "Atomic, không có population lượng hóa.", "entity_metric_binding_correct": "Entity Model Juniper; metric accuracy.", "time_condition_scope_correct": "Không có restriction thời gian/điều kiện được thêm."}, "notes": "[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Một part retains 94% accuracy đầy đủ. C2: Giữ nguyên retains và requirement 94%. C3: Atomic, không có population lượng hóa. C4: Entity Model Juniper; metric accuracy. C5: Không có restriction thời gian/điều kiện được thêm."}, {"example_id": "decompose:003", "claim": "The study used human labels.", "decomposition": {"parts": [{"quote": "The study used human labels.", "quantifier": "atomic", "scope": {"entity": "study", "metric": "used human labels", "time": "", "condition": ""}, "start": 0, "end": 28, "numeric_requirements": []}], "unresolved": []}, "judgments": {"factual_predicates_not_fragments": null, "all_requirements_preserved": null, "quantifier_preserved": null, "entity_metric_binding_correct": null, "time_condition_scope_correct": null}, "criterion_notes": {"factual_predicates_not_fragments": "Một part used human labels giữ cả động từ và đối tượng.", "all_requirements_preserved": "Không bỏ used hoặc human labels; không thêm số liệu.", "quantifier_preserved": "Atomic đúng với một study.", "entity_metric_binding_correct": "study là chủ thể; used human labels là metric dạng predicate đầy đủ vì không có named property.", "time_condition_scope_correct": "Không gán thêm time/condition."}, "notes": "[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Một part used human labels giữ cả động từ và đối tượng. C2: Không bỏ used hoặc human labels; không thêm số liệu. C3: Atomic đúng với một study. C4: study là chủ thể; used human labels là metric dạng predicate đầy đủ vì không có named property. C5: Không gán thêm time/condition."}, {"example_id": "decompose:004", "claim": "The new index caused the latency improvement.", "decomposition": {"parts": [{"quote": "The new index caused the latency improvement.", "quantifier": "atomic", "scope": {"entity": "new index", "metric": "latency", "time": "", "condition": ""}, "start": 0, "end": 45, "numeric_requirements": []}], "unresolved": []}, "judgments": {"factual_predicates_not_fragments": null, "all_requirements_preserved": null, "quantifier_preserved": null, "entity_metric_binding_correct": null, "time_condition_scope_correct": null}, "criterion_notes": {"factual_predicates_not_fragments": "Giữ nguyên causal predicate caused the latency improvement.", "all_requirements_preserved": "Quan hệ caused nằm trong quote, không bị đổi thành đồng xuất hiện/correlation.", "quantifier_preserved": "Atomic đúng; không tạo population.", "entity_metric_binding_correct": "new index và metric latency đúng, modifier new được giữ.", "time_condition_scope_correct": "Không có restriction được tự thêm. Decomposition không chứng minh quan hệ causal là thật."}, "notes": "[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Giữ nguyên causal predicate caused the latency improvement. C2: Quan hệ caused nằm trong quote, không bị đổi thành đồng xuất hiện/correlation. C3: Atomic đúng; không tạo population. C4: new index và metric latency đúng, modifier new được giữ. C5: Không có restriction được tự thêm. Decomposition không chứng minh quan hệ causal là thật."}, {"example_id": "decompose:005", "claim": "All tasks improved after compression.", "decomposition": {"parts": [{"quote": "All tasks improved after compression.", "quantifier": "all", "scope": {"entity": "tasks", "metric": "improved", "time": "after compression", "condition": ""}, "start": 0, "end": 37, "numeric_requirements": []}], "unresolved": []}, "judgments": {"factual_predicates_not_fragments": null, "all_requirements_preserved": null, "quantifier_preserved": null, "entity_metric_binding_correct": null, "time_condition_scope_correct": null}, "criterion_notes": {"factual_predicates_not_fragments": "Predicate improved đầy đủ với population tasks.", "all_requirements_preserved": "Không bịa improved accuracy khi claim chỉ nói improved.", "quantifier_preserved": "All ánh xạ all trên tasks.", "entity_metric_binding_correct": "Entity tasks; improved là predicate source cung cấp, không suy đoán property.", "time_condition_scope_correct": "after compression nằm đúng time và vẫn trong quote."}, "notes": "[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Predicate improved đầy đủ với population tasks. C2: Không bịa improved accuracy khi claim chỉ nói improved. C3: All ánh xạ all trên tasks. C4: Entity tasks; improved là predicate source cung cấp, không suy đoán property. C5: after compression nằm đúng time và vẫn trong quote."}, {"example_id": "decompose:006", "claim": "The report evaluated four models on two datasets.", "decomposition": {"parts": [{"quote": "The report evaluated four models on two datasets.", "quantifier": "atomic", "scope": {"entity": "report", "metric": "evaluated four models", "time": "", "condition": "on two datasets"}, "start": 0, "end": 49, "numeric_requirements": [{"start": 21, "end": 32, "quote": "four models", "value": "4", "unit": "models", "kind": "number"}, {"start": 36, "end": 48, "quote": "two datasets", "value": "2", "unit": "datasets", "kind": "number"}]}], "unresolved": []}, "judgments": {"factual_predicates_not_fragments": null, "all_requirements_preserved": null, "quantifier_preserved": null, "entity_metric_binding_correct": null, "time_condition_scope_correct": null}, "criterion_notes": {"factual_predicates_not_fragments": "Một event evaluated four models on two datasets, không tách count thành fragment.", "all_requirements_preserved": "Có đủ hai requirement: 4 models và 2 datasets, giữ object/unit riêng.", "quantifier_preserved": "Atomic; four/two là số lượng đối tượng, không phải ALL/SOME.", "entity_metric_binding_correct": "report là entity; evaluated four models giữ quan hệ đánh giá; on two datasets là condition.", "time_condition_scope_correct": "Không biến dataset condition thành time hoặc bỏ dataset requirement."}, "notes": "[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Một event evaluated four models on two datasets, không tách count thành fragment. C2: Có đủ hai requirement: 4 models và 2 datasets, giữ object/unit riêng. C3: Atomic; four/two là số lượng đối tượng, không phải ALL/SOME. C4: report là entity; evaluated four models giữ quan hệ đánh giá; on two datasets là condition. C5: Không biến dataset condition thành time hoặc bỏ dataset requirement."}, {"example_id": "decompose:007", "claim": "Training took 12 seconds.", "decomposition": {"parts": [{"quote": "Training took 12 seconds.", "quantifier": "atomic", "scope": {"entity": "Training", "metric": "took 12 seconds", "time": "", "condition": ""}, "start": 0, "end": 25, "numeric_requirements": [{"start": 14, "end": 24, "quote": "12 seconds", "value": "12", "unit": "seconds", "kind": "number"}]}], "unresolved": []}, "judgments": {"factual_predicates_not_fragments": null, "all_requirements_preserved": null, "quantifier_preserved": null, "entity_metric_binding_correct": null, "time_condition_scope_correct": null}, "criterion_notes": {"factual_predicates_not_fragments": "Training took 12 seconds là một factual predicate đầy đủ.", "all_requirements_preserved": "Giữ số 12 và unit seconds cùng quan hệ took.", "quantifier_preserved": "Atomic, không có lượng từ population.", "entity_metric_binding_correct": "Training là entity; metric took 12 seconds đầy đủ, không phải took hoặc 12 seconds riêng.", "time_condition_scope_correct": "12 seconds là thời lượng được đo, không phải mốc time; time rỗng hợp lý."}, "notes": "[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Training took 12 seconds là một factual predicate đầy đủ. C2: Giữ số 12 và unit seconds cùng quan hệ took. C3: Atomic, không có lượng từ population. C4: Training là entity; metric took 12 seconds đầy đủ, không phải took hoặc 12 seconds riêng. C5: 12 seconds là thời lượng được đo, không phải mốc time; time rỗng hợp lý."}, {"example_id": "decompose:008", "claim": "The sample contained 240 documents.", "decomposition": {"parts": [{"quote": "The sample contained 240 documents.", "quantifier": "atomic", "scope": {"entity": "sample", "metric": "contained 240 documents", "time": "", "condition": ""}, "start": 0, "end": 35, "numeric_requirements": [{"start": 21, "end": 34, "quote": "240 documents", "value": "240", "unit": "documents", "kind": "number"}]}], "unresolved": []}, "judgments": {"factual_predicates_not_fragments": null, "all_requirements_preserved": null, "quantifier_preserved": null, "entity_metric_binding_correct": null, "time_condition_scope_correct": null}, "criterion_notes": {"factual_predicates_not_fragments": "contained 240 documents giữ hành động và đối tượng trong một part.", "all_requirements_preserved": "Giữ requirement 240 documents, không bỏ count hoặc object.", "quantifier_preserved": "Atomic; 240 không bị hiểu thành population quantifier.", "entity_metric_binding_correct": "Entity sample; metric contained 240 documents đầy đủ.", "time_condition_scope_correct": "Không tự thêm điều kiện hay thời gian."}, "notes": "[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: contained 240 documents giữ hành động và đối tượng trong một part. C2: Giữ requirement 240 documents, không bỏ count hoặc object. C3: Atomic; 240 không bị hiểu thành population quantifier. C4: Entity sample; metric contained 240 documents đầy đủ. C5: Không tự thêm điều kiện hay thời gian."}, {"example_id": "decompose:009", "claim": "On the tested dataset, the method improved recall.", "decomposition": {"parts": [{"quote": "On the tested dataset, the method improved recall.", "quantifier": "atomic", "scope": {"entity": "method", "metric": "recall", "time": "", "condition": "On the tested dataset"}, "start": 0, "end": 50, "numeric_requirements": []}], "unresolved": []}, "judgments": {"factual_predicates_not_fragments": null, "all_requirements_preserved": null, "quantifier_preserved": null, "entity_metric_binding_correct": null, "time_condition_scope_correct": null}, "criterion_notes": {"factual_predicates_not_fragments": "improved recall là predicate của method, giữ nguyên leading restriction.", "all_requirements_preserved": "Giữ hướng improved và property recall.", "quantifier_preserved": "Atomic, không suy rộng sang mọi dataset.", "entity_metric_binding_correct": "Entity method, metric recall đúng.", "time_condition_scope_correct": "On the tested dataset là condition; không đòi kết quả của dataset khác."}, "notes": "[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: improved recall là predicate của method, giữ nguyên leading restriction. C2: Giữ hướng improved và property recall. C3: Atomic, không suy rộng sang mọi dataset. C4: Entity method, metric recall đúng. C5: On the tested dataset là condition; không đòi kết quả của dataset khác."}, {"example_id": "decompose:010", "claim": "Every validation shard improved recall after the revision.", "decomposition": {"parts": [{"quote": "Every validation shard improved recall after the revision.", "quantifier": "all", "scope": {"entity": "validation shard", "metric": "recall", "time": "after the revision", "condition": ""}, "start": 0, "end": 58, "numeric_requirements": []}], "unresolved": []}, "judgments": {"factual_predicates_not_fragments": null, "all_requirements_preserved": null, "quantifier_preserved": null, "entity_metric_binding_correct": null, "time_condition_scope_correct": null}, "criterion_notes": {"factual_predicates_not_fragments": "Mỗi validation shard improved recall là một predicate đầy đủ.", "all_requirements_preserved": "Giữ hướng improved và restriction after the revision.", "quantifier_preserved": "Every ánh xạ all; population validation shard giữ modifier validation.", "entity_metric_binding_correct": "Entity validation shard; metric recall không kèm improved.", "time_condition_scope_correct": "after the revision nằm trong time của đúng predicate."}, "notes": "[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Mỗi validation shard improved recall là một predicate đầy đủ. C2: Giữ hướng improved và restriction after the revision. C3: Every ánh xạ all; population validation shard giữ modifier validation. C4: Entity validation shard; metric recall không kèm improved. C5: after the revision nằm trong time của đúng predicate."}, {"example_id": "decompose:011", "claim": "At least one audited cache node reduced response time after the patch.", "decomposition": {"parts": [{"quote": "At least one audited cache node reduced response time after the patch.", "quantifier": "some", "scope": {"entity": "audited cache node", "metric": "response time", "time": "after the patch", "condition": ""}, "start": 0, "end": 70, "numeric_requirements": []}], "unresolved": []}, "judgments": {"factual_predicates_not_fragments": null, "all_requirements_preserved": null, "quantifier_preserved": null, "entity_metric_binding_correct": null, "time_condition_scope_correct": null}, "criterion_notes": {"factual_predicates_not_fragments": "reduced response time đầy đủ trên audited cache node.", "all_requirements_preserved": "Giữ at least one, reduced, response time và after the patch.", "quantifier_preserved": "At least one ánh xạ some; giữ đủ audited cache node.", "entity_metric_binding_correct": "Entity audited cache node; metric response time giữ cả cụm.", "time_condition_scope_correct": "after the patch là time; không thêm điều kiện khác."}, "notes": "[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: reduced response time đầy đủ trên audited cache node. C2: Giữ at least one, reduced, response time và after the patch. C3: At least one ánh xạ some; giữ đủ audited cache node. C4: Entity audited cache node; metric response time giữ cả cụm. C5: after the patch là time; không thêm điều kiện khác."}, {"example_id": "decompose:012", "claim": "None of the monitored pumps leaked during the overnight test.", "decomposition": {"parts": [{"quote": "None of the monitored pumps leaked during the overnight test.", "quantifier": "none", "scope": {"entity": "monitored pumps", "metric": "leaked", "time": "during the overnight test", "condition": ""}, "start": 0, "end": 61, "numeric_requirements": []}], "unresolved": []}, "judgments": {"factual_predicates_not_fragments": null, "all_requirements_preserved": null, "quantifier_preserved": null, "entity_metric_binding_correct": null, "time_condition_scope_correct": null}, "criterion_notes": {"factual_predicates_not_fragments": "Predicate leaked được giữ, quantifier none mang phủ định.", "all_requirements_preserved": "Giữ monitored và during the overnight test; không tạo số liệu.", "quantifier_preserved": "None of ánh xạ none trên monitored pumps.", "entity_metric_binding_correct": "Entity monitored pumps; metric leaked là predicate dương trước áp lượng từ none.", "time_condition_scope_correct": "during the overnight test là restriction thời gian."}, "notes": "[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Predicate leaked được giữ, quantifier none mang phủ định. C2: Giữ monitored và during the overnight test; không tạo số liệu. C3: None of ánh xạ none trên monitored pumps. C4: Entity monitored pumps; metric leaked là predicate dương trước áp lượng từ none. C5: during the overnight test là restriction thời gian."}, {"example_id": "decompose:013", "claim": "The North gateway reduced its error rate after calibration.", "decomposition": {"parts": [{"quote": "The North gateway reduced its error rate after calibration.", "quantifier": "atomic", "scope": {"entity": "North gateway", "metric": "error rate", "time": "after calibration", "condition": ""}, "start": 0, "end": 59, "numeric_requirements": []}], "unresolved": []}, "judgments": {"factual_predicates_not_fragments": null, "all_requirements_preserved": null, "quantifier_preserved": null, "entity_metric_binding_correct": null, "time_condition_scope_correct": null}, "criterion_notes": {"factual_predicates_not_fragments": "North gateway reduced its error rate là factual predicate đầy đủ.", "all_requirements_preserved": "Giữ quan hệ reduced, định danh North và after calibration.", "quantifier_preserved": "Atomic, không mở rộng sang gateway khác.", "entity_metric_binding_correct": "Entity North gateway; metric error rate không lẫn its/reduced.", "time_condition_scope_correct": "after calibration là time của predicate reduced."}, "notes": "[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: North gateway reduced its error rate là factual predicate đầy đủ. C2: Giữ quan hệ reduced, định danh North và after calibration. C3: Atomic, không mở rộng sang gateway khác. C4: Entity North gateway; metric error rate không lẫn its/reduced. C5: after calibration là time của predicate reduced."}, {"example_id": "decompose:014", "claim": "Every weekly trial conducted in May improved throughput.", "decomposition": {"parts": [{"quote": "Every weekly trial conducted in May improved throughput.", "quantifier": "all", "scope": {"entity": "weekly trial", "metric": "throughput", "time": "", "condition": "in May"}, "start": 0, "end": 56, "numeric_requirements": []}], "unresolved": []}, "judgments": {"factual_predicates_not_fragments": null, "all_requirements_preserved": null, "quantifier_preserved": null, "entity_metric_binding_correct": null, "time_condition_scope_correct": null}, "criterion_notes": {"factual_predicates_not_fragments": "weekly trial conducted in May improved throughput là một predicate, không tách modifier thành part riêng.", "all_requirements_preserved": "Giữ nguyên conducted in May trong quote, cùng hướng improved và property throughput.", "quantifier_preserved": "Every ánh xạ all; population là weekly trial được lọc bởi conducted in May.", "entity_metric_binding_correct": "Entity weekly trial; metric throughput đúng, không còn improved throughput.", "time_condition_scope_correct": "condition=in May lọc trial được tiến hành trong May; time rỗng không khẳng định improvement xảy ra trong May. Phải đọc cùng quote; schema chưa có restriction-owner riêng."}, "notes": "[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: weekly trial conducted in May improved throughput là một predicate, không tách modifier thành part riêng. C2: Giữ nguyên conducted in May trong quote, cùng hướng improved và property throughput. C3: Every ánh xạ all; population là weekly trial được lọc bởi conducted in May. C4: Entity weekly trial; metric throughput đúng, không còn improved throughput. C5: condition=in May lọc trial được tiến hành trong May; time rỗng không khẳng định improvement xảy ra trong May. Phải đọc cùng quote; schema chưa có restriction-owner riêng."}, {"example_id": "decompose:015", "claim": "The patch reduced median request latency.", "decomposition": {"parts": [{"quote": "The patch reduced median request latency.", "quantifier": "atomic", "scope": {"entity": "patch", "metric": "median request latency", "time": "", "condition": ""}, "start": 0, "end": 41, "numeric_requirements": []}], "unresolved": []}, "judgments": {"factual_predicates_not_fragments": null, "all_requirements_preserved": null, "quantifier_preserved": null, "entity_metric_binding_correct": null, "time_condition_scope_correct": null}, "criterion_notes": {"factual_predicates_not_fragments": "patch reduced median request latency là predicate đầy đủ.", "all_requirements_preserved": "Giữ cả median, request và hướng reduced.", "quantifier_preserved": "Atomic, không tạo population.", "entity_metric_binding_correct": "Entity patch; metric median request latency không bị rút thành latency.", "time_condition_scope_correct": "Không tự thêm time/condition."}, "notes": "[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: patch reduced median request latency là predicate đầy đủ. C2: Giữ cả median, request và hướng reduced. C3: Atomic, không tạo population. C4: Entity patch; metric median request latency không bị rút thành latency. C5: Không tự thêm time/condition."}, {"example_id": "decompose:016", "claim": "The configuration change increased precision.", "decomposition": {"parts": [{"quote": "The configuration change increased precision.", "quantifier": "atomic", "scope": {"entity": "configuration change", "metric": "precision", "time": "", "condition": ""}, "start": 0, "end": 45, "numeric_requirements": []}], "unresolved": []}, "judgments": {"factual_predicates_not_fragments": null, "all_requirements_preserved": null, "quantifier_preserved": null, "entity_metric_binding_correct": null, "time_condition_scope_correct": null}, "criterion_notes": {"factual_predicates_not_fragments": "configuration change increased precision là predicate đầy đủ.", "all_requirements_preserved": "Giữ quan hệ increased trong quote.", "quantifier_preserved": "Atomic, không thêm lượng từ.", "entity_metric_binding_correct": "Entity configuration change giữ đủ định danh; metric precision không lẫn change trong subject.", "time_condition_scope_correct": "Không tự thêm time/condition."}, "notes": "[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: configuration change increased precision là predicate đầy đủ. C2: Giữ quan hệ increased trong quote. C3: Atomic, không thêm lượng từ. C4: Entity configuration change giữ đủ định danh; metric precision không lẫn change trong subject. C5: Không tự thêm time/condition."}, {"example_id": "decompose:017", "claim": "After tuning, the extractor decreased memory use and increased token recall.", "decomposition": {"parts": [{"quote": "After tuning, the extractor decreased memory use", "quantifier": "atomic", "scope": {"entity": "extractor", "metric": "memory use", "time": "After tuning", "condition": ""}, "start": 0, "end": 48, "numeric_requirements": []}, {"quote": "and increased token recall.", "quantifier": "atomic", "scope": {"entity": "extractor", "metric": "token recall", "time": "After tuning", "condition": ""}, "start": 49, "end": 76, "numeric_requirements": []}], "unresolved": []}, "judgments": {"factual_predicates_not_fragments": null, "all_requirements_preserved": null, "quantifier_preserved": null, "entity_metric_binding_correct": null, "time_condition_scope_correct": null}, "criterion_notes": {"factual_predicates_not_fragments": "Tách decreased memory use và increased token recall; part sau kế thừa extractor.", "all_requirements_preserved": "Giữ hai hướng đối nhau và đầy đủ memory use/token recall.", "quantifier_preserved": "Hai part atomic; không thêm lượng từ population.", "entity_metric_binding_correct": "Cả hai entity extractor, hai metric riêng đúng vế.", "time_condition_scope_correct": "After tuning là prefix chung trước dấu phẩy, nên kế thừa time cho cả hai part là đúng."}, "notes": "[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: Tách decreased memory use và increased token recall; part sau kế thừa extractor. C2: Giữ hai hướng đối nhau và đầy đủ memory use/token recall. C3: Hai part atomic; không thêm lượng từ population. C4: Cả hai entity extractor, hai metric riêng đúng vế. C5: After tuning là prefix chung trước dấu phẩy, nên kế thừa time cho cả hai part là đúng."}, {"example_id": "decompose:018", "claim": "Every batch in the low-temperature group gained yield after the update.", "decomposition": {"parts": [{"quote": "Every batch in the low-temperature group gained yield after the update.", "quantifier": "all", "scope": {"entity": "batch", "metric": "yield", "time": "after the update", "condition": "in the low-temperature group"}, "start": 0, "end": 71, "numeric_requirements": []}], "unresolved": []}, "judgments": {"factual_predicates_not_fragments": null, "all_requirements_preserved": null, "quantifier_preserved": null, "entity_metric_binding_correct": null, "time_condition_scope_correct": null}, "criterion_notes": {"factual_predicates_not_fragments": "batch gained yield là predicate đầy đủ kèm restriction population và time.", "all_requirements_preserved": "Giữ gained, yield, low-temperature group và after the update.", "quantifier_preserved": "Every ánh xạ all; entity batch kết hợp condition in the low-temperature group giới hạn đúng population.", "entity_metric_binding_correct": "Entity batch; metric yield không kèm gained.", "time_condition_scope_correct": "after the update là time; low-temperature group là condition, không tráo hai loại restriction."}, "notes": "[Gợi ý AI; người review cần đọc/chỉnh trước khi xác nhận.] C1: batch gained yield là predicate đầy đủ kèm restriction population và time. C2: Giữ gained, yield, low-temperature group và after the update. C3: Every ánh xạ all; entity batch kết hợp condition in the low-temperature group giới hạn đúng population. C4: Entity batch; metric yield không kèm gained. C5: after the update là time; low-temperature group là condition, không tráo hai loại restriction."}], "ai_review_sha256": "a3f204e50212e3ad37cc98032a66a48703ba969695618ae5f6b330d836ef2cd1"};
+document.querySelector('#save').onclick=()=>{
+ const data=JSON.parse(JSON.stringify(seed));data.reviewer=document.querySelector('#name').value.trim();
+ if(!data.reviewer||!document.querySelector('#done').checked){alert('Cần tên và xác nhận đã trực tiếp review đủ 18 ca.');return;}
+ const cards=[...document.querySelectorAll('article')];
+ data.cases=data.cases.map((row,i)=>{const card=cards[i];row.judgments=Object.fromEntries([...card.querySelectorAll('[data-key]')].map(x=>[x.dataset.key,x.checked]));row.notes=card.querySelector('textarea').value.trim();return row;});
+ if(data.cases.some(row=>Object.values(row.judgments).some(v=>v!==true)||!row.notes)){alert('Cần đủ 90 xác nhận và notes từng ca; ca chưa đạt phải dừng.');return;}
+ data.review_completed=true;data.human_review_completed=true;data.reviewer_kind='human';data.reviewed_on=new Date().toISOString();
+ const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json'}));
+ const link=document.createElement('a');link.href=url;link.download='semantic-review.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+};</script></html>

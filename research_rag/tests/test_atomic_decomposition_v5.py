@@ -4,7 +4,7 @@ import importlib
 import json
 import unittest
 
-from research_rag.tests.test_atomic_decoding import Sequence, TinyTokenizer
+from research_rag.tests.test_atomic_decoding import Sequence, TinyTokenizer, token_backend
 
 
 a = importlib.import_module('04_factchecker.inference.atomic_verifier')
@@ -20,7 +20,7 @@ def plan(claim, *, entity, metric, time='', condition='', quantifier='atomic'):
 class DecompositionV5RegressionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.backend = d.ConstrainedAtomicBackend(None, TinyTokenizer())
+        cls.backend = token_backend()
 
     def accepts(self, claim, value):
         request = [{'role': 'system', 'content': a.DECOMPOSE_PROMPT},

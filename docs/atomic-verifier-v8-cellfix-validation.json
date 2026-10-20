@@ -1,0 +1,44 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix1",
+  "parent_criteria_sha256": "20b94ccfb2451fce3ebd0fba1e321a344615641b5fa9e6b6ef7d3cef4d08fce1",
+  "failed_v8_zip_sha256": "83760d503606d2b576d00f83552ff42e7f520643c24ed40df8db8358c7304fef",
+  "failed_v8_run_id": "20261017T074401Z-42c4ae8e",
+  "v8_release_preserved": true,
+  "cell_files": {
+    "scripts/colab_v8_cellfix_prepare.py": "2d29e83b0d9482984fa2a663043e784a33f1af3cc12286b2c6bc43c85918c541",
+    "scripts/colab_v8_cellfix_smoke.py": "8d6df6e09a067478d2208555e8d8037f4229515b8810c6714795c2d34fba4fce"
+  },
+  "local_validation": {
+    "frozen_runtime_tests_passed": 130,
+    "new_tests": 7,
+    "source_and_fixture_files": 29,
+    "regression_log": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\atomic-v8-cellfix-regression-final.log",
+    "regression_log_sha256": "211d9d7fce7fb5b7c7f08d4eb94366265eb854a4198b8c95ce4e9e5437c198da",
+    "smoke_validate_only_passed": true,
+    "cell_state_and_download_simulated_checks_passed": 7,
+    "local_run": {
+      "candidate_root": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\atomic-v8-cellfix-local-082408\\workspace-cellfix-20261017T082409Z-7c75687f",
+      "candidate_out": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\atomic-v8-cellfix-local-082408\\output-cellfix-20261017T082409Z-7c75687f",
+      "statuses": {
+        "regression-cellfix": {
+          "exit_code": 0
+        },
+        "smoke-validate-only-cellfix": {
+          "exit_code": 0
+        }
+      },
+      "prepare_cell_sha256": "2d29e83b0d9482984fa2a663043e784a33f1af3cc12286b2c6bc43c85918c541"
+    }
+  },
+  "candidate_criteria_sha256": "b41c72aecd4d35ed05901fa2dcc911e179b87a4fbdef846aa451f4089bfd6c33",
+  "model_revision_data_budgets_unchanged": true,
+  "new_gpu_inference_completed": false,
+  "new_smoke_result": null,
+  "full39_result": null,
+  "new_human_review": "pending",
+  "promoted_to_serving": false,
+  "limitations": [
+    "Causal and collective-ALL guards use finite conservative English rules, not a complete entailment verifier.",
+    "Passing local tests does not establish 12/12 labels or zero false support; T4 smoke and a separate annotated validation set remain necessary."
+  ]
+}

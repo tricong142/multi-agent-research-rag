@@ -1,0 +1,24 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix5",
+  "criteria_sha256": "642d66612c25514e3764840f750a97cc85c93d4a32a3e4f23bcabff6b993e84c",
+  "payload_sha256": "922bb57ed569982785d026e365c208ef19d4fc5c104e622aa7e9e70395fcb869",
+  "original_probe_run": "20261017T173345Z-905edcb5",
+  "original_probe_zip_sha256": "e854d7d7276a806941b876ef1a23bc04365677caa2301cda3c9f14356dc4f1bb",
+  "human_review": {
+    "reviewer": "Trí Công",
+    "probe_predictions_sha256": "b555551b7812fd9aa9fcf372715f1551ccd72d1568176de50266c1210c90b014",
+    "semantic_review_sha256": "b1caf56e66a869d7e9c9a3d3b8443449ee3915e1a1a1991304031704364104dc"
+  },
+  "human_admission_verified_locally": true,
+  "human_admission_rechecked_before_model_cache": true,
+  "code_cells": 4,
+  "new_probe_inference_required": false,
+  "full39_inference_completed": false,
+  "files": {
+    "scripts/colab_atomic_verifier39_cellfix5.ipynb": "fc6e8d26495920ef9b316dce183ab05850cf64c9be10e89a40b64fc7bbc4b443",
+    "scripts/build_colab_cellfix5_full39.py": "bb9afff42a6fc75e938d691e13403ac5a8676c26d1fe3ca75fc1a743d8991497",
+    "scripts/colab_atomic_verifier_cellfix5_fresh.ipynb": "db68828cbc1a6bd05d9e6d250811459e6334ee35c89b7f0631fc22c612e09962",
+    "docs/semantic-review-cellfix5-20261017T173345Z-905edcb5-human.json": "b1caf56e66a869d7e9c9a3d3b8443449ee3915e1a1a1991304031704364104dc",
+    "docs/atomic-verifier-cellfix5-human-admission-20261017T173345Z-905edcb5.json": "f78f58866599511e1161baa6cb2ca810859ffd6484548210b34778196b5c1f27"
+  }
+}

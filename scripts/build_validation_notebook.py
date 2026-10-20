@@ -253,6 +253,7 @@ with zipfile.ZipFile(root/'kaggle_transfer/validation-update-20260927.zip') as a
              'research_rag/evaluation/autonomy.py', 'research_rag/evaluation/autonomy_criteria.json',
              'research_rag/tests/test_autonomy_evaluation.py',
              '04_factchecker/inference/judge.py', 'train_agent2_reader/reader_agent.py',
+             'train_agent2_reader/tools/tool_ocr_fallback.py', 'research_rag/tests/test_reader_local.py',
              'research_rag/tests/test_e2e_regressions.py',
              '04_factchecker/inference/confidence.py', '04_factchecker/node.py',
              '04_factchecker/prompts.py', '04_factchecker/eval_factchecker.py',

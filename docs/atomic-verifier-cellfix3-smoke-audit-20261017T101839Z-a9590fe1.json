@@ -1,0 +1,204 @@
+{
+  "run_id": "20261017T101839Z-a9590fe1",
+  "zip_sha256": "37fa91b236c15078ebaf2fb571a3fdf91dd76f96ad88dae6ee1fd6adf759eec2",
+  "archive_files": 47,
+  "all_output_hashes_valid": true,
+  "all_input_bytes_match_released_payload": true,
+  "input_files": 78,
+  "frozen_source_files": 32,
+  "criteria_sha256": "c38cf4cad12ce7ddcf257c1b80dff5467dc1d499a22f295d2824b0ca5c5a558f",
+  "load_frozen_passed": true,
+  "all_predictions_replayed": true,
+  "all_29_call_triplets_match_raw_and_trace": true,
+  "metrics_recomputed_exactly": true,
+  "model_pairing": {
+    "model_files": true,
+    "shared_tokenizer_files": true,
+    "repo_id": true,
+    "revision": true,
+    "dtype": true,
+    "quantization": true,
+    "seed": true,
+    "do_sample": true
+  },
+  "metrics": {
+    "n": 12,
+    "correct_labels": 11,
+    "false_support": 0,
+    "runtime_failed_rows": 1,
+    "gold_support_rejected": 1,
+    "gold_support_count": 4,
+    "backend_calls": 29,
+    "checks": {
+      "all_cases_present": true,
+      "all_labels_correct": false,
+      "no_false_support": true,
+      "no_runtime_failures": false,
+      "within_call_budget": true,
+      "each_group_complete_and_correct": false,
+      "within_measured_token_budget": true,
+      "structured_decoding_trace_complete": true,
+      "cooperative_deadline_trace_complete": true
+    },
+    "automated_gate_pass": false,
+    "dataset_groups": {
+      "original_contracts": {
+        "n": 12,
+        "correct": 11,
+        "false_support": 0,
+        "failed": 1
+      }
+    },
+    "stop_reasons": {
+      "completed": 11,
+      "invalid_output_exhausted": 1
+    },
+    "confusion": [
+      {
+        "gold": "contradict",
+        "prediction": "contradict",
+        "n": 4
+      },
+      {
+        "gold": "not_enough_info",
+        "prediction": "not_enough_info",
+        "n": 4
+      },
+      {
+        "gold": "support",
+        "prediction": "__incomplete__",
+        "n": 1
+      },
+      {
+        "gold": "support",
+        "prediction": "support",
+        "n": 3
+      }
+    ],
+    "generated_tokens": 3633,
+    "prompt_tokens": 40386
+  },
+  "stage_issues": {
+    "valid": 27,
+    "numeric_requirement_missing": 1,
+    "numeric_evidence_not_cited": 1
+  },
+  "exact_source_citations_checked": 17,
+  "colab_recorded_regression_tests_passed": 153,
+  "colab_validate_only": {
+    "probe": {
+      "freeze_valid": true,
+      "cases": 18,
+      "maximum_calls": 36
+    },
+    "smoke": {
+      "freeze_valid": true,
+      "cases": 12,
+      "maximum_calls": 96
+    },
+    "verifier": {
+      "freeze_valid": true,
+      "cases": 39,
+      "maximum_calls": 312
+    }
+  },
+  "source_grounded_numeric_records_checked": 11,
+  "per_case": [
+    {
+      "example_id": "contract:partial_accuracy",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "stop_reason": "completed",
+      "issues": []
+    },
+    {
+      "example_id": "contract:partial_memory",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "stop_reason": "completed",
+      "issues": []
+    },
+    {
+      "example_id": "contract:both_supported",
+      "gold": "support",
+      "prediction": "support",
+      "stop_reason": "completed",
+      "issues": []
+    },
+    {
+      "example_id": "contract:accuracy_conflict",
+      "gold": "contradict",
+      "prediction": "contradict",
+      "stop_reason": "completed",
+      "issues": []
+    },
+    {
+      "example_id": "contract:irrelevant",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "stop_reason": "completed",
+      "issues": []
+    },
+    {
+      "example_id": "contract:negation",
+      "gold": "contradict",
+      "prediction": "contradict",
+      "stop_reason": "completed",
+      "issues": []
+    },
+    {
+      "example_id": "contract:causality_missing",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "stop_reason": "completed",
+      "issues": []
+    },
+    {
+      "example_id": "contract:scope",
+      "gold": "contradict",
+      "prediction": "contradict",
+      "stop_reason": "completed",
+      "issues": []
+    },
+    {
+      "example_id": "contract:cross_sentence",
+      "gold": "support",
+      "prediction": null,
+      "stop_reason": "invalid_output_exhausted",
+      "issues": [
+        "numeric_requirement_missing",
+        "numeric_evidence_not_cited"
+      ]
+    },
+    {
+      "example_id": "contract:wrong_units",
+      "gold": "contradict",
+      "prediction": "contradict",
+      "stop_reason": "completed",
+      "issues": []
+    },
+    {
+      "example_id": "contract:atomic_support",
+      "gold": "support",
+      "prediction": "support",
+      "stop_reason": "completed",
+      "issues": []
+    },
+    {
+      "example_id": "contract:bounded_scope",
+      "gold": "support",
+      "prediction": "support",
+      "stop_reason": "completed",
+      "issues": []
+    }
+  ],
+  "new_gpu_inference_during_audit": false,
+  "human_review": "pending",
+  "probe18_current_candidate": null,
+  "full39_current_candidate": null,
+  "promoted_to_serving": false,
+  "limitations": [
+    "Hashes verify consistency with the local frozen release, not remote execution authenticity.",
+    "12 development smoke cases are not independent evaluation or full39 evidence."
+  ]
+}

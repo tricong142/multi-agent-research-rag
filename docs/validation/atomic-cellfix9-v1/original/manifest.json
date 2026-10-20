@@ -1,0 +1,46 @@
+{
+  "version": "atomic-cellfix6-validation-v1",
+  "status": "draft_pending_human_annotation",
+  "candidate": "atomic-verifier-constrained-v8-cellfix6",
+  "candidate_criteria_sha256": "b9d77823b5c8d6d2a56d4053667b8b53f6e059a1f5edb9e7e3a7578a50f34071",
+  "candidate_manifest_sha256": "feb6268f230e77b073cc46d0db341c02a56d94c4fd84e289966616863346cef9",
+  "cases": 30,
+  "papers": 10,
+  "proposed_label_counts": {
+    "support": 10,
+    "contradict": 10,
+    "not_enough_info": 10
+  },
+  "files": {
+    "authoring.json": {
+      "size": 12427,
+      "sha256": "919c35353f283d394624cb0252fbce07b0f48868d9a7a1c54c444f32e9af8a07"
+    },
+    "cases.jsonl": {
+      "size": 48392,
+      "sha256": "1df43fb4907b1e385c8ad04059a81644d5aa3e84dd121ab93ee0f2b079ea13f5"
+    },
+    "criteria.json": {
+      "size": 1703,
+      "sha256": "fd75cfde6c180c2d16e88219742a1b27a3c1aedaec65d2d09ccd10095854d4bf"
+    },
+    "inputs.jsonl": {
+      "size": 25016,
+      "sha256": "da73a462421d7ca850ffe5061c3fcd8a4bad35a81cb7b68bd865ab24a276b77a"
+    },
+    "overlap-report.json": {
+      "size": 14933,
+      "sha256": "7cb2c60f63778f6dc5dbc2683221b45d3648c4f97fb5e995c4a96fc659cb711e"
+    },
+    "review_gate.py": {
+      "size": 5695,
+      "sha256": "b2f7ce817af4152ae5c19ce8ddd76083a796297d9f088a92fa9a2e81d1dcd7c4"
+    },
+    "source-provenance.json": {
+      "size": 1713,
+      "sha256": "7ae871ed72ce3f21748f5d62463fb7dfb8f7b302227355e62df1192fa5b2d043"
+    }
+  },
+  "inference_completed": false,
+  "human_adjudication_complete": false
+}

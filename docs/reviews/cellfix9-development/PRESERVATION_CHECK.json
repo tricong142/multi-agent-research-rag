@@ -1,0 +1,20 @@
+{
+  "cellfix8_release_files_preserved": true,
+  "validation30_files_preserved": true,
+  "model_budget_gate_and_data_unchanged": true,
+  "decomposition_prompt_unchanged": true,
+  "changed_parent_source_files": [
+    "04_factchecker/inference/atomic_verifier.py",
+    "research_rag/tests/test_atomic_verifier.py",
+    "04_factchecker/inference/atomic_decoding.py",
+    "04_factchecker/inference/assessment_rules.py",
+    "04_factchecker/inference/assessment_decisions.py"
+  ],
+  "new_source_files": [
+    "04_factchecker/inference/assessment_evidence.py",
+    "research_rag/tests/fixtures/atomic_cellfix8_full39_traces.json",
+    "research_rag/tests/test_atomic_assessment_cellfix9.py"
+  ],
+  "criteria_sha256": "6abc7038759bd361155c3aa19745c664af67e9f8e3f3fc6e26e1a436d6b6caf8",
+  "new_model_inference_completed": false
+}

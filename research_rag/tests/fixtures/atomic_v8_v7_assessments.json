@@ -1,0 +1,76 @@
+{
+  "origin": "Exact actual model generations from v7 development run 20261016T071213Z-7c8c33c6; not held-out",
+  "source_calls_sha256": "200ee35ffee5bef7d401d08c85d72b069808fdd9179efb8cd7c0a7fd1c350a75",
+  "cases": [
+    {
+      "case_id": "contract:irrelevant",
+      "call_id": 14,
+      "input": {
+        "claim": "Model Juniper retains 94% accuracy.",
+        "part": {
+          "quote": "Model Juniper retains 94% accuracy.",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "Model Juniper",
+            "metric": "accuracy",
+            "time": "",
+            "condition": ""
+          },
+          "start": 0,
+          "end": 35,
+          "numeric_requirements": [
+            {
+              "start": 22,
+              "end": 25,
+              "quote": "94%",
+              "value": "94",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ]
+        },
+        "context": "The benchmark was conducted on a Tuesday. No model accuracy is reported."
+      },
+      "raw_output": "{\n  \"scope_match\": \"matched\",\n  \"coverage\": {\n   \"complete\": true,\n   \"members\": [\n\t  \"Model Juniper\"\n\t],\n   \"quotes\": [\n\t  \"Model Juniper retains 94% accuracy\"\n\t]\n  },\n  \"observations\": [\n   {\n\t  \"member\": \"Model Juniper\",\n\t  \"truth\": \"true\",\n\t  \"quotes\": [\"Model Juniper retains 94% accuracy\"],\n\t  \"explanation\": \"The observation directly matches the claim's subject 'Model Juniper'.\"\n   , \n\t \"numeric\": [\n\t\t{\n\t\t \"kind\": \"change\",\n\t\t \"source_quote\": \"Model Juniper retains 94% accuracy\",\n\t\t \"left\": {\n\t\t\t\"value\": \"94\",\n\t\t\t\"unit\": \"%\"\n\t\t , \n\t\t\"quote\": \"94% accuracy\"\n\t\t },\n\t\t \"right\": {\n\t\t\t\"value\": \"94\",\n\t\t\t\"unit\": \"%\"\n\t\t , \n\t\t\"quote\": \"94% accuracy\"\n\t\t }\n\t\t}\n\t  ]\n   }\n  ],\n  \"missing_information\": []\n  ,\"explanation\": \"The claim is supported by the context which confirms the existence of Model Juniper and its accuracy level. The observation directly matches the claim, providing the required information without any gaps or contradictions. The numeric requirement is fully covered as it specifies the exact accuracy percentage retained by Model Juniper. The observation provides the necessary context and evidence to verify the claim accurately. The numeric change is confirmed as the accuracy level remains at 94%.\"\n}"
+    },
+    {
+      "case_id": "contract:cross_sentence",
+      "call_id": 26,
+      "input": {
+        "claim": "The report evaluated four models on two datasets.",
+        "part": {
+          "quote": "The report evaluated four models on two datasets.",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "report",
+            "metric": "evaluated four models",
+            "time": "",
+            "condition": "on two datasets"
+          },
+          "start": 0,
+          "end": 49,
+          "numeric_requirements": [
+            {
+              "start": 21,
+              "end": 32,
+              "quote": "four models",
+              "value": "4",
+              "unit": "models",
+              "kind": "number"
+            },
+            {
+              "start": 36,
+              "end": 48,
+              "quote": "two datasets",
+              "value": "2",
+              "unit": "datasets",
+              "kind": "number"
+            }
+          ]
+        },
+        "context": "Four models were evaluated in the report. Evaluation used two datasets."
+      },
+      "raw_output": "{\n  \"scope_match\": \"matched\",\n  \"coverage\": {\n   \"complete\": true,\n   \"members\": [\n\t  \"Four models were evaluated in the report. Evaluation used two datasets\"\n   ],\n   \"quotes\": [\n\t  \"Four models were evaluated in the report. Evaluation used two datasets\"\n   ]\n  },\n  \"observations\": [\n   {\n\t  \"member\": \"Four models were evaluated in the report. Evaluation used two datasets\",\n\t  \"truth\": \"true\",\n\t  \"quotes\": [\n\t\t\"Four models were evaluated in the report. Evaluation used two datasets\"\n\t  ],\n\t  \"explanation\": \"The observation directly matches the claim's scope and metric, confirming the evaluation of four models on two datasets as stated in the context\"\n   , \"numeric\": null\n  }\n  ],\n  \"missing_information\": [],\n  \"explanation\": \"The observation fully matches the claim's scope and metric, providing the required information without any gaps or contradictions\"\n}"
+    }
+  ]
+}

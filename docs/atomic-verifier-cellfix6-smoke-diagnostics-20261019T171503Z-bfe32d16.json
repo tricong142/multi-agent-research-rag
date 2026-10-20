@@ -1,0 +1,626 @@
+[
+  {
+    "example_id": "contract:accuracy_conflict",
+    "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+    "context": "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%.",
+    "gold": "contradict",
+    "prediction": "not_enough_info",
+    "parts": [
+      {
+        "part": {
+          "quote": "Model Juniper uses 25% less memory",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "Model Juniper",
+            "metric": "memory",
+            "time": "",
+            "condition": ""
+          },
+          "start": 0,
+          "end": 34,
+          "numeric_requirements": [
+            {
+              "start": 19,
+              "end": 22,
+              "quote": "25%",
+              "value": "25",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ]
+        },
+        "numeric_requirements": [
+          {
+            "start": 19,
+            "end": 22,
+            "quote": "25%",
+            "value": "25",
+            "unit": "%",
+            "kind": "percent"
+          }
+        ],
+        "assessed_label": "not_enough_info",
+        "observations": [
+          {
+            "member": "Model Juniper",
+            "truth": "unknown",
+            "quotes": [
+              "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%."
+            ],
+            "explanation": "Contextually, Model Juniper's accuracy is disputed but memory is",
+            "numeric": null,
+            "citation_additions": [],
+            "model_truth": "unknown",
+            "numeric_result": null
+          }
+        ],
+        "explanation": "atomic: not_enough_info; observed predicate values: unknown; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "mismatched",
+        "missing_information": [
+          "Resolve scope_mismatched for claim part: Model Juniper uses 25% less memory"
+        ],
+        "model_explanation": "The context contradicts the claim on accuracy, leaving memory's",
+        "validation_issues": [
+          "scope_mismatched"
+        ]
+      },
+      {
+        "part": {
+          "quote": "and retains 94% accuracy.",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "Model Juniper",
+            "metric": "accuracy",
+            "time": "",
+            "condition": ""
+          },
+          "start": 35,
+          "end": 60,
+          "numeric_requirements": [
+            {
+              "start": 12,
+              "end": 15,
+              "quote": "94%",
+              "value": "94",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ]
+        },
+        "numeric_requirements": [
+          {
+            "start": 12,
+            "end": 15,
+            "quote": "94%",
+            "value": "94",
+            "unit": "%",
+            "kind": "percent"
+          }
+        ],
+        "assessed_label": "not_enough_info",
+        "observations": [
+          {
+            "member": "Model Juniper",
+            "truth": "unknown",
+            "quotes": [
+              "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%."
+            ],
+            "explanation": "Contextually contradicts the claim",
+            "numeric": null,
+            "citation_additions": [],
+            "model_truth": "unknown",
+            "numeric_result": null
+          }
+        ],
+        "explanation": "atomic: not_enough_info; observed predicate values: unknown; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "mismatched",
+        "missing_information": [
+          "Resolve scope_mismatched for claim part: and retains 94% accuracy."
+        ],
+        "model_explanation": "Contextual evidence refutes the claim",
+        "validation_issues": [
+          "scope_mismatched"
+        ]
+      }
+    ],
+    "assessment_trace": [
+      {
+        "stage": "part_1",
+        "attempt": 1,
+        "output": {
+          "scope_match": "mismatched",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "observations": [
+            {
+              "member": "Model Juniper",
+              "truth": "unknown",
+              "quotes": [
+                "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%."
+              ],
+              "explanation": "Contextually, Model Juniper's accuracy is disputed but memory is",
+              "numeric": null
+            }
+          ],
+          "missing_information": [],
+          "explanation": "The context contradicts the claim on accuracy, leaving memory's"
+        }
+      },
+      {
+        "stage": "part_2",
+        "attempt": 1,
+        "output": {
+          "scope_match": "mismatched",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "observations": [
+            {
+              "member": "Model Juniper",
+              "truth": "unknown",
+              "quotes": [
+                "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%."
+              ],
+              "explanation": "Contextually contradicts the claim",
+              "numeric": null
+            }
+          ],
+          "missing_information": [],
+          "explanation": "Contextual evidence refutes the claim"
+        }
+      }
+    ]
+  },
+  {
+    "example_id": "contract:negation",
+    "claim": "The study used human labels.",
+    "context": "The study did not use any human labels; all labels were generated automatically.",
+    "gold": "contradict",
+    "prediction": "not_enough_info",
+    "parts": [
+      {
+        "part": {
+          "quote": "The study used human labels.",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "study",
+            "metric": "used human labels",
+            "time": "",
+            "condition": ""
+          },
+          "start": 0,
+          "end": 28,
+          "numeric_requirements": []
+        },
+        "numeric_requirements": [],
+        "assessed_label": "not_enough_info",
+        "observations": [
+          {
+            "member": "study",
+            "truth": "unknown",
+            "quotes": [
+              "The study did not use any human labels; all labels were generated automatically."
+            ],
+            "explanation": "Context explicitly states no human labels were used but does not",
+            "numeric": null,
+            "citation_additions": [],
+            "model_truth": "unknown",
+            "numeric_result": null
+          }
+        ],
+        "explanation": "atomic: not_enough_info; observed predicate values: unknown; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "mismatched",
+        "missing_information": [
+          "The specific study that used human labels was not mentioned in the context"
+        ],
+        "model_explanation": "Context directly contradicts the claim but does not provide",
+        "validation_issues": [
+          "scope_mismatched"
+        ]
+      }
+    ],
+    "assessment_trace": [
+      {
+        "stage": "part_1",
+        "attempt": 1,
+        "output": {
+          "scope_match": "mismatched",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "observations": [
+            {
+              "member": "study",
+              "truth": "unknown",
+              "quotes": [
+                "The study did not use any human labels; all labels were generated automatically."
+              ],
+              "explanation": "Context explicitly states no human labels were used but does not",
+              "numeric": null
+            }
+          ],
+          "missing_information": [
+            "The specific study that used human labels was not mentioned in the context"
+          ],
+          "explanation": "Context directly contradicts the claim but does not provide"
+        }
+      }
+    ]
+  },
+  {
+    "example_id": "contract:scope",
+    "claim": "All tasks improved after compression.",
+    "context": "Three tasks improved after compression, but a fourth task became less accurate.",
+    "gold": "contradict",
+    "prediction": "not_enough_info",
+    "parts": [
+      {
+        "part": {
+          "quote": "All tasks improved after compression.",
+          "quantifier": "all",
+          "scope": {
+            "entity": "tasks",
+            "metric": "improved",
+            "time": "after compression",
+            "condition": ""
+          },
+          "start": 0,
+          "end": 37,
+          "numeric_requirements": []
+        },
+        "numeric_requirements": [],
+        "assessed_label": "not_enough_info",
+        "observations": [
+          {
+            "member": "a fourth task became less accurate",
+            "truth": "unknown",
+            "quotes": [
+              "Three tasks improved after compression, but a fourth task became less accurate."
+            ],
+            "explanation": "Conflicting results for one member",
+            "numeric": null,
+            "citation_additions": [],
+            "model_truth": "unknown",
+            "numeric_result": null
+          }
+        ],
+        "explanation": "all: not_enough_info; observed predicate values: unknown; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "matched",
+        "missing_information": [
+          "All tasks improved after compression"
+        ],
+        "model_explanation": "The context contains conflicting information, making it unclear",
+        "validation_issues": []
+      }
+    ],
+    "assessment_trace": [
+      {
+        "stage": "part_1",
+        "attempt": 1,
+        "output": {
+          "scope_match": "matched",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "observations": [
+            {
+              "member": "a fourth task became less accurate",
+              "truth": "unknown",
+              "quotes": [
+                "Three tasks improved after compression, but a fourth task became less accurate."
+              ],
+              "explanation": "Conflicting results for one member",
+              "numeric": null
+            }
+          ],
+          "missing_information": [
+            "All tasks improved after compression"
+          ],
+          "explanation": "The context contains conflicting information, making it unclear"
+        }
+      }
+    ]
+  },
+  {
+    "example_id": "contract:cross_sentence",
+    "claim": "The report evaluated four models on two datasets.",
+    "context": "Four models were evaluated in the report. Evaluation used two datasets.",
+    "gold": "support",
+    "prediction": "not_enough_info",
+    "parts": [
+      {
+        "part": {
+          "quote": "The report evaluated four models on two datasets.",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "report",
+            "metric": "evaluated four models",
+            "time": "",
+            "condition": "on two datasets"
+          },
+          "start": 0,
+          "end": 49,
+          "numeric_requirements": [
+            {
+              "start": 21,
+              "end": 32,
+              "quote": "four models",
+              "value": "4",
+              "unit": "models",
+              "kind": "number"
+            },
+            {
+              "start": 36,
+              "end": 48,
+              "quote": "two datasets",
+              "value": "2",
+              "unit": "datasets",
+              "kind": "number"
+            }
+          ]
+        },
+        "numeric_requirements": [
+          {
+            "start": 21,
+            "end": 32,
+            "quote": "four models",
+            "value": "4",
+            "unit": "models",
+            "kind": "number"
+          },
+          {
+            "start": 36,
+            "end": 48,
+            "quote": "two datasets",
+            "value": "2",
+            "unit": "datasets",
+            "kind": "number"
+          }
+        ],
+        "assessed_label": "not_enough_info",
+        "observations": [
+          {
+            "member": "report",
+            "truth": "unknown",
+            "quotes": [
+              "Four models were evaluated in the report. Evaluation used two datasets."
+            ],
+            "explanation": "Context lacks specific details about the number of models and/or",
+            "numeric": null,
+            "citation_additions": [],
+            "model_truth": "unknown",
+            "numeric_result": null
+          }
+        ],
+        "explanation": "atomic: not_enough_info; observed predicate values: unknown; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "mismatched",
+        "missing_information": [
+          "specific details about the number of models and/or datasets"
+        ],
+        "model_explanation": "Contextual information is insufficient to verify the exact count",
+        "validation_issues": [
+          "scope_mismatched"
+        ]
+      }
+    ],
+    "assessment_trace": [
+      {
+        "stage": "part_1",
+        "attempt": 1,
+        "output": {
+          "scope_match": "matched",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "observations": [
+            {
+              "member": "report",
+              "truth": "true",
+              "quotes": [
+                "Four models were evaluated in the report."
+              ],
+              "explanation": "Exact match in the context provided",
+              "numeric": [
+                {
+                  "kind": "value",
+                  "source_quote": "Four models were evaluated in the report.",
+                  "left": {
+                    "value": "4",
+                    "unit": "models",
+                    "quote": "four models"
+                  },
+                  "right": {
+                    "value": "4",
+                    "unit": "models",
+                    "quote": "Four models"
+                  }
+                },
+                {
+                  "kind": "value",
+                  "source_quote": "Four models were evaluated in the report.",
+                  "left": {
+                    "value": "4",
+                    "unit": "models",
+                    "quote": "four models"
+                  },
+                  "right": {
+                    "value": "4",
+                    "unit": "models",
+                    "quote": "Four models"
+                  }
+                }
+              ]
+            }
+          ],
+          "missing_information": [],
+          "explanation": "The claim matches the context exactly, but there is no specific"
+        },
+        "validation_issue": "duplicate_numeric_requirement"
+      },
+      {
+        "stage": "part_1",
+        "attempt": 2,
+        "output": {
+          "scope_match": "mismatched",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "observations": [
+            {
+              "member": "report",
+              "truth": "unknown",
+              "quotes": [
+                "Four models were evaluated in the report. Evaluation used two datasets."
+              ],
+              "explanation": "Context lacks specific details about the number of models and/or",
+              "numeric": null
+            }
+          ],
+          "missing_information": [
+            "specific details about the number of models and/or datasets"
+          ],
+          "explanation": "Contextual information is insufficient to verify the exact count"
+        }
+      }
+    ]
+  },
+  {
+    "example_id": "contract:wrong_units",
+    "claim": "Training took 12 seconds.",
+    "context": "Training took 12 hours, not 12 seconds.",
+    "gold": "contradict",
+    "prediction": "not_enough_info",
+    "parts": [
+      {
+        "part": {
+          "quote": "Training took 12 seconds.",
+          "quantifier": "atomic",
+          "scope": {
+            "entity": "Training",
+            "metric": "took 12 seconds",
+            "time": "",
+            "condition": ""
+          },
+          "start": 0,
+          "end": 25,
+          "numeric_requirements": [
+            {
+              "start": 14,
+              "end": 24,
+              "quote": "12 seconds",
+              "value": "12",
+              "unit": "seconds",
+              "kind": "number"
+            }
+          ]
+        },
+        "numeric_requirements": [
+          {
+            "start": 14,
+            "end": 24,
+            "quote": "12 seconds",
+            "value": "12",
+            "unit": "seconds",
+            "kind": "number"
+          }
+        ],
+        "assessed_label": "not_enough_info",
+        "observations": [
+          {
+            "member": "Training",
+            "truth": "unknown",
+            "quotes": [
+              "Training took 12 hours, not 12 seconds."
+            ],
+            "explanation": "Contextually inconsistent with claim",
+            "numeric": null,
+            "citation_additions": [],
+            "model_truth": "unknown",
+            "numeric_result": null
+          }
+        ],
+        "explanation": "atomic: not_enough_info; observed predicate values: unknown; complete coverage: False.",
+        "coverage": {
+          "complete": false,
+          "members": [],
+          "quotes": []
+        },
+        "scope_match": "mismatched",
+        "missing_information": [
+          "The context states training took 12 hours, contradicting the claim of 12 seconds"
+        ],
+        "model_explanation": "Contextually inconsistent",
+        "validation_issues": [
+          "scope_mismatched"
+        ]
+      }
+    ],
+    "assessment_trace": [
+      {
+        "stage": "part_1",
+        "attempt": 1,
+        "output": {
+          "scope_match": "mismatched",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "observations": [
+            {
+              "member": "Training",
+              "truth": "unknown",
+              "quotes": [
+                "Training took 12 hours, not 12 seconds."
+              ],
+              "explanation": "Contextually inconsistent with claim",
+              "numeric": null
+            }
+          ],
+          "missing_information": [
+            "The context states training took 12 hours, contradicting the claim of 12 seconds"
+          ],
+          "explanation": "Contextually inconsistent"
+        }
+      }
+    ]
+  }
+]

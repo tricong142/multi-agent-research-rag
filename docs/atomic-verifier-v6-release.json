@@ -1,0 +1,11 @@
+{
+  "version": "atomic-verifier-constrained-v6-20261015",
+  "files": {
+    "scripts/kaggle_decomposition_probe_v6.ipynb": "b096fc9d1f25b1ddcde63bfb717e6ae57335b171c93b8266463ede8b9fe696d1",
+    "research_rag/evaluation/atomic_verifier_criteria_v6.json": "69b9d45d071d1c4627189f8eeecf3387a3b32b8357b8161ca417f82efc0047ae",
+    "research_rag/evaluation/atomic_verifier_contract_v6.json": "914f4fb7e7ac492d93c9850981e9194abbe1c48b079c22bee5e44ff3884728cf",
+    "scripts/build_atomic_verifier_notebook.py": "512fa1d2bc812e09113410a2e6ff8ab82e83f82fe6b5e591904f0ef417722dc3",
+    "scripts/freeze_atomic_verifier_v6.py": "2cbe0fb6775b5f50002b0148dae4097f484534d603b0715f4f1583dece4812e7"
+  },
+  "validation": "Offline source/prompt/data/contract freeze checked before packaging; model quality and human semantic review remain pending."
+}

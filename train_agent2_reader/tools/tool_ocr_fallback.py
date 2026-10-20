@@ -39,51 +39,36 @@ def extract_with_ocr(
     page_numbers: Optional[List[int]] = None,
     dpi: int = DEFAULT_DPI,
 ) -> List[ExtractedBlock]:
-    doc = fitz.open(pdf_path)
     results: List[ExtractedBlock] = []
-    pages = page_numbers if page_numbers is not None else range(len(doc))
-    # He so quy doi toa do pixel (theo DPI render) ve lai he toa do point
-    # cua PDF goc, de bbox tra ve nhat quan voi 2 tool con lai.
     scale = _PDF_POINT_DPI / dpi
-
-    for page_no in pages:
-        page = doc[page_no]
-        image = render_page_to_image(page, dpi=dpi)
-        data = pytesseract.image_to_data(image, output_type=pytesseract.Output.DICT)
-        n = len(data["text"])
-
-        for i in range(n):
-            text = data["text"][i].strip()
-            if not text:
-                continue
-
-            conf_raw = data["conf"][i]
-            try:
-                # Tesseract tra conf tu 0-100, hoac -1 neu khong xac dinh duoc.
-                confidence = max(0.0, float(conf_raw)) / 100.0
-            except (ValueError, TypeError):
-                confidence = 0.0
-
-            x, y, w, h = (
-                data["left"][i],
-                data["top"][i],
-                data["width"][i],
-                data["height"][i],
-            )
-            bbox = [x * scale, y * scale, (x + w) * scale, (y + h) * scale]
-
-            results.append(
-                ExtractedBlock(
-                    page_no=page_no,
-                    text=text,
-                    bbox=bbox,
-                    label=None,
-                    confidence=confidence,
-                    source_tool="ocr_fallback",
-                )
-            )
-
-    doc.close()
+    with fitz.open(pdf_path) as doc:
+        pages = page_numbers if page_numbers is not None else range(len(doc))
+        for page_no in pages:
+            with render_page_to_image(doc[page_no], dpi=dpi) as image:
+                data = pytesseract.image_to_data(image, output_type=pytesseract.Output.DICT, timeout=60)
+            # Preserve paragraph evidence instead of returning isolated word chunks.
+            paragraphs = {}
+            for i, word in enumerate(data["text"]):
+                text = word.strip()
+                if not text:
+                    continue
+                try:
+                    confidence = max(0.0, float(data["conf"][i])) / 100.0
+                except (ValueError, TypeError):
+                    confidence = 0.0
+                x, y, w, h = (data[key][i] for key in ("left", "top", "width", "height"))
+                bbox = [x * scale, y * scale, (x + w) * scale, (y + h) * scale]
+                key = (data["block_num"][i], data["par_num"][i])
+                group = paragraphs.setdefault(key, {"words": [], "confidences": [], "bbox": bbox})
+                group["words"].append(text)
+                group["confidences"].append(confidence)
+                previous = group["bbox"]
+                group["bbox"] = [min(previous[0], bbox[0]), min(previous[1], bbox[1]),
+                                 max(previous[2], bbox[2]), max(previous[3], bbox[3])]
+            for group in paragraphs.values():
+                results.append(ExtractedBlock(
+                    page_no=page_no, text=" ".join(group["words"]), bbox=group["bbox"], label=None,
+                    confidence=sum(group["confidences"]) / len(group["confidences"]), source_tool="ocr_fallback"))
     return results
 
 

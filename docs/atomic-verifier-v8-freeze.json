@@ -1,0 +1,10 @@
+{
+  "version": "atomic-verifier-constrained-v8-20261017",
+  "criteria_sha256": "20b94ccfb2451fce3ebd0fba1e321a344615641b5fa9e6b6ef7d3cef4d08fce1",
+  "frozen_files": 28,
+  "v7_snapshot_verified": true,
+  "model_revision_data_and_budgets_unchanged": true,
+  "fresh_gpu_inference_completed": false,
+  "human_review": "pending",
+  "promoted_to_serving": false
+}

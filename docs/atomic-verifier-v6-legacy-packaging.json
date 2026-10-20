@@ -1,0 +1,77 @@
+{
+  "artifact": "scripts/kaggle_resume_validation.ipynb",
+  "cause": "Pre-existing resume notebook embedded Summarizer and Judge sources older than the preserved v5 runtime.",
+  "source_changed_by_v6": false,
+  "stale_payloads": [
+    {
+      "path": "train_agent3_summarizer/node.py",
+      "embedded_sha256": "8f219e2740a4fe73449a849a893a50a980880d33a6748c31084d22fa22d91188",
+      "current_sha256": "43dff6e0ecccd9b9f7c6eb24d1ee73c0239c45a0c3553faf499a5e9fcfad5096"
+    },
+    {
+      "path": "04_factchecker/inference/judge.py",
+      "embedded_sha256": "e05d2d19384f4b8713fa6c18cbc9fa87defcafda164628467508cc7c98a50649",
+      "current_sha256": "818aa5a4dc7f8065e101264e59d57828cc00f60d1c105156e49c03f374f6dbb7"
+    }
+  ],
+  "before_sha256": "7d13c8bb55af04c3558871d75259975132a67e7d0544e548435df73676666481",
+  "after_sha256": "09018149517b2b4b5c4884dc1827591f4ddfd68962e0962df2ef2120062541de",
+  "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\kaggle_resume_validation.ipynb",
+  "rebuilt_payload_files_verified": 45,
+  "dependent_artifacts_refreshed": [
+    {
+      "path": "scripts/kaggle_autonomy_validation.ipynb",
+      "before_sha256": "82307a86a236935d0846882b10e75ea8466a3f89a774ce9f45f74b9ca233377e",
+      "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\scripts\\kaggle_autonomy_validation.ipynb",
+      "after_sha256": "3ee1e6f59f4f01fe96d52afc1c16c0dde6b6a92cf1411f0cb21408bf3cb8ad15"
+    },
+    {
+      "path": "scripts/kaggle_confidence_validation.ipynb",
+      "before_sha256": "6b5db2f1862792d863bc944607083cfdc80eca968b4655cc9060e28340236a87",
+      "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\scripts\\kaggle_confidence_validation.ipynb",
+      "after_sha256": "7b6e5be7ffa3785c64a08a3c32f6d4849a87627bd18f87571aebd766f1fbdfe0"
+    },
+    {
+      "path": "scripts/kaggle_confidence_backends.ipynb",
+      "before_sha256": "8ff762a50974e594cb77fd8816b49e82e652c25358ac628ee768ea9d954186d8",
+      "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\scripts\\kaggle_confidence_backends.ipynb",
+      "after_sha256": "d16183744c752db2d5b45da2d28946274f4491235da30c350df44b27c60a7aa1"
+    },
+    {
+      "path": "scripts/kaggle_reader_diagnostics.ipynb",
+      "before_sha256": "28bce63d375aef98ad152d6047cae8a4eb4daaa23fb36351208d8b8b346af36c",
+      "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\scripts\\kaggle_reader_diagnostics.ipynb",
+      "after_sha256": "884c47e553144a1da6db9f8a49afb439e9d8702902b7208acb00550d67b7c878"
+    },
+    {
+      "path": "scripts/kaggle_gemini_access_check.ipynb",
+      "before_sha256": "3440db511623b44430394050c4f6135bddcc42476b4473f08d883af1078ab587",
+      "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\scripts\\kaggle_gemini_access_check.ipynb",
+      "after_sha256": "3440db511623b44430394050c4f6135bddcc42476b4473f08d883af1078ab587"
+    },
+    {
+      "path": "scripts/kaggle_reader_retry_503.ipynb",
+      "before_sha256": "91f2f22423f50b0000663cdf35dfe82b520935a1a1f56790c4e0e8110d5b5e87",
+      "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\scripts\\kaggle_reader_retry_503.ipynb",
+      "after_sha256": "91f2f22423f50b0000663cdf35dfe82b520935a1a1f56790c4e0e8110d5b5e87"
+    },
+    {
+      "path": "scripts/kaggle_completion_validation.ipynb",
+      "before_sha256": "b754fcbbe76f5b2b22685a545e2912964e6506afe2dec31eb585332b31a629b0",
+      "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\scripts\\kaggle_completion_validation.ipynb",
+      "after_sha256": "60b64cdfc2ebc0eed43eefb5ba4d5ace9d78a154859c3801f2f33d9364fa06f4"
+    },
+    {
+      "path": "scripts/kaggle_blind_verifier.ipynb",
+      "before_sha256": "f14f892e322cb8a59e1724817206b1bfb4dd157424c97f4311506f9acb40281e",
+      "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\scripts\\kaggle_blind_verifier.ipynb",
+      "after_sha256": "1801f2a630c16903c03d9f16fbec0ac8aeacb6186201af663142308a22b235b2"
+    },
+    {
+      "path": "docs/READER_RETRY_503.md",
+      "before_sha256": "51e7caa40decd642a69eb8e2b66e25ae97cb1f70b81aea1cb5f1a859859b44ca",
+      "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\docs\\READER_RETRY_503.md",
+      "after_sha256": "51e7caa40decd642a69eb8e2b66e25ae97cb1f70b81aea1cb5f1a859859b44ca"
+    }
+  ]
+}

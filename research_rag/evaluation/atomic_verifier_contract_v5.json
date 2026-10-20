@@ -11,7 +11,8 @@
       "end",
       "quote",
       "quantifier",
-      "scope"
+      "scope",
+      "numeric_requirements"
     ],
     "scope_fields": [
       "entity",
@@ -36,7 +37,7 @@
     ],
     "repair": "At most 2 attempts; structural repair reports the related scope/coverage failures together. Syntax repair regenerates without replaying malformed JSON. Other errors include prior output, capped at 6000 characters.",
     "semantic_gate": "18 unique development claims; all structural checks AND human predicate/coverage/quantifier/entity-metric/time-condition review before full 39-case inference",
-    "scope_rules": "Copy capitalization exactly. Prefer the named measurement property in metric. Preserve entity population modifiers. Explicit simple temporal phrases require their full scope in time; simple on/using/under ... dataset restrictions belong in condition and cannot be stored in time. Semantic assignments outside these grammar rules require review."
+    "scope_rules": "Copy capitalization exactly. Preserve population modifiers in entity or condition. Simple time/dataset restrictions bind to their own AND clause. Only explicit leading comma-delimited temporal/dataset prefixes are shared. Each clause has at most one time and one dataset restriction; conflicting or unrepresentable restrictions stop incomplete with unsupported_scope_structure before generation. Other semantic scope assignments require review."
   },
   "assessment": {
     "required_fields": [
@@ -70,7 +71,8 @@
     ],
     "truth_semantics": "Positive predicate before applying the quantifier",
     "max_observations": 16,
-    "complete_coverage": "Quoted nonempty population with unique members and one observation per declared member"
+    "complete_coverage": "Quoted nonempty population with unique members and one observation per declared member",
+    "numeric_records": "numeric is null, a legacy single check object, or a nonempty list of at most 16 check objects. Every independent quantity requirement must have its own cited check. Missing or unknown requirements cannot support; any established false requirement refutes the conjunction. Model-declared unknown association remains unknown."
   },
   "numeric": {
     "required_fields": [
@@ -88,7 +90,9 @@
       "unit",
       "quote"
     ],
-    "arithmetic": "Source-grounded Decimal; value comparison or ordered before/after change",
+    "requirement_fields": ["start", "end", "quote", "value", "unit", "kind"],
+    "requirements": "Code derives an occurrence-based numeric_requirements list per normalized part. Offsets are relative to part.quote. Each quote binds a number to its immediate English unit/count noun; repeated values on different objects remain separate. A multi-quantity value check must use exactly one requirement quote as left.quote. Duplicate checks are rejected; each source_quote must be cited in that observation. Compound or ambiguous associations are not established by arithmetic.",
+    "arithmetic": "Source-grounded Decimal; value comparison for each independent requirement, or ordered before/after change",
     "unknown_policy": "No implicit unit conversion, unsupported comparisons or ambiguous association"
   },
   "result": {
@@ -108,10 +112,15 @@
   "decoding": {
     "library": "lm-format-enforcer==0.11.3",
     "adapter": "Public TokenEnforcer core plus Transformers prefix_allowed_tokens_fn; default serving backend has no constraint kwargs",
-    "decomposition": "Schema required keys/types/arrays; quote/scope enum from exact word-boundary spans in current claim; unique quotes; unambiguous quantifier restricted by source wording; no-AND claims require exactly one complete quote; detected simple temporal/dataset scope limits field enums",
-    "assessment": "Schema required fields/types, scope_match/truth/numeric enums and nullable numeric object; exact evidence and arithmetic still validated after generation",
+    "decomposition": "Schema required keys/types/arrays; quote/scope enums from exact source spans. AND clauses use separate object alternatives binding each quote to its local time/dataset restrictions plus explicit shared prefixes. No-AND claims require one complete quote. Unsupported scope structures fail preflight rather than generating against an impossible schema.",
+    "assessment": "Schema required fields/types, scope_match/truth/numeric enums and null/single/list numeric union; requirement coverage, exact evidence and arithmetic are validated after generation",
     "trace": "Every generation records decoder policy and schema SHA256; missing/mismatched trace fails gate",
     "scope_limit": "At most 80 whitespace-separated claim words for finite source enums",
     "limitations": "Schema validity does not prove atomicity, correct scope or entailment; truncated output still fails validation; human review required; supported scope grammar is English AND and simple temporal/dataset phrases; whole no-AND quote does not prove semantic atomicity"
+  },
+  "summarizer": {
+    "generator": "Object with exactly answer (nonempty string) and evidence_spans (list of nonempty strings, possibly empty). Invalid output skips Critic and requests repair.",
+    "critic": "Object with boolean is_supported, nonempty reason, and action empty for support or rewrite/request_more_context/lower_confidence otherwise. Optional suggested_query is a nonempty string of at most 4000 characters.",
+    "repair": "Uses existing MAX_INTERNAL_RETRY=3; exhaustion returns unsupported, low confidence. Valid JSON and valid role schema are recorded separately in opt-in traces."
   }
 }

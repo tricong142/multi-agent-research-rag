@@ -1,0 +1,21 @@
+{
+  "version": "atomic-cellfix9-validation-binding-v1",
+  "candidate": "atomic-verifier-constrained-v8-cellfix9",
+  "candidate_criteria_sha256": "6abc7038759bd361155c3aa19745c664af67e9f8e3f3fc6e26e1a436d6b6caf8",
+  "authorization": "User requested: Giữ bộ validation30 đã review, chưa dùng để tune; lập binding/lock mới khi đổi candidate.",
+  "binding_kind": "new candidate preregistration reusing unchanged human-reviewed gold",
+  "new_human_signature_created": false,
+  "original_reviewer": "Trí Công",
+  "original_reviewed_on": "2026-10-19",
+  "original_manifest_sha256": "2220c18b708c967b7a33ee1bcd6a8771ce7aefe7e2b3753d8a60adcc3c080069",
+  "annotation_review_sha256": "ff331ff78a9570959e8ec885ea9f7600078a31fe563878c09ca042f37df554b3",
+  "original_lock_sha256": "f699e958090b4016c80bc79171c03bbd53f21a8ea9567381e22411714d26f20e",
+  "cases_sha256": "1df43fb4907b1e385c8ad04059a81644d5aa3e84dd121ab93ee0f2b079ea13f5",
+  "inputs_sha256": "da73a462421d7ca850ffe5061c3fcd8a4bad35a81cb7b68bd865ab24a276b77a",
+  "protocol_sha256": "fd75cfde6c180c2d16e88219742a1b27a3c1aedaec65d2d09ccd10095854d4bf",
+  "cases": 30,
+  "papers": 10,
+  "development_overlap_sha256": "c7e1389e3d509ef05a29a67b9ae74bd47d59a4ab4c46d01744c2346ad66881a8",
+  "validation_used_for_tuning": false,
+  "inference_completed": false
+}

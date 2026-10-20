@@ -1,0 +1,196 @@
+{
+  "diagnostic_only_no_new_model_inference": true,
+  "source_sha256": {
+    "04_factchecker/inference/atomic_verifier.py": "35cec201bec6d1a4ab5d6186a7a0617c288db92ef7bd54d69e679bf2a6e3f595",
+    "04_factchecker/inference/numeric_verifier.py": "13facfbf47e4a979ea29c37ac81ae65aab866a0e30905b3a4b484c40c0df5428",
+    "04_factchecker/inference/evidence_screen.py": "23574b7320ac576989b283a58d3e81d58be001f1b1c286523d4f0baa04dfcab5",
+    "04_factchecker/inference/verifier.py": "7eff9f8678cf1a4c270e59ada432bdf12a2fd6323c3d598fa34cc3513fd468f8",
+    "04_factchecker/inference/judge.py": "818aa5a4dc7f8065e101264e59d57828cc00f60d1c105156e49c03f374f6dbb7",
+    "research_rag/evaluation/evaluate_atomic_verifier.py": "f8e3362b38c4e1cf11b2d3d0d90f10d7abdf8647e99f3cad5d6a8080a393f9ed",
+    "research_rag/evaluation/compare_blind_verifier.py": "ea14524f1f43c806975e0adbe0c0f24eecf23fd970123be735b9e14b7e6644cb",
+    "research_rag/evaluation/compare_factchecker.py": "ce7a74e56699a35d597493dd5152972a0cf40447aab6000774c7d76209574ae7",
+    "research_rag/evaluation/compare_confidence_backends.py": "0d383a92d02cec05743c3585058cd1fd7a4dbd5daab3730beee08b499eb5e873",
+    "research_rag/local.py": "b363825e64d07a5f8c12c5b456b1e58e4b2c4297e93f48d493c5dec3ba8bbf5a",
+    "requirements-orchestrator.txt": "31b5dac851eaaf005a151e9c071226aeafeb4679ebe4019d0368e68fbd0dacd4",
+    "research_rag/tests/test_atomic_verifier.py": "5d039eddaed6f8cd4a8a1e6677c52d012d7648d20b3437c042c0a0097e0491bb",
+    "research_rag/tests/test_atomic_experiment.py": "9f284c20054211fa851a786b96424ca531f9112383a918a2fbee09b0fd605eaa",
+    "04_factchecker/inference/atomic_decoding.py": "12b54889e184ef9fa5f5cb9300fe3150560fd2fc7f41d2519ae95873b178b31d",
+    "research_rag/tests/test_atomic_decoding.py": "6eabd3db1e06ffa61021811b7909b65277e6d4719cbf7d1f3e26d74c79e1745b",
+    "requirements-atomic-verifier.txt": "b95eaa539ed6046f9261b09cdaa82017360568703d8af8d2bc6d8eed3c9af370",
+    "research_rag/tests/test_atomic_decomposition_v5.py": "f5f2e053f0dbe3de38e0751aded20f22bdfa7c3822e4e7b669dd3eea2baf82d9",
+    "research_rag/tests/test_atomic_contract_v5.py": "c4bec92fda42241f7c0ee03366dda8e4ed88049e1ac5b75a0780f9f910c0cbed",
+    "train_agent3_summarizer/node.py": "43dff6e0ecccd9b9f7c6eb24d1ee73c0239c45a0c3553faf499a5e9fcfad5096",
+    "train_agent3_summarizer/config.py": "cf69370bc520b960cf144386793f44fac316c1c1ea20fd9bb3e566519c6863ea",
+    "train_agent3_summarizer/generator/prompts.py": "64bf3da00181c210452f86f24cf67b9c8acd9ea12c66e5d33eb2f026327e46fd",
+    "train_agent3_summarizer/critic/prompts.py": "5ec5559e8c6542375feb0d6ba619dc8b64036ae748972f9a01b8dfcb3ea54c11",
+    "research_rag/tests/test_summary_schema.py": "95f04375510bca135ab56a31c40b1e6b418e126d0b5f9059db8da60dd71b521c",
+    "research_rag/tests/test_summary_trace.py": "5285b7109213573ef157e3b8d67e44d6eb78bc9e8b7e3d18290e7cbad5c47538",
+    "research_rag/tests/test_atomic_metric_v6.py": "63433a23b9b07a309c2f88afd8bbe6eb6c552a344d69a9e97a25dedbee095477",
+    "research_rag/tests/test_atomic_metric_v7.py": "6d05e7f7502457cec1962b0959c731e13b123e678fee19c0fe156423eab29299",
+    "research_rag/tests/test_atomic_assessment_v8.py": "93e900e49a79b22313d0c74c5b3d1e8ff492292a7ad2674f87b12fcf7dcd9db5",
+    "research_rag/tests/fixtures/atomic_v8_v7_assessments.json": "577eb9dd475a800b80b8330510573c0b0c52b53e57e565c77af79e7b71675494",
+    "research_rag/tests/test_atomic_smoke_cellfix.py": "9b4efc67525f4fc905739590839fcb54c9db5b0c55964a429469b86b0a428949",
+    "research_rag/tests/test_atomic_smoke_cellfix2.py": "6c99a4ed08116f7bb5a72790a6830bcf4417fdf8168a404bc35fc51061c3f11a",
+    "research_rag/tests/test_atomic_smoke_cellfix3.py": "f240bd059d220ba21cca5a02deb17e39302cec73c22c1a473825599a44002d7b",
+    "research_rag/tests/fixtures/atomic_cellfix2_binding_traces.json": "734d96996de0008940e908d9513b5e21dd331d64c6124209c83e0af651cdbf9f",
+    "research_rag/tests/test_atomic_smoke_cellfix4.py": "51009a2b500059634383a6a1961d9caf8d9156762f06fb9524b705562d728c49",
+    "research_rag/tests/fixtures/atomic_cellfix3_citation_traces.json": "62ea69491c48c58c7441023f8314b04b9d0ef63b88fbcf58504654d94b891d82",
+    "research_rag/tests/test_atomic_metric_cellfix5.py": "fc66c70e90689eb9816ba8a8a4c6fe028832520e9bde12993ff97d3ad0f994fb",
+    "research_rag/tests/fixtures/atomic_cellfix4_metric_traces.json": "19f7e6de615f35b5a5bbf276aa0639930b9c35140cd9ba9b2ab2a0a92a28187d"
+  },
+  "all39_decompositions_match_reviewed_probe": true,
+  "failed_case_categories": {
+    "quantifier_population_or_positive_predicate": [
+      "scope:universal:support",
+      "scope:existential:support",
+      "scope:existential:contradict",
+      "scope:none:support",
+      "scope:none:contradict"
+    ],
+    "missing_information_mistaken_for_false": [
+      "scope:universal:not_enough_info",
+      "scope:entity:not_enough_info",
+      "scope:time:not_enough_info",
+      "scope:direction:not_enough_info",
+      "scope:condition:not_enough_info"
+    ],
+    "outside_population_counterevidence": [
+      "scope:time:support",
+      "scope:condition:support"
+    ],
+    "numeric_parser_or_binding": [
+      "scope:direction:support",
+      "scope:direction:contradict",
+      "scope:metric:support",
+      "scope:metric:contradict"
+    ],
+    "literal_target_forces_unknown": [
+      "scope:conjunction:support",
+      "scope:conjunction:contradict"
+    ]
+  },
+  "frozen_schema_and_numeric_checks": {
+    "scope:universal:support": [
+      {
+        "quote": "Every validation shard improved recall after the revision.",
+        "literal_targets": [],
+        "allowed_truths": [
+          "unknown",
+          "true",
+          "false"
+        ],
+        "complete_coverage_representable": true
+      }
+    ],
+    "scope:conjunction:support": [
+      {
+        "quote": "After tuning, the extractor decreased memory use",
+        "literal_targets": [],
+        "allowed_truths": [
+          "unknown"
+        ],
+        "complete_coverage_representable": false
+      },
+      {
+        "quote": "and increased token recall.",
+        "literal_targets": [],
+        "allowed_truths": [
+          "unknown"
+        ],
+        "complete_coverage_representable": false
+      }
+    ],
+    "scope:conjunction:contradict": [
+      {
+        "quote": "After tuning, the extractor decreased memory use",
+        "literal_targets": [],
+        "allowed_truths": [
+          "unknown"
+        ],
+        "complete_coverage_representable": false
+      },
+      {
+        "quote": "and increased token recall.",
+        "literal_targets": [],
+        "allowed_truths": [
+          "unknown"
+        ],
+        "complete_coverage_representable": false
+      }
+    ],
+    "afterward_unit": {
+      "parsed_requirements": [
+        {
+          "start": 58,
+          "end": 62,
+          "quote": "0.81",
+          "value": "0.81",
+          "unit": "",
+          "kind": "number"
+        },
+        {
+          "start": 98,
+          "end": 112,
+          "quote": "0.86 afterward",
+          "value": "0.86",
+          "unit": "afterward",
+          "kind": "number"
+        }
+      ],
+      "bare_dimensionless_operand_error": "numeric_unit_required"
+    },
+    "scope:direction:support": {
+      "numeric_metric_bound": false,
+      "numeric_tool_result": {
+        "kind": "change",
+        "input": {
+          "kind": "change",
+          "source_quote": "For the same requests and conditions, median latency was 42 milliseconds before the patch and 31 milliseconds after it.",
+          "left": {
+            "value": "42",
+            "unit": "milliseconds",
+            "quote": "42 milliseconds"
+          },
+          "right": {
+            "value": "31",
+            "unit": "milliseconds",
+            "quote": "31 milliseconds"
+          }
+        },
+        "truth": "true",
+        "reason": "ordered_change_comparison",
+        "left": "42",
+        "right": "31",
+        "unit": "milliseconds",
+        "requested_direction": "decrease",
+        "observed_direction": "decrease",
+        "delta": "-11"
+      }
+    },
+    "scope:metric:contradict": {
+      "numeric_metric_bound": true,
+      "numeric_tool_result": {
+        "kind": "change",
+        "input": {
+          "kind": "change",
+          "source_quote": "Under the same conditions, precision fell from 0.81 to 0.74 after the configuration change, while recall rose from 0.64 to 0.79.",
+          "left": {
+            "value": "0.81",
+            "unit": "",
+            "quote": "0.81"
+          },
+          "right": {
+            "value": "0.74",
+            "unit": "",
+            "quote": "0.74"
+          }
+        },
+        "truth": "unknown",
+        "reason": "ambiguous_numeric_passage",
+        "left": "0.81",
+        "right": "0.74",
+        "unit": ""
+      }
+    }
+  }
+}

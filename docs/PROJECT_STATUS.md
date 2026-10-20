@@ -1,10 +1,446 @@
-# Trạng thái hoàn thiện Research RAG — 2026-10-13
+# Trạng thái hoàn thiện Research RAG — 2026-10-20
 
 **Chưa đạt gate phát hành.** Đã có workflow LangGraph và các lượt inference
 thật; diagnostic còn trượt confidence/Reader PDF và atomic verifier. Đây là
 trang trạng thái hiện hành; các run log khác giữ lịch sử và bằng chứng chi tiết.
 
-## Hiện tại — probe v3 trượt; v4 đã đóng băng, chờ model thật — 2026-10-13
+## Hiện tại — cellfix10 T4 smoke/probe đạt; chờ human probe trước full39 — 2026-10-20
+
+- Audit run `20261020T145035Z-d525a354`: **71 output/120 input khớp release**,
+  replay 30 predictions/46 call triplets; metrics và derived parts khớp source.
+  Colab regression 314/314 và bốn validate-only đạt; model/revision/budget giữ nguyên.
+- Smoke **12/12 nhãn đúng, false support=0, runtime=0**, 28 calls. Probe **18/18
+  decomposition hợp lệ**, 20 part, 18 calls; không phải phép đo label accuracy.
+- AI review đủ 90 tiêu chí decomposition: 18/18 claim đạt theo AI, notes riêng.
+  Review human trong ZIP trống; admission chặn đúng. Full39 cellfix10 chưa chạy,
+  chưa đo lỗi scope/SOME mới trên model, validation30 vẫn chưa chạy.
+- Chất lượng smoke còn điểm cần theo dõi: member ở irrelevant là một đoạn văn,
+  missing causality chưa nêu rõ chứng cứ nhân quả, partial numeric chưa chỉ rõ
+  quantity trong prose missing. Nhãn đúng không đồng nghĩa mọi evidence/prose đạt.
+- Có thể chạy full39 để đánh giá **sau human review probe đúng run/hash**.
+  Chưa có human evidence review full39 hoặc serving/E2E pass.
+- [Audit và bước tiếp](reviews/cellfix10-20261020T145035Z-d525a354/AUDIT_AND_NEXT_STEPS.md),
+  [form có ghi chú AI](reviews/cellfix10-20261020T145035Z-d525a354/HUMAN_REVIEW_WITH_AI_NOTES.html),
+  [hash/replay](atomic-verifier-cellfix10-smoke-probe-audit-20261020T145035Z-d525a354.json).
+
+## Mốc đóng băng — cellfix10 kiểm local trước T4 — 2026-10-20
+
+- Đã bảo toàn cellfix9 ZIP/source/predictions **36/39, false support=0, 2 incomplete**.
+  Đây vẫn là mốc GPU gần nhất. Chưa có kết quả model mới của cellfix10.
+- Người dùng xác nhận audited set là toàn bộ cache nodes trong ca SOME. Candidate
+  mới lưu adjudication và bổ sung quy ước unique complete selection-set; không
+  đổi claim/context/gold, không có nhánh runtime theo ID hoặc tên của ca test.
+  Closure vẫn cần toàn bộ kết quả và đúng scope; hiển thị binding basis để review.
+- Sửa repair coverage và dùng missing reason code theo part. Decoder phát ghi chú
+  cố định; explanation/missing cho người dùng được dựng từ ledger đã kiểm.
+  Raw model prose giữ trong trace/model_explanation, không coi là evidence.
+- **314/314 regression** (23 test mới), **27/27 đường token filter Qwen**,
+  **15 test notebook + 6 test workflow**, **bốn validate-only từ payload** đạt.
+  Replay 39 output legacy từ chối ba ca lỗi; không tạo prediction/model score mới.
+- Criteria `2edd14d0e7fb728b3ba6eb99923ade128573ed2938f55bfeb2d1a0e4a06f8cda`;
+  **106 file candidate, 120 file payload**. Model/revision/budget/gate và
+  decomposition prompt giữ nguyên. Validation30 giữ nguyên gold/review/protocol,
+  binding mới cellfix10-v1, overlap screen 0 cờ và chưa dùng để tune.
+- Notebook mặc định chỉ chạy smoke -> probe18. Cần human review cho probe mới
+  trước full39 và human evidence review full39 đạt trước validation30. **Chưa có
+  inference GPU cellfix10, chưa có human review mới và chưa promote serving/E2E.**
+- [Notebook](../scripts/colab_atomic_verifier_cellfix10.ipynb),
+  [hướng dẫn và giới hạn](ATOMIC_VERIFIER_CELLFIX10_HANDOFF.md),
+  [release](atomic-verifier-cellfix10-release.json),
+  [kiểm đóng gói](atomic-verifier-cellfix10-packaging-validation.json).
+
+## Mốc GPU gần nhất — cellfix9 full39 đạt 36/39, validation30 bị chặn — 2026-10-20
+
+- Đã audit ZIP `output-cellfix9-fresh-20261020T110710Z-cf47db2f (3).zip`:
+  **105 output/115 input khớp hash**, đúng release. Replay đủ 69 prediction rows
+  và **141 call triplets** (smoke31, probe18, full39 92); metrics khớp từng trường.
+  Colab regression 291/291 và cả bốn validate-only đạt.
+- Smoke **12/12 nhãn đúng, false support=0, runtime=0**; probe **18/18 decomposition
+  hợp lệ**, không phải phép đo accuracy. Human probe review Trí Công đủ 90 tiêu chí
+  và notes, đúng hash, admission replay đạt.
+- Full39 **36/39 đúng, false support=0 theo gold, 2 incomplete**, một ca hoàn tất
+  sai nhãn. Original contracts 12/12; scope regression 24/27; gold support 12/12.
+  Gate giữ nguyên 39/39 và runtime=0 nên **chưa đạt**, exit code 1 là gate failure.
+- `scope:existential:contradict`: sửa coverage lỗi lặp thành chỉ Fir=false,
+  coverage=false, nên NEI thay vì frozen gold contradict. Hai incomplete do
+  hai lượt đều bịa author/year ở direction:NEI hoặc missing sai metric ở
+  conjunction:NEI. Guard chặn output sai đúng, nhưng repair chưa thành công.
+- Ngoài điểm nhãn: `scope:none:support` có quote/ledger/label đúng nhưng prose
+  nói có leak và claim bị contradicted; một số missing/prose vẫn sai hoặc bị cụt.
+  Không suy zero false support theo gold thành đạt semantic review toàn bộ.
+- **Validation30 chưa chạy, chưa có human review full39, admission chặn đúng.**
+  Giữ `RUN_VALIDATION30=False`, bảo toàn ZIP/predictions/source. Audit này không
+  sửa candidate/gold, không tạo human signature và không promote serving/E2E.
+- [Audit, đủ 39 notes và hướng tiếp](reviews/cellfix9-full39-20261020T110710Z-cf47db2f/AUDIT_AND_NEXT_STEPS.md),
+  [hash và replay](atomic-verifier-cellfix9-full39-audit-20261020T110710Z-cf47db2f.json).
+
+## Mốc đóng băng — cellfix9 kiểm local trước T4 — 2026-10-20
+
+- Mốc thất bại cellfix8 giữ nguyên ZIP/source/predictions và kết quả 29/39,
+  false support=0 theo gold, 3 incomplete. Snapshot và hash có trong
+  `atomic-verifier-cellfix8-preserved-before-cellfix9.json`.
+- Cellfix9 sửa binding member/predicate/citation dùng chung validator/decoder,
+  polarity theo từng member, coverage tập thể đóng rõ trong nguồn và
+  missing-information sai metric/citation không có nguồn. Có regression từ trace
+  cellfix8 và câu mới; không dùng case ID trong quy tắc runtime.
+- **291/291 regression** (39 test mới), **21/21 đường token filter Qwen**,
+  **15 test notebook + 6 test workflow**, cả **bốn validate-only từ payload** đạt.
+  Đây là kiểm code/đường token dựng để thử và backend giả, chưa đo chất lượng model.
+- Criteria `6abc7038759bd361155c3aa19745c664af67e9f8e3f3fc6e26e1a436d6b6caf8`;
+  101 file candidate, 115 file payload. Model/revision, decomposition prompt,
+  dữ liệu, budget/gate giữ nguyên. Validation30 gold/review/protocol giữ nguyên;
+  binding mới cellfix9-v1, overlap screen không báo cờ, chưa dùng để tune.
+- Notebook mới mặc định chạy smoke -> probe18; full39/validation30 tắt. Cần human
+  review probe cho chính predictions mới trước full39. **Chưa có smoke/probe/full39
+  inference GPU cellfix9, chưa có human review mới, chưa promote serving/E2E.**
+- [Notebook](../scripts/colab_atomic_verifier_cellfix9.ipynb),
+  [hướng dẫn và giới hạn](ATOMIC_VERIFIER_CELLFIX9_HANDOFF.md),
+  [release](atomic-verifier-cellfix9-release.json),
+  [kiểm đóng gói](atomic-verifier-cellfix9-packaging-validation.json).
+
+## Mốc bảo toàn — cellfix8 full39 chạy đủ, 29/39, chưa đạt — 2026-10-20
+
+- Recovery `20261020T095348Z-7974a5cc` từ run probe
+  `20261020T061934Z-c87bce57`: **128 output/111 input khớp hash**; lineage,
+  human admission Trí Công và smoke replay đạt. Model/revision, source/prompt,
+  contract, budget và gate không đổi. Môi trường Colab T4 dựng thành công.
+- Replay đủ **39 predictions/95 call triplets**, metrics khớp: **29/39 đúng,
+  false support=0 theo gold, 3 incomplete do invalid_output_exhausted**.
+  Original contracts 12/12; scope regression 17/27. Bảy ca hoàn tất sai nhãn;
+  bốn trong 12 gold support chưa được nhận đúng. Exit code 1 do gate thất bại.
+- Cả 95 generation đều parse JSON được, không có deadline/OOM trong kết quả.
+  Ba incomplete: universal:contradict, none:contradict, time:support.
+- **Có support đúng nhãn nhưng sai citation**: scope:entity:support nói North
+  gateway nhưng chỉ cite South gateway. Guard polarity còn reject nhầm phản ví dụ
+  third shard vì mượn vế improved của shard khác. NONE/coverage còn sai; prose
+  nêu thiếu sai metric và tự thêm Shepherd et al. (2023) không có trong context.
+  Zero false support theo gold không chứng minh evidence đã đúng toàn bộ.
+- Đã bảo toàn ZIP/source/predictions và AI audit từng ca; không ký human full39,
+  không thay annotation/predictions, **validation30 chưa chạy và bị chặn đúng**.
+  Chưa promote serving/E2E. Candidate tiếp cần sửa binding, polarity, closure,
+  missing-information qua regression trace thật + câu mới; giữ validation30 độc lập.
+- [Audit, 39 nhận xét và hướng tiếp](reviews/cellfix8-full39-20261020T095348Z-7974a5cc/AUDIT_AND_NEXT_STEPS.md),
+  [replay và hash](atomic-verifier-cellfix8-full39-audit-20261020T095348Z-7974a5cc.json),
+  [diagnostic guard](atomic-verifier-cellfix8-full39-audit-20261020T095348Z-7974a5cc-guard-diagnostics.json).
+
+## Lịch sử trước recovery — cellfix8 smoke12 và human probe18 đạt — 2026-10-20
+
+- Run `20261020T061934Z-c87bce57`: 71 output/111 input khớp hash; replay đủ
+  smoke12/probe18 và 46 call triplets, metrics khớp. Colab regression 252 đạt,
+  cả bốn validate-only đạt. HTML đính kèm trùng nguyên byte form trong ZIP.
+- **Smoke đúng 12/12, false support=0, runtime failure=0**, 28 calls. Probe
+  **18/18 cấu trúc hợp lệ**, 20 part, 18 calls; chưa đo label accuracy trên probe.
+- AI đã đánh giá riêng 90 tiêu chí decomposition, 18 claim đạt. 014: in May lọc
+  population trial conducted in May, không gán May làm thời điểm improvement.
+  018: entity batch + low-temperature group giới hạn population đúng.
+- Trí Công đã gửi human review của run mới, đủ 90 judgments và notes; hash
+  khớp criteria/predictions. **require_probe_review admission/replay đạt**.
+  Giữ file human nguyên byte, AI review/unsigned gốc giữ riêng, không ký thay.
+- Smoke còn vấn đề chất lượng explanation/missing-information: partial_memory
+  nêu thiếu sai metric; accuracy_conflict diễn giải memory sang accuracy;
+  một số câu giải thích bị cụt. Không suy từ đúng nhãn thành đạt review evidence.
+- Chưa có full39 hoặc validation30 của cellfix8. Đã chuẩn bị cell RUN_FULL39=True
+  với run_id/admission gốc và kiểm đúng hash human upload trước khi copy;
+  chưa execute model. Chưa promote serving/E2E.
+- [Human admission và bước full39](reviews/cellfix8-20261020T061934Z-c87bce57/human/NEXT_STEPS.md),
+  [machine admission](reviews/cellfix8-20261020T061934Z-c87bce57/human/admission.json).
+- Handoff gặp globals run_id không khớp; chưa có bằng chứng artifact cũ còn/mất
+  trong Colab. Đã chuẩn bị [đường khôi phục từ ZIP + human review](reviews/cellfix8-20261020T061934Z-c87bce57/human/RESTORE_GUIDE.md),
+  workspace riêng, pins cũ, replay/admission trước model; không sửa assert để
+  gán nhầm source và không tạo candidate mới. **7/7 test recovery đạt**, replay
+  smoke/human admission thực tế từ bản khôi phục đạt, pins/release giữ nguyên.
+  Full39 recovery chưa chạy trên T4.
+- [Audit và bước tiếp](reviews/cellfix8-20261020T061934Z-c87bce57/AUDIT_AND_NEXT_STEPS.md),
+  [review đủ 18 claim](reviews/cellfix8-20261020T061934Z-c87bce57/DECOMPOSITION_REVIEW.md),
+  [form human có notes AI](reviews/cellfix8-20261020T061934Z-c87bce57/HUMAN_REVIEW_WITH_AI_NOTES.html).
+
+## Lịch sử — cellfix7 trượt smoke 10/12; cellfix8 kiểm local trước T4 — 2026-10-20
+
+- ZIP run `20261020T033551Z-c7337790` khớp 53 output/107 input; replay đủ
+  12 predictions/29 calls và metrics. **10/12 đúng, false support=0, runtime=1**.
+  Chưa có probe18/full39/validation30 của cellfix7; baseline 37/39 là lịch sử.
+- Hai lỗi: JSON còn mở sau 111 token ở both_supported; bounded_scope khai thiếu
+  dữ liệu dataset ngoài claim dù observation true/matched. Đã bảo toàn ZIP,
+  source/predictions và validation30 gốc.
+- Cellfix8 sửa freetext parser/cache theo alphabet và biên ký tự, empty array
+  maxItems=0, cùng scoped missing-information qua bounded repair. Model/revision,
+  budget/gate, decomposition prompt và gold validation giữ nguyên.
+- **252/252 regression**, **20/20 test đóng gói/workflow**, **14/14 đường tokenizer
+  Qwen thật** đạt; đã tái hiện EOS sớm ở parser cũ và chặn prefix lỗi ở parser mới.
+  Payload 111 file qua cả bốn validate-only. Binding validation mới là cellfix8-v1;
+  source/predictions cellfix7 và review/lock/gold validation30 giữ nguyên hash.
+- Chưa có inference GPU cellfix8. Kiểm local không xác nhận smoke12/full39 đạt.
+- [Audit cellfix7](ATOMIC_VERIFIER_CELLFIX7_SMOKE_REVIEW_20261020T033551Z-c7337790.md),
+  [hướng dẫn cellfix8](ATOMIC_VERIFIER_CELLFIX8_RUN_GUIDE.md),
+  [kiểm đóng gói cuối](atomic-verifier-cellfix8-packaging-validation.json).
+
+## Lịch sử — cellfix7 đã kiểm local trước inference — 2026-10-20
+
+- Cellfix7 là candidate riêng từ source cellfix6 đã audit; ZIP/source/predictions
+  thất bại 7/12, false support=0 và toàn bộ validation30 cũ giữ nguyên hash.
+- Sửa quy tắc chung scope/truth, witness bác ALL và ledger q0/q1 cho từng quantity;
+  nhánh false cần một record thực sự sai. Model/revision, budget/gate và prompt
+  decomposition giữ nguyên; không promote vào serving.
+- **237/237 regression đạt**, gồm 26 test mới từ trace/câu development mới;
+  **20/20 test đóng gói/workflow đạt**. Payload giải nén từ notebook qua cả bốn
+  validate-only smoke12/probe18/full39/validation30. Token filter Qwen thật đạt
+  10/10 đường thử, không tải weights/generate predictions.
+- Validation30 dùng gold/review cũ nguyên byte, binding mới
+  [v5](validation/atomic-cellfix7-v5/binding.json) theo yêu cầu đổi candidate;
+  không ký human review mới. Kiểm thêm 53 file development, không thấy overlap
+  lexical theo các quy tắc đã công bố; chưa dùng outcomes validation để tune.
+- Notebook 7 cell chạy smoke → probe18 + review → full39 + review → validation30.
+  Hai chặng cuối mặc định tắt, kiểm admission/replay trước khi gọi model.
+  Chưa có inference cellfix7, số đo full39/validation30 hoặc E2E thực tế.
+- [Notebook và hướng dẫn](ATOMIC_VERIFIER_CELLFIX7_RUN_GUIDE.md),
+  [kết quả regression](atomic-verifier-cellfix7-validation.json),
+  [kiểm đóng gói cuối](atomic-verifier-cellfix7-packaging-validation.json).
+
+## Lịch sử — cellfix6 trượt smoke 7/12; probe/full39 bị chặn — 2026-10-20
+
+- Run `20261019T171503Z-bfe32d16` đã qua cell 2, review admission và T4 preflight.
+  211 regression và ba validate-only đạt; 12 ca smoke hoàn tất, **7/12 đúng nhãn,
+  false support=0, runtime failure=0**. Contradict recall 0/4; support recall 3/4.
+- Audit đủ 50 output/99 input; replay 12 predictions và 29 call triplets khớp
+  metrics. Năm ca sai liên quan scope-vs-truth, phản ví dụ ALL và numeric ledger.
+  Một attempt bị từ chối đúng vì duplicate_numeric_requirement; repair trả NEI sai.
+- Cùng 12 claim/context/gold trong cellfix5 đã lưu đạt 12/12. Đây là suy giảm
+  trên development, chưa có ablation xác định ảnh hưởng riêng code/prompt.
+- Notebook chặn probe18; chưa có full39/validation30 inference của cellfix6.
+  Số 37/39 trong baseline-metrics là lịch sử, không phải kết quả candidate này.
+- [Audit và hướng tiếp theo](ATOMIC_VERIFIER_CELLFIX6_SMOKE_REVIEW_20261019T171503Z-bfe32d16.md),
+  [machine audit](atomic-verifier-cellfix6-smoke-audit-20261019T171503Z-bfe32d16.json).
+
+## Annotation validation cellfix6 đã khóa — 2026-10-20
+
+- File review của Trí Công, ngày 2026-10-19, đạt admission đủ 30 ca / 10 paper.
+  Đã tạo [validation-lock.json](validation/atomic-cellfix6-v1/validation-lock.json)
+  khớp manifest và criteria cellfix6. Notebook vẫn khớp hash đã đóng gói.
+- Có thể chạy notebook Colab T4 từ đầu và upload đúng file review ở cell 2.
+  Chưa có inference mới, kết quả full39 hoặc validation30 của cellfix6.
+
+## Chuẩn bị packet validation — 2026-10-19
+
+- Chuẩn bị 30 ca từ 10 paper QASPER, claim mới và gold đề xuất kèm evidence
+  nguyên văn/thông tin thiếu. Tách khỏi paper dev và paper từng trả về trong
+  retrieval dev đã lưu; không thấy overlap lexical theo các kiểm đã công bố.
+  Nhãn chưa được người review xác nhận; chưa gọi là final test độc lập.
+- Protocol/hash đã được ghi trước inference. Notebook smoke/probe chứa đúng
+  89 đầu vào candidate cộng 10 file packet; chặn GPU khi review chưa hợp lệ,
+  tạo lock khi đủ xác nhận. Chưa chạy full39 hoặc validation30 của cellfix6.
+- Kiểm bản đóng gói đạt 23/23 test admission/lifecycle; payload giải nén từ
+  notebook đạt lại 211/211 regression và cả ba CLI validate-only.
+  [Báo cáo kiểm gói](atomic-verifier-cellfix6-packet-validation.json).
+- [Form review 30 ca](validation/atomic-cellfix6-v1/REVIEW.html),
+  [hướng dẫn bước tiếp theo](ATOMIC_VERIFIER_CELLFIX6_VALIDATION_RUN_GUIDE.md).
+
+## Cellfix6 sửa assessment, local đạt; chờ inference — 2026-10-18
+
+- Người dùng chọn giữ context và đánh nhãn theo evidence nghiêm ngặt.
+  Bản annotation `strict-identity-v1` chuyển hai ca conjunction S/C thành NEI
+  vì thiếu identity extractor; ca NEI giữ nhãn, sửa rationale. Giữ nguyên bộ39
+  gốc, ZIP/predictions cellfix5 và báo cáo lịch sử 21/39.
+- Candidate riêng sửa absence-vs-false, scope của witness, positive predicate
+  trước lượng từ, temporal adverb bị hiểu là unit và binding cặp số theo metric.
+  Prompt assessment đổi; decomposition, model/revision, budget/gate giữ nguyên.
+- **211/211 regression đạt**, gồm 30 test mới từ trace/câu development mới;
+  ba CLI validate-only smoke12/probe18/full39 đạt. Token filter thật với tokenizer
+  Qwen đạt 7/7 đường thử (4 hợp lệ, 3 bị chặn đúng). Kiểm này không nạp trọng số.
+- Chưa có inference T4/smoke/probe/full39 mới, review candidate mới, validation
+  độc lập hoặc tích hợp/E2E. Candidate chưa được promote vào serving.
+- [Quyết định và phạm vi cellfix6](ATOMIC_VERIFIER_CELLFIX6_ASSESSMENT_DECISIONS.md),
+  [kết quả local](atomic-verifier-cellfix6-validation.json).
+
+## Lịch sử — full39 cellfix5 đã chạy, gate chưa đạt — 2026-10-18
+
+- Run `20261018T153854Z-2c3e0bd6`: đủ 39 completed, **21/39 đúng nhãn**,
+  **false_support=0**, runtime_failed_rows=0. Original contracts 12/12;
+  scope regression 9/27. Đây là số đo của candidate cellfix5, không phải baseline.
+- Support recall **5/13 (38,46%)**; chỉ có 5 predictions support. Zero false
+  support không thay gate đúng 39/39. `automated_gate_pass=false`, exit 1 là
+  trượt chất lượng, không phải crash/timeout. Human admission probe của Trí Công đạt.
+- Đã kiểm hash/provenance, replay 39 predictions/85 calls và rà 46 part.
+  181 regression và ba validate-only đạt trên T4; cả 39 decomposition trùng
+  probe đã review. Lỗi còn ở truth/coverage, missing-vs-false, population,
+  numeric binding/unit parser và exact-target schema. Hai ca conjunction cần
+  làm rõ binding ngầm trong annotation trước khi thay guard.
+- [Audit full39 và việc cần làm](ATOMIC_VERIFIER_CELLFIX5_FULL39_REVIEW_20261018T153854Z-2c3e0bd6.md).
+  Chưa đủ điều kiện tích hợp/nghiệm thu verifier. Validation độc lập và E2E
+  Reader/Summarizer/Writer với atomic verifier mới vẫn thiếu.
+
+Các mục ngày 17/10 bên dưới giữ lịch sử trước lượt full39 cellfix5.
+
+## Candidate verifier v8 — chuẩn bị local, chưa inference T4 — 2026-10-17
+
+- Đã kiểm lại snapshot v7 211 file và ZIP/hash; giữ nguyên prediction/review cũ.
+- V8 giới hạn explanation/quote, decoder chọn evidence nguyên văn và operand
+  từ nguồn; thiếu numeric bắt buộc đi vào repair có giới hạn. Sửa binding
+  predicate có `exactly`, explicit quantity denial và hint repair riêng assessment.
+  Các quan hệ chưa hỗ trợ hoặc giả định vẫn unknown.
+- Deadline tuyệt đối đi qua RecordingBackend vào Transformers stopping criteria;
+  JSON dở được giữ trong trace và kết quả đến muộn bị loại. Đây là ngắt hợp tác
+  khi decode; watchdog process vẫn cần để xử lý CUDA/prefill treo.
+- Model/revision/data/budget và prompt decomposition giữ như v7. Chưa có kết quả
+  GPU, human review v8, full39 hoặc validation độc lập; chưa kết luận zero false
+  support. Agent3/Agent5 và toàn dự án vẫn chưa Ready với verifier mới.
+- Regression local đạt332/332; payload độc lập đạt123 frozen tests, validate-only
+  probe18/smoke12/verifier39 đạt. Những kiểm tra này không nạp trọng số model v8.
+- [Validation local](ATOMIC_VERIFIER_V8_VALIDATION.md) và [hướng dẫn T4](ATOMIC_VERIFIER_V8_RUN_GUIDE.md):
+  smoke12 contract dev trước probe18; chỉ admission người mới của đúng v8 mới
+  được chạy full39. Không vá riêng claim007 hoặc dùng lại chữ ký v7.
+
+## Hiện tại — QASPER Dense đã chạy hợp lệ; verifier/E2E còn chờ — 2026-10-17
+
+- Run `20261017T053445Z-0d2b6961`: đã kiểm ZIP/CRC,34 output files,13 input
+  files khớp release.12 stage và4 Colab regression đạt. FAISS mới18.587 vector,
+  1.024 chiều, IndexFlatIP; tất cả vector hữu hạn/normalized, mapping khớp corpus.
+- Đã chấm lại393 BM25 +393 Dense traces; **fallback/error=0**. Dense Hit@5
+  **40,97%**, paragraph Recall@5 **27,07%**, MRR@5 **0,23087**; BM25 lần lượt
+  **27,99%**, **15,97%**, **0,15895**. Top-5 và scores BM25393 câu khớp lượt local.
+- Dense còn232/393 câu không lấy được đoạn gold trong top-5. Đây là retrieval dev
+  theo đoạn văn, không phải official QASPER answer score, nhãn verifier hoặc E2E.
+  417 test-candidate qrels chưa được chấm trong lượt này; adaptive/hybrid chưa đo.
+- Bước tiếp theo: chạy candidate verifier v8 theo smoke12/probe18 + human review
+  mới rồi đủ39 ca; tách bộ validation có annotation riêng, sau đó Reader OCR
+  và tích hợp model E2E.
+  Claim007 đã qua probe v7; không vá theo ID để tăng điểm. Full39 v7 vẫn không đạt.
+- **Agent3, Agent5 và toàn dự án chưa Ready với verifier mới.** Xem
+  [audit và các bước nghiệm thu](QASPER_BM25_DENSE_REVIEW_20261017.md).
+
+## Lịch sử — gate nghiệm thu và QASPER — 2026-10-16
+
+**Agent 3 và Agent 5 chưa Ready với atomic verifier mới, chưa có E2E đạt.**
+Loader vẫn nạp FactChecker cũ. Probe18 chỉ đo cấu trúc tách mệnh đề; không thay
+accuracy nhãn hoặc false support39. V7 hiện đạt18/18 probe/human review nhưng
+full39 timeout, chưa hoàn tất phép đo. Không tiếp tục vá riêng007.
+
+BM25 mới chạy393/393 dev QASPER: Hit@5=0,2798982188, paragraph
+Recall@5=0,1596641625, fallback/error=0. QASPER chưa có FAISS: Dense metrics=null,
+so sánh hai phương pháp chưa hợp lệ. Notebook GPU đã đóng gói riêng dev/corpus,
+giữ417 test candidate riêng, kiểm backend từng query và từ chối điểm Dense khi
+fallback. Reader mặc định local PyMuPDF → Tesseract; binary OCR trên host còn thiếu.
+Xem [protocol, bằng chứng và thứ tự chạy](PRODUCTION_GATES_20261016.md).
+
+## Lịch sử — full39 v7 timeout, assessment không đạt — 2026-10-16
+
+- Run `20261016T071213Z-7c8c33c6`:54/54 output files,69 input files,26 frozen
+  sources, model pairing và human admission đều khớp;101 Colab regression và
+  hai validate-only đạt. Hard timeout5.400 giây dừng run, chưa có metrics.json cuối.
+-22 predictions đã lưu replay khớp:21 incomplete, một completed nhưng sai
+  gold ở contract:cross_sentence;0 nhãn đúng và0 support ở phần này.17 ca chưa
+  có prediction, gồm một đang chạy và16 chưa bắt đầu; chưa kết luận false support39.
+-68 started/67 finished calls;27 generations chạm1.536 tokens và JSON chưa
+  đóng. Quotes bịa/paraphrase bị guard chặn; numeric bắt buộc bị bỏ. Fixture
+  offline còn tái hiện full-predicate metric không bind được proof có exactly,
+  cùng mismatch explicit denial/numeric policy.17 rows vượt soft deadline180 giây.
+- Giữ nguyên v7/output; chưa triển khai v8 hoặc chạy inference mới trong audit.
+  Cần sửa assessment generation/grounding/numeric/deadline và smoke probe ngắn
+  trước full39 mới. [Audit và hướng sửa](ATOMIC_VERIFIER_V7_FULL39_REVIEW_20261016T071213Z-7c8c33c6.md).
+- **Bước2 và gate toàn dự án chưa hoàn tất; chưa promotion serving.**
+
+## Lịch sử — probe v7 đạt; human admission hoàn tất — 2026-10-16
+
+- Run `20261016T024708Z-a57ee72a`: provenance/CRC/39 output files/69 input files/
+  26 frozen sources và replay18 predictions/18 calls/54 events khớp.
+  **18/18 structural pass, không repair**; Colab101 tests và hai validate-only đạt.
+- AI đã review20 parts. Human reviewer **tricong** cung cấp tên và xác nhận rõ
+  cả18 ca đạt cả năm tiêu chí, đã đọc lưu ý named-metric010/014/018. Human JSON
+  được lưu riêng và `require_probe_review` đã chấp nhận; original ZIP/template
+  pending giữ nguyên làm lịch sử. [Audit/review](DECOMPOSITION_PROBE_REVIEW_20261016T024708Z-a57ee72a.md).
+- Đã dựng notebook39 tự chứa đúng source/data, probe gốc và human review đã
+  xác nhận;4 packaging/admission tests mới đạt. Người dùng chạy bốn cell trên
+  T4 mới; không cần chạy lại probe. [Hướng dẫn39](ATOMIC_VERIFIER_V7_FULL39_RUN_GUIDE.md).
+- **Chưa có kết quả39 hoặc số đo false support; bước2 và gate toàn dự án chưa hoàn tất.**
+
+## Lịch sử — candidate v7 đóng băng offline — 2026-10-16
+
+- Đã bảo toàn v6 bằng snapshot/ZIP 140 file có hash; replay đủ 18 predictions
+  bằng source v6 độc lập. Giữ nguyên ZIP, predictions và human review gốc.
+- V7 dùng chung source-derived metric requirement theo từng vế cho validator
+  và decoder policy v4; chặn bare verb và quantity/object fragment trong mẫu
+  đếm/thời lượng được hỗ trợ. Model/revision, base prompts, dữ liệu và budget giữ nguyên.
+- **299/299 regression và 7/7 kiểm thử đóng gói đạt**. Payload Colab độc lập
+  chạy đủ 101 frozen tests và hai validate-only; source/contract/criteria/notebook
+  mới đồng bộ hash. Đây là kết quả chuẩn bị trước khi inference; probe/human
+  admission mới được ghi ở mục hiện tại phía trên.
+- Chỉ sau18/18 output thực tế đạt cùng human review đúng hash mới admission39.
+  [Notebook và hướng dẫn](ATOMIC_VERIFIER_V7_RUN_GUIDE.md),
+  [validation và giới hạn](ATOMIC_VERIFIER_V7_VALIDATION.md).
+
+## Lịch sử — probe v6 đã chạy T4, gate chưa đạt — 2026-10-15
+
+- Run `20261015T155608Z-9262cfd5`: CRC/39 output files, 68 input manifest files,
+  25 frozen sources, model pairing và replay 18 predictions/20 calls khớp.
+  Colab 87 tests và hai validate-only đạt. Probe **17/18 hợp lệ, 1 incomplete**.
+- 007 giữ metric `took` ở cả hai attempts; 008 repair sang `240 documents`, còn
+  thiếu full predicate theo prompt. Review AI: 16 claim đạt, 1 cần sửa, 1 chưa
+  có valid plan. **Chưa admission 39 ca, chưa human review, false support chưa đo.**
+  [Báo cáo và bước tiếp theo](DECOMPOSITION_PROBE_REVIEW_20261015T155608Z-9262cfd5.md).
+
+## Lịch sử chuẩn bị — candidate v6 đóng băng offline — 2026-10-15
+
+- Đã bảo toàn v5: snapshot/ZIP 127 file có hash; replay đủ 18 predictions bằng
+  source v5 trong snapshot. Giữ nguyên ZIP và human review gốc.
+- V6 thêm `metric_predicate_incomplete` vào validator/repair hữu hạn. Bảy
+  regression mới, 87 test verifier/summarizer và 7 test packaging đạt; cả hai
+  validate-only đạt. Decoder, model, base prompts, dữ liệu và ngân sách không đổi.
+- Đã dựng notebook Colab/Kaggle v6, freeze 25 source files. Ở thời điểm đóng gói
+  chưa có inference; run model sau đó được ghi ở mục hiện tại phía trên.
+- Lượt cuối: **285/285 test `research_rag/tests` và 7/7 test đóng gói đạt**.
+  Đã sao lưu và dựng lại notebook resume cùng các notebook phụ thuộc để đồng
+  bộ Summarizer/Judge source cũ; không đổi assertions hoặc quality gate.
+  [Chi tiết validation và artifact](ATOMIC_VERIFIER_V6_VALIDATION.md).
+
+## Lịch sử — probe Colab v5 đã audit — 2026-10-15
+
+- Đã nhận và audit ZIP Colab run `20261015T103401Z-723b3e4a`: CRC, 39 output
+  files, 67 input manifest files và 24 frozen sources khớp; replay 18 predictions/
+  18 calls khớp. Tesla T4, 80 regression tests và hai validate-only đạt.
+  Probe **18/18 cấu trúc, 18 calls, không repair**. Review AI đủ 20 parts:
+  **16/18 claim đạt, 007/008 cần sửa metric `took`/`contained` quá chung**.
+  Human review còn pending; chưa chạy 39 ca, chưa đo false support.
+  [Báo cáo review](DECOMPOSITION_PROBE_REVIEW_20261015T103401Z-723b3e4a.md).
+
+- Chuyển môi trường theo yêu cầu: dựng notebook Colab 4 cell, 67 file payload;
+  80 regression tests từ payload độc lập và hai `validate-only` đạt (2 test
+  packaging Colab đạt). Trình duyệt agent lỗi tải Monaco; người dùng chạy bằng
+  Chrome/Edge và gửi ZIP probe đã kiểm ở mục trên.
+  [Notebook Colab](../scripts/colab_decomposition_probe_v5.ipynb),
+  [trạng thái bước 2](ATOMIC_VERIFIER_V5_STEP2_20261015.md).
+
+- Bước chạy model đã thử trên Kaggle: phát hiện và sửa hash nền thiếu trong
+  payload `test_summary_trace.py`; 3 test packaging đạt, draft tải ngược khớp
+  đủ ba code cell. Lượt chạy từ draft đã xác minh bị chặn trước model loading
+  bởi `Firebase: Error (auth/internal-error)`; Refresh vẫn lỗi. Lượt Kaggle không
+  có inference; kết quả Colab sau đó ghi ở mục trên. Chưa đo false support.
+  [Báo cáo thực thi](ATOMIC_VERIFIER_V5_STEP2_20261015.md).
+
+- Đã sửa bug 6/8/9/10: schema Generator/Critic và retry hữu hạn; scope theo từng
+  vế AND; danh sách yêu cầu số liệu và bằng chứng riêng; criteria/notebook v5 đồng bộ hash.
+- 83 test regression/experiment/đóng gói và 55 test autonomy/E2E/graph/integration đạt.
+  `validate-only` cho 39 ca và probe 18 ca đều đạt. Notebook được kiểm payload,
+  compile ba cell và freeze check trong runtime giải nén tạm.
+- Đã chạy Qwen/CUDA v5 decomposition; review ngữ nghĩa bằng người và full 39 ca
+  vẫn chờ. Quality gate toàn hệ chưa đạt.
+  Xem [chi tiết, artifact và lệnh kiểm tra](ATOMIC_VERIFIER_V5_VALIDATION.md).
+
+## Hiện tại — local demo đã chạy; quality gate toàn hệ còn chờ — 2026-10-14
+
+- Đã chạy runner local riêng cho năm agent: 94 test logic được chọn đạt; bốn test
+  runner/report đạt. BM25 chạy trên corpus thật, Hit@5 = 7/10; công cụ Reader
+  PyMuPDF khớp 7/7 span ở hai PDF text, toàn bộ ba PDF = 7/9; Writer baseline
+  không dùng LLM đạt schema 100% nhưng warning 100%.
+- Summarizer/Fact-checker chấm lại predictions lưu trong repo, chưa inference
+  mới trên local: verbatim span 86,67% trên 18 ca; accuracy 79,91%, macro-F1
+  0,78308 trên 468 ca. Đây là dữ liệu development, không thay đánh giá độc lập.
+- Host chỉ có CPU, 7,69 GiB RAM tổng; Summarizer/Writer thiếu base weights trong
+  cache. Reader chưa có Tesseract/Gemini key trong môi trường. Chưa xác nhận chạy
+  đủ năm checkpoint trên laptop. [Hướng dẫn demo và nguồn số đo](LOCAL_AGENT_DEMO.md).
+- ZIP probe v4 `20261013T152836Z-a86e9199` đã chạy model: 214 test Kaggle đạt,
+  16/18 decomposition hợp lệ, 2 incomplete, 23 calls; gate vẫn false. Bản sửa v5
+  đã đóng băng offline ngày 2026-10-15, chưa chạy model. Local demo không thay gate verifier.
+
+## Lịch sử — probe v3 trượt; chuẩn bị v4 trước inference — 2026-10-13
 
 - ZIP `20261013T135905Z-ac194776` đạt CRC; 37/37 output files, 45/45 runtime,
   28/28 patch và frozen source/prompt/data/model pairing khớp. Replay 18

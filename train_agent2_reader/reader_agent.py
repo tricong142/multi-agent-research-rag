@@ -1,4 +1,8 @@
 """
+Default runtime is local PyMuPDF -> Tesseract with bounded extraction guards.
+Gemini router/critique below run only with allow_remote=True (diagnostics/opt-in).
+Passing extraction guards does not establish semantic or table accuracy.
+
 reader_agent.py
 =================
 Router + Self-Critique Loop cho pipeline doc tai lieu PDF, ket hop:
@@ -29,6 +33,7 @@ LUONG XU LY 1 TRANG PDF:
 """
 
 import logging
+import math
 from typing import List, Optional, Tuple
 
 import fitz  # PyMuPDF
@@ -64,10 +69,12 @@ _NEXT_TOOL_FROM_ACTION = {
 
 
 class ReaderAgent:
-    def __init__(self, layoutlmv3_model_dir: Optional[str] = None, *, on_api_attempt=None):
+    def __init__(self, layoutlmv3_model_dir: Optional[str] = None, *, on_api_attempt=None,
+                 allow_remote: bool = False):
         self._layoutlmv3_tool = None
         self._layoutlmv3_model_dir = layoutlmv3_model_dir
         self._on_api_attempt = on_api_attempt
+        self.allow_remote = allow_remote
 
     def _get_layoutlmv3_tool(self):
         """Lazy-load model LayoutLMv3 - chi load khi thuc su can dung lan dau,
@@ -120,6 +127,10 @@ class ReaderAgent:
             logger.info("Guardrail: khong co text layer -> chon ocr_fallback (khong goi LLM)")
             return "ocr_fallback"
 
+        if not self.allow_remote:
+            logger.info('Local Reader: text layer -> alt_segmentation; remote policy disabled')
+            return "alt_segmentation"
+
         if (
             features["avg_block_count"] <= SIMPLE_LAYOUT_BLOCK_THRESHOLD
             and features["image_area_ratio"] < 0.1
@@ -157,9 +168,20 @@ class ReaderAgent:
         if not blocks:
             return (
                 False,
-                _DEFAULT_FALLBACK_CHAIN.get(tool_name),
+                self._local_next_tool(tool_name) if not self.allow_remote else _DEFAULT_FALLBACK_CHAIN.get(tool_name),
                 "Ket qua rong hoan toan (Heuristic Guardrail)",
             )
+
+        if not self.allow_remote:
+            width, height = features['page_width'], features['page_height']
+            for block in blocks:
+                box = block.bbox
+                confidence = block.confidence
+                if (not isinstance(block.text, str) or not block.text.strip()
+                        or len(box) != 4 or not all(math.isfinite(v) for v in box)
+                        or not (0 <= box[0] < box[2] <= width + 1 and 0 <= box[1] < box[3] <= height + 1)
+                        or confidence is not None and (not math.isfinite(confidence) or not 0 <= confidence <= 1)):
+                    return False, self._local_next_tool(tool_name), 'Invalid local extraction block'
 
         confidences = [b.confidence for b in blocks if b.confidence is not None]
         avg_conf = sum(confidences) / len(confidences) if confidences else None
@@ -167,9 +189,13 @@ class ReaderAgent:
         if avg_conf is not None and avg_conf < MIN_ACCEPTABLE_CONFIDENCE:
             return (
                 False,
-                _DEFAULT_FALLBACK_CHAIN.get(tool_name),
+                self._local_next_tool(tool_name) if not self.allow_remote else _DEFAULT_FALLBACK_CHAIN.get(tool_name),
                 f"Confidence trung binh qua thap ({avg_conf:.2f}) (Heuristic Guardrail)",
             )
+
+        if not self.allow_remote:
+            # shortcut: extraction guards do not certify reading order or table semantics.
+            return True, None, 'Local extraction guards passed; semantic/layout review still required'
 
         # Khong ro rang tot/xau -> goi Gemini Critique
         if __package__:
@@ -199,6 +225,10 @@ class ReaderAgent:
             next_tool = _DEFAULT_FALLBACK_CHAIN.get(tool_name)
         return False, next_tool, result.reasoning
 
+    @staticmethod
+    def _local_next_tool(tool_name):
+        return 'ocr_fallback' if tool_name == 'alt_segmentation' else None
+
     def process_page(self, pdf_path: str, page_no: int = 0) -> dict:
         attempts = []
         api_attempts = []
@@ -226,8 +256,14 @@ class ReaderAgent:
                 is_acceptable, next_tool, reason = self._critique(
                     tool_name, blocks, features, on_attempt=record_api_attempt)
             except Exception as exc:
+                if not self.allow_remote and stage == 'extract' and tool_name == 'alt_segmentation':
+                    attempts.append({'stage': stage, 'tool': tool_name, 'accepted': False,
+                                     'error_type': type(exc).__name__, 'api_attempts': []})
+                    tool_name = 'ocr_fallback'
+                    continue
                 return self._failed_page(stage, tool_name, attempts, exc, api_attempts)
             attempts.append({"tool": tool_name, "reason": reason, "accepted": is_acceptable,
+                             "validation_mode": "gemini" if self.allow_remote else "local_extraction_guards",
                              "api_attempts": api_attempts})
             api_attempts = []
 
@@ -243,12 +279,15 @@ class ReaderAgent:
                 logger.warning(f"Het duong fallback sau tool '{tool_name}'. Dung lai.")
                 break
 
+            if not self.allow_remote and next_tool == 'layoutlmv3':
+                break
+
             logger.info(f"Fallback: '{tool_name}' -> '{next_tool}'")
             if len(attempts) < MAX_RETRIES:
                 tool_name = next_tool
 
         return {
-            "blocks": blocks,
+            "blocks": [],
             "final_tool": tool_name,
             "attempts": attempts,
             "success": False,

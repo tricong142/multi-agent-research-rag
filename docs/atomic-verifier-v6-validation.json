@@ -1,0 +1,253 @@
+{
+  "version": "atomic-verifier-constrained-v6-20261015",
+  "criteria_sha256": "69b9d45d071d1c4627189f8eeecf3387a3b32b8357b8161ca417f82efc0047ae",
+  "source_files": 25,
+  "unchanged": [
+    "backends",
+    "base_model",
+    "base_revision",
+    "baseline_file",
+    "baseline_sha256",
+    "case_deadline_seconds",
+    "cases_per_backend",
+    "contracts_sha256",
+    "dataset_groups",
+    "decomposition_probe",
+    "human_review_acceptance",
+    "human_review_required",
+    "human_review_rubric",
+    "max_attempts",
+    "max_calls_per_case",
+    "max_false_support",
+    "max_new_tokens",
+    "max_runtime_failed_rows",
+    "maximum_generated_tokens",
+    "maximum_total_backend_calls",
+    "min_correct_labels_recognized",
+    "process_timeout_seconds",
+    "promotion",
+    "prompt_sha256",
+    "purpose",
+    "seed",
+    "structured_decoder",
+    "supplemental_cases_file",
+    "supplemental_cases_sha256"
+  ],
+  "validate_only": [
+    {
+      "freeze_valid": true,
+      "cases": 18,
+      "maximum_calls": 36
+    },
+    {
+      "freeze_valid": true,
+      "cases": 39,
+      "maximum_calls": 312
+    }
+  ],
+  "historical_v5_wire_revalidation_under_v6": {
+    "note": "Offline validation of old v5 plans only; not new v6 predictions, repairs or model quality.",
+    "accepted": 16,
+    "rejected": [
+      {
+        "example_id": "decompose:007",
+        "error": "metric_predicate_incomplete",
+        "detail": {
+          "issues": [
+            {
+              "code": "metric_predicate_incomplete"
+            },
+            {
+              "code": "metric_predicate_incomplete",
+              "field": "parts[0].scope.metric",
+              "required_source": [
+                "took 12 seconds"
+              ]
+            }
+          ],
+          "missing_source_spans": []
+        }
+      },
+      {
+        "example_id": "decompose:008",
+        "error": "metric_predicate_incomplete",
+        "detail": {
+          "issues": [
+            {
+              "code": "metric_predicate_incomplete"
+            },
+            {
+              "code": "metric_predicate_incomplete",
+              "field": "parts[0].scope.metric",
+              "required_source": [
+                "contained 240 documents"
+              ]
+            }
+          ],
+          "missing_source_spans": []
+        }
+      }
+    ],
+    "original_predictions_modified": false
+  },
+  "v6_gpu_inference_completed": true,
+  "latest_probe": {
+    "run": "20261015T155608Z-9262cfd5",
+    "zip_sha256": "3c55d7a31f4f46d530285cc95b93e2d22bf9e989a62657ba647adf07706e0281",
+    "predictions_replayed": 18,
+    "backend_calls": 20,
+    "valid_decompositions": 17,
+    "incomplete": 1,
+    "automated_gate_pass": false,
+    "assistant_review": {"pass": 16, "needs_revision": 1, "without_valid_plan": 1},
+    "audit": "docs/decomposition-probe-audit-20261015T155608Z-9262cfd5.json"
+  },
+  "human_review": "pending",
+  "verifier39_completed": false,
+  "false_support": null,
+  "serving_promoted": false,
+  "tests": [
+    {
+      "suite": "verifier_summarizer_subset",
+      "tests": 87,
+      "passed": true,
+      "elapsed_seconds": 20.454,
+      "log": "docs/atomic-verifier-v6-core-tests.log",
+      "log_sha256": "0ceb5c7a5486fe6a1037dabd9cfd2bdb428b3c0cfef574eb1c48bcbf0f6dddf7"
+    },
+    {
+      "suite": "research_rag_full_suite",
+      "tests": 285,
+      "passed": true,
+      "elapsed_seconds": 72.571,
+      "log": "docs/atomic-verifier-v6-full-tests.log",
+      "log_sha256": "6e095783734ef37c84390b77d68c008083ef7b16f66d4b39bd5754b5cfede62d"
+    },
+    {
+      "suite": "packaging_suite",
+      "tests": 7,
+      "passed": true,
+      "elapsed_seconds": 59.813,
+      "log": "docs/atomic-verifier-v6-packaging-tests.log",
+      "log_sha256": "a9efd520644c5f1a673cab3c93ae44a90edfc155ad1e7c1a54a25e0647e03d3e"
+    },
+    {
+      "suite": "legacy_notebook_subset",
+      "tests": 24,
+      "passed": true,
+      "elapsed_seconds": 11.978,
+      "log": "docs/atomic-verifier-v6-legacy-tests.log",
+      "log_sha256": "c84080e1cf385e25b9f9e6a097b8c86eb23370a5e56b91f22ca3a36d34fc3d71"
+    }
+  ],
+  "counting_note": "87 core tests and 24 legacy notebook tests are subsets of the 285 research_rag tests. The 7 script packaging tests are separate: 292 unique current test cases passed.",
+  "colab_payload_verified": {
+    "files": 68,
+    "runtime_regression_tests": 87,
+    "compiled_code_cells": 4,
+    "both_validate_only_modes_passed": true
+  },
+  "v5_preservation": {
+    "snapshot": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\atomic-verifier-v5-source-snapshot-20261015T103401Z-723b3e4a",
+    "archive": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\atomic-verifier-v5-source-snapshot-20261015T103401Z-723b3e4a.zip",
+    "files": 127,
+    "manifest_sha256": "d16ccb1fe463bf728da948fc79cb273ea21ff990539475bd742888fee13e6318",
+    "archive_sha256": "337583ca37fc017e164023dab462540c758906539349d10cdc64de39e00196af",
+    "validation": {
+      "v5_freeze_valid": true,
+      "v5_predictions_replayed": 18
+    }
+  },
+  "legacy_packaging_repaired": {
+    "artifact": "scripts/kaggle_resume_validation.ipynb",
+    "cause": "Pre-existing resume notebook embedded Summarizer and Judge sources older than the preserved v5 runtime.",
+    "source_changed_by_v6": false,
+    "stale_payloads": [
+      {
+        "path": "train_agent3_summarizer/node.py",
+        "embedded_sha256": "8f219e2740a4fe73449a849a893a50a980880d33a6748c31084d22fa22d91188",
+        "current_sha256": "43dff6e0ecccd9b9f7c6eb24d1ee73c0239c45a0c3553faf499a5e9fcfad5096"
+      },
+      {
+        "path": "04_factchecker/inference/judge.py",
+        "embedded_sha256": "e05d2d19384f4b8713fa6c18cbc9fa87defcafda164628467508cc7c98a50649",
+        "current_sha256": "818aa5a4dc7f8065e101264e59d57828cc00f60d1c105156e49c03f374f6dbb7"
+      }
+    ],
+    "before_sha256": "7d13c8bb55af04c3558871d75259975132a67e7d0544e548435df73676666481",
+    "after_sha256": "09018149517b2b4b5c4884dc1827591f4ddfd68962e0962df2ef2120062541de",
+    "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\kaggle_resume_validation.ipynb",
+    "rebuilt_payload_files_verified": 45,
+    "dependent_artifacts_refreshed": [
+      {
+        "path": "scripts/kaggle_autonomy_validation.ipynb",
+        "before_sha256": "82307a86a236935d0846882b10e75ea8466a3f89a774ce9f45f74b9ca233377e",
+        "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\scripts\\kaggle_autonomy_validation.ipynb",
+        "after_sha256": "3ee1e6f59f4f01fe96d52afc1c16c0dde6b6a92cf1411f0cb21408bf3cb8ad15"
+      },
+      {
+        "path": "scripts/kaggle_confidence_validation.ipynb",
+        "before_sha256": "6b5db2f1862792d863bc944607083cfdc80eca968b4655cc9060e28340236a87",
+        "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\scripts\\kaggle_confidence_validation.ipynb",
+        "after_sha256": "7b6e5be7ffa3785c64a08a3c32f6d4849a87627bd18f87571aebd766f1fbdfe0"
+      },
+      {
+        "path": "scripts/kaggle_confidence_backends.ipynb",
+        "before_sha256": "8ff762a50974e594cb77fd8816b49e82e652c25358ac628ee768ea9d954186d8",
+        "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\scripts\\kaggle_confidence_backends.ipynb",
+        "after_sha256": "d16183744c752db2d5b45da2d28946274f4491235da30c350df44b27c60a7aa1"
+      },
+      {
+        "path": "scripts/kaggle_reader_diagnostics.ipynb",
+        "before_sha256": "28bce63d375aef98ad152d6047cae8a4eb4daaa23fb36351208d8b8b346af36c",
+        "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\scripts\\kaggle_reader_diagnostics.ipynb",
+        "after_sha256": "884c47e553144a1da6db9f8a49afb439e9d8702902b7208acb00550d67b7c878"
+      },
+      {
+        "path": "scripts/kaggle_gemini_access_check.ipynb",
+        "before_sha256": "3440db511623b44430394050c4f6135bddcc42476b4473f08d883af1078ab587",
+        "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\scripts\\kaggle_gemini_access_check.ipynb",
+        "after_sha256": "3440db511623b44430394050c4f6135bddcc42476b4473f08d883af1078ab587"
+      },
+      {
+        "path": "scripts/kaggle_reader_retry_503.ipynb",
+        "before_sha256": "91f2f22423f50b0000663cdf35dfe82b520935a1a1f56790c4e0e8110d5b5e87",
+        "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\scripts\\kaggle_reader_retry_503.ipynb",
+        "after_sha256": "91f2f22423f50b0000663cdf35dfe82b520935a1a1f56790c4e0e8110d5b5e87"
+      },
+      {
+        "path": "scripts/kaggle_completion_validation.ipynb",
+        "before_sha256": "b754fcbbe76f5b2b22685a545e2912964e6506afe2dec31eb585332b31a629b0",
+        "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\scripts\\kaggle_completion_validation.ipynb",
+        "after_sha256": "60b64cdfc2ebc0eed43eefb5ba4d5ace9d78a154859c3801f2f33d9364fa06f4"
+      },
+      {
+        "path": "scripts/kaggle_blind_verifier.ipynb",
+        "before_sha256": "f14f892e322cb8a59e1724817206b1bfb4dd157424c97f4311506f9acb40281e",
+        "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\scripts\\kaggle_blind_verifier.ipynb",
+        "after_sha256": "1801f2a630c16903c03d9f16fbec0ac8aeacb6186201af663142308a22b235b2"
+      },
+      {
+        "path": "docs/READER_RETRY_503.md",
+        "before_sha256": "51e7caa40decd642a69eb8e2b66e25ae97cb1f70b81aea1cb5f1a859859b44ca",
+        "backup": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v6-legacy-packaging-backup\\docs\\READER_RETRY_503.md",
+        "after_sha256": "51e7caa40decd642a69eb8e2b66e25ae97cb1f70b81aea1cb5f1a859859b44ca"
+      }
+    ]
+  },
+  "initial_full_suite_failures_preserved": [
+    {
+      "log": "research-runs/v6-full-suite.log",
+      "failures": 1,
+      "cause": "Pre-existing stale resume payload"
+    },
+    {
+      "log": "research-runs/v6-full-suite-final.log",
+      "failures": 5,
+      "cause": "Dependent notebooks still used the earlier resume setup"
+    }
+  ],
+  "freeze_idempotence_checked": true,
+  "steps_1_to_3_completed": true,
+  "step2_model_evaluation_completed": false
+}

@@ -128,6 +128,8 @@ class RetrievalService:
         import faiss
         import numpy as np
 
+        # A missing static index must not load a large encoder before fallback.
+        index = None if pdf else self._get_faiss_index()
         encoder = self._get_encoder()
         if pdf:
             vectors = np.asarray(encoder.encode([r["text"] for r in rows], normalize_embeddings=True), dtype="float32")
@@ -135,8 +137,6 @@ class RetrievalService:
                 raise ValueError("PDF embedding output has the wrong shape")
             index = faiss.IndexFlatIP(vectors.shape[1])
             index.add(vectors)
-        else:
-            index = self._get_faiss_index()
         vector = np.asarray(encoder.encode(QUERY_PREFIX + query, normalize_embeddings=True), dtype="float32").reshape(1, -1)
         if vector.shape[1] != index.d:
             raise IndexMismatchError("Query embedding dimension differs from FAISS index")

@@ -1,0 +1,44 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix2",
+  "single_cell_file": "scripts/colab_v8_assessment_smoke_cellfix2.py",
+  "cell_sha256": "99c278e04861752e407e5883981583b836afa5b9928cdd271495d236af9d0e97",
+  "candidate_criteria_sha256": "35e83fc64066e6fa08473bee783c119953eb3d1e216ea1c51ec7f45570f77cc8",
+  "v8_release_and_cellfix1_scripts_preserved": true,
+  "regression_tests_passed": 135,
+  "new_tests": 5,
+  "source_files": 30,
+  "smoke_validate_only": {
+    "freeze_valid": true,
+    "cases": 12,
+    "maximum_calls": 96
+  },
+  "simulated_failed_gate_remained_blocked": true,
+  "download_invoked_in_simulation": true,
+  "model_data_budgets_unchanged": true,
+  "new_gpu_inference_completed": false,
+  "new_smoke_result": null,
+  "full39_result": null,
+  "human_review": "pending",
+  "limitations": [
+    "Local unit/token-filter/validate-only checks do not measure real Qwen T4 labels.",
+    "Finite semantic guards remain conservative; no claim of 12/12 or zero false support."
+  ],
+  "local_harness": {
+    "candidate_root": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\atomic-v8-cellfix-local-082408\\workspace-cellfix2-20261017T084559Z-525a2968",
+    "candidate_out": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\atomic-v8-cellfix-local-082408\\output-cellfix2-20261017T084559Z-525a2968",
+    "statuses": {
+      "regression-cellfix2": {
+        "exit_code": 0
+      },
+      "smoke-validate-only-cellfix2": {
+        "exit_code": 0
+      },
+      "assessment-smoke": {
+        "exit_code": 1
+      }
+    },
+    "cell_sha256": "99c278e04861752e407e5883981583b836afa5b9928cdd271495d236af9d0e97",
+    "model_inference": false,
+    "simulated_failed_gate_remained_blocked": true
+  }
+}

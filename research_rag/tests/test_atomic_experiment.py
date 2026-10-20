@@ -19,6 +19,10 @@ class UnknownBackend:
     def __init__(self):
         self.calls = []
 
+    @contextmanager
+    def generation_deadline(self, deadline):
+        yield True  # Immediate scripted output; no real model in this fixture.
+
     def generate_json(self, messages, **options):
         payload = json.loads(messages[1]['content'])
         self.calls.append(payload)
@@ -33,18 +37,20 @@ class UnknownBackend:
                 while end > start and claim[end-1].isspace(): end -= 1
                 own = d.atomic._quantifier(claim[start:end])
                 q = inherited if own == 'atomic' else own
+                restrictions = d.atomic.part_restrictions(claim, claim[start:end])
                 parts.append({'quote': claim[start:end], 'quantifier': q,
-                    'scope': {'entity': claim.split()[0], 'metric': claim.split()[0],
-                              'time': next((m[0] for m in re.finditer(r'\b(?:after|before|during)\b', claim, re.I)), ''),
-                              'condition': next((m[0] for m in re.finditer(r'\b(?:on|using|under)\s+[^,.;]*\bdatasets?\b', claim, re.I)), '') or
-                                  next((m[0] for m in re.finditer(r'\b(?:if|when|under|\w+-temperature)\b', claim, re.I)), '')}})
+                    'scope': {'entity': claim.split()[0], 'metric': restrictions['required_metric'] or claim.split()[0],
+                              'time': next(iter(restrictions['time']), ''),
+                              'condition': next(iter(restrictions['condition']), '') or
+                                  next((m[0] for m in re.finditer(r'\b(?:if|when|under|\w+-temperature)\b', restrictions['source'], re.I)), '')}})
             result = {'parts': parts, 'unresolved': []}
         else:
             result = assessment([], missing=['Matching evidence for this claim part.'])
         if self.on_generation is not None:
             self.on_generation({'generated_tokens': 1, 'prompt_tokens': 1,
                 'max_new_tokens': options['max_new_tokens'], 'structured_decoder': d.decoding.DECODER,
-                'schema_sha256': d.decoding.schema_sha256(d.decoding.schema_for(messages)[0])})
+                'schema_sha256': d.decoding.schema_sha256(d.decoding.schema_for(messages)[0]),
+                'deadline_stop_enabled': True})
         return result
 
 
@@ -82,7 +88,7 @@ class AtomicExperimentTests(unittest.TestCase):
                     d.run_experiment(directory / 'out', loader, criteria_path=path)
                 loader.assert_not_called()
                 self.assertFalse((directory / 'out').exists())
-        for file in ('factchecker_contract_cases.jsonl', 'atomic_verifier_contract_v5.json', 'decomposition_probe_claims_v2.jsonl'):
+        for file in ('factchecker_contract_cases.jsonl', json.loads(d.CRITERIA.read_text())['contract_file'], 'decomposition_probe_claims_v2.jsonl'):
             with self.subTest(file=file), tempfile.TemporaryDirectory() as tmp:
                 directory = Path(tmp)
                 path, _ = self.copy_inputs(directory)

@@ -1,0 +1,20 @@
+{
+  "version": "atomic-verifier-constrained-v7-20261016",
+  "purpose": "Full39 notebook; human admission required before model loading",
+  "criteria_sha256": "3e9a61616903e99f3c767e45c2ba361b44f6ea6c65732598ac3166b6cf23af7f",
+  "embedded_probe_run": "20261016T024708Z-a57ee72a",
+  "embedded_original_probe_zip_sha256": "9501567f9efe425c9d8ed61a416f58a92ccac75bc44afef7c04e71b1eead590f",
+  "files": {
+    "scripts/colab_atomic_verifier39_v7.ipynb": "59110ae9501a9208d1e88d0810d1c5c9f3d503e7e53b7e09a62db792d8243025",
+    "scripts/build_colab_atomic_verifier39.py": "1ba72e4fd149ff38289bf4c7b8a0aa6798a099a5cc86e732c62207dfcc30bcc9",
+    "scripts/colab_decomposition_probe_v7.ipynb": "5e1fcf1774f208f11d5021ee5429402ccd7cc817f876876a6c8976bd764fda3e",
+    "docs/semantic-review-v7-20261016T024708Z-a57ee72a.json": "c01870b7f777607508055b0ee12ce44b47141960345ce8ae15babed0d4f9719f"
+  },
+  "human_review_embedded": true,
+  "human_review": {
+    "probe_predictions_sha256": "55d449e24056ed440ec9e6e660aea164f20a345c045dc70c5411cf2d84b747d4",
+    "semantic_review_sha256": "c01870b7f777607508055b0ee12ce44b47141960345ce8ae15babed0d4f9719f",
+    "reviewer": "tricong"
+  },
+  "verifier39_inference_completed": false
+}

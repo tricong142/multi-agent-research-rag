@@ -1,0 +1,352 @@
+[
+  {
+    "kind": "offline_constructed_witness_not_model_prediction",
+    "case_id": "contract:atomic_support",
+    "claim": "The sample contained 240 documents.",
+    "context": "The final sample contained exactly 240 documents.",
+    "expected_from_frozen_case": "support",
+    "numeric_checker": {
+      "kind": "value",
+      "input": {
+        "kind": "value",
+        "source_quote": "The final sample contained exactly 240 documents.",
+        "left": {
+          "value": "240",
+          "unit": "documents",
+          "quote": "240 documents"
+        },
+        "right": {
+          "value": "240",
+          "unit": "documents",
+          "quote": "240 documents"
+        }
+      },
+      "truth": "true",
+      "reason": "exact_value_comparison",
+      "left": "240",
+      "right": "240",
+      "unit": "documents",
+      "requirement": {
+        "start": 21,
+        "end": 34,
+        "quote": "240 documents",
+        "value": "240",
+        "unit": "documents",
+        "kind": "number"
+      }
+    },
+    "raw": {
+      "scope_match": "matched",
+      "coverage": {
+        "complete": true,
+        "members": [
+          "sample"
+        ],
+        "quotes": [
+          "The final sample contained exactly 240 documents."
+        ]
+      },
+      "observations": [
+        {
+          "member": "sample",
+          "truth": "true",
+          "quotes": [
+            "The final sample contained exactly 240 documents."
+          ],
+          "explanation": "Source explicitly reports this entity and measurement.",
+          "numeric": {
+            "kind": "value",
+            "source_quote": "The final sample contained exactly 240 documents.",
+            "left": {
+              "value": "240",
+              "unit": "documents",
+              "quote": "240 documents"
+            },
+            "right": {
+              "value": "240",
+              "unit": "documents",
+              "quote": "240 documents"
+            }
+          }
+        }
+      ],
+      "missing_information": [],
+      "explanation": "Offline constructed test fixture, not a new model output."
+    },
+    "checked": {
+      "part": {
+        "quote": "The sample contained 240 documents.",
+        "quantifier": "atomic",
+        "scope": {
+          "entity": "sample",
+          "metric": "contained 240 documents",
+          "time": "",
+          "condition": ""
+        },
+        "start": 0,
+        "end": 35,
+        "numeric_requirements": [
+          {
+            "start": 21,
+            "end": 34,
+            "quote": "240 documents",
+            "value": "240",
+            "unit": "documents",
+            "kind": "number"
+          }
+        ]
+      },
+      "numeric_requirements": [
+        {
+          "start": 21,
+          "end": 34,
+          "quote": "240 documents",
+          "value": "240",
+          "unit": "documents",
+          "kind": "number"
+        }
+      ],
+      "assessed_label": "not_enough_info",
+      "observations": [
+        {
+          "member": "sample",
+          "truth": "unknown",
+          "quotes": [
+            "The final sample contained exactly 240 documents."
+          ],
+          "explanation": "Source explicitly reports this entity and measurement.",
+          "numeric": {
+            "kind": "value",
+            "source_quote": "The final sample contained exactly 240 documents.",
+            "left": {
+              "value": "240",
+              "unit": "documents",
+              "quote": "240 documents"
+            },
+            "right": {
+              "value": "240",
+              "unit": "documents",
+              "quote": "240 documents"
+            }
+          },
+          "model_truth": "true",
+          "numeric_result": {
+            "kind": "value",
+            "input": {
+              "kind": "value",
+              "source_quote": "The final sample contained exactly 240 documents.",
+              "left": {
+                "value": "240",
+                "unit": "documents",
+                "quote": "240 documents"
+              },
+              "right": {
+                "value": "240",
+                "unit": "documents",
+                "quote": "240 documents"
+              }
+            },
+            "truth": "unknown",
+            "reason": "numeric_metric_binding_unresolved",
+            "left": "240",
+            "right": "240",
+            "unit": "documents",
+            "requirement": {
+              "start": 21,
+              "end": 34,
+              "quote": "240 documents",
+              "value": "240",
+              "unit": "documents",
+              "kind": "number"
+            }
+          }
+        }
+      ],
+      "explanation": "atomic: not_enough_info; observed predicate values: unknown; complete coverage: False.",
+      "coverage": {
+        "complete": true,
+        "members": [
+          "sample"
+        ],
+        "quotes": [
+          "The final sample contained exactly 240 documents."
+        ]
+      },
+      "scope_match": "matched",
+      "missing_information": [
+        "Resolve numeric_metric_binding_unresolved for claim part: The sample contained 240 documents."
+      ],
+      "model_explanation": "Offline constructed test fixture, not a new model output.",
+      "validation_issues": [
+        "numeric_metric_binding_unresolved"
+      ]
+    }
+  },
+  {
+    "kind": "offline_constructed_witness_not_model_prediction",
+    "case_id": "contract:wrong_units",
+    "claim": "Training took 12 seconds.",
+    "context": "Training took 12 hours, not 12 seconds.",
+    "expected_from_frozen_case": "contradict",
+    "numeric_checker": {
+      "kind": "value",
+      "input": {
+        "kind": "value",
+        "source_quote": "Training took 12 hours, not 12 seconds.",
+        "left": {
+          "value": "12",
+          "unit": "seconds",
+          "quote": "12 seconds"
+        },
+        "right": {
+          "value": "12",
+          "unit": "hours",
+          "quote": "12 hours"
+        }
+      },
+      "truth": "unknown",
+      "reason": "qualified_numeric_evidence",
+      "left": "12",
+      "right": "12",
+      "unit": "seconds"
+    },
+    "raw": {
+      "scope_match": "matched",
+      "coverage": {
+        "complete": true,
+        "members": [
+          "Training"
+        ],
+        "quotes": [
+          "Training took 12 hours, not 12 seconds."
+        ]
+      },
+      "observations": [
+        {
+          "member": "Training",
+          "truth": "false",
+          "quotes": [
+            "Training took 12 hours, not 12 seconds."
+          ],
+          "explanation": "Source explicitly reports this entity and measurement.",
+          "numeric": {
+            "kind": "value",
+            "source_quote": "Training took 12 hours, not 12 seconds.",
+            "left": {
+              "value": "12",
+              "unit": "seconds",
+              "quote": "12 seconds"
+            },
+            "right": {
+              "value": "12",
+              "unit": "hours",
+              "quote": "12 hours"
+            }
+          }
+        }
+      ],
+      "missing_information": [],
+      "explanation": "Offline constructed test fixture, not a new model output."
+    },
+    "checked": {
+      "part": {
+        "quote": "Training took 12 seconds.",
+        "quantifier": "atomic",
+        "scope": {
+          "entity": "Training",
+          "metric": "took 12 seconds",
+          "time": "",
+          "condition": ""
+        },
+        "start": 0,
+        "end": 25,
+        "numeric_requirements": [
+          {
+            "start": 14,
+            "end": 24,
+            "quote": "12 seconds",
+            "value": "12",
+            "unit": "seconds",
+            "kind": "number"
+          }
+        ]
+      },
+      "numeric_requirements": [
+        {
+          "start": 14,
+          "end": 24,
+          "quote": "12 seconds",
+          "value": "12",
+          "unit": "seconds",
+          "kind": "number"
+        }
+      ],
+      "assessed_label": "not_enough_info",
+      "observations": [
+        {
+          "member": "Training",
+          "truth": "unknown",
+          "quotes": [
+            "Training took 12 hours, not 12 seconds."
+          ],
+          "explanation": "Source explicitly reports this entity and measurement.",
+          "numeric": {
+            "kind": "value",
+            "source_quote": "Training took 12 hours, not 12 seconds.",
+            "left": {
+              "value": "12",
+              "unit": "seconds",
+              "quote": "12 seconds"
+            },
+            "right": {
+              "value": "12",
+              "unit": "hours",
+              "quote": "12 hours"
+            }
+          },
+          "model_truth": "false",
+          "numeric_result": {
+            "kind": "value",
+            "input": {
+              "kind": "value",
+              "source_quote": "Training took 12 hours, not 12 seconds.",
+              "left": {
+                "value": "12",
+                "unit": "seconds",
+                "quote": "12 seconds"
+              },
+              "right": {
+                "value": "12",
+                "unit": "hours",
+                "quote": "12 hours"
+              }
+            },
+            "truth": "unknown",
+            "reason": "numeric_metric_binding_unresolved",
+            "left": "12",
+            "right": "12",
+            "unit": "seconds"
+          }
+        }
+      ],
+      "explanation": "atomic: not_enough_info; observed predicate values: unknown; complete coverage: False.",
+      "coverage": {
+        "complete": true,
+        "members": [
+          "Training"
+        ],
+        "quotes": [
+          "Training took 12 hours, not 12 seconds."
+        ]
+      },
+      "scope_match": "matched",
+      "missing_information": [
+        "Resolve numeric_metric_binding_unresolved for claim part: Training took 12 seconds."
+      ],
+      "model_explanation": "Offline constructed test fixture, not a new model output.",
+      "validation_issues": [
+        "numeric_metric_binding_unresolved"
+      ]
+    }
+  }
+]

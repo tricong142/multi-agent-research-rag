@@ -1,0 +1,183 @@
+{
+  "version": "atomic-verifier-constrained-v7-20261016",
+  "date": "2026-10-16",
+  "status": "full39_timed_out_assessment_failed",
+  "criteria_sha256": "3e9a61616903e99f3c767e45c2ba361b44f6ea6c65732598ac3166b6cf23af7f",
+  "frozen_source_files": 26,
+  "decoder_policy": "atomic-schema-decoding-v4",
+  "checks": {
+    "full": [
+      {
+        "command": [
+          "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\.venv\\Scripts\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "research_rag/tests",
+          "-v"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 133.813,
+        "log": "docs/atomic-verifier-v7-full-tests.log"
+      }
+    ],
+    "packaging": [
+      {
+        "command": [
+          "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\.venv\\Scripts\\python.exe",
+          "-m",
+          "unittest",
+          "scripts.test_atomic_notebook",
+          "scripts.test_colab_atomic_probe",
+          "-v"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 79.172,
+        "log": "docs/atomic-verifier-v7-packaging-tests.log"
+      }
+    ],
+    "validate-only": [
+      {
+        "command": [
+          "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\.venv\\Scripts\\python.exe",
+          "-m",
+          "research_rag.evaluation.evaluate_atomic_verifier",
+          "--output-dir",
+          "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v7-test-tmp\\not-created",
+          "--validate-only",
+          "--decomposition-probe"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 7.64,
+        "log": "docs/atomic-verifier-v7-probe-validate-only.log"
+      },
+      {
+        "command": [
+          "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\.venv\\Scripts\\python.exe",
+          "-m",
+          "research_rag.evaluation.evaluate_atomic_verifier",
+          "--output-dir",
+          "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\v7-test-tmp\\not-created",
+          "--validate-only"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 2.047,
+        "log": "docs/atomic-verifier-v7-verifier-validate-only.log"
+      }
+    ]
+  },
+  "research_tests_passed": 299,
+  "packaging_tests_passed": 7,
+  "unique_tests_passed": 306,
+  "frozen_payload_tests_passed": 101,
+  "new_metric_regression_tests": 14,
+  "frozen_payload_tests_are_subset_of_research_tests": true,
+  "both_validate_only_passed": true,
+  "exact_payload_tests_executed": true,
+  "preserved_v5_and_v6_replayed": true,
+  "old_probes_cannot_admit_v7": true,
+  "original_v6_outputs_verified_unchanged": 39,
+  "original_v6_zip_and_human_template_unchanged": true,
+  "v6_snapshot": "docs/atomic-verifier-v6-preserved-before-v7.json",
+  "real_tokenizer_check": {
+    "kind": "offline_real_tokenizer_feasibility",
+    "model_inference": false,
+    "fixture_count": 18,
+    "fixtures_accepted": [
+      "decompose:001",
+      "decompose:002",
+      "decompose:003",
+      "decompose:004",
+      "decompose:005",
+      "decompose:006",
+      "decompose:007",
+      "decompose:008",
+      "decompose:009",
+      "decompose:010",
+      "decompose:011",
+      "decompose:012",
+      "decompose:013",
+      "decompose:014",
+      "decompose:015",
+      "decompose:016",
+      "decompose:017",
+      "decompose:018"
+    ],
+    "old_bad_drafts_rejected": [
+      {
+        "example_id": "decompose:007",
+        "metric": "took"
+      },
+      {
+        "example_id": "decompose:007",
+        "metric": "took"
+      },
+      {
+        "example_id": "decompose:008",
+        "metric": "contained"
+      },
+      {
+        "example_id": "decompose:008",
+        "metric": "240 documents"
+      }
+    ],
+    "original_v6_predictions_unchanged": true,
+    "tokenizer_source": "frozen shared local Qwen tokenizer",
+    "decoder": {
+      "engine": "lm-format-enforcer",
+      "version": "0.11.3",
+      "interegular": "0.3.3",
+      "policy": "atomic-schema-decoding-v4",
+      "source_enum_max_words": 80,
+      "strict_field_order": true,
+      "max_consecutive_whitespaces": 4,
+      "num_beams": 1,
+      "repetition_penalty": 1.05
+    },
+    "note": "Counterfactual fixtures are not v7 predictions or proof of 18/18 inference."
+  },
+  "model_revision_data_base_prompts_budgets_unchanged_from_v6": true,
+  "files": {
+    "scripts/colab_decomposition_probe_v7.ipynb": "5e1fcf1774f208f11d5021ee5429402ccd7cc817f876876a6c8976bd764fda3e",
+    "scripts/kaggle_decomposition_probe_v7.ipynb": "ee78c397219ee3662ddd4525eb72a044729d67a5fb8aa007656e53828e5e9c37",
+    "research_rag/evaluation/atomic_verifier_criteria_v7.json": "3e9a61616903e99f3c767e45c2ba361b44f6ea6c65732598ac3166b6cf23af7f",
+    "research_rag/evaluation/atomic_verifier_contract_v7.json": "206227cc94c5711d9b68af08a540b68a580f72b74751c7053cf8a239eea781ed",
+    "docs/ATOMIC_VERIFIER_V7_VALIDATION.md": "ac1e541e216479a841c47aef6cef715debc3dac35a1f80106696dc5d52280df6",
+    "docs/ATOMIC_VERIFIER_V7_RUN_GUIDE.md": "f39c0f9b232d99c3286a35fe7b14d2e0785e4cf94ed4b183efe6f7cea3c42ab9"
+  },
+  "gpu_inference_completed": true,
+  "probe_18_model_predictions_completed": true,
+  "human_review_completed": true,
+  "verifier39_completed": false,
+  "false_support": null,
+  "step2_completed": false,
+  "promoted_to_serving": false,
+  "next": "User runs the frozen v7 Colab notebook on T4 and supplies original ZIP; audit/replay all actual outputs, then real human review bound to hashes before39.",
+  "full39_admission_verified": true,
+  "latest_probe_run": "20261016T024708Z-a57ee72a",
+  "latest_probe_audit": "docs/decomposition-probe-audit-20261016T024708Z-a57ee72a.json",
+  "human_admission_file": "docs/atomic-verifier-v7-human-admission-20261016T024708Z-a57ee72a.json",
+  "full39_notebook": "scripts/colab_atomic_verifier39_v7.ipynb",
+  "full39_packaging_tests_passed": 4,
+  "latest_probe": {
+    "structurally_valid": 18,
+    "calls": 18,
+    "repair_attempts": 0,
+    "remote_tests_passed": 101,
+    "human_reviewer": "tricong"
+  },
+  "full39_release": "docs/atomic-verifier-v7-full39-colab-release.json",
+  "full39_model_inference_completed": false,
+  "full39_model_inference_attempted": true,
+  "latest_full39_run": "20261016T071213Z-7c8c33c6",
+  "latest_full39_audit": "docs/atomic-verifier-v7-full39-audit-20261016T071213Z-7c8c33c6.json",
+  "latest_full39_review": "docs/ATOMIC_VERIFIER_V7_FULL39_REVIEW_20261016T071213Z-7c8c33c6.md",
+  "false_support_in_saved_rows": 0,
+  "support_labels_in_saved_rows": 0,
+  "saved_full39_predictions": 22,
+  "saved_full39_incomplete_rows": 21,
+  "saved_full39_correct_labels": 0,
+  "human_probe_review_completed": true,
+  "human_evidence_review39_completed": false
+}

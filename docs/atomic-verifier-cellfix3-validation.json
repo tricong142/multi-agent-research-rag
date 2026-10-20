@@ -1,0 +1,87 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix3",
+  "candidate_criteria_sha256": "c38cf4cad12ce7ddcf257c1b80dff5467dc1d499a22f295d2824b0ca5c5a558f",
+  "parent_criteria_sha256": "a31549bda8776f6a566689c59378e5c47092faf6000d4597ef7ab82fdafa197b",
+  "original_v8_release_and_cellfix2_source_zip_preserved": true,
+  "model_revision_data_budgets_and_gates_unchanged": true,
+  "decomposition_prompt_unchanged": true,
+  "files": {
+    "scripts/atomic_cellfix3_patch.py": "5fe4bd00220189711d0f5417d84689a28b8bd95df0cb3317a48f6aac737df9e7",
+    "scripts/build_colab_cellfix3.py": "43e8836a03c464ba4229fc2b35c309175732ff70ed48b713b1af277b0112a6ca",
+    "scripts/colab_v8_assessment_smoke_cellfix3.py": "d512d7dd50abcd540223d05e570829298cd8d62db0345abce91384bedaf9e9d5"
+  },
+  "local_validation": {
+    "frozen_regression_tests_passed": 153,
+    "new_regression_tests": 18,
+    "frozen_source_fixture_files": 32,
+    "packaged_input_files": 78,
+    "validate_only": {
+      "probe": {
+        "freeze_valid": true,
+        "cases": 18,
+        "maximum_calls": 36
+      },
+      "smoke": {
+        "freeze_valid": true,
+        "cases": 12,
+        "maximum_calls": 96
+      },
+      "verifier": {
+        "freeze_valid": true,
+        "cases": 39,
+        "maximum_calls": 312
+      }
+    },
+    "simulated_failed_smoke_gate_remained_false": true,
+    "simulated_download_invoked": true,
+    "hardware": {
+      "torch": "2.6.0+cpu",
+      "cuda_available": false,
+      "cuda_devices": 0
+    },
+    "run": {
+      "candidate_root": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\audit-cellfix2-20261017T085227Z-e0a1ba82\\workspace-cellfix3-20261017T093245Z-4cf8f16e",
+      "candidate_out": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\audit-cellfix2-20261017T085227Z-e0a1ba82\\output-cellfix3-20261017T093245Z-4cf8f16e",
+      "statuses": {
+        "regression-cellfix3": {
+          "exit_code": 0
+        },
+        "probe-validate-only-cellfix3": {
+          "exit_code": 0
+        },
+        "smoke-validate-only-cellfix3": {
+          "exit_code": 0
+        },
+        "verifier-validate-only-cellfix3": {
+          "exit_code": 0
+        },
+        "cuda-preflight-cellfix3": {
+          "state": "skipped_local_harness",
+          "reason": "No CUDA inference in this check."
+        },
+        "assessment-smoke": {
+          "exit_code": 1,
+          "state": "simulated_failed_gate"
+        }
+      },
+      "cell_sha256": "d512d7dd50abcd540223d05e570829298cd8d62db0345abce91384bedaf9e9d5",
+      "gpu_inference_completed": false,
+      "simulated_gate_remained_false": true,
+      "download_ui_calls": 1
+    }
+  },
+  "intentional_legacy_test_updates": [
+    "Two different members no longer pass the exact atomic-target decoder contract; preserve a single-target positive test.",
+    "Wrong quantity-object binding with a correct alternative in context must raise into bounded repair rather than finalize NEI."
+  ],
+  "new_gpu_inference_completed": false,
+  "new_smoke_result": null,
+  "full39_result": null,
+  "new_human_review": "pending",
+  "promoted_to_serving": false,
+  "limitations": [
+    "Regression cases and the captured traces are development data, not independent held-out evaluation.",
+    "Exact target spans, sibling-name checks and finite English measurement-clause rules do not prove semantic entailment or evidence completeness. Alias/coreference, complex scope and unsupported syntax remain conservative or model dependent.",
+    "No accessible Chrome/Edge/Colab tab was present; local PyTorch has no CUDA. The self-contained cell is ready for the existing Colab T4 session, but real smoke labels/full39 false support remain unmeasured for this candidate."
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "snapshot_verified": true,
+  "snapshot_files": 211,
+  "original_source_files_verified": 26,
+  "archive_sha256": "528746088f5313f38a3e148b49ffe1b56061218bbc50777760921bbc1c305039",
+  "probe_replay_from_preservation_record": 18,
+  "partial39_replay_from_preservation_record": 22
+}

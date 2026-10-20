@@ -1,0 +1,129 @@
+{
+  "run": "20261015T155608Z-9262cfd5",
+  "zip_sha256": "3c55d7a31f4f46d530285cc95b93e2d22bf9e989a62657ba647adf07706e0281",
+  "crc_pass": true,
+  "output_manifest_files_verified": 39,
+  "input_manifest_files_verified_against_release_and_local_bytes": 68,
+  "frozen_source_files_verified": 25,
+  "criteria_sha256": "69b9d45d071d1c4627189f8eeecf3387a3b32b8357b8161ca417f82efc0047ae",
+  "model_pairing_matches_recorded_baseline": {
+    "model_files": true,
+    "shared_tokenizer_files": true,
+    "repo_id": true,
+    "revision": true,
+    "dtype": true,
+    "quantization": true,
+    "seed": true,
+    "do_sample": true
+  },
+  "provenance_limit": "Recorded hashes match frozen baseline; remote GPU weights were not included or independently rehashed locally.",
+  "gpu": {
+    "cuda": "12.8",
+    "torch": "2.10.0+cu128",
+    "device": "Tesla T4"
+  },
+  "remote_regression_tests_passed": 87,
+  "remote_regression_elapsed_seconds": 1.824,
+  "probe_validate_only": {
+    "freeze_valid": true,
+    "cases": 18,
+    "maximum_calls": 36
+  },
+  "verifier_validate_only": {
+    "freeze_valid": true,
+    "cases": 39,
+    "maximum_calls": 312
+  },
+  "predictions_replayed": 18,
+  "trace_event_counts": {
+    "call_started": 20,
+    "generation": 20,
+    "call_finished": 20
+  },
+  "calls_reconciled": 20,
+  "successful_first_attempt": 16,
+  "repair_attempts": 2,
+  "structurally_successful_repairs": 1,
+  "validation_issues": {
+    "metric_predicate_incomplete": 3
+  },
+  "max_generated_tokens_per_call": 117,
+  "canonical_parts_available": 19,
+  "metrics": {
+    "n": 18,
+    "valid_decompositions": 17,
+    "incomplete": 1,
+    "backend_calls": 20,
+    "checks": {
+      "all_claims_present": true,
+      "all_decompositions_valid": false,
+      "within_call_budget": true,
+      "within_measured_token_budget": true,
+      "structured_decoding_trace_complete": true
+    },
+    "automated_gate_pass": false,
+    "semantic_review": "pending",
+    "label_accuracy": null,
+    "generated_tokens": 1063,
+    "prompt_tokens": 25835
+  },
+  "summary": {
+    "experiment_completed": true,
+    "prediction_count": 18,
+    "backend_calls": 20,
+    "automated_gate_pass": false,
+    "human_review": "pending",
+    "overall_pass": false,
+    "promoted_to_serving": false,
+    "cost_usd": null,
+    "status": "automated_gates_failed",
+    "evaluation_mode": "decomposition",
+    "last_case_id": "decompose:018",
+    "elapsed_ms": 200957.915
+  },
+  "stage_status": {
+    "state": "failed",
+    "exit_code": 1,
+    "elapsed_ms": 206880.39
+  },
+  "admission_error": "Probe must finish successfully before semantic admission",
+  "full39_blocked_before_model_loader": true,
+  "predictions_sha256": "fbcc1e35d51cae1b536c25daefb2bd4406a8d864991ab7078f6ce0d06830bf41",
+  "original_review_sha256": "ae14b3ab0bd29b9a5713ada76cf104587fc3cea70187662bbcdaedfe6ddd6a44",
+  "original_output_modified": false,
+  "new_inference_calls_by_assistant": 0,
+  "full39_authorized_by_gate": false,
+  "verifier_39_completed": false,
+  "false_support": null,
+  "assistant_review": {
+    "reviewer_kind": "assistant",
+    "claims_reviewed": 18,
+    "canonical_parts_reviewed": 19,
+    "invalid_drafts_reviewed": 2,
+    "claims_pass": 16,
+    "claims_needing_revision": 1,
+    "claims_without_valid_plan": 1,
+    "review_file": "docs/decomposition-semantic-review-20261015T155608Z-9262cfd5.jsonl",
+    "review_sha256": "1a5e888ae38b3e22c076424c4793140aeff77f365a555fa063c65012b7c8efa5",
+    "human_review_completed": false,
+    "semantic_gate_pass": false
+  },
+  "schema_diagnostic": [
+    {
+      "example_id": "decompose:007",
+      "all_allowed_by_metric_enum": [
+        "took",
+        "12 seconds",
+        "took 12 seconds"
+      ]
+    },
+    {
+      "example_id": "decompose:008",
+      "all_allowed_by_metric_enum": [
+        "contained",
+        "240 documents",
+        "contained 240 documents"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix3",
+  "notebook": "scripts/colab_atomic_verifier_cellfix3_fresh.ipynb",
+  "notebook_sha256": "82f5a96d1fbcb23480a6fee39267dd050e91f78dab59a98e4011f3d429dcc5b3",
+  "payload_sha256": "c43ef457eefe017eb6b314c858adeb46ddc4e9397a1b3f7fce5d3ae8fae72dfb",
+  "criteria_sha256": "c38cf4cad12ce7ddcf257c1b80dff5467dc1d499a22f295d2824b0ca5c5a558f",
+  "payload_files": 78,
+  "frozen_source_fixture_files": 32,
+  "notebook_schema_validation": "not installed; JSON/cell compilation and payload tests passed",
+  "notebook_packaging_and_stage_guard_tests_passed": 8,
+  "isolated_payload_validation": {
+    "frozen_regression_tests_passed": 153,
+    "validate_only": {
+      "probe": {
+        "freeze_valid": true,
+        "cases": 18,
+        "maximum_calls": 36
+      },
+      "smoke": {
+        "freeze_valid": true,
+        "cases": 12,
+        "maximum_calls": 96
+      },
+      "verifier": {
+        "freeze_valid": true,
+        "cases": 39,
+        "maximum_calls": 312
+      }
+    },
+    "model_inference_completed": false
+  },
+  "original_v8_release_preserved": true,
+  "previous_session_required": false,
+  "model_revision_data_budgets_and_gates_unchanged": true,
+  "fresh_colab_dependency_installation_tested": false,
+  "fresh_gpu_inference_completed": false,
+  "smoke_result": null,
+  "probe18_result": null,
+  "full39_result": null,
+  "human_review": "pending",
+  "promoted_to_serving": false,
+  "limitations": [
+    "Local CPU checks do not establish real Qwen/T4 smoke labels.",
+    "Dependency/CUDA commands retain prior pins; the fresh Colab install still needs execution.",
+    "All evaluation cases are development data; independent evaluation and fresh human review are pending."
+  ]
+}

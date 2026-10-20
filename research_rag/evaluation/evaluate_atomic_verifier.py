@@ -1,6 +1,8 @@
 """Frozen, isolated atomic-verifier development experiment with a hard process deadline."""
 from __future__ import annotations
 
+from contextlib import contextmanager, nullcontext
+
 import argparse
 from collections import Counter
 import hashlib
@@ -18,7 +20,7 @@ from .compare_factchecker import TracedBackend
 atomic = importlib.import_module('04_factchecker.inference.atomic_verifier')
 decoding = importlib.import_module('04_factchecker.inference.atomic_decoding')
 ROOT = Path(__file__).resolve().parents[2]
-CRITERIA = Path(__file__).with_name('atomic_verifier_criteria_v5.json')
+CRITERIA = Path(__file__).with_name('atomic_verifier_criteria_v8.json')
 LABELS = ('support', 'contradict', 'not_enough_info')
 
 
@@ -43,6 +45,8 @@ def load_frozen(criteria_path):
         raise ValueError('Unsupported atomic policy/backend')
     if criteria.get('structured_decoder') != decoding.DECODER:
         raise ValueError('Frozen structured decoder changed')
+    if criteria.get('require_cooperative_deadline') is not True:
+        raise ValueError('V8 requires cooperative generation deadlines')
     for key in ('max_calls_per_case', 'max_attempts', 'max_new_tokens', 'cases_per_backend',
                 'case_deadline_seconds', 'process_timeout_seconds'):
         if type(criteria[key]) is not int or criteria[key] < 1:
@@ -71,6 +75,7 @@ def load_frozen(criteria_path):
     if metrics['correct_labels_recognized'] != 37 or metrics['false_support'] != 2:
         raise ValueError('Recorded logic_v3 baseline does not match audited 37/39 result')
     probe_configuration(criteria, cases, criteria_path)
+    smoke_configuration(criteria, cases)
     return criteria, cases, inputs, contract, baseline_path, baseline, metrics
 
 
@@ -92,6 +97,21 @@ def probe_configuration(criteria, cases, criteria_path):
     return {**criteria, **probe, 'cases_per_backend': 18}, claims, path
 
 
+def smoke_configuration(criteria, cases):
+    spec = criteria['assessment_smoke']
+    selected = [row for row in cases if row['example_id'] in spec['case_ids']]
+    if (len(spec['case_ids']) != len(set(spec['case_ids'])) or len(selected) != len(set(spec['case_ids'])) or len(selected) != 12
+            or spec['process_timeout_seconds'] != 2400
+            or {row.get('dataset_group', 'original_contracts') for row in selected} != {'original_contracts'}):
+        raise ValueError('Assessment smoke must select the 12 original development contracts')
+    effective = {**criteria, 'cases_per_backend': len(selected), 'min_correct_labels_recognized': len(selected),
+                 'dataset_groups': {'original_contracts': len(selected)},
+                 'maximum_total_backend_calls': len(selected) * criteria['max_calls_per_case'],
+                 'maximum_generated_tokens': len(selected) * criteria['max_calls_per_case'] * criteria['max_new_tokens'],
+                 'process_timeout_seconds': spec['process_timeout_seconds']}
+    return effective, selected
+
+
 def replay_result(result, claim, context, criteria):
     """Recompute valid decisions from recorded model outputs; never accept a stored label blindly."""
     if result['policy'] != criteria['policy'] or result['claim_verified'] is not False or result['promoted_to_serving'] is not False:
@@ -102,8 +122,16 @@ def replay_result(result, claim, context, criteria):
                        'timeout_seconds': criteria.get('case_deadline_seconds', result['budget']['timeout_seconds'])}
     if result['budget'] != expected_budget:
         raise ValueError('Result budget differs from frozen criteria')
-    if result['backend_calls'] != len(trace) or not 1 <= len(trace) <= criteria['max_calls_per_case']:
+    if result['backend_calls'] != len(trace) or not 0 <= len(trace) <= criteria['max_calls_per_case']:
         raise ValueError('Invalid result call count')
+    if not trace:
+        try:
+            atomic.preflight_request(claim, context, decomposition_only=result.get('evaluation_mode') == 'decomposition')
+        except ValueError as exc:
+            if result['stop_reason'] != str(exc):
+                raise ValueError('Preflight stop differs from replay') from exc
+        else:
+            raise ValueError('Missing trace for a representable claim')
     probe = result.get('evaluation_mode') == 'decomposition'
     if result.get('evaluation_mode') not in ('verification', 'decomposition'):
         raise ValueError('Unknown evaluation mode')
@@ -136,7 +164,10 @@ def replay_result(result, claim, context, criteria):
             if event['stage'] != 'part_' + str(len(parts) + 1) or payload != {'claim': claim, 'part': part, 'context': context}:
                 raise ValueError('Assessment input changed or leaked label')
             if event.get('valid') is True:
-                parts.append(atomic.assess_part(event['output'], part, context))
+                try:
+                    parts.append(atomic.assess_part(event['output'], part, context))
+                except ValueError as exc:
+                    raise ValueError('Stored plan/parts disagree with replay: invalid assessment') from exc
     if result['decomposition'] != plan or result['parts'] != parts:
         raise ValueError('Stored plan/parts disagree with replay')
     if result['status'] == 'completed':
@@ -221,7 +252,8 @@ def score_probe(outputs, cases, criteria):
 def decoding_trace_complete(generations, messages, criteria):
     return len(generations) == len(messages) and bool(generations) and all(
         event.get('structured_decoder') == criteria['structured_decoder'] and
-        event.get('schema_sha256') == decoding.schema_sha256(decoding.schema_for(request)[0])
+        event.get('schema_sha256') == decoding.schema_sha256(decoding.schema_for(request)[0]) and
+        (not criteria.get('require_cooperative_deadline') or event.get('deadline_stop_enabled') is True)
         for event, request in zip(generations, messages))
 
 
@@ -280,6 +312,12 @@ class RecordingBackend:
         self.counter, self.maximum = counter, maximum
         self.generation_stats = generation_stats if generation_stats is not None else []
 
+    @contextmanager
+    def generation_deadline(self, deadline):
+        hook = getattr(type(self.backend), 'generation_deadline', None)
+        with (hook(self.backend, deadline) if hook else nullcontext(False)) as supported:
+            yield supported is True
+
     def generate_json(self, messages, *, max_new_tokens):
         if self.counter[0] >= self.maximum:
             raise RuntimeError('experiment_call_budget_exhausted')
@@ -308,11 +346,15 @@ class RecordingBackend:
                 self.backend.on_generation = previous
 
 
-def run_experiment(output_dir, backend_loader, *, criteria_path=CRITERIA, decomposition_probe=False):
+def run_experiment(output_dir, backend_loader, *, criteria_path=CRITERIA, decomposition_probe=False, assessment_smoke=False):
+    if decomposition_probe and assessment_smoke:
+        raise ValueError('Choose probe or assessment smoke')
     criteria, cases, inputs, contract, baseline_path, baseline, baseline_metrics = load_frozen(criteria_path)
     if decomposition_probe:
         criteria, cases, probe_path = probe_configuration(criteria, cases, criteria_path)
         inputs = {'probe-claims': probe_path}
+    elif assessment_smoke:
+        criteria, cases = smoke_configuration(criteria, cases)
     output_dir.mkdir(parents=True, exist_ok=False)
     for name, path in {'criteria.json': criteria_path, 'contract.json': contract,
                        'baseline.json': baseline_path, **{name + '.jsonl': p for name, p in inputs.items()}}.items():
@@ -327,7 +369,7 @@ def run_experiment(output_dir, backend_loader, *, criteria_path=CRITERIA, decomp
     summary = {'experiment_completed': False, 'prediction_count': 0, 'backend_calls': 0,
                'automated_gate_pass': False, 'human_review': 'pending', 'overall_pass': False,
                'promoted_to_serving': False, 'cost_usd': None, 'status': 'running',
-               'evaluation_mode': 'decomposition' if decomposition_probe else 'verification'}
+               'evaluation_mode': 'decomposition' if decomposition_probe else 'assessment_smoke' if assessment_smoke else 'verification'}
     write_summary(output_dir / 'summary.json', summary)
     with backend_loader('base_instruct', criteria) as (backend, metadata):
         pairing_keys = ('model_files', 'shared_tokenizer_files', 'repo_id', 'revision', 'dtype', 'quantization', 'seed', 'do_sample')
@@ -369,6 +411,9 @@ def run_experiment(output_dir, backend_loader, *, criteria_path=CRITERIA, decomp
     call_messages = [event['messages'] for row in outputs for event in row['result']['trace']]
     metrics['checks']['structured_decoding_trace_complete'] = measured and decoding_trace_complete(
         generation_stats, call_messages, criteria)
+    if criteria.get('require_cooperative_deadline'):
+        metrics['checks']['cooperative_deadline_trace_complete'] = all(
+            event.get('cooperative_deadline') is True for row in outputs for event in row['result']['trace'])
     metrics['automated_gate_pass'] = all(metrics['checks'].values())
     assert counter[0] == metrics['backend_calls']
     write_json(output_dir / 'metrics.json', metrics)
@@ -411,13 +456,17 @@ def main():
     parser.add_argument('--criteria', default=CRITERIA, type=Path)
     parser.add_argument('--online-model-downloads', action='store_true')
     parser.add_argument('--validate-only', action='store_true')
-    parser.add_argument('--decomposition-probe', action='store_true')
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument('--decomposition-probe', action='store_true')
+    modes.add_argument('--assessment-smoke', action='store_true', help='12 inspected development contracts; never substitutes for probe admission or full39')
     parser.add_argument('--probe-dir', type=Path, help='Successful v2 probe with completed semantic-review.json; required for 39 cases')
     parser.add_argument('--worker', action='store_true', help=argparse.SUPPRESS)
     args = parser.parse_args()
     criteria, cases, *_ = load_frozen(args.criteria)
     if args.decomposition_probe:
         criteria, _, _ = probe_configuration(criteria, cases, args.criteria)
+    elif args.assessment_smoke:
+        criteria, _ = smoke_configuration(criteria, cases)
     if args.validate_only:
         print(json.dumps({'freeze_valid': True, 'cases': criteria['cases_per_backend'],
                           'maximum_calls': criteria['maximum_total_backend_calls']}))
@@ -425,7 +474,9 @@ def main():
     if args.output_dir.exists():
         parser.error('Output already exists; preserve it and start a new run')
     admission = None
-    if not args.decomposition_probe:
+    if args.assessment_smoke and args.probe_dir is not None:
+        parser.error('Assessment smoke is not a probe-admitted full39 run; omit --probe-dir')
+    if not args.decomposition_probe and not args.assessment_smoke:
         if args.probe_dir is None:
             parser.error('Run the 18-claim probe and complete semantic review first; --probe-dir is required')
         admission = require_probe_review(args.probe_dir, args.criteria)
@@ -446,7 +497,8 @@ def main():
         raise SystemExit(code)
     try:
         result = run_experiment(args.output_dir, decoding.constrained_loader(model_loader(online=args.online_model_downloads)),
-                                criteria_path=args.criteria, decomposition_probe=args.decomposition_probe)
+                                criteria_path=args.criteria, decomposition_probe=args.decomposition_probe,
+                                assessment_smoke=args.assessment_smoke)
         if admission:
             write_json(args.output_dir / 'probe-admission.json', admission)
     except Exception as exc:

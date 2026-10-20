@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Agent Research RAG — Interactive Studio</title>
+  <meta name="description" content="Trực quan hoá luồng điều phối 5 Agent trên LangGraph StateGraph: Retrieval, Reader, Summarizer, Fact-Checker và Writer.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+  <!-- Top Navigation & Header -->
+  <header class="studio-header">
+    <div class="header-content">
+      <div class="brand-group">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M3 12h3m12 0h3M12 3v3m0 12v3M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6l2.1-2.1"></path>
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">Multi-Agent Research RAG</h1>
+          <p class="brand-subtitle">Mô phỏng workflow 5 agent &middot; LangGraph StateGraph</p>
+        </div>
+      </div>
+
+      <div class="system-pills">
+        <span class="status-pill online" id="server-status-pill">
+          <span class="pulse-dot"></span> Local Engine Online
+        </span>
+        <span class="badge-pill">LangGraph StateGraph</span>
+        <span class="badge-pill">Backend mô phỏng</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Studio Workspace -->
+  <main class="studio-main">
+    <p role="note" style="padding:14px;border:1px solid #d8a640;border-radius:10px;color:#f5d683">
+      Đây là mô phỏng luồng điều phối, chưa chạy checkpoint của các model.
+      Số liệu từng node là minh họa; không dùng làm kết quả đánh giá.
+      Để xem metrics đo được, chạy <code>run_agent_tests.bat</code> và mở <code>report.html</code> được xuất.
+    </p>
+    <!-- Section 1: Interactive Agent Topology Flow -->
+    <section class="topology-section" aria-label="Kiến trúc đồ thị Agent">
+      <div class="section-header-row">
+        <h2 class="section-title">5-Agent Live Topology &amp; State Machine</h2>
+        <span class="topology-legend" id="current-cycle-status">Trạng thái: Sẵn sàng thực thi</span>
+      </div>
+
+      <div class="topology-flow-card">
+        <div class="agent-node-group">
+          <!-- User / Controller -->
+          <div class="flow-node active" id="node-controller" data-agent="controller">
+            <div class="node-indicator"></div>
+            <div class="node-tag">HUB</div>
+            <div class="node-name">LangGraph Controller</div>
+            <div class="node-meta">State &amp; Planning</div>
+          </div>
+
+          <div class="flow-arrow"><span>&#10230;</span></div>
+
+          <!-- Agent 1: Retrieval -->
+          <div class="flow-node" id="node-retrieval" data-agent="retrieval">
+            <div class="node-indicator"></div>
+            <div class="node-tag">AGENT 1</div>
+            <div class="node-name">Hybrid Retrieval</div>
+            <div class="node-meta">BM25 + FAISS Dense</div>
+          </div>
+
+          <div class="flow-arrow"><span>&#10230;</span></div>
+
+          <!-- Agent 2: Reader -->
+          <div class="flow-node" id="node-reader" data-agent="reader">
+            <div class="node-indicator"></div>
+            <div class="node-tag">AGENT 2</div>
+            <div class="node-name">PDF Reader</div>
+            <div class="node-meta">LayoutLMv3 &amp; OCR</div>
+          </div>
+
+          <div class="flow-arrow"><span>&#10230;</span></div>
+
+          <!-- Agent 3: Summarizer -->
+          <div class="flow-node" id="node-summarizer" data-agent="summarizer">
+            <div class="node-indicator"></div>
+            <div class="node-tag">AGENT 3</div>
+            <div class="node-name">Summarizer</div>
+            <div class="node-meta">Verbatim Gate (7B)</div>
+          </div>
+
+          <div class="flow-arrow"><span>&#10230;</span></div>
+
+          <!-- Agent 4: Fact-Checker -->
+          <div class="flow-node" id="node-factchecker" data-agent="factchecker">
+            <div class="node-indicator"></div>
+            <div class="node-tag">AGENT 4</div>
+            <div class="node-name">Atomic Verifier</div>
+            <div class="node-meta">Decimal Math (3B)</div>
+          </div>
+
+          <div class="flow-arrow"><span>&#10230;</span></div>
+
+          <!-- Agent 5: Writer -->
+          <div class="flow-node" id="node-writer" data-agent="writer">
+            <div class="node-indicator"></div>
+            <div class="node-tag">AGENT 5</div>
+            <div class="node-name">Writer Node</div>
+            <div class="node-meta">Critic Loop (1.5B)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Two-column Interactive Workspace -->
+    <div class="workspace-grid">
+      <!-- Left Column: Input, Presets & Traces -->
+      <div class="left-panel">
+        <!-- Preset Scenario Selector -->
+        <div class="glass-card">
+          <div class="card-header">
+            <h3>Kịch bản kiểm thử mẫu (Benchmark Presets)</h3>
+            <span class="help-text">Chọn kịch bản để quan sát cơ chế phản vệ</span>
+          </div>
+          <div class="presets-container" id="presets-list">
+            <!-- Rendered dynamically by JS -->
+          </div>
+        </div>
+
+        <!-- Query Input Form -->
+        <div class="glass-card">
+          <div class="card-header">
+            <h3>Câu hỏi nghiên cứu (Research Intent)</h3>
+            <span class="active-badge" id="selected-scenario-badge">Tự do nhập liệu</span>
+          </div>
+
+          <form id="research-form" onsubmit="return false;">
+            <div class="input-wrapper">
+              <textarea id="question-input" rows="3" placeholder="Nhập câu hỏi nghiên cứu khoa học cần tổng hợp và kiểm chứng..."></textarea>
+            </div>
+
+            <div class="action-bar">
+              <div class="options-toggle">
+                <label class="toggle-label">
+                  <input type="checkbox" id="enable-live-steps" checked>
+                  <span class="toggle-slider"></span>
+                  <span class="toggle-text">Mô phỏng từng bước (Step-by-step Trace)</span>
+                </label>
+              </div>
+
+              <button type="button" class="btn-primary" id="btn-run-query">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <span>Chạy luồng 5 Agent</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Live Event Stream Log -->
+        <div class="glass-card">
+          <div class="card-header">
+            <h3>Nhật ký sự kiện thời gian thực (Event Stream)</h3>
+            <span class="mono-badge" id="step-counter">0 steps &middot; 0 ms</span>
+          </div>
+          <div class="event-stream-box" id="event-stream-container">
+            <div class="empty-state">Nhấn "Chạy luồng 5 Agent" hoặc chọn một kịch bản để bắt đầu quan sát sự kiện.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Deep-dive Inspector & Final Report -->
+      <div class="right-panel">
+        <!-- Tabbed Agent Inspector -->
+        <div class="glass-card inspector-card">
+          <div class="tab-header-row">
+            <nav class="inspector-tabs" aria-label="Thanh điều hướng Agent">
+              <button class="tab-btn active" data-tab="tab-report" id="btn-tab-report">Báo cáo cuối cùng</button>
+              <button class="tab-btn" data-tab="tab-retrieval" id="btn-tab-retrieval">Agent 1: Retrieval</button>
+              <button class="tab-btn" data-tab="tab-reader" id="btn-tab-reader">Agent 2: Reader</button>
+              <button class="tab-btn" data-tab="tab-summarizer" id="btn-tab-summarizer">Agent 3: Summarizer</button>
+              <button class="tab-btn" data-tab="tab-factchecker" id="btn-tab-factchecker">Agent 4: Fact-Checker</button>
+              <button class="tab-btn" data-tab="tab-writer" id="btn-tab-writer">Agent 5: Writer</button>
+              <button class="tab-btn" data-tab="tab-state" id="btn-tab-state">State JSON</button>
+            </nav>
+          </div>
+
+          <div class="tab-content-container">
+            <!-- TAB: FINAL REPORT -->
+            <div class="tab-panel active" id="tab-report">
+              <div id="report-view-container">
+                <div class="empty-state large">Chưa có kết quả báo cáo. Hãy khởi chạy một câu hỏi nghiên cứu.</div>
+              </div>
+            </div>
+
+            <!-- TAB: AGENT 1 RETRIEVAL -->
+            <div class="tab-panel" id="tab-retrieval">
+              <div class="agent-detail-block">
+                <div class="detail-header">
+                  <h4>Agent 1 — Hybrid Retrieval Service</h4>
+                  <span class="badge-accent cyan">BM25Okapi + BGE-Large FAISS</span>
+                </div>
+                <div id="retrieval-detail-content" class="detail-body">
+                  <div class="empty-state">Chưa có dữ liệu truy xuất.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: AGENT 2 READER -->
+            <div class="tab-panel" id="tab-reader">
+              <div class="agent-detail-block">
+                <div class="detail-header">
+                  <h4>Agent 2 — PDF Document &amp; Structure Reader</h4>
+                  <span class="badge-accent violet">LayoutLMv3 (DocLayNet) + Vision OCR</span>
+                </div>
+                <div id="reader-detail-content" class="detail-body">
+                  <div class="empty-state">Chưa có dữ liệu đọc PDF.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: AGENT 3 SUMMARIZER -->
+            <div class="tab-panel" id="tab-summarizer">
+              <div class="agent-detail-block">
+                <div class="detail-header">
+                  <h4>Agent 3 — Synthesis &amp; Verbatim Evidence Gate</h4>
+                  <span class="badge-accent sky">Qwen2.5-7B LoRA + Char-level Verbatim Matching</span>
+                </div>
+                <div id="summarizer-detail-content" class="detail-body">
+                  <div class="empty-state">Chưa có dữ liệu tóm tắt.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: AGENT 4 FACT-CHECKER -->
+            <div class="tab-panel" id="tab-factchecker">
+              <div class="agent-detail-block">
+                <div class="detail-header">
+                  <h4>Agent 4 — Atomic Verifier &amp; Decimal Tool</h4>
+                  <span class="badge-accent emerald">Qwen2.5-3B + Decimal Math + NLI Entailment</span>
+                </div>
+                <div id="factchecker-detail-content" class="detail-body">
+                  <div class="empty-state">Chưa có dữ liệu kiểm chứng.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: AGENT 5 WRITER -->
+            <div class="tab-panel" id="tab-writer">
+              <div class="agent-detail-block">
+                <div class="detail-header">
+                  <h4>Agent 5 — Writer Node &amp; Self-Critique Loop</h4>
+                  <span class="badge-accent amber">Qwen2.5-1.5B LoRA + Sentence Critic Loop</span>
+                </div>
+                <div id="writer-detail-content" class="detail-body">
+                  <div class="empty-state">Chưa có dữ liệu viết báo cáo.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: STATE JSON -->
+            <div class="tab-panel" id="tab-state">
+              <div class="code-block-header">
+                <span>ResearchState (Pydantic / TypedDict)</span>
+                <button class="btn-copy" id="btn-copy-state">Sao chép JSON</button>
+              </div>
+              <pre class="json-viewer" id="json-state-viewer"><code>{}</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Notification Toast -->
+  <div class="toast-container" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+{
+  "summary": {
+    "benchmark": "QASPER-derived global paragraph retrieval, development only",
+    "official_qasper_score": false,
+    "test_candidate_evaluated": false,
+    "static_load_ms": 4736.253499984741,
+    "results": {
+      "bm25": {
+        "requested_method": "bm25",
+        "n": 393,
+        "top_k": 5,
+        "valid_backend_run": true,
+        "actual_backends": {
+          "bm25": 393
+        },
+        "fallback_queries": 0,
+        "failed_queries": 0,
+        "metrics": {
+          "hit_at_k": 0.27989821882951654,
+          "paragraph_recall_at_k": 0.15966416252675794,
+          "mrr_at_k": 0.15894826123833758
+        },
+        "latency_ms_mean": 860.5321312965126,
+        "latency_ms_p95": 2354.765900003258,
+        "first_query_ms": 837.6407999894582,
+        "preflight": {
+          "passed": true
+        }
+      },
+      "dense": {
+        "valid_backend_run": false,
+        "metrics": null,
+        "n": 0,
+        "preflight": {
+          "passed": false,
+          "error_type": "ValueError",
+          "reason": "Dense index provenance/model/revision does not match this benchmark"
+        },
+        "status": "blocked_before_encoder_load"
+      }
+    },
+    "paired_comparison_valid": false,
+    "delta_dense_minus_bm25": null,
+    "timing_note": "Static alignment load excluded; first Dense query includes encoder load. Query order fixed; no retrieval history.",
+    "quality_note": "Paragraph retrieval scores do not measure answer accuracy, verifier false support or E2E quality."
+  },
+  "provenance": {
+    "corpus_sha256": "4ad78d602384e8c50a02e0ab5c2363b26ecf74b06296a3457a41ef05ee6631c6",
+    "qrels_dev_sha256": "b61631d9cf2a3f0729de1168d13896fe056ba87dea0d7157c0c541a383d3225e",
+    "corpus_chunks": 18587,
+    "dev_queries": 393,
+    "embedding_model": "BAAI/bge-large-en-v1.5",
+    "embedding_revision": "d4aa6901d3a41ba39fb536a557fa166f842b0e09",
+    "query_prefix": "Represent this sentence for searching relevant passages: ",
+    "packages": {
+      "rank-bm25": "0.2.2",
+      "sentence-transformers": "6.0.0",
+      "faiss-cpu": "1.15.0",
+      "torch": "2.6.0",
+      "transformers": "5.16.1"
+    },
+    "python": "3.10.11",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "index_sha256": {
+      "bm25_index.pkl": "34b73027ba7b6e7d8bf7812e844c286f2044508d26e901bb67ec845dc7ead372",
+      "faiss_doc_ids.json": "c15a5010617c9d3769342276df8ae8e12bd81a66b25c4c9826cef25a7973a6af",
+      "index_manifest.json": "bccd2fa76dee7ca720208f9c996d840d8ba9b8a4f7f7b08c3ee3db73f8e81142"
+    },
+    "source_sha256": {
+      "research_rag/evaluation/qasper_benchmark.py": "283fc0c2b50f76bb72d95bab4076ba305542ae4cb6c97f1326ee8f6307136e6e",
+      "research_rag/retrieval.py": "f8fc0c3118c0feb7dcb845f6be2a3dc026f253679524cbdcb5c4ec9bc1f6c75b",
+      "research_rag/indexing.py": "2e02675e5094a278b4eb9d0e2eb0245389fda47ad0d9236ba69fef68f457cd14"
+    }
+  },
+  "replay": {
+    "replayed_queries": 393,
+    "metrics_match": true,
+    "input_hashes_verified": true
+  },
+  "dense_request_audit": {
+    "requested_method": "dense",
+    "actual_method": "bm25",
+    "warning": "dense_unavailable:RuntimeError;used_bm25",
+    "encoder_loaded": false,
+    "doc_ids": [
+      "qasper:1909.12079:paragraph:7",
+      "qasper:1909.12079:paragraph:40",
+      "qasper:1909.12079:paragraph:2",
+      "qasper:1908.11053:paragraph:52",
+      "qasper:1603.00957:paragraph:43"
+    ],
+    "dense_metrics_valid": false
+  }
+}

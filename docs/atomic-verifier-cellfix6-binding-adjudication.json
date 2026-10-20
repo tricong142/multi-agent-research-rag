@@ -1,0 +1,34 @@
+{
+  "version": "strict-identity-v1",
+  "decision_date": "2026-10-18",
+  "authorization": "User selected: Giữ context, đánh nhãn lại theo evidence nghiêm ngặt.",
+  "scope": "Development annotation correction; not independent held-out adjudication.",
+  "rule": "Claim/workload similarity is not evidence of target identity. Missing target identity is NEI for both support and contradiction.",
+  "historical_dataset_unchanged": true,
+  "cases": [
+    {
+      "example_id": "scope:conjunction:support",
+      "claim_sha256": "83ae0aeb1c710d31b87c90e2a89e9804e0f118277a3df0b39316a4c02268e161",
+      "context_sha256": "7666dcfd61e82942a87ec7e19778fba5d0e248577beb2d04e5ac721bf1e9053d",
+      "original_label": "support",
+      "label": "not_enough_info",
+      "rationale": "The context does not identify the claimed extractor. Workload-level measurements cannot establish either predicate for that target. Identity evidence is missing; no supported conjunct is assumed."
+    },
+    {
+      "example_id": "scope:conjunction:contradict",
+      "claim_sha256": "83ae0aeb1c710d31b87c90e2a89e9804e0f118277a3df0b39316a4c02268e161",
+      "context_sha256": "ffe23d139f7f6cd8120c373d596d0e1cf5d126f946fde65ccdfd26e66e49903f",
+      "original_label": "contradict",
+      "label": "not_enough_info",
+      "rationale": "The context does not identify the claimed extractor. Workload-level measurements cannot establish either predicate for that target. Identity evidence is missing; no supported conjunct is assumed."
+    },
+    {
+      "example_id": "scope:conjunction:not_enough_info",
+      "claim_sha256": "83ae0aeb1c710d31b87c90e2a89e9804e0f118277a3df0b39316a4c02268e161",
+      "context_sha256": "2d8fe99d8347b974a4ebbc1d1c2d83ee6c5266193ee0284e3c8811d948aadc38",
+      "original_label": "not_enough_info",
+      "label": "not_enough_info",
+      "rationale": "The context does not identify the claimed extractor. Workload-level measurements cannot establish either predicate for that target. Identity evidence is missing; no supported conjunct is assumed."
+    }
+  ]
+}

@@ -1,0 +1,205 @@
+--- cellfix8/04_factchecker/inference/atomic_verifier.py
++++ cellfix9/04_factchecker/inference/atomic_verifier.py
+@@ -995,7 +995,12 @@
+         return False
+     head, name = ' '.join(words[:-1]), words[-1].casefold()
+     mentions = re.findall(r'(?<!\w)'+re.escape(head)+r'\s+([\w-]+)',proof,re.I)
+-    return bool(mentions) and name not in {m.casefold() for m in mentions}
++    if mentions and name not in {m.casefold() for m in mentions}:
++        return True
++    # A leading identifier (West gateway) is not a suffix identifier (Model West).
++    suffix = ' '.join(words[1:])
++    prefixes = re.findall(r'(?<!\w)([A-Z][\w-]*)\s+'+re.escape(suffix)+r'(?!\w)',proof)
++    return bool(words[0][:1].isupper() and prefixes and words[0].casefold() not in {p.casefold() for p in prefixes})
+ 
+ def numeric_metric_matches(part, record, requirements):
+     proof, bound = measurement_scope(record, part['quote'], part['scope']['metric'])
+@@ -1117,3 +1122,23 @@
+     'requirements in this part are established, missing_information is []. '
+     'Do not generalize a scoped result. Keep explanations short enough to '
+     'finish a sentence before the 64-character limit.\n')
++
++
++POLICY = 'atomic-verifier-constrained-v8-cellfix9'
++REPAIR_HINTS.update(
++    observation_evidence_unbound='Cite the observation member and its predicate in the SAME local evidence. A different subject cannot supply its truth.',
++    observation_predicate_not_grounded='A roster identifies members but does not establish the predicate. Cite actual member outcomes, not just the population list.',
++    population_witness_missing='Use the explicit closed-population witness and its full outcome quote. Truth is the positive predicate before ALL/SOME/NONE.',
++    population_closure_required='For a closed, completely reported population, coverage members must match observation members. A collective member requires the entire-population outcome quote.',
++    missing_information_wrong_metric='Name missing evidence for this PART and metric only. Do not borrow another conjunct or an already reported metric.',
++    unattributed_prose_citation='Remove invented author/year references. Use only facts and sources present in the input.',
++    observation_polarity_mismatch='Inspect only the cited member outcome. Different members may have different outcomes; never borrow another member polarity.')
++ASSESS_PROMPT += (
++    '\nCitations must bind member and predicate in their own local clauses. A roster '
++    'alone is not an outcome. Do not select a date, update, bare number or other subject '
++    'as a population member. For a closed population with an explicit collective '
++    'result, use the exact collective source span provided by the schema, cite '
++    'the whole population/result passage, and use that same span in coverage. '
++    'For NONE, no leak means leaked=false; an actual leak means leaked=true. '
++    'Never add an author/year reference absent from the input. Missing facts must '
++    'refer to the current part, not another metric or a known source measurement.\n')
+--- cellfix8/research_rag/tests/test_atomic_verifier.py
++++ cellfix9/research_rag/tests/test_atomic_verifier.py
+@@ -69,7 +69,7 @@
+     def test_decimal_directions_and_equality_override_incorrect_model_arithmetic(self):
+         claim = 'The service reduced latency.'
+         for end, truth, delta in [('55', 'false', '13'), ('31', 'true', '-11'), ('42', 'false', '0')]:
+-            proof = f'Latency was 42 ms before tuning and {end} ms after tuning.'
++            proof = f'The service latency was 42 ms before tuning and {end} ms after tuning.'
+             data = numeric('change', proof, operand('42', 'ms'), operand(end, 'ms'))
+             value = n.check_numeric(data, claim, proof)
+             self.assertEqual((value['truth'], value['delta']), (truth, delta))
+@@ -209,8 +209,8 @@
+ 
+     def test_complete_coverage_cannot_omit_member_or_use_missing_quote(self):
+         context = 'A improved. B worsened. The complete set is A and B.'
+-        p = part('Some service improved latency.', quantifier='some')
+-        raw = assessment([observation('A', 'false', context)], complete=True)
++        p = part('Some service improved.', quantifier='some', metric='improved')
++        raw = assessment([observation('A', 'true', context)], complete=True)
+         raw['coverage']['members'].append('B')
+         with self.assertRaisesRegex(ValueError, 'incomplete_coverage_ledger'):
+             a.assess_part(raw, p, context)
+@@ -229,8 +229,9 @@
+         for scope in ('unknown', 'mismatched'):
+             raw['scope_match'] = scope
+             self.assertEqual(a.assess_part(raw, p, context)['assessed_label'], 'not_enough_info')
+-        raw = assessment([observation('A', 'true', 'A improved.'), observation('B', 'false', 'B worsened.')])
+-        self.assertEqual(a.assess_part(raw, p, 'A improved. B worsened.')['assessed_label'], 'not_enough_info')
++        context = 'The service increased precision. The service did not increase precision.'
++        raw = assessment([observation('service', 'unknown', context)])
++        self.assertEqual(a.assess_part(raw, p, context)['assessed_label'], 'not_enough_info')
+ 
+     def test_numbers_cannot_bypass_tool_and_unknown_association_stays_unknown(self):
+         claim, proof = 'The service reduced latency.', 'The service latency fell from 42 ms to 31 ms.'
+--- cellfix8/04_factchecker/inference/atomic_decoding.py
++++ cellfix9/04_factchecker/inference/atomic_decoding.py
+@@ -531,3 +531,65 @@
+     if decision_evidence(part,context):
+         schema['properties']['missing_information']['maxItems'] = 0
+     return schema
++
++
++from .assessment_evidence import citation_issue, population_witness
++DECODER.update(policy='atomic-schema-decoding-v5-cellfix9',
++    member_predicate_binding='local_clause_no_unrelated_fallback',
++    population_coverage='explicit_closed_collective_witness',
++    missing_information_scope='part_metric_and_source_reference')
++_cellfix8_final_schema = assessment_schema
++
++def assessment_schema(claim, part, context):
++    schema = _cellfix8_final_schema(claim,part,context)
++    props = schema['properties']
++    population = population_witness(part,context)
++    if population:
++        truth = population['truth']
++        complete = (part['quantifier']=='all' and truth=='true'
++                    or part['quantifier'] in ('some','none') and truth=='false')
++        member = {'type':'string','enum':population['members']}
++        proof = {'type':'string','enum':population['quotes']}
++        props['coverage'] = obj({'complete':{'const':bool(complete)},
++            'members':array(member,minimum=1 if complete else 0,maximum=1 if complete else 0),
++            'quotes':array(proof,minimum=1 if complete else 0,maximum=1 if complete else 0)})
++        obs = obj({'member':member,'truth':{'type':'string','enum':[truth]},
++            'quotes':array(proof,minimum=1,maximum=1),
++            'explanation':bounded_text(ASSESSMENT_LIMITS['explanation_chars']),
++            'numeric':{'type':'null'}})
++        props['observations'] = array(obs,minimum=1,maximum=1)
++        props['missing_information']['maxItems'] = 0
++        return schema
++    kept = []
++    for branch in props['observations']['items']['anyOf']:
++        obs = branch['properties']
++        if obs['truth']['enum']==['unknown']:
++            kept.append(branch)
++            continue
++        # Bind choices jointly, not independent member/quote enums. Otherwise
++        # a legal member could still select another member's legal passage.
++        def numeric_passages(value):
++            if not isinstance(value,dict):
++                return set()
++            found = set(value.get('properties',{}).get('source_quote',{}).get('enum',[]))
++            for item in value.values():
++                if isinstance(item,dict):
++                    found.update(numeric_passages(item))
++                elif isinstance(item,list):
++                    for sub in item:
++                        found.update(numeric_passages(sub))
++            return found
++        ledger_quotes = numeric_passages(obs['numeric'])
++        for member in obs['member'].get('enum',[]):
++            quotes = [q for q in obs['quotes']['items'].get('enum',[])
++                      if q in ledger_quotes or not citation_issue(part,member,[q],obs['truth']['enum'][0])]
++            if not quotes:
++                continue
++            fixed = deepcopy(branch)
++            fixed['properties']['member'] = {'type':'string','enum':[member]}
++            fixed['properties']['quotes']['items'] = {'type':'string','enum':quotes}
++            kept.append(fixed)
++    if not kept:
++        raise ValueError('unrepresentable_assessment_evidence')
++    props['observations']['items']['anyOf'] = kept
++    return schema
+--- cellfix8/04_factchecker/inference/assessment_rules.py
++++ cellfix9/04_factchecker/inference/assessment_rules.py
+@@ -43,13 +43,18 @@
+     """Inspect the cited member's clauses; never borrow another member's truth."""
+     if truth == 'unknown':
+         return None
++    from .assessment_evidence import citation_issue, population_witness
++    witness = population_witness(part, ' '.join(quotes))
++    if witness and member in witness['members'] and truth == witness['truth']:
++        return None
+     pieces = [p for q in quotes for p in clauses(q)]
+     own = [p for p in pieces if contains(member, p)]
+     # A roster-only sentence identifies a member but supplies no predicate.
+-    relevant = [p for p in own if contains(part['scope']['metric'], p) or _MISSING.search(p)] or pieces
+-    if relevant and all(_MISSING.search(p) for p in relevant):
++    relevant = [p for p in own if contains(part['scope']['metric'], p) or _MISSING.search(p)] or own
++    scoped = relevant or pieces
++    if scoped and all(_MISSING.search(p) for p in scoped):
+         return 'missing_evidence_is_not_false'
+-    if relevant and all(scope_conflict(part, p) for p in relevant):
++    if scoped and all(scope_conflict(part, p) for p in scoped):
+         return 'observation_scope_mismatch'
+     # A whole-context quote spanning opposed groups needs an individually bound
+     # witness. A global scope_match flag cannot associate that counterexample.
+@@ -73,7 +78,7 @@
+         direct = [p for p in own if re.search(r'(?<!\w)' + re.escape(member) + r'\s+' + re.escape(metric) + r'(?!\w)', p, re.I)]
+         if truth == 'false' and direct and not any(re.search(r'\b(?:not|never|no|may|might|if|would)\b', p, re.I) for p in direct):
+             return 'positive_predicate_before_quantifier'
+-    return None
++    return citation_issue(part, member, quotes, truth)
+ 
+ 
+ def passage_issue(part, passage):
+--- cellfix8/04_factchecker/inference/assessment_decisions.py
++++ cellfix9/04_factchecker/inference/assessment_decisions.py
+@@ -139,7 +139,7 @@
+     return None
+ 
+ 
+-def decision_evidence(part, context):
++def _legacy_decision_evidence(part, context):
+     """Return a finite decidable witness set or None; do not interpret free explanations."""
+     from .atomic_verifier import target_members, ASSESSMENT_LIMITS
+     words=part['scope']['entity'].split()
+@@ -203,7 +203,18 @@
+             'numeric':False,'quotes':sorted({clause for _,_,clause in chosen})}
+ 
+ 
++def decision_evidence(part, context):
++    from .assessment_evidence import population_witness, change_witness
++    return (_legacy_decision_evidence(part,context) or population_witness(part,context)
++            or change_witness(part,context))
++
++
+ def assessment_issue(raw, part, context):
++    from .assessment_evidence import population_issue, missing_issue
++    issue = population_issue(raw,part,context) or missing_issue(raw,part,context)
++    if issue:
++        return issue
++
+     evidence = decision_evidence(part,context)
+     if evidence is None:
+         return None

@@ -1,0 +1,543 @@
+{
+  "zip_sha256": "70ad8c8ba6376b14ac29d3daee53aabc6e76dc7a2fdc7ca631e5f30cf9ea92fe",
+  "run_id": "20261017T085227Z-e0a1ba82",
+  "archive_files": 24,
+  "all_output_hashes_valid": true,
+  "reconstructed_input_files": 75,
+  "all_input_bytes_match_manifest": true,
+  "frozen_source_files": 30,
+  "load_frozen_passed": true,
+  "criteria_sha256": "a31549bda8776f6a566689c59378e5c47092faf6000d4597ef7ab82fdafa197b",
+  "all_predictions_replayed": true,
+  "metrics_recomputed_exactly": true,
+  "all_30_call_triplets_match_trace_and_raw_json": true,
+  "all_schema_hashes_match": true,
+  "model_pairing": {
+    "model_files": true,
+    "shared_tokenizer_files": true,
+    "repo_id": true,
+    "revision": true,
+    "dtype": true,
+    "quantization": true,
+    "seed": true,
+    "do_sample": true
+  },
+  "model_data_budgets_match_parent": true,
+  "metrics": {
+    "n": 12,
+    "correct_labels": 8,
+    "false_support": 0,
+    "runtime_failed_rows": 2,
+    "gold_support_rejected": 2,
+    "gold_support_count": 4,
+    "backend_calls": 30,
+    "checks": {
+      "all_cases_present": true,
+      "all_labels_correct": false,
+      "no_false_support": true,
+      "no_runtime_failures": false,
+      "within_call_budget": true,
+      "each_group_complete_and_correct": false,
+      "within_measured_token_budget": true,
+      "structured_decoding_trace_complete": true,
+      "cooperative_deadline_trace_complete": true
+    },
+    "automated_gate_pass": false,
+    "dataset_groups": {
+      "original_contracts": {
+        "n": 12,
+        "correct": 8,
+        "false_support": 0,
+        "failed": 2
+      }
+    },
+    "stop_reasons": {
+      "completed": 10,
+      "invalid_output_exhausted": 2
+    },
+    "confusion": [
+      {
+        "gold": "contradict",
+        "prediction": "__incomplete__",
+        "n": 1
+      },
+      {
+        "gold": "contradict",
+        "prediction": "contradict",
+        "n": 3
+      },
+      {
+        "gold": "not_enough_info",
+        "prediction": "__incomplete__",
+        "n": 1
+      },
+      {
+        "gold": "not_enough_info",
+        "prediction": "not_enough_info",
+        "n": 3
+      },
+      {
+        "gold": "support",
+        "prediction": "not_enough_info",
+        "n": 2
+      },
+      {
+        "gold": "support",
+        "prediction": "support",
+        "n": 2
+      }
+    ],
+    "generated_tokens": 5078,
+    "prompt_tokens": 39090
+  },
+  "previous_metrics": {
+    "n": 12,
+    "correct_labels": 1,
+    "false_support": 0,
+    "runtime_failed_rows": 9,
+    "gold_support_rejected": 4,
+    "gold_support_count": 4,
+    "backend_calls": 35,
+    "checks": {
+      "all_cases_present": true,
+      "all_labels_correct": false,
+      "no_false_support": true,
+      "no_runtime_failures": false,
+      "within_call_budget": true,
+      "each_group_complete_and_correct": false,
+      "within_measured_token_budget": true,
+      "structured_decoding_trace_complete": true,
+      "cooperative_deadline_trace_complete": true
+    },
+    "automated_gate_pass": false,
+    "dataset_groups": {
+      "original_contracts": {
+        "n": 12,
+        "correct": 1,
+        "false_support": 0,
+        "failed": 9
+      }
+    },
+    "stop_reasons": {
+      "invalid_output_exhausted": 9,
+      "completed": 3
+    },
+    "confusion": [
+      {
+        "gold": "contradict",
+        "prediction": "__incomplete__",
+        "n": 2
+      },
+      {
+        "gold": "contradict",
+        "prediction": "not_enough_info",
+        "n": 2
+      },
+      {
+        "gold": "not_enough_info",
+        "prediction": "__incomplete__",
+        "n": 3
+      },
+      {
+        "gold": "not_enough_info",
+        "prediction": "not_enough_info",
+        "n": 1
+      },
+      {
+        "gold": "support",
+        "prediction": "__incomplete__",
+        "n": 4
+      }
+    ],
+    "generated_tokens": 3605,
+    "prompt_tokens": 33135
+  },
+  "all_trace_validation_issues": {
+    "valid": 25,
+    "observation_identity_or_truth": 4,
+    "causal_relation_not_grounded": 1
+  },
+  "assessment_calls": 18,
+  "semantic_validation_issues": {
+    "qualified_numeric_evidence": 1,
+    "scope_unknown": 1,
+    "numeric_metric_binding_unresolved": 1
+  },
+  "source_quote_occurrences_checked": 27,
+  "numeric_records_source_membership_checked": 18,
+  "colab_recorded_regression_tests_passed": 135,
+  "colab_validate_only_passed": true,
+  "diagnostic_counterfactuals_not_predictions": {
+    "contract:partial_memory:first_observation_only": {
+      "label": "not_enough_info",
+      "validation_issues": [
+        "numeric_metric_binding_unresolved"
+      ],
+      "numeric_results": [
+        [
+          {
+            "kind": "value",
+            "input": {
+              "kind": "value",
+              "source_quote": "Model Juniper retains 94% accuracy on the benchmark.",
+              "left": {
+                "value": "25",
+                "unit": "%",
+                "quote": "25%"
+              },
+              "right": {
+                "value": "94",
+                "unit": "%",
+                "quote": "94%"
+              }
+            },
+            "truth": "unknown",
+            "reason": "numeric_metric_binding_unresolved",
+            "left": "25",
+            "right": "94",
+            "unit": "%",
+            "requirement": {
+              "start": 19,
+              "end": 22,
+              "quote": "25%",
+              "value": "25",
+              "unit": "%",
+              "kind": "percent"
+            }
+          }
+        ]
+      ]
+    },
+    "contract:accuracy_conflict:first_observation_only": {
+      "label": "not_enough_info",
+      "validation_issues": [
+        "qualified_numeric_evidence"
+      ],
+      "numeric_results": [
+        {
+          "kind": "value",
+          "input": {
+            "kind": "value",
+            "source_quote": "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%.",
+            "left": {
+              "value": "94",
+              "unit": "%",
+              "quote": "94%"
+            },
+            "right": {
+              "value": "81",
+              "unit": "%",
+              "quote": "81%"
+            }
+          },
+          "truth": "unknown",
+          "reason": "qualified_numeric_evidence",
+          "left": "94",
+          "right": "81",
+          "unit": "%",
+          "requirement": {
+            "start": 12,
+            "end": 15,
+            "quote": "94%",
+            "value": "94",
+            "unit": "%",
+            "kind": "percent"
+          }
+        }
+      ]
+    },
+    "memory_check_full_sentence": "qualified_numeric_evidence",
+    "memory_check_exact_clause": "exact_value_comparison"
+  },
+  "per_case": [
+    {
+      "example_id": "contract:partial_accuracy",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "context": "Model Juniper uses 25% less memory than its baseline.",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "correct": true,
+      "status": "completed",
+      "stop_reason": "completed",
+      "backend_calls": 3,
+      "elapsed_ms": 36344.958,
+      "stage_issues": [],
+      "part_decisions": [
+        {
+          "quote": "Model Juniper uses 25% less memory",
+          "label": "support",
+          "issues": []
+        },
+        {
+          "quote": "and retains 94% accuracy.",
+          "label": "not_enough_info",
+          "issues": []
+        }
+      ]
+    },
+    {
+      "example_id": "contract:partial_memory",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "context": "Model Juniper retains 94% accuracy on the benchmark.",
+      "gold": "not_enough_info",
+      "prediction": null,
+      "correct": false,
+      "status": "incomplete",
+      "stop_reason": "invalid_output_exhausted",
+      "backend_calls": 3,
+      "elapsed_ms": 62070.196,
+      "stage_issues": [
+        {
+          "stage": "part_1",
+          "attempt": 1,
+          "issue": "observation_identity_or_truth"
+        },
+        {
+          "stage": "part_1",
+          "attempt": 2,
+          "issue": "observation_identity_or_truth"
+        }
+      ],
+      "part_decisions": []
+    },
+    {
+      "example_id": "contract:both_supported",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "context": "Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "gold": "support",
+      "prediction": "not_enough_info",
+      "correct": false,
+      "status": "completed",
+      "stop_reason": "completed",
+      "backend_calls": 3,
+      "elapsed_ms": 58652.86,
+      "stage_issues": [],
+      "part_decisions": [
+        {
+          "quote": "Model Juniper uses 25% less memory",
+          "label": "not_enough_info",
+          "issues": []
+        },
+        {
+          "quote": "and retains 94% accuracy.",
+          "label": "not_enough_info",
+          "issues": []
+        }
+      ]
+    },
+    {
+      "example_id": "contract:accuracy_conflict",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "context": "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%.",
+      "gold": "contradict",
+      "prediction": null,
+      "correct": false,
+      "status": "incomplete",
+      "stop_reason": "invalid_output_exhausted",
+      "backend_calls": 4,
+      "elapsed_ms": 99483.316,
+      "stage_issues": [
+        {
+          "stage": "part_2",
+          "attempt": 1,
+          "issue": "observation_identity_or_truth"
+        },
+        {
+          "stage": "part_2",
+          "attempt": 2,
+          "issue": "observation_identity_or_truth"
+        }
+      ],
+      "part_decisions": [
+        {
+          "quote": "Model Juniper uses 25% less memory",
+          "label": "not_enough_info",
+          "issues": [
+            "qualified_numeric_evidence"
+          ]
+        }
+      ]
+    },
+    {
+      "example_id": "contract:irrelevant",
+      "claim": "Model Juniper retains 94% accuracy.",
+      "context": "The benchmark was conducted on a Tuesday. No model accuracy is reported.",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "correct": true,
+      "status": "completed",
+      "stop_reason": "completed",
+      "backend_calls": 2,
+      "elapsed_ms": 12918.123,
+      "stage_issues": [],
+      "part_decisions": [
+        {
+          "quote": "Model Juniper retains 94% accuracy.",
+          "label": "not_enough_info",
+          "issues": []
+        }
+      ]
+    },
+    {
+      "example_id": "contract:negation",
+      "claim": "The study used human labels.",
+      "context": "The study did not use any human labels; all labels were generated automatically.",
+      "gold": "contradict",
+      "prediction": "contradict",
+      "correct": true,
+      "status": "completed",
+      "stop_reason": "completed",
+      "backend_calls": 2,
+      "elapsed_ms": 13837.045,
+      "stage_issues": [],
+      "part_decisions": [
+        {
+          "quote": "The study used human labels.",
+          "label": "contradict",
+          "issues": []
+        }
+      ]
+    },
+    {
+      "example_id": "contract:causality_missing",
+      "claim": "The new index caused the latency improvement.",
+      "context": "The new index and lower latency were observed in the same deployment. The study did not establish a causal relationship.",
+      "gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "correct": true,
+      "status": "completed",
+      "stop_reason": "completed",
+      "backend_calls": 3,
+      "elapsed_ms": 22477.063,
+      "stage_issues": [
+        {
+          "stage": "part_1",
+          "attempt": 1,
+          "issue": "causal_relation_not_grounded"
+        }
+      ],
+      "part_decisions": [
+        {
+          "quote": "The new index caused the latency improvement.",
+          "label": "not_enough_info",
+          "issues": [
+            "scope_unknown"
+          ]
+        }
+      ]
+    },
+    {
+      "example_id": "contract:scope",
+      "claim": "All tasks improved after compression.",
+      "context": "Three tasks improved after compression, but a fourth task became less accurate.",
+      "gold": "contradict",
+      "prediction": "contradict",
+      "correct": true,
+      "status": "completed",
+      "stop_reason": "completed",
+      "backend_calls": 2,
+      "elapsed_ms": 13685.721,
+      "stage_issues": [],
+      "part_decisions": [
+        {
+          "quote": "All tasks improved after compression.",
+          "label": "contradict",
+          "issues": []
+        }
+      ]
+    },
+    {
+      "example_id": "contract:cross_sentence",
+      "claim": "The report evaluated four models on two datasets.",
+      "context": "Four models were evaluated in the report. Evaluation used two datasets.",
+      "gold": "support",
+      "prediction": "not_enough_info",
+      "correct": false,
+      "status": "completed",
+      "stop_reason": "completed",
+      "backend_calls": 2,
+      "elapsed_ms": 28803.065,
+      "stage_issues": [],
+      "part_decisions": [
+        {
+          "quote": "The report evaluated four models on two datasets.",
+          "label": "not_enough_info",
+          "issues": [
+            "numeric_metric_binding_unresolved"
+          ]
+        }
+      ]
+    },
+    {
+      "example_id": "contract:wrong_units",
+      "claim": "Training took 12 seconds.",
+      "context": "Training took 12 hours, not 12 seconds.",
+      "gold": "contradict",
+      "prediction": "contradict",
+      "correct": true,
+      "status": "completed",
+      "stop_reason": "completed",
+      "backend_calls": 2,
+      "elapsed_ms": 20051.237,
+      "stage_issues": [],
+      "part_decisions": [
+        {
+          "quote": "Training took 12 seconds.",
+          "label": "contradict",
+          "issues": []
+        }
+      ]
+    },
+    {
+      "example_id": "contract:atomic_support",
+      "claim": "The sample contained 240 documents.",
+      "context": "The final sample contained exactly 240 documents.",
+      "gold": "support",
+      "prediction": "support",
+      "correct": true,
+      "status": "completed",
+      "stop_reason": "completed",
+      "backend_calls": 2,
+      "elapsed_ms": 30674.397,
+      "stage_issues": [],
+      "part_decisions": [
+        {
+          "quote": "The sample contained 240 documents.",
+          "label": "support",
+          "issues": []
+        }
+      ]
+    },
+    {
+      "example_id": "contract:bounded_scope",
+      "claim": "On the tested dataset, the method improved recall.",
+      "context": "The method improved recall on the tested dataset. Results on other datasets are unknown.",
+      "gold": "support",
+      "prediction": "support",
+      "correct": true,
+      "status": "completed",
+      "stop_reason": "completed",
+      "backend_calls": 2,
+      "elapsed_ms": 13374.127,
+      "stage_issues": [],
+      "part_decisions": [
+        {
+          "quote": "On the tested dataset, the method improved recall.",
+          "label": "support",
+          "issues": []
+        }
+      ]
+    }
+  ],
+  "new_gpu_inference_run_during_audit": false,
+  "probe18_current_candidate_result": null,
+  "full39_current_candidate_result": null,
+  "human_review": "pending",
+  "promoted_to_serving": false,
+  "limitations": [
+    "Hash checks establish artifact consistency with reconstructed known source, not a digital signature of remote execution.",
+    "Offline replay verifies stored model outputs; no new Qwen inference or independent quality benchmark ran.",
+    "No full39, decomposition-probe18 or Reader/Summarizer E2E results exist in this ZIP.",
+    "Zero false support is observed only in this 12-case development smoke, with two supported claims rejected and two incomplete rows."
+  ]
+}

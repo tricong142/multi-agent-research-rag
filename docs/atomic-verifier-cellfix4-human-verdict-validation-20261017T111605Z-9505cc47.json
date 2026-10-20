@@ -1,0 +1,18 @@
+{
+  "run_id": "20261017T111605Z-9505cc47",
+  "review_sha256": "ec9d8f465371bdf329f0879a70bbf9215a37bd5aca3909b23187e0a8c927f74e",
+  "human_verdict_recorded": true,
+  "passed_claims": 15,
+  "failed_claims": [
+    "decompose:010",
+    "decompose:014",
+    "decompose:018"
+  ],
+  "failed_criterion": "entity_metric_binding_correct",
+  "all_criteria_pass": false,
+  "gate_rejected_failed_human_review": true,
+  "admission_error": "Every semantic criterion must pass with a written review note",
+  "full39_blocked_before_model_loader": true,
+  "original_artifacts_preserved": true,
+  "new_model_inference": false
+}

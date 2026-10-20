@@ -1,0 +1,31 @@
+{
+  "run": "20261016T024708Z-a57ee72a",
+  "reviewer": "tricong",
+  "reviewer_kind": "human",
+  "human_review_completed": true,
+  "confirmation_source": "Two direct human replies in this chat: reviewer name then explicit all18/fivecriteria confirmation.",
+  "user_provided_reviewer_name": "tricong",
+  "user_confirmation_verbatim": "Cả 18 ca đạt cả năm tiêu chí; tôi đã đọc các lưu ý",
+  "format_caveats_shown_before_confirmation": [
+    "decompose:010",
+    "decompose:014",
+    "decompose:018"
+  ],
+  "per_case_notes_origin": "AI-proposed case notes shown in the review form and explicitly confirmed by the human.",
+  "human_review_file": "docs/semantic-review-v7-20261016T024708Z-a57ee72a.json",
+  "reviewed_probe_directory": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\research-runs\\colab-atomic-v7\\20261016T024708Z-a57ee72a\\reviewed-probe",
+  "criteria_sha256": "3e9a61616903e99f3c767e45c2ba361b44f6ea6c65732598ac3166b6cf23af7f",
+  "original_probe_zip_sha256": "9501567f9efe425c9d8ed61a416f58a92ccac75bc44afef7c04e71b1eead590f",
+  "admission": {
+    "probe_predictions_sha256": "55d449e24056ed440ec9e6e660aea164f20a345c045dc70c5411cf2d84b747d4",
+    "semantic_review_sha256": "c01870b7f777607508055b0ee12ce44b47141960345ce8ae15babed0d4f9719f",
+    "reviewer": "tricong"
+  },
+  "admission_verified": true,
+  "original_human_template_sha256": "e44c3bb66326824370971ae1bd11494ff6ceb69a1af3ffec26740b5c1eecf4df",
+  "original_output_modified": false,
+  "verifier39_inference_completed": false,
+  "false_support": null,
+  "step2_completed": false,
+  "promoted_to_serving": false
+}

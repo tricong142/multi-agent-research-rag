@@ -1,0 +1,61 @@
+{
+  "notebook": "scripts/colab_qasper_bm25_dense_dev.ipynb",
+  "notebook_sha256": "089dbb1834766e867b4bce31a6e01b3725cead15075726cded7dbcc525276e28",
+  "payload_sha256": "daa725644223196d5d47b907f690a8f03bedc013a91ffb9263133e46c123d1ea",
+  "payload_files": {
+    "kb_indexing/data/qasper_eval_20260926/corpus.jsonl": {
+      "size": 14185126,
+      "sha256": "4ad78d602384e8c50a02e0ab5c2363b26ecf74b06296a3457a41ef05ee6631c6"
+    },
+    "kb_indexing/data/qasper_eval_20260926/manifest.json": {
+      "size": 4761,
+      "sha256": "d47d47c9a6e83cac349645d69ac01bfe775fe52eaac045867b8093cec97b2a71"
+    },
+    "kb_indexing/data/qasper_eval_20260926/qrels_dev.jsonl": {
+      "size": 222172,
+      "sha256": "b61631d9cf2a3f0729de1168d13896fe056ba87dea0d7157c0c541a383d3225e"
+    },
+    "research_rag/__init__.py": {
+      "size": 134,
+      "sha256": "cc7fea0e7e9fe57abaea1ca3e78e70ecaad9feb9819b088c50cdf26ba0d249e5"
+    },
+    "research_rag/controller.py": {
+      "size": 7426,
+      "sha256": "b97466aece81f27bd89d62f1fd0c61857a8a604b2b9681faf1850cdfb55ff43f"
+    },
+    "research_rag/evaluation/__init__.py": {
+      "size": 66,
+      "sha256": "edf15e92c3397d31441733113a0ea6bc45d805a6084ef354526ffce327d7dd5d"
+    },
+    "research_rag/evaluation/qasper_benchmark.py": {
+      "size": 11034,
+      "sha256": "283fc0c2b50f76bb72d95bab4076ba305542ae4cb6c97f1326ee8f6307136e6e"
+    },
+    "research_rag/graph.py": {
+      "size": 32194,
+      "sha256": "b2883b3b7c2ca75cda20ab9223fb8012591dcd3284dc2eca9595af083fc275df"
+    },
+    "research_rag/indexing.py": {
+      "size": 5245,
+      "sha256": "2e02675e5094a278b4eb9d0e2eb0245389fda47ad0d9236ba69fef68f457cd14"
+    },
+    "research_rag/planning.py": {
+      "size": 9967,
+      "sha256": "680b25c3d049f7fa908ebaaed9b2a799a2430425eefd33ffb2b362e36a2d24f7"
+    },
+    "research_rag/retrieval.py": {
+      "size": 12796,
+      "sha256": "f8fc0c3118c0feb7dcb845f6be2a3dc026f253679524cbdcb5c4ec9bc1f6c75b"
+    },
+    "research_rag/state.py": {
+      "size": 1901,
+      "sha256": "0da55a10e4f5d1c33b4f06cad2e78553bfb190bc30c8b96b76a699e69a6fdc39"
+    },
+    "research_rag/tests/test_qasper_benchmark.py": {
+      "size": 4323,
+      "sha256": "f1e615cc0227deecbd39c9778b20c48d839099d9c6fc74ffbfc9adeac7c50462"
+    }
+  },
+  "gpu_executed": false,
+  "test_candidate_included": false
+}

@@ -1,0 +1,43 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix9",
+  "criteria_sha256": "6abc7038759bd361155c3aa19745c664af67e9f8e3f3fc6e26e1a436d6b6caf8",
+  "payload_sha256": "73627aa73f466be72a50b2b3f1ff72094db29ff4f1eb9205e0b8bf78358e72ac",
+  "all_passed": true,
+  "regression_tests": 291,
+  "token_filter_paths": 21,
+  "notebook_tests": 15,
+  "workflow_tests": 6,
+  "payload_files": 115,
+  "validate_only": {
+    "smoke": {
+      "freeze_valid": true,
+      "cases": 12,
+      "maximum_calls": 96
+    },
+    "probe": {
+      "freeze_valid": true,
+      "cases": 18,
+      "maximum_calls": 36
+    },
+    "full39": {
+      "freeze_valid": true,
+      "cases": 39,
+      "maximum_calls": 312
+    },
+    "validation30": {
+      "freeze_valid": true,
+      "cases": 30,
+      "maximum_calls": 240,
+      "prerequisites_required_for_inference": true
+    }
+  },
+  "logs_sha256": {
+    "regression": "1160a356e855fe5273af2a656f896710d007c856ca4704ec1976d87c260ccb44",
+    "packaging": "e9f5e6a84b11bed8e15c5988a55d29343db4f8037a505c0854d440af666f6245",
+    "workflow": "8680d5412f83e0570d87d8dea1fb4fa740b65c3edafd5079e10230102647d2c3"
+  },
+  "new_model_inference_completed": false,
+  "full39_quality_measured": false,
+  "independent_validation_completed": false,
+  "promoted_to_serving": false
+}

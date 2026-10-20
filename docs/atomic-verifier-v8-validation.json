@@ -1,0 +1,110 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-20261017",
+  "validated_at_utc": "2026-10-17T07:38:05.503565+00:00",
+  "criteria_sha256": "20b94ccfb2451fce3ebd0fba1e321a344615641b5fa9e6b6ef7d3cef4d08fce1",
+  "contract_sha256": "d271a605783c4bd294e500c1488e56974d3b0759edc501b9e725515cf9a2edd6",
+  "release_manifest_sha256": "03c4931dae7d4826287ad4972cd2f581aef09ee872bd84a1edea63dc1c55e297",
+  "frozen_source_and_fixture_files": 28,
+  "notebook_payload_files": 71,
+  "full_local_regression": {
+    "log": "research-runs/atomic-v8-all-regression.log",
+    "sha256": "bfc1c75b1afb758cfc2f7b45cf5fd97f3dafcb7044e8ebacc9550bcdc984dcf7",
+    "tests_run": 332,
+    "passed": true
+  },
+  "new_v8_regression_tests": 22,
+  "isolated_payload": {
+    "log": "research-runs/atomic-v8-final-packaging.log",
+    "sha256": "012644f694994c9752cd83aaaaf333e66975ddabccbb7cd0cb1b1408ce04a7dd",
+    "tests_run": 4,
+    "passed": true,
+    "frozen_tests_passed": 123,
+    "model_weights_loaded": false
+  },
+  "v8_notebook_checks": {
+    "distinct_tests_passed": 5,
+    "isolated_payload_log": "research-runs/atomic-v8-final-packaging.log",
+    "release_checks": {
+      "log": "research-runs/atomic-v8-release-checks.log",
+      "sha256": "3d1e2373962143fc1742e9eb71d0cd93a251114a6bd3933f30ebc2c1dd25401a",
+      "tests_run": 4,
+      "passed": true
+    }
+  },
+  "historical_v7_packaging": {
+    "legacy_checks_passed": 11,
+    "mixed_draft_log": {
+      "log": "research-runs/atomic-v8-packaging.log",
+      "sha256": "d693fba1574e32a3a06eb755314042218601284233da71d6b8b47b75b3e9093c",
+      "tests_run": 15,
+      "passed": true
+    },
+    "note": "11 legacy checks use preserved v7; four draft v8 checks in this mixed log are superseded by final logs."
+  },
+  "validate_only": {
+    "probe": {
+      "output": {
+        "freeze_valid": true,
+        "cases": 18,
+        "maximum_calls": 36
+      },
+      "path": "research-runs/atomic-v8-probe-validate-only.json",
+      "sha256": "9a27bdd61f7f7f525da6ee971d30b8344714ddcbded0c9a10998eee07e07a1c8"
+    },
+    "smoke": {
+      "output": {
+        "freeze_valid": true,
+        "cases": 12,
+        "maximum_calls": 96
+      },
+      "path": "research-runs/atomic-v8-smoke-validate-only.json",
+      "sha256": "5c062174f414d88bb2d23ce3fc63eeabecb7904fd27a8ccd289f90502bfd8b32"
+    },
+    "verifier": {
+      "output": {
+        "freeze_valid": true,
+        "cases": 39,
+        "maximum_calls": 312
+      },
+      "path": "research-runs/atomic-v8-verifier-validate-only.json",
+      "sha256": "88e7e2f8b96444af185a291a996f59058a63eb6faff3dbb53d1fbe0aeffb3e50"
+    }
+  },
+  "real_qwen_tokenizer": {
+    "report": "docs/atomic-verifier-v8-tokenizer-check.json",
+    "sha256": "a0bf7add312d1ff2796acc3ca0eade5c5872b335c063f62e72f15ed6e85a30f2",
+    "assessment_legal_token_path": {
+      "generated_tokens_including_eos": 226,
+      "split_tokens": [
+        ".\","
+      ]
+    },
+    "model_inference": false,
+    "canonical_reencoding_accepted": false
+  },
+  "v7_preservation": {
+    "snapshot_verified": true,
+    "snapshot_files": 211,
+    "original_source_files_verified": 26,
+    "archive_sha256": "528746088f5313f38a3e148b49ffe1b56061218bbc50777760921bbc1c305039",
+    "probe_replay_from_preservation_record": 18,
+    "partial39_replay_from_preservation_record": 22
+  },
+  "model_revision_data_and_budgets_unchanged": true,
+  "fresh_v8_gpu_inference_completed": false,
+  "assessment_smoke_result": null,
+  "probe18_v8_result": null,
+  "human_review_v8": "pending",
+  "full39_v8_result": null,
+  "full39_v8_false_support": null,
+  "independent_validation_completed": false,
+  "promoted_to_serving": false,
+  "e2e_with_new_verifier_completed": false,
+  "pending": [
+    "T4 smoke12",
+    "T4 probe18 and new human review bound to v8",
+    "complete full39 label/false-support measurement",
+    "independent annotated validation",
+    "Reader/Summarizer/Writer integration and model E2E"
+  ]
+}
