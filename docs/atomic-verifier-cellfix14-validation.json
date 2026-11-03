@@ -1,0 +1,30 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix14",
+  "criteria_sha256": "f63345bb14de338432e57bad6644301bb43ef61e1fd6cf5e22376dcab2b19e5e",
+  "regression_tests": 405,
+  "regression_scope": "all",
+  "failures": 0,
+  "errors": 0,
+  "all_regression_passed": true,
+  "validate_only": {
+    "smoke": {
+      "freeze_valid": true,
+      "cases": 12,
+      "maximum_calls": 96
+    },
+    "probe": {
+      "freeze_valid": true,
+      "cases": 18,
+      "maximum_calls": 36
+    },
+    "full39": {
+      "freeze_valid": true,
+      "cases": 39,
+      "maximum_calls": 312
+    }
+  },
+  "model_inference_completed": false,
+  "validation30_used_for_tuning": true,
+  "independent_validation_completed": false,
+  "promoted_to_serving": false
+}

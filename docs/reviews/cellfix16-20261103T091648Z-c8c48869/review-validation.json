@@ -1,0 +1,15 @@
+{
+  "run_id": "20261103T091648Z-c8c48869",
+  "candidate": "atomic-verifier-constrained-v8-cellfix16",
+  "claims": 18,
+  "parts": 20,
+  "criteria_checked": 90,
+  "passed_claims": 18,
+  "reviewer": "Trí Công",
+  "reviewer_kind": "human",
+  "human_review_completed": true,
+  "review_completed": true,
+  "original_predictions_unchanged": true,
+  "criteria_sha256": "c025247428698d892e549fb12ad22e19561020b034a2a2276c9dfcaf0cbdc966",
+  "predictions_sha256": "4c44ecdb7863ca0cd76be2450233840756872a6205cd5816896d6c1dcdf29dc2"
+}

@@ -1,0 +1,117 @@
+{
+  "run_id": "20261027T025350Z-c67b6d37",
+  "kind": "saved_ledger_semantic_reproducer",
+  "findings": [
+    {
+      "example_id": "contract:irrelevant",
+      "part": "Model Juniper retains 94% accuracy.",
+      "member": "No model accuracy is reported",
+      "truth": "unknown",
+      "quotes": [],
+      "raw_output_accepted_by_validator": true,
+      "character_token_fixture_accepts_same_ledger": true,
+      "complete_absence_regex_matches_member": false,
+      "observation_focus_issue": null
+    },
+    {
+      "example_id": "scope:none:not_enough_info",
+      "part": "None of the monitored pumps leaked during the overnight test.",
+      "member": "Silver's leak status was not",
+      "truth": "unknown",
+      "quotes": [
+        "Blue and Green had no leaks, but Silver's leak status was not reported."
+      ],
+      "raw_output_accepted_by_validator": true,
+      "character_token_fixture_accepts_same_ledger": true,
+      "complete_absence_regex_matches_member": false,
+      "observation_focus_issue": null
+    },
+    {
+      "example_id": "scope:conjunction:support",
+      "part": "After tuning, the extractor decreased memory use",
+      "member": "5.4 to 4.6 gigabytes",
+      "truth": "unknown",
+      "quotes": [],
+      "raw_output_accepted_by_validator": true,
+      "character_token_fixture_accepts_same_ledger": true,
+      "complete_absence_regex_matches_member": false,
+      "observation_focus_issue": null
+    },
+    {
+      "example_id": "scope:conjunction:support",
+      "part": "and increased token recall.",
+      "member": "4.6 gigabytes",
+      "truth": "unknown",
+      "quotes": [],
+      "raw_output_accepted_by_validator": true,
+      "character_token_fixture_accepts_same_ledger": true,
+      "complete_absence_regex_matches_member": false,
+      "observation_focus_issue": null
+    },
+    {
+      "example_id": "scope:conjunction:contradict",
+      "part": "After tuning, the extractor decreased memory use",
+      "member": "For the same workload, tuning reduced memory use",
+      "truth": "unknown",
+      "quotes": [],
+      "raw_output_accepted_by_validator": true,
+      "character_token_fixture_accepts_same_ledger": true,
+      "complete_absence_regex_matches_member": false,
+      "observation_focus_issue": null
+    },
+    {
+      "example_id": "scope:conjunction:contradict",
+      "part": "and increased token recall.",
+      "member": "4.6 gigabytes",
+      "truth": "unknown",
+      "quotes": [],
+      "raw_output_accepted_by_validator": true,
+      "character_token_fixture_accepts_same_ledger": true,
+      "complete_absence_regex_matches_member": false,
+      "observation_focus_issue": null
+    },
+    {
+      "example_id": "scope:conjunction:not_enough_info",
+      "part": "After tuning, the extractor decreased memory use",
+      "member": "the extraction workload",
+      "truth": "unknown",
+      "quotes": [],
+      "raw_output_accepted_by_validator": true,
+      "character_token_fixture_accepts_same_ledger": true,
+      "complete_absence_regex_matches_member": false,
+      "observation_focus_issue": null
+    },
+    {
+      "example_id": "scope:conjunction:not_enough_info",
+      "part": "and increased token recall.",
+      "member": "4.6 gigabytes",
+      "truth": "unknown",
+      "quotes": [],
+      "raw_output_accepted_by_validator": true,
+      "character_token_fixture_accepts_same_ledger": true,
+      "complete_absence_regex_matches_member": false,
+      "observation_focus_issue": null
+    },
+    {
+      "example_id": "scope:condition:not_enough_info",
+      "part": "Every batch in the low-temperature group gained yield after the update.",
+      "member": "no yield changes were",
+      "truth": "unknown",
+      "quotes": [
+        "The low-temperature group contained three batches, but no yield changes were measured for that group."
+      ],
+      "raw_output_accepted_by_validator": true,
+      "character_token_fixture_accepts_same_ledger": true,
+      "complete_absence_regex_matches_member": false,
+      "observation_focus_issue": null
+    }
+  ],
+  "human_form_text_matches_frozen_renderer": true,
+  "form_comparison_normalization": "CRLF to LF only",
+  "original_colab_html_preserved_bytes": true,
+  "human_signature_created": false,
+  "ai_review_does_not_admit_validation30": true,
+  "admission_block": "Completed human review bound to this candidate and predictions is required",
+  "new_model_inference": false,
+  "predictions_modified": false
+}

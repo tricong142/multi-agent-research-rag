@@ -1,0 +1,26 @@
+{
+  "run_id": "20261027T025350Z-c67b6d37",
+  "cases": 39,
+  "criteria": 195,
+  "checked_boxes": 0,
+  "ai_flagged_cases": [
+    "contract:irrelevant",
+    "scope:none:not_enough_info",
+    "scope:conjunction:support",
+    "scope:conjunction:contradict",
+    "scope:conjunction:not_enough_info",
+    "scope:condition:not_enough_info"
+  ],
+  "human_signature_created": false,
+  "release_files_unchanged": true,
+  "original_html_preserved": true,
+  "validation30_inference_completed": false,
+  "files_sha256": {
+    "AI_EVIDENCE_AUDIT.json": "e196622cdfeef4a67353a758728b1db01482f9ab86833a2ad5a26cc630c6eb30",
+    "AUDIT_AND_NEXT_STEPS.md": "904ceb01cf306f6713035975afd2f5387d3a93ca8b53ce7d762acb02dd53204a",
+    "EVIDENCE_REVIEW_39.md": "17eb053eed072b1bbc6421cd188c7bb93eb9105ce86b5c754b1424b5e598bab3",
+    "GUARD_DIAGNOSTICS.json": "5ba74a8be39c87f946f79691600adf8b51697fbcb468a51a3a146ef85c548aac",
+    "HUMAN_REVIEW.html": "b516de4a97393e5f24d9a8de417023714d55aadae1ebf65876a376e720b022b5",
+    "HUMAN_REVIEW_WITH_AI_NOTES.html": "44cb7ff668dc1c4f90215fd27c4e2185c0408746f804dff8550d2f431b23d72f"
+  }
+}

@@ -1,6 +1,7 @@
 # LangGraph orchestration
 
-**Chưa nghiệm thu với atomic verifier mới.** Loader vẫn dùng FactChecker cũ;
+**Chưa nghiệm thu với atomic verifier mới.** Loader mặc định dùng FactChecker cũ;
+đã có nhánh opt-in `--verifier atomic` cho candidate Cellfix16.
 Summarizer và Writer chưa đạt E2E với verifier mới. [Gate hiện hành và notebook
 benchmark QASPER](../docs/PRODUCTION_GATES_20261016.md) phân biệt probe tách mệnh
 đề, nhãn/false support39 và E2E. Reader mặc định chạy PyMuPDF/Tesseract local;
@@ -12,7 +13,7 @@ Recall@5=27,07%, cao hơn BM25 trên lượt này. Đây là benchmark retrieval
 chưa đánh giá adaptive policy, verifier hoặc model E2E.
 
 Candidate atomic verifier v8 dùng default criteria v8 trong runner thí nghiệm;
-serving vẫn dùng FactChecker cũ. [Notebook và thứ tự chạy T4](../docs/ATOMIC_VERIFIER_V8_RUN_GUIDE.md):
+serving mặc định vẫn dùng FactChecker cũ. [Notebook và thứ tự chạy T4](../docs/ATOMIC_VERIFIER_V8_RUN_GUIDE.md):
 smoke12 → probe18 → review người mới → full39. Regression local/freeze không
 thay số đo nhãn, false support hoặc E2E. [Validation v8](../docs/ATOMIC_VERIFIER_V8_VALIDATION.md).
 
@@ -77,6 +78,38 @@ python -m pip install -r requirements-orchestrator.txt
 python -m research_rag.local --question "Câu hỏi của bạn" --quantize-4bit --profile-resources --metrics-output run-metrics.json
 python -m research_rag.local --question "Câu hỏi về PDF" --pdf path\to\paper.pdf
 ```
+
+Sau khi candidate Cellfix16 qua các gate nghiệm thu, chọn adapter E2E đã chuẩn bị:
+
+```powershell
+python -m pip install -r requirements-atomic-verifier.txt
+python -m research_rag.local --verifier atomic --question "Câu hỏi về PDF" --pdf path\to\paper.pdf --quantize-4bit --process-timeout 1800 --metrics-output atomic-e2e-metrics.json --trace-output atomic-e2e-private.jsonl
+```
+
+`--verifier legacy` là mặc định. Nhánh `atomic` dùng **base Qwen2.5-3B-Instruct**
+revision `aa8e72537993ba99e69dfaafa59ed015b17504d1`, NF4/float16 và constrained
+decoder của Cellfix16, không dùng weights fine-tuned của FactChecker cũ. Cần CUDA;
+`--allow-cpu` không đổi cấu hình NF4 của candidate. Cần giữ workspace frozen
+`research-runs/atomic-cellfix16-candidate/workspace` và release manifest trong repo
+khi chuyển host; adapter kiểm tra hash trước khi import vào namespace riêng.
+Thiếu artifact, source thay đổi hoặc backend lỗi sẽ dừng/chặn xác minh, không tự
+chuyển sang legacy. Cache model tuân theo `--online-model-downloads` hiện có.
+
+Adapter giữ các giới hạn call/token/attempt của criteria và thu hẹp deadline mỗi
+ca theo thời gian còn lại của graph. `--max-factcheck-calls` tiếp tục đếm số lượt
+kiểm claim/evidence ở graph; mỗi lượt atomic có tối đa 8 backend calls riêng.
+Events ghi backend calls thực tế. Dùng `--process-timeout` để có giới hạn cứng
+cho cả worker, kể cả code native không trả quyền điều khiển.
+
+Chỉ ledger `completed` với nhãn `support` mới đủ điều kiện xác minh; incomplete
+và lỗi không được publish thành support. Field `confidence_score` của contract
+cũ được dùng như **cờ eligibility 1/0**, không phải confidence đã calibration.
+Lý do này được lưu ở `confidence_reasoning`. Adapter không thêm một lượt LLM
+đo confidence. Các gate evidence/source/conflict của graph vẫn áp dụng.
+Checkpoint atomic khóa cả criteria hash và policy ánh xạ này; dùng thread mới khi
+đổi giữa legacy/atomic. Trace output là dữ liệu private có prompt, ledger và text
+nguồn; mặc định không xuất trace. Các test adapter dùng output giả lập, chưa
+chứng minh inference GPU hoặc chất lượng model E2E.
 
 Loader local mặc định không tải base model qua mạng. Thêm `--online-model-downloads` khi bạn đã quyết định tải các base model của adapter. `--quantize-4bit` dùng NF4 cho Summarizer và Fact-Checker trên CUDA; Writer đã tự nạp 4-bit khi có CUDA. Một ca DistilBERT đã chạy đủ Retrieval → Summarizer → Fact-Checker → Writer thật trên Kaggle T4 x2 ngày 2026-09-26 sau bản sửa đối chiếu evidence; đây chưa phải đánh giá chất lượng tổng quát. `--allow-cpu` chỉ dành cho host có đủ RAM; mặc định chương trình từ chối nạp đồng thời các model lớn khi không có CUDA. `--profile-resources` ghi RAM tiến trình và CUDA memory sau mỗi model được nạp và sau graph. `--metrics-output` ghi thời gian/trạng thái/số lượng, không ghi prompt, chunk hoặc report; `token_usage` và `estimated_cost` để `null` vì backend hiện không trả usage. Reader cần `GEMINI_API_KEY` nếu dùng bước critique Gemini; OCR cần binary Tesseract ngoài package Python. Xem [Kaggle GPU runbook](../docs/KAGGLE_GPU_RUNBOOK.md) để cài môi trường mới và kiểm thử có model thật.
 

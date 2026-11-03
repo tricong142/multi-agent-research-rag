@@ -1,0 +1,3160 @@
+{
+  "run_id": "20261027T151114Z-20ea1926",
+  "candidate": "atomic-verifier-constrained-v8-cellfix13",
+  "criteria_sha256": "fc4d4a8f7baaf88886cbd3047819125752867e7cdb2f2a8fb850f4be293abb4c",
+  "predictions_sha256": "d9b77f1687e1b6e201a53d9b723c0e91ecc8618077ab87055603e09272e9bf7f",
+  "reviewer_kind": "assistant",
+  "reviewer": "Codex (AI diagnostic audit)",
+  "ai_diagnostic_review_completed": true,
+  "human_review_completed": false,
+  "automated_gate_pass": false,
+  "ready_for_next_pipeline_stage": false,
+  "gold_changed": false,
+  "cases": [
+    {
+      "example_id": "validation-v1:001",
+      "claim": "Model E-4 achieved 88.26% WER with the LibriSpeech language model.",
+      "context": "Row(1) is for Model A in Fig. FIGREF5 taken as the baseline, which was trained on LibriSpeech data with SAT, together with the language model also trained with LibriSpeech. The extremely high WER (96.21%) indicated the wide mismatch between speech and song audio, and the high difficulties in transcribing song audio. This is taken as the baseline of this work. After going through the series of Alignments a, b, c, d and training the series of Models B, C, D, we finally obtained the best GMM-HMM model, Model E-4 in Model E with fMLLR on the fragment level, as explained in section SECREF3 and shown in Fig. FIGREF5 . As shown in row(2) of Table. TABREF14 , with the same LibriSpeech LM, Model E-4 reduced WER to 88.26%, and brought an absolute improvement of 7.95% (rows (2) vs. (1)), which shows the achievements by the series of GMM-HMM alone. When we replaced the LibriSpeech language model with Lyrics language model but with the same Model E-4, we obtained an WER of 80.40% or an absolute improvement of 7.86% (rows (3) vs. (2)). This shows the achievement by the Lyrics language model alone.",
+      "label": "support",
+      "dataset_group": "1804.05306",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": false,
+      "stop_reason": "completed",
+      "elapsed_ms": 15721.039,
+      "diagnostic_categories": [
+        "quantity_identifier",
+        "unknown_despite_measurement"
+      ],
+      "notes": "Nguồn nêu Model E-4 + LibriSpeech LM đạt 88.26% WER. Numeric requirements lại có quantity giả 4 achieved từ model ID; ledger unknown dù có measurement. Gold support giữ nguyên; NEI sai.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "Model E-4 achieved 88.26% WER with the LibriSpeech language model.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "Model E-4",
+              "metric": "WER",
+              "time": "",
+              "condition": "with the LibriSpeech language model"
+            },
+            "start": 0,
+            "end": 66,
+            "numeric_requirements": [
+              {
+                "start": 8,
+                "end": 18,
+                "quote": "4 achieved",
+                "value": "4",
+                "unit": "achieved",
+                "kind": "number"
+              },
+              {
+                "start": 19,
+                "end": 25,
+                "quote": "88.26%",
+                "value": "88.26",
+                "unit": "%",
+                "kind": "percent"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "Model E-4 achieved 88.26% WER with the LibriSpeech language model.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "Model E-4",
+              "metric": "WER",
+              "time": "",
+              "condition": "with the LibriSpeech language model"
+            },
+            "start": 0,
+            "end": 66,
+            "numeric_requirements": [
+              {
+                "start": 8,
+                "end": 18,
+                "quote": "4 achieved",
+                "value": "4",
+                "unit": "achieved",
+                "kind": "number"
+              },
+              {
+                "start": 19,
+                "end": 25,
+                "quote": "88.26%",
+                "value": "88.26",
+                "unit": "%",
+                "kind": "percent"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 8,
+              "end": 18,
+              "quote": "4 achieved",
+              "value": "4",
+              "unit": "achieved",
+              "kind": "number"
+            },
+            {
+              "start": 19,
+              "end": 25,
+              "quote": "88.26%",
+              "value": "88.26",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "Model E-4",
+              "truth": "unknown",
+              "quotes": [],
+              "explanation": "Member 'Model E-4' has unresolved evidence for the positive predicate 'WER', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. Evidence resolving this predicate for the claimed target and scope: target=Model E-4; predicate/metric=WER; condition=with the LibriSpeech language model.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "Evidence resolving this predicate for the claimed target and scope: target=Model E-4; predicate/metric=WER; condition=with the LibriSpeech language model."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "scoped_evidence_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:002",
+      "claim": "Model E-4 achieved 80.40% WER with the LibriSpeech language model.",
+      "context": "Row(1) is for Model A in Fig. FIGREF5 taken as the baseline, which was trained on LibriSpeech data with SAT, together with the language model also trained with LibriSpeech. The extremely high WER (96.21%) indicated the wide mismatch between speech and song audio, and the high difficulties in transcribing song audio. This is taken as the baseline of this work. After going through the series of Alignments a, b, c, d and training the series of Models B, C, D, we finally obtained the best GMM-HMM model, Model E-4 in Model E with fMLLR on the fragment level, as explained in section SECREF3 and shown in Fig. FIGREF5 . As shown in row(2) of Table. TABREF14 , with the same LibriSpeech LM, Model E-4 reduced WER to 88.26%, and brought an absolute improvement of 7.95% (rows (2) vs. (1)), which shows the achievements by the series of GMM-HMM alone. When we replaced the LibriSpeech language model with Lyrics language model but with the same Model E-4, we obtained an WER of 80.40% or an absolute improvement of 7.86% (rows (3) vs. (2)). This shows the achievement by the Lyrics language model alone.",
+      "label": "contradict",
+      "dataset_group": "1804.05306",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": false,
+      "stop_reason": "completed",
+      "elapsed_ms": 15123.309,
+      "diagnostic_categories": [
+        "quantity_identifier",
+        "condition_binding"
+      ],
+      "notes": "LibriSpeech LM gắn 88.26%, còn 80.40% thuộc Lyrics LM. Claim 80.40% với LibriSpeech bị refute; model trả unknown. Numeric requirements còn có 4 achieved giả từ E-4. Cần bind target/LM/value, không lấy số cùng paragraph tùy ý.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "Model E-4 achieved 80.40% WER with the LibriSpeech language model.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "Model E-4",
+              "metric": "WER",
+              "time": "",
+              "condition": "with the LibriSpeech language model"
+            },
+            "start": 0,
+            "end": 66,
+            "numeric_requirements": [
+              {
+                "start": 8,
+                "end": 18,
+                "quote": "4 achieved",
+                "value": "4",
+                "unit": "achieved",
+                "kind": "number"
+              },
+              {
+                "start": 19,
+                "end": 25,
+                "quote": "80.40%",
+                "value": "80.40",
+                "unit": "%",
+                "kind": "percent"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "Model E-4 achieved 80.40% WER with the LibriSpeech language model.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "Model E-4",
+              "metric": "WER",
+              "time": "",
+              "condition": "with the LibriSpeech language model"
+            },
+            "start": 0,
+            "end": 66,
+            "numeric_requirements": [
+              {
+                "start": 8,
+                "end": 18,
+                "quote": "4 achieved",
+                "value": "4",
+                "unit": "achieved",
+                "kind": "number"
+              },
+              {
+                "start": 19,
+                "end": 25,
+                "quote": "80.40%",
+                "value": "80.40",
+                "unit": "%",
+                "kind": "percent"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 8,
+              "end": 18,
+              "quote": "4 achieved",
+              "value": "4",
+              "unit": "achieved",
+              "kind": "number"
+            },
+            {
+              "start": 19,
+              "end": 25,
+              "quote": "80.40%",
+              "value": "80.40",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "Model E-4",
+              "truth": "unknown",
+              "quotes": [],
+              "explanation": "Member 'Model E-4' has unresolved evidence for the positive predicate 'WER', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. Evidence resolving this predicate for the claimed target and scope: target=Model E-4; predicate/metric=WER; condition=with the LibriSpeech language model.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "Evidence resolving this predicate for the claimed target and scope: target=Model E-4; predicate/metric=WER; condition=with the LibriSpeech language model."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "scoped_evidence_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:003",
+      "claim": "Model E-4 used 25% less memory with the LibriSpeech language model than Model A.",
+      "context": "Row(1) is for Model A in Fig. FIGREF5 taken as the baseline, which was trained on LibriSpeech data with SAT, together with the language model also trained with LibriSpeech. The extremely high WER (96.21%) indicated the wide mismatch between speech and song audio, and the high difficulties in transcribing song audio. This is taken as the baseline of this work. After going through the series of Alignments a, b, c, d and training the series of Models B, C, D, we finally obtained the best GMM-HMM model, Model E-4 in Model E with fMLLR on the fragment level, as explained in section SECREF3 and shown in Fig. FIGREF5 . As shown in row(2) of Table. TABREF14 , with the same LibriSpeech LM, Model E-4 reduced WER to 88.26%, and brought an absolute improvement of 7.95% (rows (2) vs. (1)), which shows the achievements by the series of GMM-HMM alone. When we replaced the LibriSpeech language model with Lyrics language model but with the same Model E-4, we obtained an WER of 80.40% or an absolute improvement of 7.86% (rows (3) vs. (2)). This shows the achievement by the Lyrics language model alone.",
+      "label": "not_enough_info",
+      "dataset_group": "1804.05306",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": true,
+      "stop_reason": "completed",
+      "elapsed_ms": 14834.666,
+      "diagnostic_categories": [
+        "quantity_identifier"
+      ],
+      "notes": "NEI đúng vì không có memory comparison. Tuy nhiên numeric requirements có 4 used giả từ E-4 ngoài quantity 25%; nhãn đúng chưa chứng minh quantity contract đúng.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "Model E-4 used 25% less memory with the LibriSpeech language model than Model A.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "Model E-4",
+              "metric": "memory",
+              "time": "",
+              "condition": "with the LibriSpeech language model"
+            },
+            "start": 0,
+            "end": 80,
+            "numeric_requirements": [
+              {
+                "start": 8,
+                "end": 14,
+                "quote": "4 used",
+                "value": "4",
+                "unit": "used",
+                "kind": "number"
+              },
+              {
+                "start": 15,
+                "end": 18,
+                "quote": "25%",
+                "value": "25",
+                "unit": "%",
+                "kind": "percent"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "Model E-4 used 25% less memory with the LibriSpeech language model than Model A.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "Model E-4",
+              "metric": "memory",
+              "time": "",
+              "condition": "with the LibriSpeech language model"
+            },
+            "start": 0,
+            "end": 80,
+            "numeric_requirements": [
+              {
+                "start": 8,
+                "end": 14,
+                "quote": "4 used",
+                "value": "4",
+                "unit": "used",
+                "kind": "number"
+              },
+              {
+                "start": 15,
+                "end": 18,
+                "quote": "25%",
+                "value": "25",
+                "unit": "%",
+                "kind": "percent"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 8,
+              "end": 14,
+              "quote": "4 used",
+              "value": "4",
+              "unit": "used",
+              "kind": "number"
+            },
+            {
+              "start": 15,
+              "end": 18,
+              "quote": "25%",
+              "value": "25",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "Model E-4",
+              "truth": "unknown",
+              "quotes": [],
+              "explanation": "Member 'Model E-4' has unresolved evidence for the positive predicate 'memory', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. Evidence resolving this predicate for the claimed target and scope: target=Model E-4; predicate/metric=memory; condition=with the LibriSpeech language model.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "Evidence resolving this predicate for the claimed target and scope: target=Model E-4; predicate/metric=memory; condition=with the LibriSpeech language model."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "scoped_evidence_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:004",
+      "claim": "For WMT En-De, the reported BLEU is detokenized BLEU.",
+      "context": "For English-German (En-De) we train on WMT'17 data, validate on news2016 and test on news2017. For reranking, we train models with a 40K joint byte pair encoding vocabulary (BPE; BIBREF11). To be able to use the language model during online decoding, we use the vocabulary of the langauge model on the target side. For the source vocabulary, we learn a 40K byte pair encoding on the source portion of the bitext; we find using LM and bitext vocabularies give similar accuracy. For Chinese-English (Zh-En), we pre-process WMT'17 data following BIBREF12, we develop on dev2017 and test on news2017. For IWSLT'14 De-En we follow the setup of BIBREF13 and measure case-sensitive tokenized BLEU. For WMT De-En, En-De and Zh-En we measure detokenized BLEU BIBREF14.",
+      "label": "support",
+      "dataset_group": "1908.05731",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": false,
+      "stop_reason": "completed",
+      "elapsed_ms": 11858.977,
+      "diagnostic_categories": [
+        "target_alias_or_shared_head"
+      ],
+      "notes": "Nguồn liệt kê For WMT De-En, En-De and Zh-En we measure detokenized BLEU. Exact target WMT En-De bị coi vắng mặt do shared WMT head/list. Empty ledger làm bỏ support; cần quy chiếu có chứng cứ, không nới lỏng mọi alias.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "For WMT En-De, the reported BLEU is detokenized BLEU.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "WMT En-De",
+              "metric": "reported BLEU",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 53,
+            "numeric_requirements": []
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "For WMT En-De, the reported BLEU is detokenized BLEU.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "WMT En-De",
+              "metric": "reported BLEU",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 53,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [],
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=WMT En-De; predicate/metric=reported BLEU.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "unknown",
+          "missing_information": [
+            "Evidence identifying the claimed target in the reported results: target=WMT En-De; predicate/metric=reported BLEU."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [
+            "scope_unknown"
+          ],
+          "model_missing_information": [
+            "target_binding_unresolved"
+          ],
+          "missing_reason": "target_binding_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:005",
+      "claim": "For WMT En-De, the reported BLEU is tokenized BLEU.",
+      "context": "For English-German (En-De) we train on WMT'17 data, validate on news2016 and test on news2017. For reranking, we train models with a 40K joint byte pair encoding vocabulary (BPE; BIBREF11). To be able to use the language model during online decoding, we use the vocabulary of the langauge model on the target side. For the source vocabulary, we learn a 40K byte pair encoding on the source portion of the bitext; we find using LM and bitext vocabularies give similar accuracy. For Chinese-English (Zh-En), we pre-process WMT'17 data following BIBREF12, we develop on dev2017 and test on news2017. For IWSLT'14 De-En we follow the setup of BIBREF13 and measure case-sensitive tokenized BLEU. For WMT De-En, En-De and Zh-En we measure detokenized BLEU BIBREF14.",
+      "label": "contradict",
+      "dataset_group": "1908.05731",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": false,
+      "stop_reason": "completed",
+      "elapsed_ms": 11569.334,
+      "diagnostic_categories": [
+        "target_alias_or_shared_head"
+      ],
+      "notes": "Cùng nguồn WMT detokenized BLEU refute tokenized BLEU của claim. Empty ledger/missing identity bỏ bằng chứng quyết định; NEI sai. IWSLT tokenized BLEU thuộc setup khác.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "For WMT En-De, the reported BLEU is tokenized BLEU.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "WMT En-De",
+              "metric": "reported BLEU",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 51,
+            "numeric_requirements": []
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "For WMT En-De, the reported BLEU is tokenized BLEU.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "WMT En-De",
+              "metric": "reported BLEU",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 51,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [],
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=WMT En-De; predicate/metric=reported BLEU.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "unknown",
+          "missing_information": [
+            "Evidence identifying the claimed target in the reported results: target=WMT En-De; predicate/metric=reported BLEU."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [
+            "scope_unknown"
+          ],
+          "model_missing_information": [
+            "target_binding_unresolved"
+          ],
+          "missing_reason": "target_binding_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:006",
+      "claim": "The WMT En-De system achieved a BLEU score of 30.",
+      "context": "For English-German (En-De) we train on WMT'17 data, validate on news2016 and test on news2017. For reranking, we train models with a 40K joint byte pair encoding vocabulary (BPE; BIBREF11). To be able to use the language model during online decoding, we use the vocabulary of the langauge model on the target side. For the source vocabulary, we learn a 40K byte pair encoding on the source portion of the bitext; we find using LM and bitext vocabularies give similar accuracy. For Chinese-English (Zh-En), we pre-process WMT'17 data following BIBREF12, we develop on dev2017 and test on news2017. For IWSLT'14 De-En we follow the setup of BIBREF13 and measure case-sensitive tokenized BLEU. For WMT De-En, En-De and Zh-En we measure detokenized BLEU BIBREF14.",
+      "label": "not_enough_info",
+      "dataset_group": "1908.05731",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": true,
+      "stop_reason": "completed",
+      "elapsed_ms": 10117.437,
+      "diagnostic_categories": [
+        "missing_reason_target_vs_measurement"
+      ],
+      "notes": "NEI đúng: paragraph không cho BLEU score 30. Missing hiện đòi target identity trong khi WMT En-De được quy chiếu qua danh sách; cần nêu thiếu score thay vì nhầm thiếu target.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "The WMT En-De system achieved a BLEU score of 30.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "WMT En-De system",
+              "metric": "BLEU score",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 49,
+            "numeric_requirements": [
+              {
+                "start": 46,
+                "end": 48,
+                "quote": "30",
+                "value": "30",
+                "unit": "",
+                "kind": "number"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "The WMT En-De system achieved a BLEU score of 30.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "WMT En-De system",
+              "metric": "BLEU score",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 49,
+            "numeric_requirements": [
+              {
+                "start": 46,
+                "end": 48,
+                "quote": "30",
+                "value": "30",
+                "unit": "",
+                "kind": "number"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 46,
+              "end": 48,
+              "quote": "30",
+              "value": "30",
+              "unit": "",
+              "kind": "number"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [],
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=WMT En-De system; predicate/metric=BLEU score.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "unknown",
+          "missing_information": [
+            "Evidence identifying the claimed target in the reported results: target=WMT En-De system; predicate/metric=BLEU score."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [
+            "scope_unknown"
+          ],
+          "model_missing_information": [
+            "target_binding_unresolved"
+          ],
+          "missing_reason": "target_binding_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:007",
+      "claim": "The controllable parametrization achieved 41.87 SARI on WikiLarge.",
+      "context": "Our contributions are the following: (1) We adapt a parametrization mechanism to the specific task of Sentence Simplification by choosing relevant parameters; (2) We show through a detailed analysis that our model can indeed control the considered attributes, making the simplifications potentially able to fit the needs of various end audiences; (3) With careful calibration, our controllable parametrization improves the performance of out-of-the-box Seq2Seq models leading to a new state-of-the-art score of 41.87 SARI BIBREF9 on the WikiLarge benchmark BIBREF10, a +1.42 gain over previous scores, without requiring any external resource or modified training objective.",
+      "label": "support",
+      "dataset_group": "1910.02677",
+      "prediction": "support",
+      "label_matches_frozen_gold": true,
+      "stop_reason": "completed",
+      "elapsed_ms": 44115.777,
+      "diagnostic_categories": [
+        "citation_quality_warning"
+      ],
+      "notes": "Support 41.87 SARI/WikiLarge khớp nguồn và numeric record cuối đúng. Quotes chứa các đoạn dài cắt giữa mệnh đề, hai đoạn trùng nhau; citation bổ sung đầy đủ giữ được bằng chứng. Cần review quote selection, không coi mọi literal substring là quote tốt.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "The controllable parametrization achieved 41.87 SARI on WikiLarge.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "controllable parametrization",
+              "metric": "SARI",
+              "time": "",
+              "condition": "on WikiLarge"
+            },
+            "start": 0,
+            "end": 66,
+            "numeric_requirements": [
+              {
+                "start": 42,
+                "end": 52,
+                "quote": "41.87 SARI",
+                "value": "41.87",
+                "unit": "SARI",
+                "kind": "number"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "The controllable parametrization achieved 41.87 SARI on WikiLarge.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "controllable parametrization",
+              "metric": "SARI",
+              "time": "",
+              "condition": "on WikiLarge"
+            },
+            "start": 0,
+            "end": 66,
+            "numeric_requirements": [
+              {
+                "start": 42,
+                "end": 52,
+                "quote": "41.87 SARI",
+                "value": "41.87",
+                "unit": "SARI",
+                "kind": "number"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 42,
+              "end": 52,
+              "quote": "41.87 SARI",
+              "value": "41.87",
+              "unit": "SARI",
+              "kind": "number"
+            }
+          ],
+          "assessed_label": "support",
+          "observations": [
+            {
+              "member": "controllable parametrization",
+              "truth": "true",
+              "quotes": [
+                "We adapt a parametrization mechanism to the specific task of Sentence Simplification by choosing relevant parameters; (2) We show through a detailed analysis that our model can indeed control the considered attributes, making the simplifications potentially able to fit the needs of various end audiences; (3) With careful calibration, our controllable parametrization improves the",
+                "relevant parameters; (2) We show through a detailed analysis that our model can indeed control the considered attributes, making the simplifications potentially able to fit the needs of various end audiences; (3) With careful calibration, our controllable parametrization improves the performance of out-of-the-box Seq2Seq models leading to a new state-of-the-art score of 41.87 SARI",
+                "relevant parameters; (2) We show through a detailed analysis that our model can indeed control the considered attributes, making the simplifications potentially able to fit the needs of various end audiences; (3) With careful calibration, our controllable parametrization improves the performance of out-of-the-box Seq2Seq models leading to a new state-of-the-art score of 41.87 SARI",
+                "With careful calibration, our controllable parametrization improves the performance of out-of-the-box Seq2Seq models leading to a new state-of-the-art score of 41.87 SARI BIBREF9 on the WikiLarge benchmark BIBREF10, a +1.42 gain over previous scores, without requiring any external resource or modified training objective."
+              ],
+              "explanation": "Member 'controllable parametrization' satisfies the positive predicate 'SARI', before applying ATOMIC. See the checked numeric records and their source quotes.",
+              "numeric": {
+                "kind": "value",
+                "source_quote": "With careful calibration, our controllable parametrization improves the performance of out-of-the-box Seq2Seq models leading to a new state-of-the-art score of 41.87 SARI BIBREF9 on the WikiLarge benchmark BIBREF10, a +1.42 gain over previous scores, without requiring any external resource or modified training objective.",
+                "left": {
+                  "value": "41.87",
+                  "unit": "SARI",
+                  "quote": "41.87 SARI"
+                },
+                "right": {
+                  "value": "41.87",
+                  "unit": "SARI",
+                  "quote": "41.87 SARI"
+                }
+              },
+              "citation_additions": [
+                "With careful calibration, our controllable parametrization improves the performance of out-of-the-box Seq2Seq models leading to a new state-of-the-art score of 41.87 SARI BIBREF9 on the WikiLarge benchmark BIBREF10, a +1.42 gain over previous scores, without requiring any external resource or modified training objective."
+              ],
+              "model_truth": "true",
+              "numeric_result": {
+                "kind": "value",
+                "input": {
+                  "kind": "value",
+                  "source_quote": "With careful calibration, our controllable parametrization improves the performance of out-of-the-box Seq2Seq models leading to a new state-of-the-art score of 41.87 SARI BIBREF9 on the WikiLarge benchmark BIBREF10, a +1.42 gain over previous scores, without requiring any external resource or modified training objective.",
+                  "left": {
+                    "value": "41.87",
+                    "unit": "SARI",
+                    "quote": "41.87 SARI"
+                  },
+                  "right": {
+                    "value": "41.87",
+                    "unit": "SARI",
+                    "quote": "41.87 SARI"
+                  }
+                },
+                "truth": "true",
+                "reason": "exact_value_comparison",
+                "left": "41.87",
+                "right": "41.87",
+                "unit": "sari",
+                "requirement": {
+                  "start": 42,
+                  "end": 52,
+                  "quote": "41.87 SARI",
+                  "value": "41.87",
+                  "unit": "SARI",
+                  "kind": "number"
+                }
+              },
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence establishes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:008",
+      "claim": "The controllable parametrization required a modified training objective to achieve its WikiLarge score.",
+      "context": "Our contributions are the following: (1) We adapt a parametrization mechanism to the specific task of Sentence Simplification by choosing relevant parameters; (2) We show through a detailed analysis that our model can indeed control the considered attributes, making the simplifications potentially able to fit the needs of various end audiences; (3) With careful calibration, our controllable parametrization improves the performance of out-of-the-box Seq2Seq models leading to a new state-of-the-art score of 41.87 SARI BIBREF9 on the WikiLarge benchmark BIBREF10, a +1.42 gain over previous scores, without requiring any external resource or modified training objective.",
+      "label": "contradict",
+      "dataset_group": "1910.02677",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": false,
+      "stop_reason": "completed",
+      "elapsed_ms": 14803.671,
+      "diagnostic_categories": [
+        "predicate_condition_binding"
+      ],
+      "notes": "Nguồn nói without requiring any external resource or modified training objective. Claim required modified objective phải contradict. Plan lại đưa modified training objective vào condition và metric achieve its WikiLarge score; unknown bỏ phủ định trực tiếp của requirement.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "The controllable parametrization required a modified training objective to achieve its WikiLarge score.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "controllable parametrization",
+              "metric": "achieve its WikiLarge score",
+              "time": "",
+              "condition": "modified training objective"
+            },
+            "start": 0,
+            "end": 103,
+            "numeric_requirements": []
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "The controllable parametrization required a modified training objective to achieve its WikiLarge score.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "controllable parametrization",
+              "metric": "achieve its WikiLarge score",
+              "time": "",
+              "condition": "modified training objective"
+            },
+            "start": 0,
+            "end": 103,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "controllable parametrization",
+              "truth": "unknown",
+              "quotes": [],
+              "explanation": "Member 'controllable parametrization' has unresolved evidence for the positive predicate 'achieve its WikiLarge score', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. Evidence resolving this predicate for the claimed target and scope: target=controllable parametrization; predicate/metric=achieve its WikiLarge score; condition=modified training objective.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "Evidence resolving this predicate for the claimed target and scope: target=controllable parametrization; predicate/metric=achieve its WikiLarge score; condition=modified training objective."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "scoped_evidence_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:009",
+      "claim": "The controllable parametrization simplified each sentence in 20 milliseconds.",
+      "context": "Our contributions are the following: (1) We adapt a parametrization mechanism to the specific task of Sentence Simplification by choosing relevant parameters; (2) We show through a detailed analysis that our model can indeed control the considered attributes, making the simplifications potentially able to fit the needs of various end audiences; (3) With careful calibration, our controllable parametrization improves the performance of out-of-the-box Seq2Seq models leading to a new state-of-the-art score of 41.87 SARI BIBREF9 on the WikiLarge benchmark BIBREF10, a +1.42 gain over previous scores, without requiring any external resource or modified training objective.",
+      "label": "not_enough_info",
+      "dataset_group": "1910.02677",
+      "prediction": null,
+      "label_matches_frozen_gold": false,
+      "stop_reason": "deadline_exceeded",
+      "elapsed_ms": 2722166.31,
+      "diagnostic_categories": [
+        "deadline",
+        "quantifier_population"
+      ],
+      "notes": "Không có latency 20 ms nên gold NEI; run không có final label. Assessment mất 2716.593455 giây dù còn 174.427156 giây deadline. Plan gán ALL cho subject parametrization thay vì từng sentence; cần kiểm population của object quantifier.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "The controllable parametrization simplified each sentence in 20 milliseconds.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "parametrization",
+              "metric": "simplified each sentence",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 77,
+            "numeric_requirements": [
+              {
+                "start": 61,
+                "end": 76,
+                "quote": "20 milliseconds",
+                "value": "20",
+                "unit": "milliseconds",
+                "kind": "number"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": []
+    },
+    {
+      "example_id": "validation-v1:010",
+      "claim": "The dataset contains 1,268 video clips and 14,769 actions, of which 4,340 are visible.",
+      "context": "The paper makes three main contributions. First, we introduce a novel dataset consisting of 1,268 short video clips paired with sets of actions mentioned in the video transcripts, as well as manual annotations of whether the actions are visible or not. The dataset includes a total of 14,769 actions, 4,340 of which are visible. Second, we propose a set of strong baselines to determine whether an action is visible or not. Third, we introduce a multimodal neural architecture that combines information drawn from visual and linguistic clues, and show that it improves over models that rely on one modality at a time.",
+      "label": "support",
+      "dataset_group": "1906.04236",
+      "prediction": null,
+      "label_matches_frozen_gold": false,
+      "stop_reason": "invalid_output_exhausted",
+      "elapsed_ms": 57440.619,
+      "diagnostic_categories": [
+        "decomposition_fragment",
+        "numeric_object_binding",
+        "repair_exhausted"
+      ],
+      "notes": "Plan chấp nhận fragment and 14,769 actions và entity 4,340 cho part visible. Unit bị lấy video/are. Assessment quantity 14,769 actions lại chọn right=4,340 of hai lần; guard từ chối và hết repair. Nguồn có đủ 1,268 clips, 14,769 actions, 4,340 visible.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "The dataset contains 1,268 video clips",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "dataset",
+              "metric": "contains 1,268 video clips",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 38,
+            "numeric_requirements": [
+              {
+                "start": 21,
+                "end": 32,
+                "quote": "1,268 video",
+                "value": "1268",
+                "unit": "video",
+                "kind": "number"
+              }
+            ]
+          },
+          {
+            "quote": "and 14,769 actions",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "actions",
+              "metric": "14,769 actions",
+              "time": "",
+              "condition": "and 14,769 actions"
+            },
+            "start": 39,
+            "end": 57,
+            "numeric_requirements": [
+              {
+                "start": 4,
+                "end": 18,
+                "quote": "14,769 actions",
+                "value": "14769",
+                "unit": "actions",
+                "kind": "number"
+              }
+            ]
+          },
+          {
+            "quote": "of which 4,340 are visible.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "4,340",
+              "metric": "are visible",
+              "time": "",
+              "condition": "of which 4,340 are visible."
+            },
+            "start": 59,
+            "end": 86,
+            "numeric_requirements": [
+              {
+                "start": 9,
+                "end": 18,
+                "quote": "4,340 are",
+                "value": "4340",
+                "unit": "are",
+                "kind": "number"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "The dataset contains 1,268 video clips",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "dataset",
+              "metric": "contains 1,268 video clips",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 38,
+            "numeric_requirements": [
+              {
+                "start": 21,
+                "end": 32,
+                "quote": "1,268 video",
+                "value": "1268",
+                "unit": "video",
+                "kind": "number"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 21,
+              "end": 32,
+              "quote": "1,268 video",
+              "value": "1268",
+              "unit": "video",
+              "kind": "number"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "dataset",
+              "truth": "unknown",
+              "quotes": [],
+              "explanation": "Member 'dataset' has unresolved evidence for the positive predicate 'contains 1,268 video clips', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. Evidence resolving this predicate for the claimed target and scope: target=dataset; predicate/metric=contains 1,268 video clips.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "Evidence resolving this predicate for the claimed target and scope: target=dataset; predicate/metric=contains 1,268 video clips."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "scoped_evidence_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:011",
+      "claim": "All 14,769 actions in the dataset are visible.",
+      "context": "The paper makes three main contributions. First, we introduce a novel dataset consisting of 1,268 short video clips paired with sets of actions mentioned in the video transcripts, as well as manual annotations of whether the actions are visible or not. The dataset includes a total of 14,769 actions, 4,340 of which are visible. Second, we propose a set of strong baselines to determine whether an action is visible or not. Third, we introduce a multimodal neural architecture that combines information drawn from visual and linguistic clues, and show that it improves over models that rely on one modality at a time.",
+      "label": "contradict",
+      "dataset_group": "1906.04236",
+      "prediction": null,
+      "label_matches_frozen_gold": false,
+      "stop_reason": "deadline_exceeded",
+      "elapsed_ms": 187761.008,
+      "diagnostic_categories": [
+        "deadline",
+        "count_subset_reasoning"
+      ],
+      "notes": "Gold contradict vì chỉ 4,340 trong 14,769 actions visible, không phải all. Assessment quá deadline, không có final label/generation event. Cần kiểm count/subset logic và deadline thực tế.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "All 14,769 actions in the dataset are visible.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "actions",
+              "metric": "are visible",
+              "time": "",
+              "condition": "in the dataset"
+            },
+            "start": 0,
+            "end": 46,
+            "numeric_requirements": [
+              {
+                "start": 4,
+                "end": 18,
+                "quote": "14,769 actions",
+                "value": "14769",
+                "unit": "actions",
+                "kind": "number"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": []
+    },
+    {
+      "example_id": "validation-v1:012",
+      "claim": "Every video clip in the dataset lasts exactly 10 seconds.",
+      "context": "The paper makes three main contributions. First, we introduce a novel dataset consisting of 1,268 short video clips paired with sets of actions mentioned in the video transcripts, as well as manual annotations of whether the actions are visible or not. The dataset includes a total of 14,769 actions, 4,340 of which are visible. Second, we propose a set of strong baselines to determine whether an action is visible or not. Third, we introduce a multimodal neural architecture that combines information drawn from visual and linguistic clues, and show that it improves over models that rely on one modality at a time.",
+      "label": "not_enough_info",
+      "dataset_group": "1906.04236",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": true,
+      "stop_reason": "completed",
+      "elapsed_ms": 58820.128,
+      "diagnostic_categories": [
+        "decomposition_metric",
+        "repair_control"
+      ],
+      "notes": "NEI đúng vì không có duration 10 seconds. Attempt đầu invent complete coverage từ fragment về paper contributions; validator reject và repair thành incomplete. Metric lasts vẫn chỉ động từ, missing không nêu duration cụ thể; nhãn đúng chưa làm decomposition đầy đủ.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "Every video clip in the dataset lasts exactly 10 seconds.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "video clip",
+              "metric": "lasts",
+              "time": "",
+              "condition": "in the dataset"
+            },
+            "start": 0,
+            "end": 57,
+            "numeric_requirements": [
+              {
+                "start": 46,
+                "end": 56,
+                "quote": "10 seconds",
+                "value": "10",
+                "unit": "seconds",
+                "kind": "number"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "Every video clip in the dataset lasts exactly 10 seconds.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "video clip",
+              "metric": "lasts",
+              "time": "",
+              "condition": "in the dataset"
+            },
+            "start": 0,
+            "end": 57,
+            "numeric_requirements": [
+              {
+                "start": 46,
+                "end": 56,
+                "quote": "10 seconds",
+                "value": "10",
+                "unit": "seconds",
+                "kind": "number"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 46,
+              "end": 56,
+              "quote": "10 seconds",
+              "value": "10",
+              "unit": "seconds",
+              "kind": "number"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "video clips",
+              "truth": "unknown",
+              "quotes": [],
+              "explanation": "Member 'video clips' has unresolved evidence for the positive predicate 'lasts', before applying ALL.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. A closed target population and the remaining member results: target=video clip; predicate/metric=lasts; condition=in the dataset.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "A closed target population and the remaining member results: target=video clip; predicate/metric=lasts; condition=in the dataset."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "population_results_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "model_ledger"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:013",
+      "claim": "The model achieved 0.548 prediction accuracy.",
+      "context": "Overall prediction accuracy can be calculated by subtracting one with the average result of error rate division on each party by number of its remaining candidates. We achieve 0.548 prediction accuracy, which is not good enough BIBREF1 . The model accuracy is mainly affected by the large error rate on Democratic candidates (1.33 from 2 candidates).",
+      "label": "support",
+      "dataset_group": "1611.00440",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": false,
+      "stop_reason": "completed",
+      "elapsed_ms": 23523.571,
+      "diagnostic_categories": [
+        "unknown_despite_numeric_evidence",
+        "compound_quantity_object"
+      ],
+      "notes": "Nguồn We achieve 0.548 prediction accuracy và câu sau quy về model. Numeric result cùng 0.548 nhưng ledger vẫn unknown. Unit prediction chỉ là phần đầu của prediction accuracy; missing nói thiếu measurement đang có trong nguồn.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "The model achieved 0.548 prediction accuracy.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "model",
+              "metric": "prediction accuracy",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 45,
+            "numeric_requirements": [
+              {
+                "start": 19,
+                "end": 35,
+                "quote": "0.548 prediction",
+                "value": "0.548",
+                "unit": "prediction",
+                "kind": "number"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "The model achieved 0.548 prediction accuracy.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "model",
+              "metric": "prediction accuracy",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 45,
+            "numeric_requirements": [
+              {
+                "start": 19,
+                "end": 35,
+                "quote": "0.548 prediction",
+                "value": "0.548",
+                "unit": "prediction",
+                "kind": "number"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 19,
+              "end": 35,
+              "quote": "0.548 prediction",
+              "value": "0.548",
+              "unit": "prediction",
+              "kind": "number"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "model",
+              "truth": "unknown",
+              "quotes": [
+                "The model accuracy is mainly affected by the large error rate on Democratic candidates (1.33 from 2 candidates).",
+                "We achieve 0.548 prediction accuracy, which is not good enough BIBREF1 . The model accuracy is mainly affected by the large error rate on Democratic candidates (1.33 from 2 candidates)."
+              ],
+              "explanation": "Member 'model' has unresolved evidence for the positive predicate 'prediction accuracy', before applying ATOMIC. See the checked numeric records and their source quotes.",
+              "numeric": {
+                "kind": "value",
+                "source_quote": "We achieve 0.548 prediction accuracy, which is not good enough BIBREF1 . The model accuracy is mainly affected by the large error rate on Democratic candidates (1.33 from 2 candidates).",
+                "left": {
+                  "value": "0.548",
+                  "unit": "prediction",
+                  "quote": "0.548 prediction"
+                },
+                "right": {
+                  "value": "0.548",
+                  "unit": "prediction",
+                  "quote": "0.548 prediction"
+                }
+              },
+              "citation_additions": [
+                "We achieve 0.548 prediction accuracy, which is not good enough BIBREF1 . The model accuracy is mainly affected by the large error rate on Democratic candidates (1.33 from 2 candidates)."
+              ],
+              "model_truth": "true",
+              "numeric_result": {
+                "kind": "value",
+                "input": {
+                  "kind": "value",
+                  "source_quote": "We achieve 0.548 prediction accuracy, which is not good enough BIBREF1 . The model accuracy is mainly affected by the large error rate on Democratic candidates (1.33 from 2 candidates).",
+                  "left": {
+                    "value": "0.548",
+                    "unit": "prediction",
+                    "quote": "0.548 prediction"
+                  },
+                  "right": {
+                    "value": "0.548",
+                    "unit": "prediction",
+                    "quote": "0.548 prediction"
+                  }
+                },
+                "truth": "unknown",
+                "reason": "qualified_numeric_evidence",
+                "left": "0.548",
+                "right": "0.548",
+                "unit": "prediction",
+                "requirement": {
+                  "start": 19,
+                  "end": 35,
+                  "quote": "0.548 prediction",
+                  "value": "0.548",
+                  "unit": "prediction",
+                  "kind": "number"
+                }
+              },
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. Evidence resolving this predicate for the claimed target and scope: target=model; predicate/metric=prediction accuracy.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "Evidence resolving this predicate for the claimed target and scope: target=model; predicate/metric=prediction accuracy."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [
+            "qualified_numeric_evidence"
+          ],
+          "model_missing_information": [],
+          "missing_reason": "scoped_evidence_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:014",
+      "claim": "The model achieved 0.748 prediction accuracy.",
+      "context": "Overall prediction accuracy can be calculated by subtracting one with the average result of error rate division on each party by number of its remaining candidates. We achieve 0.548 prediction accuracy, which is not good enough BIBREF1 . The model accuracy is mainly affected by the large error rate on Democratic candidates (1.33 from 2 candidates).",
+      "label": "contradict",
+      "dataset_group": "1611.00440",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": false,
+      "stop_reason": "completed",
+      "elapsed_ms": 13405.313,
+      "diagnostic_categories": [
+        "unknown_despite_measurement",
+        "compound_quantity_object"
+      ],
+      "notes": "Nguồn chỉ rõ accuracy 0.548, refute claim 0.748 trong cùng report. Model trả unknown không quote; numeric object chỉ prediction. Gold contradict giữ nguyên; cần kiểm binding qua câu, không thay gold thành NEI để tăng điểm.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "The model achieved 0.748 prediction accuracy.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "model",
+              "metric": "prediction accuracy",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 45,
+            "numeric_requirements": [
+              {
+                "start": 19,
+                "end": 35,
+                "quote": "0.748 prediction",
+                "value": "0.748",
+                "unit": "prediction",
+                "kind": "number"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "The model achieved 0.748 prediction accuracy.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "model",
+              "metric": "prediction accuracy",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 45,
+            "numeric_requirements": [
+              {
+                "start": 19,
+                "end": 35,
+                "quote": "0.748 prediction",
+                "value": "0.748",
+                "unit": "prediction",
+                "kind": "number"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 19,
+              "end": 35,
+              "quote": "0.748 prediction",
+              "value": "0.748",
+              "unit": "prediction",
+              "kind": "number"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "model",
+              "truth": "unknown",
+              "quotes": [],
+              "explanation": "Member 'model' has unresolved evidence for the positive predicate 'prediction accuracy', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. Evidence resolving this predicate for the claimed target and scope: target=model; predicate/metric=prediction accuracy.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "Evidence resolving this predicate for the claimed target and scope: target=model; predicate/metric=prediction accuracy."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "scoped_evidence_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:015",
+      "claim": "The model achieved 0.548 prediction accuracy and produced each prediction in 20 milliseconds.",
+      "context": "Overall prediction accuracy can be calculated by subtracting one with the average result of error rate division on each party by number of its remaining candidates. We achieve 0.548 prediction accuracy, which is not good enough BIBREF1 . The model accuracy is mainly affected by the large error rate on Democratic candidates (1.33 from 2 candidates).",
+      "label": "not_enough_info",
+      "dataset_group": "1611.00440",
+      "prediction": null,
+      "label_matches_frozen_gold": false,
+      "stop_reason": "invalid_output_exhausted",
+      "elapsed_ms": 17436.261,
+      "diagnostic_categories": [
+        "quantifier_attachment",
+        "decoder_validator_conflict",
+        "repair_exhausted"
+      ],
+      "notes": "Cả hai attempts gán ALL cho accuracy và each prediction; normalize từ chối quantifier_not_preserved. Đã kiểm hàm frozen: decoder ép enum all cho cả hai alternatives, nhưng validator chấp nhận accuracy=atomic, latency=all. Đây là đường schema loại output hợp lệ; repair không thể sửa qua decoder hiện tại. Counterfactual dùng để kiểm contract, không phải prediction mới.",
+      "decomposition": null,
+      "parts": []
+    },
+    {
+      "example_id": "validation-v1:016",
+      "claim": "CALLHOME contains transcriptions from 120 half-hour casual telephone conversations.",
+      "context": "To assess how well Interview represents open-domain dialog, we look to two datasets in widespread usage: DailyDialog BIBREF4, 13K short dialogs written to simulate simple conversations from daily life; and CALLHOME BIBREF11, transcriptions from 120 half-hour casual telephone conversations. We measure the language modeling performance of a pre-trained transformer model—117M-parameter GPT2 BIBREF27—both in its original form and versions fine-tuned (FT) on the training splits for Interview, DailyDialog, and CALLHOME. We evaluated the zero-shot performance of these models on the test splits of these datasets, with perplexities shown in tab:datasetcomparison.",
+      "label": "support",
+      "dataset_group": "2004.03090",
+      "prediction": "support",
+      "label_matches_frozen_gold": true,
+      "stop_reason": "completed",
+      "elapsed_ms": 27573.015,
+      "diagnostic_categories": [
+        "compound_count_duration_contract"
+      ],
+      "notes": "Nhãn support đúng; source xác nhận 120 half-hour conversations. Numeric requirement/record lại là 120 half, chưa biểu diễn độc lập count 120 và duration half-hour. Cần kiểm contrast với ca 017, không dùng nhãn đúng để kết luận duration contract đã được kiểm đầy đủ.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "CALLHOME contains transcriptions from 120 half-hour casual telephone conversations.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "CALLHOME",
+              "metric": "transcriptions",
+              "time": "",
+              "condition": "from 120 half-hour casual telephone conversations"
+            },
+            "start": 0,
+            "end": 83,
+            "numeric_requirements": [
+              {
+                "start": 38,
+                "end": 46,
+                "quote": "120 half",
+                "value": "120",
+                "unit": "half",
+                "kind": "number"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "CALLHOME contains transcriptions from 120 half-hour casual telephone conversations.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "CALLHOME",
+              "metric": "transcriptions",
+              "time": "",
+              "condition": "from 120 half-hour casual telephone conversations"
+            },
+            "start": 0,
+            "end": 83,
+            "numeric_requirements": [
+              {
+                "start": 38,
+                "end": 46,
+                "quote": "120 half",
+                "value": "120",
+                "unit": "half",
+                "kind": "number"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 38,
+              "end": 46,
+              "quote": "120 half",
+              "value": "120",
+              "unit": "half",
+              "kind": "number"
+            }
+          ],
+          "assessed_label": "support",
+          "observations": [
+            {
+              "member": "CALLHOME",
+              "truth": "true",
+              "quotes": [
+                "To assess how well Interview represents open-domain dialog, we look to two datasets in widespread usage: DailyDialog BIBREF4, 13K short dialogs written to simulate simple conversations from daily life; and CALLHOME BIBREF11, transcriptions from 120 half-hour casual telephone conversations."
+              ],
+              "explanation": "Member 'CALLHOME' satisfies the positive predicate 'transcriptions', before applying ATOMIC. See the checked numeric records and their source quotes.",
+              "numeric": {
+                "kind": "value",
+                "source_quote": "To assess how well Interview represents open-domain dialog, we look to two datasets in widespread usage: DailyDialog BIBREF4, 13K short dialogs written to simulate simple conversations from daily life; and CALLHOME BIBREF11, transcriptions from 120 half-hour casual telephone conversations.",
+                "left": {
+                  "value": "120",
+                  "unit": "half",
+                  "quote": "120 half"
+                },
+                "right": {
+                  "value": "120",
+                  "unit": "half",
+                  "quote": "120 half"
+                }
+              },
+              "citation_additions": [],
+              "model_truth": "true",
+              "numeric_result": {
+                "kind": "value",
+                "input": {
+                  "kind": "value",
+                  "source_quote": "To assess how well Interview represents open-domain dialog, we look to two datasets in widespread usage: DailyDialog BIBREF4, 13K short dialogs written to simulate simple conversations from daily life; and CALLHOME BIBREF11, transcriptions from 120 half-hour casual telephone conversations.",
+                  "left": {
+                    "value": "120",
+                    "unit": "half",
+                    "quote": "120 half"
+                  },
+                  "right": {
+                    "value": "120",
+                    "unit": "half",
+                    "quote": "120 half"
+                  }
+                },
+                "truth": "true",
+                "reason": "exact_value_comparison",
+                "left": "120",
+                "right": "120",
+                "unit": "half",
+                "requirement": {
+                  "start": 38,
+                  "end": 46,
+                  "quote": "120 half",
+                  "value": "120",
+                  "unit": "half",
+                  "kind": "number"
+                }
+              },
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence establishes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:017",
+      "claim": "CALLHOME contains transcriptions from 120 two-hour casual telephone conversations.",
+      "context": "To assess how well Interview represents open-domain dialog, we look to two datasets in widespread usage: DailyDialog BIBREF4, 13K short dialogs written to simulate simple conversations from daily life; and CALLHOME BIBREF11, transcriptions from 120 half-hour casual telephone conversations. We measure the language modeling performance of a pre-trained transformer model—117M-parameter GPT2 BIBREF27—both in its original form and versions fine-tuned (FT) on the training splits for Interview, DailyDialog, and CALLHOME. We evaluated the zero-shot performance of these models on the test splits of these datasets, with perplexities shown in tab:datasetcomparison.",
+      "label": "contradict",
+      "dataset_group": "2004.03090",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": false,
+      "stop_reason": "completed",
+      "elapsed_ms": 18498.072,
+      "diagnostic_categories": [
+        "compound_count_duration_contract"
+      ],
+      "notes": "Nguồn half-hour refute two-hour. Requirements tạo 120 two và two=2 rời rạc; model unknown thay vì refute. Phải tách count conversations và duration conversation, giữ quan hệ của chúng.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "CALLHOME contains transcriptions from 120 two-hour casual telephone conversations.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "CALLHOME",
+              "metric": "transcriptions",
+              "time": "",
+              "condition": "from 120 two-hour casual telephone conversations"
+            },
+            "start": 0,
+            "end": 82,
+            "numeric_requirements": [
+              {
+                "start": 38,
+                "end": 45,
+                "quote": "120 two",
+                "value": "120",
+                "unit": "two",
+                "kind": "number"
+              },
+              {
+                "start": 42,
+                "end": 45,
+                "quote": "two",
+                "value": "2",
+                "unit": "",
+                "kind": "number"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "CALLHOME contains transcriptions from 120 two-hour casual telephone conversations.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "CALLHOME",
+              "metric": "transcriptions",
+              "time": "",
+              "condition": "from 120 two-hour casual telephone conversations"
+            },
+            "start": 0,
+            "end": 82,
+            "numeric_requirements": [
+              {
+                "start": 38,
+                "end": 45,
+                "quote": "120 two",
+                "value": "120",
+                "unit": "two",
+                "kind": "number"
+              },
+              {
+                "start": 42,
+                "end": 45,
+                "quote": "two",
+                "value": "2",
+                "unit": "",
+                "kind": "number"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 38,
+              "end": 45,
+              "quote": "120 two",
+              "value": "120",
+              "unit": "two",
+              "kind": "number"
+            },
+            {
+              "start": 42,
+              "end": 45,
+              "quote": "two",
+              "value": "2",
+              "unit": "",
+              "kind": "number"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "CALLHOME",
+              "truth": "unknown",
+              "quotes": [
+                "To assess how well Interview represents open-domain dialog, we look to two datasets in widespread usage: DailyDialog BIBREF4, 13K short dialogs written to simulate simple conversations from daily life; and CALLHOME BIBREF11, transcriptions from 120 half-hour casual telephone conversations."
+              ],
+              "explanation": "Member 'CALLHOME' has unresolved evidence for the positive predicate 'transcriptions', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. Evidence resolving this predicate for the claimed target and scope: target=CALLHOME; predicate/metric=transcriptions; condition=from 120 two-hour casual telephone conversations.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "Evidence resolving this predicate for the claimed target and scope: target=CALLHOME; predicate/metric=transcriptions; condition=from 120 two-hour casual telephone conversations."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "scoped_evidence_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:018",
+      "claim": "CALLHOME transcriptions have a word error rate of 5%.",
+      "context": "To assess how well Interview represents open-domain dialog, we look to two datasets in widespread usage: DailyDialog BIBREF4, 13K short dialogs written to simulate simple conversations from daily life; and CALLHOME BIBREF11, transcriptions from 120 half-hour casual telephone conversations. We measure the language modeling performance of a pre-trained transformer model—117M-parameter GPT2 BIBREF27—both in its original form and versions fine-tuned (FT) on the training splits for Interview, DailyDialog, and CALLHOME. We evaluated the zero-shot performance of these models on the test splits of these datasets, with perplexities shown in tab:datasetcomparison.",
+      "label": "not_enough_info",
+      "dataset_group": "2004.03090",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": true,
+      "stop_reason": "completed",
+      "elapsed_ms": 9859.061,
+      "diagnostic_categories": [
+        "target_apposition",
+        "missing_reason_target_vs_measurement"
+      ],
+      "notes": "NEI đúng vì không có WER 5%. CALLHOME BIBREF11, transcriptions... đã có apposition trong nguồn; missing target identity phản ánh exact-match guard quá hẹp thay vì nêu thiếu WER.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "CALLHOME transcriptions have a word error rate of 5%.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "CALLHOME transcriptions",
+              "metric": "word error rate",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 53,
+            "numeric_requirements": [
+              {
+                "start": 50,
+                "end": 52,
+                "quote": "5%",
+                "value": "5",
+                "unit": "%",
+                "kind": "percent"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "CALLHOME transcriptions have a word error rate of 5%.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "CALLHOME transcriptions",
+              "metric": "word error rate",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 53,
+            "numeric_requirements": [
+              {
+                "start": 50,
+                "end": 52,
+                "quote": "5%",
+                "value": "5",
+                "unit": "%",
+                "kind": "percent"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 50,
+              "end": 52,
+              "quote": "5%",
+              "value": "5",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [],
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=CALLHOME transcriptions; predicate/metric=word error rate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "unknown",
+          "missing_information": [
+            "Evidence identifying the claimed target in the reported results: target=CALLHOME transcriptions; predicate/metric=word error rate."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [
+            "scope_unknown"
+          ],
+          "model_missing_information": [
+            "target_binding_unresolved"
+          ],
+          "missing_reason": "target_binding_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:019",
+      "claim": "Every plane crash event in the Stanford Plane Crash Dataset is paired with related news articles.",
+      "context": "The Stanford Plane Crash Dataset BIBREF15 is a small data set consisting of 80 plane crash events, each paired with a set of related news articles. Of these events, 40 are reserved for training, and 40 for testing, with the average cluster containing more than 2,000 mentions. Gold labels for each cluster are derived from Wikipedia infoboxes and cover up to 15 slots, of which 8 are used in evaluation (Figure TABREF54 ).",
+      "label": "support",
+      "dataset_group": "1610.09722",
+      "prediction": "support",
+      "label_matches_frozen_gold": true,
+      "stop_reason": "completed",
+      "elapsed_ms": 27464.458,
+      "diagnostic_categories": [
+        "known_member_identity",
+        "closure_member_binding"
+      ],
+      "notes": "Nhãn support đúng theo nguồn 80 events, each paired with news. Tuy nhiên ledger/coverage member Dataset BIBREF15 is a small data set consisting là clause fragment, không phải plane-crash event/group. Known truth=true vẫn lọt guard identity; đây là lỗi semantic dù nhãn đúng.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "Every plane crash event in the Stanford Plane Crash Dataset is paired with related news articles.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "plane crash event",
+              "metric": "paired with related news articles",
+              "time": "",
+              "condition": "in the Stanford Plane Crash Dataset"
+            },
+            "start": 0,
+            "end": 97,
+            "numeric_requirements": []
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "Every plane crash event in the Stanford Plane Crash Dataset is paired with related news articles.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "plane crash event",
+              "metric": "paired with related news articles",
+              "time": "",
+              "condition": "in the Stanford Plane Crash Dataset"
+            },
+            "start": 0,
+            "end": 97,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "support",
+          "observations": [
+            {
+              "member": "Dataset BIBREF15 is a small data set consisting",
+              "truth": "true",
+              "quotes": [
+                "The Stanford Plane Crash Dataset BIBREF15 is a small data set consisting of 80 plane crash events, each paired with a set of related news articles."
+              ],
+              "explanation": "Member 'Dataset BIBREF15 is a small data set consisting' satisfies the positive predicate 'paired with related news articles', before applying ALL.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "true",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The complete checked population satisfies the predicate for every member.",
+          "coverage": {
+            "complete": true,
+            "members": [
+              "Dataset BIBREF15 is a small data set consisting"
+            ],
+            "quotes": [
+              "The Stanford Plane Crash Dataset BIBREF15 is a small data set consisting of 80 plane crash events, each paired with a set of related news articles."
+            ]
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "model_ledger"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:020",
+      "claim": "The Stanford Plane Crash Dataset reserves all 80 events for training.",
+      "context": "The Stanford Plane Crash Dataset BIBREF15 is a small data set consisting of 80 plane crash events, each paired with a set of related news articles. Of these events, 40 are reserved for training, and 40 for testing, with the average cluster containing more than 2,000 mentions. Gold labels for each cluster are derived from Wikipedia infoboxes and cover up to 15 slots, of which 8 are used in evaluation (Figure TABREF54 ).",
+      "label": "contradict",
+      "dataset_group": "1610.09722",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": false,
+      "stop_reason": "completed",
+      "elapsed_ms": 24069.688,
+      "diagnostic_categories": [
+        "quantifier_population",
+        "subset_counterevidence"
+      ],
+      "notes": "Nguồn 40 training và 40 testing refute all 80 training. Plan đặt ALL lên Stanford Plane Crash Dataset thay vì event population và đẩy all 80 events for training thành condition. Unknown/missing closure bỏ counterevidence có sẵn.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "The Stanford Plane Crash Dataset reserves all 80 events for training.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "Stanford Plane Crash Dataset",
+              "metric": "reserves",
+              "time": "",
+              "condition": "all 80 events for training"
+            },
+            "start": 0,
+            "end": 69,
+            "numeric_requirements": [
+              {
+                "start": 46,
+                "end": 55,
+                "quote": "80 events",
+                "value": "80",
+                "unit": "events",
+                "kind": "number"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "The Stanford Plane Crash Dataset reserves all 80 events for training.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "Stanford Plane Crash Dataset",
+              "metric": "reserves",
+              "time": "",
+              "condition": "all 80 events for training"
+            },
+            "start": 0,
+            "end": 69,
+            "numeric_requirements": [
+              {
+                "start": 46,
+                "end": 55,
+                "quote": "80 events",
+                "value": "80",
+                "unit": "events",
+                "kind": "number"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 46,
+              "end": 55,
+              "quote": "80 events",
+              "value": "80",
+              "unit": "events",
+              "kind": "number"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "The Stanford Plane Crash Dataset",
+              "truth": "unknown",
+              "quotes": [],
+              "explanation": "Member 'The Stanford Plane Crash Dataset' has unresolved evidence for the positive predicate 'reserves', before applying ALL.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. A closed target population and the remaining member results: target=Stanford Plane Crash Dataset; predicate/metric=reserves; condition=all 80 events for training.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "A closed target population and the remaining member results: target=Stanford Plane Crash Dataset; predicate/metric=reserves; condition=all 80 events for training."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "population_results_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "model_ledger"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:021",
+      "claim": "The news articles paired with the Stanford Plane Crash Dataset events are all written in French.",
+      "context": "The Stanford Plane Crash Dataset BIBREF15 is a small data set consisting of 80 plane crash events, each paired with a set of related news articles. Of these events, 40 are reserved for training, and 40 for testing, with the average cluster containing more than 2,000 mentions. Gold labels for each cluster are derived from Wikipedia infoboxes and cover up to 15 slots, of which 8 are used in evaluation (Figure TABREF54 ).",
+      "label": "not_enough_info",
+      "dataset_group": "1610.09722",
+      "prediction": "contradict",
+      "label_matches_frozen_gold": false,
+      "stop_reason": "completed",
+      "elapsed_ms": 23307.103,
+      "diagnostic_categories": [
+        "false_refutation",
+        "missing_property_is_unknown"
+      ],
+      "notes": "Nguồn không nói language của news articles. Ledger gán news articles=false cho written in French chỉ từ câu paired with related news articles; không có bằng chứng non-French. Đây là false refutation: phải NEI, không phải contradict.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "The news articles paired with the Stanford Plane Crash Dataset events are all written in French.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "news articles paired with the Stanford Plane Crash Dataset events",
+              "metric": "written in French",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 96,
+            "numeric_requirements": []
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "The news articles paired with the Stanford Plane Crash Dataset events are all written in French.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "news articles paired with the Stanford Plane Crash Dataset events",
+              "metric": "written in French",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 96,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "contradict",
+          "observations": [
+            {
+              "member": "news articles",
+              "truth": "false",
+              "quotes": [
+                "The Stanford Plane Crash Dataset BIBREF15 is a small data set consisting of 80 plane crash events, each paired with a set of related news articles."
+              ],
+              "explanation": "Member 'news articles' does not satisfy the positive predicate 'written in French', before applying ALL.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "false",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "A checked member fails the predicate, refuting ALL.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "model_ledger"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:022",
+      "claim": "The study targets 980 name annotations in 670 Turkish tweets.",
+      "context": "In this paper, we consider name variants from the perspective of a NER application and analyze an existing named entity-annotated tweet dataset in Turkish described in BIBREF5, in order to further annotate the included named entities with respect to a proprietary name variant categorization. The original dataset includes named annotations for eight types: PERSON, LOCATION, ORGANIZATION, DATE, TIME, MONEY, PERCENT, and MISC BIBREF5. However, in this study, we target only at the first three categories which amounts to a total of 980 annotations in 670 tweets in Turkish. We further annotate these 980 names with respect to a name variant categorization that we propose and try to present a rough estimate of the extent at which different named entity variants are used as named entities in Turkish tweets. The resulting annotations of named entities as different name variants are also made publicly available for research purposes. We believe that both the analysis described in the paper and the publicly-shared annotations (i.e., a tweet dataset annotated for name variants) will help improve research on NER, name disambiguation, and name linking on Turkish social media posts.",
+      "label": "support",
+      "dataset_group": "1912.07940",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": false,
+      "stop_reason": "completed",
+      "elapsed_ms": 14616.344,
+      "diagnostic_categories": [
+        "multi_quantity_object_binding"
+      ],
+      "notes": "Nguồn xác nhận 980 annotations trong 670 Turkish tweets, gold support. Requirements chỉ lấy 980 name và 670 Turkish làm unit/object; ledger unknown, không quote. Cần binding đủ count + object + language restriction cho từng quantity.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "The study targets 980 name annotations in 670 Turkish tweets.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "study",
+              "metric": "targets 980 name annotations",
+              "time": "",
+              "condition": "in 670 Turkish tweets"
+            },
+            "start": 0,
+            "end": 61,
+            "numeric_requirements": [
+              {
+                "start": 18,
+                "end": 26,
+                "quote": "980 name",
+                "value": "980",
+                "unit": "name",
+                "kind": "number"
+              },
+              {
+                "start": 42,
+                "end": 53,
+                "quote": "670 Turkish",
+                "value": "670",
+                "unit": "Turkish",
+                "kind": "number"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "The study targets 980 name annotations in 670 Turkish tweets.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "study",
+              "metric": "targets 980 name annotations",
+              "time": "",
+              "condition": "in 670 Turkish tweets"
+            },
+            "start": 0,
+            "end": 61,
+            "numeric_requirements": [
+              {
+                "start": 18,
+                "end": 26,
+                "quote": "980 name",
+                "value": "980",
+                "unit": "name",
+                "kind": "number"
+              },
+              {
+                "start": 42,
+                "end": 53,
+                "quote": "670 Turkish",
+                "value": "670",
+                "unit": "Turkish",
+                "kind": "number"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 18,
+              "end": 26,
+              "quote": "980 name",
+              "value": "980",
+              "unit": "name",
+              "kind": "number"
+            },
+            {
+              "start": 42,
+              "end": 53,
+              "quote": "670 Turkish",
+              "value": "670",
+              "unit": "Turkish",
+              "kind": "number"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "study",
+              "truth": "unknown",
+              "quotes": [],
+              "explanation": "Member 'study' has unresolved evidence for the positive predicate 'targets 980 name annotations', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. Evidence resolving this predicate for the claimed target and scope: target=study; predicate/metric=targets 980 name annotations; condition=in 670 Turkish tweets.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "Evidence resolving this predicate for the claimed target and scope: target=study; predicate/metric=targets 980 name annotations; condition=in 670 Turkish tweets."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "scoped_evidence_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:023",
+      "claim": "The study targets all eight named-entity categories from the original dataset.",
+      "context": "In this paper, we consider name variants from the perspective of a NER application and analyze an existing named entity-annotated tweet dataset in Turkish described in BIBREF5, in order to further annotate the included named entities with respect to a proprietary name variant categorization. The original dataset includes named annotations for eight types: PERSON, LOCATION, ORGANIZATION, DATE, TIME, MONEY, PERCENT, and MISC BIBREF5. However, in this study, we target only at the first three categories which amounts to a total of 980 annotations in 670 tweets in Turkish. We further annotate these 980 names with respect to a name variant categorization that we propose and try to present a rough estimate of the extent at which different named entity variants are used as named entities in Turkish tweets. The resulting annotations of named entities as different name variants are also made publicly available for research purposes. We believe that both the analysis described in the paper and the publicly-shared annotations (i.e., a tweet dataset annotated for name variants) will help improve research on NER, name disambiguation, and name linking on Turkish social media posts.",
+      "label": "contradict",
+      "dataset_group": "1912.07940",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": false,
+      "stop_reason": "completed",
+      "elapsed_ms": 26247.478,
+      "diagnostic_categories": [
+        "quantifier_population",
+        "subset_counterevidence"
+      ],
+      "notes": "Nguồn eight categories nhưng study chỉ first three. Claim all eight phải contradict. Plan dùng entity study cho ALL thay vì categories; requirement eight named thiếu full object. Unknown bỏ explicit subset counterevidence.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "The study targets all eight named-entity categories from the original dataset.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "study",
+              "metric": "targets",
+              "time": "",
+              "condition": "from the original dataset"
+            },
+            "start": 0,
+            "end": 78,
+            "numeric_requirements": [
+              {
+                "start": 22,
+                "end": 33,
+                "quote": "eight named",
+                "value": "8",
+                "unit": "named",
+                "kind": "number"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "The study targets all eight named-entity categories from the original dataset.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "study",
+              "metric": "targets",
+              "time": "",
+              "condition": "from the original dataset"
+            },
+            "start": 0,
+            "end": 78,
+            "numeric_requirements": [
+              {
+                "start": 22,
+                "end": 33,
+                "quote": "eight named",
+                "value": "8",
+                "unit": "named",
+                "kind": "number"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 22,
+              "end": 33,
+              "quote": "eight named",
+              "value": "8",
+              "unit": "named",
+              "kind": "number"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "study",
+              "truth": "unknown",
+              "quotes": [],
+              "explanation": "Member 'study' has unresolved evidence for the positive predicate 'targets', before applying ALL.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. A closed target population and the remaining member results: target=study; predicate/metric=targets; condition=from the original dataset.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "A closed target population and the remaining member results: target=study; predicate/metric=targets; condition=from the original dataset."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [
+            "population_results_unresolved"
+          ],
+          "missing_reason": "population_results_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "model_ledger"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:024",
+      "claim": "Three human annotators produced the study's name-variant annotations.",
+      "context": "In this paper, we consider name variants from the perspective of a NER application and analyze an existing named entity-annotated tweet dataset in Turkish described in BIBREF5, in order to further annotate the included named entities with respect to a proprietary name variant categorization. The original dataset includes named annotations for eight types: PERSON, LOCATION, ORGANIZATION, DATE, TIME, MONEY, PERCENT, and MISC BIBREF5. However, in this study, we target only at the first three categories which amounts to a total of 980 annotations in 670 tweets in Turkish. We further annotate these 980 names with respect to a name variant categorization that we propose and try to present a rough estimate of the extent at which different named entity variants are used as named entities in Turkish tweets. The resulting annotations of named entities as different name variants are also made publicly available for research purposes. We believe that both the analysis described in the paper and the publicly-shared annotations (i.e., a tweet dataset annotated for name variants) will help improve research on NER, name disambiguation, and name linking on Turkish social media posts.",
+      "label": "not_enough_info",
+      "dataset_group": "1912.07940",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": true,
+      "stop_reason": "completed",
+      "elapsed_ms": 11759.18,
+      "diagnostic_categories": [
+        "compound_quantity_object"
+      ],
+      "notes": "NEI đúng vì context không nêu số annotators. Requirement Three human lấy human làm unit thay vì human annotators; giữ nhận xét contract này tách khỏi nhãn đúng. Missing phải hướng vào annotator count/binding chưa được báo cáo.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "Three human annotators produced the study's name-variant annotations.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "human annotators",
+              "metric": "produced the study's name-variant annotations",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 69,
+            "numeric_requirements": [
+              {
+                "start": 0,
+                "end": 11,
+                "quote": "Three human",
+                "value": "3",
+                "unit": "human",
+                "kind": "number"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "Three human annotators produced the study's name-variant annotations.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "human annotators",
+              "metric": "produced the study's name-variant annotations",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 69,
+            "numeric_requirements": [
+              {
+                "start": 0,
+                "end": 11,
+                "quote": "Three human",
+                "value": "3",
+                "unit": "human",
+                "kind": "number"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 0,
+              "end": 11,
+              "quote": "Three human",
+              "value": "3",
+              "unit": "human",
+              "kind": "number"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [],
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=human annotators; predicate/metric=produced the study's name-variant annotations.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "unknown",
+          "missing_information": [
+            "Evidence identifying the claimed target in the reported results: target=human annotators; predicate/metric=produced the study's name-variant annotations."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [
+            "scope_unknown"
+          ],
+          "model_missing_information": [
+            "target_binding_unresolved"
+          ],
+          "missing_reason": "target_binding_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:025",
+      "claim": "The proposed model performs better than the wav2letter Transformer on the test-other dataset.",
+      "context": "As far as we know, our model is the best E2E ASR system on the Librispeech testset, which achieves a comparable result with wav2letter Transformer on test-clean dataset and a better result on test-other dataset, even though our model (75M parameters) is much smaller than the wav2letter Transformer (210M parameters). The reason might be that our semantic masking is more suitable on a noisy setting, because the input features are not reliable and the model has to predict the next token relying on previous ones and the whole context of the input. Our model is built upon the code base of ESPnet, and achieves relative $10\\%$ gains due to the better architecture and masking strategy. Comparing with hybrid methods, our model obtains a similar performance on the test-clean set, but is still worse than the best hybrid model on the test-other dataset.",
+      "label": "support",
+      "dataset_group": "1912.03010",
+      "prediction": "contradict",
+      "label_matches_frozen_gold": false,
+      "stop_reason": "completed",
+      "elapsed_ms": 19569.68,
+      "diagnostic_categories": [
+        "subject_comparator_reversal"
+      ],
+      "notes": "Nguồn our model tốt hơn wav2letter Transformer trên test-other. Claim nói proposed model nhưng decomposition chọn entity the wav2letter Transformer (đối chứng), truth false và contradict. Gold support đúng; phải giữ hướng subject/comparator và dataset.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "The proposed model performs better than the wav2letter Transformer on the test-other dataset.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "the wav2letter Transformer",
+              "metric": "performs better",
+              "time": "",
+              "condition": "on the test-other dataset"
+            },
+            "start": 0,
+            "end": 93,
+            "numeric_requirements": []
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "The proposed model performs better than the wav2letter Transformer on the test-other dataset.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "the wav2letter Transformer",
+              "metric": "performs better",
+              "time": "",
+              "condition": "on the test-other dataset"
+            },
+            "start": 0,
+            "end": 93,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "contradict",
+          "observations": [
+            {
+              "member": "wav2letter Transformer",
+              "truth": "false",
+              "quotes": [
+                "As far as we know, our model is the best E2E ASR system on the Librispeech testset, which achieves a comparable result with wav2letter Transformer on test-clean dataset and a better result on test-other dataset, even though our model (75M parameters) is much smaller than the wav2letter Transformer (210M parameters)."
+              ],
+              "explanation": "Member 'wav2letter Transformer' does not satisfy the positive predicate 'performs better', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "false",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence refutes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:026",
+      "claim": "The proposed model performs better than the best hybrid model on the test-other dataset.",
+      "context": "As far as we know, our model is the best E2E ASR system on the Librispeech testset, which achieves a comparable result with wav2letter Transformer on test-clean dataset and a better result on test-other dataset, even though our model (75M parameters) is much smaller than the wav2letter Transformer (210M parameters). The reason might be that our semantic masking is more suitable on a noisy setting, because the input features are not reliable and the model has to predict the next token relying on previous ones and the whole context of the input. Our model is built upon the code base of ESPnet, and achieves relative $10\\%$ gains due to the better architecture and masking strategy. Comparing with hybrid methods, our model obtains a similar performance on the test-clean set, but is still worse than the best hybrid model on the test-other dataset.",
+      "label": "contradict",
+      "dataset_group": "1912.03010",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": false,
+      "stop_reason": "completed",
+      "elapsed_ms": 11836.342,
+      "diagnostic_categories": [
+        "target_coreference",
+        "unknown_despite_counterevidence"
+      ],
+      "notes": "Nguồn our model vẫn worse than best hybrid model trên test-other, refute better. Proposed model không exact-match our model nên empty ledger. Cần coreference có căn cứ của paper, không áp alias tùy tiện cho workload chưa xác định.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "The proposed model performs better than the best hybrid model on the test-other dataset.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "proposed model",
+              "metric": "performs better",
+              "time": "",
+              "condition": "on the test-other dataset"
+            },
+            "start": 0,
+            "end": 88,
+            "numeric_requirements": []
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "The proposed model performs better than the best hybrid model on the test-other dataset.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "proposed model",
+              "metric": "performs better",
+              "time": "",
+              "condition": "on the test-other dataset"
+            },
+            "start": 0,
+            "end": 88,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [],
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=proposed model; predicate/metric=performs better; condition=on the test-other dataset.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "unknown",
+          "missing_information": [
+            "Evidence identifying the claimed target in the reported results: target=proposed model; predicate/metric=performs better; condition=on the test-other dataset."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [
+            "scope_unknown"
+          ],
+          "model_missing_information": [
+            "target_binding_unresolved"
+          ],
+          "missing_reason": "target_binding_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:027",
+      "claim": "The study experimentally established that semantic masking is more suitable on noisy input because the input features are unreliable.",
+      "context": "As far as we know, our model is the best E2E ASR system on the Librispeech testset, which achieves a comparable result with wav2letter Transformer on test-clean dataset and a better result on test-other dataset, even though our model (75M parameters) is much smaller than the wav2letter Transformer (210M parameters). The reason might be that our semantic masking is more suitable on a noisy setting, because the input features are not reliable and the model has to predict the next token relying on previous ones and the whole context of the input. Our model is built upon the code base of ESPnet, and achieves relative $10\\%$ gains due to the better architecture and masking strategy. Comparing with hybrid methods, our model obtains a similar performance on the test-clean set, but is still worse than the best hybrid model on the test-other dataset.",
+      "label": "not_enough_info",
+      "dataset_group": "1912.03010",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": true,
+      "stop_reason": "completed",
+      "elapsed_ms": 14924.278,
+      "diagnostic_categories": [
+        "epistemic_causal_specificity"
+      ],
+      "notes": "NEI đúng: source chỉ The reason might be, không nói experimentally established. Missing renderer hiện ghi generic scoped evidence và condition chứa because; cần người review kiểm việc nêu rõ thiếu experimental/causal certainty.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "The study experimentally established that semantic masking is more suitable on noisy input because the input features are unreliable.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "semantic masking",
+              "metric": "more suitable",
+              "time": "",
+              "condition": "on noisy input because the input features are unreliable"
+            },
+            "start": 0,
+            "end": 133,
+            "numeric_requirements": []
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "The study experimentally established that semantic masking is more suitable on noisy input because the input features are unreliable.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "semantic masking",
+              "metric": "more suitable",
+              "time": "",
+              "condition": "on noisy input because the input features are unreliable"
+            },
+            "start": 0,
+            "end": 133,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "semantic masking",
+              "truth": "unknown",
+              "quotes": [],
+              "explanation": "Member 'semantic masking' has unresolved evidence for the positive predicate 'more suitable', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. Evidence resolving this predicate for the claimed target and scope: target=semantic masking; predicate/metric=more suitable; condition=on noisy input because the input features are unreliable.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "Evidence resolving this predicate for the claimed target and scope: target=semantic masking; predicate/metric=more suitable; condition=on noisy input because the input features are unreliable."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "scoped_evidence_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:028",
+      "claim": "PDTB sections 0-1 were used for development and hyperparameter optimization.",
+      "context": "We used the largest hand-annotated discourse corpus PDTB 2.0 BIBREF12 (PDTB hereafter). This corpus contains discourse annotations over 2,312 Wall Street Journal articles, and is organized in different sections. Following previous work BIBREF6 , BIBREF13 , BIBREF14 , BIBREF9 , we used sections 2-20 as our training set, sections 21-22 as the test set. Sections 0-1 were used as the development set for hyperparameter optimization.",
+      "label": "support",
+      "dataset_group": "1603.03876",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": false,
+      "stop_reason": "completed",
+      "elapsed_ms": 23937.39,
+      "diagnostic_categories": [
+        "section_identifier",
+        "decomposition_fragment",
+        "target_coreference"
+      ],
+      "notes": "Nguồn PDTB hereafter -> sections 0-1 là development for hyperparameter optimization. Range section IDs bị coi quantities 0 và 1 were. AND nối hai mục đích nhưng split thành part hyperparameter optimization với entity chính nó; cả hai part NEI vì binding/fragment.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "PDTB sections 0-1 were used for development",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "PDTB sections 0-1",
+              "metric": "used",
+              "time": "",
+              "condition": "for development"
+            },
+            "start": 0,
+            "end": 43,
+            "numeric_requirements": [
+              {
+                "start": 14,
+                "end": 15,
+                "quote": "0",
+                "value": "0",
+                "unit": "",
+                "kind": "number"
+              },
+              {
+                "start": 16,
+                "end": 22,
+                "quote": "1 were",
+                "value": "1",
+                "unit": "were",
+                "kind": "number"
+              }
+            ]
+          },
+          {
+            "quote": "and hyperparameter optimization.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "hyperparameter optimization",
+              "metric": "used",
+              "time": "",
+              "condition": "and hyperparameter optimization"
+            },
+            "start": 44,
+            "end": 76,
+            "numeric_requirements": []
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "PDTB sections 0-1 were used for development",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "PDTB sections 0-1",
+              "metric": "used",
+              "time": "",
+              "condition": "for development"
+            },
+            "start": 0,
+            "end": 43,
+            "numeric_requirements": [
+              {
+                "start": 14,
+                "end": 15,
+                "quote": "0",
+                "value": "0",
+                "unit": "",
+                "kind": "number"
+              },
+              {
+                "start": 16,
+                "end": 22,
+                "quote": "1 were",
+                "value": "1",
+                "unit": "were",
+                "kind": "number"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 14,
+              "end": 15,
+              "quote": "0",
+              "value": "0",
+              "unit": "",
+              "kind": "number"
+            },
+            {
+              "start": 16,
+              "end": 22,
+              "quote": "1 were",
+              "value": "1",
+              "unit": "were",
+              "kind": "number"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [],
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=PDTB sections 0-1; predicate/metric=used; condition=for development.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "unknown",
+          "missing_information": [
+            "Evidence identifying the claimed target in the reported results: target=PDTB sections 0-1; predicate/metric=used; condition=for development."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [
+            "scope_unknown"
+          ],
+          "model_missing_information": [
+            "target_binding_unresolved"
+          ],
+          "missing_reason": "target_binding_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        },
+        {
+          "part": {
+            "quote": "and hyperparameter optimization.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "hyperparameter optimization",
+              "metric": "used",
+              "time": "",
+              "condition": "and hyperparameter optimization"
+            },
+            "start": 44,
+            "end": 76,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "hyperparameter optimization",
+              "truth": "unknown",
+              "quotes": [],
+              "explanation": "Member 'hyperparameter optimization' has unresolved evidence for the positive predicate 'used', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. Evidence resolving this predicate for the claimed target and scope: target=hyperparameter optimization; predicate/metric=used; condition=and hyperparameter optimization.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "Evidence resolving this predicate for the claimed target and scope: target=hyperparameter optimization; predicate/metric=used; condition=and hyperparameter optimization."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "scoped_evidence_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:029",
+      "claim": "PDTB sections 0-1 were the test set used in the study.",
+      "context": "We used the largest hand-annotated discourse corpus PDTB 2.0 BIBREF12 (PDTB hereafter). This corpus contains discourse annotations over 2,312 Wall Street Journal articles, and is organized in different sections. Following previous work BIBREF6 , BIBREF13 , BIBREF14 , BIBREF9 , we used sections 2-20 as our training set, sections 21-22 as the test set. Sections 0-1 were used as the development set for hyperparameter optimization.",
+      "label": "contradict",
+      "dataset_group": "1603.03876",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": false,
+      "stop_reason": "completed",
+      "elapsed_ms": 12338.045,
+      "diagnostic_categories": [
+        "section_identifier",
+        "target_coreference"
+      ],
+      "notes": "Nguồn sections 21-22 là test, sections 0-1 là development nên claim test set phải contradict. Exact PDTB sections 0-1 vắng nguyên chuỗi làm empty ledger; section IDs còn bị coi quantities với unit were.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "PDTB sections 0-1 were the test set used in the study.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "PDTB sections 0-1",
+              "metric": "test set",
+              "time": "",
+              "condition": "used in the study"
+            },
+            "start": 0,
+            "end": 54,
+            "numeric_requirements": [
+              {
+                "start": 14,
+                "end": 15,
+                "quote": "0",
+                "value": "0",
+                "unit": "",
+                "kind": "number"
+              },
+              {
+                "start": 16,
+                "end": 22,
+                "quote": "1 were",
+                "value": "1",
+                "unit": "were",
+                "kind": "number"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "PDTB sections 0-1 were the test set used in the study.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "PDTB sections 0-1",
+              "metric": "test set",
+              "time": "",
+              "condition": "used in the study"
+            },
+            "start": 0,
+            "end": 54,
+            "numeric_requirements": [
+              {
+                "start": 14,
+                "end": 15,
+                "quote": "0",
+                "value": "0",
+                "unit": "",
+                "kind": "number"
+              },
+              {
+                "start": 16,
+                "end": 22,
+                "quote": "1 were",
+                "value": "1",
+                "unit": "were",
+                "kind": "number"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 14,
+              "end": 15,
+              "quote": "0",
+              "value": "0",
+              "unit": "",
+              "kind": "number"
+            },
+            {
+              "start": 16,
+              "end": 22,
+              "quote": "1 were",
+              "value": "1",
+              "unit": "were",
+              "kind": "number"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [],
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=PDTB sections 0-1; predicate/metric=test set; condition=used in the study.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "unknown",
+          "missing_information": [
+            "Evidence identifying the claimed target in the reported results: target=PDTB sections 0-1; predicate/metric=test set; condition=used in the study."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [
+            "scope_unknown"
+          ],
+          "model_missing_information": [
+            "target_binding_unresolved"
+          ],
+          "missing_reason": "target_binding_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "validation-v1:030",
+      "claim": "The study trained its model for 10 epochs on PDTB.",
+      "context": "We used the largest hand-annotated discourse corpus PDTB 2.0 BIBREF12 (PDTB hereafter). This corpus contains discourse annotations over 2,312 Wall Street Journal articles, and is organized in different sections. Following previous work BIBREF6 , BIBREF13 , BIBREF14 , BIBREF9 , we used sections 2-20 as our training set, sections 21-22 as the test set. Sections 0-1 were used as the development set for hyperparameter optimization.",
+      "label": "not_enough_info",
+      "dataset_group": "1603.03876",
+      "prediction": "not_enough_info",
+      "label_matches_frozen_gold": true,
+      "stop_reason": "completed",
+      "elapsed_ms": 10506.287,
+      "diagnostic_categories": [
+        "missing_reason_review"
+      ],
+      "notes": "NEI đúng: nguồn không cho số epochs. Missing hiện đòi study identity thay vì training-epoch evidence; source dùng we/our corpus. Cần kiểm quy chiếu paper và nêu thông tin training còn thiếu, không suy 10 epochs từ section IDs.",
+      "decomposition": {
+        "parts": [
+          {
+            "quote": "The study trained its model for 10 epochs on PDTB.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "study",
+              "metric": "trained its model",
+              "time": "",
+              "condition": "for 10 epochs on PDTB"
+            },
+            "start": 0,
+            "end": 50,
+            "numeric_requirements": [
+              {
+                "start": 32,
+                "end": 41,
+                "quote": "10 epochs",
+                "value": "10",
+                "unit": "epochs",
+                "kind": "number"
+              }
+            ]
+          }
+        ],
+        "unresolved": []
+      },
+      "parts": [
+        {
+          "part": {
+            "quote": "The study trained its model for 10 epochs on PDTB.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "study",
+              "metric": "trained its model",
+              "time": "",
+              "condition": "for 10 epochs on PDTB"
+            },
+            "start": 0,
+            "end": 50,
+            "numeric_requirements": [
+              {
+                "start": 32,
+                "end": 41,
+                "quote": "10 epochs",
+                "value": "10",
+                "unit": "epochs",
+                "kind": "number"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 32,
+              "end": 41,
+              "quote": "10 epochs",
+              "value": "10",
+              "unit": "epochs",
+              "kind": "number"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [],
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=study; predicate/metric=trained its model; condition=for 10 epochs on PDTB.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "unknown",
+          "missing_information": [
+            "Evidence identifying the claimed target in the reported results: target=study; predicate/metric=trained its model; condition=for 10 epochs on PDTB."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [
+            "scope_unknown"
+          ],
+          "model_missing_information": [
+            "target_binding_unresolved"
+          ],
+          "missing_reason": "target_binding_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    }
+  ]
+}

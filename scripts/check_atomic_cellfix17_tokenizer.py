@@ -1,0 +1,262 @@
+"""Exercise the pinned Qwen token filter; no weights or new predictions."""
+from copy import deepcopy
+import json
+from pathlib import Path
+import sys
+import time
+
+ROOT=Path(__file__).resolve().parents[1]
+SOURCE=ROOT/'research-runs/atomic-cellfix17-candidate/workspace'
+sys.path.insert(0,str(SOURCE))
+
+
+def main():
+    started=time.perf_counter()
+    print('Loading pinned tokenizer and building vocabulary tree; no weights.',flush=True)
+    from research_rag.evaluation import evaluate_atomic_verifier as r
+    from scripts.atomic_offline_memory import use_streaming_hashes
+    use_streaming_hashes(r)
+    from research_rag.tests.test_atomic_smoke_cellfix3 import scoped,request
+    from research_rag.tests.test_atomic_verifier import assessment,observation,numeric,operand
+    from research_rag.tests.test_atomic_assessment_cellfix7 import LedgerTests
+    from research_rag.tests import test_atomic_assessment_v8 as h
+    from research_rag.tests.test_atomic_decoding import Sequence
+    from transformers import PreTrainedTokenizerFast
+    criteria,_,_,_,_,baseline,_=r.load_frozen(r.CRITERIA)
+    folder=SOURCE/'04_factchecker/checkpoints/factchecker_merged'
+    for name,expected in baseline['model_metadata']['shared_tokenizer_files'].items():
+        assert r.sha256(folder/name)==expected
+    config=json.loads((folder/'tokenizer_config.json').read_bytes())
+    tokenizer=PreTrainedTokenizerFast(tokenizer_file=str(folder/'tokenizer.json'),eos_token=config['eos_token'],pad_token=config['pad_token'],extra_special_tokens=config['extra_special_tokens'],clean_up_tokenization_spaces=False)
+    assert tokenizer.eos_token_id==tokenizer.convert_tokens_to_ids(config['eos_token'])
+    assert all(tokenizer.convert_tokens_to_ids(v) in tokenizer.all_special_ids for v in config['extra_special_tokens'])
+    backend=r.decoding.ConstrainedAtomicBackend(None,tokenizer)
+    paths=[]
+    claim,p,ctx,raw=LedgerTests().sample()
+    paths.append(('keyed_two_sentence_counts',claim,p,ctx,raw,True))
+    bad=deepcopy(raw);bad['observations'][0]['numeric']['q1']=bad['observations'][0]['numeric']['q0']
+    paths.append(('duplicated_requirement',claim,p,ctx,bad,False))
+    bad=deepcopy(raw);bad['observations'][0]['numeric'].pop('q1')
+    paths.append(('missing_requirement',claim,p,ctx,bad,False))
+    claim='The audit used handwritten forms.';ctx='The audit did not use any handwritten forms.'
+    p=scoped(claim,'audit','used handwritten forms');raw=assessment([observation('audit','false',ctx)])
+    paths.append(('explicit_denial',claim,p,ctx,raw,True))
+    bad=deepcopy(raw);bad['scope_match']='mismatched'
+    paths.append(('counterevidence_as_scope_mismatch',claim,p,ctx,bad,False))
+    bad=deepcopy(raw);bad['observations'][0]['truth']='unknown'
+    paths.append(('counterevidence_as_unknown',claim,p,ctx,bad,False))
+    ctx='The audit protocol was not reported.';raw=assessment([observation('audit','unknown',ctx)])
+    paths.append(('genuine_missing_evidence',claim,p,ctx,raw,True))
+    claim='All channels improved after calibration.'
+    ctx='Two channels improved after calibration, but a third channel worsened.'
+    p=scoped(claim,'channels','improved',quantifier='all',time='after calibration')
+    raw=assessment([observation('a third channel','false',ctx)])
+    paths.append(('single_counterexample',claim,p,ctx,raw,True))
+    claim='The update increased precision.';ctx='Precision rose from 0.71 before the update to 0.88 afterward.'
+    p=scoped(claim,'update','precision')
+    raw=assessment([observation('update','true',ctx,numeric('change',ctx,operand('0.71'),operand('0.88')))])
+    paths.append(('old_ordered_change_preserved',claim,p,ctx,raw,True))
+    bad=deepcopy(raw);bad['observations'][0]['numeric'].update(left=operand('0.88'),right=operand('0.71'))
+    paths.append(('reversed_change_rejected',claim,p,ctx,bad,False))
+    claim='On the Falcon corpus, the parser reduced latency.'
+    ctx='The parser reduced latency on the Falcon corpus. Results on other corpora are unknown.'
+    p=scoped(claim,'parser','latency',condition='On the Falcon corpus')
+    raw=assessment([observation('parser','true','The parser reduced latency on the Falcon corpus.')])
+    paths.append(('scoped_support_without_other_corpora',claim,p,ctx,raw,True))
+    bad=deepcopy(raw);bad['missing_information']=['Results on other corpora.']
+    paths.append(('irrelevant_missing_information_rejected',claim,p,ctx,bad,False))
+    boundary=deepcopy(raw);boundary['observations'][0]['explanation']='x'*64;boundary['explanation']='x'*64
+    paths.append(('free_prose_64_rejected_by_new_contract',claim,p,ctx,boundary,False))
+    bad=deepcopy(boundary);bad['observations'][0]['explanation']+='x'
+    paths.append(('explanation_65_rejected',claim,p,ctx,bad,False))
+    from research_rag.tests.test_atomic_assessment_cellfix9 import PopulationTests
+    claim='The West relay reduced latency.'
+    ctx='The West relay reduced latency. The East relay increased latency.'
+    p=scoped(claim,'West relay','latency')
+    raw=assessment([observation('West relay','true','The West relay reduced latency.')])
+    paths.append(('prefix_named_target_local_quote',claim,p,ctx,raw,True))
+    bad=deepcopy(raw);bad['observations'][0]['quotes']=["The East relay increased latency."]
+    paths.append(('prefix_named_target_wrong_quote_rejected',claim,p,ctx,bad,False))
+    claim,p,ctx,raw=PopulationTests().sample()
+    paths.append(('closed_all_collective_coverage',claim,p,ctx,raw,True))
+    bad=deepcopy(raw);bad['coverage']={'complete':False,'members':[],'quotes':[]}
+    paths.append(('closed_all_cannot_discard_coverage',claim,p,ctx,bad,False))
+    claim,p,ctx,raw=PopulationTests().sample('none')
+    paths.append(('none_no_leaks_positive_predicate_false',claim,p,ctx,raw,True))
+    bad=deepcopy(raw);bad['observations'][0]['truth']='true'
+    paths.append(('none_cannot_invert_positive_predicate',claim,p,ctx,bad,False))
+    claim='Every audit shard improved recall after the refresh.'
+    ctx='The audit set consisted of exactly four shards. After the refresh, three improved recall, while the fourth became worse at recalling relevant records.'
+    p=scoped(claim,'audit shard','recall',quantifier='all',time='after the refresh')
+    raw=assessment([observation('the fourth','false',ctx)])
+    paths.append(('mixed_members_do_not_borrow_polarity',claim,p,ctx,raw,True))
+    from research_rag.tests.test_atomic_assessment_cellfix10 import canonical, closure_sample, traces
+    claim,p,ctx,raw=closure_sample()
+    paths.append(('selection_set_closure',claim,p,ctx,raw,True))
+    bad=deepcopy(raw);bad['coverage']['members']*=2
+    paths.append(('selection_set_duplicate_coverage',claim,p,ctx,bad,False))
+    for cid in ('scope:direction:not_enough_info','scope:conjunction:not_enough_info'):
+        trace,payload=traces(cid)[-1]
+        raw=canonical(trace['output'],payload['part'],payload['context'])
+        paths.append((cid+'_repaired_contract',payload['claim'],payload['part'],payload['context'],raw,True))
+        bad=deepcopy(raw);bad['missing_information']=['Invented Author (2030) says results are missing.']
+        paths.append((cid+'_invented_prose_blocked',payload['claim'],payload['part'],payload['context'],bad,False))
+    # Existing positive token fixtures adopt only the revised reporting fields.
+    # Invalid evidence/quantity fields remain byte-for-byte the test mutations.
+    from research_rag.tests.test_atomic_cellfix17 import token_paths17
+    paths.extend(token_paths17())
+    prepared=[]
+    for name,claim,p,ctx,raw,expected in paths:
+        if name not in ('free_prose_64_rejected_by_new_contract','explanation_65_rejected') and not name.endswith('_invented_prose_blocked'):
+            raw=canonical(raw,p,ctx)
+        prepared.append((name,claim,p,ctx,raw,expected))
+    paths=prepared
+    from research_rag.tests.test_atomic_assessment_cellfix11 import trace as cf13_trace, repaired, novel_metric, novel_group
+    for cid in ('contract:causality_missing','scope:metric:not_enough_info','scope:condition:not_enough_info'):
+        raw,payload=cf13_trace(cid);p,ctx=payload['part'],payload['context']
+        good=repaired(raw,p,ctx,'low-temperature group' if cid.startswith('scope:condition') else None)
+        paths.append((cid+'_cf13_repaired',payload['claim'],p,ctx,good,True))
+        paths.append((cid+'_cf10_bad_evidence',payload['claim'],p,ctx,raw,False))
+    claim,p,ctx,raw=novel_metric()
+    paths.append(('novel_specificity_absence',claim,p,ctx,raw,True))
+    bad=deepcopy(raw);bad['observations'][0]['quotes']=[ctx.split('. ')[0]+'.']
+    paths.append(('novel_sensitivity_quote_rejected',claim,p,ctx,bad,False))
+    claim,p,ctx,raw=novel_group()
+    paths.append(('novel_cold_storage_unknown',claim,p,ctx,raw,True))
+    bad=deepcopy(raw);bad['observations'][0]['member']='All measured hot-storage chambers'
+    paths.append(('novel_hot_storage_member_rejected',claim,p,ctx,bad,False))
+    from research_rag.tests.test_atomic_assessment_cellfix12 import token_paths as parent_paths
+    from research_rag.tests.test_atomic_assessment_cellfix13 import token_paths,empty_target
+    from importlib import import_module
+    members=import_module('04_factchecker.inference.assessment_members')
+    paths += [('cf12_'+name,claim,p,ctx,raw,expected) for name,claim,p,ctx,raw,expected in parent_paths()]
+    paths += [('cf13_'+name,claim,p,ctx,raw,expected) for name,claim,p,ctx,raw,expected in token_paths()]
+    # Positive legacy fixtures explicitly adopt the new missing-target contract.
+    # Every negative fixture and every received bad output remains unchanged.
+    paths=[(name+'_empty_target',claim,p,ctx,empty_target(p,ctx),expected)
+        if expected and members.target_absent(p,ctx) else (name,claim,p,ctx,raw,expected)
+        for name,claim,p,ctx,raw,expected in paths]
+    from research_rag.tests.test_atomic_cellfix14 import duration_case
+    for duration in ('half-hour','two-hour'):
+        claim,p,ctx,raw=duration_case(duration)
+        paths.append(('cf14_duration_'+duration,claim,p,ctx,raw,True))
+        bad=deepcopy(raw);bad['observations'][0]['numeric']['q1']=bad['observations'][0]['numeric']['q0']
+        paths.append(('cf14_duration_wrong_slot_'+duration,claim,p,ctx,bad,False))
+    from research_rag.tests.test_atomic_cellfix15 import token_paths as absence_paths
+    paths += [('cf15_'+name,claim,p,ctx,raw,expected) for name,claim,p,ctx,raw,expected in absence_paths()]
+    from research_rag.tests.test_atomic_cellfix16 import cases,received
+    for cid in ('005','008','026','029'):
+        c,p,raw=received(cid)
+        paths.append(('cf16_'+cid+'_received_blocked',c['claim'],p,c['context'],deepcopy(raw),False))
+        witness=r.atomic.assessment_issue.__globals__['decision_evidence'](p,c['context'])
+        passage=next(q for q in sorted(r.decoding.evidence_passages(c['context']),key=len) if witness['quotes'][0] in q)
+        raw['observations'][0].update(member=witness['members'][0],truth='false',quotes=[passage])
+        paths.append(('cf16_'+cid+'_counterevidence',c['claim'],p,c['context'],raw,True))
+    for cid in ('013','014'):
+        c,p,raw=received(cid)
+        if cid=='014':
+            paths.append(('cf16_014_old_true_blocked',c['claim'],p,c['context'],deepcopy(raw),False))
+            raw['observations'][0]['truth']='false'
+        paths.append(('cf16_'+cid+'_reported_accuracy',c['claim'],p,c['context'],raw,True))
+    c,p,raw=received('007');raw['observations'][0]['numeric']['right']=deepcopy(raw['observations'][0]['numeric']['left'])
+    paths.append(('cf16_sari_operand',c['claim'],p,c['context'],raw,True))
+    c,p,raw=received('019')
+    witness=__import__('importlib').import_module('04_factchecker.inference.cellfix16_rules').population_witness(p,c['context'])
+    raw['coverage']=dict(complete=True,members=witness['members'],quotes=witness['quotes'])
+    raw['observations'][0].update(member=witness['members'][0],truth='true',quotes=witness['quotes'])
+    paths.append(('cf16_collective_closure',c['claim'],p,c['context'],raw,True))
+    paths.append(('cf16_collective_unknown_retry',c['claim'],p,c['context'],cases()['019']['traces'][-1]['raw_output'],False))
+    c,p,raw=received('011')
+    paths.append(('cf16_unbound_count',c['claim'],p,c['context'],deepcopy(raw),False))
+    raw['observations'][0].update(member='14,769 actions',truth='false')
+    paths.append(('cf16_count_counterexample',c['claim'],p,c['context'],raw,True))
+    c,p,raw=received('022')
+    source=next(s for s in r.decoding.evidence_passages(c['context']) if 'However, in this study' in s and '980 annotations in 670 tweets in Turkish.' in s)
+    numeric=__import__('importlib').import_module('04_factchecker.inference.numeric_verifier')
+    records={}
+    for i,left in enumerate(numeric.numeric_requirements(p['quote'])):
+        right=next(v for v in numeric.numeric_requirements(source) if v['value']==left['value'])
+        records['q'+str(i)]=dict(kind='value',source_quote=source,left={k:left[k] for k in ('value','unit','quote')},right={k:right[k] for k in ('value','unit','quote')})
+    raw['observations'][0].update(truth='true',quotes=[source],numeric=records)
+    paths.append(('cf16_modified_count_units',c['claim'],p,c['context'],raw,True))
+    for cid,entity in {'009':'sentence','015':'prediction','020':'80 events','021':'news articles','023':'eight named-entity categories','025':'proposed model'}.items():
+        c=cases()[cid];raw=deepcopy(c['traces'][0]['raw_output'])
+        paths.append(('cf16_decompose_'+cid+'_received',c['claim'],None,'',deepcopy(raw),cid in ('015','021')))
+        raw['parts'][-1]['scope']['entity']=entity
+        paths.append(('cf16_decompose_'+cid+'_repaired',c['claim'],None,'',raw,True))
+    if '--new-only' in sys.argv:paths=[v for v in paths if v[0].startswith('cf16_')]
+
+    results=[]
+    for name,claim,p,ctx,raw,expected in paths:
+        path_started=time.perf_counter()
+        print('Checking '+name,flush=True)
+        messages=request(claim,p,ctx) if p is not None else [{'role':'system','content':r.atomic.DECOMPOSE_PROMPT},{'role':'user','content':json.dumps({'claim':claim})}]
+        callback=backend.generation_options(messages)['prefix_allowed_tokens_fn']
+        text=json.dumps(json.loads(h.AssessmentTokenFilterTests().ordered(raw)) if p is not None else raw,separators=(',',':'))
+        ids=Sequence([tokenizer.eos_token_id]);accepted=True
+        for token in tokenizer.encode(text,add_special_tokens=False):
+            if token in callback(0,ids):ids.append(token);continue
+            for char in tokenizer.decode([token]):
+                pieces=tokenizer.encode(char,add_special_tokens=False)
+                assert len(pieces)==1 and tokenizer.decode(pieces)==char
+                if pieces[0] not in callback(0,ids):accepted=False;break
+                ids.append(pieces[0])
+            if not accepted:break
+        if accepted:
+            assert tokenizer.decode(ids[1:])==text
+            accepted=tokenizer.eos_token_id in callback(0,ids)
+        assert accepted==expected,(name,accepted,expected,tokenizer.decode(ids[1:])[-200:])
+        if accepted:assert len(ids)<=criteria['max_new_tokens']
+        results.append({'case':name,'accepted':accepted,'expected':expected,'legal_path_tokens':len(ids) if accepted else None,
+            'elapsed_seconds':round(time.perf_counter()-path_started,3)})
+    # Replay the canonical BPE path for the exact received malformed prefix.
+    # No character fallback here: this specifically catches the old fast cache.
+    from lmformatenforcer import TokenEnforcer, JsonSchemaParser, CharacterLevelParserConfig
+    trace_path=SOURCE/'research_rag/tests/fixtures/atomic_cellfix7_smoke_traces.json'
+    sample=next(v for v in json.loads(trace_path.read_bytes()) if v['case']['example_id']=='contract:both_supported')
+    trace=sample['result']['trace'][1];payload=json.loads(trace['messages'][1]['content'])
+    msg=request(payload['claim'],payload['part'],payload['context'])
+    # The negative control explicitly uses the prior free-prose schema;
+    # cf10 no longer contains a free-prose field for this cache bug to exploit.
+    schema=r.decoding._cellfix9_final_schema(payload['claim'],payload['part'],payload['context'])
+    config=CharacterLevelParserConfig();config.force_json_field_order=True;config.max_consecutive_whitespaces=4
+    config.alphabet+=''.join(sorted(set(payload['claim']+payload['context'])-set(config.alphabet)))
+    old=TokenEnforcer(backend.tokenizer_data,JsonSchemaParser(schema,config=config));old.root_parser.config=config
+    ids=Sequence([tokenizer.eos_token_id])
+    encoded=tokenizer.encode(trace['raw_output'],add_special_tokens=False)
+    for token in encoded:
+        assert token in old.get_allowed_tokens(ids).allowed_tokens
+        ids.append(token)
+    assert tokenizer.eos_token_id in old.get_allowed_tokens(ids).allowed_tokens
+    callback=backend.generation_options(msg)['prefix_allowed_tokens_fn']
+    ids=Sequence([tokenizer.eos_token_id]);rejected_at=None
+    for index,token in enumerate(encoded):
+        allowed=callback(0,ids)
+        assert tokenizer.eos_token_id not in allowed,'EOS before a complete JSON object'
+        if token not in allowed:rejected_at=index;break
+        ids.append(token)
+    assert rejected_at is not None,'Malformed prefix must not reach EOS'
+    prefix_check={'old_control_schema':'cellfix9_free_prose','old_parser_allows_eos_on_malformed_prefix':True,
+        'new_parser_rejects_prefix':True,'rejected_at_bpe_token':rejected_at,
+        'prefix_bpe_tokens':len(encoded),'original_model_generated_tokens':111,
+        'no_character_fallback_used':True}
+    from research_rag.tests.test_atomic_cellfix17 import fixture17
+    sample17=fixture17();messages17=request(sample17['case']['claim'],sample17['part'],sample17['case']['context'])
+    exact_received=[]
+    for attempt,text17 in enumerate(sample17['received_texts'],1):
+        callback17=backend.generation_options(messages17)['prefix_allowed_tokens_fn']
+        ids17=Sequence([tokenizer.eos_token_id]);rejected17=None
+        for index,token in enumerate(tokenizer.encode(text17,add_special_tokens=False)):
+            if token not in callback17(0,ids17):rejected17=index;break
+            ids17.append(token)
+        assert rejected17 is not None,'Received invalid coverage reached EOS'
+        exact_received.append(dict(attempt=attempt,rejected_at_bpe_token=rejected17,no_character_fallback=True))
+    output={'candidate':criteria['policy'],'criteria_sha256':r.sha256(r.CRITERIA),
+        'kind':'real_pinned_tokenizer_handcrafted_path_check','checks':results,
+        'exact_malformed_prefix_replay':prefix_check,'received_full39_bpe_replay':exact_received,'elapsed_seconds':round(time.perf_counter()-started,3),
+        'weights_loaded':False,'model_inference_completed':False}
+    (ROOT/('docs/atomic-verifier-cellfix17-tokenizer-check-focused.json' if '--new-only' in sys.argv else 'docs/atomic-verifier-cellfix17-tokenizer-check.json')).write_text(json.dumps(output,indent=2)+'\n',encoding='utf-8')
+    print(json.dumps(output))
+
+
+if __name__=='__main__':main()

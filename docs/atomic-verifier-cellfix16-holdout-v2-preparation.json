@@ -1,0 +1,24 @@
+{
+  "version": "atomic-cellfix16-holdout30-v2",
+  "cases": 30,
+  "papers": 10,
+  "label_counts": {
+    "support": 10,
+    "contradict": 10,
+    "not_enough_info": 10
+  },
+  "scanned_files": 468,
+  "excluded_papers": 4882,
+  "eligible_test_papers": 27,
+  "overlap_flags": 0,
+  "document_overlap": [],
+  "manifest_sha256": "9821fcae09302b65d9e393a82e7767e1b1f1466eca4c4d2e5bfaf53d915bfad9",
+  "packet_lock_sha256": "d6c3399a079dfc65d8b450861d77657dd7655525c8a4d0226388f490216d7d63",
+  "review_packet_zip_sha256": "a253ae17250d10012e893d7a30c6a27752e223d934dddae44bf41fa597345431",
+  "blind_inputs_zip_sha256": "05aa9e0605c9e5512132ddf14bd4384f376f5f8d045d743bf330a7184e737dce",
+  "annotation_status": "AI proposed; human review pending",
+  "model_inference_completed": false,
+  "independent_validation_completed": false,
+  "promoted_to_serving": false,
+  "network_requests": 0
+}

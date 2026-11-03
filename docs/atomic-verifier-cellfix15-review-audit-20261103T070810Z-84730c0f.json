@@ -1,0 +1,259 @@
+{
+  "run_id": "20261103T070810Z-84730c0f",
+  "archive_sha256": "285777195d506c4e20212920d4b3feb8d97cf40dd2dfe80b5c041fd4367c53c3",
+  "verified_outputs": 115,
+  "verified_inputs": 140,
+  "actual_candidate": "atomic-verifier-constrained-v8-cellfix15",
+  "actual_criteria_sha256": "95b79b8589980376c9c3ca45780ac3ac1a809bf13c03b84904616ee7da939e69",
+  "intended_cellfix16_criteria_sha256": "c025247428698d892e549fb12ad22e19561020b034a2a2276c9dfcaf0cbdc966",
+  "review_sha256": "cb1f0b16156a61d61c9603c3621b80b91e10e10425836b9ab86b78e65ba27b88",
+  "review_bound_to_received_predictions": true,
+  "review_negative_cases": [
+    {
+      "example_id": "contract:causality_missing",
+      "rejected": {
+        "missing_information_specific": false
+      },
+      "notes": "XÁC NHẬN TRƯỢT TIÊU CHÍ missing_information_specific. Nhãn NEI đúng vì quan hệ nhân quả (causality) chưa được chứng minh. Tuy nhiên phần missing_information chỉ ghi chung chung thiếu chứng cứ cho new index/latency, bỏ qua việc chỉ rõ thiếu \"chứng cứ về mối quan hệ nhân quả\" (causal relationship). Cần đánh dấu trượt để buộc refactor module missing renderer.",
+      "actual_parts": [
+        {
+          "part": {
+            "quote": "The new index caused the latency improvement.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "new index",
+              "metric": "latency",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 45,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "new index",
+              "truth": "unknown",
+              "quotes": [
+                "The study did not establish a causal relationship."
+              ],
+              "explanation": "Member 'new index' has unresolved evidence for the positive predicate 'latency', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. Evidence establishing the claimed causal relationship, beyond co-occurrence/correlation: target=new index; predicate/metric=latency; claimed relation=The new index caused the latency improvement..",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "Evidence establishing the claimed causal relationship, beyond co-occurrence/correlation: target=new index; predicate/metric=latency; claimed relation=The new index caused the latency improvement.."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [
+            "causal_relationship"
+          ],
+          "missing_reason": "causal_relationship",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "scope:metric:not_enough_info",
+      "rejected": {
+        "quote_relevant": false
+      },
+      "notes": "XÁC NHẬN TRƯỢT TIÊU CHÍ quote_relevant. Nhãn NEI đúng vì precision không được đo. Tuy nhiên trích dẫn duy nhất của mô hình lại là \"Recall rose from 0.64 to 0.79...\", bỏ sót hoàn toàn câu quan trọng \"Precision was not measured.\". Trích dẫn này không phục vụ chứng minh cho lý do NEI của precision.",
+      "actual_parts": [
+        {
+          "part": {
+            "quote": "The configuration change increased precision.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "configuration change",
+              "metric": "precision",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 45,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "configuration change",
+              "truth": "unknown",
+              "quotes": [
+                "Precision was not measured."
+              ],
+              "explanation": "Member 'configuration change' has unresolved evidence for the positive predicate 'precision', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. The unreported in-scope measurement/result: target=configuration change; predicate/metric=precision.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "The unreported in-scope measurement/result: target=configuration change; predicate/metric=precision."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "measurement_unreported",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ]
+    },
+    {
+      "example_id": "scope:condition:not_enough_info",
+      "rejected": {
+        "explanation_follows_evidence": false
+      },
+      "notes": "XÁC NHẬN TRƯỢT TIÊU CHÍ explanation_follows_evidence. Nhãn NEI đúng vì nhóm low-temperature không được đo yield. Tuy nhiên, bảng observation lại đưa phần tử \"All measured high-temperature batches\" với truth=unknown vào lời giải thích, trong khi nguồn đã nêu rõ nhóm high-temperature có gained yield. Việc đưa sai nhóm điều kiện vào observation làm lời giải thích không bám sát chứng cứ.",
+      "actual_parts": [
+        {
+          "part": {
+            "quote": "Every batch in the low-temperature group gained yield after the update.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "batch",
+              "metric": "yield",
+              "time": "after the update",
+              "condition": "in the low-temperature group"
+            },
+            "start": 0,
+            "end": 71,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "low-temperature group",
+              "truth": "unknown",
+              "quotes": [
+                "The low-temperature group contained three batches, but no yield changes were measured for that group."
+              ],
+              "explanation": "Member 'low-temperature group' has unresolved evidence for the positive predicate 'yield', before applying ALL.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. The unreported in-scope measurement/result: target=batch; predicate/metric=yield; time=after the update; condition=in the low-temperature group.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "The unreported in-scope measurement/result: target=batch; predicate/metric=yield; time=after the update; condition=in the low-temperature group."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [
+            "measurement_unreported"
+          ],
+          "missing_reason": "measurement_unreported",
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "model_ledger"
+        }
+      ]
+    }
+  ],
+  "metrics_difference": {
+    "usage_complete": {
+      "replayed": true,
+      "stored": null,
+      "stored_present": false
+    }
+  },
+  "replayed_metrics": {
+    "n": 39,
+    "correct_labels": 39,
+    "false_support": 0,
+    "runtime_failed_rows": 0,
+    "gold_support_rejected": 0,
+    "gold_support_count": 12,
+    "backend_calls": 85,
+    "checks": {
+      "all_cases_present": true,
+      "all_labels_correct": true,
+      "no_false_support": true,
+      "no_runtime_failures": true,
+      "within_call_budget": true,
+      "each_group_complete_and_correct": true,
+      "within_measured_token_budget": true,
+      "structured_decoding_trace_complete": true,
+      "cooperative_deadline_trace_complete": true
+    },
+    "automated_gate_pass": true,
+    "dataset_groups": {
+      "original_contracts": {
+        "n": 12,
+        "correct": 12,
+        "false_support": 0,
+        "failed": 0
+      },
+      "scope_regression": {
+        "n": 27,
+        "correct": 27,
+        "false_support": 0,
+        "failed": 0
+      }
+    },
+    "stop_reasons": {
+      "completed": 39
+    },
+    "confusion": [
+      {
+        "gold": "contradict",
+        "prediction": "contradict",
+        "n": 12
+      },
+      {
+        "gold": "not_enough_info",
+        "prediction": "not_enough_info",
+        "n": 15
+      },
+      {
+        "gold": "support",
+        "prediction": "support",
+        "n": 12
+      }
+    ],
+    "usage_complete": true,
+    "generated_tokens": 9224,
+    "prompt_tokens": 122329
+  },
+  "admission_errors": {
+    "original": "Full39 gate failed on replay",
+    "compatible": "All semantic criteria and notes are required: contract:causality_missing; missing_information_specific"
+  },
+  "validation30_started": false,
+  "cellfix16_notebook_sha256": "05aa83b16c4c93b917d61a7c94cc0d242adc5f3e0f28c68f159c3546599be34b",
+  "new_model_inference": false,
+  "original_outputs_and_review_unchanged": true
+}

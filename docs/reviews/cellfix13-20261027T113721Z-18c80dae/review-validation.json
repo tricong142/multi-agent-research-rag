@@ -1,0 +1,20 @@
+{
+  "run_id": "20261027T113721Z-18c80dae",
+  "claims": 18,
+  "parts": 20,
+  "criteria_checked": 90,
+  "ai_passed_claims": 18,
+  "reviewer_kind": "assistant",
+  "human_review_completed": false,
+  "ai_review_does_not_admit_full39": true,
+  "admission_block": "Completed human review bound to this probe is required",
+  "full39_cell_prepared_with_run_flag_true": false,
+  "full39_executed": false,
+  "original_predictions_unchanged": true,
+  "files_sha256": {
+    "AI_REVIEW.json": "ce037e52f11a0ae1334bcc07b46a77c799d5436b6e5e0cdc23942a91f44a0015",
+    "DECOMPOSITION_REVIEW.md": "0875e0efe1453cf2e16c082def29a010315ddfdb881b214216b5ac9f4b86498b",
+    "HUMAN_REVIEW_WITH_AI_NOTES.html": "c5ef070b4ed2a661cc4be02b28cec46e65f0ccf36288f5f6c413aa62eb523f92",
+    "review-form.js": "0e890caa24c74382ed0de86d919f594c77d074d0740cd787fe39fa1c85111a0e"
+  }
+}

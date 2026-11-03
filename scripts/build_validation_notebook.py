@@ -248,6 +248,7 @@ with zipfile.ZipFile(root/'kaggle_transfer/validation-update-20260927.zip') as a
              'research_rag/tests/test_indexing.py', 'research_rag/controller.py',
              'research_rag/adapters.py', 'research_rag/local.py', 'research_rag/observe.py',
              'requirements-orchestrator.txt', 'train_agent3_summarizer/node.py',
+             'train_agent3_summarizer/claim_contract.py', 'research_rag/atomic_adapter.py',
              'train_agent3_summarizer/critic/prompts.py', 'research_rag/tests/test_integration.py',
              'research_rag/tests/test_autonomy.py', 'research_rag/planning.py', 'research_rag/tests/test_planning.py',
              'research_rag/evaluation/autonomy.py', 'research_rag/evaluation/autonomy_criteria.json',

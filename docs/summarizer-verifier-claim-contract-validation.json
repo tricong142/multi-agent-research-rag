@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-03",
+  "tests_run": 94,
+  "failures": 0,
+  "errors": 0,
+  "test_mode": "synthetic_backend_contract_and_graph_regression",
+  "max_internal_retry": 3,
+  "graph_runtime_schema": 4,
+  "real_model_e2e_tested": false,
+  "gpu_inference_tested": false,
+  "full_natural_language_grammar_guaranteed": false,
+  "frozen_release_files_unchanged": {
+    "cellfix14": 21,
+    "cellfix15": 21,
+    "cellfix16": 23
+  },
+  "holdout_artifacts_unchanged": true,
+  "existing_notebooks_regenerated": false,
+  "source_sha256": {
+    "train_agent3_summarizer/claim_contract.py": "c19a225ffcaeb1acd29245892113c1a45092493783d9d7d4f90b96b008e47a16",
+    "train_agent3_summarizer/node.py": "71d1c7586507f71dbd81f0aad951be113b038e11ebd0af01067f325e5fcd136b",
+    "train_agent3_summarizer/critic/prompts.py": "b2e90a2dabe49aaed67c6d8ad835e2c0c8cc463c0ea80dcee00afb7b010959fa",
+    "research_rag/graph.py": "c2af1d5fc90074911c64ebdbcc3f99330f19e811f5216502c2a3958125c9d4eb",
+    "scripts/build_validation_notebook.py": "c8d128f99aed2328e5268e83faa88f76bc1dff6f0aecae45d5ff3e0eccc1f8f0",
+    "research_rag/tests/test_claim_contract.py": "f4627ff1e8cbc18e48ec96dd46f0666f0f73756bd0acd181bea2aaf12e60b03d"
+  },
+  "test_log": "research-runs/claim-contract-regression.log",
+  "test_log_sha256": "7925432f3a41a265d8501f1bf8be2c1dcb067ebc15159b972b3d1976e89bf346"
+}

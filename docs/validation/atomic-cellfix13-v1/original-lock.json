@@ -1,0 +1,14 @@
+{
+  "version": "atomic-cellfix6-validation-v1",
+  "status": "locked_after_human_annotation",
+  "manifest_sha256": "2220c18b708c967b7a33ee1bcd6a8771ce7aefe7e2b3753d8a60adcc3c080069",
+  "candidate_criteria_sha256": "b9d77823b5c8d6d2a56d4053667b8b53f6e059a1f5edb9e7e3a7578a50f34071",
+  "reviewer": "Trí Công",
+  "reviewed_on": "2026-10-19",
+  "cases": 30,
+  "papers": 10,
+  "inference_completed": false,
+  "scope": "Verifier pilot on supplied paragraphs; not unseen pretraining data or pipeline E2E",
+  "signature_kind": "self-attested human review; not cryptographic identity verification",
+  "review_sha256": "ff331ff78a9570959e8ec885ea9f7600078a31fe563878c09ca042f37df554b3"
+}

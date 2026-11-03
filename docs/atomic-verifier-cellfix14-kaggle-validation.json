@@ -1,0 +1,12 @@
+{
+  "notebook": "scripts/kaggle_atomic_verifier_cellfix14.ipynb",
+  "sha256": "ead61ef878aa0ff014131a904a4321c2ddc9df6741078bb11d9e1f3d054162e4",
+  "criteria_sha256": "f63345bb14de338432e57bad6644301bb43ef61e1fd6cf5e22376dcab2b19e5e",
+  "payload_sha256": "a27f87f3916032e2354d2e9e98fc74ee5c59dc260dccce350bc612f7fd59bd56",
+  "payload_inputs": 137,
+  "code_cells_compile": 7,
+  "payload_identical_to_colab": true,
+  "full39_and_validation_default_disabled": true,
+  "gpu_inference_tested": false,
+  "kaggle_browser_download_tested": false
+}

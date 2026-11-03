@@ -1,0 +1,74 @@
+{
+  "run_id": "20261026T150123Z-615bf4eb",
+  "kind": "read_only_bad_ledger_reproducer",
+  "findings": [
+    {
+      "example_id": "scope:entity:support",
+      "gold": "support",
+      "prediction": "not_enough_info",
+      "raw_assessment_accepted_on_replay": true,
+      "character_token_filter_accepts_stored_wrong_ledger": true,
+      "decoder_test_kind": "LMFE character-token fixture, not Qwen inference",
+      "member": "North gateway",
+      "truth": "unknown",
+      "quotes": [
+        "The South gateway's error rate increased."
+      ],
+      "finite_decision_evidence": null,
+      "member_scope_issue": null,
+      "focus_issue": null,
+      "preferred_absence_quotes": [],
+      "source_quote_contains_member": [
+        false
+      ],
+      "code_mechanism": "No atomic decisive witness because the multiword modifier guard also covers North gateway; unknown quoted clauses can fall back to the full-context member clause, leaving another entity quote or no quote accepted."
+    },
+    {
+      "example_id": "scope:entity:contradict",
+      "gold": "contradict",
+      "prediction": "not_enough_info",
+      "raw_assessment_accepted_on_replay": true,
+      "character_token_filter_accepts_stored_wrong_ledger": true,
+      "decoder_test_kind": "LMFE character-token fixture, not Qwen inference",
+      "member": "North gateway",
+      "truth": "unknown",
+      "quotes": [],
+      "finite_decision_evidence": null,
+      "member_scope_issue": null,
+      "focus_issue": null,
+      "preferred_absence_quotes": [],
+      "source_quote_contains_member": [],
+      "code_mechanism": "No atomic decisive witness because the multiword modifier guard also covers North gateway; unknown quoted clauses can fall back to the full-context member clause, leaving another entity quote or no quote accepted."
+    },
+    {
+      "example_id": "scope:condition:not_enough_info",
+      "gold": "not_enough_info",
+      "prediction": "contradict",
+      "raw_assessment_accepted_on_replay": true,
+      "character_token_filter_accepts_stored_wrong_ledger": true,
+      "decoder_test_kind": "LMFE character-token fixture, not Qwen inference",
+      "member": "no yield changes were measured for that group",
+      "truth": "false",
+      "quotes": [
+        "The low-temperature group contained three batches, but no yield changes were measured for that group."
+      ],
+      "finite_decision_evidence": null,
+      "member_scope_issue": null,
+      "focus_issue": null,
+      "preferred_absence_quotes": [
+        "The low-temperature group contained three batches, but no yield changes were measured for that group."
+      ],
+      "source_quote_contains_member": [
+        true
+      ],
+      "old_missing_regex_matches_owned_clauses": [
+        false
+      ],
+      "code_mechanism": "Direct absence recognizer finds no yield changes were measured, but focus only requires the quote for unknown. The false branch survives because the older absence regex lacks this construction; an absence clause is accepted as a false member."
+    }
+  ],
+  "new_model_inference": false,
+  "predictions_modified": false,
+  "source_modified": false,
+  "validation30_used": false
+}

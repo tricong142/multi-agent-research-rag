@@ -1,0 +1,178 @@
+--- cellfix11/04_factchecker/inference/assessment_decisions.py
++++ cellfix12/04_factchecker/inference/assessment_decisions.py
+@@ -145,7 +145,7 @@
+     words=part['scope']['entity'].split()
+     # shortcut: qualified populations need semantic membership review; do not
+     # force certainty from a substring such as certified inside non-certified.
+-    if len(words)>1 and not all(w[:1].isupper() for w in words):
++    if len(words)>1 and not all(w[:1].isupper() for w in words) and (part['quantifier']!='atomic' or re.search(r'(?<!\w)(?:non-|un)'+re.escape(part['scope']['entity']),context,re.I)):
+         return None
+     if not scope_supported(part,context):
+         return None
+@@ -174,6 +174,9 @@
+                 +re.escape(singular)+r'(?:\s+[A-Z0-9][\w-]*)?(?!\w)',clause)] if singular else []
+         for member in members:
+             truth = direct_truth(part,clause,member)
++            if truth is None and part['quantifier']=='atomic':
++                from .assessment_focus import atomic_property_truth
++                truth = atomic_property_truth(part,clause,member)
+             if truth:
+                 facts.append((truth,[member],clause))
+     if not facts:
+--- cellfix11/04_factchecker/inference/assessment_focus.py
++++ cellfix12/04_factchecker/inference/assessment_focus.py
+@@ -16,6 +16,19 @@
+     """An unknown record still cannot belong to an explicitly opposed scope."""
+     if scope_conflict(part, member):
+         return 'observation_scope_mismatch'
++    from .atomic_verifier import other_named_target, target_members
++    if part['quantifier']=='atomic' and target_members(part,context):
++        if any(other_named_target(part,q) for q in quotes):
++            return 'observation_target_mismatch'
++    unowned = [q for q in quotes if not any(contains(member,c) for c in clauses(q))]
++    if unowned:
++        # An explicit metric/relation absence may omit the event subject.
++        preferred = absence_quotes(part,context)
++        from .numeric_verifier import numeric_requirements
++        from .assessment_decisions import numeric_choices
++        numeric_sources = {r['source_quote'] for group in numeric_choices(part,context) for r,_ in group} if numeric_requirements(part['quote']) else set()
++        if not all(q in numeric_sources or any(a in q for a in preferred) for q in unowned):
++            return 'observation_evidence_unbound'
+     if not part['scope']['time'] and not part['scope']['condition']:
+         return None
+     # Exact local ownership also rejects a source span crossing two sentences.
+@@ -36,7 +49,9 @@
+     if re.search(r'(?<!\w)' + metric + r'(?!\w)\s+'
+                  r'(?:(?:was|were|is|are|has|have|had|been)\s+){0,3}' + _ABSENT + r'\b', clause, re.I):
+         return True
+-    if re.search(r'\bno\s+' + metric + r'\s+(?:results?|measurements?|data|changes?|evidence)\b', clause, re.I):
++    if re.search(r'\bno\s+' + metric + r'\s+(?:results?|measurements?|data|evidence)\b', clause, re.I) or (
++            re.search(r'\bno\s+' + metric + r'\s+changes?\b',clause,re.I)
++            and _MISSING.search(clause)):
+         return True
+     if causal_claim(part) and re.search(
+             r'\b(?:did not|does not|cannot|could not)\s+(?:establish|demonstrate|prove|confirm)\b[^.;]*'
+@@ -61,6 +76,8 @@
+     if not found:
+         return []
+     for c in local:
++        if causal_claim(part) and not _CAUSAL.search(c):
++            continue  # Co-occurring property changes do not establish cause.
+         if c not in found and metric_present(part,c) and not _MISSING.search(c):
+             if predicate_truth(part,c) is not None or numeric_requirements(c):
+                 return []
+@@ -90,6 +107,9 @@
+         issue = member_scope_issue(part,obs['member'],obs['quotes'],context)
+         if issue:
+             return issue
++        issue = observation_focus_issue(part,obs['member'],obs['quotes'],obs['truth'],context)
++        if issue:
++            return issue
+         if obs['truth']=='unknown' and preferred and not any(
+                 quote in cited for quote in preferred for cited in obs['quotes']):
+             return 'missing_evidence_quote_required'
+@@ -112,9 +132,10 @@
+         quote_choices = preferred if unknown and preferred else obs['quotes']['items'].get('enum',[])
+         groups = {}
+         for member in members:
+-            quotes = [q for q in quote_choices if member_scope_issue(part,member,[q],context) is None]
++            truth = obs['truth']['enum'][0]
++            quotes = [q for q in quote_choices if observation_focus_issue(part,member,[q],truth,context) is None]
+             required = max(obs['quotes'].get('minItems',0),int(unknown and bool(preferred)))
+-            if member_scope_issue(part,member,[],context):
++            if observation_focus_issue(part,member,[],truth,context):
+                 required = max(1,required)
+             if required and not quotes:
+                 continue
+@@ -143,3 +164,51 @@
+         props['observations']['minItems'] = 0
+         props['observations']['maxItems'] = 0
+     return schema
++
++
++
++def observation_focus_issue(part, member, quotes, truth, context):
++    issue = member_scope_issue(part,member,quotes,context)
++    if issue:
++        return issue
++    # An absence assertion is evidence about availability, not an entity name.
++    if _MISSING.search(member) and re.search(r'\b(?:was|were|is|are|has been|have been)\b',member,re.I):
++        return 'observation_member_is_not_entity'
++    if truth!='unknown' and absence_quotes(part,context):
++        return 'missing_evidence_is_not_false'
++    own = [c for q in quotes for c in clauses(q) if contains(member,c)]
++    relevant = [c for c in own if metric_present(part,c) or _direct_absence(part,c)] or own
++    if truth!='unknown' and relevant and all(_direct_absence(part,c) for c in relevant):
++        return 'missing_evidence_is_not_false'
++    return None
++
++
++def atomic_property_truth(part, text, member):
++    """Root subject + exact property direction only; no inferred coreference."""
++    from .assessment_decisions import scope_supported
++    from .numeric_verifier import numeric_requirements
++    if (numeric_requirements(part['quote']) or numeric_requirements(text)
++            or causal_claim(part) or not scope_supported(part,text)):
++        return None
++    if re.search(r'(?<!\w)(?:non-|un)'+re.escape(member),text,re.I):
++        return None
++    clean = text.strip(' .,;:')
++    for restriction in (part['scope']['time'],part['scope']['condition']):
++        if restriction:
++            clean = re.sub(r'^'+re.escape(restriction)+r'\s*,?\s*','',clean,flags=re.I)
++            clean = re.sub(r'\s*,?\s*'+re.escape(restriction)+r'$','',clean,flags=re.I)
++    subject = r'(?:the\s+)?'+re.escape(member)
++    metric = re.escape(part['scope']['metric'])
++    verb = r'(?:increased|decreased|reduced|rose|fell|gained|lost|remained unchanged|stayed the same)'
++    shape = subject+r"(?:'s\s+"+metric+r'\s+'+verb+r'|\s+'+verb+r'\s+(?:its\s+)?'+metric+r')'
++    if not re.fullmatch(shape,clean,re.I):
++        return None
++    # The claim must also be a direct predicate about this exact target/property.
++    claim = part['quote'].strip(' .,;:')
++    for restriction in (part['scope']['time'],part['scope']['condition']):
++        if restriction:
++            claim = re.sub(r'^'+re.escape(restriction)+r'\s*,?\s*','',claim,flags=re.I)
++            claim = re.sub(r'\s*,?\s*'+re.escape(restriction)+r'$','',claim,flags=re.I)
++    if not re.fullmatch(shape,claim,re.I):
++        return None
++    return predicate_truth(part,text)
+--- cellfix11/04_factchecker/inference/assessment_rules.py
++++ cellfix12/04_factchecker/inference/assessment_rules.py
+@@ -8,6 +8,7 @@
+ _MISSING = re.compile(
+     r'\b(?:not (?:reported|measured|evaluated|established|known|available)|'
+     r'unreported|unmeasured|unevaluated|unknown|'
++    r'no (?:\w+[ -]){0,5}changes?\s+(?:was|were|has been|have been)\s+(?:measured|reported|evaluated|recorded)|'
+     r'no (?:\w+[ -]){0,5}(?:results?|measurements?|data|evidence|baseline))\b', re.I)
+ _MONTHS = re.compile(r'\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\b')
+ _CONDITION = re.compile(r'\b(low|high|cold|hot|wet|dry)-([a-z]+)\b', re.I)
+--- cellfix11/04_factchecker/inference/atomic_decoding.py
++++ cellfix12/04_factchecker/inference/atomic_decoding.py
+@@ -612,3 +612,6 @@
+ _cellfix10_final_schema = assessment_schema
+ def assessment_schema(claim, part, context):
+     return constrain_focus(_cellfix10_final_schema(claim,part,context),part,context)
++
++
++DECODER.update(policy='atomic-schema-decoding-v5-cellfix12', unknown_binding='member_quote_joint', absence_truth='unknown_before_polarity')
+--- cellfix11/04_factchecker/inference/atomic_verifier.py
++++ cellfix12/04_factchecker/inference/atomic_verifier.py
+@@ -1193,3 +1193,18 @@
+     'alone is insufficient. Respect the current condition/time even for unknown '
+     'truth; another group cannot supply its member. If the context contains '
+     'only an opposed scope, retain uncertainty without inventing a member.\n')
++
++
++
++POLICY = 'atomic-verifier-constrained-v8-cellfix12'
++REPAIR_HINTS.update(
++    observation_evidence_unbound='Bind the quote to this member, not another target. Explicit metric/relation absence may omit the event subject only when locally unambiguous.',
++    observation_member_is_not_entity='A clause stating that measurements were not reported is not an entity. Select the in-scope entity/group; retain unknown for missing measurements.',
++    missing_evidence_is_not_false='Missing/unreported measurements are unknown, not true or false. A measured unchanged result or explicit denial is different and can be counterevidence.',
++    decisive_witness_missing_or_unknown='Use the explicit in-scope target/property result already present; unknown cannot discard a decisive witness.')
++ASSESS_PROMPT += (
++    '\nBINDING: Every quoted result belongs to its own member. Unknown does not '
++    'permit another named target quote or omission of a direct decisive result. '
++    'A sentence saying measurements were not made is evidence of uncertainty, '
++    'never a false outcome or an entity name. Measured no-change results and '
++    'explicit denials remain actual counterevidence.\n')

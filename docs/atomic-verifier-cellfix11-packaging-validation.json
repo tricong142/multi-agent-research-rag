@@ -1,0 +1,57 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix11",
+  "criteria_sha256": "e0d6bb116d32f4485e678e635c8e911577148212875c9c24f782b2ed2ad84789",
+  "payload_sha256": "16b52cfbf4d954658f795ec9ddfb73fd0ccb1aa211784c8d5f333d11dc136b0c",
+  "notebook_sha256": "9e301ac7ec2aef6aa6a2ca63fde31ab0c8bfccb33d809fc12a13706a85976a80",
+  "all_passed": true,
+  "regression_tests": 342,
+  "new_regression_tests": 28,
+  "token_filter_paths": 37,
+  "notebook_tests": 15,
+  "workflow_tests": 6,
+  "cell6_retry_tests": 10,
+  "cell7_retry_tests": 3,
+  "final_catalog_recheck_passed": true,
+  "candidate_input_files": 110,
+  "payload_files": 124,
+  "validate_only": {
+    "smoke": {
+      "freeze_valid": true,
+      "cases": 12,
+      "maximum_calls": 96
+    },
+    "probe": {
+      "freeze_valid": true,
+      "cases": 18,
+      "maximum_calls": 36
+    },
+    "full39": {
+      "freeze_valid": true,
+      "cases": 39,
+      "maximum_calls": 312
+    },
+    "validation30": {
+      "freeze_valid": true,
+      "cases": 30,
+      "maximum_calls": 240,
+      "prerequisites_required_for_inference": true
+    }
+  },
+  "logs_sha256": {
+    "regression": "341f6a4de72c2818468af7848f4087884e260ab3b83bf80e39cc3dca9b43ecb4",
+    "packaging": "973554d1f39aaf9bd0ef09046d06bd779ef0c5520827e3edfb9f367eb2f2f524",
+    "workflow": "3107bfda413b9856d8c79fc7f378894e10dc4f0014c203eff2e112f916d96d11",
+    "cell7": "986a8c0d2ea90abdf4f1fa18d42eb4c7bffe34b0b6d92a80df7526aa5065019d",
+    "final-catalog": "815f19237745c1c6f98d58ba5e355a2f8dda951809ee1395959815f9c0411241"
+  },
+  "released_bytes_equal_tested_draft": true,
+  "parent_39_correct_false_support_0_baseline_preserved": true,
+  "parent_semantic_review_artifacts_unchanged": true,
+  "all_existing_regression_fixture_bytes_unchanged": true,
+  "model_revision_budget_gate_unchanged": true,
+  "validation30_all_original_files_unchanged": true,
+  "new_model_inference_completed": false,
+  "full39_quality_measured": false,
+  "independent_validation_completed": false,
+  "promoted_to_serving": false
+}

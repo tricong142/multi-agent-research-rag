@@ -1,0 +1,21 @@
+{
+  "regression_tests": 11,
+  "passed": true,
+  "exact_compatibility_worker_validate_only": {
+    "freeze_valid": true,
+    "cases": 30,
+    "maximum_calls": 240,
+    "prerequisites_required_for_inference": true
+  },
+  "original_release_files_unchanged": 21,
+  "changed_code_cells": [
+    7
+  ],
+  "original_payload_unchanged": true,
+  "original_notebook_sha256": "2a8ee31ff7fe7558f0ad63caa4a9ba60789d189214fdd438afe75b4a47f1ee6a",
+  "fixed_notebook_sha256": "2759c942a4bbf416446fde35e41c69de34411a4296ae6a60b2b05fe6aeb82267",
+  "replacement_cell_sha256": "927a2871d116afec1f2508cceca7781ef070ae1194dec27c79b0a5ac65a21328",
+  "compatibility_worker_sha256": "5b250930ea9ee249ef71c5fae0135628cc664b174244ce88d45ae894bbef4eb8",
+  "real_received_artifact_admission_verified": true,
+  "validation30_inference_started": false
+}

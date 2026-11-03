@@ -33,7 +33,6 @@ từ Bước 1 - Retrieval Agent, áp dụng y hệt cho Summarizer):
 """
 
 import json
-import re
 from dataclasses import dataclass, field
 from typing import Callable
 
@@ -41,10 +40,12 @@ if __package__:
     from . import config
     from .generator.prompts import GENERATOR_SYSTEM_PROMPT, build_generator_user_prompt
     from .critic.prompts import CRITIC_SYSTEM_PROMPT, build_critic_user_prompt
+    from .claim_contract import claim_contract_issues, REWRITE_INSTRUCTION
 else:  # direct execution from this directory
     import config
     from generator.prompts import GENERATOR_SYSTEM_PROMPT, build_generator_user_prompt
     from critic.prompts import CRITIC_SYSTEM_PROMPT, build_critic_user_prompt
+    from claim_contract import claim_contract_issues, REWRITE_INSTRUCTION
 
 
 def output_schema_issue(value, role: str) -> str | None:
@@ -127,7 +128,8 @@ class SummarizerNode:
         retry_instruction = (
             "Answer the question directly in complete factual sentences, naming the subject and predicate. "
             "Do not return a bare number or a pointer to another section as the answer. "
-            "If the requested fact is absent, state what is missing. Copy evidence text without source ID prefixes."
+            "If the requested fact is absent, state what is missing. Copy evidence text without source ID prefixes. "
+            + REWRITE_INSTRUCTION
         )
         current_context = context
 
@@ -138,6 +140,7 @@ class SummarizerNode:
             evidence_spans = gen_output["evidence_spans"]
 
             # --- Bước 2: Critic độc lập phê bình ---
+            structure_issues = claim_contract_issues(answer)
             if gen_output.get("validation_issue"):
                 critic_output = {"is_supported": False, "reason": gen_output["validation_issue"],
                                  "action": "rewrite"}
@@ -146,10 +149,12 @@ class SummarizerNode:
             is_supported = critic_output["is_supported"] is True
             reason = critic_output["reason"]
             action = critic_output.get("action", "")
-            if re.fullmatch(r"[\d\s.,%+\-]+", str(answer).strip()):
+            if structure_issues and not gen_output.get("validation_issue"):
                 is_supported = False
-                reason = "Restate the quantity as a complete factual sentence identifying its subject."
-                action = "rewrite"
+                # Missing source information must yield to retrieval, not invented rewrites.
+                if action != "request_more_context":
+                    reason = "Incomplete claim structure: " + ", ".join(i["code"] for i in structure_issues)
+                    action = "rewrite"
 
             trials.append(SummarizerTrial(
                 answer=answer,
@@ -207,7 +212,8 @@ class SummarizerNode:
         if action == "rewrite":
             return (
                 f"Câu trả lời trước bị đánh giá chưa đạt: {critic_reason}. "
-                f"Hãy sinh lại, bám sát evidence chặt chẽ hơn, không suy diễn thêm."
+                f"Hãy sinh lại, bám sát evidence chặt chẽ hơn, không suy diễn thêm. "
+                + REWRITE_INSTRUCTION
             )
         elif action == "request_more_context":
             return (

@@ -1,0 +1,225 @@
+{
+  "criteria_sha256": "c025247428698d892e549fb12ad22e19561020b034a2a2276c9dfcaf0cbdc966",
+  "predictions_sha256": "4c44ecdb7863ca0cd76be2450233840756872a6205cd5816896d6c1dcdf29dc2",
+  "reviewer": "Trí Công",
+  "reviewer_kind": "human",
+  "review_completed": true,
+  "cases": [
+    {
+      "example_id": "decompose:001",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "C1: Tách đúng hai factual predicates độc lập gồm uses 25% less memory và retains 94% accuracy; mệnh đề sau kế thừa trọn vẹn chủ thể Model Juniper mà không biến thành fragment. C2: Giữ trọn số liệu 25% và 94%, đúng quan hệ uses less và retains, đơn vị % đầy đủ. C3: Cả hai part đều là atomic predicate, không tự gán quantifier ALL/SOME/NONE. C4: Chủ thể Model Juniper nhất quán; hai metric memory và accuracy liên kết chính xác với từng số liệu tương ứng, không hoán đổi. C5: Claim không có ràng buộc time hay condition; cả hai trường để rỗng hợp lý."
+    },
+    {
+      "example_id": "decompose:002",
+      "claim": "Model Juniper retains 94% accuracy.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "C1: Một factual predicate hoàn chỉnh chứa đầy đủ chủ ngữ Model Juniper, động từ retains và tân ngữ 94% accuracy. C2: Giữ nguyên quan hệ retains, số liệu 94% và đơn vị %. C3: Lượng từ atomic chuẩn xác cho một mô hình đơn nhất, không tạo population. C4: Chủ thể là Model Juniper, metric là accuracy, liên kết chính xác. C5: Không có phạm vi thời gian hoặc điều kiện phát sinh, time và condition rỗng đúng thực tế."
+    },
+    {
+      "example_id": "decompose:003",
+      "claim": "The study used human labels.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "C1: Một factual predicate trọn vẹn The study used human labels, giữ cả hành động used và đối tượng human labels. C2: Không thêm bớt số liệu hay quan hệ; bảo toàn nguyên vẹn nội dung claim. C3: Lượng từ atomic xác đáng cho thực thể đơn nhất study. C4: Chủ thể study; metric dạng predicate đầy đủ used human labels vì claim không nêu một scalar metric danh nghĩa. C5: Không tự gán thêm restriction thời gian hay điều kiện."
+    },
+    {
+      "example_id": "decompose:004",
+      "claim": "The new index caused the latency improvement.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "C1: Giữ nguyên quan hệ nhân quả factual caused the latency improvement trong một part hoàn chỉnh, không bị phân mảnh. C2: Quan hệ caused nằm trọn vẹn trong quote, không bị giảm cấp thành quan hệ đồng xuất hiện (correlation). C3: Lượng từ atomic, không tạo giả định population. C4: Entity new index bảo toàn modifier new; metric latency liên kết chuẩn xác với cải thiện độ trễ. C5: Không tự thêm điều kiện hoặc mốc thời gian ngoài văn bản."
+    },
+    {
+      "example_id": "decompose:005",
+      "claim": "All tasks improved after compression.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "C1: Factual predicate improved hoàn chỉnh trên tập hợp population tasks. C2: Giữ hướng improved và mốc thời gian after compression, không tự suy đoán thêm metric chưa có như accuracy. C3: Từ khóa All ánh xạ chính xác thành quantifier all trên tập tasks. C4: Entity tasks; metric giữ nguyên predicate improved do source cung cấp. C5: Mốc after compression được đặt chuẩn xác vào trường time và nằm trong quote."
+    },
+    {
+      "example_id": "decompose:006",
+      "claim": "The report evaluated four models on two datasets.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "C1: Một sự kiện hoàn chỉnh evaluated four models on two datasets, không tách các số đếm thành các fragment rời rạc. C2: Nhận diện đầy đủ cả hai yêu cầu định lượng: 4 models và 2 datasets, giữ đúng đối tượng và đơn vị riêng. C3: Lượng từ atomic; các số từ four/two là số lượng đối tượng (cardinality), không phải lượng từ phổ quát. C4: Entity report; metric evaluated four models giữ đúng quan hệ đánh giá; condition on two datasets. C5: on two datasets phân loại đúng vào condition môi trường thực nghiệm, không bị nhầm sang time."
+    },
+    {
+      "example_id": "decompose:007",
+      "claim": "Training took 12 seconds.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "C1: Mệnh đề factual hoàn chỉnh Training took 12 seconds, không tách nhỏ. C2: Giữ trọn số 12, đơn vị seconds và động từ took. C3: Lượng từ atomic chuẩn, không gán population. C4: Entity Training; metric took 12 seconds biểu thị đầy đủ độ đo thời lượng huấn luyện. C5: 12 seconds là khoảng thời gian đo lường (duration metric) chứ không phải mốc thời gian (timestamp); trường time để rỗng là chuẩn xác."
+    },
+    {
+      "example_id": "decompose:008",
+      "claim": "The sample contained 240 documents.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "C1: Factual predicate hoàn chỉnh diễn đạt dung lượng mẫu dữ liệu. C2: Bảo toàn số lượng 240, đơn vị documents, động từ contained. C3: Lượng từ atomic; 240 là kích thước tập mẫu, không phải lượng từ bao hàm. C4: Entity sample; metric contained 240 documents thể hiện trọn vẹn ngữ nghĩa. C5: Không tự thêm điều kiện hay thời gian giả định."
+    },
+    {
+      "example_id": "decompose:009",
+      "claim": "On the tested dataset, the method improved recall.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "C1: Mệnh đề factual hoàn chỉnh với chủ thể method và thuộc tính recall, bảo toàn phạm vi mở đầu. C2: Giữ đúng hướng improved và chỉ số recall. C3: Lượng từ atomic; không tự khái quát hóa kết quả sang các tập dữ liệu khác ngoài tập được thử nghiệm. C4: Entity method, metric recall liên kết chuẩn xác. C5: Cụm On the tested dataset được gán đúng vào condition; không có mốc thời gian."
+    },
+    {
+      "example_id": "decompose:010",
+      "claim": "Every validation shard improved recall after the revision.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "C1: Factual predicate hoàn chỉnh cho từng validation shard. C2: Giữ nguyên hướng improved, chỉ số recall, modifier validation và mốc after the revision. C3: Every ánh xạ chuẩn xác thành quantifier all trên tập validation shard. C4: Entity giữ trọn modifier validation shard; metric recall đúng thuộc tính. C5: after the revision được gán chuẩn xác vào trường time của predicate."
+    },
+    {
+      "example_id": "decompose:011",
+      "claim": "At least one audited cache node reduced response time after the patch.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "C1: Predicate đầy đủ cho thực thể cache node được kiểm toán. C2: Giữ trọn at least one, reduced, response time, modifier audited và mốc after the patch. C3: Cụm từ At least one ánh xạ chuẩn xác thành quantifier some (tồn tại) trên tập audited cache node. C4: Entity audited cache node giữ modifier quan trọng audited; metric response time đầy đủ. C5: after the patch đặt vào time chuẩn xác; không thêm điều kiện khác."
+    },
+    {
+      "example_id": "decompose:012",
+      "claim": "None of the monitored pumps leaked during the overnight test.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "C1: Factual predicate hoàn chỉnh với lượng từ phủ định toàn thể. C2: Giữ nguyên modifier monitored, sự cố leaked và khoảng thời gian during the overnight test. C3: None of ánh xạ chuẩn xác thành quantifier none trên population monitored pumps. C4: Entity monitored pumps giữ đủ modifier; metric leaked là predicate khẳng định cơ sở trước khi áp quantifier none. C5: Khoảng thời gian during the overnight test đặt đúng vào trường time."
+    },
+    {
+      "example_id": "decompose:013",
+      "claim": "The North gateway reduced its error rate after calibration.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "C1: Factual predicate hoàn chỉnh diễn đạt sự sụt giảm tỷ lệ lỗi của trạm North gateway. C2: Giữ đúng định danh North, hướng giảm reduced, chỉ số error rate và mốc after calibration. C3: Lượng từ atomic cho một thực thể đơn nhất North gateway. C4: Entity North gateway không bị rút gọn; metric error rate sạch, không dính đại từ its hay động từ reduced. C5: Mốc after calibration được đưa chuẩn xác vào trường time."
+    },
+    {
+      "example_id": "decompose:014",
+      "claim": "Every weekly trial conducted in May improved throughput.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "C1: Mệnh đề hoàn chỉnh Every weekly trial conducted in May improved throughput, không phân tách mệnh đề phụ thành fragment. C2: Giữ nguyên conducted in May trong quote, hướng improved và thuộc tính throughput. C3: Every ánh xạ chuẩn xác thành quantifier all trên tập weekly trial có điều kiện lọc. C4: Entity weekly trial; metric throughput đúng thuộc tính định lượng. C5: in May được gán vào condition để lọc population các trial tiến hành trong tháng 5 (tránh suy đoán nhầm time là sự cải thiện diễn ra trong tháng 5)."
+    },
+    {
+      "example_id": "decompose:015",
+      "claim": "The patch reduced median request latency.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "C1: Factual predicate hoàn chỉnh diễn đạt sự giảm độ trễ yêu cầu trung vị. C2: Giữ đầy đủ median, request, latency và quan hệ reduced. C3: Lượng từ atomic cho đối tượng bản vá cụ thể. C4: Entity patch; metric giữ nguyên cụm median request latency, không bị rút gọn thành latency. C5: Không có restriction thời gian hoặc điều kiện phát sinh, để rỗng đúng chuẩn."
+    },
+    {
+      "example_id": "decompose:016",
+      "claim": "The configuration change increased precision.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "C1: Factual predicate hoàn chỉnh diễn đạt sự tăng độ chính xác do thay đổi cấu hình. C2: Giữ nguyên quan hệ increased và thuộc tính precision. C3: Lượng từ atomic, không thêm bớt lượng từ. C4: Entity configuration change giữ trọn vẹn chủ thể tác động; metric precision chuẩn xác. C5: Không có điều kiện hay phạm vi thời gian, trường rỗng hợp lệ."
+    },
+    {
+      "example_id": "decompose:017",
+      "claim": "After tuning, the extractor decreased memory use and increased token recall.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "C1: Tách chuẩn xác hai predicate đối lập decreased memory use và increased token recall; vế thứ hai kế thừa trọn vẹn chủ ngữ extractor. C2: Giữ đúng hai chiều biến thiên ngược nhau (decreased/increased) cùng hai chỉ số tương ứng (memory use/token recall). C3: Cả hai part đều là atomic predicate, không gán quantifier tập hợp. C4: Cùng entity extractor; hai metric memory use và token recall được phân định chính xác theo từng part. C5: Mốc After tuning là trạng từ mở đầu câu, kế thừa thời gian cho cả hai part một cách chuẩn xác."
+    },
+    {
+      "example_id": "decompose:018",
+      "claim": "Every batch in the low-temperature group gained yield after the update.",
+      "judgments": {
+        "factual_predicates_not_fragments": true,
+        "all_requirements_preserved": true,
+        "quantifier_preserved": true,
+        "entity_metric_binding_correct": true,
+        "time_condition_scope_correct": true
+      },
+      "notes": "C1: Factual predicate hoàn chỉnh diễn đạt sự gia tăng sản lượng của các mẻ thuộc nhóm nhiệt độ thấp. C2: Giữ đầy đủ động từ gained, chỉ số yield, điều kiện nhóm low-temperature group và mốc thời gian after the update. C3: Every ánh xạ chuẩn xác thành quantifier all trên tập batch thuộc nhóm chỉ định. C4: Entity batch; metric yield độc lập, không lẫn động từ gained. C5: Phân định rành mạch giữa after the update là time và in the low-temperature group là condition, không bị hoán đổi."
+    }
+  ]
+}

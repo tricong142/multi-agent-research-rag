@@ -1,0 +1,181 @@
+{
+  "run_id": "20261027T092904Z-e02b51ab",
+  "diagnostic_zip_sha256": "7e35ba0035fff58838da7f608182224bbd50fd05d4f473a8c32a1afff9256dd9",
+  "output_files_hash_verified": 116,
+  "payload_matches_cellfix12_release": true,
+  "review_sha256": "dc9d542f7f7527b86a1f3781419b1d1b7b78834e6c8831a11c157b311f358e91",
+  "criteria_sha256": "e147868fc5826a1f10e5a5132e1ea0fb0517e16b66b229c2ad163e71f64146f7",
+  "predictions_sha256": "42deb4c53f4a5e044ae98f105efb463d95977654fd6ea6ae2bc008f18d87ff3b",
+  "review_bound_to_current_run_predictions": true,
+  "reviewer": "Trí Công",
+  "reviewer_kind": "human",
+  "review_completed": true,
+  "case_coverage": 39,
+  "judgments_total": 195,
+  "judgments_true": 189,
+  "judgments_false": 6,
+  "missing_notes": 0,
+  "failed_cases": [
+    {
+      "example_id": "contract:irrelevant",
+      "failed_judgments": {
+        "explanation_follows_evidence": false
+      },
+      "notes": "NEI và missing target đúng, nhưng member=No model accuracy is reported là mệnh đề về việc báo cáo số liệu, không phải entity Model Juniper. Quotes rỗng; observation explanation dựng trên pseudo-member. AI đánh dấu explanation_follows_evidence chưa đạt, không dùng nhãn NEI đúng để bỏ lỗi identity."
+    },
+    {
+      "example_id": "scope:none:not_enough_info",
+      "failed_judgments": {
+        "explanation_follows_evidence": false
+      },
+      "notes": "Nhãn NEI đúng, nhưng member=Silver's leak status was not là fragment cắt trước reported, không phải pump Silver. Renderer gọi fragment này là Member. Quote có đúng absence của Silver nhưng identity/observation explanation chưa đạt; không được coi trạng thái chưa báo cáo là false outcome."
+    },
+    {
+      "example_id": "scope:conjunction:support",
+      "failed_judgments": {
+        "explanation_follows_evidence": false
+      },
+      "notes": "Frozen gold NEI theo strict identity: workload không xác định extractor, không phải support dù ID lịch sử chứa support. Cả hai part đã được assess nhưng member=5.4 to 4.6 gigabytes và 4.6 gigabytes là quantities; quantity memory còn bị gọi là member của token recall. Missing identity đúng, observation explanation sai loại đối tượng."
+    },
+    {
+      "example_id": "scope:conjunction:contradict",
+      "failed_judgments": {
+        "explanation_follows_evidence": false
+      },
+      "notes": "Frozen gold NEI vì context thiếu extractor. Hai part NEI đúng nhưng member=For the same workload, tuning reduced memory use và 4.6 gigabytes là clause/quantity thay entity. Explanation dựng trên pseudo-member; không suy contradict cho extractor từ workload chưa bind."
+    },
+    {
+      "example_id": "scope:conjunction:not_enough_info",
+      "failed_judgments": {
+        "explanation_follows_evidence": false
+      },
+      "notes": "Cả hai part NEI vì thiếu extractor; token recall cũng chưa evaluated. Member=the extraction workload và 4.6 gigabytes không phải extractor; memory quantity bị gọi là member của token recall. Missing ưu tiên identity là đúng; observation explanation chưa đạt."
+    },
+    {
+      "example_id": "scope:condition:not_enough_info",
+      "failed_judgments": {
+        "explanation_follows_evidence": false
+      },
+      "notes": "Đã sửa nhãn về NEI, quote chỉ low-temperature absence và truth=unknown, không mượn high-temperature. Tuy nhiên member=no yield changes were là fragment cắt trước measured, không phải batch/group. Renderer gọi fragment là member; explanation_follows_evidence chưa đạt."
+    }
+  ],
+  "actual_observations_for_failed_cases": {
+    "contract:irrelevant": [
+      {
+        "member": "No model accuracy is reported",
+        "truth": "unknown",
+        "explanation": "Member 'No model accuracy is reported' has unresolved evidence for the positive predicate 'accuracy', before applying ATOMIC."
+      }
+    ],
+    "scope:none:not_enough_info": [
+      {
+        "member": "Silver's leak status was not",
+        "truth": "unknown",
+        "explanation": "Member \"Silver's leak status was not\" has unresolved evidence for the positive predicate 'leaked', before applying NONE."
+      }
+    ],
+    "scope:conjunction:support": [
+      {
+        "member": "5.4 to 4.6 gigabytes",
+        "truth": "unknown",
+        "explanation": "Member '5.4 to 4.6 gigabytes' has unresolved evidence for the positive predicate 'memory use', before applying ATOMIC."
+      },
+      {
+        "member": "4.6 gigabytes",
+        "truth": "unknown",
+        "explanation": "Member '4.6 gigabytes' has unresolved evidence for the positive predicate 'token recall', before applying ATOMIC."
+      }
+    ],
+    "scope:conjunction:contradict": [
+      {
+        "member": "For the same workload, tuning reduced memory use",
+        "truth": "unknown",
+        "explanation": "Member 'For the same workload, tuning reduced memory use' has unresolved evidence for the positive predicate 'memory use', before applying ATOMIC."
+      },
+      {
+        "member": "4.6 gigabytes",
+        "truth": "unknown",
+        "explanation": "Member '4.6 gigabytes' has unresolved evidence for the positive predicate 'token recall', before applying ATOMIC."
+      }
+    ],
+    "scope:conjunction:not_enough_info": [
+      {
+        "member": "the extraction workload",
+        "truth": "unknown",
+        "explanation": "Member 'the extraction workload' has unresolved evidence for the positive predicate 'memory use', before applying ATOMIC."
+      },
+      {
+        "member": "4.6 gigabytes",
+        "truth": "unknown",
+        "explanation": "Member '4.6 gigabytes' has unresolved evidence for the positive predicate 'token recall', before applying ATOMIC."
+      }
+    ],
+    "scope:condition:not_enough_info": [
+      {
+        "member": "no yield changes were",
+        "truth": "unknown",
+        "explanation": "Member 'no yield changes were' has unresolved evidence for the positive predicate 'yield', before applying ALL."
+      }
+    ]
+  },
+  "full39_automated_gate": {
+    "n": 39,
+    "correct_labels": 39,
+    "false_support": 0,
+    "runtime_failed_rows": 0,
+    "gold_support_rejected": 0,
+    "gold_support_count": 12,
+    "backend_calls": 85,
+    "checks": {
+      "all_cases_present": true,
+      "all_labels_correct": true,
+      "no_false_support": true,
+      "no_runtime_failures": true,
+      "within_call_budget": true,
+      "each_group_complete_and_correct": true,
+      "within_measured_token_budget": true,
+      "structured_decoding_trace_complete": true,
+      "cooperative_deadline_trace_complete": true
+    },
+    "automated_gate_pass": true,
+    "dataset_groups": {
+      "original_contracts": {
+        "n": 12,
+        "correct": 12,
+        "false_support": 0,
+        "failed": 0
+      },
+      "scope_regression": {
+        "n": 27,
+        "correct": 27,
+        "false_support": 0,
+        "failed": 0
+      }
+    },
+    "stop_reasons": {
+      "completed": 39
+    },
+    "confusion": [
+      {
+        "gold": "contradict",
+        "prediction": "contradict",
+        "n": 12
+      },
+      {
+        "gold": "not_enough_info",
+        "prediction": "not_enough_info",
+        "n": 15
+      },
+      {
+        "gold": "support",
+        "prediction": "support",
+        "n": 12
+      }
+    ],
+    "generated_tokens": 9361,
+    "prompt_tokens": 113156
+  },
+  "validation30_inference_present": false,
+  "admission_diagnosis": "Review completed with six failed semantic judgments; rejection is expected, not a cell7 runtime bug.",
+  "release_or_predictions_modified": false
+}

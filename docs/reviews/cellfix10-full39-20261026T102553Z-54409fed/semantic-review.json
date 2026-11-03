@@ -1,0 +1,477 @@
+{
+  "criteria_sha256": "2edd14d0e7fb728b3ba6eb99923ade128573ed2938f55bfeb2d1a0e4a06f8cda",
+  "predictions_sha256": "973ead8c8463fd8d107a551ae46eac1a70f06b59290ceac826b5b5561b65d52b",
+  "reviewer": "Trí Công",
+  "reviewer_kind": "human",
+  "review_completed": true,
+  "cases": [
+    {
+      "example_id": "contract:partial_accuracy",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Memory 25% có numeric proof; accuracy chưa báo cáo, AND thành NEI đúng. Missing ghi accuracy nhưng nên chỉ rõ yêu cầu 94%; không coi memory hỗ trợ accuracy."
+    },
+    {
+      "example_id": "contract:partial_memory",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Accuracy 94% có proof; memory chưa có, AND thành NEI đúng. Missing nên nêu rõ mức giảm 25% so baseline thay vì chỉ tên memory."
+    },
+    {
+      "example_id": "contract:both_supported",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Cả 25% less memory và 94% accuracy đúng Model Juniper, có source/requirement/check riêng; support đúng."
+    },
+    {
+      "example_id": "contract:accuracy_conflict",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Memory 25% true, accuracy 81% phủ định 94% false; aggregate contradict đúng. Không dùng 94% bị phủ định làm observed value."
+    },
+    {
+      "example_id": "contract:irrelevant",
+      "claim": "Model Juniper retains 94% accuracy.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "NEI và missing target đúng. Observation member lại là đoạn The benchmark was conducted on a Tuesday. No, không phải Model Juniper hay entity có nghĩa; scope_match=matched chưa biểu đạt target thiếu. Cần review chất lượng identity/observation riêng."
+    },
+    {
+      "example_id": "contract:negation",
+      "claim": "The study used human labels.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Study did not use human labels là same-scope false; contradict đúng, không nhầm thiếu evidence."
+    },
+    {
+      "example_id": "contract:causality_missing",
+      "claim": "The new index caused the latency improvement.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": false
+      },
+      "notes": "NEI đúng: index và latency cùng deployment chưa chứng minh caused. Missing chỉ ghi new index/latency, bỏ quan hệ nhân quả cần chứng minh; chưa đạt độ cụ thể của missing-information."
+    },
+    {
+      "example_id": "contract:scope",
+      "claim": "All tasks improved after compression.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Fourth task less accurate là một false witness, refute ALL đúng; không cần đủ roster và không mượn polarity của ba task improved."
+    },
+    {
+      "example_id": "contract:cross_sentence",
+      "claim": "The report evaluated four models on two datasets.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "q0 kiểm 4 models, q1 kiểm 2 datasets từ hai câu, cùng report/event. Cả hai source_quote nguyên văn; q1 được bổ sung citation theo contract. Support có đủ hai requirement."
+    },
+    {
+      "example_id": "contract:wrong_units",
+      "claim": "Training took 12 seconds.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Observed 12 hours, explicitly not 12 seconds. Numeric giữ đúng claimed/observed units; contradict đúng, không tự đổi đơn vị."
+    },
+    {
+      "example_id": "contract:atomic_support",
+      "claim": "The sample contained 240 documents.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Contained exactly 240 documents có đúng entity/sample, quantity/object và numeric check; support đúng."
+    },
+    {
+      "example_id": "contract:bounded_scope",
+      "claim": "On the tested dataset, the method improved recall.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Quote riêng tested dataset chứng minh recall improved; không đòi dataset khác; support đúng scope."
+    },
+    {
+      "example_id": "scope:universal:support",
+      "claim": "Every validation shard improved recall after the revision.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Closed three-shard population và each improved recall after revision có trong full quote, coverage=true; support ALL đúng."
+    },
+    {
+      "example_id": "scope:universal:contradict",
+      "claim": "Every validation shard improved recall after the revision.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "The third worsened recalling là false member trong validation population sau revision; contradict ALL đúng."
+    },
+    {
+      "example_id": "scope:universal:not_enough_info",
+      "claim": "Every validation shard improved recall after the revision.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Hai shard positive không phủ hết population; complete set/results others chưa biết nên NEI đúng. Ledger chỉ giữ unknown collective, chưa lưu hai fact positive; missing remaining population đúng."
+    },
+    {
+      "example_id": "scope:existential:support",
+      "claim": "At least one audited cache node reduced response time after the patch.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Birch faster là một true member sau patch; support SOME đúng. Không cần complete=true và không mượn outcome Elm/Fir."
+    },
+    {
+      "example_id": "scope:existential:contradict",
+      "claim": "At least one audited cache node reduced response time after the patch.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Full audited roster Birch/Elm/Fir có outcomes increased/increased/unchanged, đều false cho reduced response time; complete=true nên contradict SOME đúng theo binding đã được người dùng chốt. population_binding_basis=unique_complete_selection_set được giữ."
+    },
+    {
+      "example_id": "scope:existential:not_enough_info",
+      "claim": "At least one audited cache node reduced response time after the patch.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Elm tăng response time chỉ là một false member; other node results chưa báo cáo, chưa refute SOME. NEI và missing remaining population đúng."
+    },
+    {
+      "example_id": "scope:none:support",
+      "claim": "None of the monitored pumps leaked during the overnight test.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Whole monitored population no leaks, positive leaked=false trước NONE, complete=true; support đúng. Renderer không còn prose đảo thành có leak như cf9."
+    },
+    {
+      "example_id": "scope:none:contradict",
+      "claim": "None of the monitored pumps leaked during the overnight test.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Silver leaked=true trước NONE, cùng overnight test; một true witness refute NONE đúng."
+    },
+    {
+      "example_id": "scope:none:not_enough_info",
+      "claim": "None of the monitored pumps leaked during the overnight test.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Silver leak status chưa báo cáo, Blue/Green no leak không đủ để support NONE. NEI đúng; missing nên gọi rõ Silver để cụ thể hơn."
+    },
+    {
+      "example_id": "scope:entity:support",
+      "claim": "The North gateway reduced its error rate after calibration.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Quote North error rate decreased after calibration, không còn South-only citation; support đúng."
+    },
+    {
+      "example_id": "scope:entity:contradict",
+      "claim": "The North gateway reduced its error rate after calibration.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "North error rate increased là same-scope false cho reduced; contradict đúng, không dùng South decreased."
+    },
+    {
+      "example_id": "scope:entity:not_enough_info",
+      "claim": "The North gateway reduced its error rate after calibration.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "North calibration results không được ghi, không dùng South decreased để support. NEI đúng và missing giữ North/error rate/after calibration."
+    },
+    {
+      "example_id": "scope:time:support",
+      "claim": "Every weekly trial conducted in May improved throughput.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Exactly four weekly trials conducted in May và each improved có coverage đầy đủ; bỏ April. May lọc population trial, không tự gán thời gian improvement."
+    },
+    {
+      "example_id": "scope:time:contradict",
+      "claim": "Every weekly trial conducted in May improved throughput.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "One reduced throughput thuộc bốn May trials là false witness, refute ALL đúng."
+    },
+    {
+      "example_id": "scope:time:not_enough_info",
+      "claim": "Every weekly trial conducted in May improved throughput.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "April improved không chứng minh May; May không có throughput results. NEI đúng; missing giữ in May, có thể nêu rõ không có kết quả May thay vì generic remaining population."
+    },
+    {
+      "example_id": "scope:direction:support",
+      "claim": "The patch reduced median request latency.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "42 -> 31 milliseconds cùng requests/conditions, ordered change giảm -11; support đúng."
+    },
+    {
+      "example_id": "scope:direction:contradict",
+      "claim": "The patch reduced median request latency.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "42 -> 55 milliseconds tăng +13, refute reduced; contradict đúng."
+    },
+    {
+      "example_id": "scope:direction:not_enough_info",
+      "claim": "The patch reduced median request latency.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "31 milliseconds after-only không chứng minh giảm; missing baseline/comparison đúng. Đã hoàn tất, không còn invented author/year hoặc repair exhaustion."
+    },
+    {
+      "example_id": "scope:metric:support",
+      "claim": "The configuration change increased precision.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Precision 0.81 -> 0.86 được check đúng metric/order, support đúng."
+    },
+    {
+      "example_id": "scope:metric:contradict",
+      "claim": "The configuration change increased precision.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Precision 0.81 -> 0.74 false cho increased; không dùng recall 0.64 -> 0.79, contradict đúng."
+    },
+    {
+      "example_id": "scope:metric:not_enough_info",
+      "claim": "The configuration change increased precision.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": false,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "NEI/missing precision chưa đo đúng, nhưng quote duy nhất là Recall rose..., không trích Precision was not measured. Citation này không chứng minh lý do NEI về precision; quote_relevant chưa đạt."
+    },
+    {
+      "example_id": "scope:conjunction:support",
+      "claim": "After tuning, the extractor decreased memory use and increased token recall.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "ID lịch sử support nhưng gold hiện tại NEI theo strict-identity-v1: context thiếu extractor. Hai part đều NEI và missing identity đúng. Member là 5.4 to 4.6 gigabytes / 4.6 gigabytes, là measurement thay vì entity; observation prose cần review."
+    },
+    {
+      "example_id": "scope:conjunction:contradict",
+      "claim": "After tuning, the extractor decreased memory use and increased token recall.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "ID lịch sử contradict nhưng gold NEI vì workload chưa xác định extractor. Không bỏ qua binding để suy contradict từ recall 0.72 -> 0.68. Missing identity đúng; member workload/4.6 gigabytes chưa đúng entity."
+    },
+    {
+      "example_id": "scope:conjunction:not_enough_info",
+      "claim": "After tuning, the extractor decreased memory use and increased token recall.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Đã assess đủ hai part, đều NEI vì extractor chưa bind; memory part không còn nhầm missing token recall. Member workload/4.6 gigabytes vẫn là identity chất lượng thấp. Token recall cũng chưa evaluated, renderer mới nêu missing identity trước."
+    },
+    {
+      "example_id": "scope:condition:support",
+      "claim": "Every batch in the low-temperature group gained yield after the update.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Đúng three batches low-temperature và each gained yield after update; không mượn high-temperature. Coverage và support ALL đúng."
+    },
+    {
+      "example_id": "scope:condition:contradict",
+      "claim": "Every batch in the low-temperature group gained yield after the update.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "One lost yield thuộc low-temperature sau update là false witness refute ALL; đúng scope."
+    },
+    {
+      "example_id": "scope:condition:not_enough_info",
+      "claim": "Every batch in the low-temperature group gained yield after the update.",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": false,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "NEI đúng vì low-temperature yield chưa measured. Observation lại dùng All measured high-temperature batches truth=unknown dù nhóm này có reported gained yield, trong scope_match=matched. Ledger/explanation lệch nhóm cần kiểm; missing giữ đúng low-temperature nhưng diễn đạt còn generic."
+    }
+  ]
+}

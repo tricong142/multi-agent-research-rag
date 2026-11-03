@@ -14,11 +14,11 @@ from typing import Any, Callable
 from .state import EvidenceRef, ResearchState, SourceChunk
 from .controller import AgentResult, Decision, budget_config, choose_action, enforce_limits
 from .planning import answer_coverage_gap, create_plan, plan_complete, task_question, update_plan
+from train_agent3_summarizer.claim_contract import claim_contract_issues, split_claims
 
 logger = logging.getLogger(__name__)
 
 
-SENTENCE_BREAK = re.compile(r"(?<=[.!?])\s+(?=[A-ZÀ-Ỹ0-9])")
 PDF_LIGATURES = str.maketrans({"ﬀ": "ff", "ﬁ": "fi", "ﬂ": "fl", "ﬃ": "ffi", "ﬄ": "ffl", "ﬅ": "st", "ﬆ": "st"})
 
 
@@ -53,11 +53,6 @@ def source_evidence(span: str, text: str) -> str | None:
     return None
 
 
-def split_claims(answer: str) -> list[str]:
-    """Conservative sentence candidates; every candidate is still fact-checked."""
-    return [part.strip() for part in SENTENCE_BREAK.split(answer.strip()) if part.strip()]
-
-
 def build_graph(
     *,
     retriever: Any,
@@ -70,6 +65,7 @@ def build_graph(
     max_context_chars: int = 6000,
     factcheck_threshold: float = 0.7,
     max_factcheck_calls: int = 120,
+    verifier_policy: str | None = None,
     max_steps: int = 30,
     max_seconds: float = 600.0,
     max_cost_usd: float | None = None,
@@ -91,8 +87,11 @@ def build_graph(
                            max_searches=max_graph_retries + 1, max_cost_usd=max_cost_usd,
                            action_cost_bounds=action_cost_bounds)
     budget["policy"] = {"initial_top_k": initial_top_k, "max_context_chars": max_context_chars,
-                        "runtime_schema": 3, "retrieval_policy": getattr(retriever, "policy", None) if callable(getattr(retriever, "run", None)) else "service",
+                        "runtime_schema": 4, "claim_contract": "explicit-subject-relation-v1",
+                        "retrieval_policy": getattr(retriever, "policy", None) if callable(getattr(retriever, "run", None)) else "service",
                         "factcheck_threshold": factcheck_threshold, "max_factcheck_calls": max_factcheck_calls}
+    if verifier_policy is not None:
+        budget["policy"]["verifier"] = verifier_policy
 
     def emit(event: dict) -> None:
         # Only counts, identifiers and reason codes; source/query text stays in private state.
@@ -249,9 +248,12 @@ def build_graph(
                             refs.append(ref)
                 matched_span_count += int(matched)
             gap = answer_coverage_gap(task_question(state), str(result.answer))
-            supported = (not gap and result.is_supported is True and result.confidence == "high"
+            structure_issues = claim_contract_issues(result.answer)
+            supported = (not gap and not structure_issues and result.is_supported is True and result.confidence == "high"
                          and bool(refs) and matched_span_count == len(spans))
             reasons = []
+            if structure_issues:
+                reasons.append("incomplete_claim_structure")
             if gap:
                 reasons.append("answer_coverage_missing")
             if result.is_supported is not True:
@@ -277,6 +279,7 @@ def build_graph(
                 "summary_confidence": str(result.confidence),
                 "agent_result": outcome.model_dump(),
                 "summary_diagnostics": {"reasons": reasons, "span_count": len(spans),
+                                        "claim_contract_issues": structure_issues,
                                         "trials": [asdict(t) if is_dataclass(t) else t for t in getattr(result, "reasoning_trace", [])],
                                         "matched_span_count": matched_span_count,
                                         "selected_chunk_count": len(selected)},
@@ -296,6 +299,14 @@ def build_graph(
         proposed = ([r["text"] for r in state.get("evidence_refs", [])] if audit_only
                     else split_claims(state.get("draft_answer", "")))
         claims = list(dict.fromkeys(previous + proposed))
+        invalid_claims = [issue for claim in claims for issue in claim_contract_issues(claim)]
+        if invalid_claims:
+            outcome = AgentResult(agent="factcheck", completed="insufficient_evidence", authority="advise",
+                                  missing_information=["Complete claims with explicit entities and relations are required."],
+                                  suggested_action="search", suggested_query=task_question(state))
+            return {"fact_check_results": [], "verified_claims": [], "low_confidence_warning": True,
+                    "status": "insufficient_evidence", "agent_result": outcome.model_dump(),
+                    "errors": state.get("errors", []) + ["factchecker:incomplete_claim_structure"]}
         reviews: list[dict[str, Any]] = []
         errors = list(state.get("errors", []))
         verified: list[dict[str, Any]] = []
@@ -324,7 +335,7 @@ def build_graph(
                     if clock() >= state["deadline_at"]:
                         raise TimeoutError("Research deadline reached")
                     calls_started += 1
-                    decision = factchecker({"claim": claim, "context": evidence})
+                    decision = factchecker({"claim": claim, "context": evidence, "deadline_at": state["deadline_at"]})
                     if not isinstance(decision, Mapping):
                         raise ValueError("Fact-check response must be a mapping")
                     label = decision.get("fact_check_label")

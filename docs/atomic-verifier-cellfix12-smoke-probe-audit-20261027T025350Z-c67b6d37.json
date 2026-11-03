@@ -1,0 +1,144 @@
+{
+  "run_id": "20261027T025350Z-c67b6d37",
+  "candidate": "atomic-verifier-constrained-v8-cellfix12",
+  "zip_sha256": "b3e7ba416dc4c69295bb0c96eec3a00b315e8df050ab414502710692782f6a7e",
+  "output_files": 71,
+  "input_files": 127,
+  "criteria_sha256": "e147868fc5826a1f10e5a5132e1ea0fb0517e16b66b229c2ad163e71f64146f7",
+  "payload_sha256": "7b1688f0110d537d5bfee979ec539e94b3e93eca5e1980ec722810006521b4be",
+  "all_output_hashes_valid": true,
+  "all_input_bytes_match_release": true,
+  "all_predictions_replayed": true,
+  "metrics_recomputed_exactly": true,
+  "model_revision_budget_gate_unchanged": true,
+  "remote_regression_tests_passed": 363,
+  "remote_validate_only": {
+    "smoke": {
+      "freeze_valid": true,
+      "cases": 12,
+      "maximum_calls": 96
+    },
+    "probe": {
+      "freeze_valid": true,
+      "cases": 18,
+      "maximum_calls": 36
+    },
+    "verifier": {
+      "freeze_valid": true,
+      "cases": 39,
+      "maximum_calls": 312
+    },
+    "validation30": {
+      "freeze_valid": true,
+      "cases": 30,
+      "maximum_calls": 240,
+      "prerequisites_required_for_inference": true
+    }
+  },
+  "html_matches_probe_exactly": true,
+  "html_sha256": "e8596bc4cef544099b27470e18623907db450f3a48d1a6f35e97fd980b18cf9d",
+  "validation_binding_replayed": true,
+  "results": {
+    "assessment-smoke": {
+      "metrics": {
+        "n": 12,
+        "correct_labels": 12,
+        "false_support": 0,
+        "runtime_failed_rows": 0,
+        "gold_support_rejected": 0,
+        "gold_support_count": 4,
+        "backend_calls": 28,
+        "checks": {
+          "all_cases_present": true,
+          "all_labels_correct": true,
+          "no_false_support": true,
+          "no_runtime_failures": true,
+          "within_call_budget": true,
+          "each_group_complete_and_correct": true,
+          "within_measured_token_budget": true,
+          "structured_decoding_trace_complete": true,
+          "cooperative_deadline_trace_complete": true
+        },
+        "automated_gate_pass": true,
+        "dataset_groups": {
+          "original_contracts": {
+            "n": 12,
+            "correct": 12,
+            "false_support": 0,
+            "failed": 0
+          }
+        },
+        "stop_reasons": {
+          "completed": 12
+        },
+        "confusion": [
+          {
+            "gold": "contradict",
+            "prediction": "contradict",
+            "n": 4
+          },
+          {
+            "gold": "not_enough_info",
+            "prediction": "not_enough_info",
+            "n": 4
+          },
+          {
+            "gold": "support",
+            "prediction": "support",
+            "n": 4
+          }
+        ],
+        "generated_tokens": 3579,
+        "prompt_tokens": 37585
+      },
+      "call_triplets_reconciled": 28,
+      "validation_issues": {
+        "valid": 28
+      },
+      "exact_citations_checked": 14,
+      "numeric_records_checked": 10,
+      "derived_citation_additions": 1,
+      "predictions_sha256": "6d1064fc9f1291ebee22607b65a2637664a94069ba9d0d82427934555696b1c5"
+    },
+    "decomposition-probe": {
+      "metrics": {
+        "n": 18,
+        "valid_decompositions": 18,
+        "incomplete": 0,
+        "backend_calls": 18,
+        "checks": {
+          "all_claims_present": true,
+          "all_decompositions_valid": true,
+          "within_call_budget": true,
+          "within_measured_token_budget": true,
+          "structured_decoding_trace_complete": true,
+          "cooperative_deadline_trace_complete": true
+        },
+        "automated_gate_pass": true,
+        "semantic_review": "pending",
+        "label_accuracy": null,
+        "generated_tokens": 972,
+        "prompt_tokens": 22892
+      },
+      "call_triplets_reconciled": 18,
+      "validation_issues": {
+        "valid": 18
+      },
+      "exact_citations_checked": 0,
+      "numeric_records_checked": 0,
+      "derived_citation_additions": 0,
+      "predictions_sha256": "ab209aff38480018dac4e1e91099f87a35da9562df7f651578d107a714f477b8"
+    }
+  },
+  "original_human_review_completed": false,
+  "unsigned_review_admission_block": "Completed human review bound to this probe is required",
+  "full39_present": false,
+  "validation30_inference_present": false,
+  "new_inference_during_audit": false,
+  "limitations": [
+    "Stored provenance is consistency evidence, not a cryptographic signature of the Colab host.",
+    "Probe decomposition validity is not label accuracy or false-support measurement.",
+    "Smoke label correctness does not certify every model explanation.",
+    "Full39 has not run for this cellfix12 run; historical baseline metrics are not new outcomes."
+  ]
+}

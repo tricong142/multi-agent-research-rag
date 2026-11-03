@@ -1,0 +1,24 @@
+{
+  "run_id": "20261026T125935Z-2cff8d38",
+  "claims": 18,
+  "parts": 20,
+  "criteria_checked": 90,
+  "ai_passed_claims": 18,
+  "reviewer_kind": "assistant",
+  "human_review_completed": false,
+  "ai_review_does_not_admit_full39": true,
+  "admission_block": "Completed human review bound to this probe is required",
+  "full39_cell_prepared_with_run_flag_true": false,
+  "full39_executed": false,
+  "original_predictions_unchanged": true,
+  "files_sha256": {
+    "AI_REVIEW.json": "4f5a0f130ecc9fd95b3f425432300961b235df1d8ad1fb65d3d7ab6969391331",
+    "AUDIT_AND_NEXT_STEPS.md": "5d49516b4d652b6c0a4f41b93ea2eb7f6f4f8c7bc832245072506ba2ce206f04",
+    "DECOMPOSITION_REVIEW.md": "cc62f4686c2551d96de58475caaef553d04b290172ae8a32b0ac87b6be777a34",
+    "HUMAN_REVIEW_WITH_AI_NOTES.html": "b5bb6975e7ad4efb4b06d6b8ed3d3c3dcf6473fa891a2a132575cdd24c2bae33",
+    "review-form.js": "5b5e13c9e8715e496c98980cb0307867b77c20b9b65cf61ac3e7979f87f21524"
+  },
+  "review_form_dom_export_test_passed": true,
+  "review_form_test_created_human_artifact": false,
+  "candidate_release_files_unchanged": true
+}

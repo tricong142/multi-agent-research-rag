@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-03",
+  "tests_run": 22,
+  "failures": 0,
+  "errors": 0,
+  "test_mode": "dataset_integrity_and_annotation_admission_only",
+  "network_requests": 0,
+  "model_inference_completed": false,
+  "human_approval_created": false,
+  "source_sha256": {
+    "scripts/prepare_atomic_holdout_v2.py": "60c1496c181fff46b85ab261366683482ef07bc422a8c5190f73d310ed23a2dc",
+    "scripts/atomic_holdout_review.py": "952591862f3b18930d9a86da0bb6c6d26696c6bf0f90fc20c0745d0dd2da8947",
+    "scripts/test_atomic_holdout_v2.py": "a87c0a301c18757ef03822fbaf69321cd7e5c98806593da90be8778883d81da4",
+    "scripts/fixtures/atomic_holdout_v2_authoring.json": "4e64d83f951dda2728f5721a85f3ea50827bdcaa9d60bd1cdcf41ddb564e0239"
+  },
+  "test_log_sha256": "37eba44b38ce9a1dedcc33d0787d5ce44a75642433a762e706751652185674ad"
+}

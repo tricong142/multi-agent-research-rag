@@ -1,30 +1,81 @@
-# Local secrets and environments
-.env
-.env.*
-!.env.example
-_archive/
-.venv/
-venv/
+# Python
 __pycache__/
 *.py[cod]
+*$py.class
+*.so
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
 
-# Generated model and search artifacts
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment & Secrets
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
+!.env.*.example
+!**/.env.*.example
+*.pem
+*.key
+credentials.json
+service-account*.json
+
+# IDE & Operating System
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs & Temporary Files
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+_tmp*/
+_archive/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Node.js
+node_modules/
+
+# AI/ML & RAG Generated Artifacts
 **/checkpoints/
 **/layoutlmv3_doclaynet_model/
 kb_indexing/data/
 kb_indexing/indices/
+kaggle_transfer/
+research-runs/
+*.pt
+*.pth
+*.ckpt
+*.onnx
 *.safetensors
 *.pkl
 *.index
+chroma_db/
+chroma/
+vector_store/
+faiss_index/
 
-# Local caches and logs
-.ipynb_checkpoints/
-*.log
-*.tmp
-sample.pdf
-kaggle_transfer/
-research-runs/
+# SQLite & local demo caches
 *.sqlite
 *.sqlite-wal
 *.sqlite-shm
+sample.pdf

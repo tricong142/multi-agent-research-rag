@@ -1,0 +1,47 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix14",
+  "criteria_sha256": "03e5673352f560d25c57a16210ddfc308177d9de23b86669b0f1231ee50cf4c6",
+  "kind": "real_pinned_tokenizer_handcrafted_path_check",
+  "checks": [
+    {
+      "case": "cf14_duration_half-hour",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 185,
+      "elapsed_seconds": 0.791
+    },
+    {
+      "case": "cf14_duration_wrong_slot_half-hour",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.899
+    },
+    {
+      "case": "cf14_duration_two-hour",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 183,
+      "elapsed_seconds": 1.32
+    },
+    {
+      "case": "cf14_duration_wrong_slot_two-hour",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 1.348
+    }
+  ],
+  "exact_malformed_prefix_replay": {
+    "old_control_schema": "cellfix9_free_prose",
+    "old_parser_allows_eos_on_malformed_prefix": true,
+    "new_parser_rejects_prefix": true,
+    "rejected_at_bpe_token": 91,
+    "prefix_bpe_tokens": 107,
+    "original_model_generated_tokens": 111,
+    "no_character_fallback_used": true
+  },
+  "elapsed_seconds": 28.004,
+  "weights_loaded": false,
+  "model_inference_completed": false
+}

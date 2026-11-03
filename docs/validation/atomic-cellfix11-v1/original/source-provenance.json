@@ -1,0 +1,21 @@
+{
+  "source": "allenai/qasper",
+  "native_split": "test",
+  "source_revision": "06806e4608976fc2fac0a090ac425d5b2b29caf4",
+  "source_card": "https://huggingface.co/datasets/allenai/qasper",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "Dasigi, Lo, Beltagy, Cohan, Smith and Gardner (2021), A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+  "remaining_review": "Summarizer source_doc_id values are not reliable paper IDs. Token overlap screening cannot prove semantic non-overlap. Base-model pretraining exposure is unknown. Confirm provenance before final-test use.",
+  "output_hashes": {
+    "corpus.jsonl": "4ad78d602384e8c50a02e0ab5c2363b26ecf74b06296a3457a41ef05ee6631c6",
+    "qrels_dev.jsonl": "b61631d9cf2a3f0729de1168d13896fe056ba87dea0d7157c0c541a383d3225e",
+    "qrels_test_candidate.jsonl": "6ce01455898b40b027bd1fba8ce750f89cd39c15499f864dc50258250527c5e6"
+  },
+  "retrieval_trace_sha256": {
+    "research-runs/colab-qasper-benchmark/20261017T053445Z-0d2b6961/output/benchmark/bm25-traces.jsonl": "51b5e26625874dbe056e1e909f5a90662d1193cb049212af2051857b84018f9d",
+    "research-runs/colab-qasper-benchmark/20261017T053445Z-0d2b6961/output/benchmark/dense-traces.jsonl": "cb49e22bbc445f9a07c119d481ff1a22045396e0edf9b21314220b1287e545a1"
+  },
+  "selection": "Human-readable textual paragraphs from test-candidate qrels, excluding every paper in saved dev BM25/Dense returned results. Ten papers selected before candidate inference to cover numbers, scope, relation and absence; not a random representative sample.",
+  "label_author": "AI proposed; pending human adjudication",
+  "candidate_results_used_for_selection": false
+}

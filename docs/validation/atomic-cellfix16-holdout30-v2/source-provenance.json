@@ -1,0 +1,21 @@
+{
+  "source": "allenai/qasper",
+  "native_split": "test",
+  "source_revision": "06806e4608976fc2fac0a090ac425d5b2b29caf4",
+  "source_card": "https://huggingface.co/datasets/allenai/qasper",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "Dasigi, Lo, Beltagy, Cohan, Smith and Gardner (2021), A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+  "upstream_manifest_sha256": "d47d47c9a6e83cac349645d69ac01bfe775fe52eaac045867b8093cec97b2a71",
+  "output_hashes": {
+    "corpus.jsonl": "4ad78d602384e8c50a02e0ab5c2363b26ecf74b06296a3457a41ef05ee6631c6",
+    "qrels_dev.jsonl": "b61631d9cf2a3f0729de1168d13896fe056ba87dea0d7157c0c541a383d3225e",
+    "qrels_test_candidate.jsonl": "6ce01455898b40b027bd1fba8ce750f89cd39c15499f864dc50258250527c5e6"
+  },
+  "candidate_release_sha256": "20fbfd0e3328f0bfbdf92d98d8a7ac11216ed25acc55fab596f6da88c86cf18f",
+  "annotation_origin": "AI-authored new claims and proposed labels; evidence copied exactly from cached QASPER paragraphs",
+  "selection": "Paper-ID and lexical exposure exclusions, then manual semantic coverage selection before any candidate run; not selected by candidate scores.",
+  "publication_recency_claimed": false,
+  "model_outputs_on_holdout_used": false,
+  "network_requests": 0,
+  "new_model_inference": false
+}

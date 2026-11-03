@@ -1,0 +1,373 @@
+{
+  "review_type": "human",
+  "reviewer": "",
+  "reviewed_on": "",
+  "human_attestation": false,
+  "provenance_limits_acknowledged": false,
+  "no_candidate_outcomes_seen": false,
+  "protocol_accepted": false,
+  "manifest_sha256": "9821fcae09302b65d9e393a82e7767e1b1f1466eca4c4d2e5bfaf53d915bfad9",
+  "candidate_criteria_sha256": "c025247428698d892e549fb12ad22e19561020b034a2a2276c9dfcaf0cbdc966",
+  "decisions": [
+    {
+      "id": "holdout-v2:001",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:002",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:003",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:004",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:005",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:006",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:007",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:008",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:009",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:010",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:011",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:012",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:013",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:014",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:015",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:016",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:017",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:018",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:019",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:020",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:021",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:022",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:023",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:024",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:025",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:026",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:027",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:028",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:029",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    },
+    {
+      "id": "holdout-v2:030",
+      "accepted_label": null,
+      "checks": {
+        "gold_label": null,
+        "exact_evidence": null,
+        "missing_information": null,
+        "identity_metric_quantity": null,
+        "scope_population_relation": null
+      },
+      "note": ""
+    }
+  ]
+}

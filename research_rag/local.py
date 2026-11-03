@@ -48,6 +48,7 @@ def _load_adapter(adapter_dir: Path, *, offline: bool, quantize_4bit: bool = Fal
 
 def build_local_graph(*, offline: bool = True, allow_cpu: bool = False, max_graph_retries: int = 1,
                       quantize_4bit: bool = False,
+                      verifier: str = "legacy",
                       retrieval_policy: str = "adaptive",
                       initial_top_k: int = 5, max_factcheck_calls: int = 120,
                       agents: dict[str, Any] | None = None,
@@ -59,7 +60,11 @@ def build_local_graph(*, offline: bool = True, allow_cpu: bool = False, max_grap
                       max_cost_usd: float | None = None, action_cost_bounds: dict[str, float] | None = None,
                       checkpointer: Any = None, on_event: Callable[[dict], None] | None = None) -> Any:
     """Load local checkpoints. Two 7B Summarizer models need substantial memory."""
+    if verifier not in ("legacy", "atomic"):
+        raise ValueError("verifier must be legacy or atomic")
+    from .atomic_adapter import POLICY_ID
     graph_options = dict(max_graph_retries=max_graph_retries, initial_top_k=initial_top_k,
+                         verifier_policy=POLICY_ID if verifier == "atomic" else None,
                          max_factcheck_calls=max_factcheck_calls,
                          max_steps=max_steps, max_seconds=max_seconds, max_cost_usd=max_cost_usd,
                          action_cost_bounds=action_cost_bounds, checkpointer=checkpointer, on_event=on_event)
@@ -69,13 +74,17 @@ def build_local_graph(*, offline: bool = True, allow_cpu: bool = False, max_grap
 
     if not torch.cuda.is_available() and not allow_cpu:
         raise RuntimeError("No CUDA GPU detected; use a GPU host or inject remote model services")
+    if verifier == "atomic" and not torch.cuda.is_available():
+        raise RuntimeError("Cellfix16 atomic loading requires CUDA/NF4, including with --allow-cpu")
     if quantize_4bit and not torch.cuda.is_available():
         raise RuntimeError("4-bit loading requires a CUDA GPU")
+    atomic_runtime = None
+    if verifier == "atomic":
+        from .atomic_adapter import cellfix16_runtime
+        atomic_runtime = cellfix16_runtime()
     from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
     summarizer_module = importlib.import_module("train_agent3_summarizer.node")
-    factchecker_module = importlib.import_module("04_factchecker.node")
-    fact_inference = importlib.import_module("04_factchecker.inference")
     writer_module = importlib.import_module("05_writer.node")
     writer_loop = importlib.import_module("05_writer.loop_controller")
     writer_inference = importlib.import_module("05_writer.inference")
@@ -102,31 +111,39 @@ def build_local_graph(*, offline: bool = True, allow_cpu: bool = False, max_grap
     summarizer._call_generator = observe_call(summarizer._call_generator, "summarizer_generator", backend_event)
     summarizer._call_critic = observe_call(summarizer._call_critic, "summarizer_critic", backend_event)
 
-    fact_dir = ROOT / "04_factchecker" / "checkpoints" / "factchecker_merged"
-    fact_tokenizer = AutoTokenizer.from_pretrained(fact_dir, local_files_only=True)
-    fact_load_options = {}
-    if quantize_4bit:
-        dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
-        fact_load_options = {
-            "torch_dtype": dtype,
-            "quantization_config": BitsAndBytesConfig(
-                load_in_4bit=True, bnb_4bit_quant_type="nf4",
-                bnb_4bit_use_double_quant=True, bnb_4bit_compute_dtype=dtype,
-            ),
-        }
-    fact_model = AutoModelForCausalLM.from_pretrained(
-        fact_dir, device_map="auto", local_files_only=True,
-        **({"torch_dtype": "auto"} | fact_load_options),
-    ).eval()
-    if on_model_loaded:
-        on_model_loaded("factchecker_merged")
-    fact_backend = fact_inference.TransformersJSONBackend(fact_model, fact_tokenizer, on_generation=on_generation)
-    fact_backend.generate_json = observe_call(fact_backend.generate_json, "factchecker", backend_event)
-    factchecker = factchecker_module.FactCheckerNode(
-        fact_inference.FactCheckJudge(fact_backend),
-        fact_inference.ConfidenceEstimator(fact_backend),
-        fact_inference.ActionRecommender(fact_backend),
-    )
+    if verifier == "atomic":
+        from .atomic_adapter import load_atomic_factchecker
+        factchecker = load_atomic_factchecker(offline=offline, on_generation=on_generation,
+                                             on_event=backend_event, on_model_loaded=on_model_loaded,
+                                             runtime=atomic_runtime)
+    else:
+        factchecker_module = importlib.import_module("04_factchecker.node")
+        fact_inference = importlib.import_module("04_factchecker.inference")
+        fact_dir = ROOT / "04_factchecker" / "checkpoints" / "factchecker_merged"
+        fact_tokenizer = AutoTokenizer.from_pretrained(fact_dir, local_files_only=True)
+        fact_load_options = {}
+        if quantize_4bit:
+            dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
+            fact_load_options = {
+                "torch_dtype": dtype,
+                "quantization_config": BitsAndBytesConfig(
+                    load_in_4bit=True, bnb_4bit_quant_type="nf4",
+                    bnb_4bit_use_double_quant=True, bnb_4bit_compute_dtype=dtype,
+                ),
+            }
+        fact_model = AutoModelForCausalLM.from_pretrained(
+            fact_dir, device_map="auto", local_files_only=True,
+            **({"torch_dtype": "auto"} | fact_load_options),
+        ).eval()
+        if on_model_loaded:
+            on_model_loaded("factchecker_merged")
+        fact_backend = fact_inference.TransformersJSONBackend(fact_model, fact_tokenizer, on_generation=on_generation)
+        fact_backend.generate_json = observe_call(fact_backend.generate_json, "factchecker", backend_event)
+        factchecker = factchecker_module.FactCheckerNode(
+            fact_inference.FactCheckJudge(fact_backend),
+            fact_inference.ConfidenceEstimator(fact_backend),
+            fact_inference.ActionRecommender(fact_backend),
+        )
 
     writer_adapter = ROOT / "05_writer" / "checkpoints" / "writer_qlora"
     writer_base = json.loads((writer_adapter / "adapter_config.json").read_text(encoding="utf-8"))["base_model_name_or_path"]
@@ -182,6 +199,8 @@ def main() -> None:
     parser.add_argument("--allow-cpu", action="store_true", help="Allow loading all local models without CUDA")
     parser.add_argument("--online-model-downloads", action="store_true", help="Allow downloading missing base models")
     parser.add_argument("--quantize-4bit", action="store_true", help="Try 4-bit loading for Summarizer and Fact-Checker on CUDA")
+    parser.add_argument("--verifier", choices=["legacy", "atomic"], default="legacy",
+                        help="Fact-Checker: legacy (default) or opt-in frozen Cellfix16 atomic (CUDA/NF4)")
     parser.add_argument("--profile-resources", action="store_true", help="Log RSS and CUDA memory after model loading and graph execution")
     parser.add_argument("--max-graph-retries", type=int, default=1)
     parser.add_argument("--retrieval-policy", choices=["adaptive", "bm25", "dense"], default="adaptive")
@@ -238,6 +257,12 @@ def main() -> None:
             saved = checkpointer.get({"configurable": {"thread_id": args.thread_id}})
             if args.resume and saved is None:
                 parser.error("No checkpoint exists for this thread")
+            if args.resume and saved is not None:
+                from .atomic_adapter import POLICY_ID
+                expected_verifier = POLICY_ID if args.verifier == "atomic" else None
+                saved_verifier = saved.get("channel_values", {}).get("budget", {}).get("policy", {}).get("verifier")
+                if saved_verifier != expected_verifier:
+                    parser.error("Resume must use the original --verifier; start a new thread when switching")
             if not args.resume and saved is not None:
                 parser.error("Thread already exists; use --resume or a new --thread-id")
         _run(args, checkpointer)
@@ -278,6 +303,7 @@ def _run(args: argparse.Namespace, checkpointer: Any) -> None:
                               max_graph_retries=args.max_graph_retries,
                               retrieval_policy=args.retrieval_policy, initial_top_k=args.initial_top_k,
                               max_factcheck_calls=args.max_factcheck_calls,
+                              verifier=args.verifier,
                               quantize_4bit=args.quantize_4bit,
                               on_model_loaded=record_resources if args.profile_resources else None,
                               on_generation=write_trace if args.trace_output else None,

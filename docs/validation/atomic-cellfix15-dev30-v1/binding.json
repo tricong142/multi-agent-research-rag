@@ -1,0 +1,25 @@
+{
+  "version": "cellfix15-development-binding-v1",
+  "candidate": "atomic-verifier-constrained-v8-cellfix15",
+  "candidate_criteria_sha256": "95b79b8589980376c9c3ca45780ac3ac1a809bf13c03b84904616ee7da939e69",
+  "evaluation_role": "development",
+  "validation_used_for_tuning": true,
+  "independent_validation_completed": false,
+  "new_human_signature_created": false,
+  "original_annotation_preserved": true,
+  "inference_completed": false,
+  "cases": 30,
+  "papers": 10,
+  "original_files_sha256": {
+    "annotation-review.json": "ff331ff78a9570959e8ec885ea9f7600078a31fe563878c09ca042f37df554b3",
+    "original-lock.json": "f699e958090b4016c80bc79171c03bbd53f21a8ea9567381e22411714d26f20e",
+    "original/authoring.json": "919c35353f283d394624cb0252fbce07b0f48868d9a7a1c54c444f32e9af8a07",
+    "original/cases.jsonl": "1df43fb4907b1e385c8ad04059a81644d5aa3e84dd121ab93ee0f2b079ea13f5",
+    "original/criteria.json": "fd75cfde6c180c2d16e88219742a1b27a3c1aedaec65d2d09ccd10095854d4bf",
+    "original/inputs.jsonl": "da73a462421d7ca850ffe5061c3fcd8a4bad35a81cb7b68bd865ab24a276b77a",
+    "original/manifest.json": "2220c18b708c967b7a33ee1bcd6a8771ce7aefe7e2b3753d8a60adcc3c080069",
+    "original/overlap-report.json": "7cb2c60f63778f6dc5dbc2683221b45d3648c4f97fb5e995c4a96fc659cb711e",
+    "original/review_gate.py": "b2f7ce817af4152ae5c19ce8ddd76083a796297d9f088a92fa9a2e81d1dcd7c4",
+    "original/source-provenance.json": "7ae871ed72ce3f21748f5d62463fb7dfb8f7b302227355e62df1192fa5b2d043"
+  }
+}

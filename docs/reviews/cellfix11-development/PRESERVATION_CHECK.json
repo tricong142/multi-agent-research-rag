@@ -1,0 +1,27 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix11",
+  "criteria_sha256": "e0d6bb116d32f4485e678e635c8e911577148212875c9c24f782b2ed2ad84789",
+  "baseline_zip_unchanged": true,
+  "baseline_39_correct_false_support_0": true,
+  "baseline_outputs_unchanged": true,
+  "baseline_semantic_review_artifacts_unchanged": true,
+  "all_parent_release_files_unchanged": true,
+  "all_existing_regression_fixtures_unchanged": true,
+  "validation30_all_original_files_unchanged": true,
+  "model_revision_budget_gate_unchanged": true,
+  "changed_parent_inputs": [
+    "04_factchecker/inference/assessment_reporting.py",
+    "04_factchecker/inference/atomic_decoding.py",
+    "04_factchecker/inference/atomic_verifier.py",
+    "research_rag/evaluation/atomic_verifier_criteria_v8.json"
+  ],
+  "new_inputs": [
+    "04_factchecker/inference/assessment_focus.py",
+    "research_rag/evaluation/atomic_verifier_contract_v8_cellfix11.json",
+    "research_rag/tests/fixtures/atomic_cellfix10_full39_traces.json",
+    "research_rag/tests/test_atomic_assessment_cellfix11.py"
+  ],
+  "new_model_inference_completed": false,
+  "full39_quality_measured": false,
+  "independent_validation_completed": false
+}

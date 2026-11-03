@@ -52,6 +52,35 @@ Tesseract OCR can cai **binary** rieng (khong chi python package):
 sudo apt-get install tesseract-ocr   # Ubuntu/Debian
 ```
 
+### Windows: OCR local và PATH
+
+Reader mặc định dùng `ReaderAgent(allow_remote=False)`: trang có text layer dùng
+PyMuPDF, trang scan hoặc parser thất bại dùng Tesseract. Chế độ này không gọi
+Gemini router/critique và không cần API key. Phần cấu hình Gemini bên dưới chỉ
+áp dụng khi chủ động bật `allow_remote=True`.
+
+Nếu đã có `C:\Program Files\Tesseract-OCR\tesseract.exe`, thêm **thư mục**
+`C:\Program Files\Tesseract-OCR` vào biến `Path` của tài khoản Windows
+(Environment Variables → User variables → Path → New). Giữ nguyên các mục cũ;
+nếu cài ở nơi khác, dùng thư mục chứa `tesseract.exe` thực tế.
+`pip install pytesseract` chỉ cài wrapper Python, không cài binary.
+
+Đóng rồi mở lại terminal và ứng dụng chạy Python (Codex/VS Code/Jupyter) để
+nhận PATH mới. Kiểm tra từ thư mục gốc repository:
+
+```powershell
+tesseract --version
+tesseract --list-langs
+.\.venv\Scripts\python.exe -c "import shutil, pytesseract; print(shutil.which('tesseract')); print(pytesseract.get_tesseract_version())"
+.\.venv\Scripts\python.exe -m unittest research_rag.tests.test_reader_local -v
+.\.venv\Scripts\python.exe -m research_rag.evaluation.reader_smoke
+```
+
+Các unit test local có giả lập OCR; lệnh `reader_smoke` chạy OCR thật trên PDF
+scan trong bộ fixture. Qua smoke test chỉ xác nhận hoạt động trên các fixture,
+không chứng minh độ chính xác trên mọi tài liệu. OCR hiện dùng ngôn ngữ mặc định
+`eng`; nhận dạng tiếng Việt cần thêm traineddata `vie` và cấu hình `lang` riêng.
+
 ## 2. Tai va xu ly dataset (Kaggle, GPU T4)
 
 Thu tu bat buoc, khong nhay coc:

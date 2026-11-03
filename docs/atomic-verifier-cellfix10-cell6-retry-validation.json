@@ -1,0 +1,25 @@
+{
+  "change_scope": "standalone replacement for cell 6 only; frozen notebook/candidate unchanged",
+  "orchestration_tests_passed": 10,
+  "old_review_admitted_for_actual_oct20_probe": {
+    "probe_predictions_sha256": "67859c961c674260fe66bca7ef46caecf6dfb743d973d5f0612b59919f52052f",
+    "semantic_review_sha256": "93a77778f303250b1fb34d7ed63856f1e394d2156ae7b07442e3f795d4449d0a",
+    "reviewer": "Trí Công"
+  },
+  "wrong_predictions_hash_rejected": "Completed human review bound to this probe is required",
+  "oct26_archive_available": false,
+  "oct26_review_binding_verified": false,
+  "new_model_inference_run": false,
+  "original_release_files_unchanged": true,
+  "replacement_sha256": "dc7ff3e680b5a9b1160ee1e37fcf1aa3af6d1fbbc70c33390850bb2909e2766e",
+  "actual_frozen_run_helper_tested": true,
+  "duplicate_stage_status_and_exclusive_log_collisions_tested": true,
+  "old_status_and_logs_preserved": true,
+  "user_supplied_oct26_trace": {
+    "run_id": "20261026T102553Z-54409fed",
+    "predictions_sha256": "2ec8f33a01e4446228e5887fe488df9a515a8adfd7964d9852a19c64ff063681",
+    "probe_admission_preflight_exit_code": 0,
+    "next_failure": "run helper rejected existing probe-admission stage name",
+    "full39_started_by_the_pasted_trace": false
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "case": "validation-v1:015",
+  "decoder_quantifier_enums": [
+    [
+      "all"
+    ],
+    [
+      "all"
+    ]
+  ],
+  "validator_accepts_first_part_atomic_second_part_all": true,
+  "recorded_attempts_both_all_rejected": true,
+  "schema_excludes_validated_first_part": true,
+  "new_inference": false,
+  "counterfactual_is_not_a_prediction": true,
+  "method": "frozen pure schema and validator functions; unused optional Torch bitmask disabled; no token-filter test"
+}

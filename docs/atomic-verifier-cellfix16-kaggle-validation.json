@@ -1,0 +1,15 @@
+{
+  "notebook": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\scripts\\kaggle_atomic_verifier_cellfix16.ipynb",
+  "sha256": "05aa83b16c4c93b917d61a7c94cc0d242adc5f3e0f28c68f159c3546599be34b",
+  "code_cells_compile": 7,
+  "payload_inputs_match_colab": 144,
+  "payload_sha256": "1a0f00f7e31d566408d8beac48522c182e600ba704588a0e57b506348e124fd3",
+  "criteria_sha256": "c025247428698d892e549fb12ad22e19561020b034a2a2276c9dfcaf0cbdc966",
+  "runtime_and_evaluation_cells_unchanged_except_io": true,
+  "invalid_review_inputs_rejected": 4,
+  "human_review_metadata_not_modified_by_adapter": true,
+  "full39_and_validation_default_disabled": true,
+  "original_release_files_unchanged": 23,
+  "gpu_inference_tested": false,
+  "kaggle_browser_download_tested": false
+}

@@ -1,0 +1,210 @@
+--- cellfix12/04_factchecker/inference/assessment_focus.py
++++ cellfix13/04_factchecker/inference/assessment_focus.py
+@@ -102,6 +102,9 @@
+ 
+ 
+ def focus_issue(result, part, context):
++    from .assessment_members import empty_identity_required, empty_ledger_issue
++    if empty_identity_required(part,context):
++        return empty_ledger_issue(result)
+     preferred = absence_quotes(part,context)
+     for obs in result['observations']:
+         issue = member_scope_issue(part,obs['member'],obs['quotes'],context)
+@@ -120,6 +123,9 @@
+ 
+ def constrain_focus(schema, part, context):
+     from copy import deepcopy
++    from .assessment_members import empty_identity_required, constrain_empty_ledger, member_absence_quotes
++    if empty_identity_required(part,context):
++        return constrain_empty_ledger(schema)
+     props = schema['properties']
+     preferred = absence_quotes(part,context)
+     original = props['observations']['items']
+@@ -133,23 +139,25 @@
+         groups = {}
+         for member in members:
+             truth = obs['truth']['enum'][0]
+-            quotes = [q for q in quote_choices if observation_focus_issue(part,member,[q],truth,context) is None]
+-            required = max(obs['quotes'].get('minItems',0),int(unknown and bool(preferred)))
++            local_absence = member_absence_quotes(part,member,context) if unknown else []
++            choices = local_absence or quote_choices
++            quotes = [q for q in choices if observation_focus_issue(part,member,[q],truth,context) is None]
++            required = max(obs['quotes'].get('minItems',0),int(unknown and bool(preferred or local_absence)))
+             if observation_focus_issue(part,member,[],truth,context):
+                 required = max(1,required)
+             if required and not quotes:
+                 continue
+-            groups.setdefault((tuple(quotes),required),[]).append(member)
++            groups.setdefault((tuple(quotes),required,bool(local_absence)),[]).append(member)
+         # Equivalent members share a branch; do not duplicate its numeric schema
+         # once per source span, which slows the token filter without adding proof.
+-        for (quotes, required), bound_members in groups.items():
++        for (quotes, required, local_absence), bound_members in groups.items():
+             fixed = deepcopy(branch)
+             values = fixed['properties']
+             values['member'] = {'type':'string','enum':bound_members}
+             if quotes:
+                 values['quotes']['items'] = {'type':'string','enum':list(quotes)}
+             values['quotes']['minItems'] = required
+-            if unknown and preferred:
++            if unknown and (preferred or local_absence):
+                 values['quotes']['maxItems'] = 1
+             elif not quotes:
+                 values['quotes']['maxItems'] = 0
+@@ -171,6 +179,14 @@
+     issue = member_scope_issue(part,member,quotes,context)
+     if issue:
+         return issue
++    from .assessment_members import member_identity_issue, member_absence_quotes
++    identity_issue = member_identity_issue(part,member,truth,context)
++    if identity_issue:
++        return identity_issue
++    if truth=='unknown':
++        direct = member_absence_quotes(part,member,context)
++        if direct and not any(q in cited for q in direct for cited in quotes):
++            return 'missing_evidence_quote_required'
+     # An absence assertion is evidence about availability, not an entity name.
+     if _MISSING.search(member) and re.search(r'\b(?:was|were|is|are|has been|have been)\b',member,re.I):
+         return 'observation_member_is_not_entity'
+--- cellfix12/04_factchecker/inference/assessment_members.py
++++ cellfix13/04_factchecker/inference/assessment_members.py
+@@ -0,0 +1,108 @@
++"""Finite source-backed member references; uncertainty never invents an entity."""
++import re
++
++from .assessment_rules import clauses, contains, scope_conflict
++from .assessment_evidence import _head, _noun, _population, metric_present, predicate_truth
++from .evidence_screen import WORDS
++
++_DETERMINERS = {'the','a','an','all','every','each','some','other','others','remaining',
++    'first','second','third','fourth','fifth','sixth','last','two','three','these','those'}
++_CLAUSAL = re.compile(r'\b(?:is|are|was|were|has|have|had|be|been|do|does|did|not|no|never|and|or|from|to|which|that)\b',re.I)
++
++
++def target_absent(part, context):
++    from .atomic_verifier import target_entity, target_members
++    return bool(part['quantifier']=='atomic' and target_entity(part) and not target_members(part,context))
++
++
++def _nominal_member(part, member):
++    text=member.strip()
++    # Scope stays in its own fields; a matching participial noun modifier is legal.
++    for restriction in (part['scope']['time'],part['scope']['condition']):
++        if restriction:
++            text=re.sub(r'\s+(?:(?:conducted|tested|evaluated|monitored|audited)\s+)?'+re.escape(restriction)+r'$', '',text,flags=re.I)
++    if _CLAUSAL.search(text) or not re.fullmatch(r'[\w-]+(?:\s+[\w-]+){0,7}',text):
++        return False
++    key=re.sub(r'^(?:in|on|under|for)\s+','',part['scope']['condition'],flags=re.I)
++    if (key and re.search(r'\b(?:group|cohort|population|set)\s*$',key,re.I)
++            and re.sub(r'^the\s+','',text,flags=re.I).casefold()==re.sub(r'^the\s+','',key,flags=re.I).casefold()):
++        return True
++    text=re.sub(r'^(?:the\s+)?(?:(?:complete|entire|full|remaining)\s+)?(?:set|population|group)\s+of\s+','',text,flags=re.I)
++    words=text.split()
++    if not words or not re.fullmatch(_noun(_head(part)),words[-1],re.I):
++        return False
++    modifiers={v.casefold() for v in part['scope']['entity'].split()[:-1]}
++    permitted=modifiers | _DETERMINERS | set(WORDS)
++    return all(v.casefold() in permitted or v.isdigit() for v in words[:-1])
++
++
++def member_identity_issue(part, member, truth, context):
++    """Known outcomes retain their existing predicate/quantity/coverage guards."""
++    if target_absent(part,context):
++        return 'unresolved_target_requires_empty_ledger'
++    if part['quantifier']=='atomic' or truth!='unknown':
++        return None
++    for modifier in part['scope']['entity'].split()[:-1]:
++        if re.search(r'\b(?:non-|un)'+re.escape(modifier)+r'\b',member,re.I):
++            return 'observation_scope_mismatch'
++    if _nominal_member(part,member):
++        return None
++    population=_population(part,context)
++    if population and member in population['names']+[population['anchor']]:
++        return None
++    # shortcut: proper names need a local possessive metric anchor; no general NER.
++    if (not _CLAUSAL.search(member)
++            and re.fullmatch(r'[A-Z][\w-]*(?:\s+[A-Z][\w-]*){0,2}',member)
++            and member.casefold() not in {v.casefold() for v in part['scope']['metric'].split()}):
++        for clause in clauses(context):
++            possessive=bool(re.search(r'(?<!\w)'+re.escape(member)+r"['’]s\b",clause) and metric_present(part,clause))
++            status=bool(re.search(r'(?<!\w)'+re.escape(member)+r'\s+status\s+(?:(?:was|is|has been)\s+)?(?:unreported|unknown|not reported)\b',clause,re.I))
++            if (possessive or status) and not scope_conflict(part,clause):
++                return None
++    return 'observation_member_is_not_entity'
++
++
++def empty_identity_required(part, context):
++    return target_absent(part,context)
++
++
++def empty_ledger_issue(result):
++    if (result['observations'] or result['coverage']['complete'] or result['coverage']['members']
++            or result['coverage']['quotes']):
++        return 'unresolved_target_requires_empty_ledger'
++    if result['scope_match']!='unknown':
++        return 'unresolved_target_scope_unknown'
++    if not result.get('model_missing_information',result['missing_information']):
++        return 'unresolved_target_missing_information'
++    return None
++
++
++def constrain_empty_ledger(schema):
++    from .atomic_decoding import obj,array
++    props=schema['properties']
++    props['scope_match']={'type':'string','enum':['unknown']}
++    props['observations']['minItems']=props['observations']['maxItems']=0
++    props['coverage']=obj({'complete':{'const':False},
++        'members':array({'type':'string'},maximum=0),'quotes':array({'type':'string'},maximum=0)})
++    props['missing_information']['minItems']=props['missing_information']['maxItems']=1
++    return schema
++
++
++def member_absence_quotes(part, member, context):
++    from .assessment_focus import _direct_absence
++    from .atomic_decoding import evidence_passages
++    from .numeric_verifier import numeric_requirements
++    metric=re.escape(part['scope']['metric'])
++    if part['scope']['metric'].casefold() in ('leak','leaked','leaks'):
++        metric=r'leak(?:ed|s)?'
++    status=re.compile(r'\b'+metric+r'(?:\s+(?:status|results?|measurements?))?\s+'
++        r'(?:(?:was|were|is|are|has|have|been)\s+){0,3}'
++        r'(?:not (?:reported|measured|evaluated|known|available)|unreported|unmeasured|unknown)\b',re.I)
++    own=[c for c in clauses(context) if contains(member,c) and not scope_conflict(part,c)]
++    absent=[c for c in own if _direct_absence(part,c) or status.search(c)]
++    if not absent or any(c not in absent and metric_present(part,c)
++            and (predicate_truth(part,c) is not None or numeric_requirements(c)) for c in own):
++        return []
++    passages=evidence_passages(context)
++    return sorted({min((q for q in passages if c in q and not scope_conflict(part,q)),key=len)
++        for c in absent if any(c in q and not scope_conflict(part,q) for q in passages)})
+--- cellfix12/04_factchecker/inference/atomic_decoding.py
++++ cellfix13/04_factchecker/inference/atomic_decoding.py
+@@ -615,3 +615,6 @@
+ 
+ 
+ DECODER.update(policy='atomic-schema-decoding-v5-cellfix12', unknown_binding='member_quote_joint', absence_truth='unknown_before_polarity')
++
++
++DECODER.update(policy='atomic-schema-decoding-v5-cellfix13', member_identity='source_nominal_referents_v1', unresolved_target='empty_unknown_ledger')
+--- cellfix12/04_factchecker/inference/atomic_verifier.py
++++ cellfix13/04_factchecker/inference/atomic_verifier.py
+@@ -1208,3 +1208,19 @@
+     'A sentence saying measurements were not made is evidence of uncertainty, '
+     'never a false outcome or an entity name. Measured no-change results and '
+     'explicit denials remain actual counterevidence.\n')
++
++
++
++POLICY = 'atomic-verifier-constrained-v8-cellfix13'
++REPAIR_HINTS.update(
++    unresolved_target_requires_empty_ledger='The exact target is absent/unbound. Return observations=[], empty incomplete coverage, scope_match=unknown and the bound missing-information reason. Do not invent a member from a measurement or clause.',
++    unresolved_target_scope_unknown='An unbound target has scope_match=unknown; an empty ledger cannot claim matched scope.',
++    unresolved_target_missing_information='Name the missing target/population binding using the supplied reason code.',
++    observation_member_is_not_entity='Use an exact source noun reference for the claimed population, a supported collective group, or a locally anchored name. Fragments, auxiliary-verb tails and quantities are not entities, even for unknown.')
++ASSESS_PROMPT += (
++    '\nMEMBER IDENTITY: Source membership is necessary but not sufficient. '
++    'A clause fragment or measurement is not an entity. When the exact atomic '
++    'target is absent, emit an empty observation ledger with unknown scope and '
++    'the required missing target reason; do not replace it with a workload alias. '
++    'For unknown population records choose a source noun reference/group/name '
++    'and cite its own explicit unreported status when available.\n')

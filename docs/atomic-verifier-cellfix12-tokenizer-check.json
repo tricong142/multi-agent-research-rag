@@ -1,0 +1,467 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix12",
+  "criteria_sha256": "e147868fc5826a1f10e5a5132e1ea0fb0517e16b66b229c2ad163e71f64146f7",
+  "kind": "real_pinned_tokenizer_handcrafted_path_check",
+  "checks": [
+    {
+      "case": "keyed_two_sentence_counts",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 193,
+      "elapsed_seconds": 1.542
+    },
+    {
+      "case": "duplicated_requirement",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.812
+    },
+    {
+      "case": "missing_requirement",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.844
+    },
+    {
+      "case": "explicit_denial",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 69,
+      "elapsed_seconds": 0.718
+    },
+    {
+      "case": "counterevidence_as_scope_mismatch",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.39
+    },
+    {
+      "case": "counterevidence_as_unknown",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.413
+    },
+    {
+      "case": "genuine_missing_evidence",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 67,
+      "elapsed_seconds": 0.493
+    },
+    {
+      "case": "single_counterexample",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 75,
+      "elapsed_seconds": 0.547
+    },
+    {
+      "case": "old_ordered_change_preserved",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 140,
+      "elapsed_seconds": 0.779
+    },
+    {
+      "case": "reversed_change_rejected",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.732
+    },
+    {
+      "case": "scoped_support_without_other_corpora",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 69,
+      "elapsed_seconds": 0.659
+    },
+    {
+      "case": "irrelevant_missing_information_rejected",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.607
+    },
+    {
+      "case": "free_prose_64_rejected_by_new_contract",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.608
+    },
+    {
+      "case": "explanation_65_rejected",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.596
+    },
+    {
+      "case": "prefix_named_target_local_quote",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 67,
+      "elapsed_seconds": 0.572
+    },
+    {
+      "case": "prefix_named_target_wrong_quote_rejected",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.504
+    },
+    {
+      "case": "closed_all_collective_coverage",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 103,
+      "elapsed_seconds": 0.612
+    },
+    {
+      "case": "closed_all_cannot_discard_coverage",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.384
+    },
+    {
+      "case": "none_no_leaks_positive_predicate_false",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 115,
+      "elapsed_seconds": 0.573
+    },
+    {
+      "case": "none_cannot_invert_positive_predicate",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.46
+    },
+    {
+      "case": "mixed_members_do_not_borrow_polarity",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 88,
+      "elapsed_seconds": 0.499
+    },
+    {
+      "case": "selection_set_closure",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 127,
+      "elapsed_seconds": 0.571
+    },
+    {
+      "case": "selection_set_duplicate_coverage",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.513
+    },
+    {
+      "case": "scope:direction:not_enough_info_repaired_contract",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 63,
+      "elapsed_seconds": 0.564
+    },
+    {
+      "case": "scope:direction:not_enough_info_invented_prose_blocked",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.625
+    },
+    {
+      "case": "scope:conjunction:not_enough_info_repaired_contract",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 78,
+      "elapsed_seconds": 0.887
+    },
+    {
+      "case": "scope:conjunction:not_enough_info_invented_prose_blocked",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 1.037
+    },
+    {
+      "case": "contract:causality_missing_cf12_repaired",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 73,
+      "elapsed_seconds": 1.091
+    },
+    {
+      "case": "contract:causality_missing_cf10_bad_evidence",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.663
+    },
+    {
+      "case": "scope:metric:not_enough_info_cf12_repaired",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 69,
+      "elapsed_seconds": 0.739
+    },
+    {
+      "case": "scope:metric:not_enough_info_cf10_bad_evidence",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.65
+    },
+    {
+      "case": "scope:condition:not_enough_info_cf12_repaired",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 85,
+      "elapsed_seconds": 1.545
+    },
+    {
+      "case": "scope:condition:not_enough_info_cf10_bad_evidence",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.836
+    },
+    {
+      "case": "novel_specificity_absence",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 69,
+      "elapsed_seconds": 0.618
+    },
+    {
+      "case": "novel_sensitivity_quote_rejected",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.46
+    },
+    {
+      "case": "novel_cold_storage_unknown",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 80,
+      "elapsed_seconds": 0.791
+    },
+    {
+      "case": "novel_hot_storage_member_rejected",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.684
+    },
+    {
+      "case": "scope:entity:support_bad",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.426
+    },
+    {
+      "case": "scope:entity:support_repaired",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 72,
+      "elapsed_seconds": 0.499
+    },
+    {
+      "case": "scope:entity:contradict_bad",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.427
+    },
+    {
+      "case": "scope:entity:contradict_repaired",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 72,
+      "elapsed_seconds": 0.784
+    },
+    {
+      "case": "scope:condition:not_enough_info_bad",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 1.002
+    },
+    {
+      "case": "scope:condition:not_enough_info_repaired",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 85,
+      "elapsed_seconds": 0.95
+    },
+    {
+      "case": "scope:none:not_enough_info_bad",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.971
+    },
+    {
+      "case": "scope:none:not_enough_info_repaired",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 76,
+      "elapsed_seconds": 1.275
+    },
+    {
+      "case": "novel_root_true",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 74,
+      "elapsed_seconds": 0.597
+    },
+    {
+      "case": "novel_unknown_true_empty",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.485
+    },
+    {
+      "case": "novel_unknown_true_other",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.457
+    },
+    {
+      "case": "novel_root_false",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 74,
+      "elapsed_seconds": 0.555
+    },
+    {
+      "case": "novel_unknown_false_empty",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.432
+    },
+    {
+      "case": "novel_unknown_false_other",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.461
+    },
+    {
+      "case": "novel_absence_measured",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 80,
+      "elapsed_seconds": 0.803
+    },
+    {
+      "case": "novel_absence_measured_true",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.591
+    },
+    {
+      "case": "novel_absence_measured_false",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.638
+    },
+    {
+      "case": "novel_clause_member_measured",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.589
+    },
+    {
+      "case": "novel_absence_reported",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 80,
+      "elapsed_seconds": 0.748
+    },
+    {
+      "case": "novel_absence_reported_true",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.67
+    },
+    {
+      "case": "novel_absence_reported_false",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.747
+    },
+    {
+      "case": "novel_clause_member_reported",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.809
+    },
+    {
+      "case": "novel_absence_recorded",
+      "accepted": true,
+      "expected": true,
+      "legal_path_tokens": 80,
+      "elapsed_seconds": 0.727
+    },
+    {
+      "case": "novel_absence_recorded_true",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.59
+    },
+    {
+      "case": "novel_absence_recorded_false",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.635
+    },
+    {
+      "case": "novel_clause_member_recorded",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.639
+    },
+    {
+      "case": "novel_unknown_mixed_bound_unbound_quotes",
+      "accepted": false,
+      "expected": false,
+      "legal_path_tokens": null,
+      "elapsed_seconds": 0.443
+    }
+  ],
+  "exact_malformed_prefix_replay": {
+    "old_control_schema": "cellfix9_free_prose",
+    "old_parser_allows_eos_on_malformed_prefix": true,
+    "new_parser_rejects_prefix": true,
+    "rejected_at_bpe_token": 91,
+    "prefix_bpe_tokens": 107,
+    "original_model_generated_tokens": 111,
+    "no_character_fallback_used": true
+  },
+  "elapsed_seconds": 69.401,
+  "weights_loaded": false,
+  "model_inference_completed": false
+}

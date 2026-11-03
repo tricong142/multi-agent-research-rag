@@ -1,0 +1,83 @@
+{
+  "source_run_id": "20261103T091648Z-c8c48869",
+  "case": {
+    "example_id": "scope:existential:contradict",
+    "claim": "At least one audited cache node reduced response time after the patch.",
+    "context": "The complete audited set was Birch, Elm and Fir. After the patch, response time increased on Birch and Elm and stayed unchanged on Fir.",
+    "label": "contradict",
+    "dataset_group": "scope_regression",
+    "family": "existential",
+    "contrast_set": "existential",
+    "annotation_rationale": "The complete population has no positive instance of reduced response time.",
+    "source": "Assistant-authored synthetic development regression; all entities and measurements are fictional; not independently adjudicated."
+  },
+  "part": {
+    "quote": "At least one audited cache node reduced response time after the patch.",
+    "quantifier": "some",
+    "scope": {
+      "entity": "audited cache node",
+      "metric": "response time",
+      "time": "after the patch",
+      "condition": ""
+    },
+    "start": 0,
+    "end": 70,
+    "numeric_requirements": []
+  },
+  "raw_outputs": [
+    {
+      "scope_match": "matched",
+      "coverage": {
+        "complete": true,
+        "members": [
+          "Audited cache node"
+        ],
+        "quotes": [
+          "The complete audited set was Birch, Elm and Fir. After the patch, response time increased on Birch and Elm and stayed unchanged on Fir."
+        ]
+      },
+      "observations": [
+        {
+          "member": "Birch, Elm and Fir",
+          "truth": "false",
+          "quotes": [
+            "The complete audited set was Birch, Elm and Fir. After the patch, response time increased on Birch and Elm and stayed unchanged on Fir."
+          ],
+          "explanation": "Predicate evidence recorded.",
+          "numeric": null
+        }
+      ],
+      "missing_information": [],
+      "explanation": "Assess the recorded evidence ledger."
+    },
+    {
+      "scope_match": "matched",
+      "coverage": {
+        "complete": true,
+        "members": [
+          "Audited cache node reduced response time after the patch"
+        ],
+        "quotes": [
+          "The complete audited set was Birch, Elm and Fir. After the patch, response time increased on Birch and Elm and stayed unchanged on Fir."
+        ]
+      },
+      "observations": [
+        {
+          "member": "Birch, Elm and Fir",
+          "truth": "false",
+          "quotes": [
+            "The complete audited set was Birch, Elm and Fir. After the patch, response time increased on Birch and Elm and stayed unchanged on Fir."
+          ],
+          "explanation": "Predicate evidence recorded.",
+          "numeric": null
+        }
+      ],
+      "missing_information": [],
+      "explanation": "Assess the recorded evidence ledger."
+    }
+  ],
+  "received_texts": [
+    "{\n  \"scope_match\": \"matched\",\n  \"coverage\": {\n   \"complete\": true,\n   \"members\": [\n   \"Audited cache node\"\n   ],\n   \"quotes\": [\n   \"The complete audited set was Birch, Elm and Fir. After the patch, response time increased on Birch and Elm and stayed unchanged on Fir.\"\n   ]\n  },\n  \"observations\": [\n   {\n   \"member\": \"Birch, Elm and Fir\",\n   \"truth\": \"false\",\n   \"quotes\": [\n   \"The complete audited set was Birch, Elm and Fir. After the patch, response time increased on Birch and Elm and stayed unchanged on Fir.\"\n   ],\n   \"explanation\": \"Predicate evidence recorded.\",\n   \"numeric\": null\n  }\n  ],\n  \"missing_information\": [],\n  \"explanation\": \"Assess the recorded evidence ledger.\"\n}",
+    "{\n  \"scope_match\": \"matched\",\n  \"coverage\": {\n   \"complete\": true,\n   \"members\": [\n   \"Audited cache node reduced response time after the patch\"\n   ],\n   \"quotes\": [\n   \"The complete audited set was Birch, Elm and Fir. After the patch, response time increased on Birch and Elm and stayed unchanged on Fir.\"\n   ]\n  },\n  \"observations\": [\n   {\n   \"member\": \"Birch, Elm and Fir\",\n   \"truth\": \"false\",\n   \"quotes\": [\n   \"The complete audited set was Birch, Elm and Fir. After the patch, response time increased on Birch and Elm and stayed unchanged on Fir.\"\n   ],\n   \"explanation\": \"Predicate evidence recorded.\",\n   \"numeric\": null\n  }\n  ],\n  \"missing_information\": [],\n  \"explanation\": \"Assess the recorded evidence ledger.\"\n}"
+  ]
+}

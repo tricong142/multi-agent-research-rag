@@ -1,10 +1,394 @@
-# Trạng thái hoàn thiện Research RAG — 2026-10-20
+# Trạng thái hoàn thiện Research RAG — 2026-11-03
 
 **Chưa đạt gate phát hành.** Đã có workflow LangGraph và các lượt inference
 thật; diagnostic còn trượt confidence/Reader PDF và atomic verifier. Đây là
 trang trạng thái hiện hành; các run log khác giữ lịch sử và bằng chứng chi tiết.
 
-## Hiện tại — cellfix10 T4 smoke/probe đạt; chờ human probe trước full39 — 2026-10-20
+## Hợp đồng claim Summarizer → Verifier — 2026-11-03
+
+- Node và graph dùng chung guard cấu trúc cho từng claim: số/đơn vị trơ,
+  noun fragment và predicate thiếu chủ ngữ phải rewrite trước kiểm chứng.
+  Không tự thêm entity/quantity từ câu hỏi hoặc bắt claim định tính phải có số.
+- Giữ 3 lượt nội bộ và yield ngay khi Critic yêu cầu thêm context. Graph chặn
+  fragment từ cả service/injected summary và audit source trước lời gọi Verifier;
+  giữ source/evidence và cơ chế chặn mâu thuẫn. Checkpoint policy nâng schema4.
+- **94/94 regression tests đạt**, dùng backend giả lập; chưa chạy sufficient
+  hoặc model E2E thật trên GPU. Grammar guard hữu hạn, không chứng minh đầy đủ
+  cú pháp hoặc ngữ nghĩa. Frozen Verifier/holdout không được sửa.
+- [Chi tiết contract và giới hạn](SUMMARIZER_VERIFIER_CLAIM_CONTRACT.md).
+
+## Holdout candidate độc lập theo paper — 2026-11-03
+
+- Đã chuẩn bị offline `docs/validation/atomic-cellfix16-holdout30-v2/`: **30 ca,
+  10 paper khác dev30**, cân bằng 10 support / 10 contradict / 10 NEI. Nguồn là
+  paragraph arXiv trong QASPER local; không khẳng định bài mới xuất bản năm 2026.
+- Rà 468 file, registry 4.882 paper ID bị loại; zero document overlap đã biết
+  và zero lexical flags. Có exact spans/source snapshots, blind input ZIP,
+  protocol và SHA256 lock riêng, giữ nguyên candidate/dev30 đã đóng băng.
+- **22/22 integrity/admission tests đạt**. Nhãn là AI đề xuất, **chờ human
+  adjudication**; chưa chạy model, chưa hoàn tất independent validation/promotion.
+  Paper ID Summarizer chưa đầy đủ và pretraining exposure vẫn chưa xác định.
+- [Bàn giao và bước review](ATOMIC_VERIFIER_CELLFIX16_HOLDOUT_V2.md).
+
+## Chuẩn bị adapter E2E Cellfix16 — 2026-11-03
+
+- `research_rag.local` nhận `--verifier legacy|atomic`; mặc định giữ legacy.
+  Nhánh atomic import candidate frozen vào namespace riêng và kiểm tra hash,
+  dùng đúng base Qwen revision/NF4 của Cellfix16; không thay release thí nghiệm.
+- Adapter chuyển ledger hoàn tất sang contract của graph; incomplete/lỗi chặn
+  xác minh, giữ deadline/call/token limits và private trace. `confidence_score`
+  là eligibility 1/0, chưa phải xác suất đã calibration.
+- Đã đạt **79/79 tests** cho adapter và graph liên quan: ba nhãn, incomplete,
+  source/citation, deadline, loader mock và chặn đổi verifier khi resume cả
+  checkpoint dở dang lẫn hoàn tất. CLI help đã nhận cờ mới; hash release14/15/16
+  giữ nguyên. [Hướng dẫn chạy](../research_rag/README.md).
+- Đây là tích hợp với backend giả lập, **chưa chạy inference GPU/model E2E**;
+  không thay gate nghiệm thu Cellfix16 hay chứng minh score Full39/dev30 mới.
+
+## Hiện tại — audit development30 và candidate Cellfix16 — 2026-11-03
+
+- ZIP mới sau Validation30 của run `20261102T163553Z-ed00dfbc` được audit:
+  **13/30 đúng, 8 incomplete, 9 sai nhãn; 4 false support**. Metrics và
+  classification replay khớp hoàn toàn; hai JSONL rời khớp ZIP từng byte.
+  [Audit từng ca](reviews/cellfix15-validation30-20261102T163553Z-ed00dfbc/AUDIT.md).
+- Cellfix16 được tạo cô lập từ Cellfix15: explicit relation witnesses cho bốn
+  false support; shared decomposition subject/metric guards; BIBREF/unit,
+  phạm vi phủ định và quantity total/subset; collective coverage/observation.
+- Source cuối đạt **422/422 regression**, **139/139 pinned Qwen token paths**.
+  Criteria SHA256: `c025247428698d892e549fb12ad22e19561020b034a2a2276c9dfcaf0cbdc966`.
+  Đây là kiểm tra offline, không phải score inference mới.
+- Release Cellfix16 đã đóng băng: **38/38 packaging tests**, 144 payload inputs,
+  validate-only đúng payload đạt cho cả bốn chế độ; Kaggle notebook compile đủ 7 cells.
+- Chưa có smoke/probe/full39/development30 inference cho Cellfix16; chưa được
+  tích hợp serving. Gold/budgets/gates giữ nguyên; development30 không phải holdout.
+- [Bàn giao và cách chạy candidate mới](ATOMIC_VERIFIER_CELLFIX16_HANDOFF.md).
+
+## Mốc trước — Cellfix15 full39 39/39; sửa admission cell7 — 2026-11-03
+
+- ZIP run `20261102T163553Z-ed00dfbc`: 115 output files và 140 payload inputs
+  đúng hash. Replay smoke/probe/full39 và tái tính metrics đã kiểm chứng.
+- **Full39 39/39 nhãn, 0 false support, 0 runtime failures**, 85 calls,
+  9224 generated tokens. NONE/NEI trước đây lỗi nay model sinh Silver/unknown,
+  trả NEI, hoàn tất trong 2 calls.
+- Cell7 dừng trước validation30: replay thêm diagnostic `usage_complete=True`
+  nhưng metrics producer không lưu key này; so sánh toàn bộ dictionary từ chối.
+  Đây là lỗi tương thích workflow, không phải full39 trượt hoặc thiếu token trace.
+- Có bản thay chỉ cell7: `scripts/kaggle_cellfix15_cell7_replay_compat.py`.
+  Giữ frozen inputs/metrics/predictions/review gốc; compatibility worker ghi hash
+  riêng trong output. Chỉ cho phép thiếu diagnostic khi replay xác nhận True;
+  mọi metric/provenance/human gate còn lại giữ nguyên. 11 regression tests đạt;
+  admission trên trace và review thực nhận đã đạt với adapter.
+- **Validation30 chưa chạy** trong ZIP này. Tiếp tục cùng runtime bằng cell7
+  đã sửa, đúng full39 review; không rerun cells1–6. Bộ30 vẫn development.
+- Hướng dẫn và bằng chứng:
+  [audit/resume](reviews/cellfix15-full39-20261102T163553Z-ed00dfbc/AUDIT_AND_RESUME.md).
+
+## Mốc chuẩn bị — Cellfix15 sửa assessment trước inference — 2026-11-02
+
+- Candidate riêng kế thừa Cellfix14: thêm member-local absence guard vào
+  `assessment_focus.observation_focus_issue`, dùng chung bởi decoder/validator.
+  Chặn true/false khi chính member có trạng thái chưa báo cáo; giữ unknown.
+  Không ép unknown cho Blue/Green đã có kết quả hoặc che fact cạnh tranh.
+- **413/413 regression và 110/110 đường token Qwen đạt kỳ vọng**: hai record
+  lỗi thực nhận bị chặn, Silver/unknown -> NEI, Blue/Green false vẫn hợp lệ;
+  có entities mới và NONE/ALL/SOME. Đây không phải model accuracy.
+- **38/38 kiểm tra notebook/gate và bốn validate-only exact payload đạt**;
+  Colab/Kaggle cùng 140 payload inputs. 21 file release và 124 source inputs
+  Cellfix14 vẫn đúng hash; scoring và workflow gate không đổi.
+- Giữ nguyên model/revision, prompt, gold, scoring, budgets và human gates.
+  Cellfix14/source/notebook/predictions/review không sửa. Giữ
+  `RUN_VALIDATION30=False` ở run Cellfix14 hiện tại.
+- Cần inference candidate mới: smoke12, probe18 và review mới, full39 và
+  review mới, sau đó mới có thể bật dev30. Chưa có bằng chứng 39/39 hoặc 30/30
+  cho Cellfix15. Bộ30-v1 tiếp tục là development; cần holdout khác paper.
+- Hướng dẫn: [ATOMIC_VERIFIER_CELLFIX15_HANDOFF.md](ATOMIC_VERIFIER_CELLFIX15_HANDOFF.md).
+
+## Mốc model thật gần nhất — Cellfix14 full39 38/39, một incomplete — 2026-11-02
+
+- Run Kaggle `20261102T120149Z-ca882061`: 108 output + manifest, 137 input
+  khớp release. Source/prompt/model/revision/budget/gate giữ nguyên. Probe đã
+  qua admission; replay smoke/probe/full39 và tái tính metrics khớp.
+- Smoke12 nhãn đạt, probe18 hợp lệ; **full39 38/39 nhãn, false support=0,
+  gold support rejected=0, một runtime_failed row**. Completed 38 đều đúng;
+  `scope:none:not_enough_info` hết hai assessment attempts và incomplete.
+- Model chọn member `Silver's leak status`, truth false, từ nguồn nói trạng
+  thái Silver chưa báo cáo. Validator chặn đúng bằng missing_evidence_is_not_false;
+  ca mất 23,89 giây, không phải timeout hoặc lỗi cell6. Run_id vắng trong review
+  chỉ informational; candidate/prediction hashes đã khớp.
+- CPU token-filter replay xác nhận bad record được decoder cho phép nhưng
+  validator từ chối. Guard thử trong bộ nhớ cho member-local absence ở cả
+  known/unknown chặn path sai, giữ Silver/unknown -> NEI. **Không inference mới,
+  chưa sửa source Cellfix14 hoặc chứng minh candidate kế tiếp đạt.**
+- Giữ RUN_VALIDATION30=False; validation30 chưa chạy trong run này. Cần sửa
+  shared guard trong candidate kế tiếp, regression/token filter, freeze và đo
+  model mới. Không đổi gold/review/metrics hoặc bỏ ca lỗi để qua gate.
+- Báo cáo: [audit full39](reviews/cellfix14-full39-20261102T120149Z-ca882061/AUDIT_AND_NEXT_STEPS.md).
+  Record: `atomic-verifier-cellfix14-full39-audit-20261102T120149Z-ca882061.json`.
+
+## Mốc chuẩn bị — Cellfix14 kiểm offline trước inference GPU — 2026-11-02
+
+- Đã tạo candidate riêng `atomic-verifier-constrained-v8-cellfix14`, giữ nguyên
+  Cellfix13/source/predictions/review và gold cũ. Builder kiểm hash parent và
+  giữ nguyên model/revision, call/token/time budget cùng gate full39.
+- Sửa deadline trong schema/token filter, watchdog của worker và trace khi
+  generation thất bại; quantity loại identifier, giữ compound object/duration
+  và explicit partitive; binding tham chiếu nguồn và subject/comparator;
+  decoder/validator dùng chung lượng từ theo part, không bỏ AND predicate lạ.
+- **405/405 regression CPU, 94/94 đường token Qwen, 38/38 test notebook/gate
+  và bốn validate-only exact payload đạt.** Gói đã chốt, 137 payload inputs
+  đồng nhất giữa Colab/Kaggle; 21 file release Cellfix13 vẫn đúng hash.
+  Đây không phải model accuracy. Báo cáo:
+  `atomic-verifier-cellfix14-{validation,tokenizer-check,packaging-validation,kaggle-validation}.json`.
+- `validation30-v1` đã dùng để phát triển: binding mới ghi **development**,
+  `validation_used_for_tuning=true`, `independent_validation_completed=false`.
+  Giữ gold/annotation bytes cũ, không tạo human signature mới. Cần holdout mới
+  disjoint theo paper để nghiệm thu độc lập sau khi candidate ổn định.
+- **Chưa có kết quả 30/30 hoặc inference GPU Cellfix14; chưa promote serving.**
+  Kết quả model thật gần nhất vẫn là Cellfix13 10/30, bốn runtime failures.
+- Notebook mới: `scripts/kaggle_atomic_verifier_cellfix14.ipynb`; cells6/7
+  mặc định tắt, yêu cầu review mới cho probe/full39 của đúng run mới.
+  Hướng dẫn: [ATOMIC_VERIFIER_CELLFIX14_HANDOFF.md](ATOMIC_VERIFIER_CELLFIX14_HANDOFF.md).
+
+## Mốc model thật gần nhất — Cellfix13 Validation30 trượt; chưa đạt acceptance tích hợp — 2026-10-28
+
+- Run `20261027T151114Z-20ea1926`, ZIP `(5)` có 151 output / 131 input
+  đúng release. Source/prompt/model/budget/gate không đổi. Review probe18 và
+  full39 của chính run mới được human gate chấp nhận (Trí Công, 90/195 true).
+- Smoke12 và full39 nhãn đạt, nhưng **Validation30 chỉ 10/30 nhãn đúng,
+  false support=0, bốn runtime failures**. Support recall 3/10; contradict
+  recall 0/10. 16 ca hoàn tất nhưng sai nhãn. Chưa promote serving/E2E.
+- Metrics/classification đã replay khớp frozen source. Hai call timeout thiếu
+  generation events (62/64); usage 6.942 generated tokens chỉ là lower bound.
+  Một ca mất 2.722 giây dù budget 180 giây; cooperative flag không chứng minh
+  deadline được thực thi. Gate failed là đúng, không sửa review để qua.
+- Findings: lượng từ decoder/validator không tương thích ở ca015; model ID/
+  section range bị coi quantity; compound object/duration chưa đủ; target/
+  comparator/reference binding sai; ca021 false refutation khi nguồn không
+  nêu language; ca019 đúng nhãn nhưng member là clause fragment.
+- Giữ run thất bại; sửa candidate mới bằng regression tổng quát. Nếu dùng
+  bộ30 này để sửa/tune thì chuyển thành development, chuẩn bị holdout khác
+  theo paper và khóa gold/evidence/review/hash trước inference mới.
+- Bằng chứng: `docs/atomic-verifier-cellfix13-validation30-audit-20261027T151114Z-20ea1926.json`
+  và `docs/reviews/cellfix13-validation30-20261027T151114Z-20ea1926/`.
+- Bản chuyển Kaggle `scripts/kaggle_atomic_verifier_cellfix13.ipynb` giữ
+  payload/gate; chỉ kiểm offline, chưa GPU. Không phải candidate sửa lỗi.
+
+## Mốc trước — Cellfix13 full39 đạt gate tự động, human review còn pending ở run cũ — 2026-10-27
+
+- Run `20261027T113721Z-18c80dae`, ZIP full39 `(3)` có 113 output /
+  131 input khớp manifest/release và giữ nguyên smoke/probe của ZIP `(2)`.
+  Colab 385/385 regression và bốn validate-only đạt; smoke 12/12 nhãn,
+  false support=0, runtime=0. Probe18 đã có review human Trí Công đúng hash.
+- Full39 **39/39 nhãn, false support=0, runtime=0, 85 calls**; toàn bộ
+  budget/trace checks đạt. Local replay 131 calls của ba stage khớp kết quả
+  và metrics. Không tạo inference mới trong lượt audit.
+- AI đã đọc đủ 39 claim/context/46 assessment, chưa thấy lỗi ở 195 tiêu chí;
+  sáu lỗi member/target cũ không tái xuất hiện trong predictions mới.
+  **Đây chưa phải human review full39.** Form có ghi chú AI vẫn để trống
+  195 checkbox; gate thật chặn review unsigned và assistant.
+- Bước kế tiếp: human review full39 mới + 39 notes; chỉ khi mọi tiêu chí
+  đạt mới bật cell7 Validation30. **Validation30 chưa chạy; chưa promote
+  serving hoặc tuyên bố Reader/Summarizer E2E Ready.**
+- Báo cáo: `docs/atomic-verifier-cellfix13-full39-audit-20261027T113721Z-18c80dae.json`.
+  Form và hướng dẫn: `docs/reviews/cellfix13-full39-20261027T113721Z-18c80dae/`.
+
+## Mốc đóng băng Cellfix13 — 2026-10-27
+
+- Candidate `atomic-verifier-constrained-v8-cellfix13`, criteria
+  `fc4d4a8f7baaf88886cbd3047819125752867e7cdb2f2a8fb850f4be293abb4c`.
+  Shared member/target guard: atomic target vắng mặt có empty unknown ledger;
+  unknown population records dùng source nominal/group/name reference có căn cứ,
+  không dùng clause/fragment/quantity thay entity; cite absence của chính member.
+- Giữ nguyên Cellfix12 run `20261027T092904Z-e02b51ab`: 39/39 nhãn nhưng
+  human review sáu tiêu chí false. ZIP, source/release, predictions và human
+  review bảo toàn bằng hash; không đổi judgments/gold cũ thành đạt.
+- **385/385 regression, 90/90 đường token filter Qwen, 35/35 test notebook/
+  workflow/retry/gate và bốn validate-only exact payload đạt.** Replay 46
+  ledger cũ: 36 qua guard, 10 bị từ chối, gồm chín observation lỗi trong sáu
+  ca human trượt và một ca May NEI phải cite direct absence. Không tạo prediction mới.
+- Model/revision/budget/gold/gate/decomposition prompt giữ nguyên. Ba file
+  test cũ được cập nhật trong copy candidate: giữ bad ledgers làm negative
+  controls, thêm empty unknown response đúng contract. Không bỏ test/fixture.
+  Overlap screen 77 file/3.328 chuỗi không có cờ; validation30 chưa dùng tune.
+- Notebook `scripts/colab_atomic_verifier_cellfix13.ipynb`: 7 code cell,
+  117 candidate/131 payload inputs; notebook SHA
+  `bc09f708b5b66a43a4d1af0c4f48c785e4a2159bc706c6ee2990eb544dbb839e`.
+  Human gate giữ nguyên; thông báo lỗi mới nêu case/criterion bị chặn.
+- **Chưa có inference T4/human review mới của Cellfix13.** Chạy runtime mới
+  cells1–5 -> probe18 + review mới -> cell6 full39 + review mới; chỉ mở cell7
+  khi mọi automated/semantic gate cùng đạt. Chưa công bố sáu false đã thành true,
+  chưa chạy validation30, promote serving hoặc Reader/Summarizer E2E.
+- Handoff: `docs/ATOMIC_VERIFIER_CELLFIX13_HANDOFF.md`. Bằng chứng:
+  `docs/atomic-verifier-cellfix13-{release,validation,tokenizer-check,packaging-validation}.json`
+  và `docs/reviews/cellfix13-development/BASELINE_TRACE_REPLAY.json`.
+
+## Mốc trước — Cellfix12 human review xác nhận sáu tiêu chí trượt; validation30 bị chặn — 2026-10-27
+
+- Run mới `20261027T092904Z-e02b51ab`, diagnostic ZIP `(6)`: 116 output
+  khớp manifest, payload trùng frozen Cellfix12. Full39 vẫn 39/39 nhãn đúng,
+  false support=0, runtime=0, 85 calls; chưa có inference validation30.
+- `semantic-review (11).json`: Trí Công/human/review_completed=true; đủ
+  39 ca/195 keys/39 notes, đúng criteria và predictions SHA
+  `42deb4c53f4a5e044ae98f105efb463d95977654fd6ea6ae2bc008f18d87ff3b`.
+  **189 true, 6 false** ở explanation_follows_evidence: irrelevant, NONE NEI,
+  ba conjunction và condition NEI. Đã đối chiếu fragment/quantity/workload
+  members với predictions mới. Review hoàn tất nhưng không đạt acceptance.
+- Preflight chặn đúng tại require_human_review; chưa cần sửa cell7 hoặc nới
+  gate. Giữ RUN_VALIDATION30=False, bảo toàn review trượt làm mốc cho sửa
+  member/target semantics chung trong candidate tiếp; chưa triển khai bản mới.
+- Chẩn đoán và bằng chứng:
+  `docs/reviews/cellfix12-full39-20261027T092904Z-e02b51ab/ADMISSION_DIAGNOSIS.{md,json}`.
+
+## Mốc trước — Cellfix12 full39 39/39; AI review còn sáu cờ semantic — 2026-10-27
+
+- Run `20261027T025350Z-c67b6d37`, ZIP `(3)`: 113 output/127 input khớp
+  release; giữ nguyên ZIP smoke/probe `(2)`. Replay 69 rows/131 call triplets,
+  source/model/revision/budget/gate đúng hash; probe admission Trí Công hợp lệ.
+- Full39 **39/39 nhãn đúng, false support=0, runtime=0**, 85 calls;
+  original_contracts 12/12, scope_regression 27/27. Generated 9.361, prompt
+  113.156 token; trace/budget đạt. Đây là development, chưa đo generalization.
+- Hai North gateway và condition label đã đúng. Tuy nhiên AI audit đánh dấu
+  `explanation_follows_evidence` chưa đạt ở sáu ca: irrelevant, NONE NEI,
+  ba conjunction và condition NEI. Member là fragment như
+  `Silver's leak status was not`, `no yield changes were`, hoặc quantities/
+  workload thay extractor. Nhãn NEI đúng không làm observation identity đúng.
+- Có thể bắt đầu human review full39, chưa được coi review sạch. Form mới
+  giữ 195 checkbox chưa tích; phải review trung thực cả ca trượt. Giữ
+  `RUN_VALIDATION30=False`; chưa inference validation30 hoặc promote serving.
+- Bằng chứng và form: `docs/reviews/cellfix12-full39-20261027T025350Z-c67b6d37/`.
+  Audit machine-readable: `docs/atomic-verifier-cellfix12-full39-audit-20261027T025350Z-c67b6d37.json`.
+  Không sửa source/predictions/gold/release trong lượt audit này.
+
+## Mốc đóng băng — Cellfix12 trước inference T4 — 2026-10-26
+
+- Candidate `atomic-verifier-constrained-v8-cellfix12`; criteria SHA256
+  `e147868fc5826a1f10e5a5132e1ea0fb0517e16b66b229c2ad163e71f64146f7`.
+  Source mới sửa chung quote/member binding kể cả unknown, decisive atomic
+  target/property witness và absence trước polarity; validator/decoder dùng
+  cùng guard. Model/revision/budget/gold/gate/decomposition prompt không đổi.
+- Giữ nguyên ZIP `(3)`/109 output/source/predictions Cellfix11 36/39 làm mốc.
+  Replay 46 ledger: 42 qua guard, bốn bị từ chối; không tạo prediction mới.
+- **363/363 regression, 64/64 đường token filter Qwen, 34/34 test notebook/
+  workflow/retry/gate, bốn validate-only exact payload đạt**. Overlap screen
+  73 file/2.977 chuỗi không có cờ; validation30 packet/review/lock giữ nguyên,
+  binding mới không tạo chữ ký human hoặc dùng held-out outcome để tune.
+- Notebook `scripts/colab_atomic_verifier_cellfix12.ipynb`: 7 code cell,
+  113 candidate/127 payload input, source/prompt/contract/criteria/binding khớp
+  hash. Notebook SHA `3f09c406e82719bf26089440a7479787e9974a938f0e31133e9d9d138dcf440d`.
+- **Chưa chạy model T4 Cellfix12 hoặc human review mới; validation30 tiếp tục
+  tắt.** Chạy runtime mới cells1–5 -> probe human review đúng run -> cell6
+  full39 -> full39 automated gate và human evidence review cùng đạt -> cell7.
+  Không dùng điểm replay/offline để công bố accuracy/false support mới. Chưa
+  promote serving hoặc kiểm Reader/Summarizer E2E.
+- Handoff: `docs/ATOMIC_VERIFIER_CELLFIX12_HANDOFF.md`; bằng chứng
+  `docs/atomic-verifier-cellfix12-{release,validation,tokenizer-check,packaging-validation}.json`
+  và `docs/reviews/cellfix12-development/BASELINE_TRACE_REPLAY.json`.
+
+## Mốc trước — Cellfix11 full39 36/39; validation30 bị chặn — 2026-10-26
+
+- Audit run `20261026T150123Z-615bf4eb`, ZIP `(3)`: **109 output/124 input khớp
+  release**, giữ nguyên smoke/probe ZIP `(2)`. Replay 69 predictions/131 call
+  triplets; source/model/revision/budget/gate và human probe admission đúng hash.
+- Full39 **36/39 nhãn đúng, false support=0, runtime=0**, 85 calls. Original
+  contracts 12/12; scope regression 24/27. Mọi call valid attempt đầu, không có
+  repair/deadline/parse failure; exit1 do quality gate, không phải Colab crash.
+- Sai: North support -> NEI (cite South); North contradict -> NEI (bỏ decisive
+  evidence); low-temperature NEI -> contradict (absence measurement thành false
+  member refute ALL). Validator/decoder còn chấp nhận các bad ledger này.
+- Causal missing và quote precision NEI đã đúng trên output mới; condition NEI
+  vẫn sai truth dù không còn dùng member high-temperature. Cần sửa chung unknown
+  quote/entity binding và absence-before-polarity, thêm regression trace/câu mới.
+- **RUN_VALIDATION30=False**: full39 chưa đạt, human full39 pending. Giữ baseline
+  Cellfix10 39/39 nhãn và Cellfix11 thất bại riêng; không sửa gold/review/metrics
+  để qua gate. Chưa tune trên validation30, chưa promote serving/E2E.
+- [Audit và hướng tiếp](reviews/cellfix11-full39-20261026T150123Z-615bf4eb/AUDIT_AND_NEXT_STEPS.md),
+  [39 ghi chú AI](reviews/cellfix11-full39-20261026T150123Z-615bf4eb/EVIDENCE_REVIEW_39.md),
+  [reproducer guard](reviews/cellfix11-full39-20261026T150123Z-615bf4eb/GUARD_DIAGNOSTICS.json),
+  [hash/replay](atomic-verifier-cellfix11-full39-audit-20261026T150123Z-615bf4eb.json).
+
+## Mốc trước — Cellfix11 run 150123 smoke/probe — 2026-10-26
+
+- Audit ZIP `output-cellfix11-fresh-20261026T150123Z-615bf4eb (2).zip`:
+  **71 output/124 input khớp release**, replay 30 predictions/46 call triplets,
+  metrics khớp. Remote regression 342/342 và bốn validate-only đạt.
+- Smoke **12/12 nhãn đúng, false support=0, runtime=0**, probe **18/18 decomposition
+  hợp lệ**, 20 part. Stored smoke parts và normalized probe plans giống lượt trước;
+  file predictions hash khác nên cần review đúng run mới.
+- AI đối chiếu đủ 90 tiêu chí decomposition: 18/18 đạt theo AI. Review human
+  trong ZIP chưa ký; admission chặn đúng. Được sang review probe mới rồi cell6.
+- **Full39 Cellfix11 chưa chạy; RUN_VALIDATION30=False.** Không dùng review của
+  run trước hoặc chuyển kết quả 39/39 Cellfix10 sang candidate mới.
+- [Audit](reviews/cellfix11-20261026T150123Z-615bf4eb/AUDIT_AND_NEXT_STEPS.md),
+  [form đúng run](reviews/cellfix11-20261026T150123Z-615bf4eb/HUMAN_REVIEW_WITH_AI_NOTES.html),
+  [hash/replay](atomic-verifier-cellfix11-smoke-probe-audit-20261026T150123Z-615bf4eb.json).
+
+## Mốc trước — Cellfix11 run 125935 smoke/probe — 2026-10-26
+
+- Audit run `20261026T125935Z-2cff8d38`: **71 output/124 input khớp release**,
+  replay 30 prediction rows/46 call triplets; metrics/derived parts khớp.
+  Colab regression 342/342, bốn validate-only và validation binding đạt.
+- Smoke **12/12 nhãn đúng, false support=0, runtime=0**, 28 calls. Ca causal đã
+  cite câu không thiết lập quan hệ nhân quả và nêu reason `causal_relationship`.
+  Member của irrelevant còn là câu/không phải entity; nhãn đúng không đảm bảo
+  toàn bộ ledger/prose đã sạch.
+- Probe **18/18 decomposition hợp lệ**, 20 part; AI đối chiếu đủ 90 tiêu chí,
+  18/18 claim đạt theo AI. Review human trong ZIP chưa ký; gate chặn đúng.
+- Được chuyển sang human review probe mới rồi cell6/full39. **Full39 Cellfix11
+  chưa chạy**, hai lỗi scope39 còn phải đo lại; chưa được chuyển kết quả 39/39
+  Cellfix10 sang candidate mới. **RUN_VALIDATION30=False**, chưa promote serving/E2E.
+- [Audit và bước tiếp](reviews/cellfix11-20261026T125935Z-2cff8d38/AUDIT_AND_NEXT_STEPS.md),
+  [form đúng run mới](reviews/cellfix11-20261026T125935Z-2cff8d38/HUMAN_REVIEW_WITH_AI_NOTES.html),
+  [hash/replay](atomic-verifier-cellfix11-smoke-probe-audit-20261026T125935Z-2cff8d38.json).
+
+## Mốc đóng băng — cellfix11 kiểm local trước T4 — 2026-10-26
+
+- Giữ nguyên baseline cellfix10 run `20261026T102553Z-54409fed` **39/39 nhãn,
+  false support=0, runtime=0**, cùng ZIP, 117 output, source release và review/audit
+  có ba lỗi semantic. Không sửa judgment để mở gate.
+- Cellfix11 sửa `assessment_reporting.py` để nêu thiếu `causal_relationship`;
+  helper dùng chung `assessment_focus.py` yêu cầu quote absence trực tiếp của
+  metric/relation và kiểm local condition/time cả với unknown observation.
+  Validator/decoder không dùng case ID hoặc tên metric/nhóm của regression.
+- **342/342 regression** (28 test mới, mọi fixture cũ nguyên bytes), **37/37 đường
+  token filter**, **15 test notebook + 6 workflow + 10 cell6 + 3 cell7** đạt.
+  Cả bốn validate-only từ payload đạt. Replay 46 assessment baseline từ chối đúng
+  ba output lỗi; không tạo prediction/model score mới.
+- Criteria `e0d6bb116d32f4485e678e635c8e911577148212875c9c24f782b2ed2ad84789`;
+  110 file candidate/124 file payload. Model/revision, decomposition prompt,
+  budget/gate và bộ39 giữ nguyên. Validation30 gốc giữ nguyên gold/review/lock,
+  binding mới cellfix11-v1, overlap screen 0 cờ, chưa chạy inference hoặc tune.
+- Cell6/7 mặc định tắt và retry admission bảo toàn status/log cũ. Cần chạy T4
+  smoke -> probe18 + human review mới -> full39 + human evidence review sạch.
+  **Chưa có kết quả GPU cellfix11, chưa có human review mới; RUN_VALIDATION30=False.**
+  Chưa promote serving hoặc Reader/Summarizer E2E.
+- [Notebook](../scripts/colab_atomic_verifier_cellfix11.ipynb),
+  [hướng dẫn và giới hạn](ATOMIC_VERIFIER_CELLFIX11_HANDOFF.md),
+  [release](atomic-verifier-cellfix11-release.json),
+  [kiểm đóng gói](atomic-verifier-cellfix11-packaging-validation.json),
+  [baseline được bảo toàn](atomic-verifier-cellfix10-preserved-before-cellfix11.json).
+
+## Mốc GPU gần nhất — cellfix10 full39 39/39, ba lỗi semantic — 2026-10-26
+
+- Run `20261026T102553Z-54409fed`: **117 output/120 input khớp release**;
+  replay 69 predictions/131 call triplets, metrics và derived parts khớp.
+  Model/revision/budget/gate giữ nguyên, remote regression 314/314 và bốn
+  validate-only đạt. Probe human Trí Công đúng hash, admission retry đạt.
+- **Full39 39/39 nhãn đúng, false support=0 theo gold, runtime=0**, 85 calls,
+  9.404 generated tokens. Original contracts 12/12; scope regression 27/27.
+  Zero false support đã đo trên bộ39 development, chưa đo validation30.
+- Human review full39 trong ZIP **pending**, overall_pass=false. AI audit đủ
+  39 ca còn đánh dấu missing causal chưa cụ thể, quote recall cho claim precision,
+  observation high-temperature cho claim low-temperature. Có warning member là
+  measurement/đoạn văn trong các ca NEI; nhãn đúng chưa đảm bảo ledger/prose đạt.
+- **Giữ RUN_VALIDATION30=False**. Cần chốt review full39 và xử lý tiêu chí
+  semantic chưa đạt trước admission. Giữ ZIP/predictions 39/39 làm mốc, không
+  sửa source đã đóng băng hoặc dùng validation30 để tune. Chưa promote serving/E2E.
+- [Audit và bước tiếp](reviews/cellfix10-full39-20261026T102553Z-54409fed/AUDIT_AND_NEXT_STEPS.md),
+  [39 ghi chú AI](reviews/cellfix10-full39-20261026T102553Z-54409fed/EVIDENCE_REVIEW_39.md),
+  [form review full39](reviews/cellfix10-full39-20261026T102553Z-54409fed/HUMAN_REVIEW_WITH_AI_NOTES.html),
+  [hash/replay](atomic-verifier-cellfix10-full39-audit-20261026T102553Z-54409fed.json).
+
+## Mốc trước — cellfix10 T4 smoke/probe — 2026-10-20
 
 - Audit run `20261020T145035Z-d525a354`: **71 output/120 input khớp release**,
   replay 30 predictions/46 call triplets; metrics và derived parts khớp source.

@@ -1,0 +1,23 @@
+{
+  "run_id": "20261026T150123Z-615bf4eb",
+  "candidate": "atomic-verifier-constrained-v8-cellfix11",
+  "criteria_sha256": "e0d6bb116d32f4485e678e635c8e911577148212875c9c24f782b2ed2ad84789",
+  "full39_predictions_sha256": "a23385ddf6195fa8ff701dee2c799dbd46818b4a0fb4f3a4009554b79aaa6a07",
+  "ai_reviewed_cases": 39,
+  "label_matches": 36,
+  "false_support": 0,
+  "runtime_failures": 0,
+  "failed_full39_admission_replayed": true,
+  "bad_ledgers_reproduced_with_validator_and_character_token_filter": 3,
+  "human_signature_created": false,
+  "source_predictions_original_zip_preserved": true,
+  "candidate_release_files_unchanged": true,
+  "validation30_inference_completed": false,
+  "new_inference_during_audit": false,
+  "files_sha256": {
+    "AI_EVIDENCE_AUDIT.json": "30ac06d51d4f9472d907f42d5260d54b5634af4508d11178a4da1ba634f6c6ee",
+    "AUDIT_AND_NEXT_STEPS.md": "23de632762ff092e7a7dc94450d4c5d663be391273a1f18d58100a71c8eb906e",
+    "EVIDENCE_REVIEW_39.md": "32129f826f451eb617812485120930ab739ecf3e41b8bb768e71ffd4a3f09fdc",
+    "GUARD_DIAGNOSTICS.json": "4b63b3c43ce40cde2fac41cbdf7200dacea98f4865009202b4d1715fa42329f9"
+  }
+}

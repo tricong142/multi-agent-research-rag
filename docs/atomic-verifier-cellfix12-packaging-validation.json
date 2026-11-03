@@ -1,0 +1,64 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix12",
+  "criteria_sha256": "e147868fc5826a1f10e5a5132e1ea0fb0517e16b66b229c2ad163e71f64146f7",
+  "notebook": "C:\\Users\\dellcuatri142\\Downloads\\AI ENGINEER\\scripts\\colab_atomic_verifier_cellfix12.ipynb",
+  "notebook_sha256": "3f09c406e82719bf26089440a7479787e9974a938f0e31133e9d9d138dcf440d",
+  "candidate_files": 113,
+  "payload_files": 127,
+  "regression_tests": 363,
+  "regression_pass": true,
+  "token_filter_paths": 64,
+  "token_filter_pass": true,
+  "packaging_gate_tests": {
+    "test_colab_cellfix12": {
+      "tests": 15,
+      "failures": 0,
+      "errors": 0
+    },
+    "test_atomic_cellfix12_workflow": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0
+    },
+    "test_cellfix12_cell6": {
+      "tests": 10,
+      "failures": 0,
+      "errors": 0
+    },
+    "test_cellfix12_cell7": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0
+    }
+  },
+  "payload_validate_only": {
+    "smoke": {
+      "freeze_valid": true,
+      "cases": 12,
+      "maximum_calls": 96
+    },
+    "probe": {
+      "freeze_valid": true,
+      "cases": 18,
+      "maximum_calls": 36
+    },
+    "full39": {
+      "freeze_valid": true,
+      "cases": 39,
+      "maximum_calls": 312
+    },
+    "validation30": {
+      "freeze_valid": true,
+      "cases": 30,
+      "maximum_calls": 240,
+      "prerequisites_required_for_inference": true
+    }
+  },
+  "release_catalog_valid": true,
+  "candidate_hashes_valid": true,
+  "new_model_inference_completed": false,
+  "probe_human_review": "pending_new_predictions",
+  "full39_human_review": "pending_new_predictions",
+  "validation30_inference_completed": false,
+  "promoted_to_serving": false
+}

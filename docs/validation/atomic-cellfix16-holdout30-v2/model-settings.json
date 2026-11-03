@@ -1,0 +1,17 @@
+{
+  "model": "Qwen/Qwen2.5-3B-Instruct",
+  "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "seed": 42,
+  "quantization": "NF4",
+  "dtype": "float16",
+  "do_sample": false,
+  "candidate_criteria_sha256": "c025247428698d892e549fb12ad22e19561020b034a2a2276c9dfcaf0cbdc966",
+  "budget": {
+    "calls_per_case": 8,
+    "attempts_per_stage": 2,
+    "new_tokens_per_call": 1536,
+    "seconds_per_case": 180,
+    "maximum_calls": 240,
+    "maximum_generated_tokens": 368640
+  }
+}

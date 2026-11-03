@@ -1,0 +1,39 @@
+{
+  "candidate": "atomic-verifier-constrained-v8-cellfix14",
+  "criteria_sha256": "f63345bb14de338432e57bad6644301bb43ef61e1fd6cf5e22376dcab2b19e5e",
+  "regression_tests": 405,
+  "token_paths": 94,
+  "packaging_tests": 38,
+  "packaging_tests_passed": true,
+  "exact_payload_validate_only": {
+    "smoke": {
+      "freeze_valid": true,
+      "cases": 12,
+      "maximum_calls": 96
+    },
+    "probe": {
+      "freeze_valid": true,
+      "cases": 18,
+      "maximum_calls": 36
+    },
+    "full39": {
+      "freeze_valid": true,
+      "cases": 39,
+      "maximum_calls": 312
+    },
+    "validation30": {
+      "freeze_valid": true,
+      "cases": 30,
+      "maximum_calls": 240,
+      "prerequisites_required_for_inference": true
+    }
+  },
+  "payload_inputs": 137,
+  "parent_release_files_unchanged": 21,
+  "released_files_verified": 21,
+  "model_inference_completed": false,
+  "validation30_used_for_tuning": true,
+  "evaluation_role": "development",
+  "independent_validation_completed": false,
+  "promoted_to_serving": false
+}

@@ -1,0 +1,55 @@
+{
+  "version": "independent-verifier-pilot-v2",
+  "scope": "supplied-context verifier; not pipeline E2E",
+  "model": "Qwen/Qwen2.5-3B-Instruct",
+  "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "seed": 42,
+  "quantization": "NF4",
+  "dtype": "float16",
+  "do_sample": false,
+  "candidate_criteria_sha256": "c025247428698d892e549fb12ad22e19561020b034a2a2276c9dfcaf0cbdc966",
+  "budget": {
+    "calls_per_case": 8,
+    "attempts_per_stage": 2,
+    "new_tokens_per_call": 1536,
+    "seconds_per_case": 180,
+    "maximum_calls": 240,
+    "maximum_generated_tokens": 368640
+  },
+  "gate": {
+    "cases": 30,
+    "correct_labels": 30,
+    "false_support": 0,
+    "runtime_failed_rows": 0,
+    "every_paper_complete_and_correct": true,
+    "measured_token_budget_required": true,
+    "decode_and_deadline_trace_required": true
+  },
+  "prerequisites": [
+    "Direct human annotation admission",
+    "Same-candidate smoke12, probe18 and human review",
+    "Same-candidate full39 and human review",
+    "Record the preregistered dev30 result before holdout inference"
+  ],
+  "report": [
+    "confusion",
+    "per_label_precision_recall",
+    "support_recall",
+    "false_support_and_denominator",
+    "runtime_failures",
+    "per_paper_results",
+    "latency",
+    "backend_calls",
+    "prompt_tokens",
+    "generated_tokens"
+  ],
+  "outcome_policy": "One preregistered quality run; preserve failures and declared technical reruns. Retire to development if used for tuning.",
+  "label_origin": "AI-proposed; direct human adjudication pending",
+  "limitations": [
+    "Lexical checks cannot prove semantic non-overlap.",
+    "Unreliable Summarizer document IDs prevent a complete paper-level training exclusion proof.",
+    "The cached QASPER corpus was previously indexed; this is not an unseen-corpus retrieval benchmark.",
+    "Base-model pretraining exposure is unknown.",
+    "Three contrast siblings per paper are correlated; not a representative random sample."
+  ]
+}

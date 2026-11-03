@@ -1,0 +1,14 @@
+{
+  "run_id": "20261027T113721Z-18c80dae",
+  "form_cards": 39,
+  "form_criteria": 195,
+  "form_notes_fields": 39,
+  "prechecked_boxes": 0,
+  "original_export_script_unchanged": true,
+  "original_html_bytes_preserved": true,
+  "ai_true_judgments": 195,
+  "ai_false_judgments": 0,
+  "human_review_completed": false,
+  "ai_review_admission_blocked": true,
+  "gate_message": "Completed human review bound to this candidate and predictions is required"
+}

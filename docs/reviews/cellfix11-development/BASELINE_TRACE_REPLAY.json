@@ -1,0 +1,296 @@
+{
+  "kind": "old_trace_replay_not_new_model_predictions",
+  "candidate": "atomic-verifier-constrained-v8-cellfix11",
+  "baseline_cases": 39,
+  "assessment_calls": 46,
+  "rejected_baseline_outputs": {
+    "contract:causality_missing": [
+      "missing_evidence_quote_required"
+    ],
+    "scope:metric:not_enough_info": [
+      "missing_evidence_quote_required"
+    ],
+    "scope:condition:not_enough_info": [
+      "observation_scope_mismatch"
+    ]
+  },
+  "checks": [
+    {
+      "case": "contract:partial_accuracy",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "support"
+    },
+    {
+      "case": "contract:partial_accuracy",
+      "stage": "part_2",
+      "accepted": true,
+      "label": "not_enough_info"
+    },
+    {
+      "case": "contract:partial_memory",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "not_enough_info"
+    },
+    {
+      "case": "contract:partial_memory",
+      "stage": "part_2",
+      "accepted": true,
+      "label": "support"
+    },
+    {
+      "case": "contract:both_supported",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "support"
+    },
+    {
+      "case": "contract:both_supported",
+      "stage": "part_2",
+      "accepted": true,
+      "label": "support"
+    },
+    {
+      "case": "contract:accuracy_conflict",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "support"
+    },
+    {
+      "case": "contract:accuracy_conflict",
+      "stage": "part_2",
+      "accepted": true,
+      "label": "contradict"
+    },
+    {
+      "case": "contract:irrelevant",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "not_enough_info"
+    },
+    {
+      "case": "contract:negation",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "contradict"
+    },
+    {
+      "case": "contract:causality_missing",
+      "stage": "part_1",
+      "accepted": false,
+      "issue": "missing_evidence_quote_required"
+    },
+    {
+      "case": "contract:scope",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "contradict"
+    },
+    {
+      "case": "contract:cross_sentence",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "support"
+    },
+    {
+      "case": "contract:wrong_units",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "contradict"
+    },
+    {
+      "case": "contract:atomic_support",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "support"
+    },
+    {
+      "case": "contract:bounded_scope",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "support"
+    },
+    {
+      "case": "scope:universal:support",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "support"
+    },
+    {
+      "case": "scope:universal:contradict",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "contradict"
+    },
+    {
+      "case": "scope:universal:not_enough_info",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "not_enough_info"
+    },
+    {
+      "case": "scope:existential:support",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "support"
+    },
+    {
+      "case": "scope:existential:contradict",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "contradict"
+    },
+    {
+      "case": "scope:existential:not_enough_info",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "not_enough_info"
+    },
+    {
+      "case": "scope:none:support",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "support"
+    },
+    {
+      "case": "scope:none:contradict",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "contradict"
+    },
+    {
+      "case": "scope:none:not_enough_info",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "not_enough_info"
+    },
+    {
+      "case": "scope:entity:support",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "support"
+    },
+    {
+      "case": "scope:entity:contradict",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "contradict"
+    },
+    {
+      "case": "scope:entity:not_enough_info",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "not_enough_info"
+    },
+    {
+      "case": "scope:time:support",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "support"
+    },
+    {
+      "case": "scope:time:contradict",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "contradict"
+    },
+    {
+      "case": "scope:time:not_enough_info",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "not_enough_info"
+    },
+    {
+      "case": "scope:direction:support",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "support"
+    },
+    {
+      "case": "scope:direction:contradict",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "contradict"
+    },
+    {
+      "case": "scope:direction:not_enough_info",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "not_enough_info"
+    },
+    {
+      "case": "scope:metric:support",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "support"
+    },
+    {
+      "case": "scope:metric:contradict",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "contradict"
+    },
+    {
+      "case": "scope:metric:not_enough_info",
+      "stage": "part_1",
+      "accepted": false,
+      "issue": "missing_evidence_quote_required"
+    },
+    {
+      "case": "scope:conjunction:support",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "not_enough_info"
+    },
+    {
+      "case": "scope:conjunction:support",
+      "stage": "part_2",
+      "accepted": true,
+      "label": "not_enough_info"
+    },
+    {
+      "case": "scope:conjunction:contradict",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "not_enough_info"
+    },
+    {
+      "case": "scope:conjunction:contradict",
+      "stage": "part_2",
+      "accepted": true,
+      "label": "not_enough_info"
+    },
+    {
+      "case": "scope:conjunction:not_enough_info",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "not_enough_info"
+    },
+    {
+      "case": "scope:conjunction:not_enough_info",
+      "stage": "part_2",
+      "accepted": true,
+      "label": "not_enough_info"
+    },
+    {
+      "case": "scope:condition:support",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "support"
+    },
+    {
+      "case": "scope:condition:contradict",
+      "stage": "part_1",
+      "accepted": true,
+      "label": "contradict"
+    },
+    {
+      "case": "scope:condition:not_enough_info",
+      "stage": "part_1",
+      "accepted": false,
+      "issue": "observation_scope_mismatch"
+    }
+  ],
+  "new_inference": false
+}

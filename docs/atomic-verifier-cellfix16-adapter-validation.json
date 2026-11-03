@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-03",
+  "criteria_sha256": "c025247428698d892e549fb12ad22e19561020b034a2a2276c9dfcaf0cbdc966",
+  "default_verifier": "legacy",
+  "opt_in_flag": "--verifier atomic",
+  "execution_mode": "real_cellfix16_validators_with_synthetic_model_outputs",
+  "regression_tests": 79,
+  "failures": 0,
+  "errors": 0,
+  "cli_help_passed": true,
+  "frozen_release_files_unchanged": {
+    "cellfix16": 23,
+    "cellfix14": 21,
+    "cellfix15": 21
+  },
+  "gpu_inference_tested": false,
+  "model_e2e_tested": false,
+  "confidence_semantics": "binary_completed_ledger_eligibility_not_calibrated_probability",
+  "test_log": "research-runs/atomic-adapter-regression.log",
+  "test_log_sha256": "c747dcfef184d231b4883b3bd81f388ca20de7d2cb5dbf601966dfa59028f087",
+  "source_sha256": {
+    "research_rag/local.py": "a6db1fff8e9d38b393807eb3a3ba8e48de6923d32be303f2cf8929f967a035b3",
+    "research_rag/graph.py": "d41064334b36c2c44a2e25ba85575f1d9302b06c31ffee16aa1a5b184459568c",
+    "research_rag/atomic_adapter.py": "d6ee735a811e38257b84734f1d470c07c9ba6bddb59fa35e6dfc6b4eb117fdb5",
+    "research_rag/tests/test_atomic_adapter.py": "aadd0fa051f366cae9818254cda56c1d48e85e1b601bf52809120b7f5b811582",
+    "research_rag/README.md": "9b2c93f258fa0d14ca756de76041b80401eae5a4807983373ca3c38e7365a361"
+  }
+}

@@ -1,0 +1,310 @@
+{
+  "run_id": "20261026T150123Z-615bf4eb",
+  "candidate": "atomic-verifier-constrained-v8-cellfix11",
+  "zip_sha256": "5dadfe8e17b86b3172c88aed423c953b0ccd79a7a003bd0b6528709ab7ad6076",
+  "output_files": 109,
+  "input_files": 124,
+  "all_output_hashes_valid": true,
+  "all_input_bytes_match_release": true,
+  "parent_smoke_probe_zip_sha256": "f7d392303416870e6a852d9231660fc0bcd94864388a154e3f3acbe39cddc473",
+  "same_run_parent_artifacts_preserved": true,
+  "reviewed_probe_copy_lineage_valid": true,
+  "criteria_sha256": "e0d6bb116d32f4485e678e635c8e911577148212875c9c24f782b2ed2ad84789",
+  "payload_sha256": "16b52cfbf4d954658f795ec9ddfb73fd0ccb1aa211784c8d5f333d11dc136b0c",
+  "all_predictions_and_calls_replayed": true,
+  "metrics_recomputed_exactly": true,
+  "model_revision_budget_gate_unchanged": true,
+  "probe_human_admission": {
+    "probe_predictions_sha256": "b1714e5139551d89fa23295d7b04d7d8e15c98c3d174834b59c0bca935a69afd",
+    "semantic_review_sha256": "c2599a6b6a03306c9fa6ab018534cee9c746051ca23db1b70f1478e7f5c63c19",
+    "reviewer": "Trí Công"
+  },
+  "remote_regression_tests_passed": 342,
+  "remote_validate_only": {
+    "smoke": {
+      "freeze_valid": true,
+      "cases": 12,
+      "maximum_calls": 96
+    },
+    "probe": {
+      "freeze_valid": true,
+      "cases": 18,
+      "maximum_calls": 36
+    },
+    "verifier": {
+      "freeze_valid": true,
+      "cases": 39,
+      "maximum_calls": 312
+    },
+    "validation30": {
+      "freeze_valid": true,
+      "cases": 30,
+      "maximum_calls": 240,
+      "prerequisites_required_for_inference": true
+    }
+  },
+  "results": {
+    "assessment-smoke": {
+      "metrics": {
+        "n": 12,
+        "correct_labels": 12,
+        "false_support": 0,
+        "runtime_failed_rows": 0,
+        "gold_support_rejected": 0,
+        "gold_support_count": 4,
+        "backend_calls": 28,
+        "checks": {
+          "all_cases_present": true,
+          "all_labels_correct": true,
+          "no_false_support": true,
+          "no_runtime_failures": true,
+          "within_call_budget": true,
+          "each_group_complete_and_correct": true,
+          "within_measured_token_budget": true,
+          "structured_decoding_trace_complete": true,
+          "cooperative_deadline_trace_complete": true
+        },
+        "automated_gate_pass": true,
+        "dataset_groups": {
+          "original_contracts": {
+            "n": 12,
+            "correct": 12,
+            "false_support": 0,
+            "failed": 0
+          }
+        },
+        "stop_reasons": {
+          "completed": 12
+        },
+        "confusion": [
+          {
+            "gold": "contradict",
+            "prediction": "contradict",
+            "n": 4
+          },
+          {
+            "gold": "not_enough_info",
+            "prediction": "not_enough_info",
+            "n": 4
+          },
+          {
+            "gold": "support",
+            "prediction": "support",
+            "n": 4
+          }
+        ],
+        "generated_tokens": 3577,
+        "prompt_tokens": 36561
+      },
+      "call_triplets_reconciled": 28,
+      "validation_issues": {
+        "valid": 28
+      },
+      "exact_citations_checked": 14,
+      "numeric_records_checked": 10,
+      "derived_citation_additions": 1,
+      "predictions_sha256": "798e495216b93b2afd66b9a2a10ef7f477af3ea95024dfa3a520bd09a554030f"
+    },
+    "decomposition-probe": {
+      "metrics": {
+        "n": 18,
+        "valid_decompositions": 18,
+        "incomplete": 0,
+        "backend_calls": 18,
+        "checks": {
+          "all_claims_present": true,
+          "all_decompositions_valid": true,
+          "within_call_budget": true,
+          "within_measured_token_budget": true,
+          "structured_decoding_trace_complete": true,
+          "cooperative_deadline_trace_complete": true
+        },
+        "automated_gate_pass": true,
+        "semantic_review": "pending",
+        "label_accuracy": null,
+        "generated_tokens": 972,
+        "prompt_tokens": 22892
+      },
+      "call_triplets_reconciled": 18,
+      "validation_issues": {
+        "valid": 18
+      },
+      "exact_citations_checked": 0,
+      "numeric_records_checked": 0,
+      "derived_citation_additions": 0,
+      "predictions_sha256": "b1714e5139551d89fa23295d7b04d7d8e15c98c3d174834b59c0bca935a69afd"
+    },
+    "verifier39": {
+      "metrics": {
+        "n": 39,
+        "correct_labels": 36,
+        "false_support": 0,
+        "runtime_failed_rows": 0,
+        "gold_support_rejected": 1,
+        "gold_support_count": 12,
+        "backend_calls": 85,
+        "checks": {
+          "all_cases_present": true,
+          "all_labels_correct": false,
+          "no_false_support": true,
+          "no_runtime_failures": true,
+          "within_call_budget": true,
+          "each_group_complete_and_correct": false,
+          "within_measured_token_budget": true,
+          "structured_decoding_trace_complete": true,
+          "cooperative_deadline_trace_complete": true
+        },
+        "automated_gate_pass": false,
+        "dataset_groups": {
+          "original_contracts": {
+            "n": 12,
+            "correct": 12,
+            "false_support": 0,
+            "failed": 0
+          },
+          "scope_regression": {
+            "n": 27,
+            "correct": 24,
+            "false_support": 0,
+            "failed": 0
+          }
+        },
+        "stop_reasons": {
+          "completed": 39
+        },
+        "confusion": [
+          {
+            "gold": "contradict",
+            "prediction": "contradict",
+            "n": 11
+          },
+          {
+            "gold": "contradict",
+            "prediction": "not_enough_info",
+            "n": 1
+          },
+          {
+            "gold": "not_enough_info",
+            "prediction": "contradict",
+            "n": 1
+          },
+          {
+            "gold": "not_enough_info",
+            "prediction": "not_enough_info",
+            "n": 14
+          },
+          {
+            "gold": "support",
+            "prediction": "not_enough_info",
+            "n": 1
+          },
+          {
+            "gold": "support",
+            "prediction": "support",
+            "n": 11
+          }
+        ],
+        "generated_tokens": 9440,
+        "prompt_tokens": 110212
+      },
+      "call_triplets_reconciled": 85,
+      "validation_issues": {
+        "valid": 85
+      },
+      "exact_citations_checked": 34,
+      "numeric_records_checked": 14,
+      "derived_citation_additions": 1,
+      "predictions_sha256": "a23385ddf6195fa8ff701dee2c799dbd46818b4a0fb4f3a4009554b79aaa6a07"
+    }
+  },
+  "failed_cases": [
+    {
+      "example_id": "scope:entity:support",
+      "gold": "support",
+      "prediction": "not_enough_info",
+      "stop": "completed",
+      "issues": []
+    },
+    {
+      "example_id": "scope:entity:contradict",
+      "gold": "contradict",
+      "prediction": "not_enough_info",
+      "stop": "completed",
+      "issues": []
+    },
+    {
+      "example_id": "scope:condition:not_enough_info",
+      "gold": "not_enough_info",
+      "prediction": "contradict",
+      "stop": "completed",
+      "issues": []
+    }
+  ],
+  "full39_human_review_completed": false,
+  "validation30_admission_block": "Successful full39 is required before validation30",
+  "validation30_inference_present": false,
+  "previous_cf10_metrics_same_cases": {
+    "n": 39,
+    "correct_labels": 39,
+    "false_support": 0,
+    "runtime_failed_rows": 0,
+    "gold_support_rejected": 0,
+    "gold_support_count": 12,
+    "backend_calls": 85,
+    "checks": {
+      "all_cases_present": true,
+      "all_labels_correct": true,
+      "no_false_support": true,
+      "no_runtime_failures": true,
+      "within_call_budget": true,
+      "each_group_complete_and_correct": true,
+      "within_measured_token_budget": true,
+      "structured_decoding_trace_complete": true,
+      "cooperative_deadline_trace_complete": true
+    },
+    "automated_gate_pass": true,
+    "dataset_groups": {
+      "original_contracts": {
+        "n": 12,
+        "correct": 12,
+        "false_support": 0,
+        "failed": 0
+      },
+      "scope_regression": {
+        "n": 27,
+        "correct": 27,
+        "false_support": 0,
+        "failed": 0
+      }
+    },
+    "stop_reasons": {
+      "completed": 39
+    },
+    "confusion": [
+      {
+        "gold": "contradict",
+        "prediction": "contradict",
+        "n": 12
+      },
+      {
+        "gold": "not_enough_info",
+        "prediction": "not_enough_info",
+        "n": 15
+      },
+      {
+        "gold": "support",
+        "prediction": "support",
+        "n": 12
+      }
+    ],
+    "generated_tokens": 9404,
+    "prompt_tokens": 105796
+  },
+  "new_inference_during_audit": false,
+  "limitations": [
+    "Development full39 does not measure generalization to independent validation30.",
+    "Exact quotes and label accuracy do not certify free explanation or missing-information semantics.",
+    "AI audit is not a human full39 signature.",
+    "Manifest consistency is not remote-host attestation."
+  ]
+}

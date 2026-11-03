@@ -1,0 +1,3597 @@
+{
+  "run_id": "20261027T113721Z-18c80dae",
+  "candidate": "atomic-verifier-constrained-v8-cellfix13",
+  "criteria_sha256": "fc4d4a8f7baaf88886cbd3047819125752867e7cdb2f2a8fb850f4be293abb4c",
+  "predictions_sha256": "fa533867249df02eea87c6a9e5f48ca0e72111abdb9440b78ba9b3227a67f0f5",
+  "reviewer_kind": "assistant",
+  "reviewer": "Codex (AI evidence audit)",
+  "ai_review_completed": true,
+  "human_review_completed": false,
+  "all_semantic_criteria_passed": true,
+  "ai_flagged_semantic_cases": {},
+  "cases": [
+    {
+      "example_id": "contract:partial_accuracy",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "context": "Model Juniper uses 25% less memory than its baseline.",
+      "frozen_gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Memory 25% có bằng chứng và numeric check đúng. Accuracy 94% chưa được báo cáo; part accuracy unknown và missing đúng target/metric, nên AND là NEI. Không dùng memory để support accuracy.",
+      "parts": [
+        {
+          "part": {
+            "quote": "Model Juniper uses 25% less memory",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "Model Juniper",
+              "metric": "memory",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 34,
+            "numeric_requirements": [
+              {
+                "start": 19,
+                "end": 22,
+                "quote": "25%",
+                "value": "25",
+                "unit": "%",
+                "kind": "percent"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 19,
+              "end": 22,
+              "quote": "25%",
+              "value": "25",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ],
+          "assessed_label": "support",
+          "observations": [
+            {
+              "member": "Model Juniper",
+              "truth": "true",
+              "quotes": [
+                "Model Juniper uses 25% less memory than its baseline."
+              ],
+              "explanation": "Member 'Model Juniper' satisfies the positive predicate 'memory', before applying ATOMIC. See the checked numeric records and their source quotes.",
+              "numeric": {
+                "kind": "value",
+                "source_quote": "Model Juniper uses 25% less memory than its baseline.",
+                "left": {
+                  "value": "25",
+                  "unit": "%",
+                  "quote": "25%"
+                },
+                "right": {
+                  "value": "25",
+                  "unit": "%",
+                  "quote": "25%"
+                }
+              },
+              "citation_additions": [],
+              "model_truth": "true",
+              "numeric_result": {
+                "kind": "value",
+                "input": {
+                  "kind": "value",
+                  "source_quote": "Model Juniper uses 25% less memory than its baseline.",
+                  "left": {
+                    "value": "25",
+                    "unit": "%",
+                    "quote": "25%"
+                  },
+                  "right": {
+                    "value": "25",
+                    "unit": "%",
+                    "quote": "25%"
+                  }
+                },
+                "truth": "true",
+                "reason": "exact_value_comparison",
+                "left": "25",
+                "right": "25",
+                "unit": "%",
+                "requirement": {
+                  "start": 19,
+                  "end": 22,
+                  "quote": "25%",
+                  "value": "25",
+                  "unit": "%",
+                  "kind": "percent"
+                }
+              },
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence establishes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        },
+        {
+          "part": {
+            "quote": "and retains 94% accuracy.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "Model Juniper",
+              "metric": "accuracy",
+              "time": "",
+              "condition": ""
+            },
+            "start": 35,
+            "end": 60,
+            "numeric_requirements": [
+              {
+                "start": 12,
+                "end": 15,
+                "quote": "94%",
+                "value": "94",
+                "unit": "%",
+                "kind": "percent"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 12,
+              "end": 15,
+              "quote": "94%",
+              "value": "94",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "Model Juniper",
+              "truth": "unknown",
+              "quotes": [],
+              "explanation": "Member 'Model Juniper' has unresolved evidence for the positive predicate 'accuracy', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. Evidence resolving this predicate for the claimed target and scope: target=Model Juniper; predicate/metric=accuracy.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "Evidence resolving this predicate for the claimed target and scope: target=Model Juniper; predicate/metric=accuracy."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "scoped_evidence_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: support, not_enough_info"
+    },
+    {
+      "example_id": "contract:partial_memory",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "context": "Model Juniper retains 94% accuracy on the benchmark.",
+      "frozen_gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Accuracy 94% được xác nhận, memory 25% chưa có bằng chứng. Cả hai part được kiểm; missing chỉ memory của Model Juniper, nên NEI đúng.",
+      "parts": [
+        {
+          "part": {
+            "quote": "Model Juniper uses 25% less memory",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "Model Juniper",
+              "metric": "memory",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 34,
+            "numeric_requirements": [
+              {
+                "start": 19,
+                "end": 22,
+                "quote": "25%",
+                "value": "25",
+                "unit": "%",
+                "kind": "percent"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 19,
+              "end": 22,
+              "quote": "25%",
+              "value": "25",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "Model Juniper",
+              "truth": "unknown",
+              "quotes": [],
+              "explanation": "Member 'Model Juniper' has unresolved evidence for the positive predicate 'memory', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. Evidence resolving this predicate for the claimed target and scope: target=Model Juniper; predicate/metric=memory.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "Evidence resolving this predicate for the claimed target and scope: target=Model Juniper; predicate/metric=memory."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "scoped_evidence_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        },
+        {
+          "part": {
+            "quote": "and retains 94% accuracy.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "Model Juniper",
+              "metric": "accuracy",
+              "time": "",
+              "condition": ""
+            },
+            "start": 35,
+            "end": 60,
+            "numeric_requirements": [
+              {
+                "start": 12,
+                "end": 15,
+                "quote": "94%",
+                "value": "94",
+                "unit": "%",
+                "kind": "percent"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 12,
+              "end": 15,
+              "quote": "94%",
+              "value": "94",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ],
+          "assessed_label": "support",
+          "observations": [
+            {
+              "member": "Model Juniper",
+              "truth": "true",
+              "quotes": [
+                "Model Juniper retains 94% accuracy on the benchmark."
+              ],
+              "explanation": "Member 'Model Juniper' satisfies the positive predicate 'accuracy', before applying ATOMIC. See the checked numeric records and their source quotes.",
+              "numeric": {
+                "kind": "value",
+                "source_quote": "Model Juniper retains 94% accuracy on the benchmark.",
+                "left": {
+                  "value": "94",
+                  "unit": "%",
+                  "quote": "94%"
+                },
+                "right": {
+                  "value": "94",
+                  "unit": "%",
+                  "quote": "94%"
+                }
+              },
+              "citation_additions": [],
+              "model_truth": "true",
+              "numeric_result": {
+                "kind": "value",
+                "input": {
+                  "kind": "value",
+                  "source_quote": "Model Juniper retains 94% accuracy on the benchmark.",
+                  "left": {
+                    "value": "94",
+                    "unit": "%",
+                    "quote": "94%"
+                  },
+                  "right": {
+                    "value": "94",
+                    "unit": "%",
+                    "quote": "94%"
+                  }
+                },
+                "truth": "true",
+                "reason": "exact_value_comparison",
+                "left": "94",
+                "right": "94",
+                "unit": "%",
+                "requirement": {
+                  "start": 12,
+                  "end": 15,
+                  "quote": "94%",
+                  "value": "94",
+                  "unit": "%",
+                  "kind": "percent"
+                }
+              },
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence establishes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: not_enough_info, support"
+    },
+    {
+      "example_id": "contract:both_supported",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "context": "Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "frozen_gold": "support",
+      "prediction": "support",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Câu nguồn xác nhận cả memory giảm 25% và accuracy 94%. Hai numeric records gắn đúng metric/value; cả hai part support và AND support.",
+      "parts": [
+        {
+          "part": {
+            "quote": "Model Juniper uses 25% less memory",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "Model Juniper",
+              "metric": "memory",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 34,
+            "numeric_requirements": [
+              {
+                "start": 19,
+                "end": 22,
+                "quote": "25%",
+                "value": "25",
+                "unit": "%",
+                "kind": "percent"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 19,
+              "end": 22,
+              "quote": "25%",
+              "value": "25",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ],
+          "assessed_label": "support",
+          "observations": [
+            {
+              "member": "Model Juniper",
+              "truth": "true",
+              "quotes": [
+                "Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy."
+              ],
+              "explanation": "Member 'Model Juniper' satisfies the positive predicate 'memory', before applying ATOMIC. See the checked numeric records and their source quotes.",
+              "numeric": {
+                "kind": "value",
+                "source_quote": "Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy.",
+                "left": {
+                  "value": "25",
+                  "unit": "%",
+                  "quote": "25%"
+                },
+                "right": {
+                  "value": "25",
+                  "unit": "%",
+                  "quote": "25%"
+                }
+              },
+              "citation_additions": [],
+              "model_truth": "true",
+              "numeric_result": {
+                "kind": "value",
+                "input": {
+                  "kind": "value",
+                  "source_quote": "Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy.",
+                  "left": {
+                    "value": "25",
+                    "unit": "%",
+                    "quote": "25%"
+                  },
+                  "right": {
+                    "value": "25",
+                    "unit": "%",
+                    "quote": "25%"
+                  }
+                },
+                "truth": "true",
+                "reason": "exact_value_comparison",
+                "left": "25",
+                "right": "25",
+                "unit": "%",
+                "requirement": {
+                  "start": 19,
+                  "end": 22,
+                  "quote": "25%",
+                  "value": "25",
+                  "unit": "%",
+                  "kind": "percent"
+                }
+              },
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence establishes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        },
+        {
+          "part": {
+            "quote": "and retains 94% accuracy.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "Model Juniper",
+              "metric": "accuracy",
+              "time": "",
+              "condition": ""
+            },
+            "start": 35,
+            "end": 60,
+            "numeric_requirements": [
+              {
+                "start": 12,
+                "end": 15,
+                "quote": "94%",
+                "value": "94",
+                "unit": "%",
+                "kind": "percent"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 12,
+              "end": 15,
+              "quote": "94%",
+              "value": "94",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ],
+          "assessed_label": "support",
+          "observations": [
+            {
+              "member": "Model Juniper",
+              "truth": "true",
+              "quotes": [
+                "Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy."
+              ],
+              "explanation": "Member 'Model Juniper' satisfies the positive predicate 'accuracy', before applying ATOMIC. See the checked numeric records and their source quotes.",
+              "numeric": {
+                "kind": "value",
+                "source_quote": "Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy.",
+                "left": {
+                  "value": "94",
+                  "unit": "%",
+                  "quote": "94%"
+                },
+                "right": {
+                  "value": "94",
+                  "unit": "%",
+                  "quote": "94%"
+                }
+              },
+              "citation_additions": [],
+              "model_truth": "true",
+              "numeric_result": {
+                "kind": "value",
+                "input": {
+                  "kind": "value",
+                  "source_quote": "Compared with the baseline, Model Juniper uses 25% less memory and retains 94% accuracy.",
+                  "left": {
+                    "value": "94",
+                    "unit": "%",
+                    "quote": "94%"
+                  },
+                  "right": {
+                    "value": "94",
+                    "unit": "%",
+                    "quote": "94%"
+                  }
+                },
+                "truth": "true",
+                "reason": "exact_value_comparison",
+                "left": "94",
+                "right": "94",
+                "unit": "%",
+                "requirement": {
+                  "start": 12,
+                  "end": 15,
+                  "quote": "94%",
+                  "value": "94",
+                  "unit": "%",
+                  "kind": "percent"
+                }
+              },
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence establishes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: support, support"
+    },
+    {
+      "example_id": "contract:accuracy_conflict",
+      "claim": "Model Juniper uses 25% less memory and retains 94% accuracy.",
+      "context": "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%.",
+      "frozen_gold": "contradict",
+      "prediction": "contradict",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Memory 25% support; accuracy thực tế 81%, nguồn phủ định trực tiếp 94%. Numeric record chọn 81% làm giá trị nguồn, không chọn 94% trong phủ định. Một part contradict đủ refute AND.",
+      "parts": [
+        {
+          "part": {
+            "quote": "Model Juniper uses 25% less memory",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "Model Juniper",
+              "metric": "memory",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 34,
+            "numeric_requirements": [
+              {
+                "start": 19,
+                "end": 22,
+                "quote": "25%",
+                "value": "25",
+                "unit": "%",
+                "kind": "percent"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 19,
+              "end": 22,
+              "quote": "25%",
+              "value": "25",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ],
+          "assessed_label": "support",
+          "observations": [
+            {
+              "member": "Model Juniper",
+              "truth": "true",
+              "quotes": [
+                "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%."
+              ],
+              "explanation": "Member 'Model Juniper' satisfies the positive predicate 'memory', before applying ATOMIC. See the checked numeric records and their source quotes.",
+              "numeric": {
+                "kind": "value",
+                "source_quote": "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%.",
+                "left": {
+                  "value": "25",
+                  "unit": "%",
+                  "quote": "25%"
+                },
+                "right": {
+                  "value": "25",
+                  "unit": "%",
+                  "quote": "25%"
+                }
+              },
+              "citation_additions": [],
+              "model_truth": "true",
+              "numeric_result": {
+                "kind": "value",
+                "input": {
+                  "kind": "value",
+                  "source_quote": "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%.",
+                  "left": {
+                    "value": "25",
+                    "unit": "%",
+                    "quote": "25%"
+                  },
+                  "right": {
+                    "value": "25",
+                    "unit": "%",
+                    "quote": "25%"
+                  }
+                },
+                "truth": "true",
+                "reason": "exact_value_comparison",
+                "left": "25",
+                "right": "25",
+                "unit": "%",
+                "requirement": {
+                  "start": 19,
+                  "end": 22,
+                  "quote": "25%",
+                  "value": "25",
+                  "unit": "%",
+                  "kind": "percent"
+                }
+              },
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence establishes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        },
+        {
+          "part": {
+            "quote": "and retains 94% accuracy.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "Model Juniper",
+              "metric": "accuracy",
+              "time": "",
+              "condition": ""
+            },
+            "start": 35,
+            "end": 60,
+            "numeric_requirements": [
+              {
+                "start": 12,
+                "end": 15,
+                "quote": "94%",
+                "value": "94",
+                "unit": "%",
+                "kind": "percent"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 12,
+              "end": 15,
+              "quote": "94%",
+              "value": "94",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ],
+          "assessed_label": "contradict",
+          "observations": [
+            {
+              "member": "Model Juniper",
+              "truth": "false",
+              "quotes": [
+                "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%."
+              ],
+              "explanation": "Member 'Model Juniper' does not satisfy the positive predicate 'accuracy', before applying ATOMIC. See the checked numeric records and their source quotes.",
+              "numeric": {
+                "kind": "value",
+                "source_quote": "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%.",
+                "left": {
+                  "value": "94",
+                  "unit": "%",
+                  "quote": "94%"
+                },
+                "right": {
+                  "value": "81",
+                  "unit": "%",
+                  "quote": "81%"
+                }
+              },
+              "citation_additions": [],
+              "model_truth": "false",
+              "numeric_result": {
+                "kind": "value",
+                "input": {
+                  "kind": "value",
+                  "source_quote": "Model Juniper uses 25% less memory and retains 81% accuracy, not 94%.",
+                  "left": {
+                    "value": "94",
+                    "unit": "%",
+                    "quote": "94%"
+                  },
+                  "right": {
+                    "value": "81",
+                    "unit": "%",
+                    "quote": "81%"
+                  }
+                },
+                "truth": "false",
+                "reason": "explicit_quantity_denial",
+                "left": "94",
+                "right": "81",
+                "unit": "%",
+                "requirement": {
+                  "start": 12,
+                  "end": 15,
+                  "quote": "94%",
+                  "value": "94",
+                  "unit": "%",
+                  "kind": "percent"
+                }
+              },
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence refutes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: support, contradict"
+    },
+    {
+      "example_id": "contract:irrelevant",
+      "claim": "Model Juniper retains 94% accuracy.",
+      "context": "The benchmark was conducted on a Tuesday. No model accuracy is reported.",
+      "frozen_gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "NEI đúng: nguồn không xác định Model Juniper. Run mới có observations rỗng, coverage rỗng/incomplete và scope unknown; missing yêu cầu bind đúng target. Không còn dùng No model accuracy is reported làm member giả.",
+      "parts": [
+        {
+          "part": {
+            "quote": "Model Juniper retains 94% accuracy.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "Model Juniper",
+              "metric": "accuracy",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 35,
+            "numeric_requirements": [
+              {
+                "start": 22,
+                "end": 25,
+                "quote": "94%",
+                "value": "94",
+                "unit": "%",
+                "kind": "percent"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 22,
+              "end": 25,
+              "quote": "94%",
+              "value": "94",
+              "unit": "%",
+              "kind": "percent"
+            }
+          ],
+          "assessed_label": "not_enough_info",
+          "observations": [],
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=Model Juniper; predicate/metric=accuracy.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "unknown",
+          "missing_information": [
+            "Evidence identifying the claimed target in the reported results: target=Model Juniper; predicate/metric=accuracy."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [
+            "scope_unknown"
+          ],
+          "model_missing_information": [
+            "target_binding_unresolved"
+          ],
+          "missing_reason": "target_binding_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: not_enough_info"
+    },
+    {
+      "example_id": "contract:negation",
+      "claim": "The study used human labels.",
+      "context": "The study did not use any human labels; all labels were generated automatically.",
+      "frozen_gold": "contradict",
+      "prediction": "contradict",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Nguồn phủ định trực tiếp việc study dùng human labels. Member study, truth false và quote cùng scope; đây là kết quả phủ định, không phải chưa đo. Contradict đúng.",
+      "parts": [
+        {
+          "part": {
+            "quote": "The study used human labels.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "study",
+              "metric": "used human labels",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 28,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "contradict",
+          "observations": [
+            {
+              "member": "study",
+              "truth": "false",
+              "quotes": [
+                "The study did not use any human labels; all labels were generated automatically."
+              ],
+              "explanation": "Member 'study' does not satisfy the positive predicate 'used human labels', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "false",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence refutes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: contradict"
+    },
+    {
+      "example_id": "contract:causality_missing",
+      "claim": "The new index caused the latency improvement.",
+      "context": "The new index and lower latency were observed in the same deployment. The study did not establish a causal relationship.",
+      "frozen_gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Chỉ có co-occurrence, nguồn nói chưa xác lập causal relationship. Quote đúng câu này; unknown và missing nêu quan hệ caused của claim, nên NEI. Dấu chấm lặp ở cuối missing là lỗi trình bày nhỏ, không đổi nghĩa.",
+      "parts": [
+        {
+          "part": {
+            "quote": "The new index caused the latency improvement.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "new index",
+              "metric": "latency",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 45,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "new index",
+              "truth": "unknown",
+              "quotes": [
+                "The study did not establish a causal relationship."
+              ],
+              "explanation": "Member 'new index' has unresolved evidence for the positive predicate 'latency', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. Evidence establishing the claimed causal relationship, beyond co-occurrence/correlation: target=new index; predicate/metric=latency; claimed relation=The new index caused the latency improvement..",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "Evidence establishing the claimed causal relationship, beyond co-occurrence/correlation: target=new index; predicate/metric=latency; claimed relation=The new index caused the latency improvement.."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [
+            "causal_relationship"
+          ],
+          "missing_reason": "causal_relationship",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: not_enough_info"
+    },
+    {
+      "example_id": "contract:scope",
+      "claim": "All tasks improved after compression.",
+      "context": "Three tasks improved after compression, but a fourth task became less accurate.",
+      "frozen_gold": "contradict",
+      "prediction": "contradict",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "ALL bị refute bởi a fourth task became less accurate sau compression. Một phản ví dụ cùng scope đủ contradict; không cần giả định đã biết toàn bộ population.",
+      "parts": [
+        {
+          "part": {
+            "quote": "All tasks improved after compression.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "tasks",
+              "metric": "improved",
+              "time": "after compression",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 37,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "contradict",
+          "observations": [
+            {
+              "member": "a fourth task",
+              "truth": "false",
+              "quotes": [
+                "Three tasks improved after compression, but a fourth task became less accurate."
+              ],
+              "explanation": "Member 'a fourth task' does not satisfy the positive predicate 'improved', before applying ALL.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "false",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "A checked member fails the predicate, refuting ALL.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "model_ledger"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: contradict"
+    },
+    {
+      "example_id": "contract:cross_sentence",
+      "claim": "The report evaluated four models on two datasets.",
+      "context": "Four models were evaluated in the report. Evaluation used two datasets.",
+      "frozen_gold": "support",
+      "prediction": "support",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Hai yêu cầu độc lập được kiểm: four models=4 models và two datasets=2 datasets. Hai numeric records dùng đúng hai câu nguồn; citation_additions đưa câu datasets vào quotes. Support có đủ cả hai yêu cầu.",
+      "parts": [
+        {
+          "part": {
+            "quote": "The report evaluated four models on two datasets.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "report",
+              "metric": "evaluated four models",
+              "time": "",
+              "condition": "on two datasets"
+            },
+            "start": 0,
+            "end": 49,
+            "numeric_requirements": [
+              {
+                "start": 21,
+                "end": 32,
+                "quote": "four models",
+                "value": "4",
+                "unit": "models",
+                "kind": "number"
+              },
+              {
+                "start": 36,
+                "end": 48,
+                "quote": "two datasets",
+                "value": "2",
+                "unit": "datasets",
+                "kind": "number"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 21,
+              "end": 32,
+              "quote": "four models",
+              "value": "4",
+              "unit": "models",
+              "kind": "number"
+            },
+            {
+              "start": 36,
+              "end": 48,
+              "quote": "two datasets",
+              "value": "2",
+              "unit": "datasets",
+              "kind": "number"
+            }
+          ],
+          "assessed_label": "support",
+          "observations": [
+            {
+              "member": "report",
+              "truth": "true",
+              "quotes": [
+                "Four models were evaluated in the report.",
+                "Evaluation used two datasets."
+              ],
+              "explanation": "Member 'report' satisfies the positive predicate 'evaluated four models', before applying ATOMIC. See the checked numeric records and their source quotes.",
+              "numeric": {
+                "q0": {
+                  "kind": "value",
+                  "source_quote": "Four models were evaluated in the report.",
+                  "left": {
+                    "value": "4",
+                    "unit": "models",
+                    "quote": "four models"
+                  },
+                  "right": {
+                    "value": "4",
+                    "unit": "models",
+                    "quote": "Four models"
+                  }
+                },
+                "q1": {
+                  "kind": "value",
+                  "source_quote": "Evaluation used two datasets.",
+                  "left": {
+                    "value": "2",
+                    "unit": "datasets",
+                    "quote": "two datasets"
+                  },
+                  "right": {
+                    "value": "2",
+                    "unit": "datasets",
+                    "quote": "two datasets"
+                  }
+                }
+              },
+              "citation_additions": [
+                "Evaluation used two datasets."
+              ],
+              "model_truth": "true",
+              "numeric_result": [
+                {
+                  "kind": "value",
+                  "input": {
+                    "kind": "value",
+                    "source_quote": "Four models were evaluated in the report.",
+                    "left": {
+                      "value": "4",
+                      "unit": "models",
+                      "quote": "four models"
+                    },
+                    "right": {
+                      "value": "4",
+                      "unit": "models",
+                      "quote": "Four models"
+                    }
+                  },
+                  "truth": "true",
+                  "reason": "exact_value_comparison",
+                  "left": "4",
+                  "right": "4",
+                  "unit": "models",
+                  "requirement": {
+                    "start": 21,
+                    "end": 32,
+                    "quote": "four models",
+                    "value": "4",
+                    "unit": "models",
+                    "kind": "number"
+                  }
+                },
+                {
+                  "kind": "value",
+                  "input": {
+                    "kind": "value",
+                    "source_quote": "Evaluation used two datasets.",
+                    "left": {
+                      "value": "2",
+                      "unit": "datasets",
+                      "quote": "two datasets"
+                    },
+                    "right": {
+                      "value": "2",
+                      "unit": "datasets",
+                      "quote": "two datasets"
+                    }
+                  },
+                  "truth": "true",
+                  "reason": "exact_value_comparison",
+                  "left": "2",
+                  "right": "2",
+                  "unit": "datasets",
+                  "requirement": {
+                    "start": 36,
+                    "end": 48,
+                    "quote": "two datasets",
+                    "value": "2",
+                    "unit": "datasets",
+                    "kind": "number"
+                  }
+                }
+              ],
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence establishes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: support"
+    },
+    {
+      "example_id": "contract:wrong_units",
+      "claim": "Training took 12 seconds.",
+      "context": "Training took 12 hours, not 12 seconds.",
+      "frozen_gold": "contradict",
+      "prediction": "contradict",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Claim 12 seconds khác nguồn 12 hours, nguồn còn phủ định 12 seconds trực tiếp. Record giữ đúng unit của mỗi bên và explicit_quantity_denial, nên contradict; không so hai số 12 rồi support.",
+      "parts": [
+        {
+          "part": {
+            "quote": "Training took 12 seconds.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "Training",
+              "metric": "took 12 seconds",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 25,
+            "numeric_requirements": [
+              {
+                "start": 14,
+                "end": 24,
+                "quote": "12 seconds",
+                "value": "12",
+                "unit": "seconds",
+                "kind": "number"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 14,
+              "end": 24,
+              "quote": "12 seconds",
+              "value": "12",
+              "unit": "seconds",
+              "kind": "number"
+            }
+          ],
+          "assessed_label": "contradict",
+          "observations": [
+            {
+              "member": "Training",
+              "truth": "false",
+              "quotes": [
+                "Training took 12 hours, not 12 seconds."
+              ],
+              "explanation": "Member 'Training' does not satisfy the positive predicate 'took 12 seconds', before applying ATOMIC. See the checked numeric records and their source quotes.",
+              "numeric": {
+                "kind": "value",
+                "source_quote": "Training took 12 hours, not 12 seconds.",
+                "left": {
+                  "value": "12",
+                  "unit": "seconds",
+                  "quote": "12 seconds"
+                },
+                "right": {
+                  "value": "12",
+                  "unit": "hours",
+                  "quote": "12 hours"
+                }
+              },
+              "citation_additions": [],
+              "model_truth": "false",
+              "numeric_result": {
+                "kind": "value",
+                "input": {
+                  "kind": "value",
+                  "source_quote": "Training took 12 hours, not 12 seconds.",
+                  "left": {
+                    "value": "12",
+                    "unit": "seconds",
+                    "quote": "12 seconds"
+                  },
+                  "right": {
+                    "value": "12",
+                    "unit": "hours",
+                    "quote": "12 hours"
+                  }
+                },
+                "truth": "false",
+                "reason": "explicit_quantity_denial",
+                "left": "12",
+                "right": "12",
+                "unit": "seconds",
+                "requirement": {
+                  "start": 14,
+                  "end": 24,
+                  "quote": "12 seconds",
+                  "value": "12",
+                  "unit": "seconds",
+                  "kind": "number"
+                }
+              },
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence refutes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: contradict"
+    },
+    {
+      "example_id": "contract:atomic_support",
+      "claim": "The sample contained 240 documents.",
+      "context": "The final sample contained exactly 240 documents.",
+      "frozen_gold": "support",
+      "prediction": "support",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Sample và nguồn final sample bind được; 240 documents được kiểm đúng value/unit/object. Metric contained 240 documents đầy đủ và support đúng.",
+      "parts": [
+        {
+          "part": {
+            "quote": "The sample contained 240 documents.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "sample",
+              "metric": "contained 240 documents",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 35,
+            "numeric_requirements": [
+              {
+                "start": 21,
+                "end": 34,
+                "quote": "240 documents",
+                "value": "240",
+                "unit": "documents",
+                "kind": "number"
+              }
+            ]
+          },
+          "numeric_requirements": [
+            {
+              "start": 21,
+              "end": 34,
+              "quote": "240 documents",
+              "value": "240",
+              "unit": "documents",
+              "kind": "number"
+            }
+          ],
+          "assessed_label": "support",
+          "observations": [
+            {
+              "member": "sample",
+              "truth": "true",
+              "quotes": [
+                "The final sample contained exactly 240 documents."
+              ],
+              "explanation": "Member 'sample' satisfies the positive predicate 'contained 240 documents', before applying ATOMIC. See the checked numeric records and their source quotes.",
+              "numeric": {
+                "kind": "value",
+                "source_quote": "The final sample contained exactly 240 documents.",
+                "left": {
+                  "value": "240",
+                  "unit": "documents",
+                  "quote": "240 documents"
+                },
+                "right": {
+                  "value": "240",
+                  "unit": "documents",
+                  "quote": "240 documents"
+                }
+              },
+              "citation_additions": [],
+              "model_truth": "true",
+              "numeric_result": {
+                "kind": "value",
+                "input": {
+                  "kind": "value",
+                  "source_quote": "The final sample contained exactly 240 documents.",
+                  "left": {
+                    "value": "240",
+                    "unit": "documents",
+                    "quote": "240 documents"
+                  },
+                  "right": {
+                    "value": "240",
+                    "unit": "documents",
+                    "quote": "240 documents"
+                  }
+                },
+                "truth": "true",
+                "reason": "exact_value_comparison",
+                "left": "240",
+                "right": "240",
+                "unit": "documents",
+                "requirement": {
+                  "start": 21,
+                  "end": 34,
+                  "quote": "240 documents",
+                  "value": "240",
+                  "unit": "documents",
+                  "kind": "number"
+                }
+              },
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence establishes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: support"
+    },
+    {
+      "example_id": "contract:bounded_scope",
+      "claim": "On the tested dataset, the method improved recall.",
+      "context": "The method improved recall on the tested dataset. Results on other datasets are unknown.",
+      "frozen_gold": "support",
+      "prediction": "support",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Quote xác nhận method tăng recall trên tested dataset. Kết quả chưa biết ở dataset khác không phủ định claim có phạm vi giới hạn này. Condition đúng, support đúng.",
+      "parts": [
+        {
+          "part": {
+            "quote": "On the tested dataset, the method improved recall.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "method",
+              "metric": "recall",
+              "time": "",
+              "condition": "On the tested dataset"
+            },
+            "start": 0,
+            "end": 50,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "support",
+          "observations": [
+            {
+              "member": "method",
+              "truth": "true",
+              "quotes": [
+                "The method improved recall on the tested dataset."
+              ],
+              "explanation": "Member 'method' satisfies the positive predicate 'recall', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "true",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence establishes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: support"
+    },
+    {
+      "example_id": "scope:universal:support",
+      "claim": "Every validation shard improved recall after the revision.",
+      "context": "The validation set consisted of exactly three shards: Cedar, Maple and Pine. Recall improved on each of these three shards after the revision.",
+      "frozen_gold": "support",
+      "prediction": "support",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Population đóng gồm đúng Cedar, Maple, Pine; nguồn nói each of these three shards cải thiện recall sau revision. Group member three shards đại diện đúng toàn bộ tập có nguồn, coverage complete nên ALL support.",
+      "parts": [
+        {
+          "part": {
+            "quote": "Every validation shard improved recall after the revision.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "validation shard",
+              "metric": "recall",
+              "time": "after the revision",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 58,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "support",
+          "observations": [
+            {
+              "member": "three shards",
+              "truth": "true",
+              "quotes": [
+                "The validation set consisted of exactly three shards: Cedar, Maple and Pine. Recall improved on each of these three shards after the revision."
+              ],
+              "explanation": "Member 'three shards' satisfies the positive predicate 'recall', before applying ALL.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "true",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The complete checked population satisfies the predicate for every member.",
+          "coverage": {
+            "complete": true,
+            "members": [
+              "three shards"
+            ],
+            "quotes": [
+              "The validation set consisted of exactly three shards: Cedar, Maple and Pine. Recall improved on each of these three shards after the revision."
+            ]
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "explicit_population"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: support"
+    },
+    {
+      "example_id": "scope:universal:contradict",
+      "claim": "Every validation shard improved recall after the revision.",
+      "context": "The validation set consisted of exactly three shards. After the revision, two improved recall, while the third became worse at recalling relevant records.",
+      "frozen_gold": "contradict",
+      "prediction": "contradict",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Nguồn xác định ba shard, shard thứ ba giảm khả năng recall sau revision. Member the third là tham chiếu về shard trong cùng quote; truth false refute ALL, không cần closure để tìm phản ví dụ.",
+      "parts": [
+        {
+          "part": {
+            "quote": "Every validation shard improved recall after the revision.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "validation shard",
+              "metric": "recall",
+              "time": "after the revision",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 58,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "contradict",
+          "observations": [
+            {
+              "member": "the third",
+              "truth": "false",
+              "quotes": [
+                "The validation set consisted of exactly three shards. After the revision, two improved recall, while the third became worse at recalling relevant records."
+              ],
+              "explanation": "Member 'the third' does not satisfy the positive predicate 'recall', before applying ALL.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "false",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "A checked member fails the predicate, refuting ALL.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "explicit_population"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: contradict"
+    },
+    {
+      "example_id": "scope:universal:not_enough_info",
+      "claim": "Every validation shard improved recall after the revision.",
+      "context": "Two validation shards improved recall after the revision. The report does not identify the complete set of validation shards or results for any others.",
+      "frozen_gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Hai shard cải thiện chưa chứng minh EVERY khi complete set và kết quả còn lại chưa biết. Unknown member là nominal the complete set of validation shards có trong nguồn; coverage incomplete và missing đúng population/results. Quotes rỗng không được dùng làm bằng chứng cho true/false.",
+      "parts": [
+        {
+          "part": {
+            "quote": "Every validation shard improved recall after the revision.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "validation shard",
+              "metric": "recall",
+              "time": "after the revision",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 58,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "the complete set of validation shards",
+              "truth": "unknown",
+              "quotes": [],
+              "explanation": "Member 'the complete set of validation shards' has unresolved evidence for the positive predicate 'recall', before applying ALL.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. A closed target population and the remaining member results: target=validation shard; predicate/metric=recall; time=after the revision.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "A closed target population and the remaining member results: target=validation shard; predicate/metric=recall; time=after the revision."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "population_results_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "model_ledger"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: not_enough_info"
+    },
+    {
+      "example_id": "scope:existential:support",
+      "claim": "At least one audited cache node reduced response time after the patch.",
+      "context": "The audited cache nodes were Birch, Elm and Fir. After the patch, Birch became faster, while Elm and Fir became slower.",
+      "frozen_gold": "support",
+      "prediction": "support",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Birch thuộc audited cache nodes và nhanh hơn sau patch. Một witness cùng scope đủ SOME support; Elm/Fir chậm hơn không xóa witness này.",
+      "parts": [
+        {
+          "part": {
+            "quote": "At least one audited cache node reduced response time after the patch.",
+            "quantifier": "some",
+            "scope": {
+              "entity": "audited cache node",
+              "metric": "response time",
+              "time": "after the patch",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 70,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "support",
+          "observations": [
+            {
+              "member": "Birch",
+              "truth": "true",
+              "quotes": [
+                "The audited cache nodes were Birch, Elm and Fir. After the patch, Birch became faster, while Elm and Fir became slower."
+              ],
+              "explanation": "Member 'Birch' satisfies the positive predicate 'response time', before applying SOME.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "true",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "A checked member satisfies the predicate, establishing SOME.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "explicit_population"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: support"
+    },
+    {
+      "example_id": "scope:existential:contradict",
+      "claim": "At least one audited cache node reduced response time after the patch.",
+      "context": "The complete audited set was Birch, Elm and Fir. After the patch, response time increased on Birch and Elm and stayed unchanged on Fir.",
+      "frozen_gold": "contradict",
+      "prediction": "contradict",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Dùng cách hiểu annotation đã được người dùng chốt: complete audited set là toàn bộ audited cache nodes của claim. Birch/Elm tăng response time, Fir không đổi; complete population không có true member, nên SOME contradict. Group member và closure quote cùng xác định ba node.",
+      "parts": [
+        {
+          "part": {
+            "quote": "At least one audited cache node reduced response time after the patch.",
+            "quantifier": "some",
+            "scope": {
+              "entity": "audited cache node",
+              "metric": "response time",
+              "time": "after the patch",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 70,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "contradict",
+          "observations": [
+            {
+              "member": "Birch, Elm and Fir",
+              "truth": "false",
+              "quotes": [
+                "The complete audited set was Birch, Elm and Fir. After the patch, response time increased on Birch and Elm and stayed unchanged on Fir."
+              ],
+              "explanation": "Member 'Birch, Elm and Fir' does not satisfy the positive predicate 'response time', before applying SOME.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "false",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The complete checked population has no true member, refuting SOME.",
+          "coverage": {
+            "complete": true,
+            "members": [
+              "Birch, Elm and Fir"
+            ],
+            "quotes": [
+              "The complete audited set was Birch, Elm and Fir. After the patch, response time increased on Birch and Elm and stayed unchanged on Fir."
+            ]
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "unique_complete_selection_set"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: contradict"
+    },
+    {
+      "example_id": "scope:existential:not_enough_info",
+      "claim": "At least one audited cache node reduced response time after the patch.",
+      "context": "Elm was one of the audited cache nodes and its response time increased after the patch. Results for the other audited nodes were not reported.",
+      "frozen_gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Elm tăng response time nhưng kết quả các audited nodes khác chưa báo cáo. Một false witness không refute SOME khi population chưa đóng. Unknown nominal the other audited nodes đúng nguồn; missing đòi population/results, NEI đúng.",
+      "parts": [
+        {
+          "part": {
+            "quote": "At least one audited cache node reduced response time after the patch.",
+            "quantifier": "some",
+            "scope": {
+              "entity": "audited cache node",
+              "metric": "response time",
+              "time": "after the patch",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 70,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "the other audited nodes",
+              "truth": "unknown",
+              "quotes": [],
+              "explanation": "Member 'the other audited nodes' has unresolved evidence for the positive predicate 'response time', before applying SOME.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. A closed target population and the remaining member results: target=audited cache node; predicate/metric=response time; time=after the patch.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "A closed target population and the remaining member results: target=audited cache node; predicate/metric=response time; time=after the patch."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "population_results_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "model_ledger"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: not_enough_info"
+    },
+    {
+      "example_id": "scope:none:support",
+      "claim": "None of the monitored pumps leaked during the overnight test.",
+      "context": "The overnight test monitored exactly three pumps: Blue, Green and Silver. The report explicitly records no leaks for any of these three pumps during the test.",
+      "frozen_gold": "support",
+      "prediction": "support",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Nguồn đóng tập đúng ba pumps và xác nhận không pump nào leak trong overnight test. Truth false áp lên positive predicate leaked trước NONE; complete coverage làm NONE support, không đảo polarity hai lần.",
+      "parts": [
+        {
+          "part": {
+            "quote": "None of the monitored pumps leaked during the overnight test.",
+            "quantifier": "none",
+            "scope": {
+              "entity": "monitored pumps",
+              "metric": "leaked",
+              "time": "during the overnight test",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 61,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "support",
+          "observations": [
+            {
+              "member": "three pumps",
+              "truth": "false",
+              "quotes": [
+                "The overnight test monitored exactly three pumps: Blue, Green and Silver. The report explicitly records no leaks for any of these three pumps during the test."
+              ],
+              "explanation": "Member 'three pumps' does not satisfy the positive predicate 'leaked', before applying NONE.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "false",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The complete checked population has no true member, establishing NONE.",
+          "coverage": {
+            "complete": true,
+            "members": [
+              "three pumps"
+            ],
+            "quotes": [
+              "The overnight test monitored exactly three pumps: Blue, Green and Silver. The report explicitly records no leaks for any of these three pumps during the test."
+            ]
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "explicit_population"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: support"
+    },
+    {
+      "example_id": "scope:none:contradict",
+      "claim": "None of the monitored pumps leaked during the overnight test.",
+      "context": "The monitored pumps were Blue, Green and Silver. Silver leaked during the overnight test; Blue and Green did not.",
+      "frozen_gold": "contradict",
+      "prediction": "contradict",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Silver thuộc monitored pumps và leaked trong overnight test. Truth true của leaked là witness refute NONE; quote giữ đúng Silver/time, contradict đúng.",
+      "parts": [
+        {
+          "part": {
+            "quote": "None of the monitored pumps leaked during the overnight test.",
+            "quantifier": "none",
+            "scope": {
+              "entity": "monitored pumps",
+              "metric": "leaked",
+              "time": "during the overnight test",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 61,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "contradict",
+          "observations": [
+            {
+              "member": "Silver",
+              "truth": "true",
+              "quotes": [
+                "The monitored pumps were Blue, Green and Silver. Silver leaked during the overnight test; Blue and Green did not."
+              ],
+              "explanation": "Member 'Silver' satisfies the positive predicate 'leaked', before applying NONE.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "true",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "A checked member satisfies the predicate, refuting NONE.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "explicit_population"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: contradict"
+    },
+    {
+      "example_id": "scope:none:not_enough_info",
+      "claim": "None of the monitored pumps leaked during the overnight test.",
+      "context": "Blue, Green and Silver were monitored during the overnight test. Blue and Green had no leaks, but Silver's leak status was not reported.",
+      "frozen_gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Đã sửa identity: member Silver, không còn fragment leak status was not. Quote có câu Silver chưa được báo cáo; truth unknown, không biến unreported thành no leak. Blue/Green không leak chưa đủ support NONE; missing đúng kết quả còn thiếu, NEI đúng.",
+      "parts": [
+        {
+          "part": {
+            "quote": "None of the monitored pumps leaked during the overnight test.",
+            "quantifier": "none",
+            "scope": {
+              "entity": "monitored pumps",
+              "metric": "leaked",
+              "time": "during the overnight test",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 61,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "Silver",
+              "truth": "unknown",
+              "quotes": [
+                "Blue and Green had no leaks, but Silver's leak status was not reported."
+              ],
+              "explanation": "Member 'Silver' has unresolved evidence for the positive predicate 'leaked', before applying NONE.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. The unreported in-scope measurement/result: target=monitored pumps; predicate/metric=leaked; time=during the overnight test.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "The unreported in-scope measurement/result: target=monitored pumps; predicate/metric=leaked; time=during the overnight test."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "measurement_unreported",
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "model_ledger"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: not_enough_info"
+    },
+    {
+      "example_id": "scope:entity:support",
+      "claim": "The North gateway reduced its error rate after calibration.",
+      "context": "After calibration, the North gateway's error rate decreased. The South gateway's error rate increased.",
+      "frozen_gold": "support",
+      "prediction": "support",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Member North gateway, quote chính North error rate decreased sau calibration. Không dùng South; positive evidence support đúng.",
+      "parts": [
+        {
+          "part": {
+            "quote": "The North gateway reduced its error rate after calibration.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "North gateway",
+              "metric": "error rate",
+              "time": "after calibration",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 59,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "support",
+          "observations": [
+            {
+              "member": "North gateway",
+              "truth": "true",
+              "quotes": [
+                "After calibration, the North gateway's error rate decreased."
+              ],
+              "explanation": "Member 'North gateway' satisfies the positive predicate 'error rate', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "true",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence establishes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: support"
+    },
+    {
+      "example_id": "scope:entity:contradict",
+      "claim": "The North gateway reduced its error rate after calibration.",
+      "context": "After calibration, the North gateway's error rate increased. The South gateway's error rate decreased.",
+      "frozen_gold": "contradict",
+      "prediction": "contradict",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Member North gateway, quote chính North error rate increased sau calibration. Truth false refute reduced; không bỏ bằng chứng quyết định bằng unknown. Contradict đúng.",
+      "parts": [
+        {
+          "part": {
+            "quote": "The North gateway reduced its error rate after calibration.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "North gateway",
+              "metric": "error rate",
+              "time": "after calibration",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 59,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "contradict",
+          "observations": [
+            {
+              "member": "North gateway",
+              "truth": "false",
+              "quotes": [
+                "After calibration, the North gateway's error rate increased."
+              ],
+              "explanation": "Member 'North gateway' does not satisfy the positive predicate 'error rate', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "false",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence refutes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: contradict"
+    },
+    {
+      "example_id": "scope:entity:not_enough_info",
+      "claim": "The North gateway reduced its error rate after calibration.",
+      "context": "After calibration, the South gateway's error rate decreased. No calibration results for the North gateway were recorded.",
+      "frozen_gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Nguồn chỉ có outcome South và nói không có calibration results North. North unknown, quotes rỗng và missing đúng North/error rate/after calibration; NEI đúng. scope_match=mismatched mô tả thiếu outcome phù hợp, không phải bằng chứng North tăng error rate.",
+      "parts": [
+        {
+          "part": {
+            "quote": "The North gateway reduced its error rate after calibration.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "North gateway",
+              "metric": "error rate",
+              "time": "after calibration",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 59,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "North gateway",
+              "truth": "unknown",
+              "quotes": [],
+              "explanation": "Member 'North gateway' has unresolved evidence for the positive predicate 'error rate', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. Evidence resolving this predicate for the claimed target and scope: target=North gateway; predicate/metric=error rate; time=after calibration.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "mismatched",
+          "missing_information": [
+            "Evidence resolving this predicate for the claimed target and scope: target=North gateway; predicate/metric=error rate; time=after calibration."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [
+            "scope_mismatched"
+          ],
+          "model_missing_information": [],
+          "missing_reason": "scoped_evidence_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: not_enough_info"
+    },
+    {
+      "example_id": "scope:time:support",
+      "claim": "Every weekly trial conducted in May improved throughput.",
+      "context": "Exactly four weekly trials were conducted in May. Each of these four trials improved throughput. Some April trials reduced throughput.",
+      "frozen_gold": "support",
+      "prediction": "support",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Nguồn đóng tập bốn trials conducted in May và nói each cải thiện throughput. May là điều kiện chọn population trial, không ép thời điểm improvement. Quote loại April; coverage complete, ALL support.",
+      "parts": [
+        {
+          "part": {
+            "quote": "Every weekly trial conducted in May improved throughput.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "weekly trial",
+              "metric": "throughput",
+              "time": "",
+              "condition": "in May"
+            },
+            "start": 0,
+            "end": 56,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "support",
+          "observations": [
+            {
+              "member": "four weekly trials",
+              "truth": "true",
+              "quotes": [
+                "Exactly four weekly trials were conducted in May. Each of these four trials improved throughput."
+              ],
+              "explanation": "Member 'four weekly trials' satisfies the positive predicate 'throughput', before applying ALL.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "true",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The complete checked population satisfies the predicate for every member.",
+          "coverage": {
+            "complete": true,
+            "members": [
+              "four weekly trials"
+            ],
+            "quotes": [
+              "Exactly four weekly trials were conducted in May. Each of these four trials improved throughput."
+            ]
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "explicit_population"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: support"
+    },
+    {
+      "example_id": "scope:time:contradict",
+      "claim": "Every weekly trial conducted in May improved throughput.",
+      "context": "Exactly four weekly trials were conducted in May. Three improved throughput and one reduced throughput.",
+      "frozen_gold": "contradict",
+      "prediction": "contradict",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Bốn trials May gồm một trial reduced throughput. Member one là tham chiếu trực tiếp trong cùng quote về May trials; phản ví dụ đúng condition refute ALL.",
+      "parts": [
+        {
+          "part": {
+            "quote": "Every weekly trial conducted in May improved throughput.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "weekly trial",
+              "metric": "throughput",
+              "time": "",
+              "condition": "in May"
+            },
+            "start": 0,
+            "end": 56,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "contradict",
+          "observations": [
+            {
+              "member": "one",
+              "truth": "false",
+              "quotes": [
+                "Exactly four weekly trials were conducted in May. Three improved throughput and one reduced throughput."
+              ],
+              "explanation": "Member 'one' does not satisfy the positive predicate 'throughput', before applying ALL.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "false",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "A checked member fails the predicate, refuting ALL.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "explicit_population"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: contradict"
+    },
+    {
+      "example_id": "scope:time:not_enough_info",
+      "claim": "Every weekly trial conducted in May improved throughput.",
+      "context": "Every April trial improved throughput. The report contains no throughput results for the weekly trials conducted in May.",
+      "frozen_gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Member the weekly trials conducted in May và quote đúng câu không có throughput results May. Không lấy April support May. Unknown/coverage incomplete, missing giữ population/metric/May, NEI đúng.",
+      "parts": [
+        {
+          "part": {
+            "quote": "Every weekly trial conducted in May improved throughput.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "weekly trial",
+              "metric": "throughput",
+              "time": "",
+              "condition": "in May"
+            },
+            "start": 0,
+            "end": 56,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "the weekly trials conducted in May",
+              "truth": "unknown",
+              "quotes": [
+                "The report contains no throughput results for the weekly trials conducted in May."
+              ],
+              "explanation": "Member 'the weekly trials conducted in May' has unresolved evidence for the positive predicate 'throughput', before applying ALL.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. A closed target population and the remaining member results: target=weekly trial; predicate/metric=throughput; condition=in May.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "A closed target population and the remaining member results: target=weekly trial; predicate/metric=throughput; condition=in May."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "population_results_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "model_ledger"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: not_enough_info"
+    },
+    {
+      "example_id": "scope:direction:support",
+      "claim": "The patch reduced median request latency.",
+      "context": "For the same requests and conditions, median latency was 42 milliseconds before the patch and 31 milliseconds after it.",
+      "frozen_gold": "support",
+      "prediction": "support",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Cùng requests/conditions: latency 42 ms trước patch, 31 ms sau patch. Numeric change giữ đúng thứ tự và unit, delta -11/decrease khớp reduced nên support.",
+      "parts": [
+        {
+          "part": {
+            "quote": "The patch reduced median request latency.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "patch",
+              "metric": "median request latency",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 41,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "support",
+          "observations": [
+            {
+              "member": "patch",
+              "truth": "true",
+              "quotes": [
+                "For the same requests and conditions, median latency was 42 milliseconds before the patch and 31 milliseconds after it."
+              ],
+              "explanation": "Member 'patch' satisfies the positive predicate 'median request latency', before applying ATOMIC. See the checked numeric records and their source quotes.",
+              "numeric": {
+                "kind": "change",
+                "source_quote": "For the same requests and conditions, median latency was 42 milliseconds before the patch and 31 milliseconds after it.",
+                "left": {
+                  "value": "42",
+                  "unit": "milliseconds",
+                  "quote": "42 milliseconds"
+                },
+                "right": {
+                  "value": "31",
+                  "unit": "milliseconds",
+                  "quote": "31 milliseconds"
+                }
+              },
+              "citation_additions": [],
+              "model_truth": "true",
+              "numeric_result": {
+                "kind": "change",
+                "input": {
+                  "kind": "change",
+                  "source_quote": "For the same requests and conditions, median latency was 42 milliseconds before the patch and 31 milliseconds after it.",
+                  "left": {
+                    "value": "42",
+                    "unit": "milliseconds",
+                    "quote": "42 milliseconds"
+                  },
+                  "right": {
+                    "value": "31",
+                    "unit": "milliseconds",
+                    "quote": "31 milliseconds"
+                  }
+                },
+                "truth": "true",
+                "reason": "ordered_change_comparison",
+                "left": "42",
+                "right": "31",
+                "unit": "milliseconds",
+                "requested_direction": "decrease",
+                "observed_direction": "decrease",
+                "delta": "-11"
+              },
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence establishes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: support"
+    },
+    {
+      "example_id": "scope:direction:contradict",
+      "claim": "The patch reduced median request latency.",
+      "context": "For the same requests and conditions, median latency was 42 milliseconds before the patch and 55 milliseconds after it.",
+      "frozen_gold": "contradict",
+      "prediction": "contradict",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Cùng requests/conditions: latency 42 ms trước, 55 ms sau patch. Numeric change delta +13/increase trái reduced nên contradict, không đổi chiều baseline/final.",
+      "parts": [
+        {
+          "part": {
+            "quote": "The patch reduced median request latency.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "patch",
+              "metric": "median request latency",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 41,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "contradict",
+          "observations": [
+            {
+              "member": "patch",
+              "truth": "false",
+              "quotes": [
+                "For the same requests and conditions, median latency was 42 milliseconds before the patch and 55 milliseconds after it."
+              ],
+              "explanation": "Member 'patch' does not satisfy the positive predicate 'median request latency', before applying ATOMIC. See the checked numeric records and their source quotes.",
+              "numeric": {
+                "kind": "change",
+                "source_quote": "For the same requests and conditions, median latency was 42 milliseconds before the patch and 55 milliseconds after it.",
+                "left": {
+                  "value": "42",
+                  "unit": "milliseconds",
+                  "quote": "42 milliseconds"
+                },
+                "right": {
+                  "value": "55",
+                  "unit": "milliseconds",
+                  "quote": "55 milliseconds"
+                }
+              },
+              "citation_additions": [],
+              "model_truth": "false",
+              "numeric_result": {
+                "kind": "change",
+                "input": {
+                  "kind": "change",
+                  "source_quote": "For the same requests and conditions, median latency was 42 milliseconds before the patch and 55 milliseconds after it.",
+                  "left": {
+                    "value": "42",
+                    "unit": "milliseconds",
+                    "quote": "42 milliseconds"
+                  },
+                  "right": {
+                    "value": "55",
+                    "unit": "milliseconds",
+                    "quote": "55 milliseconds"
+                  }
+                },
+                "truth": "false",
+                "reason": "ordered_change_comparison",
+                "left": "42",
+                "right": "55",
+                "unit": "milliseconds",
+                "requested_direction": "decrease",
+                "observed_direction": "increase",
+                "delta": "13"
+              },
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence refutes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: contradict"
+    },
+    {
+      "example_id": "scope:direction:not_enough_info",
+      "claim": "The patch reduced median request latency.",
+      "context": "Median request latency was 31 milliseconds after the patch. No before-patch latency or comparative change was reported.",
+      "frozen_gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Chỉ biết latency sau patch 31 ms; nguồn nói không có baseline/comparative change. Unknown và missing yêu cầu baseline đúng metric/target; không suy giảm từ một số đo nên NEI.",
+      "parts": [
+        {
+          "part": {
+            "quote": "The patch reduced median request latency.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "patch",
+              "metric": "median request latency",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 41,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "patch",
+              "truth": "unknown",
+              "quotes": [],
+              "explanation": "Member 'patch' has unresolved evidence for the positive predicate 'median request latency', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. An in-scope baseline/comparison establishing the claimed change: target=patch; predicate/metric=median request latency.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "An in-scope baseline/comparison establishing the claimed change: target=patch; predicate/metric=median request latency."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [
+            "comparison_unresolved"
+          ],
+          "missing_reason": "comparison_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: not_enough_info"
+    },
+    {
+      "example_id": "scope:metric:support",
+      "claim": "The configuration change increased precision.",
+      "context": "Under the same evaluation conditions, precision rose from 0.81 before the configuration change to 0.86 afterward.",
+      "frozen_gold": "support",
+      "prediction": "support",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Numeric record precision 0.81 trước -> 0.86 sau configuration change, delta +0.05. Quote cùng điều kiện, đúng metric precision nên support.",
+      "parts": [
+        {
+          "part": {
+            "quote": "The configuration change increased precision.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "configuration change",
+              "metric": "precision",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 45,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "support",
+          "observations": [
+            {
+              "member": "configuration change",
+              "truth": "true",
+              "quotes": [
+                "Under the same evaluation conditions, precision rose from 0.81 before the configuration change to 0.86 afterward."
+              ],
+              "explanation": "Member 'configuration change' satisfies the positive predicate 'precision', before applying ATOMIC. See the checked numeric records and their source quotes.",
+              "numeric": {
+                "kind": "change",
+                "source_quote": "Under the same evaluation conditions, precision rose from 0.81 before the configuration change to 0.86 afterward.",
+                "left": {
+                  "value": "0.81",
+                  "unit": "",
+                  "quote": "0.81"
+                },
+                "right": {
+                  "value": "0.86",
+                  "unit": "",
+                  "quote": "0.86"
+                }
+              },
+              "citation_additions": [],
+              "model_truth": "true",
+              "numeric_result": {
+                "kind": "change",
+                "input": {
+                  "kind": "change",
+                  "source_quote": "Under the same evaluation conditions, precision rose from 0.81 before the configuration change to 0.86 afterward.",
+                  "left": {
+                    "value": "0.81",
+                    "unit": "",
+                    "quote": "0.81"
+                  },
+                  "right": {
+                    "value": "0.86",
+                    "unit": "",
+                    "quote": "0.86"
+                  }
+                },
+                "truth": "true",
+                "reason": "ordered_change_comparison",
+                "left": "0.81",
+                "right": "0.86",
+                "unit": "",
+                "requested_direction": "increase",
+                "observed_direction": "increase",
+                "delta": "0.05"
+              },
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence establishes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: support"
+    },
+    {
+      "example_id": "scope:metric:contradict",
+      "claim": "The configuration change increased precision.",
+      "context": "Under the same conditions, precision fell from 0.81 to 0.74 after the configuration change, while recall rose from 0.64 to 0.79.",
+      "frozen_gold": "contradict",
+      "prediction": "contradict",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Numeric record chọn precision 0.81 -> 0.74, delta -0.07, không lấy recall 0.64 -> 0.79. Precision giảm refute increased, contradict đúng.",
+      "parts": [
+        {
+          "part": {
+            "quote": "The configuration change increased precision.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "configuration change",
+              "metric": "precision",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 45,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "contradict",
+          "observations": [
+            {
+              "member": "configuration change",
+              "truth": "false",
+              "quotes": [
+                "Under the same conditions, precision fell from 0.81 to 0.74 after the configuration change, while recall rose from 0.64 to 0.79."
+              ],
+              "explanation": "Member 'configuration change' does not satisfy the positive predicate 'precision', before applying ATOMIC. See the checked numeric records and their source quotes.",
+              "numeric": {
+                "kind": "change",
+                "source_quote": "Under the same conditions, precision fell from 0.81 to 0.74 after the configuration change, while recall rose from 0.64 to 0.79.",
+                "left": {
+                  "value": "0.81",
+                  "unit": "",
+                  "quote": "0.81"
+                },
+                "right": {
+                  "value": "0.74",
+                  "unit": "",
+                  "quote": "0.74"
+                }
+              },
+              "citation_additions": [],
+              "model_truth": "false",
+              "numeric_result": {
+                "kind": "change",
+                "input": {
+                  "kind": "change",
+                  "source_quote": "Under the same conditions, precision fell from 0.81 to 0.74 after the configuration change, while recall rose from 0.64 to 0.79.",
+                  "left": {
+                    "value": "0.81",
+                    "unit": "",
+                    "quote": "0.81"
+                  },
+                  "right": {
+                    "value": "0.74",
+                    "unit": "",
+                    "quote": "0.74"
+                  }
+                },
+                "truth": "false",
+                "reason": "ordered_change_comparison",
+                "left": "0.81",
+                "right": "0.74",
+                "unit": "",
+                "requested_direction": "increase",
+                "observed_direction": "decrease",
+                "delta": "-0.07"
+              },
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked in-scope evidence refutes this predicate.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: contradict"
+    },
+    {
+      "example_id": "scope:metric:not_enough_info",
+      "claim": "The configuration change increased precision.",
+      "context": "Recall rose from 0.64 to 0.79 after the configuration change. Precision was not measured.",
+      "frozen_gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Quote đúng Precision was not measured. và truth unknown; missing yêu cầu measurement precision. Recall tăng không support precision và không đo không đồng nghĩa kết quả giảm. NEI đúng.",
+      "parts": [
+        {
+          "part": {
+            "quote": "The configuration change increased precision.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "configuration change",
+              "metric": "precision",
+              "time": "",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 45,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "configuration change",
+              "truth": "unknown",
+              "quotes": [
+                "Precision was not measured."
+              ],
+              "explanation": "Member 'configuration change' has unresolved evidence for the positive predicate 'precision', before applying ATOMIC.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. The unreported in-scope measurement/result: target=configuration change; predicate/metric=precision.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "The unreported in-scope measurement/result: target=configuration change; predicate/metric=precision."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [
+            "measurement_unreported"
+          ],
+          "missing_reason": "measurement_unreported",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: not_enough_info"
+    },
+    {
+      "example_id": "scope:conjunction:support",
+      "claim": "After tuning, the extractor decreased memory use and increased token recall.",
+      "context": "For the same extraction workload, tuning reduced memory use from 5.4 to 4.6 gigabytes and raised token recall from 0.72 to 0.81.",
+      "frozen_gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "ID lịch sử chứa support nhưng frozen gold đã chốt NEI theo strict identity: workload không xác định extractor. Cả memory và token recall có empty unknown ledger; missing đúng extractor/metric/After tuning. Không còn lấy 5.4 to 4.6 gigabytes làm member hoặc gán nó cho recall.",
+      "parts": [
+        {
+          "part": {
+            "quote": "After tuning, the extractor decreased memory use",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "extractor",
+              "metric": "memory use",
+              "time": "After tuning",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 48,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [],
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=extractor; predicate/metric=memory use; time=After tuning.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "unknown",
+          "missing_information": [
+            "Evidence identifying the claimed target in the reported results: target=extractor; predicate/metric=memory use; time=After tuning."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [
+            "scope_unknown"
+          ],
+          "model_missing_information": [
+            "target_binding_unresolved"
+          ],
+          "missing_reason": "target_binding_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        },
+        {
+          "part": {
+            "quote": "and increased token recall.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "extractor",
+              "metric": "token recall",
+              "time": "After tuning",
+              "condition": ""
+            },
+            "start": 49,
+            "end": 76,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [],
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=extractor; predicate/metric=token recall; time=After tuning.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "unknown",
+          "missing_information": [
+            "Evidence identifying the claimed target in the reported results: target=extractor; predicate/metric=token recall; time=After tuning."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [
+            "scope_unknown"
+          ],
+          "model_missing_information": [
+            "target_binding_unresolved"
+          ],
+          "missing_reason": "target_binding_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: not_enough_info, not_enough_info"
+    },
+    {
+      "example_id": "scope:conjunction:contradict",
+      "claim": "After tuning, the extractor decreased memory use and increased token recall.",
+      "context": "For the same workload, tuning reduced memory use from 5.4 to 4.6 gigabytes but lowered token recall from 0.72 to 0.68.",
+      "frozen_gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Frozen gold NEI vì chưa bind workload với extractor. Cả hai part được kiểm, empty ledger/scope unknown, missing identity đúng từng metric/time. Không dùng memory clause hay 4.6 gigabytes làm entity; không suy contradict cho extractor từ workload chưa bind.",
+      "parts": [
+        {
+          "part": {
+            "quote": "After tuning, the extractor decreased memory use",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "extractor",
+              "metric": "memory use",
+              "time": "After tuning",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 48,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [],
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=extractor; predicate/metric=memory use; time=After tuning.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "unknown",
+          "missing_information": [
+            "Evidence identifying the claimed target in the reported results: target=extractor; predicate/metric=memory use; time=After tuning."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [
+            "scope_unknown"
+          ],
+          "model_missing_information": [
+            "target_binding_unresolved"
+          ],
+          "missing_reason": "target_binding_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        },
+        {
+          "part": {
+            "quote": "and increased token recall.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "extractor",
+              "metric": "token recall",
+              "time": "After tuning",
+              "condition": ""
+            },
+            "start": 49,
+            "end": 76,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [],
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=extractor; predicate/metric=token recall; time=After tuning.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "unknown",
+          "missing_information": [
+            "Evidence identifying the claimed target in the reported results: target=extractor; predicate/metric=token recall; time=After tuning."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [
+            "scope_unknown"
+          ],
+          "model_missing_information": [
+            "target_binding_unresolved"
+          ],
+          "missing_reason": "target_binding_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: not_enough_info, not_enough_info"
+    },
+    {
+      "example_id": "scope:conjunction:not_enough_info",
+      "claim": "After tuning, the extractor decreased memory use and increased token recall.",
+      "context": "Tuning reduced memory use from 5.4 to 4.6 gigabytes on the extraction workload. Token recall after tuning was not evaluated.",
+      "frozen_gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Context thiếu extractor; recall còn chưa evaluated. Hai part NEI, observations rỗng, missing ưu tiên identity đúng từng metric/time. Không dùng extraction workload hoặc memory quantity thay extractor; không khẳng định outcome recall.",
+      "parts": [
+        {
+          "part": {
+            "quote": "After tuning, the extractor decreased memory use",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "extractor",
+              "metric": "memory use",
+              "time": "After tuning",
+              "condition": ""
+            },
+            "start": 0,
+            "end": 48,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [],
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=extractor; predicate/metric=memory use; time=After tuning.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "unknown",
+          "missing_information": [
+            "Evidence identifying the claimed target in the reported results: target=extractor; predicate/metric=memory use; time=After tuning."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [
+            "scope_unknown"
+          ],
+          "model_missing_information": [
+            "target_binding_unresolved"
+          ],
+          "missing_reason": "target_binding_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        },
+        {
+          "part": {
+            "quote": "and increased token recall.",
+            "quantifier": "atomic",
+            "scope": {
+              "entity": "extractor",
+              "metric": "token recall",
+              "time": "After tuning",
+              "condition": ""
+            },
+            "start": 49,
+            "end": 76,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [],
+          "explanation": "The checked ledger does not decide this claim part. Evidence identifying the claimed target in the reported results: target=extractor; predicate/metric=token recall; time=After tuning.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "unknown",
+          "missing_information": [
+            "Evidence identifying the claimed target in the reported results: target=extractor; predicate/metric=token recall; time=After tuning."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [
+            "scope_unknown"
+          ],
+          "model_missing_information": [
+            "target_binding_unresolved"
+          ],
+          "missing_reason": "target_binding_unresolved",
+          "explanation_origin": "validated_ledger_renderer_v1"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: not_enough_info, not_enough_info"
+    },
+    {
+      "example_id": "scope:condition:support",
+      "claim": "Every batch in the low-temperature group gained yield after the update.",
+      "context": "The low-temperature group consisted of exactly three batches, and each gained yield after the update. A separate high-temperature batch lost yield.",
+      "frozen_gold": "support",
+      "prediction": "support",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Nguồn đóng low-temperature group đúng ba batches và each gained yield sau update. Quote chỉ low group; high-temperature lost yield ngoài scope không refute claim. Coverage complete và ALL support đúng.",
+      "parts": [
+        {
+          "part": {
+            "quote": "Every batch in the low-temperature group gained yield after the update.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "batch",
+              "metric": "yield",
+              "time": "after the update",
+              "condition": "in the low-temperature group"
+            },
+            "start": 0,
+            "end": 71,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "support",
+          "observations": [
+            {
+              "member": "three batches",
+              "truth": "true",
+              "quotes": [
+                "The low-temperature group consisted of exactly three batches, and each gained yield after the update."
+              ],
+              "explanation": "Member 'three batches' satisfies the positive predicate 'yield', before applying ALL.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "true",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The complete checked population satisfies the predicate for every member.",
+          "coverage": {
+            "complete": true,
+            "members": [
+              "three batches"
+            ],
+            "quotes": [
+              "The low-temperature group consisted of exactly three batches, and each gained yield after the update."
+            ]
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "explicit_population"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: support"
+    },
+    {
+      "example_id": "scope:condition:contradict",
+      "claim": "Every batch in the low-temperature group gained yield after the update.",
+      "context": "The low-temperature group consisted of exactly three batches. After the update, two gained yield and one lost yield.",
+      "frozen_gold": "contradict",
+      "prediction": "contradict",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Nguồn low-temperature group ba batches có một batch lost yield sau update. Member one được bind bằng cùng quote về low group, truth false là phản ví dụ refute ALL.",
+      "parts": [
+        {
+          "part": {
+            "quote": "Every batch in the low-temperature group gained yield after the update.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "batch",
+              "metric": "yield",
+              "time": "after the update",
+              "condition": "in the low-temperature group"
+            },
+            "start": 0,
+            "end": 71,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "contradict",
+          "observations": [
+            {
+              "member": "one",
+              "truth": "false",
+              "quotes": [
+                "The low-temperature group consisted of exactly three batches. After the update, two gained yield and one lost yield."
+              ],
+              "explanation": "Member 'one' does not satisfy the positive predicate 'yield', before applying ALL.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "false",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "A checked member fails the predicate, refuting ALL.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": null,
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "explicit_population"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: contradict"
+    },
+    {
+      "example_id": "scope:condition:not_enough_info",
+      "claim": "Every batch in the low-temperature group gained yield after the update.",
+      "context": "The low-temperature group contained three batches, but no yield changes were measured for that group. All measured high-temperature batches gained yield after the update.",
+      "frozen_gold": "not_enough_info",
+      "prediction": "not_enough_info",
+      "judgments": {
+        "label_correct": true,
+        "quote_relevant": true,
+        "explanation_follows_evidence": true,
+        "all_claim_parts_checked": true,
+        "missing_information_specific": true
+      },
+      "notes": "Đã sửa member thành low-temperature group có nguồn, không còn fragment no yield changes were. Quote chỉ câu chưa đo yield changes low group; truth unknown và missing giữ batch/yield/after update/low condition. Không đưa high-temperature vào ledger; NEI đúng.",
+      "parts": [
+        {
+          "part": {
+            "quote": "Every batch in the low-temperature group gained yield after the update.",
+            "quantifier": "all",
+            "scope": {
+              "entity": "batch",
+              "metric": "yield",
+              "time": "after the update",
+              "condition": "in the low-temperature group"
+            },
+            "start": 0,
+            "end": 71,
+            "numeric_requirements": []
+          },
+          "numeric_requirements": [],
+          "assessed_label": "not_enough_info",
+          "observations": [
+            {
+              "member": "low-temperature group",
+              "truth": "unknown",
+              "quotes": [
+                "The low-temperature group contained three batches, but no yield changes were measured for that group."
+              ],
+              "explanation": "Member 'low-temperature group' has unresolved evidence for the positive predicate 'yield', before applying ALL.",
+              "numeric": null,
+              "citation_additions": [],
+              "model_truth": "unknown",
+              "numeric_result": null,
+              "model_explanation": "Predicate evidence recorded."
+            }
+          ],
+          "explanation": "The checked ledger does not decide this claim part. The unreported in-scope measurement/result: target=batch; predicate/metric=yield; time=after the update; condition=in the low-temperature group.",
+          "coverage": {
+            "complete": false,
+            "members": [],
+            "quotes": []
+          },
+          "scope_match": "matched",
+          "missing_information": [
+            "The unreported in-scope measurement/result: target=batch; predicate/metric=yield; time=after the update; condition=in the low-temperature group."
+          ],
+          "model_explanation": "Assess the recorded evidence ledger.",
+          "validation_issues": [],
+          "model_missing_information": [],
+          "missing_reason": "measurement_unreported",
+          "explanation_origin": "validated_ledger_renderer_v1",
+          "population_binding_basis": "model_ledger"
+        }
+      ],
+      "claim_explanation": "AND over part decisions: not_enough_info"
+    }
+  ],
+  "limitations": [
+    "AI judgments are review assistance, not human approval.",
+    "No validation30 inference or independent accuracy is measured here."
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "claim": "None of the monitored pumps leaked during the overnight test.",
+  "part": {
+    "quote": "None of the monitored pumps leaked during the overnight test.",
+    "quantifier": "none",
+    "scope": {
+      "entity": "monitored pumps",
+      "metric": "leaked",
+      "time": "during the overnight test",
+      "condition": ""
+    },
+    "start": 0,
+    "end": 61,
+    "numeric_requirements": []
+  },
+  "context": "Blue, Green and Silver were monitored during the overnight test. Blue and Green had no leaks, but Silver's leak status was not reported.",
+  "outputs": [
+    {
+      "scope_match": "matched",
+      "coverage": {
+        "complete": false,
+        "members": [],
+        "quotes": []
+      },
+      "observations": [
+        {
+          "member": "Silver's leak status",
+          "truth": "false",
+          "quotes": [
+            "Blue and Green had no leaks, but Silver's leak status was not reported."
+          ],
+          "explanation": "Predicate evidence recorded.",
+          "numeric": null
+        }
+      ],
+      "missing_information": [
+        "measurement_unreported"
+      ],
+      "explanation": "Assess the recorded evidence ledger."
+    },
+    {
+      "scope_match": "matched",
+      "coverage": {
+        "complete": false,
+        "members": [],
+        "quotes": []
+      },
+      "observations": [
+        {
+          "member": "Silver's leak status",
+          "truth": "false",
+          "quotes": [
+            "Blue and Green had no leaks, but Silver's leak status was not reported."
+          ],
+          "explanation": "Predicate evidence recorded.",
+          "numeric": null
+        }
+      ],
+      "missing_information": [],
+      "explanation": "Assess the recorded evidence ledger."
+    }
+  ],
+  "provenance": {
+    "run_id": "20261102T120149Z-ca882061",
+    "kind": "actual_failed_assessment_outputs_not_new_predictions"
+  }
+}

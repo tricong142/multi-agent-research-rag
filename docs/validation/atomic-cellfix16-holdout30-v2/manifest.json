@@ -1,0 +1,63 @@
+{
+  "version": "atomic-cellfix16-holdout30-v2",
+  "status": "frozen_pending_human_annotation",
+  "candidate": "atomic-verifier-constrained-v8-cellfix16",
+  "candidate_criteria_sha256": "c025247428698d892e549fb12ad22e19561020b034a2a2276c9dfcaf0cbdc966",
+  "evaluation_role": "independent_holdout_candidate",
+  "cases": 30,
+  "papers": 10,
+  "proposed_label_counts": {
+    "support": 10,
+    "contradict": 10,
+    "not_enough_info": 10
+  },
+  "files": {
+    "annotation_gate_core.py": {
+      "size": 5695,
+      "sha256": "b2f7ce817af4152ae5c19ce8ddd76083a796297d9f088a92fa9a2e81d1dcd7c4"
+    },
+    "authoring.json": {
+      "size": 13277,
+      "sha256": "4e64d83f951dda2728f5721a85f3ea50827bdcaa9d60bd1cdcf41ddb564e0239"
+    },
+    "cases.jsonl": {
+      "size": 50429,
+      "sha256": "5999817e4a95d8595a18be9f9e684a21ec1aed76dd0eded63155eec8636a354b"
+    },
+    "criteria.json": {
+      "size": 1975,
+      "sha256": "845374ca154d8cca34164ce88d30a679b45708a4a80fa16e60e20b4f3d48771a"
+    },
+    "exposure-registry.json": {
+      "size": 573769,
+      "sha256": "e41e8b70b27322e162132fc89ac6727add1fa04fa8b7c652a41f30eb360bbb35"
+    },
+    "inputs.jsonl": {
+      "size": 24474,
+      "sha256": "e6255a7eb2192b2b34ea7296113457835086f4eb88a954f5c0d41fa8ff26a4fa"
+    },
+    "model-settings.json": {
+      "size": 482,
+      "sha256": "d140ec07ed84e1c1559f5f93faedbb6749aead6b7cf4f3b9ad0f64e78abe96ae"
+    },
+    "overlap-report.json": {
+      "size": 61827,
+      "sha256": "071582cc0ff669ec68ac6420e8026bb714a751eae6364da6bca57dbfb8666fc9"
+    },
+    "review_gate.py": {
+      "size": 5100,
+      "sha256": "952591862f3b18930d9a86da0bb6c6d26696c6bf0f90fc20c0745d0dd2da8947"
+    },
+    "source-provenance.json": {
+      "size": 1338,
+      "sha256": "4b2724fb1551c98401c82c27b53191cfb9c4d2c6ae8d3d509cfad6a993b9dc12"
+    },
+    "sources.jsonl": {
+      "size": 10122,
+      "sha256": "91e18d95fdfde88f89a5702b12221a9892c50b36d3c85193049ab438fd15dd95"
+    }
+  },
+  "human_adjudication_complete": false,
+  "inference_completed": false,
+  "independent_validation_completed": false
+}

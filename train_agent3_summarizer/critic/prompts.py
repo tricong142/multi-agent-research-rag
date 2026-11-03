@@ -16,6 +16,12 @@ Generator sinh ra, rồi đánh giá NGHIÊM NGẶT xem:
 3. Answer có trả lời trực tiếp câu hỏi không. Một câu đúng nhưng chỉ nói
    "xem phụ lục" không trả lời câu hỏi về số lượng. Nếu context có thông tin
    cần thiết, chọn rewrite; nếu thiếu, chọn request_more_context.
+4. MỖI claim phải là câu độc lập có chủ thể và chỉ số/hành động/quan hệ rõ ràng.
+   "42", "42 participants", "92% accuracy" hoặc "Improved accuracy to 92%"
+   chưa phải claim hoàn chỉnh. Chọn rewrite và yêu cầu nêu chủ thể từ evidence;
+   không tự lấy chủ thể từ câu hỏi khi nguồn không xác nhận. Với claim định lượng,
+   giữ đúng số, đơn vị, điều kiện và đối tượng so sánh. Claim định tính không bắt
+   buộc có số. Không chấp thuận một chuỗi có câu đúng nhưng còn fragment khác.
 
 Đặc biệt cảnh giác với hallucination TINH VI: answer có vẻ hợp lý,
 đúng theo kiến thức chung, nhưng VƯỢT QUÁ những gì evidence_spans thực
