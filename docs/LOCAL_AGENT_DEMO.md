@@ -86,9 +86,9 @@ và artifact, chạy từng component rồi chuyển predictions/log về laptop
 bày. Kaggle GPU đang dùng là một host khác; kết quả đó phải ghi là inference trên
 Kaggle. Runner local không đổi sang model nhỏ hơn rồi coi đó là checkpoint đã train.
 
-`run_demo.bat`/`web_demo` hiện là mô phỏng workflow, có nhãn rõ trên giao diện và
-API. Những số minh họa ở đó không được đưa vào bảng đánh giá luận văn. Sử dụng
-runner trong tài liệu này cho các số đo vừa kiểm chứng.
+`run_demo.bat` mở [web demo R8 v12](R8_V12_HANDOFF.md#demo-web-local). Web chạy
+pipeline thực khi đủ điều kiện và ghi nhãn riêng cho kết quả Kaggle lưu sẵn.
+Số đo từng agent trong tài liệu này lấy từ runner đánh giá component.
 
 Atomic verifier đang có bản sửa v5 chưa đóng băng và chưa chạy model. Bộ test demo
 được chọn riêng cho serving contracts; nó không thay gate probe 18/18, 39 ca hoặc

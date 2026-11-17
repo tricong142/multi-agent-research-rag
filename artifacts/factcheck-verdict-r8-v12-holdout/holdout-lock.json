@@ -1,0 +1,32 @@
+{
+  "holdout": "r8-v12-aacl2026-holdout30-v1",
+  "locked_at_utc": "2026-11-14T06:32:07.855199+00:00",
+  "candidate": "r8-grounded-source-v12-7b",
+  "candidate_lock_sha256": "9adedbb5eb5269a41afb4a0f3a66275e079f49a0772090138c20124858279edd",
+  "lock_status": "inputs_and_gold_frozen_before_inference",
+  "cases": 30,
+  "papers": 10,
+  "class_counts": {
+    "support": 10,
+    "not_enough_info": 10,
+    "contradict": 10
+  },
+  "blind_bundle": "r8-v12-aacl2026-holdout30-v1-blind.zip",
+  "scope": "standalone_verifier_with_supplied_context_paraphrases_and_transcribed_tables",
+  "gold_review": "ai_source_grounded_review",
+  "independent_human_review": false,
+  "files": {
+    "inputs.jsonl": "ccc2647e5a6c6971bb4c6f26ba3d870105e1b4c45f5b7ab06d7d6938b459cade",
+    "cases.json": "61bbb0de2afa763c980c4d2171a46bf027e8a81740b28927a01c146e9759438f",
+    "r8-v12-aacl2026-holdout30-v1-blind.zip": "9a9c8cf0322890a64dd5dbc21bf8cb9d2bc250f61e4731821d317989979ff330",
+    "score_holdout.py": "bf89adca2aaff60a7d5ee88289214ce4cd8ae7bd32e91d19c5d7120f047ae7e7",
+    "overlap-report.json": "ef38f8ec4a7d827855945c00d45f4df4cb640dc67ed55be353df808a6961f4c5",
+    "gold-source-review.json": "2a052d82d1d893556ea6669d8403f56b4fdf1b107984a0e951b36849861148df"
+  },
+  "sla": {
+    "max_false_support": 0,
+    "min_support_precision": 0.85,
+    "min_macro_f1": 0.85,
+    "max_answerable_abstention_rate": 0.15
+  }
+}

@@ -11,10 +11,13 @@ from dataclasses import asdict, is_dataclass
 from collections.abc import Mapping
 from typing import Any, Callable
 
-from .state import EvidenceRef, ResearchState, SourceChunk
+from .state import EvidenceRef, ResearchState, SourceChunk, TableCell
+from .pdf_table_cells import count_cell_claim, count_table_header, table_count_cells, table_percentage_cells
+from .pdf_cell_context import relevant_coordinate_cells
+from .r8_adapter import R8_POLICY_ID
 from .controller import AgentResult, Decision, budget_config, choose_action, enforce_limits
 from .planning import answer_coverage_gap, create_plan, plan_complete, task_question, update_plan
-from train_agent3_summarizer.claim_contract import claim_contract_issues, split_claims
+from train_agent3_summarizer.claim_contract import SENTENCE_BREAK, claim_contract_issues, split_claims
 
 logger = logging.getLogger(__name__)
 
@@ -51,6 +54,56 @@ def source_evidence(span: str, text: str) -> str | None:
             return original
         position = canonical.find(target, position + 1)
     return None
+
+
+def referenced_table_context(question: str, hits: list[SourceChunk],
+                             pdf_chunks: list[SourceChunk]) -> list[SourceChunk]:
+    """Keep nearby table blocks and the caption together, with original citations."""
+    names = re.findall(r"\btable\s+(\d+[a-z]?)\b", question, re.I)
+    if len(set(name.casefold() for name in names)) != 1:
+        return []
+    caption_pattern = re.compile(rf"^\s*table\s+{re.escape(names[0])}\s*[:.]", re.I)
+    pdf_chunks = [c for c in pdf_chunks if c["metadata"].get("source_tool") != "pdf_coordinates"]
+    captions = [c for c in pdf_chunks if caption_pattern.match(c["text"])
+                and len(c["metadata"].get("bbox") or []) == 4]
+    if len(captions) != 1:
+        return []
+    caption = captions[0]
+    page = caption["source_id"].rsplit(":", 2)[0]
+    if not any(c["source_id"].rsplit(":", 2)[0] == page for c in hits):
+        return []
+    left, top, right, bottom = caption["metadata"]["bbox"]
+    # Bound the look-back to the local region above a bottom caption.
+    nearby = []
+    for chunk in pdf_chunks:
+        box = chunk["metadata"].get("bbox") or []
+        if (chunk["source_id"].rsplit(":", 2)[0] == page and len(box) == 4
+                and 0 <= top - box[3] <= 180 and box[0] < right and box[2] > left):
+            nearby.append(chunk)
+    nearby.sort(key=lambda c: (c["metadata"]["bbox"][1], c["metadata"]["bbox"][0]))
+    if not any(count_table_header(c["text"]) for c in nearby):
+        below = [
+            c for c in pdf_chunks if c["source_id"].rsplit(":", 2)[0] == page
+            and len(box := c["metadata"].get("bbox") or []) == 4
+            and 0 <= box[1] - bottom <= 110 and box[0] < right and box[2] > left
+        ]
+        headers = [c for c in below if count_table_header(c["text"])
+                   and c["metadata"]["bbox"][1] - bottom <= 28]
+        if len(headers) == 1:
+            nearby = sorted(below, key=lambda c: c["metadata"]["bbox"][1])
+    return [caption, *nearby]
+
+
+def pdf_evidence_units(chunks: list[SourceChunk], table_ids: set[str]) -> dict[str, EvidenceRef]:
+    units: dict[str, EvidenceRef] = {}
+    for chunk in chunks:
+        source_id = chunk["source_id"]
+        # PDF extraction often splits the cells of a row across physical lines.
+        spans = [chunk["text"]] if source_id in table_ids else SENTENCE_BREAK.split(chunk["text"])
+        for span in spans:
+            if text := span.strip():
+                units[f"S{len(units) + 1}"] = {"source_id": source_id, "text": text}
+    return units
 
 
 def build_graph(
@@ -171,12 +224,15 @@ def build_graph(
     def retrieve(state: ResearchState) -> ResearchState:
         try:
             action = Decision.model_validate(state["next_action"])
+            ordinary_chunks = [c for c in state.get("pdf_chunks", [])
+                               if c["metadata"].get("source_tool") != "pdf_coordinates"]
             if callable(getattr(retriever, "run", None)):
-                result = retriever.run(state=state, top_k=action.top_k)
+                result = retriever.run(state={**state, "pdf_chunks": ordinary_chunks}
+                                       if state.get("pdf_path") else state, top_k=action.top_k)
             else:
                 result = retriever.search(
                     action.query, method=action.method,
-                    pdf_chunks=state.get("pdf_chunks") if state.get("pdf_path") else None,
+                    pdf_chunks=ordinary_chunks if state.get("pdf_path") else None,
                     top_k=action.top_k, history=state.get("retrieval_history", []))
             chunks: list[SourceChunk] = result["chunks"]
             seen = list(state.get("seen_chunks", []))
@@ -218,35 +274,85 @@ def build_graph(
             retained_ids.update(r["source_id"] for r in state.get("fact_check_results", [])
                                 if r["label"] == "support" and r["status"] == "ok")
             retained = [c for c in state["seen_chunks"] if c["source_id"] in retained_ids]
-            candidates = retained + [c for c in state["retrieved_chunks"] if c not in retained]
+            tables = referenced_table_context(task_question(state), state["retrieved_chunks"], state.get("pdf_chunks", []))
+            cells = relevant_coordinate_cells(task_question(state), state.get("pdf_chunks", []))
+            candidates = retained + [c for c in cells + tables if c not in retained]
+            candidates += [c for c in state["retrieved_chunks"] if c not in candidates]
             candidates += [c for c in state["seen_chunks"] if c not in candidates]
+            seen_ids = {c["source_id"] for c in state["seen_chunks"]}
+            table_ids = {c["source_id"] for c in cells + tables}
+            run_ids = getattr(summarizer, "run_with_source_ids", None) if state.get("pdf_path") else None
+            id_mode = callable(run_ids)
+            selected_ids = set()
             for chunk in candidates:
+                if id_mode and chunk["source_id"] in selected_ids:
+                    continue
                 if used_chars + len(chunk["text"]) <= max_context_chars:
                     selected.append(chunk)
+                    selected_ids.add(chunk["source_id"])
                     used_chars += len(chunk["text"])
             if not selected:
                 raise ValueError("No retrieved chunk fits the context budget")
-            context = "\n\n".join(f"[{chunk['source_id']}] {chunk['text']}" for chunk in selected)
-            result = summarizer.run(context=context, question=task_question(state))
+            units = pdf_evidence_units(selected, table_ids) if id_mode else {}
+            table_cells = table_percentage_cells(state["pdf_path"], tables) if tables and id_mode else {}
+            count_cells = table_count_cells(state["pdf_path"], tables) if tables and id_mode else {}
+            if id_mode:
+                source_units = {id_: ref["text"] for id_, ref in units.items()}
+                table_text = {chunk["source_id"]: chunk["text"] for chunk in tables}
+                table_scope = {}
+                cells_by_unit = {}
+                counts_by_unit = {}
+                for id_, ref in units.items():
+                    if cell := table_cells.get(ref["source_id"]):
+                        table_scope[id_] = [table_text[cell["caption_source_id"]],
+                                            table_text[cell["header_source_id"]]]
+                        cells_by_unit[id_] = cell
+                    elif counts := count_cells.get(ref["source_id"]):
+                        table_scope[id_] = [table_text[counts[0]["caption_source_id"]],
+                                            table_text[counts[0]["header_source_id"]]]
+                        counts_by_unit[id_] = counts
+                if tables:
+                    options = {"table_scope": table_scope, "table_cells": cells_by_unit}
+                    if counts_by_unit:
+                        options["count_cells"] = counts_by_unit
+                    result = run_ids(source_units, task_question(state), **options)
+                else:
+                    result = run_ids(source_units, task_question(state))
+            else:
+                context = "\n\n".join(f"[{chunk['source_id']}] {chunk['text']}" for chunk in selected)
+                result = summarizer.run(context=context, question=task_question(state))
             if not isinstance(result.evidence_spans, list) or any(
                 not isinstance(span, str) or not span.strip() for span in result.evidence_spans
             ):
                 raise ValueError("Evidence spans must be a list of nonempty strings")
             spans = [span.strip() for span in result.evidence_spans]
-            if len(spans) > 10:
+            if not id_mode and len(spans) > 10:
                 raise ValueError("Summarizer returned too many evidence spans")
             refs: list[EvidenceRef] = []
             matched_span_count = 0
-            for span in spans:
-                matched = False
-                for chunk in selected:
-                    original = source_evidence(span, chunk["text"])
-                    if original is not None:
-                        matched = True
-                        ref = {"source_id": chunk["source_id"], "text": original}
-                        if ref not in refs:
-                            refs.append(ref)
-                matched_span_count += int(matched)
+            if id_mode:
+                refs = [{**units[id_], "evidence_id": id_, "claim": claim}
+                        for claim, ids in result.claim_sources.items() for id_ in ids]
+                for ref in refs:
+                    if cell := table_cells.get(ref["source_id"]):
+                        ref["table_cell"] = cell
+                    else:
+                        match = next((c for c in count_cells.get(ref["source_id"], [])
+                                      if count_cell_claim(c) == ref["claim"]), None)
+                        if match:
+                            ref["table_cell"] = match
+                matched_span_count = len({ref["evidence_id"] for ref in refs})
+            else:
+                for span in spans:
+                    matched = False
+                    for chunk in selected:
+                        original = source_evidence(span, chunk["text"])
+                        if original is not None:
+                            matched = True
+                            ref = {"source_id": chunk["source_id"], "text": original}
+                            if ref not in refs:
+                                refs.append(ref)
+                    matched_span_count += int(matched)
             gap = answer_coverage_gap(task_question(state), str(result.answer))
             structure_issues = claim_contract_issues(result.answer)
             supported = (not gap and not structure_issues and result.is_supported is True and result.confidence == "high"
@@ -276,9 +382,11 @@ def build_graph(
                 "draft_answer": str(result.answer), "evidence_spans": spans,
                 "context_source_ids": [chunk["source_id"] for chunk in selected],
                 "evidence_refs": refs, "summary_supported": supported,
+                "seen_chunks": state["seen_chunks"] + [c for c in selected if c["source_id"] in table_ids - seen_ids],
                 "summary_confidence": str(result.confidence),
                 "agent_result": outcome.model_dump(),
                 "summary_diagnostics": {"reasons": reasons, "span_count": len(spans),
+                                        "evidence_mode": "source_ids" if id_mode else "verbatim_spans",
                                         "claim_contract_issues": structure_issues,
                                         "trials": [asdict(t) if is_dataclass(t) else t for t in getattr(result, "reasoning_trace", [])],
                                         "matched_span_count": matched_span_count,
@@ -313,6 +421,7 @@ def build_graph(
         calls_started = 0
         if (state.get("summary_supported") or len(state.get("evidence_refs", [])) >= 2) and claims and len(claims) <= 24:
             refs = list(state.get("evidence_refs", []))
+            bound_claims = {r["claim"] for r in refs if "claim" in r}
             # Prior task claims must be supported again, not merely checked for contradiction.
             if previous:
                 for chunk in state.get("seen_chunks", []):
@@ -320,6 +429,10 @@ def build_graph(
                     if ref not in refs:
                         refs.append(ref)
             ref_keys = {(ref["source_id"], ref["text"]) for ref in refs}
+            pdf_sources = {c["source_id"]: c["text"] for c in state.get("pdf_chunks", [])}
+            coordinate_cells = [c for c in state.get("pdf_chunks", [])
+                                if c["metadata"].get("source_tool") == "pdf_coordinates"]
+            coordinate_ids = {c["source_id"] for c in coordinate_cells}
             # A new retrieval round must not erase a previously observed conflict.
             other_chunks = [chunk for chunk in state.get("seen_chunks", [])
                             if (chunk["source_id"], chunk["text"]) not in ref_keys]
@@ -328,14 +441,26 @@ def build_graph(
                         "errors": errors + ["factchecker:call_budget_exceeded"],
                         "low_confidence_warning": True, "status": "insufficient_evidence"}
 
-            def review(claim: str, source_id: str, evidence: str, scope: str) -> tuple[Any, Any, Any]:
+            def review(claim: str, source_id: str, evidence: str, scope: str,
+                       table_cell: TableCell | None = None, source_context: str | None = None,
+                       coordinate: bool = False) -> tuple[Any, Any, Any, Any]:
                 nonlocal calls_started
                 started = clock()
                 try:
                     if clock() >= state["deadline_at"]:
                         raise TimeoutError("Research deadline reached")
                     calls_started += 1
-                    decision = factchecker({"claim": claim, "context": evidence, "deadline_at": state["deadline_at"]})
+                    request = {"claim": claim, "context": evidence, "deadline_at": state["deadline_at"]}
+                    if table_cell is not None:
+                        request["source_id"] = source_id
+                        request["table_cell"] = table_cell
+                    elif source_context is not None:
+                        request["source_id"] = source_id
+                        request["pdf_source_context"] = source_context
+                    if coordinate:
+                        request.update(source_id=source_id, question=task_question(state),
+                                       pdf_coordinate_cells=coordinate_cells)
+                    decision = factchecker(request)
                     if not isinstance(decision, Mapping):
                         raise ValueError("Fact-check response must be a mapping")
                     label = decision.get("fact_check_label")
@@ -360,30 +485,41 @@ def build_graph(
                                 "scope": scope, "label": label, "confidence_score": score,
                                 "status": status, "reasoning": decision.get("fact_check_reasoning"),
                                 "confidence_reasoning": decision.get("confidence_reasoning"),
+                                "verification_method": decision.get("verification_method"),
                                 "attempts": [{k: a[k] for k in ("stage", "attempt", "ok", "error_type") if k in a}
                                              for a in decision.get("fact_check_attempts", [])],
                                 "recommended_action": action})
                 emit({"event": "tool_result", "action": "factcheck", "call": state["factcheck_calls_used"] + calls_started,
                       "status": "ok" if status == "ok" else "failed", "elapsed_ms": round((clock() - started) * 1000, 2)})
-                return label, score, status
+                return label, score, status, decision.get("verification_method")
 
             for claim_no, claim in enumerate(claims, 1):
                 candidates = []
+                require_binding = claim in bound_claims
                 conflict = False
                 failed_review = False
+                coordinate_checked = False
                 for ref in refs:
-                    label, score, status = review(claim, ref["source_id"], ref["text"], "evidence")
+                    source_context = pdf_sources.get(ref["source_id"]) if ref.get("claim") == claim else None
+                    coordinate = (verifier_policy == R8_POLICY_ID and not previous and not audit_only
+                                  and len(refs) == len(claims) == 1 and source_context == ref["text"]
+                                  and ref["source_id"] in coordinate_ids)
+                    label, score, status, method = review(claim, ref["source_id"], ref["text"], "evidence",
+                                                          ref.get("table_cell"), source_context, coordinate)
+                    coordinate_checked = coordinate and status == "ok" and method == "pdf_coordinate_cell"
                     if label == "contradict" and status == "ok":
                         conflict = True
-                    if label == "support" and status == "ok" and type(score) in (float, int) and factcheck_threshold <= score <= 1:
+                    if (label == "support" and status == "ok" and type(score) in (float, int)
+                            and factcheck_threshold <= score <= 1 and (not require_binding or ref.get("claim") == claim)):
                         candidates.append((float(score), ref))
                     if status != "ok":
                         failed_review = True
-                for chunk in other_chunks:
-                    label, score, status = review(claim, chunk["source_id"], chunk["text"], "chunk")
+                # The scoped check has already compared all cells for this exact table coordinate.
+                for chunk in [] if coordinate_checked else other_chunks:
+                    label, score, status, _ = review(claim, chunk["source_id"], chunk["text"], "chunk")
                     if label == "contradict" and status == "ok":
                         conflict = True
-                    if label == "support" and status == "ok" and factcheck_threshold <= score <= 1:
+                    if label == "support" and status == "ok" and factcheck_threshold <= score <= 1 and not require_binding:
                         candidates.append((float(score), {"source_id": chunk["source_id"], "text": chunk["text"]}))
                     if status != "ok":
                         failed_review = True

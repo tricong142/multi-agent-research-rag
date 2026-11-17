@@ -56,6 +56,7 @@ class ClaimContractTests(unittest.TestCase):
         for text in ("42", "42 participants", "210 ms", "92% accuracy", "Accuracy: 92%", "F1 = 0.92",
                      "Improved accuracy to 92%.", "Enrolled 42 participants.", "Was 42 participants.",
                      "After tuning, improved accuracy to 92%.", "It achieved 92% accuracy.",
+                     "Chooses the higher-priority pattern.", "The system chooses.", "The previously chosen pattern.",
                      "The sample 42 participants.", "The model is.", "Đã đạt độ chính xác 92%.",
                      "Sử dụng bốn mô hình.", "All achieved 92% accuracy.", "Tất cả đạt 92%."):
             with self.subTest(text=text):
@@ -65,6 +66,7 @@ class ClaimContractTests(unittest.TestCase):
         for text in (FACT, "Model A achieved 92% accuracy.", "Model A reduced latency.",
                      "42 participants were enrolled.", "The model failed.", "Sources disagree.",
                      "The model did not improve recall.", "Model A had an F1 score of 0.92.",
+                     "For matching text normalization patterns of the same length, the system chooses the higher-priority pattern.",
                      "Mô hình A đạt độ chính xác 92%.", "Mô hình A sử dụng bốn lớp.",
                      "Nghiên cứu đã tuyển 42 người tham gia."):
             with self.subTest(text=text):

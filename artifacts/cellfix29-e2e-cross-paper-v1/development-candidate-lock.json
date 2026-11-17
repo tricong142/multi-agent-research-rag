@@ -1,0 +1,165 @@
+{
+  "candidate": "cellfix29-e2e-structured-counts",
+  "evaluation": "cross-paper-development-v1",
+  "qaspar_reference_run": {
+    "artifact": "cellfix29-e2e-qasper-grounded-claims-nod6pgb1.zip",
+    "sha256": "eb19f3999ddf3c1ed7cb187e43bd0b3471ff1e714e035c98869f5d08a68c0834",
+    "observed_smoke": "3/3",
+    "pdf_sha256": "b15b4378988ed4e553dd312eaf334411abcf1fb28c53b846d360435eb55cd193"
+  },
+  "base_notebook": "kaggle_cellfix29_e2e_cross_paper.ipynb",
+  "base_notebook_sha256": "358a267d8ce731efcb968bf69eb15b0c80f810efbba91fde7b5a0c730b6690f8",
+  "runtime_sha256": "e162edb9ed94bd7ece1eece1dff6277fec5c923ef15015b5a370b13a0a640769",
+  "payload_sha256": "c2f6decea7021c83a99a7cb4e4985c4d511723fdebb4c6066a0d97e4523fbaa5",
+  "cellfix29_baseline_payload_sha256": "83c4c54562d3a68049328b635dc30d1feac5fa0409f9dfe234d3cd0f6fd1baa0",
+  "checkpoint_files": {
+    "05_writer/checkpoints/writer_qlora/adapter_config.json": {
+      "sha256": "ca0c0487fcd867c57881b4a820a1fa909964a7799221b242475e05103ca7090d",
+      "size": 838
+    },
+    "05_writer/checkpoints/writer_qlora/adapter_model.safetensors": {
+      "sha256": "2c233996b954baa8cb9b19d55e586e3ab59db9beeb7e80325f5d82f69d8d2a27",
+      "size": 73911112
+    },
+    "05_writer/checkpoints/writer_qlora/added_tokens.json": {
+      "sha256": "58b54bbe36fc752f79a24a271ef66a0a0830054b4dfad94bde757d851968060b",
+      "size": 605
+    },
+    "05_writer/checkpoints/writer_qlora/merges.txt": {
+      "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+      "size": 1671853
+    },
+    "05_writer/checkpoints/writer_qlora/special_tokens_map.json": {
+      "sha256": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd",
+      "size": 613
+    },
+    "05_writer/checkpoints/writer_qlora/tokenizer.json": {
+      "sha256": "9c5ae00e602b8860cbd784ba82a8aa14e8feecec692e7076590d014d7b7fdafa",
+      "size": 11421896
+    },
+    "05_writer/checkpoints/writer_qlora/tokenizer_config.json": {
+      "sha256": "57fea41fa99fce34f91450643e48b3bfbb078c32c6831a3c06834f122c200510",
+      "size": 7336
+    },
+    "05_writer/checkpoints/writer_qlora/vocab.json": {
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "size": 2776833
+    },
+    "train_agent3_summarizer/checkpoints/critic_qlora/final/adapter_config.json": {
+      "sha256": "449eae6ce9dc58c5c783f99a89242193f18c06b405ab9a86b9a44b3343b6ddc7",
+      "size": 1054
+    },
+    "train_agent3_summarizer/checkpoints/critic_qlora/final/adapter_model.safetensors": {
+      "sha256": "d3123dcea7298404133b0db359f533ceb2f4334a52ed93dcb11331e5de4d0c06",
+      "size": 40400200
+    },
+    "train_agent3_summarizer/checkpoints/critic_qlora/final/chat_template.jinja": {
+      "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+      "size": 2507
+    },
+    "train_agent3_summarizer/checkpoints/critic_qlora/final/tokenizer.json": {
+      "sha256": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+      "size": 11421892
+    },
+    "train_agent3_summarizer/checkpoints/critic_qlora/final/tokenizer_config.json": {
+      "sha256": "47bfa3e7727312946b29ac10d6dd0672d63cf7815b2a160b9523872040d2e536",
+      "size": 665
+    },
+    "train_agent3_summarizer/checkpoints/generator_qlora/final/adapter_config.json": {
+      "sha256": "b3f8aaf9cbfba12f590fbe96f22b3acb2c3a647c866ed0f5aef7edcdb15285d7",
+      "size": 1103
+    },
+    "train_agent3_summarizer/checkpoints/generator_qlora/final/adapter_model.safetensors": {
+      "sha256": "bb844bd730bfb1aa49afaedd6c6ee4c66b5553966eec7c3ea443d32c40352b7c",
+      "size": 161533192
+    },
+    "train_agent3_summarizer/checkpoints/generator_qlora/final/chat_template.jinja": {
+      "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+      "size": 2507
+    },
+    "train_agent3_summarizer/checkpoints/generator_qlora/final/tokenizer.json": {
+      "sha256": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+      "size": 11421892
+    },
+    "train_agent3_summarizer/checkpoints/generator_qlora/final/tokenizer_config.json": {
+      "sha256": "47bfa3e7727312946b29ac10d6dd0672d63cf7815b2a160b9523872040d2e536",
+      "size": 665
+    }
+  },
+  "checkpoints_origin": "Per-file hashes enforced by the verified notebook preflight.",
+  "candidate_runtime_config": {
+    "gpu": "T4 x2",
+    "retrieval": "dense",
+    "initial_top_k": 5,
+    "verifier_arg": "atomic",
+    "quantize_4bit": true,
+    "process_timeout": 3600,
+    "model_dependencies": "Inherited from the locked embedded runtime."
+  },
+  "inference_inputs_sha256": "a2c9b95fa14b0841c3e5eb18f4a36886c1d381b9ada38ef8a9f0eb2df1ee031d",
+  "references_sha256": "0031242bfe09ca9a1f24e722bc551dd98f149492cd32fb179eb036484183bd4a",
+  "authoring_manifest_sha256": "f99e532af932effe1ab26d3048e7785c5cace13dbee631b9d08d2f79e816cccb",
+  "papers": {
+    "viisa": {
+      "anthology_id": "2025.inlg-main.14",
+      "title": "Exploring the Power of Large Language Models for Vietnamese Implicit Sentiment Analysis",
+      "authors": [
+        "Huy Gia Luu",
+        "Dang Van Thin"
+      ],
+      "file": "2025.inlg-main.14.pdf",
+      "pages": 13,
+      "sha256": "57dc3d03781b4f3987e2bcbb5816fe3b2ad40bc8a0177cffda6379890d27904b",
+      "pdf_url": "https://aclanthology.org/2025.inlg-main.14.pdf",
+      "license": "CC BY 4.0",
+      "license_source": "https://aclanthology.org/faq/#what-is-the-copyright-for-materials-in-the-acl-anthology"
+    },
+    "visp": {
+      "anthology_id": "2025.naacl-findings.59",
+      "title": "A Large-Scale Benchmark for Vietnamese Sentence Paraphrases",
+      "authors": [
+        "Sang Quang Nguyen",
+        "Kiet Van Nguyen"
+      ],
+      "file": "2025.naacl-findings.59.pdf",
+      "pages": 16,
+      "sha256": "805b329011d77b96801df4f78e210d076c5393488c2f838bf76474051624c413",
+      "pdf_url": "https://aclanthology.org/2025.naacl-findings.59.pdf",
+      "license": "CC BY 4.0",
+      "license_source": "https://aclanthology.org/faq/#what-is-the-copyright-for-materials-in-the-acl-anthology"
+    },
+    "triple-sets": {
+      "anthology_id": "2025.inlg-main.47",
+      "title": "Scaling Up Data-to-Text Generation to Longer Sequences: A New Dataset and Benchmark Results for Generation from Large Triple Sets",
+      "authors": [
+        "Chinonso Cynthia Osuji",
+        "Simon Mille",
+        "Ornait O’Connell",
+        "Thiago Castro Ferreira",
+        "Anya Belz",
+        "Brian Davis"
+      ],
+      "file": "2025.inlg-main.47.pdf",
+      "pages": 13,
+      "sha256": "b3811bdde740f2bb89fb8d41b9a056ed3d04f18e935e2cab4b8e570d2abbf2a8",
+      "pdf_url": "https://aclanthology.org/2025.inlg-main.47.pdf",
+      "license": "CC BY 4.0",
+      "license_source": "https://aclanthology.org/faq/#what-is-the-copyright-for-materials-in-the-acl-anthology"
+    }
+  },
+  "parent_run": {
+    "artifact": "cellfix29-e2e-cross-paper-v1-0i9ajoct.zip",
+    "sha256": "daee61729bf9945f38661d52829b3d8a91dd58ad7fb80f0f36e8cc08e68edad4",
+    "lock_sha256": "53b84ce169da1b316e954f80bbbf41d755c29e90581e5af7f7fe1b1dbf298c8f",
+    "observed_cross_paper": "3/9"
+  },
+  "embedded_module_sha256": {
+    "research_rag/atomic_adapter.py": "8bb79efd37bc86249cc1ace11c35bfa19af84e28ee114fdcdaed37d943ca48d3",
+    "research_rag/graph.py": "2f48cb289f756c8e918afeae668e7c52e5994242996fcb204d7537d378cb03ad",
+    "research_rag/state.py": "1eb734656404ded18dc006d79d201fc0b64337026af9b93e692d891d54e41eb1",
+    "research_rag/pdf_count_evidence.py": "7e56f4b36fc6e0fd2d4d835d2b8eb13bd7c295a49bf7e0645a332137b3c7f4a3",
+    "research_rag/pdf_table_cells.py": "5aeed483161556f66bb4b9b67ed462963cf6dc295d720e6a29965b5a6a95286e",
+    "train_agent3_summarizer/node.py": "d09d3e3b441e737ee8a83f96539817f69d7fd20683af379849ec4b5a53ddb957",
+    "train_agent3_summarizer/source_claims.py": "32b6974a94352f8aadf6505637f0f3b8e9498460e4f2ad377ea50d6927a9b01a"
+  }
+}

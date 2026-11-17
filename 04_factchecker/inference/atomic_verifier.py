@@ -667,7 +667,7 @@ class AtomicVerifier:
         self.backend, self.max_calls, self.max_attempts = backend, max_calls, max_attempts
         self.max_new_tokens, self.timeout_seconds = max_new_tokens, timeout_seconds
 
-    def verify(self, claim: str, context: str, *, decomposition_only=False) -> dict:
+    def verify(self, claim: str, context: str, *, decomposition_only=False, structured=False) -> dict:
         if not isinstance(claim, str) or not claim.strip() or len(claim) > 8000 or not isinstance(context, str) or len(context) > 100000:
             raise ValueError('Provide a nonempty claim <=8000 chars and context <=100000 chars')
         started, calls, results, stop_reason = time.monotonic(), [], [], None
@@ -723,7 +723,7 @@ class AtomicVerifier:
                         # Only our static validation codes enter repair prompts.
                         issue = str(exc) if re.fullmatch(r'[a-z_]{1,80}', str(exc)) else 'invalid_output'
                         event['validation_issue'] = issue
-                        detail = validation_detail(raw, claim, issue) if stage == 'decompose' else None
+                        detail = validation_detail(raw, claim, issue) if stage == 'decompose' and not structured else None
                         if detail is not None:
                             event['validation_detail'] = detail
                         previous = event
@@ -734,6 +734,10 @@ class AtomicVerifier:
                     event['elapsed_ms'] = round((time.monotonic() - tick) * 1000, 3)
             stop_reason = 'invalid_output_exhausted'
             return None
+
+        if structured:
+            return verify_structured(self, claim, context, decomposition_only, started, calls, invoke,
+                                     lambda: stop_reason)
 
         def decomposition(raw):
             return normalize_decomposition(raw, claim)
@@ -770,3 +774,225 @@ class AtomicVerifier:
                 'budget': {'max_calls': self.max_calls, 'max_attempts': self.max_attempts,
                            'max_new_tokens': self.max_new_tokens, 'timeout_seconds': self.timeout_seconds},
                 'claim_verified': False, 'promoted_to_serving': False, 'cost_usd': None}
+
+
+STRUCTURED_POLICY = 'atomic-verifier-structured-v1'
+STRUCTURED_FIELDS = """A fact has evidence (exact quotes, first the assertion and then any
+local antecedent/scope), subjects (a list of {text,key}), property ({text,key}), scope (a
+list of {text,key}), relation, cue (exact words expressing the relation, or empty for an
+unqualified equality), and values ({kind,text,key,unit}). text and unit are verbatim.
+Keys identify concepts, use consistent, concise singular names, including author
+ownership and experimental scope. Reuse names only for the same referent or property.
+Number values contain the exact numeric literal without the unit. Python interprets it.
+Use eq for an observed value, not for explicit negation, only for explicit exclusion of
+other values, gt/lt/ge/le for bounds, includes for all listed members of one relationship,
+before for an explicitly ordered pair, and respectively for parallel source lists in
+their original order. A directional claim may use a reference value for its comparator.
+Use transition for two numeric operands marked from and to, in that semantic order.
+Return only the JSON object. Do not output a verdict or evidence truth values."""
+STRUCTURED_CLAIM_PROMPT = """Compile the claim into an AND of requirements with exact spans.
+Represent every substantive token in a subject, property, scope, value or relation cue.
+Use separate requirements for asserted trade-offs, negation, and secondary outcomes.
+A scope limits a requirement to its stated experiment, time or population. Keep joint
+objects together in one relationship. A hyphenated term is one lexical unit, including
+embedded quantifier words. If a requirement cannot be expressed, list it in unresolved.
+Return {requirements, unresolved}. """ + STRUCTURED_FIELDS
+STRUCTURED_SOURCE_PROMPT = """Extract observed facts from the supplied passage. The input
+also contains the requested subject, property and scope names to orient extraction. Use
+those names only if they describe the same source referent. Record opposing evidence too.
+Every fact must have a local source assertion for its property, cue and values. Cite the
+antecedent when a source uses a local alias, author reference or table reference. Bind
+each number to its own metric, subject and experimental scope. Leave unsupported facts
+out. Topical overlap does not establish a requested property. Prefer short unique evidence
+spans to stay within the output budget. Return {facts}. """ + STRUCTURED_FIELDS
+
+
+def _same_subject(left, right, evidence, *, numeric_binding=False):
+    from .decoder_parser import key_tokens
+
+    a, b = key_tokens(left.span.text), key_tokens(right.span.text)
+    if not a or not b:
+        return False
+    one, two = set(a), set(b)
+    if a == b:
+        return True
+    if {t for t in one if any(c.isdigit() for c in t)} != {t for t in two if any(c.isdigit() for c in t)}:
+        return False
+    if left.key == right.key:
+        author = {'authors', 'our', 'we', 'proposed', 'paper'}
+        if numeric_binding:
+            from .evidence_screen import DIGITS
+
+            generic = {'corpus', 'dataset', 'set', 'model', 'system', 'group', 'method'}
+            inflections = {'train': 'train', 'trained': 'train', 'training': 'train'}
+            qualifiers = {inflections.get(word, word) for word in a if word not in generic}
+            # A name on a dataset must be grounded even if the model supplies
+            # the same key for another corpus or an underspecified mention.
+            naming_evidence = [evidence[0], *(span for span in evidence[1:] if not DIGITS.search(span.text))]
+            if (a[-1] in generic and qualifiers
+                    and not any(qualifiers <= {inflections.get(piece, piece) for word in key_tokens(span.text)
+                                               for piece in (word, *word.split('-'))} for span in naming_evidence)):
+                return False
+        # A canonical name alone cannot bind disjoint spans. Require a shared
+        # lexical anchor, author reference, or cited local antecedent.
+        return bool(one & two or one & author and two & author or len(evidence) > 1)
+    # Jaccard only nominates the subject. Property and scope still have to bind.
+    return a[-1] == b[-1] and 4 * len(one & two) >= 3 * len(one | two)
+
+
+def _value_key(value):
+    from .decoder_parser import tokens
+
+    if value.kind == 'number':
+        return value.kind, value.number, value.unit
+    exclusive = bool(set(tokens(value.mention.span.text)) & {'only', 'solely', 'exclusively'})
+    return value.kind, value.mention.key, exclusive
+
+
+def _bound(relation, value):
+    if relation in {'eq', 'only'}:
+        return value, True, value, True
+    if relation in {'gt', 'ge'}:
+        return value, relation == 'ge', None, False
+    return None, False, value, relation == 'le'
+
+
+def _compare_bounds(expected, observed):
+    lower, lower_closed, upper, upper_closed = expected
+    start, start_closed, end, end_closed = observed
+
+    def precedes(a, a_closed, b, b_closed):
+        return a is not None and b is not None and (a < b or a == b and not (a_closed and b_closed))
+
+    if precedes(end, end_closed, lower, lower_closed) or precedes(upper, upper_closed, start, start_closed):
+        return False
+    lower_fits = (lower is None or start is not None and
+                  (start > lower or start == lower and (lower_closed or not start_closed)))
+    upper_fits = (upper is None or end is not None and
+                  (end < upper or end == upper and (upper_closed or not end_closed)))
+    return True if lower_fits and upper_fits else None
+
+
+def _compare(requirement, relation, values):
+    expected = requirement.values
+    req_relation = requirement.relation
+    scalar_relations = {'eq', 'only', 'gt', 'lt', 'ge', 'le'}
+    if (len(expected) == len(values) == 1 and expected[0].kind == values[0].kind == 'number'
+            and expected[0].unit == values[0].unit and req_relation in scalar_relations and relation in scalar_relations):
+        return _compare_bounds(_bound(req_relation, expected[0].number), _bound(relation, values[0].number))
+    if (req_relation == relation and relation in {'eq', 'transition'} and len(expected) == len(values)
+            and all(a.kind == b.kind == 'number' and a.unit == b.unit for a, b in zip(expected, values))):
+        return all(a.number == b.number for a, b in zip(expected, values))
+    needed, seen = tuple(map(_value_key, expected)), tuple(map(_value_key, values))
+    if req_relation == 'before':
+        if relation == 'before' and needed in (seen, seen[::-1]):
+            return needed == seen
+        return None
+    if req_relation == 'includes':
+        if relation in {'includes', 'only'} and set(needed) <= set(seen):
+            return True
+        if relation == 'only' or relation == 'not' and set(needed) & set(seen):
+            return False
+        return None
+    if req_relation == 'only':
+        if relation == 'only':
+            return set(needed) == set(seen)
+        if relation in {'eq', 'includes'} and set(seen) - set(needed):
+            return False
+        return None
+    if req_relation in {'eq', 'not'}:
+        if relation in {'eq', 'only', 'not'} and needed == seen:
+            return (req_relation == 'not') == (relation == 'not')
+        if (relation == 'only' and set(needed).isdisjoint(seen)
+                and {v.kind for v in expected} == {v.kind for v in values}
+                and {v.unit for v in expected} == {v.unit for v in values}):
+            return req_relation == 'not'
+    return None
+
+
+def evaluate_structured(requirements, facts, *, numeric_binding=False):
+    """Decide an AND of typed assertions and retain the exact source proof."""
+    from dataclasses import asdict, replace
+    from .decoder_parser import tokens
+
+    def scope_key(fact):
+        negations = {'no', 'not', 'never', 'without', 'neither', 'nor'}
+        return {(item.key, frozenset(tokens(item.span.text)) & negations,
+                 frozenset(word for word in tokens(item.span.text) if any(c.isdigit() for c in word))
+                 if numeric_binding else frozenset()) for item in fact.scope}
+
+    observations = []
+    for fact in facts:
+        if fact.relation == 'respectively':
+            observations.extend((subject, 'eq', (value,), fact) for subject, value in zip(fact.subjects, fact.values))
+        else:
+            observations.append((fact.subjects[0], fact.relation, fact.values, fact))
+    decisions = []
+    for requirement in requirements:
+        scope = scope_key(requirement)
+        comparable = [(subject, relation, values, fact) for subject, relation, values, fact in observations
+                      if requirement.property.key == fact.property.key and scope == scope_key(fact)]
+        votes = []
+        for subject, relation, values, fact in comparable:
+            if not _same_subject(requirement.subjects[0], subject, fact.evidence, numeric_binding=numeric_binding):
+                continue
+            operand = requirement.values[0]
+            if operand.kind == 'reference':
+                if relation not in {'eq', 'only'} or len(values) != 1 or values[0].kind != 'number':
+                    continue
+                for other, other_relation, other_values, other_fact in comparable:
+                    if (other_relation in {'eq', 'only'} and len(other_values) == 1 and other_values[0].kind == 'number'
+                            and _same_subject(operand.mention, other, other_fact.evidence)
+                            and not _same_subject(requirement.subjects[0], other, other_fact.evidence)):
+                        vote = _compare(replace(requirement, values=other_values), relation, values)
+                        if vote is not None:
+                            votes.append((vote, (*fact.evidence, *other_fact.evidence)))
+            else:
+                vote = _compare(requirement, relation, values)
+                if vote is not None:
+                    votes.append((vote, fact.evidence))
+        outcomes = {vote for vote, _ in votes}
+        label = {True: 'support', False: 'contradict'}[next(iter(outcomes))] if len(outcomes) == 1 else 'not_enough_info'
+        proof = sorted({span for _, spans in votes for span in spans}, key=lambda span: span.start)
+        decisions.append({'assessed_label': label, 'subject': requirement.subjects[0].span.text,
+                          'property': requirement.property.span.text, 'source_spans': [asdict(span) for span in proof],
+                          'missing_information': [requirement.evidence[0].text] if label == 'not_enough_info' else []})
+    labels = {decision['assessed_label'] for decision in decisions}
+    label = 'contradict' if 'contradict' in labels else 'support' if labels == {'support'} else 'not_enough_info'
+    return label, decisions
+
+
+def structured_targets(requirements):
+    return [dict(subjects=[list(subject.key) for subject in row.subjects] +
+                          [list(value.mention.key) for value in row.values if value.kind == 'reference'],
+                 property=list(row.property.key), scope=[list(item.key) for item in row.scope])
+            for row in requirements]
+
+
+def verify_structured(verifier, claim, context, decomposition_only, started, calls, invoke, failure):
+    from .decoder_parser import parse_observations, parse_requirements
+
+    plan = None
+    label, decisions = None, []
+    reason = None
+    if len(claim.split()) > 80 or (not decomposition_only and len(context.split()) > ASSESSMENT_LIMITS['context_words']):
+        reason = 'unsupported_structured_input'
+    else:
+        plan = invoke('compile_claim', STRUCTURED_CLAIM_PROMPT, {'claim': claim},
+                      lambda raw: (raw, parse_requirements(raw, claim)))
+        if plan is not None and not decomposition_only:
+            # Source extraction sees the requested roles, without desired values or a gold label.
+            targets = structured_targets(plan[1])
+            facts = invoke('extract_facts', STRUCTURED_SOURCE_PROMPT, {'context': context, 'targets': targets},
+                           lambda raw: parse_observations(raw, context))
+            if facts is not None:
+                label, decisions = evaluate_structured(plan[1], facts)
+    reason = reason or failure() or 'completed'
+    return {'policy': STRUCTURED_POLICY, 'evaluation_mode': 'decomposition' if decomposition_only else 'verification',
+            'status': 'completed' if reason == 'completed' else 'incomplete', 'assessed_label': label,
+            'decomposition': plan[0] if plan is not None else None, 'parts': decisions, 'trace': calls,
+            'explanation': ', '.join(part['assessed_label'] + ': ' + part['property'] for part in decisions) or reason,
+            'stop_reason': reason, 'backend_calls': len(calls), 'elapsed_ms': round((time.monotonic() - started) * 1000, 3),
+            'budget': {'max_calls': verifier.max_calls, 'max_attempts': verifier.max_attempts,
+                       'max_new_tokens': verifier.max_new_tokens, 'timeout_seconds': verifier.timeout_seconds},
+            'claim_verified': False, 'promoted_to_serving': False, 'cost_usd': None}

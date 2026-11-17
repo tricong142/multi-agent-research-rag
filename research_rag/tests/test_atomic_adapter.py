@@ -1,4 +1,4 @@
-"""Real Cellfix16 validators with synthetic model outputs; no inference score claim."""
+"""Cellfix29 adapter and graph checks with synthetic model outputs."""
 from copy import deepcopy
 from contextlib import closing, redirect_stderr, redirect_stdout
 import importlib
@@ -11,9 +11,11 @@ import tempfile
 from types import SimpleNamespace
 import unittest
 from unittest.mock import Mock, patch
+from zipfile import ZipFile
 
 from research_rag import atomic_adapter as a, local
 from research_rag.tests.test_integration import FakeRetriever, FakeSummarizer, WriterNode, chunk
+from train_agent3_summarizer.node import SummarizerNode
 
 
 CLAIM = "The service reduced latency."
@@ -45,25 +47,31 @@ class AtomicAdapterTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.legacy = importlib.import_module("04_factchecker.inference.atomic_verifier")
-        cls.runtime = a.cellfix16_runtime()
+        cls.runtime = a.cellfix29_runtime()
 
     def test_import_uses_exact_candidate_without_replacing_legacy(self):
         self.assertIs(importlib.import_module("04_factchecker.inference.atomic_verifier"), self.legacy)
         self.assertIsNot(self.runtime.atomic, self.legacy)
-        self.assertEqual(self.runtime.atomic.POLICY, "atomic-verifier-constrained-v8-cellfix16")
+        self.assertEqual(self.runtime.atomic.POLICY, "atomic-verifier-constrained-v8-cellfix29")
         self.assertTrue(Path(self.runtime.atomic.__file__).resolve().is_relative_to(a.WORKSPACE.resolve()))
 
     def test_changed_candidate_fails_before_import(self):
-        manifest = json.loads((a.ROOT / "docs/atomic-verifier-cellfix16-release.json").read_bytes())["payload_files"]
-        with tempfile.TemporaryDirectory() as folder:
-            for name in manifest:
+        with tempfile.TemporaryDirectory() as folder, ZipFile(a.PAYLOAD) as archive:
+            for name in archive.namelist():
                 if name.startswith("04_factchecker/") or name == a.CRITERIA_FILE:
                     target = Path(folder) / name
                     target.parent.mkdir(parents=True, exist_ok=True)
                     target.write_bytes((a.WORKSPACE / name).read_bytes())
             (Path(folder) / "04_factchecker/inference/atomic_verifier.py").write_text("raise RuntimeError('untrusted')")
-            with self.assertRaisesRegex(ValueError, "Changed frozen Cellfix16 input"):
-                a.cellfix16_runtime(Path(folder))
+            with self.assertRaisesRegex(ValueError, "Changed frozen Cellfix29 input"):
+                a.cellfix29_runtime(Path(folder))
+
+    def test_changed_payload_fails_before_import(self):
+        with tempfile.TemporaryDirectory() as folder:
+            changed = Path(folder) / "payload.zip"
+            changed.write_bytes(a.PAYLOAD.read_bytes() + b"changed")
+            with patch.object(a, "PAYLOAD", changed), self.assertRaisesRegex(ValueError, "frozen Cellfix29 payload"):
+                a.cellfix29_runtime()
 
     def test_completed_labels_and_private_ledger(self):
         cases = [(CLAIM, "true", "support"),
@@ -104,18 +112,29 @@ class AtomicAdapterTests(unittest.TestCase):
         self.assertEqual(result["fact_check_raw"]["atomic"]["budget"]["timeout_seconds"], 7)
         self.assertEqual(result["fact_check_raw"]["atomic"]["budget"]["max_calls"], self.runtime.criteria["max_calls_per_case"])
 
-    def graph(self, backend, **options):
+    def graph(self, backend, *, summarizer=None, **options):
         node = a.AtomicFactCheckerNode(backend, self.runtime)
         return local.build_local_graph(verifier="atomic", agents={
             "retriever": FakeRetriever([chunk(CLAIM, "paper:atomic")]),
-            "summarizer": FakeSummarizer(CLAIM, CLAIM), "factchecker": node, "writer": WriterNode(),
+            "summarizer": summarizer or FakeSummarizer(CLAIM, CLAIM), "factchecker": node, "writer": WriterNode(),
         }, max_graph_retries=0, **options)
 
     def test_e2e_support_keeps_source_and_incomplete_blocks_writer(self):
-        result = self.graph(Backend(outputs())).invoke({"question": "What happened to latency?"})
-        self.assertEqual(result["verified_claims"][0]["source_id"], "paper:atomic")
-        self.assertEqual(result["verified_claims"][0]["evidence"], CLAIM)
-        self.assertTrue(result["final_report"]["sentences"])
+        backend = Backend(outputs())
+        summarizer = SummarizerNode(None, None, None, None)
+        with patch.object(summarizer, "_call_generator", return_value={"answer": CLAIM, "evidence_spans": [CLAIM]}), \
+                patch.object(summarizer, "_call_critic", return_value={"is_supported": True, "reason": "Exact source.", "action": ""}):
+            result = self.graph(backend, summarizer=summarizer).invoke({"question": "What happened to latency?"})
+        verified, = result["verified_claims"]
+        sentence, = result["final_report"]["sentences"]
+        self.assertTrue(result["summary_supported"])
+        self.assertEqual(result["draft_answer"], CLAIM)
+        self.assertEqual(result["fact_check_results"][0]["label"], "support")
+        self.assertEqual(verified["source_id"], "paper:atomic")
+        self.assertEqual(verified["evidence"], CLAIM)
+        self.assertEqual(sentence["text"], CLAIM)
+        self.assertEqual(sentence["claim_ids"], [verified["claim_id"]])
+        self.assertEqual(len(backend.calls), 2)
         self.assertEqual(result["budget"]["policy"]["verifier"], a.POLICY_ID)
         failed = self.graph(Backend([{}] * self.runtime.criteria["max_attempts"])).invoke({"question": "Latency?"})
         self.assertEqual(failed["verified_claims"], [])
@@ -160,15 +179,19 @@ class AtomicAdapterTests(unittest.TestCase):
         from research_rag.graph import build_graph
         from research_rag.tests.test_integration import FakeFactchecker
         with tempfile.TemporaryDirectory() as directory:
-            for original, selected in [("atomic", "legacy"), ("legacy", "atomic")]:
-                database = Path(directory) / (original + ".sqlite")
+            old_hash = json.loads((a.ROOT / "docs/atomic-verifier-cellfix16-release.json").read_bytes())["criteria_sha256"]
+            old_policy = f"atomic:{old_hash}:ledger-eligibility-v1"
+            for index, (saved_policy, selected) in enumerate([
+                (a.POLICY_ID, "legacy"), (None, "atomic"), (old_policy, "atomic"),
+            ]):
+                database = Path(directory) / f"checkpoint-{index}.sqlite"
                 config = {"configurable": {"thread_id": "completed-task"}}
                 with closing(sqlite3.connect(database, check_same_thread=False)) as connection:
                     saver = SqliteSaver(connection)
-                    graph = (self.graph(Backend(outputs()), checkpointer=saver) if original == "atomic" else
+                    graph = (self.graph(Backend(outputs()), checkpointer=saver) if saved_policy == a.POLICY_ID else
                              build_graph(retriever=FakeRetriever([chunk(CLAIM)]), summarizer=FakeSummarizer(CLAIM, CLAIM),
                                          factchecker=FakeFactchecker(["support"]), writer=WriterNode(),
-                                         max_graph_retries=0, checkpointer=saver))
+                                         max_graph_retries=0, checkpointer=saver, verifier_policy=saved_policy))
                     graph.invoke({"question": "Latency?"}, config)
                 stderr = io.StringIO()
                 with patch.object(local, "build_local_graph") as build, redirect_stderr(stderr), \
@@ -194,7 +217,7 @@ class AtomicAdapterTests(unittest.TestCase):
         runtime = SimpleNamespace(**vars(self.runtime))
         runtime.decoding = SimpleNamespace(ConstrainedAtomicBackend=Mock(return_value=backend))
         loaded, generation, events = Mock(), Mock(), []
-        with patch.object(a, "cellfix16_runtime", return_value=runtime), \
+        with patch.object(a, "cellfix29_runtime", return_value=runtime), \
                 patch.dict(sys.modules, {"torch": torch, "transformers": transformers,
                                        "huggingface_hub": SimpleNamespace(snapshot_download=snapshot)}):
             node = a.load_atomic_factchecker(offline=True, on_generation=generation, on_event=events.append, on_model_loaded=loaded)
@@ -206,7 +229,7 @@ class AtomicAdapterTests(unittest.TestCase):
         self.assertIs(node.backend, backend)
         self.assertIs(backend.on_generation, generation)
         runtime.decoding.ConstrainedAtomicBackend.assert_called_once_with(model, transformers.AutoTokenizer.from_pretrained.return_value)
-        loaded.assert_called_once_with("atomic_base_instruct_cellfix16")
+        loaded.assert_called_once_with("atomic_base_instruct_cellfix29")
         backend.generate_json([], max_new_tokens=1)
         self.assertEqual(events[0]["component"], "atomic_verifier")
 

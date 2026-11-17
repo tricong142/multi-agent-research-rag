@@ -21,6 +21,7 @@ from .retrieval import CORPUS_PATH, INDEX_DIR, RetrievalService, RetrievalAgent
 
 
 ROOT = Path(__file__).resolve().parents[1]
+VERIFIERS = ("legacy", "atomic", "atomic-structured", "r8-v12")
 
 
 def _load_adapter(adapter_dir: Path, *, offline: bool, quantize_4bit: bool = False) -> tuple[Any, Any]:
@@ -49,6 +50,7 @@ def _load_adapter(adapter_dir: Path, *, offline: bool, quantize_4bit: bool = Fal
 def build_local_graph(*, offline: bool = True, allow_cpu: bool = False, max_graph_retries: int = 1,
                       quantize_4bit: bool = False,
                       verifier: str = "legacy",
+                      pdf_max_pages: int = 20, pdf_table_coordinates: dict | None = None,
                       retrieval_policy: str = "adaptive",
                       initial_top_k: int = 5, max_factcheck_calls: int = 120,
                       agents: dict[str, Any] | None = None,
@@ -60,11 +62,11 @@ def build_local_graph(*, offline: bool = True, allow_cpu: bool = False, max_grap
                       max_cost_usd: float | None = None, action_cost_bounds: dict[str, float] | None = None,
                       checkpointer: Any = None, on_event: Callable[[dict], None] | None = None) -> Any:
     """Load local checkpoints. Two 7B Summarizer models need substantial memory."""
-    if verifier not in ("legacy", "atomic"):
-        raise ValueError("verifier must be legacy or atomic")
-    from .atomic_adapter import POLICY_ID
+    if verifier not in VERIFIERS:
+        raise ValueError("verifier must be one of " + ", ".join(VERIFIERS))
+    from .atomic_adapter import verifier_policy
     graph_options = dict(max_graph_retries=max_graph_retries, initial_top_k=initial_top_k,
-                         verifier_policy=POLICY_ID if verifier == "atomic" else None,
+                         verifier_policy=verifier_policy(verifier),
                          max_factcheck_calls=max_factcheck_calls,
                          max_steps=max_steps, max_seconds=max_seconds, max_cost_usd=max_cost_usd,
                          action_cost_bounds=action_cost_bounds, checkpointer=checkpointer, on_event=on_event)
@@ -74,14 +76,14 @@ def build_local_graph(*, offline: bool = True, allow_cpu: bool = False, max_grap
 
     if not torch.cuda.is_available() and not allow_cpu:
         raise RuntimeError("No CUDA GPU detected; use a GPU host or inject remote model services")
-    if verifier == "atomic" and not torch.cuda.is_available():
-        raise RuntimeError("Cellfix16 atomic loading requires CUDA/NF4, including with --allow-cpu")
+    if verifier != "legacy" and not torch.cuda.is_available():
+        raise RuntimeError("The selected verifier requires CUDA/NF4, including with --allow-cpu")
     if quantize_4bit and not torch.cuda.is_available():
         raise RuntimeError("4-bit loading requires a CUDA GPU")
     atomic_runtime = None
-    if verifier == "atomic":
-        from .atomic_adapter import cellfix16_runtime
-        atomic_runtime = cellfix16_runtime()
+    if verifier in ("atomic", "atomic-structured"):
+        from .atomic_adapter import cellfix29_runtime, structured_runtime
+        atomic_runtime = structured_runtime() if verifier == "atomic-structured" else cellfix29_runtime()
     from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
     summarizer_module = importlib.import_module("train_agent3_summarizer.node")
@@ -111,7 +113,11 @@ def build_local_graph(*, offline: bool = True, allow_cpu: bool = False, max_grap
     summarizer._call_generator = observe_call(summarizer._call_generator, "summarizer_generator", backend_event)
     summarizer._call_critic = observe_call(summarizer._call_critic, "summarizer_critic", backend_event)
 
-    if verifier == "atomic":
+    if verifier == "r8-v12":
+        from .r8_adapter import load_r8_factchecker
+        factchecker = load_r8_factchecker(offline=offline, on_generation=on_generation,
+                                         on_event=backend_event, on_model_loaded=on_model_loaded)
+    elif verifier != "legacy":
         from .atomic_adapter import load_atomic_factchecker
         factchecker = load_atomic_factchecker(offline=offline, on_generation=on_generation,
                                              on_event=backend_event, on_model_loaded=on_model_loaded,
@@ -159,7 +165,8 @@ def build_local_graph(*, offline: bool = True, allow_cpu: bool = False, max_grap
     writer_backend.generate = observe_call(writer_backend.generate, "writer", backend_event)
 
     loaded = dict(retriever=RetrievalAgent(RetrievalService(corpus_path=corpus_path, index_dir=index_dir, offline=offline), policy=retrieval_policy),
-                  reader=PdfReader(), summarizer=summarizer, factchecker=factchecker, writer=writer)
+                  reader=PdfReader(max_pages=pdf_max_pages, table_coordinates=pdf_table_coordinates),
+                  summarizer=summarizer, factchecker=factchecker, writer=writer)
     return loaded if components_only else build_graph(**loaded, **graph_options)
 
 
@@ -194,13 +201,15 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Run the five-agent research RAG graph")
     parser.add_argument("--question")
     parser.add_argument("--pdf", help="Optional PDF; without it, search the selected corpus")
+    parser.add_argument("--pdf-max-pages", type=int, default=20, help="Maximum total pages accepted by Reader")
+    parser.add_argument("--pdf-table-coordinates", type=Path, help="Optional audited table coordinates keyed by PDF SHA-256")
     parser.add_argument("--corpus", type=Path, default=CORPUS_PATH)
     parser.add_argument("--index-dir", type=Path, default=INDEX_DIR)
     parser.add_argument("--allow-cpu", action="store_true", help="Allow loading all local models without CUDA")
     parser.add_argument("--online-model-downloads", action="store_true", help="Allow downloading missing base models")
     parser.add_argument("--quantize-4bit", action="store_true", help="Try 4-bit loading for Summarizer and Fact-Checker on CUDA")
-    parser.add_argument("--verifier", choices=["legacy", "atomic"], default="legacy",
-                        help="Fact-Checker: legacy (default) or opt-in frozen Cellfix16 atomic (CUDA/NF4)")
+    parser.add_argument("--verifier", choices=VERIFIERS, default="legacy",
+                        help="Fact-Checker backend. Atomic variants and locked r8-v12 use CUDA/NF4.")
     parser.add_argument("--profile-resources", action="store_true", help="Log RSS and CUDA memory after model loading and graph execution")
     parser.add_argument("--max-graph-retries", type=int, default=1)
     parser.add_argument("--retrieval-policy", choices=["adaptive", "bm25", "dense"], default="adaptive")
@@ -258,11 +267,11 @@ def main() -> None:
             if args.resume and saved is None:
                 parser.error("No checkpoint exists for this thread")
             if args.resume and saved is not None:
-                from .atomic_adapter import POLICY_ID
-                expected_verifier = POLICY_ID if args.verifier == "atomic" else None
+                from .atomic_adapter import verifier_policy
+                expected_verifier = verifier_policy(args.verifier)
                 saved_verifier = saved.get("channel_values", {}).get("budget", {}).get("policy", {}).get("verifier")
                 if saved_verifier != expected_verifier:
-                    parser.error("Resume must use the original --verifier; start a new thread when switching")
+                    parser.error("Resume must use the original --verifier and policy version; start a new thread when switching")
             if not args.resume and saved is not None:
                 parser.error("Thread already exists; use --resume or a new --thread-id")
         _run(args, checkpointer)
@@ -304,6 +313,9 @@ def _run(args: argparse.Namespace, checkpointer: Any) -> None:
                               retrieval_policy=args.retrieval_policy, initial_top_k=args.initial_top_k,
                               max_factcheck_calls=args.max_factcheck_calls,
                               verifier=args.verifier,
+                              pdf_max_pages=args.pdf_max_pages,
+                              pdf_table_coordinates=json.loads(args.pdf_table_coordinates.read_text(encoding="utf-8"))
+                              if args.pdf_table_coordinates else None,
                               quantize_4bit=args.quantize_4bit,
                               on_model_loaded=record_resources if args.profile_resources else None,
                               on_generation=write_trace if args.trace_output else None,

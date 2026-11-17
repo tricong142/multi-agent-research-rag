@@ -1,7 +1,7 @@
 # LangGraph orchestration
 
 **Chưa nghiệm thu với atomic verifier mới.** Loader mặc định dùng FactChecker cũ;
-đã có nhánh opt-in `--verifier atomic` cho candidate Cellfix16.
+đã có nhánh opt-in `--verifier atomic` cho candidate Cellfix29.
 Summarizer và Writer chưa đạt E2E với verifier mới. [Gate hiện hành và notebook
 benchmark QASPER](../docs/PRODUCTION_GATES_20261016.md) phân biệt probe tách mệnh
 đề, nhãn/false support39 và E2E. Reader mặc định chạy PyMuPDF/Tesseract local;
@@ -79,19 +79,26 @@ python -m research_rag.local --question "Câu hỏi của bạn" --quantize-4bit
 python -m research_rag.local --question "Câu hỏi về PDF" --pdf path\to\paper.pdf
 ```
 
-Sau khi candidate Cellfix16 qua các gate nghiệm thu, chọn adapter E2E đã chuẩn bị:
+Chạy kiểm thử E2E với Cellfix29 đã đạt gate development:
 
 ```powershell
 python -m pip install -r requirements-atomic-verifier.txt
-python -m research_rag.local --verifier atomic --question "Câu hỏi về PDF" --pdf path\to\paper.pdf --quantize-4bit --process-timeout 1800 --metrics-output atomic-e2e-metrics.json --trace-output atomic-e2e-private.jsonl
+python -m research_rag.local --verifier atomic --question "How many participants did the Aster trial enroll?" --pdf research_rag/evaluation/pdfs/simple_text.pdf --quantize-4bit --process-timeout 1800 --metrics-output atomic-e2e-metrics.json --trace-output atomic-e2e-private.jsonl
 ```
 
 `--verifier legacy` là mặc định. Nhánh `atomic` dùng **base Qwen2.5-3B-Instruct**
 revision `aa8e72537993ba99e69dfaafa59ed015b17504d1`, NF4/float16 và constrained
-decoder của Cellfix16, không dùng weights fine-tuned của FactChecker cũ. Cần CUDA;
-`--allow-cpu` không đổi cấu hình NF4 của candidate. Cần giữ workspace frozen
-`research-runs/atomic-cellfix16-candidate/workspace` và release manifest trong repo
-khi chuyển host; adapter kiểm tra hash trước khi import vào namespace riêng.
+decoder của Cellfix29. Cần CUDA để nạp model. Khi chuyển host, mang theo
+`artifacts/atomic-cellfix29-six-suite-inputs.zip` và giải nén gói vào
+`research-runs/atomic-cellfix29-candidate/workspace`. Adapter xác minh hash của
+gói và đối chiếu các tệp runtime trước khi import vào namespace riêng.
+Trên bản clone mới, chạy từ thư mục gốc để chuẩn bị workspace Cellfix29
+trước khi chạy các test atomic:
+
+```powershell
+.\.venv\Scripts\python.exe -m zipfile -e artifacts/atomic-cellfix29-six-suite-inputs.zip research-runs/atomic-cellfix29-candidate/workspace
+```
+
 Thiếu artifact, source thay đổi hoặc backend lỗi sẽ dừng/chặn xác minh, không tự
 chuyển sang legacy. Cache model tuân theo `--online-model-downloads` hiện có.
 
@@ -106,8 +113,8 @@ và lỗi không được publish thành support. Field `confidence_score` của
 cũ được dùng như **cờ eligibility 1/0**, không phải confidence đã calibration.
 Lý do này được lưu ở `confidence_reasoning`. Adapter không thêm một lượt LLM
 đo confidence. Các gate evidence/source/conflict của graph vẫn áp dụng.
-Checkpoint atomic khóa cả criteria hash và policy ánh xạ này; dùng thread mới khi
-đổi giữa legacy/atomic. Trace output là dữ liệu private có prompt, ledger và text
+Checkpoint atomic khóa cả criteria hash và policy ánh xạ này. Dùng thread mới khi
+đổi verifier hoặc đổi phiên bản atomic. Trace output là dữ liệu private có prompt, ledger và text
 nguồn; mặc định không xuất trace. Các test adapter dùng output giả lập, chưa
 chứng minh inference GPU hoặc chất lượng model E2E.
 

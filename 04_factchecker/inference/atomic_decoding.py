@@ -9,9 +9,16 @@ import re
 import time
 
 from .atomic_verifier import (DECOMPOSE_PROMPT, ASSESS_PROMPT, ASSESSMENT_LIMITS,
-                              CaseDeadlineExceeded, _quantifier, scope_clauses)
+                              CaseDeadlineExceeded, STRUCTURED_CLAIM_PROMPT, STRUCTURED_SOURCE_PROMPT,
+                              _quantifier, scope_clauses)
 from .numeric_verifier import numeric_requirements, _operand
 from .judge import TransformersJSONBackend
+from .semantic_verdict import (EVIDENCE_CHECK_PROMPT, NUMERIC_CLAIM_PROMPT, NUMERIC_SOURCE_PROMPT,
+                               SOURCE_ID_PROMPT, SYSTEM_PROMPT as VERDICT_PROMPT,
+                               schema as verdict_schema, segment_schema)
+from .source_ledger import (CLAUSE_RETRY_PROMPT, FIXED_CLAUSE_PROMPT, LEDGER_PROMPT, RELATION_PROMPT, fixed_clause_schema,
+                            relation_schema, schema as ledger_schema)
+from .source_comparison import RECOVERY_PROMPT, recovery_schema
 
 DECODER = {'engine': 'lm-format-enforcer', 'version': '0.11.3',
            'interegular': '0.3.3', 'policy': 'atomic-schema-decoding-v5',
@@ -153,12 +160,121 @@ def assessment_schema(claim, part, context):
                 'explanation': bounded_text(limits['explanation_chars'])})
 
 
+def structured_schema(*, claim):
+    from .decoder_parser import KINDS, MAX_EVIDENCE, MAX_FACTS, MAX_ITEMS, MAX_KEY, MAX_MENTION, MAX_SPAN, RELATIONS
+
+    mention = obj({'text': bounded_text(MAX_MENTION), 'key': bounded_text(MAX_KEY)})
+    value = obj({'kind': {'type': 'string', 'enum': list(KINDS[:-1] if not claim else KINDS)},
+                 'text': bounded_text(MAX_MENTION), 'key': bounded_text(MAX_KEY),
+                 'unit': {'type': 'string', 'maxLength': MAX_KEY}})
+    fact = obj({'evidence': array(bounded_text(MAX_SPAN), minimum=1, maximum=MAX_EVIDENCE),
+                'subjects': array(mention, minimum=1, maximum=1 if claim else MAX_ITEMS),
+                'property': mention, 'scope': array(mention, maximum=MAX_ITEMS),
+                'relation': {'type': 'string', 'enum': list(RELATIONS[:-1] if claim else RELATIONS)},
+                'cue': {'type': 'string', 'maxLength': MAX_MENTION},
+                'values': array(value, minimum=1, maximum=MAX_ITEMS)})
+    if claim:
+        return obj({'requirements': array(fact, minimum=1, maximum=MAX_FACTS),
+                    'unresolved': array(bounded_text(MAX_SPAN), maximum=MAX_ITEMS)})
+    return obj({'facts': array(fact, maximum=MAX_FACTS)})
+
+
+def numeric_binding_schema(*, claim, texts, segment_ids=(), targets=()):
+    from .decoder_parser import MAX_ITEMS, MAX_KEY, MAX_FACTS, RELATIONS, key_tokens, literal_spans, tokens
+
+    texts = tuple(texts)
+    phrases, numbers = literal_spans(texts)
+    if not phrases:
+        raise ValueError('no_grounded_numeric_text')
+    literal = {'type': 'string', 'enum': phrases}
+
+    def key_schema(role):
+        if claim:
+            return bounded_text(MAX_KEY)
+        keys = {item for target in targets for item in ([target[role]] if role == 'property' else target[role])}
+        if role == 'subjects':
+            # A parallel list can contain subjects outside the claim. Keep
+            # their own grounded names so the operands can stay in order.
+            keys.update(' '.join(key_tokens(phrase)) for phrase in phrases)
+        return {'type': 'string', 'enum': sorted(key for key in keys if key) or ['']}
+
+    def mention(role):
+        texts_for_role = literal
+        if claim and role == 'scope':
+            candidates = [phrase for phrase in phrases
+                          if not (tokens(phrase)[0] in numbers and any(c.isdigit() for c in tokens(phrase)[0]))]
+            texts_for_role = {'type': 'string', 'enum': candidates}
+        return obj({'text': texts_for_role, 'key': key_schema(role)})
+
+    textual = obj({'kind': {'type': 'string', 'enum': ['text', 'reference'] if claim else ['text']},
+                   'text': literal, 'key': bounded_text(MAX_KEY), 'unit': {'type': 'string', 'enum': ['']}})
+    value = textual
+    if numbers:
+        numeric = obj({'kind': {'type': 'string', 'enum': ['number']},
+                       'text': {'type': 'string', 'enum': numbers}, 'key': bounded_text(MAX_KEY),
+                       'unit': {'type': 'string', 'enum': sorted({'', '%', *phrases})}})
+        value = {'anyOf': [numeric, textual]}
+    fields = {} if claim else {
+        'evidence_ids': array({'type': 'string', 'enum': list(segment_ids)}, minimum=1, maximum=4),
+        'assertion': {'type': 'string', 'enum': ['', *phrases]},
+    }
+    scope_size = MAX_ITEMS if claim or any(target['scope'] for target in targets) else 0
+    has_transition = any({'from', 'to'} <= set(tokens(text)) for text in texts)
+    relations = [relation for relation in (RELATIONS[:-1] if claim else RELATIONS)
+                 if relation != 'transition' or has_transition]
+    parallel = not claim and any('respectively' in tokens(text) for text in texts)
+    fields.update(subjects=array(mention('subjects'), minimum=1, maximum=1 if claim else MAX_ITEMS),
+                  property=mention('property'), scope=array(mention('scope'), maximum=scope_size),
+                  relation={'type': 'string', 'enum': relations},
+                  cue={'type': 'string', 'enum': ['', *phrases]},
+                  values=array(value, minimum=1, maximum=MAX_ITEMS))
+    if not parallel:
+        fields['subjects']['maxItems'] = 1
+    fact = obj(fields)
+    if claim:
+        return obj({'requirements': array(fact, minimum=1, maximum=MAX_FACTS),
+                    'unresolved': array(bounded_text(160), maximum=MAX_ITEMS)})
+    return obj({'facts': array(fact, maximum=MAX_FACTS)})
+
+
 def schema_for(messages):
     payload = json.loads(messages[1]['content'])
     if messages[0]['content'] == DECOMPOSE_PROMPT and set(payload) == {'claim'}:
         return decomposition_schema(payload['claim']), payload['claim']
     if messages[0]['content'] == ASSESS_PROMPT and set(payload) == {'claim', 'part', 'context'}:
         return assessment_schema(payload['claim'], payload['part'], payload['context']), payload['claim'] + payload['context']
+    if (messages[0]['content'] == STRUCTURED_CLAIM_PROMPT and 'claim' in payload
+            and set(payload) <= {'claim', 'binding_rules', 'repair'}):
+        return structured_schema(claim=True), payload['claim']
+    if (messages[0]['content'] == STRUCTURED_SOURCE_PROMPT and {'context', 'targets'} <= set(payload)
+            and set(payload) <= {'context', 'targets', 'binding_rules', 'repair'}):
+        return structured_schema(claim=False), payload['context']
+    if messages[0]['content'] == NUMERIC_CLAIM_PROMPT and 'claim' in payload and set(payload) <= {'claim', 'repair'}:
+        return numeric_binding_schema(claim=True, texts=[payload['claim']]), payload['claim']
+    if (messages[0]['content'] == NUMERIC_SOURCE_PROMPT and {'segments', 'targets'} <= set(payload)
+            and set(payload) <= {'segments', 'targets', 'repair'}):
+        segments = payload['segments']
+        return numeric_binding_schema(claim=False, texts=segments.values(), segment_ids=segments,
+                                      targets=payload['targets']), ''.join(segments.values())
+    if messages[0]['content'] == VERDICT_PROMPT and set(payload) == {'claim', 'context'}:
+        return verdict_schema(), payload['claim'] + payload['context']
+    if messages[0]['content'] in (SOURCE_ID_PROMPT, EVIDENCE_CHECK_PROMPT) and set(payload) == {'claim', 'segments'}:
+        ids = payload['segments'] if messages[0]['content'] == SOURCE_ID_PROMPT else None
+        return segment_schema(ids), payload['claim'] + ''.join(payload['segments'].values())
+    if (messages[0]['content'] == LEDGER_PROMPT and {'claim', 'segments'} <= set(payload)
+            and set(payload) <= {'claim', 'segments', 'repair'}):
+        segments = payload['segments']
+        return ledger_schema(segments), payload['claim'] + ''.join(segments.values())
+    if messages[0]['content'] == RELATION_PROMPT and set(payload) == {'claim', 'fragment', 'segments'}:
+        return relation_schema(), payload['claim'] + ''.join(payload['segments'].values())
+    if messages[0]['content'] == FIXED_CLAUSE_PROMPT and set(payload) == {'claim', 'clause', 'segments'}:
+        return (fixed_clause_schema(payload['clause']['clause_id'], payload['segments']),
+                payload['claim'] + ''.join(payload['segments'].values()))
+    if messages[0]['content'] == CLAUSE_RETRY_PROMPT and set(payload) == {'claim', 'clause', 'segments', 'scope_context'}:
+        return (fixed_clause_schema(payload['clause']['clause_id'], payload['segments']),
+                payload['claim'] + ''.join(payload['segments'].values()) + ''.join(payload['scope_context'].values()))
+    if messages[0]['content'] == RECOVERY_PROMPT and set(payload) == {'claim', 'segments'}:
+        return recovery_schema(payload['segments']), payload['claim'] + ''.join(payload['segments'].values())
     raise ValueError('Unsupported constrained atomic request')
 
 
@@ -212,13 +328,30 @@ class ConstrainedAtomicBackend(TransformersJSONBackend):
         config.force_json_field_order = DECODER['strict_field_order']
         config.max_consecutive_whitespaces = DECODER['max_consecutive_whitespaces']
         config.alphabet += ''.join(sorted(set(source) - set(config.alphabet)))
-        enforcer = TokenEnforcer(self.tokenizer_data, JsonSchemaParser(schema, config=config))
+        parser = JsonSchemaParser(schema, config=config)
+        prompt = messages[0]['content']
+        verdict = prompt in {VERDICT_PROMPT, SOURCE_ID_PROMPT, EVIDENCE_CHECK_PROMPT, LEDGER_PROMPT, RELATION_PROMPT, FIXED_CLAUSE_PROMPT,
+                             CLAUSE_RETRY_PROMPT, RECOVERY_PROMPT}
+        structured = verdict or prompt in {STRUCTURED_CLAIM_PROMPT, STRUCTURED_SOURCE_PROMPT,
+                                          NUMERIC_CLAIM_PROMPT, NUMERIC_SOURCE_PROMPT}
+        if structured:
+            from .decoder_parser import checked_json_parser, filtered_token_tree
+            parser = checked_json_parser(parser, filtered_cache=True)
+        enforcer = TokenEnforcer(self.tokenizer_data, parser)
+        if structured:
+            enforcer.tokenizer_tree = filtered_token_tree(enforcer.tokenizer_tree, config)
         # TokenEnforcer replaces the parser config while initializing its alphabet.
         # Reapply the prospective limits rather than inheriting environment flags.
         enforcer.root_parser.config = config
         def callback(batch_id, input_ids):
+            if structured and self._case_deadline is not None and time.monotonic() >= self._case_deadline:
+                raise CaseDeadlineExceeded()
             return enforcer.get_allowed_tokens(input_ids.tolist()).allowed_tokens
-        self.decoding_metadata = {'structured_decoder': DECODER, 'schema_sha256': schema_sha256(schema)}
+        policy = 'atomic-structured-json-v1'
+        if verdict:
+            policy = 'factcheck-verdict-json-v1' if prompt == VERDICT_PROMPT else 'factcheck-source-id-v1'
+        decoder = {**DECODER, 'policy': policy} if structured else DECODER
+        self.decoding_metadata = {'structured_decoder': decoder, 'schema_sha256': schema_sha256(schema)}
         options = {'prefix_allowed_tokens_fn': callback, 'num_beams': DECODER['num_beams'],
                    'repetition_penalty': DECODER['repetition_penalty']}
         if self._case_deadline is not None:

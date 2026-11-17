@@ -1,0 +1,17 @@
+[
+  {
+    "id": "fires-exact-match",
+    "paper": "kaggledbqa",
+    "question": "Without fine-tuning, what exact-match accuracy did RAT-SQL achieve on the Fires database in Table 4?"
+  },
+  {
+    "id": "temp-sst2-accuracy",
+    "paper": "performance-critical-tokens",
+    "question": "In the representation-level +TEMP ablation in Table 2, what SST2 accuracy is reported for Llama 2 7B?"
+  },
+  {
+    "id": "missing-seeds",
+    "paper": "kaggledbqa",
+    "question": "What were the three exact random seed integers used for the KaggleDBQA RAT-SQL experimental runs summarized in Table 4?"
+  }
+]

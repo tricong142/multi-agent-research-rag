@@ -1,0 +1,1724 @@
+[
+  {
+    "example_id": "holdout-v6:003",
+    "claim": "The aligned corpus contained 6,105 documents after preprocessing.",
+    "context": "We follow the pipeline proposed in BIBREF0 , as illustrated in Figure FIGREF3 , with the following differences: First, we filter and re-paragraph the line-aligned corpus to parallel document-aligned files, which makes it possible to obtain in-topic inter-sentential instances. After preprocessing, we got 532,542 parallel sentence pairs in 6,105 documents. Secondly, we use a statistical machine translation system instead of a neural one for more stable translations.",
+    "label": "support",
+    "claim_record": {
+      "requirements": [
+        {
+          "evidence": [
+            "The aligned corpus contained 6,105 documents after preprocessing."
+          ],
+          "subjects": [
+            {
+              "text": "aligned corpus",
+              "key": "aligned corpus"
+            }
+          ],
+          "property": {
+            "text": "contained",
+            "key": "document count"
+          },
+          "scope": [
+            {
+              "text": "after preprocessing",
+              "key": "after preprocessing"
+            }
+          ],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "6,105",
+              "key": "6,105",
+              "unit": "documents"
+            }
+          ]
+        }
+      ],
+      "unresolved": []
+    },
+    "source_record": {
+      "facts": [
+        {
+          "evidence": [
+            "After preprocessing, we got 532,542 parallel sentence pairs in 6,105 documents.",
+            "First, we filter and re-paragraph the line-aligned corpus to parallel document-aligned files, which makes it possible to obtain in-topic inter-sentential instances."
+          ],
+          "subjects": [
+            {
+              "text": "line-aligned corpus",
+              "key": "aligned corpus"
+            }
+          ],
+          "property": {
+            "text": "got",
+            "key": "document count"
+          },
+          "scope": [
+            {
+              "text": "After preprocessing",
+              "key": "After preprocessing"
+            }
+          ],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "6,105",
+              "key": "6,105",
+              "unit": "documents"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example_id": "holdout-v6:009",
+    "claim": "After filtering, the collection contained 57,711 tweets about contenders who did not win.",
+    "context": "We restricted the data to English tweets only, as tagged by langid.py BIBREF18 . Jaccard similarity was computed between messages to identify and remove duplicates. We removed URLs and preserved only tweets that mention contenders in the text. This automatic post-processing left us with 57,711 tweets for all winners and 55,558 tweets for losers (contenders who did not win) across all events. Table TABREF17 gives the data distribution across event categories.",
+    "label": "contradict",
+    "claim_record": {
+      "requirements": [
+        {
+          "evidence": [
+            "After filtering, the collection contained 57,711 tweets about contenders who did not win."
+          ],
+          "subjects": [
+            {
+              "text": "collection",
+              "key": "collection"
+            }
+          ],
+          "property": {
+            "text": "contained",
+            "key": "tweet count"
+          },
+          "scope": [
+            {
+              "text": "After filtering",
+              "key": "postprocessing"
+            },
+            {
+              "text": "about contenders who did not win",
+              "key": "losers"
+            }
+          ],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "57,711",
+              "key": "57,711",
+              "unit": "tweets"
+            }
+          ]
+        }
+      ],
+      "unresolved": []
+    },
+    "source_record": {
+      "facts": [
+        {
+          "evidence": [
+            "This automatic post-processing left us with 57,711 tweets for all winners and 55,558 tweets for losers (contenders who did not win) across all events.",
+            "We restricted the data to English tweets only, as tagged by langid.py BIBREF18 ."
+          ],
+          "subjects": [
+            {
+              "text": "the data",
+              "key": "collection"
+            }
+          ],
+          "property": {
+            "text": "tweets for losers",
+            "key": "tweet count"
+          },
+          "scope": [
+            {
+              "text": "automatic post-processing",
+              "key": "postprocessing"
+            },
+            {
+              "text": "losers (contenders who did not win)",
+              "key": "losers"
+            }
+          ],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "55,558",
+              "key": "55,558",
+              "unit": "tweets"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example_id": "holdout-v6:011",
+    "claim": "The Sports news corpus contained 227 texts.",
+    "context": "In this work, we evaluate our NER approach using two news corpora. One corpus is a set of 227 texts published on December 31, 2010 by the Lusa agency (portuguese agency of news) and will be referred to as `News'. The other corpus (named here `Sports news') is a set of 881 sports news. The texts were manually annotated according to the enamex designation and the type `miscellaneous'.",
+    "label": "contradict",
+    "claim_record": {
+      "requirements": [
+        {
+          "evidence": [
+            "The Sports news corpus contained 227 texts."
+          ],
+          "subjects": [
+            {
+              "text": "Sports news corpus",
+              "key": "Sports news corpus"
+            }
+          ],
+          "property": {
+            "text": "contained",
+            "key": "document count"
+          },
+          "scope": [],
+          "relation": "eq",
+          "cue": "texts",
+          "values": [
+            {
+              "kind": "number",
+              "text": "227",
+              "key": "227",
+              "unit": ""
+            }
+          ]
+        }
+      ],
+      "unresolved": []
+    },
+    "source_record": {
+      "facts": [
+        {
+          "evidence": [
+            "The other corpus (named here `Sports news') is a set of 881 sports news."
+          ],
+          "subjects": [
+            {
+              "text": "corpus (named here `Sports news')",
+              "key": "sports news corpus"
+            }
+          ],
+          "property": {
+            "text": "set of",
+            "key": "document count"
+          },
+          "scope": [],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "881",
+              "key": "881",
+              "unit": ""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example_id": "holdout-v6:012",
+    "claim": "The KDG training ablations discussed here varied whether logical forms were pruned.",
+    "context": " BIBREF0 present several ablation studies to identify the sources of the performance improvement achieved by the KDG model. These studies comprehensively cover novel aspects of the model architecture. On the training side, the studies only vary the number of logical forms per question in the training dataset. Pruning of the logical forms was not considered. This may have happened inadvertently as the KDG system may have downloaded the logical forms dataset made available by Pasupat et al. without noticing that it had been pruned out.",
+    "label": "contradict",
+    "claim_record": {
+      "requirements": [
+        {
+          "evidence": [
+            "The KDG training ablations discussed here varied whether logical forms were pruned."
+          ],
+          "subjects": [
+            {
+              "text": "KDG training ablations",
+              "key": "KDG training ablations"
+            }
+          ],
+          "property": {
+            "text": "varied whether",
+            "key": "ablation intervention"
+          },
+          "scope": [
+            {
+              "text": "discussed here",
+              "key": "training"
+            }
+          ],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "text",
+              "text": "logical forms were pruned",
+              "key": "pruning",
+              "unit": ""
+            }
+          ]
+        }
+      ],
+      "unresolved": []
+    },
+    "source_record": {
+      "facts": [
+        {
+          "evidence": [
+            "Pruning of the logical forms was not considered.",
+            "BIBREF0 present several ablation studies to identify the sources of the performance improvement achieved by the KDG model.",
+            "On the training side, the studies only vary the number of logical forms per question in the training dataset."
+          ],
+          "subjects": [
+            {
+              "text": "KDG model",
+              "key": "KDG training ablations"
+            }
+          ],
+          "property": {
+            "text": "considered",
+            "key": "ablation intervention"
+          },
+          "scope": [
+            {
+              "text": "On the training side",
+              "key": "training"
+            }
+          ],
+          "relation": "not",
+          "cue": "not",
+          "values": [
+            {
+              "kind": "text",
+              "text": "Pruning of the logical forms",
+              "key": "pruning",
+              "unit": ""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example_id": "holdout-v6:013",
+    "claim": "On the translation training set, the German system obtained a higher BLEU score than the Czech system.",
+    "context": "We train three MT systems to back-translate French, German and Czech to English. To have words alignments, better and stable back-translations, we employ a statistical machine translation system Moses BIBREF12 , trained on the same parallel corpora. Source and target sentences are first tokenized, true-cased and then fed into the system for training. In our case, the translation target texts are identical with the training set of the translation systems; this would not be a problem because our only objective in the translation is to back-translate connectives in the translation into English. On the training set, the translation system achieves BLEU scores of 66.20 (French), 65.30 (German) and 69.05 (Czech).",
+    "label": "contradict",
+    "claim_record": {
+      "requirements": [
+        {
+          "evidence": [
+            "On the translation training set, the German system obtained a higher BLEU score than the Czech system."
+          ],
+          "subjects": [
+            {
+              "text": "German system",
+              "key": "German system"
+            }
+          ],
+          "property": {
+            "text": "obtained a higher BLEU score",
+            "key": "bleu"
+          },
+          "scope": [
+            {
+              "text": "On the translation training set",
+              "key": "training set"
+            }
+          ],
+          "relation": "gt",
+          "cue": "higher BLEU score than",
+          "values": [
+            {
+              "kind": "reference",
+              "text": "Czech system",
+              "key": "Czech system",
+              "unit": ""
+            }
+          ]
+        }
+      ],
+      "unresolved": []
+    },
+    "source_record": {
+      "facts": [
+        {
+          "evidence": [
+            "On the training set, the translation system achieves BLEU scores of 66.20 (French), 65.30 (German) and 69.05 (Czech)."
+          ],
+          "subjects": [
+            {
+              "text": "German",
+              "key": "German system"
+            }
+          ],
+          "property": {
+            "text": "BLEU scores",
+            "key": "bleu"
+          },
+          "scope": [
+            {
+              "text": "On the training set",
+              "key": "training set"
+            }
+          ],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "65.30",
+              "key": "65.30",
+              "unit": ""
+            }
+          ]
+        },
+        {
+          "evidence": [
+            "On the training set, the translation system achieves BLEU scores of 66.20 (French), 65.30 (German) and 69.05 (Czech)."
+          ],
+          "subjects": [
+            {
+              "text": "Czech",
+              "key": "Czech system"
+            }
+          ],
+          "property": {
+            "text": "BLEU scores",
+            "key": "bleu"
+          },
+          "scope": [
+            {
+              "text": "On the training set",
+              "key": "training set"
+            }
+          ],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "69.05",
+              "key": "69.05",
+              "unit": ""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example_id": "holdout-v6:014",
+    "claim": "Verb patterns covered 70% of verb phrases in the Tweets dataset.",
+    "context": "Verb patterns cover 64.3% and 70% verb phrases in Tweets and News, respectively. Considering the spelling errors or parsing errors in Google N-Gram data, the coverage in general is acceptable. We report the precision of the extracted verb patterns (VP) with the comparisons to baselines in Fig FIGREF53 . The results show that our approach (VP) has a significant priority over the baselines in terms of precision. The result suggests that both conceptualized patterns and idiom patterns are necessary for the semantic representation of verbs.",
+    "label": "contradict",
+    "claim_record": {
+      "requirements": [
+        {
+          "evidence": [
+            "Verb patterns covered 70% of verb phrases in the Tweets dataset."
+          ],
+          "subjects": [
+            {
+              "text": "Tweets dataset",
+              "key": "Tweets"
+            }
+          ],
+          "property": {
+            "text": "Verb patterns covered",
+            "key": "verb pattern coverage"
+          },
+          "scope": [
+            {
+              "text": "verb phrases",
+              "key": "verb phrases"
+            }
+          ],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "70",
+              "key": "70",
+              "unit": "%"
+            }
+          ]
+        }
+      ],
+      "unresolved": []
+    },
+    "source_record": {
+      "facts": [
+        {
+          "evidence": [
+            "Verb patterns cover 64.3% and 70% verb phrases in Tweets and News, respectively."
+          ],
+          "subjects": [
+            {
+              "text": "Tweets",
+              "key": "Tweets"
+            },
+            {
+              "text": "News",
+              "key": "News"
+            }
+          ],
+          "property": {
+            "text": "Verb patterns cover",
+            "key": "verb pattern coverage"
+          },
+          "scope": [
+            {
+              "text": "verb phrases",
+              "key": "verb phrases"
+            }
+          ],
+          "relation": "respectively",
+          "cue": "respectively",
+          "values": [
+            {
+              "kind": "number",
+              "text": "64.3",
+              "key": "64.3",
+              "unit": "%"
+            },
+            {
+              "kind": "number",
+              "text": "70",
+              "key": "70",
+              "unit": "%"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example_id": "holdout-v6:016",
+    "claim": "With configuration parameters unchanged, training the KDG model on unpruned candidates lowered accuracy from 43.3% to 36.3%.",
+    "context": "We trained the KDG model on unpruned logical form candidates generated using the DPD algorithm, and found its accuracy to drop to 36.3% (from 43.3%); all configuring parameters were left unchanged. This implies that pruning out spurious logical forms before training is necessary for the performance improvement achieved by the KDG model.",
+    "label": "support",
+    "claim_record": {
+      "requirements": [
+        {
+          "evidence": [
+            "With configuration parameters unchanged, training the KDG model on unpruned candidates lowered accuracy from 43.3% to 36.3%."
+          ],
+          "subjects": [
+            {
+              "text": "KDG model",
+              "key": "KDG model"
+            }
+          ],
+          "property": {
+            "text": "lowered accuracy",
+            "key": "accuracy transition"
+          },
+          "scope": [
+            {
+              "text": "With configuration parameters unchanged",
+              "key": "unchanged configuration"
+            },
+            {
+              "text": "training the KDG model on unpruned candidates",
+              "key": "unpruned training"
+            }
+          ],
+          "relation": "transition",
+          "cue": "from",
+          "values": [
+            {
+              "kind": "number",
+              "text": "43.3",
+              "key": "43.3",
+              "unit": "%"
+            },
+            {
+              "kind": "number",
+              "text": "36.3",
+              "key": "36.3",
+              "unit": "%"
+            }
+          ]
+        }
+      ],
+      "unresolved": []
+    },
+    "source_record": {
+      "facts": [
+        {
+          "evidence": [
+            "We trained the KDG model on unpruned logical form candidates generated using the DPD algorithm, and found its accuracy to drop to 36.3% (from 43.3%); all configuring parameters were left unchanged."
+          ],
+          "subjects": [
+            {
+              "text": "KDG model",
+              "key": "KDG model"
+            }
+          ],
+          "property": {
+            "text": "accuracy to drop",
+            "key": "accuracy transition"
+          },
+          "scope": [
+            {
+              "text": "all configuring parameters were left unchanged",
+              "key": "unchanged configuration"
+            },
+            {
+              "text": "trained the KDG model on unpruned logical form candidates",
+              "key": "unpruned training"
+            }
+          ],
+          "relation": "transition",
+          "cue": "from",
+          "values": [
+            {
+              "kind": "number",
+              "text": "43.3",
+              "key": "43.3",
+              "unit": "%"
+            },
+            {
+              "kind": "number",
+              "text": "36.3",
+              "key": "36.3",
+              "unit": "%"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example_id": "holdout-v6:017",
+    "claim": "The factorized TDNN described here extracts its 1,024-dimensional x-vector from layer 12 before ReLU.",
+    "context": "Factorized TDNN (ftdnn) architecture is listed in table TABREF8. It is the same to BIBREF2 except that we use 1024 nodes instead of 512 nodes in layer 12 and 13. The x-vector is extracted from layer 12 prior to the ReLU non-linearity. So our x-vector is 1024 dimensional. More details about the architecture can be found in BIBREF2.",
+    "label": "support",
+    "claim_record": {
+      "requirements": [
+        {
+          "evidence": [
+            "The factorized TDNN described here extracts its 1,024-dimensional x-vector from layer 12 before ReLU."
+          ],
+          "subjects": [
+            {
+              "text": "factorized TDNN",
+              "key": "factorized TDNN"
+            }
+          ],
+          "property": {
+            "text": "dimensional x-vector",
+            "key": "x-vector size"
+          },
+          "scope": [
+            {
+              "text": "described here",
+              "key": "architecture"
+            }
+          ],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "1,024",
+              "key": "1,024",
+              "unit": "dimensional"
+            }
+          ]
+        },
+        {
+          "evidence": [
+            "The factorized TDNN described here extracts its 1,024-dimensional x-vector from layer 12 before ReLU."
+          ],
+          "subjects": [
+            {
+              "text": "factorized TDNN",
+              "key": "factorized TDNN"
+            }
+          ],
+          "property": {
+            "text": "extracts its",
+            "key": "x-vector layer"
+          },
+          "scope": [],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "12",
+              "key": "12",
+              "unit": "layer"
+            }
+          ]
+        },
+        {
+          "evidence": [
+            "The factorized TDNN described here extracts its 1,024-dimensional x-vector from layer 12 before ReLU."
+          ],
+          "subjects": [
+            {
+              "text": "factorized TDNN",
+              "key": "factorized TDNN"
+            }
+          ],
+          "property": {
+            "text": "from layer 12",
+            "key": "x-vector activation order"
+          },
+          "scope": [],
+          "relation": "before",
+          "cue": "before",
+          "values": [
+            {
+              "kind": "text",
+              "text": "extracts",
+              "key": "extraction",
+              "unit": ""
+            },
+            {
+              "kind": "text",
+              "text": "ReLU",
+              "key": "ReLU",
+              "unit": ""
+            }
+          ]
+        }
+      ],
+      "unresolved": []
+    },
+    "source_record": {
+      "facts": [
+        {
+          "evidence": [
+            "So our x-vector is 1024 dimensional.",
+            "Factorized TDNN (ftdnn) architecture is listed in table TABREF8."
+          ],
+          "subjects": [
+            {
+              "text": "Factorized TDNN",
+              "key": "Factorized TDNN"
+            }
+          ],
+          "property": {
+            "text": "our x-vector",
+            "key": "x-vector size"
+          },
+          "scope": [
+            {
+              "text": "architecture",
+              "key": "architecture"
+            }
+          ],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "1024",
+              "key": "1024",
+              "unit": "dimensional"
+            }
+          ]
+        },
+        {
+          "evidence": [
+            "The x-vector is extracted from layer 12 prior to the ReLU non-linearity.",
+            "Factorized TDNN (ftdnn) architecture is listed in table TABREF8."
+          ],
+          "subjects": [
+            {
+              "text": "Factorized TDNN",
+              "key": "Factorized TDNN"
+            }
+          ],
+          "property": {
+            "text": "x-vector is extracted",
+            "key": "x-vector layer"
+          },
+          "scope": [],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "12",
+              "key": "12",
+              "unit": "layer"
+            }
+          ]
+        },
+        {
+          "evidence": [
+            "The x-vector is extracted from layer 12 prior to the ReLU non-linearity.",
+            "Factorized TDNN (ftdnn) architecture is listed in table TABREF8."
+          ],
+          "subjects": [
+            {
+              "text": "Factorized TDNN",
+              "key": "Factorized TDNN"
+            }
+          ],
+          "property": {
+            "text": "layer 12",
+            "key": "x-vector activation order"
+          },
+          "scope": [],
+          "relation": "before",
+          "cue": "prior to",
+          "values": [
+            {
+              "kind": "text",
+              "text": "extracted",
+              "key": "extraction",
+              "unit": ""
+            },
+            {
+              "kind": "text",
+              "text": "ReLU",
+              "key": "ReLU",
+              "unit": ""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example_id": "holdout-v6:019",
+    "claim": "For the TwiVer experiments, the authors reduced five veridicality labels to three categories.",
+    "context": "The goal of our system, TwiVer, is to automate the annotation process by predicting how veridical a tweet is toward a candidate winning a contest: is the candidate deemed to be winning, or is the author uncertain? For the purpose of our experiments, we collapsed the five labels for veridicality into three: positive veridicality (“Definitely Yes\" and “Probably Yes\"), neutral (“Uncertain about the outcome\") and negative veridicality (“Definitely No\" and “Probably No\").",
+    "label": "support",
+    "claim_record": {
+      "requirements": [
+        {
+          "evidence": [
+            "For the TwiVer experiments, the authors reduced five veridicality labels to three categories."
+          ],
+          "subjects": [
+            {
+              "text": "the authors",
+              "key": "the authors"
+            }
+          ],
+          "property": {
+            "text": "reduced five veridicality labels to three categories",
+            "key": "label count transition"
+          },
+          "scope": [
+            {
+              "text": "For the TwiVer experiments",
+              "key": "twiver experiments"
+            },
+            {
+              "text": "veridicality",
+              "key": "veridicality"
+            }
+          ],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "five",
+              "key": "five",
+              "unit": ""
+            },
+            {
+              "kind": "number",
+              "text": "three",
+              "key": "three",
+              "unit": ""
+            }
+          ]
+        }
+      ],
+      "unresolved": []
+    },
+    "source_record": {
+      "facts": [
+        {
+          "evidence": [
+            "For the purpose of our experiments, we collapsed the five labels for veridicality into three:",
+            "The goal of our system, TwiVer, is to automate the annotation process by predicting how veridical a tweet is toward a candidate winning a contest:"
+          ],
+          "subjects": [
+            {
+              "text": "we",
+              "key": "the authors"
+            }
+          ],
+          "property": {
+            "text": "collapsed",
+            "key": "label count transition"
+          },
+          "scope": [
+            {
+              "text": "TwiVer",
+              "key": "twiver experiments"
+            },
+            {
+              "text": "veridicality",
+              "key": "veridicality"
+            }
+          ],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "five",
+              "key": "five",
+              "unit": ""
+            },
+            {
+              "kind": "number",
+              "text": "three",
+              "key": "three",
+              "unit": ""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example_id": "holdout-v6:021",
+    "claim": "The SNACS scheme described here treats coverbs and localizers as separate annotation targets.",
+    "context": "Localizers are words that follow a noun phrase to refine its semantic relation. For example, 4 in zho:shangtopic denotes a contextual meaning, `in a particular area,' whereas the co-occurring coverb 4 only conveys a generic location. It is unclear whether localizers are syntactically postpositions, but we annotate all localizers because of their semantic significance. Though coverbs frequently co-occur with localizers and the combination of coverbs and localizers is very productive, there is no strong evidence to suggest that they are circumpositions. As a result, we treat them as separate targets for SNACS annotation: for example, 4 and 4 receive Locus and TopicLocus respectively in zho:shangtopic.",
+    "label": "support",
+    "claim_record": {
+      "requirements": [
+        {
+          "evidence": [
+            "The SNACS scheme described here treats coverbs and localizers as separate annotation targets."
+          ],
+          "subjects": [
+            {
+              "text": "SNACS scheme",
+              "key": "SNACS scheme"
+            }
+          ],
+          "property": {
+            "text": "treats",
+            "key": "separate annotation targets"
+          },
+          "scope": [
+            {
+              "text": "described here",
+              "key": "annotation"
+            }
+          ],
+          "relation": "includes",
+          "cue": "as separate annotation targets",
+          "values": [
+            {
+              "kind": "text",
+              "text": "coverbs",
+              "key": "coverbs",
+              "unit": ""
+            },
+            {
+              "kind": "text",
+              "text": "localizers",
+              "key": "localizers",
+              "unit": ""
+            }
+          ]
+        }
+      ],
+      "unresolved": []
+    },
+    "source_record": {
+      "facts": [
+        {
+          "evidence": [
+            "As a result, we treat them as separate targets for SNACS annotation:",
+            "Though coverbs frequently co-occur with localizers"
+          ],
+          "subjects": [
+            {
+              "text": "SNACS",
+              "key": "SNACS scheme"
+            }
+          ],
+          "property": {
+            "text": "separate targets",
+            "key": "separate annotation targets"
+          },
+          "scope": [
+            {
+              "text": "SNACS annotation",
+              "key": "annotation"
+            }
+          ],
+          "relation": "includes",
+          "cue": "",
+          "values": [
+            {
+              "kind": "text",
+              "text": "Though coverbs",
+              "key": "coverbs",
+              "unit": ""
+            },
+            {
+              "kind": "text",
+              "text": "localizers",
+              "key": "localizers",
+              "unit": ""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example_id": "holdout-v6:022",
+    "claim": "The authors' approach finished first in the ranking by micro F1.",
+    "context": "In Table TABREF30, the best results by team regarding micro F-1 are shown. Our approach reached second place. The difference between the first four places were mostly 0.005 between each, showing that only a minimal change could lead to a place switching. Also depicted are not null improvements results, i.e. in a following post-processing, starting from the predictions, the highest score label is predicted for each sample, even though the score was too low. It is worth-noting that the all but our approaches had much higher precision compared to the achieved recall.",
+    "label": "contradict",
+    "claim_record": {
+      "requirements": [
+        {
+          "evidence": [
+            "The authors' approach finished first in the ranking by micro F1."
+          ],
+          "subjects": [
+            {
+              "text": "The authors' approach",
+              "key": "The authors' approach"
+            }
+          ],
+          "property": {
+            "text": "finished first in the ranking",
+            "key": "ranking"
+          },
+          "scope": [
+            {
+              "text": "by micro F1",
+              "key": "micro f1"
+            }
+          ],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "first",
+              "key": "first",
+              "unit": ""
+            }
+          ]
+        }
+      ],
+      "unresolved": []
+    },
+    "source_record": {
+      "facts": [
+        {
+          "evidence": [
+            "Our approach reached second place.",
+            "In Table TABREF30, the best results by team regarding micro F-1 are shown."
+          ],
+          "subjects": [
+            {
+              "text": "Our approach",
+              "key": "authors approach"
+            }
+          ],
+          "property": {
+            "text": "reached",
+            "key": "ranking"
+          },
+          "scope": [
+            {
+              "text": "micro F-1",
+              "key": "micro f1"
+            }
+          ],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "second",
+              "key": "second",
+              "unit": ""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example_id": "holdout-v6:023",
+    "claim": "The data-driven pre-composition method used 500 utterances randomly selected from the evaluation data for warm-up.",
+    "context": "We experiment with both the naive BFS and the proposed data-driven pre-composition methods. For the data-driven approach, we randomly picked 500 utterances from the evaluation data set as warm up utterances. We use an empty contact FST to be replaced into the root LM to avoid personalized states during warm-up decoding. In order to evaluate the benefit of the proposed private cache to store the personalized language model, we group multiple utterances from a user into virtual dialog sessions of one, two, or five turns.",
+    "label": "support",
+    "claim_record": {
+      "requirements": [
+        {
+          "evidence": [
+            "The data-driven pre-composition method used 500 utterances randomly selected from the evaluation data for warm-up."
+          ],
+          "subjects": [
+            {
+              "text": "data-driven pre-composition method",
+              "key": "data-driven pre-composition method"
+            }
+          ],
+          "property": {
+            "text": "used",
+            "key": "warmup count"
+          },
+          "scope": [
+            {
+              "text": "randomly selected",
+              "key": "random sampling"
+            },
+            {
+              "text": "from the evaluation data",
+              "key": "evaluation data"
+            },
+            {
+              "text": "for warm-up",
+              "key": "warm up"
+            }
+          ],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "500",
+              "key": "500",
+              "unit": "utterances"
+            }
+          ]
+        }
+      ],
+      "unresolved": []
+    },
+    "source_record": {
+      "facts": [
+        {
+          "evidence": [
+            "For the data-driven approach, we randomly picked 500 utterances from the evaluation data set as warm up utterances.",
+            "We experiment with both the naive BFS and the proposed data-driven pre-composition methods."
+          ],
+          "subjects": [
+            {
+              "text": "data-driven approach",
+              "key": "data-driven pre-composition method"
+            }
+          ],
+          "property": {
+            "text": "picked",
+            "key": "warmup count"
+          },
+          "scope": [
+            {
+              "text": "randomly picked",
+              "key": "random sampling"
+            },
+            {
+              "text": "evaluation data set",
+              "key": "evaluation data"
+            },
+            {
+              "text": "warm up",
+              "key": "warm up"
+            }
+          ],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "500",
+              "key": "500",
+              "unit": "utterances"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example_id": "holdout-v6:024",
+    "claim": "The Portuguese named-entity extraction procedure generates a superset of candidate entities before retaining only relevant candidates.",
+    "context": "In this work, we consider the enamex definition of entities plus the miscellaneous named entities where we include events like, for instance, `Jogos Olímpicos' (`Olympic Games'). To identify those entities, an information extraction procedure was designed using regular expressions and other pattern matching strategies, along with part-of-speech tagging, i.e., employing a Part-of-Speech Tagger (POST) tool. The extraction of the named entities from Portuguese unstructured texts is composed of two phases: candidate generation, where we generate a superset of candidate entities, and entity selection, where only relevant candidates are kept. The two phases are described in Algorithms SECREF3 and SECREF3 , respectively.",
+    "label": "support",
+    "claim_record": {
+      "requirements": [
+        {
+          "evidence": [
+            "The Portuguese named-entity extraction procedure generates a superset of candidate entities before retaining only relevant candidates."
+          ],
+          "subjects": [
+            {
+              "text": "Portuguese named-entity extraction procedure",
+              "key": "Portuguese named-entity extraction procedure"
+            }
+          ],
+          "property": {
+            "text": "generates",
+            "key": "processing stage order"
+          },
+          "scope": [],
+          "relation": "before",
+          "cue": "before",
+          "values": [
+            {
+              "kind": "text",
+              "text": "a superset of candidate entities",
+              "key": "candidate generation",
+              "unit": ""
+            },
+            {
+              "kind": "text",
+              "text": "retaining only relevant candidates",
+              "key": "candidate selection",
+              "unit": ""
+            }
+          ]
+        }
+      ],
+      "unresolved": []
+    },
+    "source_record": {
+      "facts": [
+        {
+          "evidence": [
+            "The extraction of the named entities from Portuguese unstructured texts is composed of two phases: candidate generation, where we generate a superset of candidate entities, and entity selection, where only relevant candidates are kept."
+          ],
+          "subjects": [
+            {
+              "text": "The extraction of the named entities from Portuguese unstructured texts",
+              "key": "Portuguese named-entity extraction procedure"
+            }
+          ],
+          "property": {
+            "text": "composed of two phases",
+            "key": "processing stage order"
+          },
+          "scope": [],
+          "relation": "before",
+          "cue": "phases",
+          "values": [
+            {
+              "kind": "text",
+              "text": "candidate generation",
+              "key": "candidate generation",
+              "unit": ""
+            },
+            {
+              "kind": "text",
+              "text": "entity selection, where only relevant candidates are kept",
+              "key": "candidate selection",
+              "unit": ""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example_id": "holdout-v6:025",
+    "claim": "In multi-utterance dialog sessions, the proposed private cache cut the real-time factor fivefold at the cost of worse word error rate.",
+    "context": "In this work, we propose new methods for improving the efficiency of dynamic WFST decoding with personalized language models. Experimental results show that using a pre-composed graph can reduce the RTF by a factor of three compared with a fully dynamic graph. Moreover, in multi-utterance dialog sessions, the RTF can be reduced by a factor of 5 using the proposed private cache without harming WER. Though a fully dynamic graph uses less memory for the graph, the pre-composed graph has a better marginal memory cost, which is more memory efficient in large-scale production services that need to support a large number of concurrent requests.",
+    "label": "contradict",
+    "claim_record": {
+      "requirements": [
+        {
+          "evidence": [
+            "In multi-utterance dialog sessions, the proposed private cache cut the real-time factor fivefold at the cost of worse word error rate."
+          ],
+          "subjects": [
+            {
+              "text": "proposed private cache",
+              "key": "proposed private cache"
+            }
+          ],
+          "property": {
+            "text": "cut the real-time factor",
+            "key": "rtf reduction"
+          },
+          "scope": [
+            {
+              "text": "In multi-utterance dialog sessions",
+              "key": "multi-utterance dialog"
+            }
+          ],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "fivefold",
+              "key": "fivefold",
+              "unit": ""
+            }
+          ]
+        },
+        {
+          "evidence": [
+            "In multi-utterance dialog sessions, the proposed private cache cut the real-time factor fivefold at the cost of worse word error rate."
+          ],
+          "subjects": [
+            {
+              "text": "proposed private cache",
+              "key": "proposed private cache"
+            }
+          ],
+          "property": {
+            "text": "at the cost of",
+            "key": "wer degradation"
+          },
+          "scope": [
+            {
+              "text": "In multi-utterance dialog sessions",
+              "key": "multi-utterance dialog"
+            }
+          ],
+          "relation": "eq",
+          "cue": "at the cost of",
+          "values": [
+            {
+              "kind": "text",
+              "text": "worse word error rate",
+              "key": "degradation",
+              "unit": ""
+            }
+          ]
+        }
+      ],
+      "unresolved": []
+    },
+    "source_record": {
+      "facts": [
+        {
+          "evidence": [
+            "Moreover, in multi-utterance dialog sessions, the RTF can be reduced by a factor of 5 using the proposed private cache without harming WER."
+          ],
+          "subjects": [
+            {
+              "text": "proposed private cache",
+              "key": "proposed private cache"
+            }
+          ],
+          "property": {
+            "text": "RTF can be reduced",
+            "key": "rtf reduction"
+          },
+          "scope": [
+            {
+              "text": "in multi-utterance dialog sessions",
+              "key": "multi-utterance dialog"
+            }
+          ],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "5",
+              "key": "5",
+              "unit": ""
+            }
+          ]
+        },
+        {
+          "evidence": [
+            "Moreover, in multi-utterance dialog sessions, the RTF can be reduced by a factor of 5 using the proposed private cache without harming WER."
+          ],
+          "subjects": [
+            {
+              "text": "proposed private cache",
+              "key": "proposed private cache"
+            }
+          ],
+          "property": {
+            "text": "WER",
+            "key": "wer degradation"
+          },
+          "scope": [
+            {
+              "text": "in multi-utterance dialog sessions",
+              "key": "multi-utterance dialog"
+            }
+          ],
+          "relation": "not",
+          "cue": "without",
+          "values": [
+            {
+              "kind": "text",
+              "text": "harming",
+              "key": "degradation",
+              "unit": ""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example_id": "holdout-v6:026",
+    "claim": "The subtask A SVM was trained one-versus-all with C set to 1.5.",
+    "context": "For subtask A, we use the one depicted in Fig. FIGREF8, for subtask B, a similar more light-weight approach was employed as base classifier (described later). As can be seen, several vectorizer based on different n-grams (word and character) with a maximum of 100k features and preprocessing, such as using or not stopwords, were applied to the blurbs. The term frequency obtained were then weighted with inverse document frequency (TF-IDF). The results of five different feature extraction and weighting modules were given as input for a vanilla SVM classifier (parameter C=1.5) which was trained in a one-versus-all fashion.",
+    "label": "support",
+    "claim_record": {
+      "requirements": [
+        {
+          "evidence": [
+            "The subtask A SVM was trained one-versus-all with C set to 1.5."
+          ],
+          "subjects": [
+            {
+              "text": "subtask A SVM",
+              "key": "subtask A SVM"
+            }
+          ],
+          "property": {
+            "text": "was trained",
+            "key": "training method"
+          },
+          "scope": [],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "text",
+              "text": "one-versus-all",
+              "key": "one-versus-all",
+              "unit": ""
+            }
+          ]
+        },
+        {
+          "evidence": [
+            "The subtask A SVM was trained one-versus-all with C set to 1.5."
+          ],
+          "subjects": [
+            {
+              "text": "subtask A SVM",
+              "key": "subtask A SVM"
+            }
+          ],
+          "property": {
+            "text": "with C set to",
+            "key": "regularization parameter"
+          },
+          "scope": [],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "1.5",
+              "key": "1.5",
+              "unit": ""
+            }
+          ]
+        }
+      ],
+      "unresolved": []
+    },
+    "source_record": {
+      "facts": [
+        {
+          "evidence": [
+            "The results of five different feature extraction and weighting modules were given as input for a vanilla SVM classifier (parameter C=1.5) which was trained in a one-versus-all fashion.",
+            "For subtask A, we use the one depicted in Fig. FIGREF8, for subtask B, a similar more light-weight approach was employed as base classifier (described later)."
+          ],
+          "subjects": [
+            {
+              "text": "vanilla SVM classifier",
+              "key": "subtask A SVM"
+            }
+          ],
+          "property": {
+            "text": "was trained",
+            "key": "training method"
+          },
+          "scope": [],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "text",
+              "text": "one-versus-all",
+              "key": "one-versus-all",
+              "unit": ""
+            }
+          ]
+        },
+        {
+          "evidence": [
+            "The results of five different feature extraction and weighting modules were given as input for a vanilla SVM classifier (parameter C=1.5) which was trained in a one-versus-all fashion.",
+            "For subtask A, we use the one depicted in Fig. FIGREF8, for subtask B, a similar more light-weight approach was employed as base classifier (described later)."
+          ],
+          "subjects": [
+            {
+              "text": "vanilla SVM classifier",
+              "key": "subtask A SVM"
+            }
+          ],
+          "property": {
+            "text": "parameter C",
+            "key": "regularization parameter"
+          },
+          "scope": [],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "1.5",
+              "key": "1.5",
+              "unit": ""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example_id": "holdout-v6:027",
+    "claim": "The reported speed test used a GPU for inference.",
+    "context": "The speed test was performed on Intel Xeon E5-2680 v4 for etdnn_ams, multitask, c-vector and ResNet system. Test on Intel Xeon Platinum 8168 for ftdnn and eftdnn system. Extracting embedding cost about 0.103RT for etdnn_ams, 0.089RT for multitask, 0.092RT for c-vector, 0.132RT for eftdnn, 0.0639RT for ftdnn, and 0.112RT for ResNet. Single trial cost around 1.2ms for etdnn_ams, 0.9ms for multitask, 0.9ms for c-vector, 0.059s for eftdnn, 0.0288s for ftdnn, 1.0ms for ResNet. The memory cost about 1G for an embedding extraction and a single trial. In the inference, we just use CPU.",
+    "label": "contradict",
+    "claim_record": {
+      "requirements": [
+        {
+          "evidence": [
+            "The reported speed test used a GPU for inference."
+          ],
+          "subjects": [
+            {
+              "text": "reported speed test",
+              "key": "reported speed test"
+            }
+          ],
+          "property": {
+            "text": "used",
+            "key": "device class"
+          },
+          "scope": [
+            {
+              "text": "for inference",
+              "key": "inference"
+            }
+          ],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "text",
+              "text": "GPU",
+              "key": "GPU",
+              "unit": ""
+            }
+          ]
+        }
+      ],
+      "unresolved": []
+    },
+    "source_record": {
+      "facts": [
+        {
+          "evidence": [
+            "In the inference, we just use CPU.",
+            "The speed test was performed on Intel Xeon E5-2680 v4 for etdnn_ams, multitask, c-vector and ResNet system."
+          ],
+          "subjects": [
+            {
+              "text": "The speed test",
+              "key": "reported speed test"
+            }
+          ],
+          "property": {
+            "text": "use",
+            "key": "device class"
+          },
+          "scope": [
+            {
+              "text": "In the inference",
+              "key": "inference"
+            }
+          ],
+          "relation": "only",
+          "cue": "just",
+          "values": [
+            {
+              "kind": "text",
+              "text": "CPU",
+              "key": "CPU",
+              "unit": ""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example_id": "holdout-v6:028",
+    "claim": "The standard Word2Vec negative-sampling distribution uses a smoothing exponent of 0.5.",
+    "context": "While Word2Vec makes a breakthrough in word representation, it has not been fully understood and its theoretical exploitation is still in demand. One aspect, which has always been ignored, is the choice of noise distribution for negative sampling. Word2Vec employs a smoothed unigram distribution with a power rate of 3/4 as the noise distribution. The decision is made by empirical trials but has been widely adopted in subsequent work BIBREF13, BIBREF4, BIBREF14, BIBREF15. However, the quality of learned word vectors is sensitive to the choice of noise distribution BIBREF16, BIBREF13 when using a moderate number (5 to 15) of negative samples, which is a common strategy for the tradeoff between vector quality and computation costs.",
+    "label": "contradict",
+    "claim_record": {
+      "requirements": [
+        {
+          "evidence": [
+            "The standard Word2Vec negative-sampling distribution uses a smoothing exponent of 0.5."
+          ],
+          "subjects": [
+            {
+              "text": "standard Word2Vec negative-sampling distribution",
+              "key": "standard Word2Vec negative-sampling distribution"
+            }
+          ],
+          "property": {
+            "text": "uses a smoothing exponent",
+            "key": "smoothing exponent"
+          },
+          "scope": [],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "0.5",
+              "key": "0.5",
+              "unit": ""
+            }
+          ]
+        }
+      ],
+      "unresolved": []
+    },
+    "source_record": {
+      "facts": [
+        {
+          "evidence": [
+            "Word2Vec employs a smoothed unigram distribution with a power rate of 3/4 as the noise distribution.",
+            "One aspect, which has always been ignored, is the choice of noise distribution for negative sampling."
+          ],
+          "subjects": [
+            {
+              "text": "Word2Vec",
+              "key": "standard Word2Vec negative-sampling distribution"
+            }
+          ],
+          "property": {
+            "text": "power rate",
+            "key": "smoothing exponent"
+          },
+          "scope": [],
+          "relation": "eq",
+          "cue": "",
+          "values": [
+            {
+              "kind": "number",
+              "text": "3/4",
+              "key": "3/4",
+              "unit": ""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example_id": "holdout-v6:030",
+    "claim": "The pattern extraction task is defined to compute a pattern for each verb phrase and a pattern distribution for each verb.",
+    "context": "In this section, we define the problem of extracting patterns for verb phrases. The goal of pattern extraction is to compute: (1) the pattern for each verb phrase; (2) the pattern distribution for each verb. Next, we first give some preliminary definitions. Then we formalize our problem based on minimum description length. The patterns of different verbs are independent from each other. Hence, we only need to focus on each individual verb and its phrases. In the following text, we discuss our solution with respect to a given verb.",
+    "label": "support",
+    "claim_record": {
+      "requirements": [
+        {
+          "evidence": [
+            "The pattern extraction task is defined to compute a pattern for each verb phrase and a pattern distribution for each verb."
+          ],
+          "subjects": [
+            {
+              "text": "pattern extraction task",
+              "key": "pattern extraction task"
+            }
+          ],
+          "property": {
+            "text": "is defined to compute",
+            "key": "defined outputs"
+          },
+          "scope": [],
+          "relation": "includes",
+          "cue": "",
+          "values": [
+            {
+              "kind": "text",
+              "text": "a pattern for each verb phrase",
+              "key": "phrase pattern",
+              "unit": ""
+            },
+            {
+              "kind": "text",
+              "text": "a pattern distribution for each verb",
+              "key": "verb pattern distribution",
+              "unit": ""
+            }
+          ]
+        }
+      ],
+      "unresolved": []
+    },
+    "source_record": {
+      "facts": [
+        {
+          "evidence": [
+            "The goal of pattern extraction is to compute: (1) the pattern for each verb phrase; (2) the pattern distribution for each verb."
+          ],
+          "subjects": [
+            {
+              "text": "pattern extraction",
+              "key": "pattern extraction task"
+            }
+          ],
+          "property": {
+            "text": "is to compute",
+            "key": "defined outputs"
+          },
+          "scope": [],
+          "relation": "includes",
+          "cue": "",
+          "values": [
+            {
+              "kind": "text",
+              "text": "the pattern for each verb phrase",
+              "key": "phrase pattern",
+              "unit": ""
+            },
+            {
+              "kind": "text",
+              "text": "the pattern distribution for each verb",
+              "key": "verb pattern distribution",
+              "unit": ""
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

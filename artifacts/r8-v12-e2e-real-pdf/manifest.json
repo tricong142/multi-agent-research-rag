@@ -1,0 +1,25 @@
+{
+  "role": "r8_v12_real_pdf_demo",
+  "inputs_sha256": "7ce8aad17ff703405b64ccd5a704d0139e1d71d928a54e017532fea8995cc297",
+  "gold_sha256": "e7b25b24ec60118d11f2bdf54791e8618b7e528d7be62a04d729d6e7cf23fda5",
+  "notebook_template": "scripts/kaggle_r8_v12_e2e_smoke.ipynb",
+  "notebook_template_sha256": "ee10bce2d4bd6c2a741677e8f5cf00da08d370758923942034e74ab54b2f73e7",
+  "runtime_sha256": "047052066632248f84ec88f368b33fee9ceb22705bcc95a6150c5a73a9ecc79e",
+  "baseline_lock_sha256": "9adedbb5eb5269a41afb4a0f3a66275e079f49a0772090138c20124858279edd",
+  "smoke_zip_sha256": "486f8c877eab25afdbb5fddf4c6674829fd3d547438f77d787a3024f0ad75042",
+  "retrieval": "dense",
+  "initial_top_k": 5,
+  "checkpoint_archive": "research-rag-kaggle-v2.zip",
+  "pdfs": {
+    "kaggledbqa": {
+      "path": "research-runs/r8-v12-support-guard/table-coordinate-cross-paper-v1/sources/kaggledbqa.pdf",
+      "sha256": "c0fc149226f39717947f8e965fc67c974158c1d8943aac00ae66b1fdc558e753",
+      "url": "https://aclanthology.org/2021.acl-long.176.pdf#page=7"
+    },
+    "performance-critical-tokens": {
+      "path": "research-runs/r8-v12-support-guard/table-coordinate-cross-paper-v1/sources/performance-critical-tokens.pdf",
+      "sha256": "f25125f6107e47cdca916cd02dfc633f020b1d73ddd91ade8169185ec42bfcbe",
+      "url": "https://arxiv.org/pdf/2401.11323v4#page=5"
+    }
+  }
+}

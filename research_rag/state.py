@@ -14,9 +14,30 @@ class SourceChunk(TypedDict):
     method: str
 
 
-class EvidenceRef(TypedDict):
+class _EvidenceSource(TypedDict):
     source_id: str
     text: str
+
+
+class TableCell(TypedDict):
+    page_no: int
+    table_id: str
+    caption_source_id: str
+    header_source_id: str
+    row_source_id: str
+    label_header: str
+    column_header: str
+    row_label: str
+    cell_text: str
+    column_bbox: list[float]
+    label_bbox: list[float]
+    cell_bbox: list[float]
+
+
+class EvidenceRef(_EvidenceSource, total=False):
+    claim: str
+    evidence_id: str
+    table_cell: TableCell
 
 
 class ResearchState(TypedDict, total=False):

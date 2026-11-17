@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from .state import SourceChunk
+from .pdf_cell_context import coordinate_chunks
 
 
 class ReaderBatchError(RuntimeError):
@@ -19,12 +20,14 @@ class ReaderBatchError(RuntimeError):
 
 
 class PdfReader:
-    def __init__(self, agent: Any = None, *, max_pages: int = 20, max_chunk_chars: int = 2000) -> None:
+    def __init__(self, agent: Any = None, *, max_pages: int = 20, max_chunk_chars: int = 2000,
+                 table_coordinates: dict | None = None) -> None:
         if max_pages < 1 or max_chunk_chars < 1:
             raise ValueError("Reader limits must be positive")
         self.agent = agent
         self.max_pages = max_pages
         self.max_chunk_chars = max_chunk_chars
+        self.table_coordinates = table_coordinates or {}
 
     def read(self, pdf_path: str) -> list[SourceChunk]:
         """Compatibility entry point for extraction evaluations: read every permitted page."""
@@ -56,8 +59,11 @@ class PdfReader:
             scores = {i: len(terms.intersection(re.findall(r"\w+", document[i].get_text().casefold()))) for i in candidates}
             ranked = sorted(candidates, key=lambda i: (-scores[i], i))
             selected = ranked if page_batch is None else ranked[:page_batch]
-        if page_count > self.max_pages:
-            raise ValueError(f"PDF has {page_count} pages, above max_pages={self.max_pages}")
+            tables = self.table_coordinates.get(digest.hexdigest(), [])
+            cells_by_page = {
+                i: coordinate_chunks(document[i], document_hash, [table for table in tables if table["page"] == i + 1])
+                for i in selected
+            } if tables else {}
         if self.agent is None:
             agent_class = importlib.import_module("train_agent2_reader.reader_agent").ReaderAgent
             model_dir = Path(__file__).resolve().parents[1] / "train_agent2_reader" / "layoutlmv3_doclaynet_model"
@@ -79,6 +85,7 @@ class PdfReader:
                                 "final_tool": result.get("final_tool"), "accepted": result.get("success") is True})
             if result.get("success") is not True:
                 raise ReaderBatchError(diagnostics)
+            chunks.extend(cells_by_page.get(page_no, []))
             for block_no, block in enumerate(result.get("blocks", [])):
                 text = str(block.text).strip()
                 if not text:

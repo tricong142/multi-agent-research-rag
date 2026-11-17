@@ -1,0 +1,20 @@
+{
+  "page_numbering": "Physical PDF page, starting at 1. Printed page numbers may differ.",
+  "scoring": {
+    "denominator": 9,
+    "answerable": "Require all requested values with their correct labels or units, and cite the corresponding text or table cells. A missing or crashed report fails.",
+    "missing": "Require a visible indication that the requested information is unavailable, with no invented value. A crash or absent report fails.",
+    "partial": "Flag separately. Assign the semantic outcome using the actual coverage and citation of the requested answer."
+  },
+  "cases": {
+    "viisa-text": {"answer": {"annotation_rounds": 10}, "page": 2, "anchors": ["We conducted annotation over 10 rounds"], "location": "Dataset construction prose beside Figure 1."},
+    "viisa-table": {"answer": {"Negative samples": 260, "Positive samples": 42}, "page": 2, "anchors": ["Table 1: ViISA and GPT-4o result.", "Negative samples 260 Positive samples 42"], "location": "Table 1, Value column, Negative samples and Positive samples rows."},
+    "viisa-missing": {"answer": null, "missing_fact": "Exact GPT-4o zero-shot decoding temperature.", "pages_checked": [1, 13], "absence_search": "temperature", "reviewed_sections": "Table 1, experimental setup, prompting template and appendices. Only the paper PDF was checked."},
+    "visp-text": {"answer": {"approximate_original_paraphrase_pairs": 1200000}, "page": 1, "anchors": ["1.2M original–paraphrase pairs"], "location": "Abstract. Treat 1.2M as approximate."},
+    "visp-table": {"answer": {"Train": 406308, "Test": 380590}, "page": 3, "anchors": ["Sentence Pair† 406,308 391,044 380,590", "Table 4: Statistics of the training, validation, and test"], "location": "Table 4, Sentence Pair† row, Train and Test columns. Val is 391,044 and Original is a different row."},
+    "visp-missing": {"answer": null, "missing_fact": "Exact random seed for choosing 200 human-evaluation samples from each split.", "pages_checked": [1, 16], "absence_search": "\\b(?:seeds?|random[_ -]state)\\b", "reviewed_sections": "Human evaluation and appendices. The sampling count is given. Only the paper PDF was checked."},
+    "triple-sets-text": {"answer": {"LLMs_benchmarked": 6}, "page": 1, "anchors": ["we benchmark six LLMs, a rule-based system"], "location": "Abstract. The rule-based system and human-written texts are separate baselines."},
+    "triple-sets-table": {"answer": {"English AvgLenW": 279.3, "Irish AvgLenW": 320.1}, "page": 5, "anchors": ["GPT4.1 279.3", "GPT4.1 320.1", "Table 1: Diversity analysis in English and Irish"], "location": "Table 1, GPT4.1 row in each language panel, AvgLenW column."},
+    "triple-sets-missing": {"answer": null, "missing_fact": "Exact random seed for the twenty-one points used to produce Hum-1.0.", "pages_checked": [1, 13], "absence_search": "\\b(?:seeds?|random[_ -]state)\\b", "reviewed_sections": "Human-written baseline sampling description, experimental setup and appendices. Only the paper PDF was checked."}
+  }
+}

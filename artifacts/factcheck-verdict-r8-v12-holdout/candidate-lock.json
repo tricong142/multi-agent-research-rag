@@ -1,0 +1,144 @@
+{
+  "candidate": "r8-grounded-source-v12-7b",
+  "locked_at_utc": "2026-11-14T06:27:31.413276+00:00",
+  "candidate_status": "locked_after_development_sla_pass",
+  "provenance": {
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "quantization": "NF4",
+    "dtype": "float16",
+    "gpu": "Tesla T4",
+    "torch_version": "2.14.1+cu130",
+    "seed": 42,
+    "max_new_tokens": 512,
+    "timeout_seconds": 180,
+    "evidence_format": "ids",
+    "source_id_check_policy": "r8-grounded-source-v12",
+    "numeric_claim_prompt_sha256": "c35c129ad3f7c2d3274021e1e66480e147f0ed8646c08a6c6ca68c17433abe5a",
+    "numeric_source_prompt_sha256": "78f599ac19eb12ed5fc8783ef12c0b7f0b439d8013170d9a7e8df5f5801625a8",
+    "schema_sha256": "9546ecd3385ba10e56172306854ec9b5ad50fd1b97738050cc9d0eadc637096b",
+    "evidence_check_schema_sha256": "a16ada6481a47f51d188da55c06318b9d481f939dfe0787da251a1dbdc1f9262",
+    "evidence_check_prompt_sha256": "dcfed77d0c1ae5a4c952d237131746e45f457d921c71290f96beba427c61b58b",
+    "adapter_sha256": null,
+    "prompt_sha256": "852a1bc102bcf14754b6de799b49c0fb43dfaf9f8c25446244c7573cab99612e",
+    "nli_model": null,
+    "nli_revision": null,
+    "nli_threshold": null,
+    "recovery_prompt_sha256": "bbe9d171961c7a4d3e5b04b5f774d6fb47eb564339733612bb6ffde5010fea53",
+    "recovery_schema_sha256": "76dfe5acfc8cd5ee0f4f3960e5c0368730b3fbfd0cbd857842a89692133c7a4b",
+    "fixed_clause_prompt_sha256": "bbb39e40b4838aa2563ce5853fbd604eeb761df2133619a3f5e8ee28e0d8ccf8",
+    "fixed_clause_schema_sha256": "64271cfdb48c9d80fd2c9b881c9f81916dfe1b92e1a0fbc5a2706f142874d5dd",
+    "clause_retry_prompt_sha256": "f2947243ce8e8d82d3b5083c80baf4464b44ba2a833dacf5714b40d238a1092e",
+    "relation_prompt_sha256": "c93008a580b03d006d66216c9fccced8f8dbd4c535118876af38d5233624066d",
+    "relation_schema_sha256": "0f531c6177561017ed820941f018873e0e46b80e14fc572d33aa9fe66f941fea"
+  },
+  "development_environment": {
+    "python": "3.13.16",
+    "gpu": "Tesla T4",
+    "torch": "2.14.1+cu130",
+    "cuda": "13.0",
+    "packages": {
+      "transformers": "5.16.1",
+      "accelerate": "1.14.0",
+      "bitsandbytes": "0.50.2",
+      "lm-format-enforcer": "0.11.3",
+      "interegular": "0.3.3",
+      "tokenizers": "0.23.3",
+      "huggingface-hub": "1.33.0",
+      "safetensors": "0.8.0"
+    },
+    "driver": "580.82.07"
+  },
+  "development_run": {
+    "evaluation_role": "r8-v12-aacl2026-source-context-v2-development30",
+    "dataset": "aacl2026-source-context-v2",
+    "source_context_review": "artifacts/factcheck-verdict-colab/r8-v12-aacl2026-source-context-v2-review.json",
+    "source_context_review_sha256": "079c833a75c6ae40919fecf4528fe0893e6912a6a20adc265e3eae59c4883a24",
+    "input_sha256": "643539a3f972801bb4d139dfb98ae2e56e9629ebc7f94ae50912bb6b17bafbfe",
+    "gold_sha256": "316cee9e85f8d3ea71c72e0f01c61093e5b2f7f3357dea6d8b5987cf9a9141d4",
+    "payload_sha256": "25411dc2a3ad13ca9102fe1d6a704f6b2000e35520bdaeb3a1073f7b253f8d2b",
+    "notebook": "scripts/colab_factcheck_r8_v12_aacl2026_source_context_v2.ipynb",
+    "notebook_sha256": "ea2890de997b39c87848a59a5a786e681723938fefd0324e01fefb9e8721a753",
+    "output_archive": "output-verdict-r8-v12-aacl2026-source-context-v2-development30-colab-7b-20261114T061447Z-ec3ef855.zip",
+    "output_archive_sha256": "50d4e3a227a59b4df1de86f3b4f8cd1e4a4d207d2f9f89c201a3fa2a4678b133",
+    "metrics": {
+      "correct": 27,
+      "cases": 30,
+      "false_support": 0,
+      "non_support_gold": 20,
+      "false_support_rate": 0.0,
+      "support_precision": 1.0,
+      "macro_f1": 0.8976982097186701,
+      "answerable_cases": 20,
+      "answerable_abstentions": 3,
+      "answerable_abstention_rate": 0.15,
+      "overall_abstention_rate": 0.43333333333333335,
+      "incomplete": 0,
+      "per_class": {
+        "support": {
+          "gold": 10,
+          "predicted": 7,
+          "correct": 7,
+          "precision": 1.0,
+          "recall": 0.7,
+          "f1": 0.8235294117647058
+        },
+        "contradict": {
+          "gold": 10,
+          "predicted": 10,
+          "correct": 10,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "not_enough_info": {
+          "gold": 10,
+          "predicted": 13,
+          "correct": 10,
+          "precision": 0.7692307692307693,
+          "recall": 1.0,
+          "f1": 0.8695652173913043
+        }
+      },
+      "checks": {
+        "zero_false_support": true,
+        "support_precision_at_least_85": true,
+        "macro_f1_at_least_85": true,
+        "answerable_abstention_at_most_15": true
+      },
+      "sla_pass": true
+    }
+  },
+  "source_bundle": {
+    "path": "artifacts/factcheck-verdict-colab/r8-grounded-source-v12-7b-source.zip",
+    "sha256": "bdecc02cb8b2dc51753773489a5268a245bb0494419c8d63e862fb8791c0f0ab"
+  },
+  "source_members": {
+    "04_factchecker/config.py": "2d9f99a6dee5a7a4b40278a552002d7d9737e060730bc9d5e48de4923693a584",
+    "04_factchecker/inference/__init__.py": "11edee781c7d9592646acc9ebbca280c818fe561abb487995b079cbbe3ac6495",
+    "04_factchecker/inference/action_recommender.py": "9e8d9350142122e573ed4ab758581b0076dc39d339566dd598c9f757fba9c37d",
+    "04_factchecker/inference/atomic_decoding.py": "c70a12f0a38db10ea8e9bb87f136f7fd74ee9105dd67cbb96feb3abcee1e4bc1",
+    "04_factchecker/inference/atomic_verifier.py": "827676e26dbf5644f960b6df9f644d281602ce3e395bc28eae363d41c5112a63",
+    "04_factchecker/inference/confidence.py": "307cdfb8bb9509a5189a31994d0aaa4c37f662e008f36dadaa54dcabeba0a09b",
+    "04_factchecker/inference/decoder_parser.py": "cb59e479e8f3eab0ead463709c98aac5ca1f8957f70c62fbd67cdba5a4ba7ab1",
+    "04_factchecker/inference/evidence_screen.py": "23574b7320ac576989b283a58d3e81d58be001f1b1c286523d4f0baa04dfcab5",
+    "04_factchecker/inference/explicit_numeric_proof.py": "f8590554ffeee71a7eb0c3b939f78f221446d4bd4c7b0c06b737235b0417a7d7",
+    "04_factchecker/inference/judge.py": "818aa5a4dc7f8065e101264e59d57828cc00f60d1c105156e49c03f374f6dbb7",
+    "04_factchecker/inference/numeric_verifier.py": "d78a6c7e189a7d55201454cdc99200b8593a9e9beb6067aa5bdd992be6c9362f",
+    "04_factchecker/inference/semantic_verdict.py": "f50b37ee3db2f283824696b382e30aedeb1018f8a1850c65a465b6ee3375d3a2",
+    "04_factchecker/inference/source_comparison.py": "d3bf3e4efea5d6c99edc70c730dce7241f71cefe01829644766aec2214f6e10b",
+    "04_factchecker/inference/source_ledger.py": "03faa3e48c2d25b58193d1b40e677b4e213e3d0cd0f770139d9ed50358194050",
+    "04_factchecker/inference/tradeoff_proof.py": "59700edc0f4bf752f2cc559d88e1c30dcc0afc39519e1bf3a46dd1ef36014271",
+    "04_factchecker/inference/verifier.py": "7eff9f8678cf1a4c270e59ada432bdf12a2fd6323c3d598fa34cc3513fd468f8",
+    "04_factchecker/prompts.py": "fe7be89a4ac6f789f9629f90c9710aeafc074806c066fa2451cb889121b6017e",
+    "research_rag/evaluation/factcheck_sla.py": "926222006b911fb408d96fcc833086b4781e012622191baba1918665a0780866",
+    "scripts/run_factcheck_verdict.py": "7a133bca5e71d34a84ce349789d269bf566944b96e1bab14e87a7e2b115325a3",
+    "scripts/score_factcheck_verdict_smoke.py": "47474a4dc3bdefd47fd2b6bca6762fdbcce4688bb0350a52d8423bda4af00e3b"
+  },
+  "sla": {
+    "max_false_support": 0,
+    "min_support_precision": 0.85,
+    "min_macro_f1": 0.85,
+    "max_answerable_abstention_rate": 0.15
+  }
+}

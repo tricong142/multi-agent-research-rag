@@ -1,0 +1,9 @@
+# Byte hashes are part of the R8 runtime and demo contracts.
+artifacts/factcheck-verdict-r8-v12-holdout/*-lock.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+artifacts/r8-v12-e2e-real-pdf/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/kaggle_r8_v12_e2e_*.ipynb -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+research_rag/adapters.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+research_rag/graph.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+research_rag/local.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+research_rag/pdf_cell_context.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+research_rag/r8_adapter.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

@@ -53,6 +53,23 @@ class SummaryTraceTests(unittest.TestCase):
         self.assertEqual(events[0]["role"], "critic")
         self.assertEqual(json.loads(events[0]["raw_output"])["reason"], "Missing source")
 
+    def test_source_id_json_allows_one_trailing_semicolon_and_keeps_the_raw_output(self):
+        events = []
+        raw = '{"claims":[{"text":"Study A enrolled 17 patients.","source_ids":["S1"]}]};\n'
+        parsed = self.generate(raw, events.append, role="generator_ids")
+        self.assertEqual(parsed["claims"][0]["source_ids"], ["S1"])
+        self.assertEqual(events[0]["raw_output"], raw)
+        self.assertTrue(events[0]["trailing_semicolon_removed"])
+        self.assertTrue(events[0]["schema_valid"])
+
+    def test_source_id_json_rejects_other_suffixes_and_legacy_roles_stay_strict(self):
+        for tail in (";;", '"user\nContext:', '{"claims":[]}', "; extra"):
+            with self.subTest(tail=tail):
+                self.assertIsNone(self.generate('{"claims":[]}' + tail, role="generator_ids"))
+        self.assertIsNone(self.generate('{"answer":"Example.","evidence_spans":[]};'))
+        self.assertIsNone(self.generate('{"claims":[{"text":"Example.","source_ids":[]}]} ;',
+                                        role="generator_ids"))
+
     def test_default_generation_does_not_print_raw_text(self):
         stdout = io.StringIO()
         with contextlib.redirect_stdout(stdout):
