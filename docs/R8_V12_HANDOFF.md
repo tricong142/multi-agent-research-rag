@@ -71,6 +71,17 @@ hash checkpoint và hai PDF. Cả hai ZIP kết quả nằm trong thư mục Dow
 **Llama 2 7B / +TEMP**, cột **SST2**. Nguồn trích dẫn có ID
 `pdf:f25125f6107e47cd:p4:table2:r0-3:c1`.
 
+## Tạo lại notebook bàn giao
+
+Sau khi chuẩn bị hai PDF theo manifest ở mục web local, chạy từ thư mục gốc
+trên Windows. Lệnh này ghi lại notebook `table-proof` tại đường dẫn đã khóa.
+
+```powershell
+.\.venv\Scripts\python.exe .\scripts\build_kaggle_r8_v12_e2e_real_pdf.py --table-proof
+```
+
+Đối chiếu SHA-256 của notebook sinh ra với bảng artifact phía trên.
+
 ## Demo web local
 
 Chạy trong PowerShell từ máy có repo và môi trường Python của dự án.
