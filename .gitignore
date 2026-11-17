@@ -62,6 +62,7 @@ kb_indexing/data/
 kb_indexing/indices/
 kaggle_transfer/
 research-runs/
+/artifacts/cellfix29-e2e-kaggle-checkpoints/research-rag-kaggle-v2.zip
 *.pt
 *.pth
 *.ckpt
